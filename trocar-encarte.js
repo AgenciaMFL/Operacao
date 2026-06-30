@@ -41,21 +41,23 @@ async function main() {
   }
 
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
     slowMo: 100,
     executablePath: process.env.CHROMIUM_PATH || undefined,
   });
   const context = await browser.newContext({ acceptDownloads: true });
   const page    = await context.newPage();
+  page.setDefaultTimeout(60000);
 
   try {
     // ── 1. Login ───────────────────────────────────────────────────────────
     console.log('\n🔐 Fazendo login...');
-    await page.goto(`${WP_ADMIN}/`);
+    await page.goto(`${WP_ADMIN}/`, { waitUntil: 'networkidle', timeout: 60000 });
+    await page.waitForSelector('#user_login', { timeout: 30000 });
     await page.fill('#user_login', WP_USER);
     await page.fill('#user_pass',  WP_PASS);
     await page.click('#wp-submit');
-    await page.waitForURL(`${WP_ADMIN}/**`, { timeout: 15000 });
+    await page.waitForURL(`${WP_ADMIN}/**`, { timeout: 30000 });
     console.log('✅ Login OK');
 
     // ── 2. Encontra a página Encarte ───────────────────────────────────────
