@@ -1,0 +1,12 @@
+{
+  "name": "trocar-encarte-rioatacadao",
+  "version": "1.0.0",
+  "description": "Automação para troca de encarte no WordPress do Rio'Atacadão",
+  "scripts": {
+    "instalar": "npm install && npx playwright install chromium",
+    "trocar": "node trocar-encarte.js"
+  },
+  "dependencies": {
+    "playwright": "^1.45.0"
+  }
+}
