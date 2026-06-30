@@ -1,2 +1,5 @@
 # Local MCP settings with secrets
 .claude/settings.json
+
+node_modules/
+package-lock.json
