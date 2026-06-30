@@ -57,16 +57,14 @@ async function main() {
     await page.waitForURL('**/wp-admin/**', { timeout: 30000 });
     console.log('✅ Login OK');
 
-    // ── 2. Encontra a página Encarte ───────────────────────────────────────
-    console.log('\n🔍 Procurando página "Encarte"...');
-    await page.goto(`${WP_ADMIN}/edit.php?post_type=page&s=encarte`);
-    await page.waitForLoadState('networkidle');
+    // ── 2. Navega para a página do Encarte e abre o Elementor ─────────────
+    console.log('\n🔍 Abrindo página do Encarte...');
+    await page.goto('https://rioatacadao.com.br/encarte/', { waitUntil: 'networkidle', timeout: 60000 });
 
-    const editLink = page.locator('a:has-text("Editar com Elementor"), a:has-text("Edit with Elementor")')
-                         .first();
+    const editLink = page.locator('#wp-admin-bar-elementor_edit_page a, a:has-text("Editar com Elementor"), a:has-text("Edit with Elementor")').first();
     await editLink.waitFor({ timeout: 15000 });
     const editUrl = await editLink.getAttribute('href');
-    console.log('✅ Página encontrada:', editUrl);
+    console.log('✅ Botão Elementor encontrado:', editUrl);
 
     // ── 3. Abre o Elementor ────────────────────────────────────────────────
     console.log('\n🎨 Abrindo Elementor...');
