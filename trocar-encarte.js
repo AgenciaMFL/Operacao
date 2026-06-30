@@ -16,10 +16,11 @@ const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
 
-const WP_ADMIN   = 'https://rioatacadao.com.br/mfl/wp-admin';
-const WP_USER    = 'wallace-rox@hotmail.com';
-const WP_PASS    = 'Ux2pix9zuni!';
-const ENCARTE_SLUG = 'encarte'; // slug da página no WordPress
+const WP_ADMIN     = 'https://rioatacadao.com.br/mfl/wp-admin';
+const WP_USER      = 'wallace-rox@hotmail.com';
+const WP_PASS      = 'Ux2pix9zuni!';
+const TEMP_LOGIN   = 'https://rioatacadao.com.br/wp-admin/?wtlwp_token=f9f0b83f99928cc1d802022c0bd8591898b5ed891812885d4c25f085c3463816160e613a6fa17b138ce40438f5db2583d9ebaca73387598cc367f137a8996c02';
+const ENCARTE_SLUG = 'encarte';
 
 async function main() {
   const args = process.argv.slice(2);
@@ -50,14 +51,10 @@ async function main() {
   page.setDefaultTimeout(60000);
 
   try {
-    // ── 1. Login ───────────────────────────────────────────────────────────
-    console.log('\n🔐 Fazendo login...');
-    await page.goto(`${WP_ADMIN}/`, { waitUntil: 'networkidle', timeout: 60000 });
-    await page.waitForSelector('#user_login', { timeout: 30000 });
-    await page.fill('#user_login', WP_USER);
-    await page.fill('#user_pass',  WP_PASS);
-    await page.click('#wp-submit');
-    await page.waitForURL(`${WP_ADMIN}/**`, { timeout: 30000 });
+    // ── 1. Login via Temporary Login ──────────────────────────────────────
+    console.log('\n🔐 Fazendo login via link temporário...');
+    await page.goto(TEMP_LOGIN, { waitUntil: 'networkidle', timeout: 60000 });
+    await page.waitForURL('**/wp-admin/**', { timeout: 30000 });
     console.log('✅ Login OK');
 
     // ── 2. Encontra a página Encarte ───────────────────────────────────────
