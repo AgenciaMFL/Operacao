@@ -40,7 +40,11 @@ async function main() {
     console.log(`✅ Imagem encontrada: ${img}`);
   }
 
-  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const browser = await chromium.launch({
+    headless: true,
+    slowMo: 100,
+    executablePath: process.env.CHROMIUM_PATH || undefined,
+  });
   const context = await browser.newContext({ acceptDownloads: true });
   const page    = await context.newPage();
 
