@@ -59,14 +59,14 @@ async function main() {
 
     // ── 2. Encontra a página Encarte ───────────────────────────────────────
     console.log('\n🔍 Procurando página "Encarte"...');
-    await page.goto(`${WP_ADMIN}/edit.php?post_type=page`);
+    await page.goto(`${WP_ADMIN}/edit.php?post_type=page&s=encarte`);
     await page.waitForLoadState('networkidle');
 
-    const editLink = page.locator('tr').filter({ hasText: /^Encarte/i })
-                         .locator('a:has-text("Editar com Elementor")');
-    await editLink.waitFor({ timeout: 10000 });
+    const editLink = page.locator('a:has-text("Editar com Elementor"), a:has-text("Edit with Elementor")')
+                         .first();
+    await editLink.waitFor({ timeout: 15000 });
     const editUrl = await editLink.getAttribute('href');
-    console.log('✅ Página encontrada');
+    console.log('✅ Página encontrada:', editUrl);
 
     // ── 3. Abre o Elementor ────────────────────────────────────────────────
     console.log('\n🎨 Abrindo Elementor...');
