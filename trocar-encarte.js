@@ -91,12 +91,14 @@ async function main() {
     // ── 4. Encontra widgets de imagem no canvas ────────────────────────────
     console.log('\n🖼️  Localizando imagens do encarte...');
     const elementorFrame = page.frameLocator('#elementor-preview-iframe');
-    const imageWidgets = elementorFrame.locator('.elementor-widget-image');
-    const count = await imageWidgets.count();
-    console.log(`   Encontrados ${count} widget(s) de imagem`);
 
     await page.screenshot({ path: 'debug-elementor.png' });
     console.log('📸 Screenshot salvo: debug-elementor.png');
+
+    // Conta imagens no iframe
+    const imageWidgets = elementorFrame.locator('.elementor-widget-image');
+    const count = await imageWidgets.count();
+    console.log(`   Encontrados ${count} widget(s) de imagem`);
 
     if (count === 0) {
       console.error('❌ Nenhum widget de imagem encontrado.');
@@ -110,48 +112,54 @@ async function main() {
     for (let i = 0; i < total; i++) {
       console.log(`\n🔄 Substituindo imagem ${i + 1} de ${total}...`);
 
-      // Clica no widget de imagem no canvas para selecioná-lo
-      await imageWidgets.nth(i).click();
-      await page.waitForTimeout(2000);
+      // Clica na imagem dentro do widget no iframe
+      const imgEl = imageWidgets.nth(i).locator('img').first();
+      await imgEl.scrollIntoViewIfNeeded();
+      await imgEl.click({ force: true });
+      await page.waitForTimeout(2500);
       await page.screenshot({ path: `debug-widget-${i+1}.png` });
+      console.log(`📸 Screenshot salvo: debug-widget-${i+1}.png`);
 
-      // No painel esquerdo, clica na prévia da imagem para abrir a biblioteca
-      const chooseBtn = page.locator('.elementor-control-media__preview').first();
-      const chooseBtnAlt = page.locator('.elementor-control-media .elementor-control-media-upload-button').first();
+      // Verifica se o painel mudou para mostrar configurações do widget
+      const panelTitle = await page.locator('.elementor-panel-heading-title').textContent().catch(() => '');
+      console.log(`   Painel ativo: "${panelTitle}"`);
 
-      if (await chooseBtn.count() > 0) {
-        await chooseBtn.click();
-      } else if (await chooseBtnAlt.count() > 0) {
-        await chooseBtnAlt.click();
-      } else {
-        // Tenta clicar no botão genérico de escolher imagem
-        await page.locator('button:has-text("Escolher"), button:has-text("Choose")').first().click();
+      // Tenta achar o controle de imagem no painel esquerdo
+      const mediaPreview = page.locator('.elementor-control-media__preview, .elementor-control-media-upload-button, .elementor-control-media img').first();
+
+      if (await mediaPreview.count() === 0) {
+        // Se não achou, tenta clicar diretamente no widget (sem force)
+        await imageWidgets.nth(i).click();
+        await page.waitForTimeout(2000);
       }
+
+      await mediaPreview.waitFor({ timeout: 10000 });
+      await mediaPreview.click();
       await page.waitForTimeout(1500);
 
       // Modal da biblioteca de mídia
       await page.waitForSelector('.media-modal', { timeout: 15000 });
       console.log('   📂 Biblioteca de mídia aberta');
 
-      // Clica na aba de upload
+      // Clica na aba de upload (primeira opção do menu)
       const uploadTab = page.locator('.media-router .media-menu-item').first();
-      await uploadTab.click();
-      await page.waitForTimeout(500);
+      if (await uploadTab.count() > 0) await uploadTab.click();
+      await page.waitForTimeout(800);
 
       // Faz upload do arquivo
       const [fileChooser] = await Promise.all([
         page.waitForEvent('filechooser'),
-        page.locator('.browser, .upload-files-button, button:has-text("Selecionar arquivos"), button:has-text("Select Files")').first().click(),
+        page.locator('.browser, .upload-files-button').first().click(),
       ]);
       await fileChooser.setFiles(imagens[i]);
       console.log(`   ⬆️  Enviando: ${path.basename(imagens[i])}`);
 
-      // Aguarda o upload concluir e selecionar automaticamente
+      // Aguarda o upload concluir
       await page.waitForSelector('.attachment.selected', { timeout: 30000 });
       await page.waitForTimeout(1500);
 
       // Clica em "Inserir mídia"
-      await page.locator('button.media-button-select, button:has-text("Inserir"), button:has-text("Select"), button:has-text("Insert")').last().click();
+      await page.locator('button.media-button-select').click();
       await page.waitForTimeout(2000);
       console.log(`   ✅ Imagem ${i + 1} substituída`);
     }
