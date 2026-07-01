@@ -93,46 +93,62 @@ async function main() {
     const elementorFrame = page.frameLocator('#elementor-preview-iframe');
 
     await page.screenshot({ path: 'debug-elementor.png' });
-    console.log('📸 Screenshot salvo: debug-elementor.png');
 
-    // Conta imagens no iframe
-    const imageWidgets = elementorFrame.locator('.elementor-widget-image');
-    const count = await imageWidgets.count();
-    console.log(`   Encontrados ${count} widget(s) de imagem`);
+    // Pega todas as imagens e filtra as do encarte (excluindo logo/header)
+    // As imagens do encarte são as maiores (width > 400px)
+    const allImages = elementorFrame.locator('.elementor-widget-image img');
+    const allCount = await allImages.count();
+    console.log(`   Total de imagens na página: ${allCount}`);
 
-    if (count === 0) {
-      console.error('❌ Nenhum widget de imagem encontrado.');
+    // Identifica as imagens do encarte pela largura (as maiores)
+    const encarteIndexes = [];
+    for (let i = 0; i < allCount; i++) {
+      const box = await allImages.nth(i).boundingBox();
+      if (box && box.width > 300) {
+        encarteIndexes.push(i);
+        console.log(`   Imagem ${i}: ${Math.round(box.width)}x${Math.round(box.height)} ← encarte`);
+      } else if (box) {
+        console.log(`   Imagem ${i}: ${Math.round(box.width)}x${Math.round(box.height)} ← ignorada`);
+      }
+    }
+
+    if (encarteIndexes.length === 0) {
+      console.error('❌ Nenhuma imagem de encarte encontrada.');
       await browser.close();
       return;
     }
 
     // ── 5. Substitui cada imagem ───────────────────────────────────────────
-    const total = Math.min(count, imagens.length);
+    const total = Math.min(encarteIndexes.length, imagens.length);
 
     for (let i = 0; i < total; i++) {
-      console.log(`\n🔄 Substituindo imagem ${i + 1} de ${total}...`);
+      const widgetIndex = encarteIndexes[i];
+      console.log(`\n🔄 Substituindo imagem ${i + 1} de ${total} (widget index ${widgetIndex})...`);
 
-      // Clica na imagem dentro do widget no iframe
-      const imgEl = imageWidgets.nth(i).locator('img').first();
+      // Fecha popup se aparecer ("Você está indo para outra parte do site")
+      const popup = page.locator('button:has-text("Não sair"), button:has-text("Don\'t Leave")');
+      if (await popup.count() > 0) {
+        await popup.click();
+        await page.waitForTimeout(1000);
+      }
+
+      // Clica na imagem do encarte no iframe
+      const imgEl = allImages.nth(widgetIndex);
       await imgEl.scrollIntoViewIfNeeded();
       await imgEl.click({ force: true });
       await page.waitForTimeout(2500);
+
+      // Fecha popup se aparecer novamente
+      if (await popup.count() > 0) {
+        await popup.click();
+        await page.waitForTimeout(1000);
+      }
+
       await page.screenshot({ path: `debug-widget-${i+1}.png` });
       console.log(`📸 Screenshot salvo: debug-widget-${i+1}.png`);
 
-      // Verifica se o painel mudou para mostrar configurações do widget
-      const panelTitle = await page.locator('.elementor-panel-heading-title').textContent().catch(() => '');
-      console.log(`   Painel ativo: "${panelTitle}"`);
-
-      // Tenta achar o controle de imagem no painel esquerdo
-      const mediaPreview = page.locator('.elementor-control-media__preview, .elementor-control-media-upload-button, .elementor-control-media img').first();
-
-      if (await mediaPreview.count() === 0) {
-        // Se não achou, tenta clicar diretamente no widget (sem force)
-        await imageWidgets.nth(i).click();
-        await page.waitForTimeout(2000);
-      }
-
+      // Clica no preview da imagem no painel esquerdo para abrir a biblioteca
+      const mediaPreview = page.locator('.elementor-control-media__preview, .elementor-control-media img').first();
       await mediaPreview.waitFor({ timeout: 10000 });
       await mediaPreview.click();
       await page.waitForTimeout(1500);
