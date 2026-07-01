@@ -1,34 +1,28 @@
 /**
- * Automação: Troca de Encarte - Rio'Atacadão WordPress + Elementor
+ * Automação: Troca de Encarte - Rio'Atacadão
  *
  * Como usar:
  *   node trocar-encarte.js <imagem-pagina1> <imagem-pagina2>
  *
  * Exemplo:
- *   node trocar-encarte.js encarte-jul-p1.jpg encarte-jul-p2.jpg
+ *   node trocar-encarte.js encarte-jul-p1.webp encarte-jul-p2.webp
  *
  * Requisitos (primeira vez):
  *   npm install
- *   npx playwright install chromium
  */
 
-const { chromium } = require('playwright');
+const fs   = require('fs');
 const path = require('path');
-const fs = require('fs');
 
-const WP_ADMIN     = 'https://rioatacadao.com.br/wp-admin';
-const WP_USER      = 'wallace-rox@hotmail.com';
-const WP_PASS      = 'Ux2pix9zuni!';
-const TEMP_LOGIN   = 'https://rioatacadao.com.br/wp-admin/?wtlwp_token=f9f0b83f99928cc1d802022c0bd8591898b5ed891812885d4c25f085c3463816160e613a6fa17b138ce40438f5db2583d9ebaca73387598cc367f137a8996c02';
-const ENCARTE_SLUG = 'encarte';
+const WP_URL      = 'https://rioatacadao.com.br';
+const WP_USER     = 'wallace-rox@hotmail.com';
+const WP_PASS     = 'Ux2pix9zuni!';
+const PAGE_ID     = 90; // ID da página Encarte
 
 async function main() {
   const args = process.argv.slice(2);
   if (args.length < 2) {
-    console.error('');
-    console.error('Uso:   node trocar-encarte.js <imagem-pagina1> <imagem-pagina2>');
-    console.error('Exemplo: node trocar-encarte.js encarte-jul-p1.jpg encarte-jul-p2.jpg');
-    console.error('');
+    console.error('\nUso: node trocar-encarte.js <imagem1> <imagem2>\n');
     process.exit(1);
   }
 
@@ -38,173 +32,156 @@ async function main() {
       console.error(`❌ Arquivo não encontrado: ${img}`);
       process.exit(1);
     }
-    console.log(`✅ Imagem encontrada: ${img}`);
+    console.log(`✅ ${path.basename(img)}`);
   }
 
-  const browser = await chromium.launch({
-    headless: false,
-    slowMo: 100,
-    executablePath: process.env.CHROMIUM_PATH || undefined,
+  const auth = Buffer.from(`${WP_USER}:${WP_PASS}`).toString('base64');
+  const headers = { Authorization: `Basic ${auth}` };
+
+  // ── 1. Busca o conteúdo atual da página ────────────────────────────────
+  console.log('\n📄 Buscando dados da página Encarte...');
+  const pageRes = await fetch(`${WP_URL}/wp-json/wp/v2/pages/${PAGE_ID}`, { headers });
+
+  if (!pageRes.ok) {
+    // Tenta autenticar via cookie com Playwright como fallback
+    console.log('⚠️  API REST com Basic Auth não disponível. Usando método alternativo...');
+    await usarPlaywright(imagens);
+    return;
+  }
+
+  const pageData = await pageRes.json();
+  const elementorData = pageData.meta?._elementor_data || '';
+
+  if (!elementorData) {
+    console.log('⚠️  Dados do Elementor não encontrados via API. Usando método alternativo...');
+    await usarPlaywright(imagens);
+    return;
+  }
+
+  let elementorJson = JSON.parse(elementorData);
+
+  // ── 2. Faz upload das novas imagens ───────────────────────────────────
+  const novosIds = [];
+  for (let i = 0; i < imagens.length; i++) {
+    console.log(`\n⬆️  Enviando imagem ${i + 1}: ${path.basename(imagens[i])}...`);
+    const mediaId = await uploadImagem(imagens[i], auth);
+    novosIds.push(mediaId);
+    console.log(`   ✅ Upload OK - ID: ${mediaId}`);
+  }
+
+  // ── 3. Substitui as imagens no JSON do Elementor ───────────────────────
+  console.log('\n🔄 Atualizando dados do Elementor...');
+  let substituicoes = 0;
+  const imgWidgets = encontrarWidgetsImagem(elementorJson);
+  console.log(`   Encontrados ${imgWidgets.length} widget(s) de imagem na página`);
+
+  for (let i = 0; i < Math.min(imgWidgets.length, novosIds.length); i++) {
+    const widget = imgWidgets[i];
+    const mediaInfo = await buscarMedia(novosIds[i], auth);
+    widget.settings.image = {
+      id:  novosIds[i],
+      url: mediaInfo.source_url,
+    };
+    substituicoes++;
+    console.log(`   ✅ Widget ${i + 1} atualizado`);
+  }
+
+  if (substituicoes === 0) {
+    console.error('❌ Nenhuma imagem substituída no JSON.');
+    process.exit(1);
+  }
+
+  // ── 4. Salva a página atualizada ───────────────────────────────────────
+  console.log('\n💾 Salvando página...');
+  const updateRes = await fetch(`${WP_URL}/wp-json/wp/v2/pages/${PAGE_ID}`, {
+    method: 'POST',
+    headers: { ...headers, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ meta: { _elementor_data: JSON.stringify(elementorJson) } }),
   });
-  const context = await browser.newContext({ acceptDownloads: true });
-  const page    = await context.newPage();
-  page.setDefaultTimeout(60000);
 
-  try {
-    // ── 1. Login via Temporary Login ──────────────────────────────────────
-    console.log('\n🔐 Fazendo login via link temporário...');
-    await page.goto(TEMP_LOGIN, { waitUntil: 'networkidle', timeout: 60000 });
-    await page.waitForURL('**/wp-admin/**', { timeout: 30000 });
-    console.log('✅ Login OK');
-
-    // ── 2. Navega para a página do Encarte e abre o Elementor ─────────────
-    console.log('\n🔍 Abrindo página do Encarte...');
-    await page.goto('https://rioatacadao.com.br/encarte/', { waitUntil: 'networkidle', timeout: 60000 });
-    await page.screenshot({ path: 'debug-encarte.png' });
-    console.log('📸 Screenshot salvo: debug-encarte.png');
-
-    // Tenta achar o botão Editar com Elementor na admin bar
-    const editLink = page.locator('#wp-admin-bar-elementor_edit_page a').first();
-    let editUrl = null;
-    if (await editLink.count() > 0) {
-      editUrl = await editLink.getAttribute('href');
-    } else {
-      // Tenta via wp-admin pages list
-      console.log('   Buscando via admin...');
-      await page.goto(`${WP_ADMIN}/edit.php?post_type=page`, { waitUntil: 'networkidle' });
-      await page.screenshot({ path: 'debug-pages.png' });
-      console.log('📸 Screenshot salvo: debug-pages.png');
-      const link = page.locator('a:has-text("Editar com Elementor"), a:has-text("Edit with Elementor")').first();
-      await link.waitFor({ timeout: 15000 });
-      editUrl = await link.getAttribute('href');
-    }
-    console.log('✅ Elementor encontrado:', editUrl);
-
-    // ── 3. Abre o Elementor ────────────────────────────────────────────────
-    console.log('\n🎨 Abrindo Elementor...');
-    await page.goto(editUrl);
-    await page.waitForLoadState('networkidle');
-    await page.waitForSelector('#elementor-editor-wrapper, .elementor-panel', { timeout: 60000 });
-    console.log('✅ Elementor carregado');
-    await page.waitForTimeout(4000);
-
-    // ── 4. Encontra widgets de imagem no canvas ────────────────────────────
-    console.log('\n🖼️  Localizando imagens do encarte...');
-    const elementorFrame = page.frameLocator('#elementor-preview-iframe');
-
-    await page.screenshot({ path: 'debug-elementor.png' });
-
-    // Pega todas as imagens e filtra as do encarte (excluindo logo/header)
-    // As imagens do encarte são as maiores (width > 400px)
-    const allImages = elementorFrame.locator('.elementor-widget-image img');
-    const allCount = await allImages.count();
-    console.log(`   Total de imagens na página: ${allCount}`);
-
-    // Identifica as imagens do encarte pela largura (as maiores)
-    const encarteIndexes = [];
-    for (let i = 0; i < allCount; i++) {
-      const box = await allImages.nth(i).boundingBox();
-      if (box && box.width > 300) {
-        encarteIndexes.push(i);
-        console.log(`   Imagem ${i}: ${Math.round(box.width)}x${Math.round(box.height)} ← encarte`);
-      } else if (box) {
-        console.log(`   Imagem ${i}: ${Math.round(box.width)}x${Math.round(box.height)} ← ignorada`);
-      }
-    }
-
-    if (encarteIndexes.length === 0) {
-      console.error('❌ Nenhuma imagem de encarte encontrada.');
-      await browser.close();
-      return;
-    }
-
-    // ── 5. Substitui cada imagem ───────────────────────────────────────────
-    const total = Math.min(encarteIndexes.length, imagens.length);
-
-    for (let i = 0; i < total; i++) {
-      const widgetIndex = encarteIndexes[i];
-      console.log(`\n🔄 Substituindo imagem ${i + 1} de ${total} (widget index ${widgetIndex})...`);
-
-      // Fecha popup se aparecer ("Você está indo para outra parte do site")
-      const popup = page.locator('button:has-text("Não sair"), button:has-text("Don\'t Leave")');
-      if (await popup.count() > 0) {
-        await popup.click();
-        await page.waitForTimeout(1000);
-      }
-
-      // Clica na imagem do encarte no iframe
-      const imgEl = allImages.nth(widgetIndex);
-      await imgEl.scrollIntoViewIfNeeded();
-      await imgEl.click({ force: true });
-      await page.waitForTimeout(2500);
-
-      // Fecha popup se aparecer novamente
-      if (await popup.count() > 0) {
-        await popup.click();
-        await page.waitForTimeout(1000);
-      }
-
-      await page.screenshot({ path: `debug-widget-${i+1}.png` });
-      console.log(`📸 Screenshot salvo: debug-widget-${i+1}.png`);
-
-      // Clica no preview da imagem no painel esquerdo para abrir a biblioteca
-      const mediaPreview = page.locator('.elementor-control-media__preview, .elementor-control-media img').first();
-      await mediaPreview.waitFor({ timeout: 10000 });
-      await mediaPreview.click();
-      await page.waitForTimeout(1500);
-
-      // Modal da biblioteca de mídia
-      await page.waitForSelector('.media-modal', { timeout: 15000 });
-      console.log('   📂 Biblioteca de mídia aberta');
-
-      // Clica na aba de upload (primeira opção do menu)
-      const uploadTab = page.locator('.media-router .media-menu-item').first();
-      if (await uploadTab.count() > 0) await uploadTab.click();
-      await page.waitForTimeout(800);
-
-      // Faz upload do arquivo
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        page.locator('.browser, .upload-files-button').first().click(),
-      ]);
-      await fileChooser.setFiles(imagens[i]);
-      console.log(`   ⬆️  Enviando: ${path.basename(imagens[i])}`);
-
-      // Aguarda o upload concluir
-      await page.waitForSelector('.attachment.selected', { timeout: 30000 });
-      await page.waitForTimeout(1500);
-
-      // Clica em "Inserir mídia"
-      await page.locator('button.media-button-select').click();
-      await page.waitForTimeout(2000);
-      console.log(`   ✅ Imagem ${i + 1} substituída`);
-    }
-
-    // ── 6. Publica as alterações ───────────────────────────────────────────
-    console.log('\n💾 Salvando e publicando...');
-    const publishBtn = page.locator(
-      '#elementor-panel-footer-saver-publish, button:has-text("Publicar"), button:has-text("Publish"), button:has-text("Atualizar"), button:has-text("Update")'
-    ).first();
-    await publishBtn.waitFor({ timeout: 10000 });
-    await publishBtn.click();
-
-    // Aguarda confirmação de salvo
-    await page.waitForSelector(
-      '.elementor-panel-footer-sub-title:has-text("Publicado"), .elementor-panel-footer-sub-title:has-text("Published")',
-      { timeout: 15000 }
-    ).catch(() => console.log('   (aguardando confirmação de publicação...)'));
-
-    await page.waitForTimeout(2000);
-    console.log('✅ Publicado com sucesso!');
-    console.log('\n🎉 Encarte atualizado! Acesse o site para conferir.');
-
-  } catch (err) {
-    console.error('\n❌ Erro:', err.message);
-    await page.screenshot({ path: 'debug-erro.png' });
-    console.log('📸 Screenshot do erro salvo: debug-erro.png');
-  } finally {
-    await browser.close();
+  if (!updateRes.ok) {
+    const err = await updateRes.text();
+    console.error('❌ Erro ao salvar:', err);
+    process.exit(1);
   }
+
+  console.log('\n🎉 Encarte atualizado com sucesso!');
+  console.log(`   Acesse: ${WP_URL}/encarte/`);
 }
 
-main();
+// Faz upload de uma imagem e retorna o ID na biblioteca de mídia
+async function uploadImagem(filePath, auth) {
+  const filename = path.basename(filePath);
+  const ext = path.extname(filename).toLowerCase().replace('.', '');
+  const mimeTypes = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif' };
+  const mime = mimeTypes[ext] || 'image/jpeg';
+
+  const fileData = fs.readFileSync(filePath);
+  const res = await fetch(`${WP_URL}/wp-json/wp/v2/media`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${auth}`,
+      'Content-Disposition': `attachment; filename="${filename}"`,
+      'Content-Type': mime,
+    },
+    body: fileData,
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Erro no upload: ${err}`);
+  }
+
+  const data = await res.json();
+  return data.id;
+}
+
+// Busca informações de uma mídia pelo ID
+async function buscarMedia(id, auth) {
+  const res = await fetch(`${WP_URL}/wp-json/wp/v2/media/${id}`, {
+    headers: { Authorization: `Basic ${auth}` },
+  });
+  return res.json();
+}
+
+// Encontra recursivamente todos os widgets de imagem no JSON do Elementor
+function encontrarWidgetsImagem(elementos, resultado = []) {
+  for (const el of elementos) {
+    if (el.widgetType === 'image' && el.settings?.image) {
+      resultado.push(el);
+    }
+    if (el.elements?.length) {
+      encontrarWidgetsImagem(el.elements, resultado);
+    }
+  }
+  return resultado;
+}
+
+// Fallback: usa Playwright se a API REST não funcionar
+async function usarPlaywright(imagens) {
+  console.log('\n🌐 Abrindo navegador como alternativa...');
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch({ headless: false });
+  const page    = await browser.newPage();
+  page.setDefaultTimeout(60000);
+
+  const TEMP_LOGIN = 'https://rioatacadao.com.br/wp-admin/?wtlwp_token=f9f0b83f99928cc1d802022c0bd8591898b5ed891812885d4c25f085c3463816160e613a6fa17b138ce40438f5db2583d9ebaca73387598cc367f137a8996c02';
+
+  await page.goto(TEMP_LOGIN, { waitUntil: 'networkidle' });
+  await page.waitForURL('**/wp-admin/**');
+  console.log('✅ Login OK');
+
+  await page.goto(`https://rioatacadao.com.br/wp-admin/post.php?post=${PAGE_ID}&action=elementor`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#elementor-editor-wrapper, .elementor-panel', { timeout: 60000 });
+  await page.waitForTimeout(4000);
+  console.log('✅ Elementor aberto');
+  console.log('\n⚠️  Por favor, troque as imagens manualmente e publique.');
+  console.log('   O navegador permanecerá aberto por 5 minutos.');
+  await page.waitForTimeout(300000);
+  await browser.close();
+}
+
+main().catch(err => {
+  console.error('\n❌ Erro:', err.message);
+  process.exit(1);
+});
