@@ -5,10 +5,10 @@
   position: relative;
   background: var(--color-teal);
   overflow: hidden;
-  padding: 72px 0;
-  min-height: 700px;
+  min-height: calc(100vw * 900 / 2560);
   display: flex;
   align-items: center;
+  padding: 48px 0;
 }
 
 .hero__bg {
@@ -40,6 +40,9 @@
   position: relative;
   z-index: 2;
   width: 100%;
+  padding-left: 24.4%;
+  padding-right: 4%;
+  box-sizing: border-box;
 }
 
 .hero__copy {
@@ -117,6 +120,8 @@
   }
   .hero__inner {
     order: 1;
+    padding-left: 24px;
+    padding-right: 24px;
   }
   .hero__copy {
     max-width: none;
