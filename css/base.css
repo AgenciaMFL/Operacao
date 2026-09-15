@@ -1,0 +1,200 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.section {
+  padding: 96px 0;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 2.07px;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 17px;
+}
+
+.eyebrow--light {
+  color: var(--color-white);
+}
+
+h2.section-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -1.26px;
+  color: var(--color-ink);
+  margin-bottom: 18px;
+}
+
+h2.section-title--center {
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2.section-title--light {
+  color: var(--color-white);
+}
+
+.section-lede {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--color-grey-25);
+  max-width: 570px;
+}
+
+.section-lede--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.section-lede--light {
+  color: #e8fffc;
+}
+
+.text-accent {
+  color: var(--color-teal);
+}
+
+.text-accent-coral {
+  color: var(--color-coral-dark);
+}
+
+.text-highlight {
+  color: var(--color-pink-highlight);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px 10px 10px;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.94;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--color-white);
+  color: var(--color-coral);
+  flex-shrink: 0;
+}
+
+.btn-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.btn--primary {
+  background: var(--color-coral);
+  color: var(--color-white);
+}
+
+.btn--ghost {
+  background: rgba(244, 120, 107, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.59);
+  color: #e6e6e6;
+  backdrop-filter: blur(4px);
+  padding: 16px 33px;
+  font-family: var(--font-hero);
+  font-weight: 600;
+  font-size: 16.8px;
+}
+
+/* Generic image placeholder used where the real Figma asset could not be
+   downloaded automatically (see ASSETS.md) */
+.img-placeholder {
+  background: var(--color-placeholder);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(11, 18, 17, 0.35);
+  font-size: 13px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-placeholder.is-empty::after {
+  content: attr(data-label);
+  padding: 8px 12px;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 64px 0;
+  }
+}

@@ -1,0 +1,39 @@
+:root {
+  /* Brand colors (extracted from Figma design tokens) */
+  --color-teal: #0e6a60; /* color/cyan/24 - primary brand teal */
+  --color-teal-dark: #106b61; /* section#06 background */
+  --color-ink: #0b1211; /* color/cyan/6 - near-black headings */
+  --color-ink-08: rgba(11, 18, 17, 0.08);
+  --color-ink-10: rgba(11, 18, 17, 0.1);
+  --color-ink-12: rgba(11, 18, 17, 0.12);
+  --color-grey-25: #3a4645; /* body copy on light bg */
+  --color-grey-32: #4a5756; /* secondary body copy */
+  --color-grey-95: #f6f4f1; /* footer / checklist item bg */
+  --color-grey-99: #fbfcfc; /* card bg */
+  --color-section: #fbfbfb; /* light section bg */
+  --color-coral: #f4786b; /* primary CTA color */
+  --color-coral-dark: #ef6553; /* governance grid icon bg */
+  --color-pink-highlight: #ffc1ba; /* highlighted headline text on dark bg */
+  --color-placeholder: #d9d9d9;
+  --color-white: #ffffff;
+  --color-sidebar: #52817c;
+  --color-sidebar-text: #a3d4d0;
+
+  /* Typography */
+  --font-hero: "Inter", sans-serif;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Manrope", sans-serif;
+
+  /* Spacing / layout */
+  --container-max: 1216px;
+  --container-pad: 24px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 25px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 4px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-soft: 0 6px 10px rgba(11, 18, 17, 0.07);
+  --shadow-step: 0 16px 21px rgba(11, 18, 17, 0.06);
+}
