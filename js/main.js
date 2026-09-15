@@ -128,7 +128,7 @@
   if (prefersReducedMotion) return;
   if (window.matchMedia("(pointer: coarse)").matches) return;
 
-  const EASE = 0.12;
+  const EASE = 0.2;
   let target = window.scrollY;
   let current = window.scrollY;
   let animating = false;
@@ -137,15 +137,20 @@
     return document.documentElement.scrollHeight - window.innerHeight;
   }
 
+  // `behavior: "instant"` is required here: html has `scroll-behavior:
+  // smooth` (base.css, for anchor-link jumps), and plain scrollTo(x, y)
+  // uses the element's CSS scroll-behavior by default. Without this,
+  // every frame's jump gets ALSO smoothed natively by the browser on
+  // top of our own easing, compounding into a noticeable startup delay.
   function step() {
     current += (target - current) * EASE;
     if (Math.abs(target - current) < 0.5) {
       current = target;
-      window.scrollTo(0, current);
+      window.scrollTo({ top: current, left: 0, behavior: "instant" });
       animating = false;
       return;
     }
-    window.scrollTo(0, current);
+    window.scrollTo({ top: current, left: 0, behavior: "instant" });
     requestAnimationFrame(step);
   }
 
