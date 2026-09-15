@@ -472,15 +472,33 @@
   overflow: hidden;
 }
 
+.cost-band__inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 64px;
+}
+
+.cost-band__art {
+  width: 310px;
+  height: auto;
+  aspect-ratio: 1190 / 1272;
+  flex-shrink: 0;
+}
+
 .cost-band__content {
   max-width: 497px;
-  margin-left: auto;
 }
 
 @media (max-width: 720px) {
+  .cost-band__inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 32px;
+  }
   .cost-band__content {
     max-width: none;
-    margin-left: 0;
     text-align: center;
   }
 }
