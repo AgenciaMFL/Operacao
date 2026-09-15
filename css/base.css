@@ -125,6 +125,7 @@ h2.section-title--light {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 17px;
+  white-space: nowrap;
   cursor: pointer;
   border: none;
   transition: transform 0.15s ease, opacity 0.15s ease;
