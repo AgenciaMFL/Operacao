@@ -338,7 +338,7 @@
    ========================================================= */
 .how {
   display: grid;
-  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 477px) minmax(0, 1fr);
   gap: 64px;
   align-items: start;
 }
@@ -418,6 +418,10 @@
   background: var(--color-section);
 }
 
+.governance .protection__intro {
+  max-width: 672px;
+}
+
 .governance__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -469,21 +473,29 @@
   color: var(--color-white);
   padding: 80px 0;
   position: relative;
-  overflow: hidden;
-}
-
-.cost-band__inner {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 64px;
+  /* intentionally NOT overflow:hidden — .cost-band__art bleeds above
+     and below this section on purpose (see node "image 9" in Figma) */
 }
 
 .cost-band__art {
-  width: 310px;
+  position: absolute;
+  z-index: 2;
+  left: 20.16vw;
+  top: -2.73vw;
+  width: 24.8vw;
+  max-width: 480px;
+  min-width: 220px;
   height: auto;
   aspect-ratio: 1190 / 1272;
-  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.cost-band__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .cost-band__content {
