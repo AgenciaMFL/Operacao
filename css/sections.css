@@ -610,12 +610,9 @@
 
 .why-sis__mockup {
   position: relative;
+  background: transparent;
 }
 
-.why-sis__mockup img {
-  width: 100%;
-  transform: rotate(-4deg);
-}
 
 /* =========================================================
    FOOTER

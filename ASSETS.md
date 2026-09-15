@@ -17,11 +17,11 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | `assets/img/card-mitigar.png` | Card "Mitigar" (seção 03) |
 | `assets/img/card-monitorar.png` | Card "Monitorar" (seção 03) |
 | `assets/img/cta-bg-meeting.png` | Fundo do CTA final ("Sua empresa sabe...") |
-| `assets/img/laptop-mockup.png` | Mockup do painel administrativo (seção 07) |
+| `assets/img/laptop-mockup.webp` | Mockup do painel administrativo (seção 07) |
 
-`assets/img/custo-nao-agir.webp` não é usado — o node real da seção
-"06 — O custo de não agir" no Figma não tem nenhum ícone, só o fundo
-verde escuro com o texto. Se esse ícone (clipboard + multa) pertence a
-outra parte do design, me avisa onde que eu encaixo.
+`assets/img/custo-nao-agir.webp` ainda não é usado em nenhum lugar —
+já conferi direto no Figma e a seção "06 — O custo de não agir" não
+tem esse ícone. Preciso do link com `?node-id=` da seção onde ele
+aparece no seu Figma pra encaixar no lugar certo.
 
 Link do arquivo: https://www.figma.com/design/C23ByCz4hyo8cvyeKY4CPx/Agencia-MFL?node-id=2754-3
