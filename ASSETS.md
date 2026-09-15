@@ -18,10 +18,6 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | `assets/img/card-monitorar.png` | Card "Monitorar" (seção 03) |
 | `assets/img/cta-bg-meeting.png` | Fundo do CTA final ("Sua empresa sabe...") |
 | `assets/img/laptop-mockup.webp` | Mockup do painel administrativo (seção 07) |
-
-`assets/img/custo-nao-agir.webp` ainda não é usado em nenhum lugar —
-já conferi direto no Figma e a seção "06 — O custo de não agir" não
-tem esse ícone. Preciso do link com `?node-id=` da seção onde ele
-aparece no seu Figma pra encaixar no lugar certo.
+| `assets/img/custo-nao-agir.webp` | Ícone "image 9" (node `2794:651`), sobreposto na seção 06 — "O custo de não agir" |
 
 Link do arquivo: https://www.figma.com/design/C23ByCz4hyo8cvyeKY4CPx/Agencia-MFL?node-id=2754-3

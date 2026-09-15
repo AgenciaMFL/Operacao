@@ -569,8 +569,10 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(26px, 3.4vw, 42px);
+  line-height: 1.26;
   letter-spacing: -1.26px;
-  margin-bottom: 20px;
+  max-width: 632px;
+  margin: 0 auto 20px;
 }
 
 .final-cta p {
@@ -591,7 +593,7 @@
    ========================================================= */
 .why-sis {
   display: grid;
-  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 583px) minmax(0, 1fr);
   gap: 48px;
   align-items: center;
 }
@@ -757,6 +759,14 @@
   border-top: 1px solid var(--color-ink-10);
   box-shadow: 0 -8px 24px rgba(11, 18, 17, 0.08);
   padding: 14px 0;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+/* Hidden while a section with its own CTA button is on screen
+   (hero, "como funciona", final CTA) — see .cta-marker in js/main.js */
+.sticky-cta.is-hidden {
+  transform: translateY(100%);
 }
 
 .sticky-cta__inner {

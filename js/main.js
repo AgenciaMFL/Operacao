@@ -89,3 +89,90 @@
 
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 })();
+
+// Sticky bottom CTA bar: hidden while a section that already has its
+// own CTA button is on screen (hero, "como funciona", final CTA), so
+// the two buttons never compete for attention at the same time.
+(function initStickyCtaVisibility() {
+  const bar = document.getElementById("stickyCta");
+  const markers = document.querySelectorAll(".cta-marker");
+  if (!bar || !markers.length) return;
+
+  const visibleMarkers = new Set();
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleMarkers.add(entry.target);
+        } else {
+          visibleMarkers.delete(entry.target);
+        }
+      });
+      bar.classList.toggle("is-hidden", visibleMarkers.size > 0);
+    },
+    { threshold: 0, rootMargin: "0px 0px -10% 0px" }
+  );
+
+  markers.forEach((el) => observer.observe(el));
+})();
+
+// Smooth wheel scroll: the browser's native `scroll-behavior: smooth`
+// (base.css) only applies to programmatic jumps (anchor links). Plain
+// mouse-wheel scrolling is still the default abrupt per-notch jump, so
+// this intercepts wheel input and eases the page toward the target
+// position every frame instead. Skipped for touch input (already
+// smooth/inertial) and prefers-reduced-motion.
+(function initSmoothWheelScroll() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) return;
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+
+  const EASE = 0.12;
+  let target = window.scrollY;
+  let current = window.scrollY;
+  let animating = false;
+
+  function maxScroll() {
+    return document.documentElement.scrollHeight - window.innerHeight;
+  }
+
+  function step() {
+    current += (target - current) * EASE;
+    if (Math.abs(target - current) < 0.5) {
+      current = target;
+      window.scrollTo(0, current);
+      animating = false;
+      return;
+    }
+    window.scrollTo(0, current);
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (e.ctrlKey) return; // let pinch-zoom / ctrl+wheel pass through
+      e.preventDefault();
+      const lineHeight = 16;
+      const delta = e.deltaMode === 1 ? e.deltaY * lineHeight : e.deltaY;
+      target = Math.max(0, Math.min(target + delta, maxScroll()));
+      if (!animating) {
+        animating = true;
+        current = window.scrollY;
+        requestAnimationFrame(step);
+      }
+    },
+    { passive: false }
+  );
+
+  window.addEventListener("resize", () => {
+    target = Math.min(target, maxScroll());
+  });
+
+  // Keep target in sync with scrolling that didn't originate from the
+  // wheel handler above (anchor-link jumps, keyboard, scrollbar drag).
+  window.addEventListener("scroll", () => {
+    if (!animating) target = window.scrollY;
+  });
+})();
