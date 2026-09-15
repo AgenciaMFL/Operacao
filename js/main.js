@@ -92,13 +92,23 @@
 
 // Sticky bottom CTA bar: hidden while a section that already has its
 // own CTA button is on screen (hero, "como funciona", final CTA), so
-// the two buttons never compete for attention at the same time.
+// the two buttons never compete for attention at the same time. The
+// page only reserves bottom space (body padding) while the bar is
+// actually shown — otherwise a section with no CTA marker right
+// before the end of the page (e.g. the footer) would leave a dead
+// blank gap where the bar never gets a chance to appear.
 (function initStickyCtaVisibility() {
   const bar = document.getElementById("stickyCta");
   const markers = document.querySelectorAll(".cta-marker");
   if (!bar || !markers.length) return;
 
   const visibleMarkers = new Set();
+
+  function syncBodyPadding() {
+    document.body.style.paddingBottom = bar.classList.contains("is-hidden")
+      ? "0px"
+      : `${bar.offsetHeight}px`;
+  }
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -110,11 +120,14 @@
         }
       });
       bar.classList.toggle("is-hidden", visibleMarkers.size > 0);
+      syncBodyPadding();
     },
     { threshold: 0, rootMargin: "0px 0px -10% 0px" }
   );
 
   markers.forEach((el) => observer.observe(el));
+
+  window.addEventListener("resize", syncBodyPadding);
 })();
 
 // Smooth wheel scroll: the browser's native `scroll-behavior: smooth`

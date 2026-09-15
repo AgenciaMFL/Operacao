@@ -596,6 +596,8 @@
   grid-template-columns: minmax(0, 583px) minmax(0, 1fr);
   gap: 48px;
   align-items: center;
+  max-width: 1360px; /* wider than the shared .container so the mockup
+    column gets extra room without shrinking the fixed-width text column */
 }
 
 .checklist {
