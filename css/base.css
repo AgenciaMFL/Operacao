@@ -33,6 +33,7 @@ html {
 
 body {
   margin: 0;
+  padding-bottom: 78px; /* reserves space for the fixed .sticky-cta bar */
   font-family: var(--font-body);
   color: var(--color-ink);
   background: var(--color-white);
