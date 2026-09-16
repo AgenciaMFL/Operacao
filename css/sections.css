@@ -720,18 +720,25 @@
 /* =========================================================
    RESPONSIVE
    ========================================================= */
+@media (max-width: 1280px) {
+  /* .how needs its aside fixed at Figma's literal 477px (see rule
+     above) to keep the exact 3-line title wrap, so the 2-column
+     layout only fits comfortably from ~1280px up. Below that, stack
+     to avoid the cramped in-between zone. */
+  .how {
+    grid-template-columns: 1fr;
+  }
+  .how__aside {
+    position: static;
+  }
+}
+
 @media (max-width: 1024px) {
   .protection-card {
     flex-basis: calc(50% - 10px);
   }
   .governance__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .how {
-    grid-template-columns: 1fr;
-  }
-  .how__aside {
-    position: static;
   }
   .why-sis {
     grid-template-columns: 1fr;
