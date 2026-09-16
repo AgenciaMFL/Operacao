@@ -224,6 +224,26 @@ h2.section-title--light {
   stroke: var(--color-ink);
 }
 
+/* "Solicitar proposta" (Como funciona): same sweep effect, but inverted —
+   fills black instead of white, so the label/arrow flip to white instead
+   of black — plus a soft scale-up on hover. */
+.btn--primary.btn--invert-hover {
+  transition: color 0.35s ease 0.1s, transform 0.25s ease;
+}
+
+.btn--primary.btn--invert-hover:hover {
+  transform: translateY(-1px) scale(1.1);
+  color: var(--color-white);
+}
+
+.btn--primary.btn--invert-hover:hover .btn-icon::before {
+  background: var(--color-ink);
+}
+
+.btn--primary.btn--invert-hover:hover .btn-icon svg {
+  stroke: var(--color-white);
+}
+
 .btn--ghost {
   background: rgba(244, 120, 107, 0.13);
   border: 1px solid rgba(255, 255, 255, 0.59);
