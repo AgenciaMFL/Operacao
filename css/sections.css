@@ -341,9 +341,12 @@
    ========================================================= */
 .how {
   display: grid;
-  grid-template-columns: minmax(0, 412px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 477px) minmax(0, 1fr);
   gap: 80px;
   align-items: start;
+  max-width: 1300px; /* wider than the shared .container so the cards
+    column keeps room for the bigger image + text once the aside is
+    restored to Figma's exact 477px */
 }
 
 .how__aside {
