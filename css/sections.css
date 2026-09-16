@@ -411,7 +411,13 @@
 .how-step__media {
   aspect-ratio: 216 / 182;
   border-radius: 19px;
-  background: var(--color-placeholder);
+  overflow: hidden;
+}
+
+.how-step__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* =========================================================
