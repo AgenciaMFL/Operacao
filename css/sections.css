@@ -173,8 +173,8 @@
   }
   .hero__inner {
     order: 1;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
     /* Figma's dedicated mobile hero (node 2811:106) centers the
        whole text block instead of the left-aligned desktop layout */
     text-align: center;
@@ -210,8 +210,8 @@
     order: 2;
     left: auto;
     top: auto;
-    width: 85%;
-    max-width: 420px;
+    width: 94%;
+    max-width: 480px;
     /* Without this, the element's own width/height HTML attributes
        (used for the image's intrinsic size and to avoid layout shift
        while loading) get applied as literal presentational CSS height
@@ -224,6 +224,7 @@
     display: block;
   }
 }
+
 
 @media (max-width: 640px) {
   .hero__actions {
@@ -629,17 +630,23 @@
      sized for wide desktop screens, where the text column sits far
      enough to the right to clear it. Below ~1130px viewport width
      the math no longer works out and the icon lands directly on top
-     of the heading/paragraph text. Drop it back into normal flow
-     above the centered text instead, all the way down to mobile. */
+     of the heading/paragraph text. Drop it back into normal flow,
+     stacked below the text instead, all the way down to mobile. */
+  .cost-band {
+    display: flex;
+    flex-direction: column;
+  }
   .cost-band__art {
     position: static;
-    width: 180px;
-    max-width: 45vw;
+    order: 2;
+    width: 260px;
+    max-width: 60vw;
     min-width: 0;
-    margin: 0 auto 24px;
+    margin: 24px auto 0;
     display: block;
   }
   .cost-band__inner {
+    order: 1;
     flex-direction: column;
     justify-content: center;
     text-align: center;
@@ -859,7 +866,8 @@
     grid-template-columns: 1fr;
   }
   .why-sis__mockup {
-    order: -1;
+    /* Laptop mockup after the text/checklist column (its natural DOM
+       order), not before it — no `order` override here. */
     max-width: 360px;
     margin: 0 auto;
   }
@@ -875,12 +883,41 @@
   .governance__grid {
     grid-template-columns: 1fr;
   }
+  /* The 5 step cards become a horizontal, swipeable carousel instead of
+     a tall stacked list — each card is a snap-aligned slide, sized to
+     mostly fill the screen with a peek of the next one. The -20px/20px
+     margin+padding pair bleeds the scroll area to the viewport edge
+     (matching the .container's own 20px mobile gutter) while still
+     keeping each card's left edge aligned with the rest of the page's
+     content when at rest. */
+  .how__steps {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 4px 20px 16px;
+    scrollbar-width: none;
+  }
+  .how__steps::-webkit-scrollbar {
+    display: none;
+  }
   .how-step {
     grid-template-columns: 1fr;
+    scroll-snap-align: start;
+    flex: 0 0 88%;
+    min-width: 0;
   }
   .how-step__media {
+    /* Centered rather than edge-to-edge, and larger than the old fixed
+       250px box, so the icon reads as a framed graphic instead of a
+       stretched-thin strip on some steps. */
     order: -1;
-    width: 100%;
+    width: 82%;
+    margin: 0 auto 20px;
   }
   .hero__actions {
     flex-direction: column;
@@ -940,5 +977,30 @@
   }
   .sticky-cta__inner {
     justify-content: center;
+  }
+}
+
+/* General mobile spacing: 60px top/bottom on each content section, 20px
+   side gutters, applied consistently across every section below the
+   hero (which has its own bespoke mobile treatment earlier in this
+   file). Placed last so it wins the cascade over the section-specific
+   heading/padding rules declared above it at equal specificity. */
+@media (max-width: 1180px) {
+  .section,
+  .cost-band,
+  .final-cta,
+  .site-footer {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  h2.section-title,
+  .how__aside .section-title,
+  .cost-band h2,
+  .final-cta h2 {
+    font-size: 30px;
   }
 }

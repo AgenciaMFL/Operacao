@@ -9,7 +9,7 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | Arquivo | Onde aparece |
 |---|---|
 | `assets/icons/logo-sis.png` | Logo "SIS Mental Health" (hero e footer) |
-| `assets/img/hero-figure.webp` | Hero mobile — grupo pessoa + dashboard com fundo teal já embutido (recortado da imagem enviada pelo usuário, cortando a faixa vazia acima do grupo para o conteúdo aparecer logo abaixo dos botões), contido abaixo do texto centralizado (≤1180px) |
+| `assets/img/hero-figure.webp` | Hero mobile — grupo pessoa + dashboard com fundo teal já embutido (recortado da imagem enviada pelo usuário, cortando a faixa vazia acima E nas laterais do grupo para o conteúdo aparecer logo abaixo dos botões e maior), contido abaixo do texto centralizado (≤1180px) |
 | `assets/img/hero-bg-notebook.webp` | Hero notebook (1181-1919px) — fundo completo enviado pelo usuário, já com o grupo pessoa+dashboard |
 | `assets/img/hero-bg-wide.webp` | Hero wide (≥1920px) — fundo completo enviado pelo usuário, já com o grupo pessoa+dashboard |
 | `assets/img/reuniao-corporativa.webp` | Seção 02 — imagem ao lado do texto |

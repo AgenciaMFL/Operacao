@@ -219,8 +219,6 @@ h2.section-title--light {
   padding: 8px 12px;
 }
 
-@media (max-width: 900px) {
-  .section {
-    padding: 64px 0;
-  }
-}
+/* Mobile section/container padding lives in sections.css (see the
+   max-width:1180px block), which loads after this file and covers the
+   whole mobile tier consistently. */
