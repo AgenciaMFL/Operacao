@@ -341,8 +341,8 @@
    ========================================================= */
 .how {
   display: grid;
-  grid-template-columns: minmax(0, 477px) minmax(0, 1fr);
-  gap: 96px;
+  grid-template-columns: minmax(0, 412px) minmax(0, 1fr);
+  gap: 80px;
   align-items: start;
 }
 
