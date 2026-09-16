@@ -877,6 +877,12 @@
      avoid the cramped in-between zone. */
   .how {
     grid-template-columns: 1fr;
+    /* The 126px gap is meant as horizontal breathing room between the
+       aside and the cards column on desktop — stacked into one column,
+       that same 126px becomes vertical space TWICE over (aside→arrows,
+       arrows→cards), leaving a huge blank gap and pushing the arrows
+       far from the "Solicitar proposta" button right above them. */
+    gap: 24px;
   }
   .how__aside {
     position: static;
