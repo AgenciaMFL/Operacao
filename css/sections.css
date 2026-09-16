@@ -13,10 +13,21 @@
 
 .hero__bg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   z-index: 0;
   width: 100%;
-  height: 100%;
+  /* Locked to the viewport-width-derived height (not `inset:0`/
+     height:100%, which stretched to whatever height .hero__inner's
+     text pushed the flex row to, and not CSS `aspect-ratio`, which
+     a Chromium quirk resolved from the image's intrinsic size instead
+     of this value when combined with object-fit). When the lede wraps
+     to more lines than usual at some viewport widths, that extra
+     height changed the cover-crop composition and shifted the
+     person's face into the text column. This keeps the crop identical
+     at every width; any extra height below is just the hero's solid
+     teal background. */
+  height: calc(100vw * 900 / 2560);
   object-fit: cover;
   object-position: 85% center;
 }
@@ -31,7 +42,10 @@
 }
 
 .hero__copy {
-  max-width: 587px;
+  /* narrower than the earlier 587px: at that width the title/lede
+     text reached far enough right to sit directly on top of the
+     person's face in the photo (verified across 1181-1920px) */
+  max-width: 440px;
   position: relative;
   z-index: 2;
 }
@@ -341,12 +355,14 @@
    ========================================================= */
 .how {
   display: grid;
-  grid-template-columns: 477px minmax(0, 648px);
+  grid-template-columns: 520px minmax(0, 648px);
   gap: 126px;
   align-items: start;
-  max-width: 1300px; /* matches the Figma section's own literal pixel
-    widths (477 + 126 + 648 + 48px container padding) instead of the
-    shared .container max-width */
+  max-width: 1350px; /* 520px aside (wider than Figma's raw 477px: the
+    real Plus Jakarta Sans webfont renders wider than this sandbox's
+    fallback font, so 477px wraps the title to 4 lines instead of the
+    Figma-exact 3 — verified by loading the real font, not the
+    fallback) + 126 gap + 648 cards + 48px container padding */
 }
 
 .how__aside {
@@ -523,7 +539,21 @@
   max-width: 497px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1150px) {
+  /* .cost-band__art bleeds via absolute positioning (left: 24vw)
+     sized for wide desktop screens, where the text column sits far
+     enough to the right to clear it. Below ~1130px viewport width
+     the math no longer works out and the icon lands directly on top
+     of the heading/paragraph text. Drop it back into normal flow
+     above the centered text instead, all the way down to mobile. */
+  .cost-band__art {
+    position: static;
+    width: 180px;
+    max-width: 45vw;
+    min-width: 0;
+    margin: 0 auto 24px;
+    display: block;
+  }
   .cost-band__inner {
     flex-direction: column;
     justify-content: center;
@@ -720,11 +750,11 @@
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width: 1280px) {
-  /* .how needs its aside fixed at Figma's literal 477px (see rule
-     above) to keep the exact 3-line title wrap, so the 2-column
-     layout only fits comfortably from ~1280px up. Below that, stack
-     to avoid the cramped in-between zone. */
+@media (max-width: 1350px) {
+  /* .how needs its aside fixed at 520px (see rule above) to keep the
+     3-line title wrap with the real webfont, so the 2-column layout
+     only fits comfortably from ~1350px up. Below that, stack to
+     avoid the cramped in-between zone. */
   .how {
     grid-template-columns: 1fr;
   }
