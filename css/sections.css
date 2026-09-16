@@ -4,85 +4,85 @@
 .hero {
   position: relative;
   background-color: var(--color-teal);
-  /* Full-bleed exports of Figma's "Hero notebook" background
-     (1920x900, node 2816:476) — matches this breakpoint tier's own
-     aspect ratio exactly (see min-height below), so it displays at
-     1:1 with no cropping. The >=1920px override further down swaps
-     in the wider "Hero" background (2560x900, node 2754:59). */
-  background-image: url("../assets/img/hero-bg-notebook.webp");
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
   overflow: hidden;
-  min-height: calc(100vw * 900 / 1920);
-  display: flex;
-  align-items: flex-start;
-  padding: 104px 0 48px;
 }
 
 .hero__figure {
   /* Only used on mobile (see the <=1180px block), as a contained
      graphic below the centered text. From 1181px up, the person +
      dashboard composite is already baked into .hero's own
-     background-image (see above), so this stays hidden there. */
+     background-image (see the notebook/wide blocks below), so this
+     stays hidden there. */
   display: none;
   pointer-events: none;
 }
 
-.hero__inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  /* Figma's own notebook frame (2816:476, 1920px wide) uses a 320px/16.67%
-     left margin, but scaling that percentage down across the whole
-     1181-1919px notebook range leaves a growing, visually empty gutter
-     well before it's needed to clear the image — the button-stacking rule
-     below is what actually protects against overlap, not this margin.
-     A smaller, still-proportional value keeps the text closer to the
-     edge at every notebook width without reopening the overlap. */
-  padding-left: 8%;
-  padding-right: 4%;
-  box-sizing: border-box;
-}
-
-.hero__copy {
-  /* Proportional, not a fixed px cap: a fixed width shrinks relative
-     to the viewport more slowly than the background image scales,
-     so at narrower widths the text would reach further right than
-     Figma's notebook canvas intends and collide with the figure. */
-  max-width: min(587px, 30vw);
-  position: relative;
-  z-index: 2;
-}
-
-@media (max-width: 1500px) {
-  /* The two buttons side by side are the widest thing in the text
-     column — wider than the title/lede above them — so even with
-     Figma's own 16.67% padding they're the first thing to reach the
-     tilted laptop in the background image as the viewport narrows.
-     Stack them instead of shrinking the whole column's padding (that
-     would also needlessly narrow the title/lede, which have plenty
-     of clearance on their own). */
-  .hero__actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (min-width: 1920px) {
-  /* Above notebook width, switch to Figma's wider "Hero" background
-     (2560x900, node 2754:59) and matching proportions, which gives
-     the text more breathing room than a straight scale-up of the
-     notebook composition would. */
+/* Notebook tier (1181-1919px): the text/logo/buttons block is built at
+   Figma's own fixed canvas size (1920x900, node 2816:476) and scaled
+   down as a single rigid unit via `transform: scale()`, instead of
+   reflowing with independent vw/clamp formulas per property. Those
+   independent formulas could drift out of sync with each other (title
+   hitting its max size at a different width than the text column did,
+   the button row staying full-width while padding shrank, etc.),
+   which is what caused the title to wrap to 3-4 lines or the buttons
+   to reach the image at various widths in between. Scaling one fixed
+   layout as a whole guarantees the exact same relative composition —
+   text position, line breaks, gap to the person in the image — at
+   every width in the tier, matching Figma exactly instead of
+   approximating it. */
+@media (min-width: 1181px) and (max-width: 1919.98px) {
   .hero {
-    background-image: url("../assets/img/hero-bg-wide.webp");
-    min-height: calc(100vw * 900 / 2560);
+    height: calc(100vw * 900 / 1920);
+    background-image: url("../assets/img/hero-bg-notebook.webp");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
   }
   .hero__inner {
-    padding-left: 13%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    transform-origin: top left;
+    transform: scale(calc(100vw / 1920px));
   }
   .hero__copy {
-    max-width: min(587px, 22.7vw);
+    position: absolute;
+    left: 320px;
+    top: 187px;
+    width: 587px;
+    max-width: none;
+  }
+}
+
+/* Wide tier (>=1920px): same technique, at Figma's wider "Hero WIDE"
+   canvas (2560x900/921, nodes 2754:59 and 2817:600), which gives the
+   text more breathing room than a straight scale-up of the notebook
+   composition would. */
+@media (min-width: 1920px) {
+  .hero {
+    height: calc(100vw * 900 / 2560);
+    background-image: url("../assets/img/hero-bg-wide.webp");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+  .hero__inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2560px;
+    height: 900px;
+    transform-origin: top left;
+    transform: scale(calc(100vw / 2560px));
+  }
+  .hero__copy {
+    position: absolute;
+    left: 625px;
+    top: 187px;
+    width: 587px;
+    max-width: none;
   }
 }
 
@@ -99,14 +99,12 @@
 .hero__title {
   font-family: var(--font-hero);
   font-weight: 700;
-  /* Matched to grow at the same rate as .hero__copy's own width
-     (30vw): with the old 4.2vw the title hit its max size by
-     ~1456px while the text column kept widening until ~1957px, so
-     only that narrow band (and up) had enough relative width for a
-     clean 2-line wrap; narrower notebook widths got a
-     proportionally bigger title in a proportionally narrower column,
-     wrapping to 3-4 lines instead. */
-  font-size: clamp(30px, 3.2vw, 61.15px);
+  /* Figma's literal pixel value — fixed, not vw/clamp: inside the
+     scaled canvas above, the whole block (including this font-size)
+     is scaled as a unit, so a fixed px value here already scales
+     correctly with the viewport. A vw/clamp formula on top of the
+     transform scale would double-apply the size change. */
+  font-size: 61.15px;
   line-height: 1.2;
   letter-spacing: -1.22px;
   color: var(--color-white);
@@ -115,7 +113,7 @@
 
 .hero__lede {
   font-family: var(--font-hero);
-  font-size: clamp(16px, 1.55vw, 22.36px);
+  font-size: 22.36px;
   line-height: 1.35;
   color: var(--color-white);
   max-width: 586px;
@@ -189,8 +187,17 @@
     margin-left: auto;
     margin-right: auto;
   }
+  .hero__title {
+    /* The notebook/wide tiers use Figma's literal fixed px size (61.15px)
+       since that text block is scaled as a whole unit there — but mobile
+       (node 2811:106) uses its own much narrower, centered composition,
+       so it needs its own smaller fixed size rather than inheriting the
+       desktop one. */
+    font-size: 30px;
+  }
   .hero__lede {
     max-width: none;
+    font-size: 16px;
   }
   .hero__actions {
     justify-content: center;
