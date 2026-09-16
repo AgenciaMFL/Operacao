@@ -33,7 +33,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-left: 16.67%;
+  padding-left: 10%;
   padding-right: 4%;
   box-sizing: border-box;
 }
@@ -46,6 +46,18 @@
   max-width: min(587px, 30vw);
   position: relative;
   z-index: 2;
+}
+
+@media (max-width: 1300px) {
+  /* At the narrow end of the notebook tier the tilted laptop in the
+     background image dips further left (at the button row's height)
+     than the 10% padding above accounts for, still touching the
+     "Entender como funciona" button. A bit more padding here only,
+     rather than for the whole tier, keeps the wider end of the
+     range closer to Figma's own proportions. */
+  .hero__inner {
+    padding-left: 7%;
+  }
 }
 
 @media (min-width: 1920px) {
@@ -110,7 +122,14 @@
 
 .hero__actions .btn--primary {
   font-size: 18.3px;
-  width: 306px;
+  /* Sized to content (no fixed/proportional width): a fixed 306px
+     stayed the same size while the text column shrank at narrower
+     notebook widths, so the button row ended up wider than the text
+     above it and stuck out into the image on the right. Scaling the
+     width down to match broke the button itself (text overflowing
+     past its own edges) since 306px already has little slack over
+     what the label needs — auto-sizing avoids both problems. */
+  width: auto;
 }
 
 .hero__actions .btn-icon {
@@ -125,7 +144,7 @@
 }
 
 .hero__actions .btn--ghost {
-  width: 246px;
+  width: auto;
   font-size: 16.8px;
   backdrop-filter: blur(3.7px);
 }
@@ -552,10 +571,10 @@
 .cost-band__art {
   position: absolute;
   z-index: 2;
-  left: 24vw;
+  left: 20vw;
   top: -3.2vw;
-  width: 30vw;
-  max-width: 560px;
+  width: 33vw;
+  max-width: 600px;
   min-width: 260px;
   height: auto;
   aspect-ratio: 1190 / 1272;
@@ -699,8 +718,8 @@
   gap: 16px;
   background: var(--color-grey-95);
   border-radius: 10px;
-  padding: 16px 20px;
-  min-height: 62px;
+  padding: 13px 18px;
+  min-height: 0;
 }
 
 .checklist__check {
