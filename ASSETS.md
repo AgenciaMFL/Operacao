@@ -19,7 +19,8 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | `assets/img/card-mitigar.png` | Card "Mitigar" (seção 03) |
 | `assets/img/card-monitorar.png` | Card "Monitorar" (seção 03) |
 | `assets/img/cta-bg-meeting.png` | Fundo do CTA final ("Sua empresa sabe...") |
-| `assets/img/laptop-mockup.webp` | Mockup do painel administrativo (seção 07) |
+| `assets/img/laptop-mockup.webp` | Mockup do painel administrativo (seção 07), usado em telas ≥1025px |
+| `assets/img/laptop-mockup-mobile.webp` | Mesmo mockup, recortado (via `<picture>`) para telas ≤1024px — o original tem um anel/wordmark decorativo com bleed quase todo à esquerda, o que empurrava visualmente o laptop para a direita numa caixa estreita; este recorte remove a maior parte dessa margem vazia |
 | `assets/img/custo-nao-agir.webp` | Ícone "image 9" (node `2794:651`), sobreposto na seção 06 — "O custo de não agir" |
 
 Link do arquivo: https://www.figma.com/design/C23ByCz4hyo8cvyeKY4CPx/Agencia-MFL?node-id=2754-3

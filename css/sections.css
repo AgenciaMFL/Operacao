@@ -193,7 +193,7 @@
        (node 2811:106) uses its own much narrower, centered composition,
        so it needs its own smaller fixed size rather than inheriting the
        desktop one. */
-    font-size: 30px;
+    font-size: 34px;
   }
   .hero__lede {
     max-width: none;
@@ -466,6 +466,34 @@
 
 .how__aside .btn {
   margin-top: 17px;
+}
+
+.how__carousel-nav {
+  /* Only meaningful once .how__steps becomes a horizontal carousel (see
+     the max-width:720px block below); hidden the rest of the time. */
+  display: none;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.how__carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.4px solid var(--color-ink-12);
+  background: var(--color-white);
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.how__carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 .how__steps {
@@ -867,9 +895,18 @@
   }
   .why-sis__mockup {
     /* Laptop mockup after the text/checklist column (its natural DOM
-       order), not before it — no `order` override here. */
-    max-width: 360px;
+       order), not before it — no `order` override here. Bigger than
+       before (360px) and re-cropped (see the <picture> mobile source
+       in the HTML): the original asset has a wide ghosted ring/logo
+       bleeding mostly off its LEFT edge, so at this narrow width the
+       laptop itself read as pushed off to the right; the mobile crop
+       trims most of that empty/bled margin so the laptop sits centered.
+       aspect-ratio must be overridden to match the cropped image's own
+       ratio (1334/1390), not the original 1510/1645 — an inline style
+       sets the original, so this needs !important to win. */
+    max-width: 420px;
     margin: 0 auto;
+    aspect-ratio: 1334 / 1390 !important;
   }
 }
 
@@ -882,6 +919,12 @@
   }
   .governance__grid {
     grid-template-columns: 1fr;
+  }
+  /* Arrow controls for the carousel below — hidden by default (see the
+     unconditional .how__carousel-nav rule near .how__aside), shown only
+     at this breakpoint since swipe alone isn't always discoverable. */
+  .how__carousel-nav {
+    display: flex;
   }
   /* The 5 step cards become a horizontal, swipeable carousel instead of
      a tall stacked list — each card is a snap-aligned slide, sized to
@@ -910,13 +953,20 @@
     scroll-snap-align: start;
     flex: 0 0 88%;
     min-width: 0;
+    /* The desktop padding (44px 16px 44px 40px) is lopsided on purpose
+       for the 2-column text|media layout, where the media column sits
+       flush toward the right edge — but that same asymmetry (40px left
+       vs 16px right) shifts the whole single-column mobile content off
+       the card's true center. Symmetric padding here is what actually
+       centers the icon below. */
+    padding: 32px 20px 28px;
   }
   .how-step__media {
     /* Centered rather than edge-to-edge, and larger than the old fixed
        250px box, so the icon reads as a framed graphic instead of a
        stretched-thin strip on some steps. */
     order: -1;
-    width: 82%;
+    width: 92%;
     margin: 0 auto 20px;
   }
   .hero__actions {

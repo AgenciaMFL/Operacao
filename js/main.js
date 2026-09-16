@@ -45,6 +45,37 @@
   });
 })();
 
+// "Como funciona" mobile carousel: the arrow buttons above .how__steps
+// scroll by one card's width, and disable themselves at either end.
+(function initHowCarousel() {
+  const track = document.querySelector(".how__steps");
+  const prevBtn = document.querySelector("[data-carousel-prev]");
+  const nextBtn = document.querySelector("[data-carousel-next]");
+  if (!track || !prevBtn || !nextBtn) return;
+
+  function step() {
+    const card = track.querySelector(".how-step");
+    return card ? card.getBoundingClientRect().width + 16 /* gap */ : track.clientWidth;
+  }
+
+  function updateButtons() {
+    const maxScroll = track.scrollWidth - track.clientWidth - 1;
+    prevBtn.disabled = track.scrollLeft <= 0;
+    nextBtn.disabled = track.scrollLeft >= maxScroll;
+  }
+
+  prevBtn.addEventListener("click", () => {
+    track.scrollBy({ left: -step(), behavior: "smooth" });
+  });
+  nextBtn.addEventListener("click", () => {
+    track.scrollBy({ left: step(), behavior: "smooth" });
+  });
+
+  track.addEventListener("scroll", updateButtons, { passive: true });
+  window.addEventListener("resize", updateButtons);
+  updateButtons();
+})();
+
 // Scroll-reveal: fade + slide each section's content into place the
 // first time it enters the viewport. Cards within the same group
 // (protection cards, how-steps, governance cards) stagger one after
@@ -125,7 +156,19 @@
     { threshold: 0, rootMargin: "0px 0px -10% 0px" }
   );
 
-  markers.forEach((el) => observer.observe(el));
+  // Watch each marker's whole enclosing section rather than just the
+  // button itself — "como funciona" in particular scrolls the marker
+  // button (in the aside) out of view long before the carousel of step
+  // cards below it is done scrolling past, which re-armed the sticky
+  // bar in the middle of that same section.
+  const watched = new Set();
+  markers.forEach((el) => {
+    const target = el.closest("section, header") || el;
+    if (!watched.has(target)) {
+      watched.add(target);
+      observer.observe(target);
+    }
+  });
 
   window.addEventListener("resize", syncBodyPadding);
 })();
