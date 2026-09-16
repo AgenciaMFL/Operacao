@@ -33,7 +33,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-left: 10%;
+  padding-left: 16.67%;
   padding-right: 4%;
   box-sizing: border-box;
 }
@@ -48,15 +48,17 @@
   z-index: 2;
 }
 
-@media (max-width: 1300px) {
-  /* At the narrow end of the notebook tier the tilted laptop in the
-     background image dips further left (at the button row's height)
-     than the 10% padding above accounts for, still touching the
-     "Entender como funciona" button. A bit more padding here only,
-     rather than for the whole tier, keeps the wider end of the
-     range closer to Figma's own proportions. */
-  .hero__inner {
-    padding-left: 7%;
+@media (max-width: 1500px) {
+  /* The two buttons side by side are the widest thing in the text
+     column — wider than the title/lede above them — so even with
+     Figma's own 16.67% padding they're the first thing to reach the
+     tilted laptop in the background image as the viewport narrows.
+     Stack them instead of shrinking the whole column's padding (that
+     would also needlessly narrow the title/lede, which have plenty
+     of clearance on their own). */
+  .hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
