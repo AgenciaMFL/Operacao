@@ -42,10 +42,7 @@
 }
 
 .hero__copy {
-  /* narrower than the earlier 587px: at that width the title/lede
-     text reached far enough right to sit directly on top of the
-     person's face in the photo (verified across 1181-1920px) */
-  max-width: 440px;
+  max-width: 587px;
   position: relative;
   z-index: 2;
 }
