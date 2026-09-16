@@ -186,7 +186,7 @@ h2.section-title--light {
   color: var(--color-white);
   position: relative;
   overflow: hidden;
-  transition: color 0.35s ease 0.1s;
+  transition: color 0.35s ease 0.1s, transform 0.25s ease;
 }
 
 /* Hover: the white icon badge grows from its own spot to fill the whole
@@ -194,11 +194,13 @@ h2.section-title--light {
    above), then the arrow and label switch to black once the white fill
    has mostly covered them — the same badge "becomes" the new background
    instead of a separate overlay, so it reads as the arrow itself
-   sweeping across and settling back in place. */
+   sweeping across and settling back in place. A soft scale-up rides
+   along with it. */
 .btn--primary:hover {
   color: var(--color-ink);
   opacity: 1; /* overrides the generic .btn:hover dimming, which would
     muddy the white fill instead of reading as a clean color swap */
+  transform: translateY(-1px) scale(1.1);
 }
 
 .btn-label {
@@ -212,7 +214,14 @@ h2.section-title--light {
   inset: 0;
   background: var(--color-white);
   border-radius: inherit;
-  transition: inset 0.45s cubic-bezier(0.65, 0, 0.35, 1), border-radius 0.45s ease;
+  /* background-color is animated too (not just inset/radius) so the
+     invert variant's black fill fades back to white IN STEP with the
+     shrink on mouse-leave — without this, the color snapped back
+     instantly while the shape was still large, flashing a blank white
+     button (with white text on it) for a moment before it finished
+     shrinking. */
+  transition: inset 0.45s cubic-bezier(0.65, 0, 0.35, 1), border-radius 0.45s ease,
+    background-color 0.45s ease;
 }
 
 .btn--primary:hover .btn-icon::before {
