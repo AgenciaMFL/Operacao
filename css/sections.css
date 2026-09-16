@@ -33,7 +33,14 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-left: 16.67%;
+  /* Figma's own notebook frame (2816:476, 1920px wide) uses a 320px/16.67%
+     left margin, but scaling that percentage down across the whole
+     1181-1919px notebook range leaves a growing, visually empty gutter
+     well before it's needed to clear the image — the button-stacking rule
+     below is what actually protects against overlap, not this margin.
+     A smaller, still-proportional value keeps the text closer to the
+     edge at every notebook width without reopening the overlap. */
+  padding-left: 8%;
   padding-right: 4%;
   box-sizing: border-box;
 }
@@ -72,7 +79,7 @@
     min-height: calc(100vw * 900 / 2560);
   }
   .hero__inner {
-    padding-left: 24.4%;
+    padding-left: 13%;
   }
   .hero__copy {
     max-width: min(587px, 22.7vw);
@@ -92,7 +99,14 @@
 .hero__title {
   font-family: var(--font-hero);
   font-weight: 700;
-  font-size: clamp(34px, 4.2vw, 61.15px);
+  /* Matched to grow at the same rate as .hero__copy's own width
+     (30vw): with the old 4.2vw the title hit its max size by
+     ~1456px while the text column kept widening until ~1957px, so
+     only that narrow band (and up) had enough relative width for a
+     clean 2-line wrap; narrower notebook widths got a
+     proportionally bigger title in a proportionally narrower column,
+     wrapping to 3-4 lines instead. */
+  font-size: clamp(30px, 3.2vw, 61.15px);
   line-height: 1.2;
   letter-spacing: -1.22px;
   color: var(--color-white);
