@@ -41,6 +41,9 @@
   height: 44px;
   width: auto;
   margin-bottom: 31px;
+  /* the source asset is teal ink on a transparent background; force it
+     to white so it reads against the dark hero backdrop */
+  filter: brightness(0) invert(1);
 }
 
 .hero__title {
