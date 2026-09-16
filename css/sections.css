@@ -667,8 +667,8 @@
   .cost-band__art {
     position: static;
     order: 2;
-    width: 260px;
-    max-width: 60vw;
+    width: 340px;
+    max-width: 78vw;
     min-width: 0;
     margin: 24px auto 0;
     display: block;
@@ -1059,5 +1059,15 @@
   .cost-band h2,
   .final-cta h2 {
     font-size: 30px;
+  }
+  /* The carousel's own cards already end on a visually "closed" rounded
+     edge, so the full 60px section padding-bottom plus the next
+     section's 60px padding-top (120px combined, blank/white here since
+     both #como-funciona and the page background are white) reads as an
+     oversized empty gap where every other section-to-section transition
+     only shows one of the two colors changing. Trimmed to close that
+     specific gap without touching the 60px rule anywhere else. */
+  #como-funciona {
+    padding-bottom: 24px;
   }
 }
