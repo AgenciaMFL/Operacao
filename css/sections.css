@@ -126,17 +126,35 @@
     order: 1;
     padding-left: 24px;
     padding-right: 24px;
+    /* Figma's dedicated mobile hero (node 2811:106) centers the
+       whole text block instead of the left-aligned desktop layout */
+    text-align: center;
   }
   .hero__copy {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .hero__logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero__lede {
     max-width: none;
   }
+  .hero__actions {
+    justify-content: center;
+  }
   .hero__bg {
+    /* the mobile design shows this as a contained graphic sitting
+       below the centered text, not a full-bleed cropped photo */
     position: static;
     order: 2;
-    width: 100%;
+    width: 85%;
+    max-width: 420px;
     height: auto;
-    object-fit: initial;
-    margin-top: 32px;
+    object-fit: contain;
+    margin: 32px auto 0;
+    display: block;
   }
 }
 
