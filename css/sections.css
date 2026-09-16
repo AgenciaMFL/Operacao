@@ -3,7 +3,22 @@
    ========================================================= */
 .hero {
   position: relative;
-  background: var(--color-teal);
+  background-color: var(--color-teal);
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 40px
+    );
   overflow: hidden;
   min-height: calc(100vw * 900 / 2560);
   display: flex;
@@ -11,25 +26,19 @@
   padding: 104px 0 48px;
 }
 
-.hero__bg {
+.hero__figure {
+  /* Figma keeps this person+dashboard composite as a separate,
+     inset graphic (not a full-bleed cropped photo) — positioned at
+     the same percentages as the "Group 3" node on its 2560px-wide
+     canvas, so it scales together with the rest of the hero and
+     never approaches the text column at any width. */
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  /* Locked to the viewport-width-derived height (not `inset:0`/
-     height:100%, which stretched to whatever height .hero__inner's
-     text pushed the flex row to, and not CSS `aspect-ratio`, which
-     a Chromium quirk resolved from the image's intrinsic size instead
-     of this value when combined with object-fit). When the lede wraps
-     to more lines than usual at some viewport widths, that extra
-     height changed the cover-crop composition and shifted the
-     person's face into the text column. This keeps the crop identical
-     at every width; any extra height below is just the hero's solid
-     teal background. */
-  height: calc(100vw * 900 / 2560);
-  object-fit: cover;
-  object-position: 85% center;
+  left: 50%;
+  top: 15.48%;
+  z-index: 1;
+  width: 27%;
+  height: auto;
+  pointer-events: none;
 }
 
 .hero__inner {
@@ -42,7 +51,13 @@
 }
 
 .hero__copy {
-  max-width: 587px;
+  /* Proportional (like .hero__figure's left/width), not a fixed px
+     cap: a fixed width shrinks relative to the viewport more slowly
+     than the proportionally-positioned figure does, so at narrower
+     desktop widths the text would reach further right than Figma's
+     source (587px in a 2560px-wide canvas) intends and collide with
+     the figure. 21vw keeps a safety margin under that 22.93vw ratio. */
+  max-width: min(587px, 22.7vw);
   position: relative;
   z-index: 2;
 }
@@ -141,15 +156,16 @@
   .hero__actions {
     justify-content: center;
   }
-  .hero__bg {
-    /* the mobile design shows this as a contained graphic sitting
-       below the centered text, not a full-bleed cropped photo */
+  .hero__figure {
+    /* the mobile design (node 2811:106) shows this as a contained
+       graphic sitting below the centered text, not an inset element
+       bled off the right edge like the desktop layout */
     position: static;
     order: 2;
+    left: auto;
+    top: auto;
     width: 85%;
     max-width: 420px;
-    height: auto;
-    object-fit: contain;
     margin: 32px auto 0;
     display: block;
   }

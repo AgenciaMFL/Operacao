@@ -9,7 +9,7 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | Arquivo | Onde aparece |
 |---|---|
 | `assets/icons/logo-sis.png` | Logo "SIS Mental Health" (hero e footer) |
-| `assets/img/hero-visual.webp` | Hero — composição completa (retrato + dashboard) |
+| `assets/img/hero-figure.webp` | Hero — grupo pessoa + dashboard (node `2754:378`, "Group 3"), posicionado à parte do fundo para não sobrepor o texto |
 | `assets/img/reuniao-corporativa.webp` | Seção 02 — imagem ao lado do texto |
 | `assets/img/card-identificar.png` | Card "Identificar" (seção 03) |
 | `assets/img/card-mapear.png` | Card "Mapear" (seção 03) |
