@@ -269,7 +269,12 @@ h2.section-title--light {
     animation: btn-glow-pulse 2.4s ease-in-out infinite;
   }
 
-  .btn--glow:hover {
+  /* .btn--primary.X:hover (two classes) beats a plain .btn--glow:hover
+     (one class) on specificity alone regardless of source order — e.g.
+     .btn--invert-hover's own :hover rule, which this needs to cancel on
+     "Solicitar proposta" (primary + invert-hover + glow together). Match
+     that specificity here so the glow variant reliably wins on mobile. */
+  .btn--primary.btn--glow:hover {
     transform: translateY(-1px);
     color: var(--color-white);
     opacity: 1;
@@ -279,7 +284,7 @@ h2.section-title--light {
     content: none;
   }
 
-  .btn--glow:hover .btn-icon svg {
+  .btn--primary.btn--glow:hover .btn-icon svg {
     stroke: #f4786b;
   }
 }
