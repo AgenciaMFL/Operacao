@@ -799,6 +799,12 @@
   border-radius: 10px;
   padding: 13px 18px;
   min-height: 0;
+  /* Sized to its own text, not stretched to the full column width —
+     without this every pill matched the 583px text column regardless
+     of how short its label was, leaving a big dead-space gap on the
+     right of the shorter ones. */
+  width: fit-content;
+  max-width: 100%;
 }
 
 .checklist__check {
