@@ -31,7 +31,7 @@
       <p class="hero__lede">A NR-1 trouxe os riscos psicossociais para o escopo formal de gestão de riscos da sua empresa. A pergunta não é mais se isso entra na pauta de compliance, <strong>é como sua empresa vai administrar essa exposição.</strong></p>
 
       <div class="hero__actions cta-marker">
-        <a href="#contato" class="btn btn--primary">
+        <a href="#contato" class="btn btn--primary btn--glow">
           <span class="btn-icon" style="background:#fff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4786b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
           <span class="btn-label">Avaliar minha exposição</span>
         </a>
@@ -59,7 +59,7 @@
      ========================================================= -->
 <section class="section">
   <div class="container split">
-    <div>
+    <div class="split__text">
       <span class="eyebrow">02 — A mudança de escopo</span>
       <h2 class="section-title">A NR-1 não criou uma obrigação de RH. <span class="text-accent">Criou um risco de compliance.</span></h2>
       <p class="section-lede">Risco psicossocial não gerenciado não é clima organizacional, é exposição: passivo trabalhista, autuação, processo e pontos cegos na governança que nenhuma auditoria detecta até virarem incidente.</p>
@@ -209,7 +209,10 @@
 
 <!-- 06 — Custo de não agir -->
 <section class="cost-band">
-  <img class="cost-band__art" src="assets/img/custo-nao-agir.webp" alt="" width="1190" height="1272" />
+  <picture class="cost-band__art">
+    <source media="(max-width: 1150px)" srcset="assets/img/custo-nao-agir-mobile.webp" />
+    <img src="assets/img/custo-nao-agir.webp" alt="" width="1190" height="1272" />
+  </picture>
   <div class="container cost-band__inner">
     <div class="cost-band__content">
       <span class="eyebrow eyebrow--light">06 — O custo de não agir</span>
@@ -224,7 +227,7 @@
      ========================================================= -->
 <section class="section">
   <div class="container why-sis">
-    <div>
+    <div class="why-sis__text">
       <span class="eyebrow">07 — Por que a SIS</span>
       <h2 class="section-title">Construído para a realidade da sua empresa, <span class="text-accent">não um modelo pronto</span></h2>
       <p class="section-lede">A SIS parte da operação real de cada empresa para construir uma gestão de riscos psicossociais que resiste a auditoria.</p>

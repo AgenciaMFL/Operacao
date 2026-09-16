@@ -193,7 +193,7 @@
        (node 2811:106) uses its own much narrower, centered composition,
        so it needs its own smaller fixed size rather than inheriting the
        desktop one. */
-    font-size: 34px;
+    font-size: 40px;
   }
   .hero__lede {
     max-width: none;
@@ -229,10 +229,13 @@
 @media (max-width: 640px) {
   .hero__actions {
     flex-wrap: wrap;
+    align-items: center;
   }
   .hero__actions .btn--primary,
   .hero__actions .btn--ghost {
-    width: 100%;
+    width: 90%;
+    max-width: 340px;
+    justify-content: center;
   }
 }
 
@@ -641,6 +644,16 @@
   pointer-events: none;
 }
 
+/* .cost-band__art is a <picture> (so a mobile-cropped source can be
+   swapped in) — the img itself needs to fill whatever box the picture
+   is sized to, since a bare <picture>/<img> pair otherwise renders the
+   img at its own intrinsic size regardless of the picture's box. */
+.cost-band__art img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .cost-band__inner {
   position: relative;
   z-index: 1;
@@ -667,10 +680,10 @@
   .cost-band__art {
     position: static;
     order: 2;
-    width: 340px;
-    max-width: 78vw;
+    width: 400px;
+    max-width: 88vw;
     min-width: 0;
-    margin: 24px auto 0;
+    margin: 12px auto 0;
     display: block;
   }
   .cost-band__inner {
@@ -887,6 +900,32 @@
   .how__aside {
     position: static;
   }
+  /* "Todos os títulos centralizados": the intro text blocks that were
+     still left-aligned on mobile (sections 02, 04's aside, 07) —
+     sections 03/05 already center theirs. text-align:center also
+     centers the inline-flex "Solicitar proposta" button in
+     .how__aside, since it participates as an atomic inline box; only
+     the width-capped lede paragraph needs its own margin:auto to
+     center the box itself, not just the text inside it. */
+  .split__text,
+  .how__aside,
+  .why-sis__text {
+    text-align: center;
+  }
+  .split__text .section-lede,
+  .how__aside .section-lede,
+  .why-sis__text .section-lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Centering is only meant for the eyebrow/heading/lede above these
+     lists — text-align inherits into them too otherwise, centering
+     each bullet's text within its own row next to a left-fixed dot
+     icon, which reads as misaligned rather than centered. */
+  .claim-list,
+  .checklist {
+    text-align: left;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -965,8 +1004,10 @@
        flush toward the right edge — but that same asymmetry (40px left
        vs 16px right) shifts the whole single-column mobile content off
        the card's true center. Symmetric padding here is what actually
-       centers the icon below. */
-    padding: 32px 20px 28px;
+       centers the icon below. Top padding trimmed down separately from
+       the sides so the illustration sits higher in the card instead of
+       leaving a tall gap above it. */
+    padding: 16px 20px 28px;
   }
   .how-step__media {
     /* Centered rather than edge-to-edge, and larger than the old fixed
@@ -975,6 +1016,16 @@
     order: -1;
     width: 92%;
     margin: 0 auto 20px;
+  }
+  /* No fade/slide-in for these cards on mobile: since .how__steps is a
+     horizontally-scrolled carousel, a card scrolled out of view on the
+     X axis can also read as "not intersecting" to the reveal observer,
+     so swiping to it could trigger (or fail to trigger) the entrance
+     animation mid-swipe — always-visible avoids that glitch entirely. */
+  .how-step.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   .hero__actions {
     flex-direction: column;

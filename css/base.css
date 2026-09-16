@@ -260,6 +260,45 @@ h2.section-title--light {
   stroke: var(--color-white);
 }
 
+/* Hero primary button: the fill-sweep + scale hover relies on :hover,
+   which mobile browsers keep "stuck" active after a tap (there's no
+   real mouse to leave), so on touch the button was staying scaled/
+   filled after the very first tap. Swapped for a self-running pulsing
+   glow that needs no interaction at all, so it can't get stuck. */
+.btn--glow {
+  animation: btn-glow-pulse 2.4s ease-in-out infinite;
+}
+
+.btn--glow:hover {
+  transform: translateY(-1px);
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.btn--glow .btn-icon::before {
+  content: none;
+}
+
+.btn--glow:hover .btn-icon svg {
+  stroke: #f4786b;
+}
+
+@keyframes btn-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 120, 107, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(244, 120, 107, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--glow {
+    animation: none;
+  }
+}
+
 .btn--ghost {
   background: rgba(244, 120, 107, 0.13);
   border: 1px solid rgba(255, 255, 255, 0.59);
