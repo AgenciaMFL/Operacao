@@ -1029,7 +1029,11 @@
   }
   .hero__actions {
     flex-direction: column;
-    align-items: stretch;
+    /* center, not stretch: the buttons have their own explicit width
+       (90%, see the 640px block below) rather than filling the row, so
+       stretch just left them pinned to the start edge with the leftover
+       10% dumped on the right instead of split evenly on both sides. */
+    align-items: center;
   }
   .site-footer__inner {
     justify-content: center;
