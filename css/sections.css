@@ -212,6 +212,14 @@
     top: auto;
     width: 85%;
     max-width: 420px;
+    /* Without this, the element's own width/height HTML attributes
+       (used for the image's intrinsic size and to avoid layout shift
+       while loading) get applied as literal presentational CSS height
+       — 697px, regardless of the 85%-driven width above — since no
+       other rule here sets height. That stretched the box far past the
+       image's real proportional height, pushing the person off-screen
+       below the fold instead of scaling down with the width. */
+    height: auto;
     margin: 32px auto 0;
     display: block;
   }
