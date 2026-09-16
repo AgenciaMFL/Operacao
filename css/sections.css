@@ -995,8 +995,7 @@
   right: 0;
   bottom: 0;
   z-index: 100;
-  background: var(--color-white);
-  border-top: 1px solid var(--color-ink-10);
+  background: var(--color-teal);
   box-shadow: 0 -8px 24px rgba(11, 18, 17, 0.08);
   padding: 14px 0;
   transform: translateY(0);
@@ -1020,7 +1019,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 15px;
-  color: var(--color-ink);
+  color: var(--color-white);
 }
 
 .sticky-cta__btn {

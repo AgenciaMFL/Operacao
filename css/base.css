@@ -153,12 +153,19 @@ h2.section-title--light {
   white-space: nowrap;
   cursor: pointer;
   border: none;
+  position: relative;
+  z-index: 0;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
 .btn:hover {
   transform: translateY(-1px);
   opacity: 0.94;
+  /* Scaling up on hover (see .btn--primary:hover) makes this button
+     visually bigger than its neighbor in the same row (e.g. the two
+     hero buttons) — without a stacking boost, whichever one comes
+     later in the DOM paints on top and clips the other's growth. */
+  z-index: 1;
 }
 
 .btn-icon {
