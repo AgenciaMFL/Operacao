@@ -171,16 +171,57 @@ h2.section-title--light {
   background: var(--color-white);
   color: var(--color-coral);
   flex-shrink: 0;
+  position: relative;
 }
 
 .btn-icon svg {
   width: 17px;
   height: 17px;
+  position: relative;
+  transition: stroke 0.3s ease 0.12s;
 }
 
 .btn--primary {
   background: var(--color-coral);
   color: var(--color-white);
+  position: relative;
+  overflow: hidden;
+  transition: color 0.35s ease 0.1s;
+}
+
+/* Hover: the white icon badge grows from its own spot to fill the whole
+   button (clipped to the button's rounded corners via overflow:hidden
+   above), then the arrow and label switch to black once the white fill
+   has mostly covered them — the same badge "becomes" the new background
+   instead of a separate overlay, so it reads as the arrow itself
+   sweeping across and settling back in place. */
+.btn--primary:hover {
+  color: var(--color-ink);
+  opacity: 1; /* overrides the generic .btn:hover dimming, which would
+    muddy the white fill instead of reading as a clean color swap */
+}
+
+.btn-label {
+  position: relative;
+  z-index: 1;
+}
+
+.btn--primary .btn-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-white);
+  border-radius: inherit;
+  transition: inset 0.45s cubic-bezier(0.65, 0, 0.35, 1), border-radius 0.45s ease;
+}
+
+.btn--primary:hover .btn-icon::before {
+  inset: -600px;
+  border-radius: 0;
+}
+
+.btn--primary:hover .btn-icon svg {
+  stroke: var(--color-ink);
 }
 
 .btn--ghost {
