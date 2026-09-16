@@ -4,42 +4,28 @@
 .hero {
   position: relative;
   background-color: var(--color-teal);
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.05) 0,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 40px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.05) 0,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 40px
-    );
+  /* Full-bleed exports of Figma's "Hero notebook" background
+     (1920x900, node 2816:476) — matches this breakpoint tier's own
+     aspect ratio exactly (see min-height below), so it displays at
+     1:1 with no cropping. The >=1920px override further down swaps
+     in the wider "Hero" background (2560x900, node 2754:59). */
+  background-image: url("../assets/img/hero-bg-notebook.webp");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
   overflow: hidden;
-  min-height: calc(100vw * 900 / 2560);
+  min-height: calc(100vw * 900 / 1920);
   display: flex;
   align-items: flex-start;
   padding: 104px 0 48px;
 }
 
 .hero__figure {
-  /* Figma keeps this person+dashboard composite as a separate,
-     inset graphic (not a full-bleed cropped photo) — positioned at
-     the same percentages as the "Group 3" node on Figma's dedicated
-     "Hero notebook" canvas (1920x900, node 2816:476), which is the
-     base/default proportions below since that's the primary target
-     range; the >=1920px override further down switches to the wider
-     2560px-canvas ("Hero", node 2754:59) proportions instead. */
-  position: absolute;
-  left: 45.94%;
-  top: 15.48%;
-  z-index: 1;
-  width: 37.7%;
-  height: auto;
+  /* Only used on mobile (see the <=1180px block), as a contained
+     graphic below the centered text. From 1181px up, the person +
+     dashboard composite is already baked into .hero's own
+     background-image (see above), so this stays hidden there. */
+  display: none;
   pointer-events: none;
 }
 
@@ -53,30 +39,29 @@
 }
 
 .hero__copy {
-  /* Proportional (like .hero__figure's left/width), not a fixed px
-     cap: a fixed width shrinks relative to the viewport more slowly
-     than the proportionally-positioned figure does, so at narrower
-     widths the text would reach further right than Figma's notebook
-     canvas intends and collide with the figure. */
+  /* Proportional, not a fixed px cap: a fixed width shrinks relative
+     to the viewport more slowly than the background image scales,
+     so at narrower widths the text would reach further right than
+     Figma's notebook canvas intends and collide with the figure. */
   max-width: min(587px, 30vw);
   position: relative;
   z-index: 2;
 }
 
 @media (min-width: 1920px) {
-  /* Above notebook width, switch to the proportions of Figma's wider
-     "Hero" canvas (2560x900, node 2754:59), which gives the text and
-     figure more breathing room than a straight scale-up of the
+  /* Above notebook width, switch to Figma's wider "Hero" background
+     (2560x900, node 2754:59) and matching proportions, which gives
+     the text more breathing room than a straight scale-up of the
      notebook composition would. */
+  .hero {
+    background-image: url("../assets/img/hero-bg-wide.webp");
+    min-height: calc(100vw * 900 / 2560);
+  }
   .hero__inner {
     padding-left: 24.4%;
   }
   .hero__copy {
     max-width: min(587px, 22.7vw);
-  }
-  .hero__figure {
-    left: 50%;
-    width: 27%;
   }
 }
 
@@ -147,6 +132,7 @@
 
 @media (max-width: 1180px) {
   .hero {
+    background-image: none;
     display: flex;
     flex-direction: column;
     min-height: 0;
