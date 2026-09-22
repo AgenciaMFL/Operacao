@@ -90,7 +90,7 @@
   display: block;
   height: 44px;
   width: auto;
-  margin-bottom: 31px;
+  margin-bottom: 20px;
   /* the source asset is teal ink on a transparent background; force it
      to white so it reads against the dark hero backdrop */
   filter: brightness(0) invert(1);
@@ -103,21 +103,28 @@
      scaled canvas above, the whole block (including this font-size)
      is scaled as a unit, so a fixed px value here already scales
      correctly with the viewport. A vw/clamp formula on top of the
-     transform scale would double-apply the size change. */
-  font-size: 61.15px;
+     transform scale would double-apply the size change.
+     40px (not the original 61.15px): the new copy's title is roughly
+     twice as long as the original one this canvas was tuned for, so
+     it needs the same smaller size used at the mobile tier to keep a
+     sane line count instead of overflowing the fixed-height canvas. */
+  font-size: 40px;
   line-height: 1.2;
   letter-spacing: -1.22px;
   color: var(--color-white);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .hero__lede {
   font-family: var(--font-hero);
-  font-size: 22.36px;
-  line-height: 1.35;
+  /* Also reduced from the original 22.36px — this canvas now carries
+     two lede paragraphs instead of one, so each needs to be more
+     compact to fit inside the fixed 900px-tall canvas. */
+  font-size: 16px;
+  line-height: 1.42;
   color: var(--color-white);
   max-width: 586px;
-  margin-bottom: 23px;
+  margin-bottom: 12px;
 }
 
 .hero__actions {
@@ -364,6 +371,14 @@
   color: var(--color-ink);
 }
 
+.split__text .btn {
+  margin-top: 8px;
+}
+
+.claim-list + .section-lede {
+  margin-top: 20px;
+}
+
 /* =========================================================
    SECTION 03 - PROTECTION CARDS
    ========================================================= */
@@ -423,7 +438,11 @@
   margin: 56px auto 0;
 }
 
-.protection__closing p:first-child {
+/* :first-of-type/:last-of-type (not :first-child/:last-child) so this
+   still targets the two text paragraphs correctly even when a <a class="btn">
+   follows them as the block's actual last child (see section 02's closing
+   callout, which adds a CTA after the two paragraphs). */
+.protection__closing p:first-of-type {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 23px;
@@ -432,11 +451,116 @@
   margin-bottom: 20px;
 }
 
-.protection__closing p:last-child {
+.protection__closing p:last-of-type {
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.33;
   color: var(--color-ink);
+}
+
+/* =========================================================
+   ACCORDION (Diagnóstico — "o processo inclui")
+   ========================================================= */
+.accordion__heading {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--color-ink);
+  text-align: center;
+  margin: 0 0 24px;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.accordion__item {
+  background: var(--color-white);
+  border: 1px solid var(--color-ink-10);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.accordion__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+}
+
+.accordion__number {
+  background: var(--color-coral-dark);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.accordion__title {
+  flex: 1;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--color-ink);
+}
+
+.accordion__chevron {
+  flex-shrink: 0;
+  color: var(--color-grey-32);
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.accordion__item.is-open .accordion__chevron {
+  transform: rotate(180deg);
+}
+
+/* grid-template-rows 0fr -> 1fr animates height without a fixed max-height
+   guess; the inner overflow:hidden wrapper is required for the 0fr state
+   to actually clip the content instead of just squeezing it. */
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.accordion__item.is-open .accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion__panel-inner {
+  overflow: hidden;
+}
+
+.accordion__panel-inner p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-grey-32);
+  padding: 0 24px 22px 74px;
+}
+
+@media (max-width: 640px) {
+  .accordion__panel-inner p {
+    padding-left: 24px;
+  }
 }
 
 /* =========================================================
@@ -621,102 +745,58 @@
   color: #5d5d5d;
 }
 
-/* Cost of inaction band */
-.cost-band {
+/* =========================================================
+   TRUST / LGPD BAND
+   ========================================================= */
+.trust-band {
   background: var(--color-teal-dark);
   color: var(--color-white);
-  padding: 80px 0;
-  position: relative;
-  /* intentionally NOT overflow:hidden — .cost-band__art bleeds above
-     and below this section on purpose (see node "image 9" in Figma) */
+  padding: 96px 0;
 }
 
-.cost-band__art {
-  position: absolute;
-  z-index: 2;
-  left: 20vw;
-  top: -3.2vw;
-  width: 33vw;
-  max-width: 600px;
-  min-width: 260px;
-  height: auto;
-  aspect-ratio: 1190 / 1272;
-  pointer-events: none;
+.trust-band__inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-/* .cost-band__art is a <picture> (so a mobile-cropped source can be
-   swapped in) — the img itself needs to fill whatever box the picture
-   is sized to, since a bare <picture>/<img> pair otherwise renders the
-   img at its own intrinsic size regardless of the picture's box. */
-.cost-band__art img {
-  width: 100%;
-  height: auto;
-  display: block;
+.trust-band__inner .section-title--light {
+  margin: 20px 0 18px;
 }
 
-.cost-band__inner {
-  position: relative;
-  z-index: 1;
+.trust-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 36px auto 0;
+  max-width: 560px;
+}
+
+.trust-list__item {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: left;
 }
 
-.cost-band__content {
-  max-width: 497px;
-}
-
-@media (max-width: 1150px) {
-  /* .cost-band__art bleeds via absolute positioning (left: 24vw)
-     sized for wide desktop screens, where the text column sits far
-     enough to the right to clear it. Below ~1130px viewport width
-     the math no longer works out and the icon lands directly on top
-     of the heading/paragraph text. Drop it back into normal flow,
-     stacked below the text instead, all the way down to mobile. */
-  .cost-band {
-    display: flex;
-    flex-direction: column;
-  }
-  .cost-band__art {
-    position: static;
-    order: 2;
-    width: 400px;
-    max-width: 88vw;
-    min-width: 0;
-    margin: 12px auto 0;
-    display: block;
-  }
-  .cost-band__inner {
-    order: 1;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    gap: 32px;
-  }
-  .cost-band__content {
-    max-width: none;
-    text-align: center;
-  }
-}
-
-.cost-band h2 {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(26px, 3.4vw, 41px);
-  line-height: 1.2;
-  letter-spacing: -1.35px;
-  margin: 20px 0 24px;
-}
-
-.cost-band p {
+.trust-list__item span:last-child {
   font-family: var(--font-body);
-  font-size: 16.4px;
-  line-height: 1.42;
-  color: #e8fffc;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-white);
 }
 
-.cost-band p b {
-  color: var(--color-white);
+.trust-band__closing {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.5;
+  color: #e8fffc;
+  margin-top: 36px;
 }
 
 /* Final CTA */
@@ -1104,7 +1184,7 @@
    heading/padding rules declared above it at equal specificity. */
 @media (max-width: 1180px) {
   .section,
-  .cost-band,
+  .trust-band,
   .final-cta,
   .site-footer {
     padding-top: 60px;
@@ -1116,7 +1196,6 @@
   }
   h2.section-title,
   .how__aside .section-title,
-  .cost-band h2,
   .final-cta h2 {
     font-size: 30px;
   }

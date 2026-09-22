@@ -128,6 +128,10 @@ h2.section-title--light {
   color: #e8fffc;
 }
 
+.section-lede + .section-lede {
+  margin-top: 14px;
+}
+
 .text-accent {
   color: var(--color-teal);
 }

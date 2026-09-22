@@ -76,6 +76,31 @@
   updateButtons();
 })();
 
+// Diagnóstico accordion: single item open at a time. Height is animated
+// via CSS grid-template-rows (0fr -> 1fr), so this only needs to toggle
+// the .is-open class and the button's aria-expanded state.
+(function initAccordion() {
+  const items = document.querySelectorAll(".accordion__item");
+  if (!items.length) return;
+
+  items.forEach((item) => {
+    const trigger = item.querySelector(".accordion__trigger");
+    if (!trigger) return;
+
+    trigger.addEventListener("click", () => {
+      const wasOpen = item.classList.contains("is-open");
+      items.forEach((other) => {
+        other.classList.remove("is-open");
+        other.querySelector(".accordion__trigger").setAttribute("aria-expanded", "false");
+      });
+      if (!wasOpen) {
+        item.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+})();
+
 // Scroll-reveal: fade + slide each section's content into place the
 // first time it enters the viewport. Cards within the same group
 // (protection cards, how-steps, governance cards) stagger one after
@@ -88,13 +113,12 @@
   const groups = [
     ".split > div",
     ".protection__intro",
-    ".protection-card",
+    ".accordion__item",
     ".protection__closing",
     ".how__aside",
     ".how-step",
     ".governance__grid > *",
-    ".cost-band__art",
-    ".cost-band__content",
+    ".trust-band__inner > *",
     ".why-sis > *",
     ".final-cta__content > *",
   ];
