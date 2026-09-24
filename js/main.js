@@ -112,6 +112,8 @@
 
   const groups = [
     ".split > div",
+    ".nr1-card",
+    ".callout-box--center",
     ".protection__intro",
     ".accordion__item",
     ".protection__closing",
