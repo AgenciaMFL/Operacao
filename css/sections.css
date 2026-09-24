@@ -423,17 +423,16 @@
 }
 
 .nr1-panel__bg {
-  /* left/top/width/height = -298/1251, 31/635, 1080/1251, 691/635 —
-     the "image 11" node's exact box. Bleeds past the top-left corner
-     and the bottom edge (height>100%), clipped by overflow:hidden,
-     same as the Figma layer. */
+  /* Reverted to the pre-Figma-exact sizing at the client's request —
+     the diagramming (content position below) stays pixel-exact, but
+     the image itself goes back to how it looked before. */
   position: absolute;
-  left: -23.821%;
-  top: 4.882%;
-  width: 86.331%;
-  height: 108.819%;
+  left: -6%;
+  top: 0;
+  width: 70%;
+  height: 100%;
   object-fit: cover;
-  object-position: 20% center;
+  object-position: 15% center;
   z-index: 0;
 }
 
