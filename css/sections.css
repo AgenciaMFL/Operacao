@@ -396,60 +396,112 @@
 }
 
 /* =========================================================
-   SECTION 01 - "O QUE A NR-1 EXIGE" CARDS + CALLOUT
+   SECTION 01 - "NA PRÁTICA, SUA EMPRESA PRECISA" PANEL
+   (mirrors Figma node 2924:584 — dark panel, mockup as full-bleed
+   background image supplied by the client, content anchored right)
    ========================================================= */
-.nr1-cards-heading {
+.nr1-panel {
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+  margin-top: 56px;
+  padding: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 520px;
+}
+
+.nr1-panel__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 25% center;
+  z-index: 0;
+}
+
+/* Darkens the right side of the image (behind the text) so the
+   content stays legible regardless of how `object-fit: cover` crops
+   the source image at a given panel size. */
+.nr1-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, rgba(9, 43, 39, 0) 30%, rgba(9, 43, 39, 0.55) 58%, rgba(9, 43, 39, 0.78) 100%);
+  pointer-events: none;
+}
+
+.nr1-panel__content {
+  position: relative;
+  z-index: 2;
+  max-width: 460px;
+}
+
+.nr1-panel__heading {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 22px;
-  color: var(--color-ink);
-  text-align: center;
-  margin-top: 56px;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  color: var(--color-white);
   margin-bottom: 24px;
 }
 
-.nr1-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  max-width: 960px;
-  margin: 0 auto;
+.nr1-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 28px;
 }
 
-.nr1-card {
+.nr1-checklist__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   background: var(--color-grey-99);
   border: 1px solid var(--color-ink-08);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  padding: 26px 24px;
+  border-radius: 10px;
+  padding: 12px 16px;
 }
 
-.nr1-card__icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+.nr1-checklist__icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 9px;
   background: var(--color-teal);
   color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  flex-shrink: 0;
 }
 
-.nr1-card h3 {
+.nr1-checklist__item p {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
   color: var(--color-teal);
-  letter-spacing: -0.19px;
-  margin-bottom: 8px;
 }
 
-.nr1-card p {
+.nr1-checklist__item p strong {
+  font-weight: 800;
+}
+
+.nr1-panel__closing {
   font-family: var(--font-body);
-  font-size: 15.5px;
-  line-height: 1.5;
-  color: var(--color-grey-32);
+  font-size: 17px;
+  line-height: 1.4;
+  color: #e8fffc;
+  margin-bottom: 28px;
+}
+
+.nr1-panel__closing strong {
+  color: var(--color-white);
+  font-weight: 700;
 }
 
 /* Risk factor tags (section 01): pulled out of the lede's prose into a
@@ -476,22 +528,6 @@
   font-weight: 600;
   font-size: 13.5px;
   color: var(--color-grey-25);
-}
-
-/* Closing line (section 01): plain text + CTA, centered under the
-   cards — no card/border treatment, just normal body copy. */
-.nr1-closing {
-  margin: 32px auto 0;
-  max-width: 620px;
-  text-align: center;
-}
-
-.nr1-closing p {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--color-ink);
-  margin-bottom: 16px;
 }
 
 /* =========================================================
@@ -1132,8 +1168,15 @@
 }
 
 @media (max-width: 1024px) {
-  .nr1-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .nr1-panel {
+    padding: 48px 32px;
+    min-height: 0;
+  }
+  .nr1-panel__content {
+    max-width: 420px;
+  }
+  .nr1-panel__heading {
+    font-size: 28px;
   }
   .protection-card {
     flex-basis: calc(50% - 10px);
@@ -1176,8 +1219,28 @@
   .governance__grid {
     grid-template-columns: 1fr;
   }
-  .nr1-cards {
-    grid-template-columns: 1fr;
+  .nr1-panel {
+    border-radius: 28px;
+    padding: 32px 24px;
+    min-height: 460px;
+    align-items: flex-end;
+  }
+  /* The desktop overlay darkens left-to-right (content sits at the
+     right). Stacked mobile content spans full-width at the BOTTOM
+     instead, so the gradient needs to darken top-to-bottom here or
+     the closing paragraph/button sit unreadable on top of the busy
+     dashboard crop. */
+  .nr1-panel::after {
+    background: linear-gradient(180deg, rgba(9, 43, 39, 0) 0%, rgba(9, 43, 39, 0.55) 35%, rgba(9, 43, 39, 0.9) 65%);
+  }
+  .nr1-panel__content {
+    max-width: 100%;
+  }
+  .nr1-panel__heading {
+    font-size: 24px;
+  }
+  .nr1-checklist__item p {
+    font-size: 14.5px;
   }
   /* Arrow controls for the carousel below — hidden by default (see the
      unconditional .how__carousel-nav rule near .how__aside), shown only

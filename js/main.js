@@ -112,8 +112,7 @@
 
   const groups = [
     ".split > div",
-    ".nr1-card",
-    ".callout-box--center",
+    ".nr1-panel__content > *",
     ".protection__intro",
     ".accordion__item",
     ".protection__closing",
