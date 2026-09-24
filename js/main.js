@@ -90,7 +90,7 @@
     ".nr1-panel__content > *",
     ".protection__intro",
     ".process-card",
-    ".protection__closing",
+    ".trust-card__inner > *",
     ".climate-cta__inner > *",
     ".how__aside",
     ".how-step",

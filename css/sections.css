@@ -622,12 +622,6 @@
   color: var(--color-grey-32);
 }
 
-.protection__closing {
-  text-align: center;
-  max-width: 700px;
-  margin: 56px auto 0;
-}
-
 /* =========================================================
    CLIMATE CTA — section 02's closing callout, split out into its
    own full-width green band. Mirrors Figma node 2933:729: a full-bleed
@@ -700,24 +694,59 @@
   margin-top: 20px;
 }
 
-/* :first-of-type/:last-of-type (not :first-child/:last-child) so this
-   still targets the two text paragraphs correctly even when a <a class="btn">
-   follows them as the block's actual last child (see section 02's closing
-   callout, which adds a CTA after the two paragraphs). */
-.protection__closing p:first-of-type {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 23px;
-  line-height: 1.26;
-  color: #262c2c;
-  margin-bottom: 20px;
+/* =========================================================
+   TRUST CARD — section 05's closing callout ("Estivemos dos dois lados
+   da mesa..."), a dark rounded panel with the client's own metallic-
+   icons image bleeding from the left (same full-bleed-image technique
+   as .nr1-panel__bg: use the image as-is, no attempt to reconstruct its
+   background/gradient/blend layers separately).
+   ========================================================= */
+.trust-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-teal-dark);
+  border-radius: 55px;
+  aspect-ratio: 2000 / 850;
 }
 
-.protection__closing p:last-of-type {
+.trust-card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.trust-card__inner {
+  position: absolute;
+  z-index: 1;
+  left: 52%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42%;
+  max-width: 480px;
+}
+
+.trust-card__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.trust-card__text {
   font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 1.33;
-  color: var(--color-ink);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e8fffc;
+}
+
+.trust-card__text strong {
+  color: var(--color-white);
+  font-weight: 700;
 }
 
 /* =========================================================
@@ -1255,6 +1284,30 @@
   .nr1-panel__heading {
     font-size: 28px;
   }
+  .trust-card {
+    aspect-ratio: auto;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 32px;
+    border-radius: 32px;
+  }
+  .trust-card__bg {
+    width: 45%;
+    object-position: left center;
+  }
+  .trust-card__inner {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+    max-width: 340px;
+  }
+  .trust-card__title {
+    font-size: 22px;
+  }
   .climate-cta {
     aspect-ratio: auto;
     min-height: 200px;
@@ -1353,6 +1406,27 @@
   }
   .protection__intro--split .section-lede {
     font-size: 16px;
+  }
+  .trust-card {
+    display: block;
+    min-height: 0;
+    padding: 0;
+    border-radius: 24px;
+  }
+  .trust-card__bg {
+    position: static;
+    width: 100%;
+    height: 200px;
+    object-position: center 35%;
+  }
+  .trust-card__inner {
+    position: relative;
+    max-width: 100%;
+    padding: 24px 24px 28px;
+    transform: none;
+  }
+  .trust-card__title {
+    font-size: 20px;
   }
   /* Below tablet there's no room to keep the dashboard mockup and the
      text side by side — stacks like .nr1-panel's own mobile tier: the
