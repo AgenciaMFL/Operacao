@@ -428,10 +428,10 @@
   position: absolute;
   left: -6%;
   top: 0;
-  width: 54%;
+  width: 62%;
   height: 100%;
   object-fit: cover;
-  object-position: 30% center;
+  object-position: 20% center;
   z-index: 0;
 }
 
