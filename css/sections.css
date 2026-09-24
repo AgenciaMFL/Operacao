@@ -1056,18 +1056,21 @@
 .trust-list__row {
   display: flex;
   gap: 11px;
+  justify-content: center;
   width: 100%;
 }
 
+/* flex:0 0 auto (not the Figma spec's flex:1 0 0, equal-width cards) —
+   Manrope's real metrics render slightly wider than the fallback font
+   stack this site actually loads with, so a fixed equal split wrapped
+   "Respostas individuais não são repassadas" to 2 lines. Sizing each
+   card to its own text guarantees a single line regardless of font
+   metrics, at the cost of the two cards being slightly different
+   widths (matches the reference screenshot either way). */
 .trust-list__row .trust-list__item {
-  flex: 1 0 0;
-  min-width: 0;
+  flex: 0 0 auto;
 }
 
-.trust-list__item--single {
-  width: 446px;
-  max-width: 100%;
-}
 
 .trust-list__item {
   display: flex;
@@ -1098,17 +1101,20 @@
   font-size: 16px;
   line-height: 1.4;
   color: var(--color-white);
+  white-space: nowrap;
 }
 
+/* Full-bleed, edge to edge, no rounded corners/margins — a contained,
+   boxed card (the previous version) showed a visible seam where its
+   gradient met the section's own flat #f3fffb fill. Full width lets
+   the image's own built-in gradient blend into the page with no edge. */
 .trust-band__bg {
   display: block;
-  width: 900px;
-  max-width: calc(100% - 2 * var(--container-pad));
+  width: 100%;
   height: auto;
   aspect-ratio: 2000 / 679;
   object-fit: cover;
-  border-radius: 24px;
-  margin: 36px auto 0;
+  margin-top: 36px;
 }
 
 /* Final CTA */
@@ -1325,6 +1331,20 @@
 }
 
 @media (max-width: 1024px) {
+  /* Cards side-by-side (nowrap, sized to content) only fits at generous
+     desktop widths — narrower than that, the pair either touches the
+     edges or overflows past them. Stacks to one full-width column per
+     card, wrapping normally, same width as the single card below. */
+  .trust-list__row {
+    flex-direction: column;
+  }
+  .trust-list__row .trust-list__item {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .trust-list__item span:last-child {
+    white-space: normal;
+  }
   /* Below the desktop tier, the pixel-exact absolute layout (sized for
      the full 1251px frame) no longer fits — falls back to the
      flexbox approach: image as an absolute overlay sized by a plain
@@ -1462,9 +1482,6 @@
   }
   .process-grid {
     grid-template-columns: 1fr;
-  }
-  .trust-list__row {
-    flex-direction: column;
   }
   .trust-band__inner h2.section-title {
     font-size: 30px;
