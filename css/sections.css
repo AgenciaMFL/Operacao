@@ -428,17 +428,17 @@
   position: absolute;
   left: -6%;
   top: 0;
-  width: 62%;
+  width: 70%;
   height: 100%;
   object-fit: cover;
-  object-position: 20% center;
+  object-position: 15% center;
   z-index: 0;
 }
 
 .nr1-panel__content {
   position: relative;
   z-index: 1;
-  max-width: 460px;
+  max-width: 540px;
 }
 
 .nr1-panel__heading {
@@ -449,6 +449,11 @@
   letter-spacing: -0.6px;
   color: var(--color-white);
   margin-bottom: 16px;
+  /* Narrower than .nr1-panel__content on purpose (matches the Figma
+     spec, which gives the heading its own 418px box) — forces the
+     same 2-line wrap as the reference instead of fitting on one line
+     now that the content column itself is wider. */
+  max-width: 400px;
 }
 
 .nr1-checklist {
