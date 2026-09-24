@@ -641,11 +641,13 @@
   position: relative;
   overflow: hidden;
   background: var(--color-teal-dark);
-  /* Matches the bg image's own native 2000x400 ratio (5/1) exactly —
-     object-fit:cover then never has to scale it past its native
+  /* Matches the desktop bg image's native 2000x351 ratio exactly (see
+     the <picture> source in the HTML — tablet/mobile fall back to the
+     shorter 2000x400 image and get their own aspect-ratio:auto override
+     below) so object-fit:cover never has to upscale it past its native
      resolution (a taller box previously forced an upscale, which read
      as blurry/oversized). */
-  aspect-ratio: 5 / 1;
+  aspect-ratio: 2000 / 351;
 }
 
 .climate-cta__bg {
@@ -658,16 +660,16 @@
 }
 
 .climate-cta__inner {
-  /* left/top match the Figma frame's own text position (1418/126 over
-     2560x512, see the node comment above) — NOT vertically centered in
-     the panel, which drifted the copy down away from the mockup's own
+  /* left/top match the Figma frame's own text position (1408/78 over
+     2561x449, node 2939:811/816) — NOT vertically centered in the
+     panel, which drifted the copy down away from the mockup's own
      visual weight (its upper portion) and read as misaligned. width is
      capped in px so the column doesn't keep growing (and its lines
      stretching) past a comfortable measure on very wide viewports. */
   position: absolute;
   z-index: 1;
-  left: 55.391%;
-  top: 24.609%;
+  left: 54.98%;
+  top: 17.37%;
   width: 38%;
   max-width: 460px;
 }

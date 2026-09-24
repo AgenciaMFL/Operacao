@@ -14,7 +14,8 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | `assets/img/hero-bg-wide.webp` | Hero wide (≥1920px) — fundo completo enviado pelo usuário, já com o grupo pessoa+dashboard |
 | `assets/img/reuniao-corporativa.webp` | Seção 01 — imagem ao lado do texto |
 | `assets/img/diagnostico-dashboard-mockup.webp` | Painel "Na prática, sua empresa precisa" (seção 01) — imagem de fundo full-bleed enviada diretamente pelo usuário (não veio do arquivo Figma), já com o gradiente teal e o mockup do dashboard embutidos |
-| `assets/img/climate-cta-bg.webp` | Fundo full-bleed da banda "E se sua empresa também precisa entender o clima?" (seção 02.1) — enviada diretamente pelo usuário, já com a textura verde e o mockup do dashboard embutidos (mirrors Figma node 2933:729, cujas camadas de fundo/textura/mockup não foram reconstruídas separadamente) |
+| `assets/img/climate-cta-bg.webp` | Fundo da banda "E se sua empresa também precisa entender o clima?" (seção 02.1) em telas ≤1024px (`<picture>` fallback) — enviada diretamente pelo usuário, já com a textura verde e o mockup do dashboard embutidos (mirrors Figma node 2933:729) |
+| `assets/img/climate-cta-bg-desktop.webp` | Mesma banda, telas ≥1025px (`<picture>` source) — versão enviada pelo usuário para o node Figma 2939:811, recorte mais baixo do mesmo mockup |
 | `assets/img/how-steps/how-step-01-identificar.webp` … `how-step-05-acompanhar.webp` | Ícones dos 5 passos da seção 03 — "Como funciona" |
 | `assets/img/cta-bg-meeting.png` | Fundo do CTA final ("Descubra onde estão os riscos...") |
 | `assets/img/laptop-mockup.webp` | Mockup do painel administrativo (seção 05 — "O que sua empresa ganha"), usado em telas ≥1025px |
