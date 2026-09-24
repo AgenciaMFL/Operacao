@@ -568,14 +568,13 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 48px;
-  align-items: start;
+  align-items: center;
   text-align: left;
   max-width: none;
 }
 
 .protection__intro--split .section-lede {
   margin: 0;
-  padding-top: 4px;
 }
 
 .protection__grid {
