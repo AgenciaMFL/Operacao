@@ -658,12 +658,18 @@
 }
 
 .climate-cta__inner {
+  /* left/top match the Figma frame's own text position (1418/126 over
+     2560x512, see the node comment above) — NOT vertically centered in
+     the panel, which drifted the copy down away from the mockup's own
+     visual weight (its upper portion) and read as misaligned. width is
+     capped in px so the column doesn't keep growing (and its lines
+     stretching) past a comfortable measure on very wide viewports. */
   position: absolute;
   z-index: 1;
-  left: 54%;
-  top: 50%;
+  left: 55.391%;
+  top: 24.609%;
   width: 38%;
-  transform: translateY(-50%);
+  max-width: 460px;
 }
 
 .climate-cta__title {
