@@ -999,43 +999,32 @@
    reconstructed — same reasoning as elsewhere: use the client's own
    flattened tablet photo directly instead.
 
-   .trust-band__bg is shown at its own native resolution (no
-   aspect-ratio override, no object-fit crop) — any forced ratio makes
-   object-fit:cover scale it off its native pixels, which read as
-   blurry. Its own top ~58% is a plain light gradient with no tablet
-   content in it at all — that's the client's intended spot for ALL the
-   text (title, lede, cards), so .trust-band__content is absolutely
-   positioned over the image (not stacked below it in normal flow),
-   anchored to the top, sitting in that empty band instead of on the
-   tablet itself. */
+   Text is stacked in normal flow ABOVE the image at every width (not
+   overlaid on top of it): an earlier version absolutely positioned
+   .trust-band__content over the image's own empty top band (a plain
+   gradient with no tablet in it, meant as space for the text) sized as
+   a % of the image's height, anchored to that band's bottom edge — but
+   the box's height and the content's actual height scale differently
+   across viewports (one tracks the image, the other tracks text
+   metrics), so at some widths the box ended up much taller than the
+   content needed and the surplus showed up as a large blank gap above
+   the eyebrow. Plain stacked flow has no such box to mismatch: the
+   section is only ever as tall as its content plus the (cropped, see
+   .trust-band__bg) image, at any viewport. */
 .trust-band {
   position: relative;
   overflow: hidden;
   background: #f3fffb;
+  display: flex;
+  flex-direction: column;
 }
 
-/* height:56% (not inset:0 + padding-top) — matches .trust-band__bg's
-   own empty band (the tablet starts at ~57.8% of the image's height),
-   with justify-content:flex-end anchoring the text to the BOTTOM of
-   that band, right above the tablet. A fixed padding-top instead left
-   a gap that grew every time the viewport got wider than the width
-   this was last tuned at: the image's empty band grows in lockstep
-   with viewport width (it's a % of an always-percentage-sized image),
-   but the fixed-px text block doesn't, so any extra room only ever
-   showed up as slack between the two — now that slack shows above the
-   eyebrow instead, where it's harmless, and the gap before the tablet
-   stays the small constant padding-bottom below at any width. */
 .trust-band__content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56%;
+  order: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 10px;
+  padding: 40px 20px 16px;
   text-align: center;
 }
 
@@ -1136,10 +1125,23 @@
   white-space: nowrap;
 }
 
+/* The source photo's top ~58% is a flat gradient with no tablet in it
+   (row-by-row pixel variance confirmed the busy content only starts
+   around y=460/785) — dead space now that the text sits above it in
+   flow instead of overlaid on top of it. Cropped via object-fit:cover
+   + object-position:bottom, keeping a bit of the gradient as a soft
+   lead-in. The crop box's width still matches the image's own rendered
+   width, so cover's scale factor stays 1 — this only clips, it never
+   upscales, so it doesn't reintroduce the blur that displaying the
+   image at native resolution was originally chosen to avoid. */
 .trust-band__bg {
   display: block;
   width: 100%;
+  order: 2;
+  aspect-ratio: 2000 / 360;
   height: auto;
+  object-fit: cover;
+  object-position: bottom;
 }
 
 /* Final CTA */
@@ -1369,59 +1371,6 @@
   }
   .trust-list__item span:last-child {
     white-space: normal;
-  }
-  /* Below the desktop tier the image itself renders too short (native
-     ratio) for its own empty top band to fit the title/lede/cards
-     overlaid on it without touching the tablet — the fixed amount of
-     vertical space that content needs stays roughly constant while the
-     band shrinks proportionally with a narrower viewport. Switches
-     from overlay to a stacked flow instead: title/lede/cards first,
-     then the image (mirrors .nr1-panel's own mobile fallback). */
-  .trust-band {
-    display: flex;
-    flex-direction: column;
-  }
-  /* In stacked flow the image is no longer used as an absolute-overlay
-     backdrop with content sitting inside its own empty top band — that
-     band (the top ~58% of the source photo, a flat gradient with no
-     tablet in it, confirmed via row-by-row pixel variance) is now just
-     dead space between the text above it and the image below it, since
-     nothing overlays it anymore. Cropping it out with object-fit:cover
-     (scale factor stays 1 since the box width already matches the
-     image's rendered width — this only crops, never upscales, so it
-     doesn't reintroduce the blur the native-resolution display was
-     chosen to avoid) brings the tablet itself right up under the text,
-     keeping a little of the soft gradient as a lead-in. */
-  .trust-band__bg {
-    order: 2;
-    aspect-ratio: 2000 / 360;
-    height: auto;
-    object-fit: cover;
-    object-position: bottom;
-  }
-  /* width:100% (not just min-width:0) — align-items:stretch alone
-     wasn't enough to keep this flex item at the viewport's width:
-     .trust-list's own explicit width:840px (meant to be capped by its
-     max-width:100% at final layout) was still forcing this item wider,
-     so the whole block rendered at 840px+ and got clipped by
-     .trust-band's overflow:hidden instead of actually fitting. An
-     explicit width overrides that regardless of any descendant's size. */
-  /* height:56%/justify-content:flex-end from the base rule are only
-     meant for the absolute-overlay desktop layout — left unset here,
-     percentage height against this now-static, auto-height flex item
-     resolved to some arbitrary definite px (flexbox's own height
-     resolution, not "auto"), and flex-end then anchored the real
-     content to the bottom of THAT, opening up a large blank gap above
-     it. height:auto + justify-content:flex-start restores plain
-     top-down flow. */
-  .trust-band__content {
-    position: static;
-    order: 1;
-    height: auto;
-    justify-content: flex-start;
-    padding: 40px 20px 16px;
-    width: 100%;
-    min-width: 0;
   }
   .trust-band__inner h2.section-title {
     font-size: 28px;
