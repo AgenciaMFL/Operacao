@@ -647,7 +647,7 @@
      below) so object-fit:cover never has to upscale it past its native
      resolution (a taller box previously forced an upscale, which read
      as blurry/oversized). */
-  aspect-ratio: 2000 / 351;
+  aspect-ratio: 2000 / 700;
 }
 
 .climate-cta__bg {
@@ -677,34 +677,21 @@
 .climate-cta__title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 19px;
-  line-height: 1.25;
+  font-size: 42px;
+  line-height: 1.15;
   color: var(--color-white);
-  margin-bottom: 6px;
+  margin-bottom: 14px;
 }
 
 .climate-cta__text {
   font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: 18px;
+  line-height: 1.5;
   color: #e8fffc;
 }
 
 .climate-cta .btn {
-  margin-top: 12px;
-  padding: 6px 16px 6px 6px;
-  font-size: 13px;
-  gap: 8px;
-}
-
-.climate-cta .btn-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.climate-cta .btn-icon svg {
-  width: 11px;
-  height: 11px;
+  margin-top: 20px;
 }
 
 /* :first-of-type/:last-of-type (not :first-child/:last-child) so this
@@ -1288,8 +1275,14 @@
     left: auto;
     top: auto;
     width: auto;
-    max-width: 300px;
+    max-width: 320px;
     transform: none;
+  }
+  .climate-cta__title {
+    font-size: 26px;
+  }
+  .climate-cta__text {
+    font-size: 15px;
   }
   .protection-card {
     flex-basis: calc(50% - 10px);
@@ -1371,6 +1364,9 @@
   }
   .climate-cta__title {
     font-size: 20px;
+  }
+  .climate-cta__text {
+    font-size: 15px;
   }
   /* Stacked instead of overlaid: at this width there's no room for the
      mockup and the text side by side without the text having to sit
