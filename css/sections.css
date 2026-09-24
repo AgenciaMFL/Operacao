@@ -32,7 +32,10 @@
    approximating it. */
 @media (min-width: 1181px) and (max-width: 1919.98px) {
   .hero {
-    height: calc(100vw * 900 / 1920);
+    /* 760 (not the original 900): shorter canvas so the section reads
+       more compact and the marquee right below it starts to peek into
+       view sooner, without cropping into the copy block below. */
+    height: calc(100vw * 760 / 1920);
     background-image: url("../assets/img/hero-bg-notebook.webp");
     background-size: cover;
     background-position: top center;
@@ -43,7 +46,7 @@
     top: 0;
     left: 0;
     width: 1920px;
-    height: 900px;
+    height: 760px;
     transform-origin: top left;
     transform: scale(calc(100vw / 1920px));
   }
@@ -54,6 +57,27 @@
     width: 587px;
     max-width: none;
   }
+  /* Bigger CTA than the base (mobile-tuned) size below — the button
+     read as too small against this canvas once it became the hero's
+     only action (see js/main.js hero__actions, now a single button). */
+  .hero__actions .btn {
+    height: 76px;
+    border-radius: 11px;
+    gap: 14px;
+    padding: 14px 30px 14px 14px;
+  }
+  .hero__actions .btn--primary {
+    font-size: 21px;
+  }
+  .hero__actions .btn-icon {
+    width: 42px;
+    height: 40px;
+    border-radius: 7px;
+  }
+  .hero__actions .btn-icon svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Wide tier (>=1920px): same technique, at Figma's wider "Hero WIDE"
@@ -62,7 +86,9 @@
    composition would. */
 @media (min-width: 1920px) {
   .hero {
-    height: calc(100vw * 900 / 2560);
+    /* 760 (not the original 900), matching the notebook tier — see its
+       comment above. */
+    height: calc(100vw * 760 / 2560);
     background-image: url("../assets/img/hero-bg-wide.webp");
     background-size: cover;
     background-position: top center;
@@ -73,7 +99,7 @@
     top: 0;
     left: 0;
     width: 2560px;
-    height: 900px;
+    height: 760px;
     transform-origin: top left;
     transform: scale(calc(100vw / 2560px));
   }
@@ -83,6 +109,24 @@
     top: 187px;
     width: 587px;
     max-width: none;
+  }
+  .hero__actions .btn {
+    height: 76px;
+    border-radius: 11px;
+    gap: 14px;
+    padding: 14px 30px 14px 14px;
+  }
+  .hero__actions .btn--primary {
+    font-size: 21px;
+  }
+  .hero__actions .btn-icon {
+    width: 42px;
+    height: 40px;
+    border-radius: 7px;
+  }
+  .hero__actions .btn-icon svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -124,7 +168,7 @@
   line-height: 1.42;
   color: var(--color-white);
   max-width: 586px;
-  margin-bottom: 12px;
+  margin-bottom: 26px;
 }
 
 .hero__actions {
