@@ -433,8 +433,52 @@
   margin-top: 8px;
 }
 
-.claim-list + .section-lede {
-  margin-top: 20px;
+/* Risk factor tags (section 01): pulled out of the lede's prose into a
+   scannable pill row instead of a long "incluindo fatores como X, Y,
+   Z" clause buried in a paragraph — easier to skim at a glance. */
+.risk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 20px;
+  /* Without this, flex's default min-width:auto lets the pill row's
+     own min-content width (all pills unwrapped) push the mobile
+     .split grid column wider than the viewport instead of actually
+     wrapping — this shrinks it back down so flex-wrap can do its job. */
+  min-width: 0;
+}
+
+.risk-tag {
+  background: var(--color-grey-95);
+  border: 1px solid var(--color-ink-10);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--color-grey-25);
+}
+
+/* Closing callout (section 01): sets the "here's where SIS comes in"
+   pivot + CTA apart as its own visual block instead of just another
+   paragraph blending into the wall of text above it. */
+.callout-box {
+  background: var(--color-section);
+  border-left: 3px solid var(--color-teal);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  margin-top: 28px;
+}
+
+.callout-box p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-ink);
+}
+
+.callout-box .btn {
+  margin-top: 16px;
 }
 
 /* =========================================================
@@ -1067,12 +1111,27 @@
      each bullet's text within its own row next to a left-fixed dot
      icon, which reads as misaligned rather than centered. */
   .claim-list,
-  .checklist {
+  .checklist,
+  .callout-box {
     text-align: left;
+  }
+  .risk-tags {
+    justify-content: center;
   }
 }
 
 @media (max-width: 1024px) {
+  /* Its label ("Quero entender os riscos da minha empresa") is the
+     longest CTA on the site — .btn's default white-space:nowrap keeps
+     it on one line, which is wider than the .split text column once
+     it narrows below ~1024px (2-column down to 720px, single-column
+     below that). Letting it wrap keeps the button contained instead
+     of bleeding past the column into the image's side. */
+  .callout-box .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: left;
+  }
   .protection-card {
     flex-basis: calc(50% - 10px);
   }
@@ -1101,7 +1160,12 @@
 
 @media (max-width: 720px) {
   .split {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr), not bare 1fr: a bare 1fr track's minimum size is
+       still its content's min-content width, so a wide child (the
+       .risk-tags row) was pushing this column past the viewport
+       instead of actually wrapping. minmax(0, ...) removes that
+       automatic minimum. */
+    grid-template-columns: minmax(0, 1fr);
   }
   .protection-card {
     flex-basis: 100%;
