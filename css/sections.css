@@ -991,99 +991,124 @@
 /* =========================================================
    TRUST / LGPD BAND
    ========================================================= */
+/* Pixel-exact port of Figma node 2951:995 (a 2561px-wide frame — its
+   absolute px values are the real intended CSS sizes, same convention
+   as .nr1-panel/.climate-cta, not scaled-down fractions of 2561). The
+   frame's own background texture/blur-blob decorations (a separate
+   14%-opacity blend image plus two blurred ellipse SVGs) aren't
+   reconstructed — same reasoning as elsewhere: use the client's own
+   flattened tablet photo directly instead. That photo is now a
+   normal-flow, centered, contained image below the pills (matching the
+   Figma frame's own centered/bounded photo) rather than a full-bleed
+   background, which sidesteps the letterboxing/overlap problems the
+   full-bleed version kept running into. */
 .trust-band {
-  position: relative;
-  overflow: hidden;
-  /* Matches the bg image's own near-white top-left corner, so the gap
-     above it (see .trust-band__bg, letterboxed rather than stretched to
-     the section's full height) reads as a seamless continuation of it,
-     not a visible seam — same technique as .nr1-panel's gradient
-     fallback. No overlay here (client's own image, used as-is) — the
-     image's top is near-white, so text is dark ink here instead of the
-     white/light-teal this section used against its old solid-teal fill. */
-  background: #eefdf8;
-  /* padding-bottom is width-relative (not a fixed px per breakpoint) —
-     a % (not vw) specifically: percentage padding resolves against the
-     CONTAINING BLOCK'S width, matching exactly what .trust-band__bg's
-     own 100%-width sizing uses, so the two stay in lockstep everywhere.
-     vw resolves against the viewport instead, which is NOT always the
-     same width the section actually renders at (e.g. inside a scaled
-     embed/iframe, where vw reads real device width but the section's
-     own box is laid out narrower) — that mismatch is what produced a
-     huge, viewport-only gap for the client. .trust-band__bg is sized
-     to 100% width at its own 2000/679 aspect ratio (not stretched to
-     the section's full, text-dependent height), so its rendered height
-     is always ~34% of the section's own width — this reserves exactly
-     that much room so the text above can never reach into the tablet
-     graphic, at any width. */
-  padding: 96px 0 35%;
-}
-
-.trust-band__bg {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2000 / 679;
-  object-fit: cover;
-  z-index: 0;
-}
-
-.trust-band__inner {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin: 0 auto;
+  background: #f3fffb;
+  padding: 96px 0 80px;
   text-align: center;
 }
 
-.trust-band__inner .section-title--center {
-  margin: 20px 0 18px;
+.trust-band__inner {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-/* 2 pills side by side, 1 centered below — sized to their own text
-   (not stretched to a grid column) via flex-wrap, matching the
-   reference design. A sibling of .trust-band__inner (not nested in it)
-   since that inner block is capped at 700px for the title/lede — too
-   narrow to fit 2 pills on one row — while .trust-list uses the full
-   .container width instead. */
+.trust-band__inner .eyebrow {
+  color: #0ea971;
+}
+
+.trust-band__inner h2.section-title {
+  max-width: 610px;
+  margin: 24px auto;
+  font-size: 48px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #053833;
+}
+
+.trust-band__inner .text-highlight {
+  color: #ffa194;
+}
+
+.trust-band__inner .section-lede {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #5a6d68;
+}
+
+/* 2 cards side by side (.trust-list__row, each flex:1) plus 1 fixed-
+   width card centered below — both rows share the same 840px column
+   and center point, exactly like the Figma frame's cards-row (840px)
+   and cards-grid-container (446px card, same center). */
 .trust-list {
-  position: relative;
-  z-index: 2;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  /* Narrow enough that the 3rd pill can't fit on the first row (forcing
-     the 2-then-1 wrap the reference wants) but wide enough for the
-     first 2 side by side. */
-  max-width: 900px;
-  margin: 28px auto 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  width: 840px;
+  max-width: 100%;
+  margin: 21px auto 0;
+  padding: 0 var(--container-pad);
+}
+
+.trust-list__row {
+  display: flex;
+  gap: 11px;
+  width: 100%;
+}
+
+.trust-list__row .trust-list__item {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.trust-list__item--single {
+  width: 446px;
+  max-width: 100%;
 }
 
 .trust-list__item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: var(--color-teal-dark);
-  border-radius: 14px;
-  padding: 12px 20px;
+  gap: 16px;
+  background: #0e6a60;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px 24px;
   text-align: left;
-  width: fit-content;
 }
 
 .trust-list__item .checklist__check {
-  background: rgba(255, 255, 255, 0.2);
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: #138a7d;
+}
+
+.trust-list__item .checklist__check svg {
+  width: 12px;
+  height: 12px;
 }
 
 .trust-list__item span:last-child {
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 16px;
   line-height: 1.4;
   color: var(--color-white);
-  white-space: nowrap;
+}
+
+.trust-band__bg {
+  display: block;
+  width: 900px;
+  max-width: calc(100% - 2 * var(--container-pad));
+  height: auto;
+  aspect-ratio: 2000 / 679;
+  object-fit: cover;
+  border-radius: 24px;
+  margin: 36px auto 0;
 }
 
 /* Final CTA */
@@ -1438,6 +1463,12 @@
   .process-grid {
     grid-template-columns: 1fr;
   }
+  .trust-list__row {
+    flex-direction: column;
+  }
+  .trust-band__inner h2.section-title {
+    font-size: 30px;
+  }
   .checklist {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1691,12 +1722,5 @@
      specific gap without touching the 60px rule anywhere else. */
   #como-funciona {
     padding-bottom: 24px;
-  }
-  /* Overrides the shared 60px reset above (same selector list, later in
-     the cascade) — the 35% bottom padding must survive at every width,
-     since it's what keeps .trust-band__bg's letterboxed image clear of
-     the text above it. */
-  .trust-band {
-    padding-bottom: 35%;
   }
 }
