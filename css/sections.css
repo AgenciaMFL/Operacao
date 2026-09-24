@@ -1079,26 +1079,22 @@
 }
 
 .checklist {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  /* 2 columns instead of 1 long stack — 8 items in a single column ran
+     the section much taller than the mockup beside it. */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
   margin-top: 24px;
 }
 
 .checklist__item {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   background: var(--color-grey-95);
   border-radius: 10px;
-  padding: 13px 18px;
+  padding: 11px 14px;
   min-height: 0;
-  /* Sized to its own text, not stretched to the full column width —
-     without this every pill matched the 583px text column regardless
-     of how short its label was, leaving a big dead-space gap on the
-     right of the shorter ones. */
-  width: fit-content;
-  max-width: 100%;
 }
 
 .checklist__check {
@@ -1344,6 +1340,9 @@
   }
   .process-grid {
     grid-template-columns: 1fr;
+  }
+  .checklist {
+    grid-template-columns: minmax(0, 1fr);
   }
   .protection__intro--split {
     grid-template-columns: minmax(0, 1fr);
