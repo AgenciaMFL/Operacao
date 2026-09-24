@@ -419,18 +419,19 @@
 }
 
 .nr1-panel__bg {
-  /* Left-anchored at its own aspect ratio (not stretched full-bleed
-     cover) — a full-width cover let the mockup's own content reach
-     as far right as the text column at wide panel sizes, since the
-     image has no free/plain space to crop into horizontally. Sized
-     to a fixed share of the panel width instead, so there's always
-     clear gradient-only space behind the text on the right. */
+  /* Fills the panel's full height (bleeding past the top/bottom edges,
+     clipped by the panel's own overflow:hidden) instead of sitting at
+     its natural aspect ratio — sizing by width alone (auto height)
+     left a big empty band of flat gradient above/below it. Capped to
+     a fixed share of the panel WIDTH so it still can't reach as far
+     right as the text column. */
   position: absolute;
-  left: -4%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 68%;
-  height: auto;
+  left: -6%;
+  top: 0;
+  width: 54%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% center;
   z-index: 0;
 }
 
@@ -1172,6 +1173,9 @@
     padding: 48px 32px;
     min-height: 0;
   }
+  .nr1-panel__bg {
+    width: 42%;
+  }
   .nr1-panel__content {
     max-width: 420px;
   }
@@ -1219,14 +1223,28 @@
   .governance__grid {
     grid-template-columns: 1fr;
   }
+  /* Stacked instead of overlaid: at this width there's no room for the
+     mockup and the text side by side without the text having to sit
+     on top of it somewhere. The image becomes a plain in-flow block
+     with a fixed height at the top of the panel, and the text
+     content follows below it — no absolute positioning, no overlap
+     possible by construction. */
   .nr1-panel {
+    flex-direction: column;
+    align-items: stretch;
     border-radius: 28px;
-    padding: 32px 24px;
-    min-height: 460px;
-    align-items: flex-end;
+    padding: 0 0 32px;
+    min-height: 0;
+  }
+  .nr1-panel__bg {
+    position: static;
+    width: 100%;
+    height: 220px;
+    object-position: center 25%;
   }
   .nr1-panel__content {
     max-width: 100%;
+    padding: 28px 24px 0;
   }
   .nr1-panel__heading {
     font-size: 24px;
