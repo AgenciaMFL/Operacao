@@ -403,6 +403,7 @@
   font-weight: 800;
   font-size: 22px;
   color: var(--color-ink);
+  text-align: center;
   margin-top: 56px;
   margin-bottom: 24px;
 }
@@ -411,6 +412,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .nr1-card {
@@ -475,11 +478,12 @@
   color: var(--color-grey-25);
 }
 
-/* Closing line (section 01): plain text + CTA, left-aligned under the
+/* Closing line (section 01): plain text + CTA, centered under the
    cards — no card/border treatment, just normal body copy. */
 .nr1-closing {
-  margin-top: 32px;
+  margin: 32px auto 0;
   max-width: 620px;
+  text-align: center;
 }
 
 .nr1-closing p {
