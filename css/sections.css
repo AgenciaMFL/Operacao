@@ -440,10 +440,11 @@
   /* left/top/width = 756/1251, 92/635, 443/1251 — the checklist
      frame's box (the widest of the four content nodes), so the
      narrower heading/closing-text max-widths below sit correctly
-     inside it. */
+     inside it. Shifted a bit further left than that exact figure, per
+     client request. */
   position: absolute;
   z-index: 1;
-  left: 60.432%;
+  left: 55%;
   top: 14.488%;
   width: 35.412%;
 }
