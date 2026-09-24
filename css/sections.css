@@ -1034,28 +1034,39 @@
   margin: 20px 0 18px;
 }
 
+/* 2 pills side by side, 1 centered below — sized to their own text
+   (not stretched to a grid column) via flex-wrap, matching the
+   reference design. A sibling of .trust-band__inner (not nested in it)
+   since that inner block is capped at 700px for the title/lede — too
+   narrow to fit 2 pills on one row — while .trust-list uses the full
+   .container width instead. */
 .trust-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-  margin: 36px auto 0;
-  max-width: 640px;
-}
-
-/* 2 side by side, 1 full-width below. */
-.trust-list__item:last-child {
-  grid-column: 1 / -1;
+  /* Narrow enough that the 3rd pill can't fit on the first row (forcing
+     the 2-then-1 wrap the reference wants) but wide enough for the
+     first 2 side by side. */
+  max-width: 900px;
+  margin: 28px auto 0;
 }
 
 .trust-list__item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(16, 107, 97, 0.14);
-  border-radius: 10px;
-  padding: 14px 20px;
+  gap: 12px;
+  background: var(--color-teal-dark);
+  border-radius: 14px;
+  padding: 12px 20px;
   text-align: left;
+  width: fit-content;
+}
+
+.trust-list__item .checklist__check {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .trust-list__item span:last-child {
@@ -1063,15 +1074,8 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 1.4;
-  color: var(--color-ink);
-}
-
-.trust-band__closing {
-  font-family: var(--font-body);
-  font-size: 16.5px;
-  line-height: 1.5;
-  color: var(--color-grey-25);
-  margin-top: 36px;
+  color: var(--color-white);
+  white-space: nowrap;
 }
 
 /* Final CTA */
