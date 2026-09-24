@@ -400,45 +400,53 @@
    (mirrors Figma node 2924:584 — dark panel, mockup as full-bleed
    background image supplied by the client, content anchored right)
    ========================================================= */
+/* Desktop (>1024px): pixel-exact match of Figma node 2924:584, a
+   1251x635 frame with every child absolutely positioned. Converted to
+   percentages (not fixed px) so it scales exactly with the panel at
+   any width instead of only matching at literally 1251px:
+   left/width/right % resolve against the frame's WIDTH, top/height %
+   against its HEIGHT — both correct here since aspect-ratio ties
+   height to width, so the two scale together. Tablet/mobile
+   (<=1024px) override back to a stacked flex layout below; the exact
+   absolute figures wouldn't survive re-stacking the image above the
+   text. */
 .nr1-panel {
   position: relative;
   /* Matches the image's own built-in gradient (sampled from its
      right/flat edge) so the fallback background is a seamless
-     continuation of it, not a visible seam — the image itself isn't
-     stretched to cover the full panel (see .nr1-panel__bg below), so
-     this is what actually shows behind the text on the right. */
+     continuation of it, not a visible seam. */
   background: linear-gradient(180deg, #106b61 0%, #7eb2aa 100%);
-  border-radius: 40px;
+  border-radius: 55px;
   overflow: hidden;
   margin-top: 56px;
-  padding: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  min-height: 520px;
+  aspect-ratio: 1251 / 635;
 }
 
 .nr1-panel__bg {
-  /* Fills the panel's full height (bleeding past the top/bottom edges,
-     clipped by the panel's own overflow:hidden) instead of sitting at
-     its natural aspect ratio — sizing by width alone (auto height)
-     left a big empty band of flat gradient above/below it. Capped to
-     a fixed share of the panel WIDTH so it still can't reach as far
-     right as the text column. */
+  /* left/top/width/height = -298/1251, 31/635, 1080/1251, 691/635 —
+     the "image 11" node's exact box. Bleeds past the top-left corner
+     and the bottom edge (height>100%), clipped by overflow:hidden,
+     same as the Figma layer. */
   position: absolute;
-  left: -6%;
-  top: 0;
-  width: 70%;
-  height: 100%;
+  left: -23.821%;
+  top: 4.882%;
+  width: 86.331%;
+  height: 108.819%;
   object-fit: cover;
-  object-position: 15% center;
+  object-position: 20% center;
   z-index: 0;
 }
 
 .nr1-panel__content {
-  position: relative;
+  /* left/top/width = 756/1251, 92/635, 443/1251 — the checklist
+     frame's box (the widest of the four content nodes), so the
+     narrower heading/closing-text max-widths below sit correctly
+     inside it. */
+  position: absolute;
   z-index: 1;
-  max-width: 540px;
+  left: 60.432%;
+  top: 14.488%;
+  width: 35.412%;
 }
 
 .nr1-panel__heading {
@@ -448,19 +456,20 @@
   line-height: 1.15;
   letter-spacing: -0.6px;
   color: var(--color-white);
-  margin-bottom: 16px;
-  /* Narrower than .nr1-panel__content on purpose (matches the Figma
-     spec, which gives the heading its own 418px box) — forces the
-     same 2-line wrap as the reference instead of fitting on one line
-     now that the content column itself is wider. */
-  max-width: 400px;
+  /* 21px gap to the checklist / 443px content width */
+  margin-bottom: 4.74%;
+  /* 363px heading box / 443px content width — narrower than the
+     content column on purpose, forcing the same 2-line wrap Figma
+     has instead of fitting on one line at the column's full width. */
+  max-width: 81.941%;
 }
 
 .nr1-checklist {
   display: flex;
   flex-direction: column;
   gap: 11px;
-  margin-bottom: 16px;
+  /* 15px gap to the closing text / 443px content width */
+  margin-bottom: 3.386%;
 }
 
 .nr1-checklist__item {
@@ -502,7 +511,10 @@
   font-size: 17px;
   line-height: 1.4;
   color: #e8fffc;
-  margin-bottom: 16px;
+  /* 29px gap to the button / 443px content width */
+  margin-bottom: 6.546%;
+  /* 388px closing-text box / 443px content width */
+  max-width: 87.585%;
 }
 
 .nr1-panel__closing strong {
@@ -1174,14 +1186,29 @@
 }
 
 @media (max-width: 1024px) {
+  /* Below the desktop tier, the pixel-exact absolute layout (sized for
+     the full 1251px frame) no longer fits — falls back to the
+     flexbox approach: image as an absolute overlay sized by a plain
+     width %, content flowing in a flex row anchored to the right. */
   .nr1-panel {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     padding: 48px 32px;
     min-height: 0;
   }
   .nr1-panel__bg {
+    left: -6%;
+    top: 0;
     width: 42%;
+    height: 100%;
   }
   .nr1-panel__content {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
     max-width: 420px;
   }
   .nr1-panel__heading {
@@ -1235,6 +1262,7 @@
      content follows below it — no absolute positioning, no overlap
      possible by construction. */
   .nr1-panel {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     border-radius: 28px;
@@ -1243,11 +1271,17 @@
   }
   .nr1-panel__bg {
     position: static;
+    left: auto;
+    top: auto;
     width: 100%;
     height: 220px;
     object-position: center 25%;
   }
   .nr1-panel__content {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
     max-width: 100%;
     padding: 28px 24px 0;
   }
