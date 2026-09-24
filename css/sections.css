@@ -999,15 +999,15 @@
    reconstructed — same reasoning as elsewhere: use the client's own
    flattened tablet photo directly instead.
 
-   .trust-band__bg is shown at its own native 2000x679 resolution (no
+   .trust-band__bg is shown at its own native resolution (no
    aspect-ratio override, no object-fit crop) — any forced ratio makes
    object-fit:cover scale it off its native pixels, which read as
-   blurry. Its own top ~25% is a plain light gradient with no tablet
-   content in it at all — that's the client's intended spot for the
-   text, so .trust-band__content is absolutely positioned over the
-   image (not stacked below it in normal flow) with the copy anchored
-   to the top, sitting in that empty band instead of on the tablet
-   itself. */
+   blurry. Its own top ~58% is a plain light gradient with no tablet
+   content in it at all — that's the client's intended spot for ALL the
+   text (title, lede, cards), so .trust-band__content is absolutely
+   positioned over the image (not stacked below it in normal flow),
+   anchored to the top, sitting in that empty band instead of on the
+   tablet itself. */
 .trust-band {
   position: relative;
   overflow: hidden;
@@ -1020,7 +1020,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 28px;
+  padding-top: 12px;
   text-align: center;
 }
 
@@ -1036,7 +1036,7 @@
 
 .trust-band__inner h2.section-title {
   max-width: 610px;
-  margin: 0 auto;
+  margin: 0 auto 8px;
   font-size: 34px;
   line-height: 1.15;
   letter-spacing: -1px;
@@ -1047,15 +1047,11 @@
   color: #ffa194;
 }
 
-.trust-band__below {
-  margin-top: 32px;
-}
-
-.trust-band__below .section-lede {
+.trust-band__inner .section-lede {
   max-width: 680px;
   margin: 0 auto;
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: 16px;
+  line-height: 1.25;
   color: #5a6d68;
 }
 
@@ -1067,10 +1063,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 11px;
+  gap: 8px;
   width: 840px;
   max-width: 100%;
-  margin: 21px auto 0;
+  margin: 10px auto 0;
   padding: 0 var(--container-pad);
 }
 
@@ -1100,7 +1096,7 @@
   background: #0e6a60;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: 16px 24px;
   text-align: left;
 }
 
@@ -1359,6 +1355,37 @@
   .trust-list__item span:last-child {
     white-space: normal;
   }
+  /* Below the desktop tier the image itself renders too short (native
+     ratio) for its own empty top band to fit the title/lede/cards
+     overlaid on it without touching the tablet — the fixed amount of
+     vertical space that content needs stays roughly constant while the
+     band shrinks proportionally with a narrower viewport. Switches
+     from overlay to a stacked flow instead: title/lede/cards first,
+     then the image (mirrors .nr1-panel's own mobile fallback). */
+  .trust-band {
+    display: flex;
+    flex-direction: column;
+  }
+  .trust-band__bg {
+    order: 2;
+  }
+  /* width:100% (not just min-width:0) — align-items:stretch alone
+     wasn't enough to keep this flex item at the viewport's width:
+     .trust-list's own explicit width:840px (meant to be capped by its
+     max-width:100% at final layout) was still forcing this item wider,
+     so the whole block rendered at 840px+ and got clipped by
+     .trust-band's overflow:hidden instead of actually fitting. An
+     explicit width overrides that regardless of any descendant's size. */
+  .trust-band__content {
+    position: static;
+    order: 1;
+    padding: 40px 20px 24px;
+    width: 100%;
+    min-width: 0;
+  }
+  .trust-band__inner h2.section-title {
+    font-size: 28px;
+  }
   /* Below the desktop tier, the pixel-exact absolute layout (sized for
      the full 1251px frame) no longer fits — falls back to the
      flexbox approach: image as an absolute overlay sized by a plain
@@ -1497,37 +1524,8 @@
   .process-grid {
     grid-template-columns: 1fr;
   }
-  /* At this width the image itself renders too short (native ratio) for
-     its own empty top band to fit even just the eyebrow+title overlaid
-     on it — title started overlapping the tablet. Switches from
-     overlay to a stacked flow instead: title first, then the image,
-     then the lede/cards (mirrors .nr1-panel's own mobile fallback). */
-  .trust-band {
-    display: flex;
-    flex-direction: column;
-  }
-  .trust-band__bg {
-    order: 2;
-  }
-  .trust-band__content {
-    position: static;
-    order: 1;
-    padding: 40px 20px 24px;
-    width: 100%;
-    min-width: 0;
-  }
-  /* width:100% (not just min-width:0) — align-items:stretch alone
-     wasn't enough to keep this flex item at the viewport's width:
-     .trust-list's own explicit width:840px (meant to be capped by its
-     max-width:100% at final layout) was still forcing this item wider,
-     so the whole row rendered at 840px+ and got clipped by
-     .trust-band's overflow:hidden instead of actually fitting. An
-     explicit width overrides that regardless of any descendant's size. */
-  .trust-band__below {
-    order: 3;
-    width: 100%;
-    min-width: 0;
-  }
+  /* Already stacked (see the <=1024px tier) — just shrinks the title a
+     touch further for real phone widths. */
   .trust-band__inner h2.section-title {
     font-size: 26px;
   }
