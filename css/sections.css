@@ -38,7 +38,15 @@
     height: calc(100vw * 760 / 1920);
     background-image: url("../assets/img/hero-bg-notebook.webp");
     background-size: cover;
-    background-position: top center;
+    /* Bottom-anchored (not "top"): the source photo (2000x938) has a
+       tall empty margin above the figure's head, sized for the
+       original 900px-tall canvas. Now that the canvas is only 760px,
+       "top" cropped the extra 140px off the BOTTOM instead — cutting
+       into the laptop/hands, the most important part of the shot,
+       while leaving that empty teal margin untouched above the head.
+       Anchoring to the bottom crops that same 140px off the top edge
+       instead, trimming the empty margin and keeping the figure whole. */
+    background-position: bottom center;
     background-repeat: no-repeat;
   }
   .hero__inner {
@@ -53,7 +61,10 @@
   .hero__copy {
     position: absolute;
     left: 320px;
-    top: 187px;
+    /* Raised from 187px — with the shorter 760px canvas (see .hero
+       above) the old offset (tuned for the taller 900px one) left too
+       much empty space above the logo. */
+    top: 90px;
     width: 587px;
     max-width: none;
   }
@@ -91,7 +102,8 @@
     height: calc(100vw * 760 / 2560);
     background-image: url("../assets/img/hero-bg-wide.webp");
     background-size: cover;
-    background-position: top center;
+    /* Bottom-anchored — see the notebook tier's comment above for why. */
+    background-position: bottom center;
     background-repeat: no-repeat;
   }
   .hero__inner {
@@ -106,7 +118,8 @@
   .hero__copy {
     position: absolute;
     left: 625px;
-    top: 187px;
+    /* Raised from 187px — see the notebook tier's comment above. */
+    top: 90px;
     width: 587px;
     max-width: none;
   }
