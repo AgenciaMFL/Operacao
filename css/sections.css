@@ -1011,10 +1011,15 @@
    the eyebrow. Plain stacked flow has no such box to mismatch: the
    section is only ever as tall as its content plus the (cropped, see
    .trust-band__bg) image, at any viewport. */
+/* #eafcf5 (not the site-wide #f3fffb) matches the average pixel color
+   right at .trust-band__bg's crop line (sampled from the source photo)
+   — the generic mint used everywhere else was ~10/255 lighter, which
+   read as a faint but visible horizontal seam where the section
+   background met the top edge of the cropped image. */
 .trust-band {
   position: relative;
   overflow: hidden;
-  background: #f3fffb;
+  background: #eafcf5;
   display: flex;
   flex-direction: column;
 }
@@ -1024,7 +1029,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px 16px;
+  padding: 72px 20px 16px;
   text-align: center;
 }
 
