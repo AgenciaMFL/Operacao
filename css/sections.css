@@ -641,11 +641,11 @@
   position: relative;
   overflow: hidden;
   background: var(--color-teal-dark);
-  /* Taller than the bg image's own 2560/512 ratio (object-fit:cover
-     crops it slightly) — the raw ratio left no room for the CTA button,
-     which clipped at the bottom since .climate-cta__inner is absolutely
-     positioned and so doesn't grow this box's auto height itself. */
-  aspect-ratio: 2560 / 620;
+  /* Matches the bg image's own native 2000x400 ratio (5/1) exactly —
+     object-fit:cover then never has to scale it past its native
+     resolution (a taller box previously forced an upscale, which read
+     as blurry/oversized). */
+  aspect-ratio: 5 / 1;
 }
 
 .climate-cta__bg {
@@ -660,29 +660,43 @@
 .climate-cta__inner {
   position: absolute;
   z-index: 1;
-  left: 55.391%;
-  top: 24.609%;
-  width: 30%;
+  left: 54%;
+  top: 50%;
+  width: 38%;
+  transform: translateY(-50%);
 }
 
 .climate-cta__title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 26px;
-  line-height: 1.2;
+  font-size: 19px;
+  line-height: 1.25;
   color: var(--color-white);
-  margin-bottom: 14px;
+  margin-bottom: 6px;
 }
 
 .climate-cta__text {
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.4;
   color: #e8fffc;
 }
 
 .climate-cta .btn {
-  margin-top: 22px;
+  margin-top: 12px;
+  padding: 6px 16px 6px 6px;
+  font-size: 13px;
+  gap: 8px;
+}
+
+.climate-cta .btn-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.climate-cta .btn-icon svg {
+  width: 11px;
+  height: 11px;
 }
 
 /* :first-of-type/:last-of-type (not :first-child/:last-child) so this
@@ -1246,11 +1260,11 @@
   }
   .climate-cta {
     aspect-ratio: auto;
-    min-height: 280px;
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 48px 32px;
+    padding: 32px;
   }
   /* Confined to the left portion instead of spanning the full section —
      at this narrower box, object-fit:cover on a full-width image would
@@ -1266,7 +1280,8 @@
     left: auto;
     top: auto;
     width: auto;
-    max-width: 340px;
+    max-width: 300px;
+    transform: none;
   }
   .protection-card {
     flex-basis: calc(50% - 10px);
@@ -1344,9 +1359,10 @@
     position: relative;
     max-width: 100%;
     padding: 28px 24px 32px;
+    transform: none;
   }
   .climate-cta__title {
-    font-size: 22px;
+    font-size: 20px;
   }
   /* Stacked instead of overlaid: at this width there's no room for the
      mockup and the text side by side without the text having to sit
