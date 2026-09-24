@@ -398,11 +398,19 @@
 /* =========================================================
    SECTION 01 - "O QUE A NR-1 EXIGE" CARDS + CALLOUT
    ========================================================= */
+.nr1-cards-heading {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--color-ink);
+  margin-top: 56px;
+  margin-bottom: 24px;
+}
+
 .nr1-cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  margin-top: 56px;
 }
 
 .nr1-card {
@@ -441,18 +449,6 @@
   color: var(--color-grey-32);
 }
 
-.callout-box--center {
-  text-align: center;
-  max-width: 700px;
-  margin: 40px auto 0;
-  border-left: none;
-  border-top: 3px solid var(--color-teal);
-}
-
-.callout-box--center .btn {
-  margin: 16px auto 0;
-}
-
 /* Risk factor tags (section 01): pulled out of the lede's prose into a
    scannable pill row instead of a long "incluindo fatores como X, Y,
    Z" clause buried in a paragraph — easier to skim at a glance. */
@@ -479,26 +475,19 @@
   color: var(--color-grey-25);
 }
 
-/* Closing callout (section 01): sets the "here's where SIS comes in"
-   pivot + CTA apart as its own visual block instead of just another
-   paragraph blending into the wall of text above it. */
-.callout-box {
-  background: var(--color-section);
-  border-left: 3px solid var(--color-teal);
-  border-radius: var(--radius-md);
-  padding: 22px 24px;
-  margin-top: 28px;
+/* Closing line (section 01): plain text + CTA, left-aligned under the
+   cards — no card/border treatment, just normal body copy. */
+.nr1-closing {
+  margin-top: 32px;
+  max-width: 620px;
 }
 
-.callout-box p {
+.nr1-closing p {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.55;
   color: var(--color-ink);
-}
-
-.callout-box .btn {
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 /* =========================================================
@@ -1139,15 +1128,6 @@
 }
 
 @media (max-width: 1024px) {
-  /* Its label ("Quero entender os riscos da minha empresa") is the
-     longest CTA on the site — .btn's default white-space:nowrap keeps
-     it on one line, which can be wider than the callout-box below
-     ~1024px. Letting it wrap keeps the button contained. */
-  .callout-box .btn {
-    width: 100%;
-    white-space: normal;
-    text-align: left;
-  }
   .nr1-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
