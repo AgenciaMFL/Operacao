@@ -623,6 +623,40 @@
   margin: 56px auto 0;
 }
 
+/* =========================================================
+   CLIMATE CTA — section 02's closing callout, split out into its
+   own full-width green band instead of sitting inside .protection.
+   ========================================================= */
+.climate-cta {
+  background: var(--color-teal-dark);
+  padding: 72px 0;
+}
+
+.climate-cta__inner {
+  max-width: 620px;
+  text-align: left;
+}
+
+.climate-cta__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 1.26;
+  color: var(--color-white);
+  margin-bottom: 16px;
+}
+
+.climate-cta__text {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  color: #e8fffc;
+}
+
+.climate-cta .btn {
+  margin-top: 28px;
+}
+
 /* :first-of-type/:last-of-type (not :first-child/:last-child) so this
    still targets the two text paragraphs correctly even when a <a class="btn">
    follows them as the block's actual last child (see section 02's closing

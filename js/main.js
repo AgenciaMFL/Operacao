@@ -91,6 +91,7 @@
     ".protection__intro",
     ".process-card",
     ".protection__closing",
+    ".climate-cta__inner > *",
     ".how__aside",
     ".how-step",
     ".governance__grid > *",
