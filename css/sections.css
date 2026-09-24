@@ -1107,13 +1107,20 @@
 /* Full-bleed, edge to edge, no rounded corners/margins — a contained,
    boxed card (the previous version) showed a visible seam where its
    gradient met the section's own flat #f3fffb fill. Full width lets
-   the image's own built-in gradient blend into the page with no edge. */
+   the image's own built-in gradient blend into the page with no edge.
+   aspect-ratio is shorter than the source's own native 2000/679 —
+   the top ~40% of the source is just its own light gradient fading
+   into near-white (no tablet in it at all), which at full native
+   height read as a big dead-space gap above the tablet. Cropped via
+   object-position:bottom (crops from the top, keeps the tablet itself
+   uncropped at the bottom) instead of showing the whole source image. */
 .trust-band__bg {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2000 / 679;
+  aspect-ratio: 2000 / 420;
   object-fit: cover;
+  object-position: bottom;
   margin-top: 36px;
 }
 
