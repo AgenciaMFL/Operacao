@@ -1002,13 +1002,21 @@
      image's top is near-white, so text is dark ink here instead of the
      white/light-teal this section used against its old solid-teal fill. */
   background: #eefdf8;
-  /* padding-bottom is width-relative (not a fixed px per breakpoint):
-     .trust-band__bg is sized to 100% width at its own 2000/679 aspect
-     ratio (not stretched to the section's full, text-dependent height),
-     so its rendered height is always ~34% of the section's width — this
-     reserves exactly that much room so the text above can never reach
-     down into the tablet graphic, at any viewport width. */
-  padding: 96px 0 35vw;
+  /* padding-bottom is width-relative (not a fixed px per breakpoint) —
+     a % (not vw) specifically: percentage padding resolves against the
+     CONTAINING BLOCK'S width, matching exactly what .trust-band__bg's
+     own 100%-width sizing uses, so the two stay in lockstep everywhere.
+     vw resolves against the viewport instead, which is NOT always the
+     same width the section actually renders at (e.g. inside a scaled
+     embed/iframe, where vw reads real device width but the section's
+     own box is laid out narrower) — that mismatch is what produced a
+     huge, viewport-only gap for the client. .trust-band__bg is sized
+     to 100% width at its own 2000/679 aspect ratio (not stretched to
+     the section's full, text-dependent height), so its rendered height
+     is always ~34% of the section's own width — this reserves exactly
+     that much room so the text above can never reach into the tablet
+     graphic, at any width. */
+  padding: 96px 0 35%;
 }
 
 .trust-band__bg {
@@ -1685,10 +1693,10 @@
     padding-bottom: 24px;
   }
   /* Overrides the shared 60px reset above (same selector list, later in
-     the cascade) — the 35vw bottom padding must survive at every
-     width, since it's what keeps .trust-band__bg's letterboxed image
-     clear of the text above it. */
+     the cascade) — the 35% bottom padding must survive at every width,
+     since it's what keeps .trust-band__bg's letterboxed image clear of
+     the text above it. */
   .trust-band {
-    padding-bottom: 35vw;
+    padding-bottom: 35%;
   }
 }
