@@ -74,6 +74,13 @@ p {
   max-width: 1251px;
 }
 
+/* Matches .why-sis's own max-width (see sections.css) so a full-width
+   element below it — the trust-card closing callout — lines up with
+   the checklist/mockup above instead of the plain .container's 1216px. */
+.container--why-sis {
+  max-width: 1360px;
+}
+
 .section {
   padding: 96px 0;
 }
