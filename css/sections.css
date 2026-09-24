@@ -561,6 +561,23 @@
   margin: 0 auto 56px;
 }
 
+/* Section 02 only: title/eyebrow left, lede right, instead of the
+   centered single-column intro other sections reuse .protection__intro
+   for (e.g. governance below). */
+.protection__intro--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  text-align: left;
+  max-width: none;
+}
+
+.protection__intro--split .section-lede {
+  margin: 0;
+  padding-top: 4px;
+}
+
 .protection__grid {
   display: flex;
   flex-wrap: wrap;
@@ -1212,6 +1229,10 @@
   }
   .process-grid {
     grid-template-columns: 1fr;
+  }
+  .protection__intro--split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
   }
   /* Stacked instead of overlaid: at this width there's no room for the
      mockup and the text side by side without the text having to sit
