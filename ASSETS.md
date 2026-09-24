@@ -17,6 +17,7 @@ As fotos e ilustrações abaixo vieram do arquivo do Figma:
 | `assets/img/climate-cta-bg.webp` | Fundo da banda "E se sua empresa também precisa entender o clima?" (seção 02.1) em telas ≤1024px (`<picture>` fallback) — enviada diretamente pelo usuário, já com a textura verde e o mockup do dashboard embutidos (mirrors Figma node 2933:729) |
 | `assets/img/climate-cta-bg-desktop.webp` | Mesma banda, telas ≥1025px (`<picture>` source) — versão enviada pelo usuário para o node Figma 2939:811, recorte mais baixo do mesmo mockup |
 | `assets/img/trust-card-bg.webp` | Fundo full-bleed do card "Estivemos dos dois lados da mesa..." (fechamento da seção 05) — enviada diretamente pelo usuário, ícones metálicos + gradiente teal já embutidos |
+| `assets/img/trust-band-bg.webp` | Fundo da seção 06 "Sigilo e LGPD" — mãos segurando um tablet com um escudo, enviada diretamente pelo usuário; ancorada embaixo (`object-position: bottom`) com um gradiente escuro (`.trust-band__overlay`) cobrindo a parte de cima onde fica o texto, para não perder contraste |
 | `assets/img/how-steps/how-step-01-identificar.webp` … `how-step-05-acompanhar.webp` | Ícones dos 5 passos da seção 03 — "Como funciona" |
 | `assets/img/cta-bg-meeting.png` | Fundo do CTA final ("Descubra onde estão os riscos...") |
 | `assets/img/laptop-mockup.webp` | Mockup do painel administrativo (seção 05 — "O que sua empresa ganha"), usado em telas ≥1025px |

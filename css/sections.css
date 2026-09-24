@@ -992,12 +992,40 @@
    TRUST / LGPD BAND
    ========================================================= */
 .trust-band {
-  background: var(--color-teal-dark);
+  position: relative;
+  overflow: hidden;
   color: var(--color-white);
-  padding: 96px 0;
+  /* Extra bottom padding reserves room for the tablet/shield graphic in
+     .trust-band__bg, which sits in the lower portion of that image —
+     the text content above must never grow tall enough to encroach on
+     it (see .trust-band__overlay's fade point, tuned to match). */
+  padding: 96px 0 420px;
+}
+
+.trust-band__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  z-index: 0;
+}
+
+/* Solid near the top (where the text sits) fading to transparent by
+   the point the tablet graphic starts, so the photo's own light
+   background never fights with the white text, while the tablet
+   itself stays fully visible, uncovered, toward the bottom. */
+.trust-band__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--color-teal-dark) 0%, var(--color-teal-dark) 68%, rgba(16, 107, 97, 0) 100%);
+  z-index: 1;
 }
 
 .trust-band__inner {
+  position: relative;
+  z-index: 2;
   max-width: 700px;
   margin: 0 auto;
   text-align: center;
@@ -1008,11 +1036,16 @@
 }
 
 .trust-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin: 36px auto 0;
-  max-width: 560px;
+  max-width: 640px;
+}
+
+/* 2 side by side, 1 full-width below. */
+.trust-list__item:last-child {
+  grid-column: 1 / -1;
 }
 
 .trust-list__item {
@@ -1647,5 +1680,12 @@
      specific gap without touching the 60px rule anywhere else. */
   #como-funciona {
     padding-bottom: 24px;
+  }
+  /* Overrides the shared 60px reset above (same selector list, later in
+     the cascade) — still needs real room below the text for the tablet
+     graphic in .trust-band__bg, just less than desktop's 320px since
+     the section itself is narrower here. */
+  .trust-band {
+    padding-bottom: 220px;
   }
 }
