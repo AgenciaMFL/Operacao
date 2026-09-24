@@ -573,8 +573,13 @@
   max-width: none;
 }
 
+.protection__intro--split .section-title {
+  font-size: 42px;
+}
+
 .protection__intro--split .section-lede {
   margin: 0;
+  font-size: 22px;
 }
 
 .protection__grid {
@@ -625,36 +630,59 @@
 
 /* =========================================================
    CLIMATE CTA — section 02's closing callout, split out into its
-   own full-width green band instead of sitting inside .protection.
-   ========================================================= */
+   own full-width green band. Mirrors Figma node 2933:729: a full-bleed
+   banner (dashboard mockup + textured teal background baked into one
+   client-supplied image) with the copy positioned to its right, clear
+   of the mockup. left/top/width below are that frame's 1418/126/497
+   converted to % of its 2560x512 box — position only; the image itself
+   is the client's own flattened export, not reconstructed from Figma's
+   separate texture/mockup layers (same approach as .nr1-panel__bg). */
 .climate-cta {
+  position: relative;
+  overflow: hidden;
   background: var(--color-teal-dark);
-  padding: 72px 0;
+  /* Taller than the bg image's own 2560/512 ratio (object-fit:cover
+     crops it slightly) — the raw ratio left no room for the CTA button,
+     which clipped at the bottom since .climate-cta__inner is absolutely
+     positioned and so doesn't grow this box's auto height itself. */
+  aspect-ratio: 2560 / 620;
+}
+
+.climate-cta__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .climate-cta__inner {
-  max-width: 620px;
-  text-align: left;
+  position: absolute;
+  z-index: 1;
+  left: 55.391%;
+  top: 24.609%;
+  width: 30%;
 }
 
 .climate-cta__title {
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 23px;
-  line-height: 1.26;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.2;
   color: var(--color-white);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .climate-cta__text {
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.45;
   color: #e8fffc;
 }
 
 .climate-cta .btn {
-  margin-top: 28px;
+  margin-top: 22px;
 }
 
 /* :first-of-type/:last-of-type (not :first-child/:last-child) so this
@@ -1216,6 +1244,30 @@
   .nr1-panel__heading {
     font-size: 28px;
   }
+  .climate-cta {
+    aspect-ratio: auto;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 48px 32px;
+  }
+  /* Confined to the left portion instead of spanning the full section —
+     at this narrower box, object-fit:cover on a full-width image would
+     scale/crop the source differently than at desktop and push the
+     mockup itself under the text (see .nr1-panel__bg at this same
+     breakpoint for the identical fix). */
+  .climate-cta__bg {
+    width: 42%;
+    object-position: 30% center;
+  }
+  .climate-cta__inner {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    max-width: 340px;
+  }
   .protection-card {
     flex-basis: calc(50% - 10px);
   }
@@ -1266,6 +1318,35 @@
   .protection__intro--split {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
+  }
+  .protection__intro--split .section-title {
+    font-size: 28px;
+  }
+  .protection__intro--split .section-lede {
+    font-size: 16px;
+  }
+  /* Below tablet there's no room to keep the dashboard mockup and the
+     text side by side — stacks like .nr1-panel's own mobile tier: the
+     image becomes a plain in-flow block above the text instead of an
+     absolutely-positioned background behind it. */
+  .climate-cta {
+    display: block;
+    min-height: 0;
+    padding: 0;
+  }
+  .climate-cta__bg {
+    position: static;
+    width: 100%;
+    height: 200px;
+    object-position: center 30%;
+  }
+  .climate-cta__inner {
+    position: relative;
+    max-width: 100%;
+    padding: 28px 24px 32px;
+  }
+  .climate-cta__title {
+    font-size: 22px;
   }
   /* Stacked instead of overlaid: at this width there's no room for the
      mockup and the text side by side without the text having to sit
