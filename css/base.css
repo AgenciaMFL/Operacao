@@ -70,6 +70,10 @@ p {
   padding: 0 var(--container-pad);
 }
 
+.container--wide {
+  max-width: 1251px;
+}
+
 .section {
   padding: 96px 0;
 }

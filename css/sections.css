@@ -402,6 +402,12 @@
    ========================================================= */
 .nr1-panel {
   position: relative;
+  /* Matches the image's own built-in gradient (sampled from its
+     right/flat edge) so the fallback background is a seamless
+     continuation of it, not a visible seam — the image itself isn't
+     stretched to cover the full panel (see .nr1-panel__bg below), so
+     this is what actually shows behind the text on the right. */
+  background: linear-gradient(180deg, #106b61 0%, #7eb2aa 100%);
   border-radius: 40px;
   overflow: hidden;
   margin-top: 56px;
@@ -413,30 +419,24 @@
 }
 
 .nr1-panel__bg {
+  /* Left-anchored at its own aspect ratio (not stretched full-bleed
+     cover) — a full-width cover let the mockup's own content reach
+     as far right as the text column at wide panel sizes, since the
+     image has no free/plain space to crop into horizontally. Sized
+     to a fixed share of the panel width instead, so there's always
+     clear gradient-only space behind the text on the right. */
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 25% center;
+  left: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 68%;
+  height: auto;
   z-index: 0;
-}
-
-/* Darkens the right side of the image (behind the text) so the
-   content stays legible regardless of how `object-fit: cover` crops
-   the source image at a given panel size. */
-.nr1-panel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(100deg, rgba(9, 43, 39, 0) 30%, rgba(9, 43, 39, 0.55) 58%, rgba(9, 43, 39, 0.78) 100%);
-  pointer-events: none;
 }
 
 .nr1-panel__content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   max-width: 460px;
 }
 
@@ -1224,14 +1224,6 @@
     padding: 32px 24px;
     min-height: 460px;
     align-items: flex-end;
-  }
-  /* The desktop overlay darkens left-to-right (content sits at the
-     right). Stacked mobile content spans full-width at the BOTTOM
-     instead, so the gradient needs to darken top-to-bottom here or
-     the closing paragraph/button sit unreadable on top of the busy
-     dashboard crop. */
-  .nr1-panel::after {
-    background: linear-gradient(180deg, rgba(9, 43, 39, 0) 0%, rgba(9, 43, 39, 0.55) 35%, rgba(9, 43, 39, 0.9) 65%);
   }
   .nr1-panel__content {
     max-width: 100%;
