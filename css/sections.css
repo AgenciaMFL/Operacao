@@ -448,14 +448,14 @@
   line-height: 1.15;
   letter-spacing: -0.6px;
   color: var(--color-white);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .nr1-checklist {
   display: flex;
   flex-direction: column;
   gap: 11px;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
 }
 
 .nr1-checklist__item {
@@ -497,7 +497,7 @@
   font-size: 17px;
   line-height: 1.4;
   color: #e8fffc;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
 }
 
 .nr1-panel__closing strong {
