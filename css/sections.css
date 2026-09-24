@@ -997,14 +997,30 @@
    frame's own background texture/blur-blob decorations (a separate
    14%-opacity blend image plus two blurred ellipse SVGs) aren't
    reconstructed — same reasoning as elsewhere: use the client's own
-   flattened tablet photo directly instead. That photo is now a
-   normal-flow, centered, contained image below the pills (matching the
-   Figma frame's own centered/bounded photo) rather than a full-bleed
-   background, which sidesteps the letterboxing/overlap problems the
-   full-bleed version kept running into. */
+   flattened tablet photo directly instead.
+
+   .trust-band__bg is shown at its own native 2000x679 resolution (no
+   aspect-ratio override, no object-fit crop) — any forced ratio makes
+   object-fit:cover scale it off its native pixels, which read as
+   blurry. Its own top ~25% is a plain light gradient with no tablet
+   content in it at all — that's the client's intended spot for the
+   text, so .trust-band__content is absolutely positioned over the
+   image (not stacked below it in normal flow) with the copy anchored
+   to the top, sitting in that empty band instead of on the tablet
+   itself. */
 .trust-band {
+  position: relative;
+  overflow: hidden;
   background: #f3fffb;
-  padding: 96px 0 80px;
+}
+
+.trust-band__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 28px;
   text-align: center;
 }
 
@@ -1015,12 +1031,13 @@
 
 .trust-band__inner .eyebrow {
   color: #0ea971;
+  margin-bottom: 8px;
 }
 
 .trust-band__inner h2.section-title {
   max-width: 610px;
-  margin: 24px auto;
-  font-size: 48px;
+  margin: 0 auto;
+  font-size: 34px;
   line-height: 1.15;
   letter-spacing: -1px;
   color: #053833;
@@ -1030,7 +1047,11 @@
   color: #ffa194;
 }
 
-.trust-band__inner .section-lede {
+.trust-band__below {
+  margin-top: 32px;
+}
+
+.trust-band__below .section-lede {
   max-width: 680px;
   margin: 0 auto;
   font-size: 18px;
@@ -1104,24 +1125,10 @@
   white-space: nowrap;
 }
 
-/* Full-bleed, edge to edge, no rounded corners/margins — a contained,
-   boxed card (the previous version) showed a visible seam where its
-   gradient met the section's own flat #f3fffb fill. Full width lets
-   the image's own built-in gradient blend into the page with no edge.
-   aspect-ratio is shorter than the source's own native 2000/679 —
-   the top ~40% of the source is just its own light gradient fading
-   into near-white (no tablet in it at all), which at full native
-   height read as a big dead-space gap above the tablet. Cropped via
-   object-position:bottom (crops from the top, keeps the tablet itself
-   uncropped at the bottom) instead of showing the whole source image. */
 .trust-band__bg {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2000 / 420;
-  object-fit: cover;
-  object-position: bottom;
-  margin-top: 36px;
 }
 
 /* Final CTA */
@@ -1490,8 +1497,39 @@
   .process-grid {
     grid-template-columns: 1fr;
   }
+  /* At this width the image itself renders too short (native ratio) for
+     its own empty top band to fit even just the eyebrow+title overlaid
+     on it — title started overlapping the tablet. Switches from
+     overlay to a stacked flow instead: title first, then the image,
+     then the lede/cards (mirrors .nr1-panel's own mobile fallback). */
+  .trust-band {
+    display: flex;
+    flex-direction: column;
+  }
+  .trust-band__bg {
+    order: 2;
+  }
+  .trust-band__content {
+    position: static;
+    order: 1;
+    padding: 40px 20px 24px;
+    width: 100%;
+    min-width: 0;
+  }
+  /* width:100% (not just min-width:0) — align-items:stretch alone
+     wasn't enough to keep this flex item at the viewport's width:
+     .trust-list's own explicit width:840px (meant to be capped by its
+     max-width:100% at final layout) was still forcing this item wider,
+     so the whole row rendered at 840px+ and got clipped by
+     .trust-band's overflow:hidden instead of actually fitting. An
+     explicit width overrides that regardless of any descendant's size. */
+  .trust-band__below {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+  }
   .trust-band__inner h2.section-title {
-    font-size: 30px;
+    font-size: 26px;
   }
   .checklist {
     grid-template-columns: minmax(0, 1fr);
@@ -1722,7 +1760,6 @@
    heading/padding rules declared above it at equal specificity. */
 @media (max-width: 1180px) {
   .section,
-  .trust-band,
   .final-cta,
   .site-footer {
     padding-top: 60px;
