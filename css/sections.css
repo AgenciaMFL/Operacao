@@ -1020,7 +1020,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 12px;
+  padding-top: 28px;
   text-align: center;
 }
 
@@ -1031,14 +1031,14 @@
 
 .trust-band__inner .eyebrow {
   color: #0ea971;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .trust-band__inner h2.section-title {
-  max-width: 610px;
-  margin: 0 auto 8px;
-  font-size: 34px;
-  line-height: 1.15;
+  max-width: 640px;
+  margin: 0 auto 6px;
+  font-size: 42px;
+  line-height: 1.1;
   letter-spacing: -1px;
   color: #053833;
 }
@@ -1048,7 +1048,7 @@
 }
 
 .trust-band__inner .section-lede {
-  max-width: 680px;
+  max-width: 780px;
   margin: 0 auto;
   font-size: 16px;
   line-height: 1.25;
@@ -1063,10 +1063,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   width: 840px;
   max-width: 100%;
-  margin: 10px auto 0;
+  margin: 6px auto 0;
   padding: 0 var(--container-pad);
 }
 
@@ -1096,7 +1096,7 @@
   background: #0e6a60;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  padding: 16px 24px;
+  padding: 12px 22px;
   text-align: left;
 }
 
