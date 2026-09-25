@@ -834,20 +834,27 @@
 /* =========================================================
    SECTION 04 - HOW IT WORKS
    ========================================================= */
+/* width:max-content (not the container's default 100%) — .how is
+   wider (520+96+648=1264px) than the shared .container's 1168px
+   content box on purpose (the 648px card width and a real gap between
+   the two columns don't both fit inside it). Left as a normal
+   block-level child (not centered, no max-width clamp of its own), it
+   still starts flush at the container's left inner edge — so the
+   section's LEFT edge stays aligned with every other section's, and
+   only the right edge bleeds past 1216px. That was the actual point
+   of the earlier grid-alignment pass (matching the client's own
+   reference line, drawn along the left edge only). */
 .how {
   display: grid;
   /* 520px aside (wider than Figma's raw 477px: the real Plus Jakarta
      Sans webfont renders wider than this sandbox's fallback font, so
      477px wraps the title to 4 lines instead of the Figma-exact 3 —
      verified by loading the real font, not the fallback) + 648px cards
-     column (client-specified) + no gap = exactly the shared
-     .container's 1168px content box (1216px minus its 48px padding) —
-     this section used to widen its own container to 1350px instead,
-     standardized away so every section shares the same left/right
-     edge. */
+     column (client-specified). */
   grid-template-columns: 520px 648px;
-  gap: 0;
+  gap: 96px;
   align-items: start;
+  width: max-content;
 }
 
 .how__aside {
@@ -863,11 +870,12 @@
   font-size: 16.5px;
 }
 
-/* 148px (not 17px) — the title's own 18px margin-bottom (base.css
-   h2.section-title) plus this adds up to the client-specified 166px
-   total gap between the title and the button below it. */
+/* Kept tight (title and button close together) — the earlier 148px
+   here read as a huge gap the client flagged as wrong; the real
+   separation they wanted was between the aside and the cards column
+   (see .how's own gap), not within the aside itself. */
 .how__aside .btn {
-  margin-top: 148px;
+  margin-top: 20px;
 }
 
 .how__carousel-nav {
@@ -1389,16 +1397,24 @@
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width: 1350px) {
+@media (max-width: 1360px) {
   /* .how needs its aside fixed at 520px (see rule above) to keep the
-     3-line title wrap with the real webfont, so the 2-column layout
-     only fits comfortably from ~1350px up. Below that, stack to
-     avoid the cramped in-between zone. */
+     3-line title wrap with the real webfont, and its own width is now
+     wider than the shared .container (max-content, ~1264px, so the
+     648px cards column + a real gap both fit) — so the 2-column layout
+     only fits without overflowing the viewport from ~1360px up. Below
+     that, stack to avoid the cramped in-between zone. */
   .how {
     grid-template-columns: 1fr;
-    /* The 126px gap is meant as horizontal breathing room between the
+    /* width:auto (not the base rule's max-content, ~1264px) — stacked
+       into one column, the grid no longer needs to fit two explicit-px
+       columns side by side, so it should just fill its container like
+       any other stacked section instead of staying pinned to that
+       fixed desktop width and overflowing the viewport. */
+    width: auto;
+    /* The 96px gap is meant as horizontal breathing room between the
        aside and the cards column on desktop — stacked into one column,
-       that same 126px becomes vertical space TWICE over (aside→arrows,
+       that same 96px becomes vertical space TWICE over (aside→arrows,
        arrows→cards), leaving a huge blank gap and pushing the arrows
        far from the "Solicitar proposta" button right above them. */
     gap: 24px;
