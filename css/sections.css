@@ -1794,19 +1794,22 @@
     max-width: 100%;
     min-width: 0;
     margin-left: 0;
-    padding: 32px 24px 0;
+    /* 60px — matches the shared .section top padding used everywhere
+       else at this tier, instead of an arbitrary smaller value. */
+    padding: 60px 24px 0;
   }
   .climate-cta__title {
     font-size: 30px;
   }
-  /* Exact Figma export for this node (2981:36) — flat #106b61 (matches
-     --color-teal-dark exactly) with the mockup baked into its own
-     bottom ~43%, straight/square edges (no border-radius on the image
-     itself; the card's own overflow:hidden + border-radius below
-     handles the outer corners). No object-fit/crop/mask needed: it
-     just scales with the card at its native aspect-ratio like
-     .nr1-panel__mockup does, and the image's own built-in empty band
-     is already the gap to the text above it. */
+  /* Cropped tight around the device (down from the full Figma export's
+     ~57% empty band) — that much blank space between the button and a
+     small mockup read as a layout gap rather than intentional
+     breathing room, so the crop keeps just a small teal margin and lets
+     the tablet itself read as bigger. Still the same flat #106b61,
+     still matches --color-teal-dark exactly (seamless), straight
+     edges. No object-fit/crop/mask needed at render time: it just
+     scales with the card at its native aspect-ratio like
+     .nr1-panel__mockup does. */
   .climate-cta__mockup {
     display: block;
     width: 100%;
