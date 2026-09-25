@@ -1414,7 +1414,16 @@
      only fits without overflowing the viewport from ~1360px up. Below
      that, stack to avoid the cramped in-between zone. */
   .how {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr), not a bare 1fr: a bare 1fr's automatic minimum
+       is the column's content size, so .how__steps (a horizontal
+       carousel with overflow-x:auto and a negative-margin bleed) was
+       forcing the grid — and with it .container and the whole page —
+       wider than the viewport instead of actually being allowed to
+       shrink and let its own overflow-x handle the excess width. This
+       is what was pushing everything below it a few dozen px left of
+       where it should sit (visible as text/buttons flush against the
+       left edge instead of sitting inside the container's padding). */
+    grid-template-columns: minmax(0, 1fr);
     /* width:auto (not the base rule's max-content, ~1264px) — stacked
        into one column, the grid no longer needs to fit two explicit-px
        columns side by side, so it should just fill its container like
@@ -1784,7 +1793,7 @@
     padding: 28px 24px 32px;
   }
   .climate-cta__title {
-    font-size: 20px;
+    font-size: 30px;
   }
   /* Matches the Figma "Mobile" node (2926:685) for this panel: the
      photo is no longer stretched to cover the whole card (that fought
@@ -1919,6 +1928,12 @@
        the sides so the illustration sits higher in the card instead of
        leaving a tall gap above it. */
     padding: 16px 20px 28px;
+  }
+  .how-step__label {
+    font-size: 22px;
+  }
+  .how-step p {
+    font-size: 16px;
   }
   .how-step__media {
     /* Centered rather than edge-to-edge, and larger than the old fixed
