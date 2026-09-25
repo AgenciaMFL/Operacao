@@ -1891,6 +1891,16 @@
   .how__carousel-nav {
     display: flex;
   }
+  /* Short CTA label only at this width — the full "Solicitar uma
+     conversa com a SIS" is fine at every wider tier (tablet included),
+     it only ran out of room on real phone widths (see .btn-label__short
+     in base.css for the shared toggle). */
+  .how__aside .btn-label__full {
+    display: none;
+  }
+  .how__aside .btn-label__short {
+    display: inline;
+  }
   /* The 5 step cards become a horizontal, swipeable carousel instead of
      a tall stacked list — each card is a snap-aligned slide, sized to
      mostly fill the screen with a peek of the next one. The -20px/20px

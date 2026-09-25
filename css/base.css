@@ -225,6 +225,14 @@ h2.section-title--light {
   z-index: 1;
 }
 
+/* Buttons with a mobile-specific short label (see .how__aside's CTA):
+   the short text only exists to solve a mobile-width space problem, so
+   it stays desktop-hidden by default; the <=720px override further
+   down swaps which span shows. */
+.btn-label__short {
+  display: none;
+}
+
 .btn--primary .btn-icon::before {
   content: "";
   position: absolute;
