@@ -624,96 +624,99 @@
 
 /* =========================================================
    CLIMATE CTA — section 02's closing callout, split out into its
-   own full-width green band. Mirrors Figma node 2933:729: a full-bleed
-   banner (dashboard mockup + textured teal background baked into one
-   client-supplied image) with the copy positioned to its right, clear
-   of the mockup.
-
-   Height is content-driven — a plain flex row with the image and the
-   text as two ordinary flow children (matches DOM order: the <picture>
-   comes first, so it lands on the left), the row auto-sized to
-   whichever of the two is taller, instead of a fixed aspect-ratio box.
-   An earlier version sized the panel via aspect-ratio (taller than the
-   image's own native ratio, "to leave room for the copy") and
-   absolutely positioned both children inside it, vertically centered.
-   That has two failure modes, both hit in practice: past ~1400px the
-   text column hits its max-width and stops growing while the
-   aspect-ratio box keeps growing with viewport width, so the empty
-   space above/below both widened without bound (same class of bug as
-   an earlier .trust-band issue). Making the row's height track the
-   image via object-fit:cover instead (a first attempt at fixing that)
-   traded it for a worse problem: the image's own native ratio
-   (2000x351, very wide/short) is nothing like the row's necessary
-   ratio (text needs a much taller, narrower box), so covering that box
-   forced a heavy crop that sliced right through the tilted tablet
-   mockup instead of the plain green margin around it.
-
-   The real fix is to stop trying to derive one element's size from the
-   other's at all. The <picture> element (the actual flex item — sizing
-   set on the .climate-cta__bg <img> class instead had no effect on it,
-   leaving picture's width to some other auto-resolution that didn't
-   match the img at all) gets its OWN aspect-ratio (560/351), sized
-   independently by width%; the img inside just fills it at 100/100 and
-   crops via object-position to the mockup's actual bounding box in the
-   source photo (found by scanning the image for where its pixel
-   variance jumps — flat green margin vs. busy mockup content —
-   bounding box roughly x:490-1050, y:0-351 out of 2000x351). Both
-   picture and the text column are now normal flex children (no
-   position:absolute, no dependency on the row's own height), so the
-   row simply auto-sizes to whichever is taller — nothing left to grow
-   apart. */
+   own full-width green band. Pixel-exact port of Figma node 2939:811
+   (fetched directly via the Figma MCP after several rounds of guessing
+   from screenshots went nowhere — get_metadata gives the frame's real
+   size as 2560x449, not the 2000x480 or other values used in earlier
+   attempts here). The mockup is NOT a separately-sized element: Figma's
+   own background image already spans the ENTIRE frame edge-to-edge
+   (w-[100.02%] h-full in the returned code) with the mockup on the left
+   and plain green space reserved on the right for the text — which is
+   exactly what the downloaded asset (2000x351, the same ~5.7:1 ratio)
+   already looks like. So the fix is to stop treating the image as a
+   separately-cropped mockup beside the text (every earlier attempt's
+   mistake) and instead go back to a single full-bleed background image
+   sized via aspect-ratio, with the text absolutely positioned in its
+   own reserved space on top of it — but with one addition that earlier
+   absolute-overlay attempts here were missing: FLUID type. Figma's
+   left/top/width (1408px, 78px, 497px of the 2560px-wide frame) convert
+   to %, so the text column scales in lockstep with the aspect-ratio
+   box at any width — but a fixed px font-size does not scale with it,
+   which is exactly what caused the earlier "huge empty gap at wide
+   viewports" bug (box height scales with width, fixed text doesn't).
+   Scaling the font with the same vw-based proportion Figma's own
+   px-of-2560 values imply (41.074px title / 18px lede -> ~1.6vw /
+   ~0.7vw) keeps text, box and image scaling together as one unit at
+   any width, so there's never a mismatch to open a gap. clamp()'s
+   floor is a readability floor (below it, real screens have already
+   switched to the <=1024px tier's different, stacked layout), not a
+   Figma value. */
 .climate-cta {
   position: relative;
   overflow: hidden;
   background: var(--color-teal-dark);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 22px 6%;
+  /* width:100% is required alongside min-height here, not just the
+     usual block-level default: a block box with 'auto' width and an
+     aspect-ratio computes its width FROM a definite height (here, from
+     min-height whenever it's the taller constraint) instead of filling
+     the container — without an explicit width the box was measuring
+     ~1710px regardless of the real (narrower) viewport. min-height
+     itself is a safety floor for the <=~1440px range, where the
+     aspect-ratio's own height would otherwise come out shorter than
+     the (fluid-sized, but not infinitely shrinkable) text needs. */
+  width: 100%;
+  aspect-ratio: 2560 / 449;
+  min-height: 320px;
 }
 
 .climate-cta picture {
+  position: absolute;
+  inset: 0;
   display: block;
-  flex: 0 0 auto;
-  width: 38%;
-  max-width: 460px;
-  aspect-ratio: 560 / 351;
-  border-radius: 12px;
-  overflow: hidden;
 }
 
 .climate-cta__bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 34% center;
 }
 
 .climate-cta__inner {
-  flex: 0 1 auto;
-  width: 40%;
-  max-width: 560px;
+  position: absolute;
+  z-index: 1;
+  left: 54.98%;
+  top: 17.37%;
+  /* 21% (not Figma's literal 497/2560 = 19.41%) — the fluid font-size
+     below tracks the same 2560px-wide proportion, so in principle the
+     two should always wrap identically regardless of viewport width,
+     but real font metrics don't scale perfectly linearly: at 19.41%
+     the title wrapped to an extra 3rd line specifically around
+     ~1900px (a few px of rounding tipped one word over), clipping the
+     button below it. A little slack here avoids that without visibly
+     changing the proportions Figma specifies. */
+  width: 21%;
+  min-width: 280px;
 }
 
 .climate-cta__title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 28px;
-  line-height: 1.15;
+  font-size: clamp(22px, 1.605vw, 41.074px);
+  line-height: 1.2;
+  letter-spacing: -0.6px;
   color: var(--color-white);
-  margin-bottom: 10px;
+  margin-bottom: clamp(8px, 0.625vw, 16px);
 }
 
 .climate-cta__text {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.4;
+  font-size: clamp(14px, 0.703vw, 18px);
+  line-height: 1.34;
   color: #e8fffc;
 }
 
 .climate-cta .btn {
-  margin-top: 14px;
+  margin-top: clamp(16px, 1.758vw, 45px);
 }
 
 /* =========================================================
@@ -1482,35 +1485,49 @@
   .trust-card__title {
     font-size: 22px;
   }
-  /* align-items:stretch (not desktop's center) — this tier's fallback
-     image (a different, already-cropped asset, see the <picture>
-     source) is meant to fill the row's full height edge-to-edge like a
-     banner crop, not sit at its own deliberately-cropped desktop size.
-     Cancelling the desktop aspect-ratio lets the flex stretch algorithm
-     resolve the image's height from the row itself instead. */
+  /* Below the desktop tier, the pixel-exact absolute layout (sized for
+     the full 2560px frame) no longer fits at any font size that stays
+     readable — falls back to the flexbox approach instead, same idea
+     as .nr1-panel's own mobile tier: image as a stretched flex item on
+     the left (a different, already-cropped fallback asset, see the
+     <picture> source), content flowing in a normal flex row on the
+     right. */
   .climate-cta {
+    aspect-ratio: auto;
+    display: flex;
     align-items: stretch;
     min-height: 200px;
     padding: 32px;
   }
   .climate-cta picture {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
     width: 42%;
-    max-width: none;
-    aspect-ratio: auto;
     border-radius: 0;
   }
   .climate-cta__bg {
     object-position: 30% center;
   }
   .climate-cta__inner {
+    position: relative;
+    left: auto;
+    top: auto;
+    flex: 0 1 auto;
     width: auto;
+    min-width: 0;
     max-width: 320px;
+    margin-left: 24px;
+    align-self: center;
   }
   .climate-cta__title {
     font-size: 26px;
   }
   .climate-cta__text {
     font-size: 15px;
+  }
+  .climate-cta .btn {
+    margin-top: 14px;
   }
   .protection-card {
     flex-basis: calc(50% - 10px);
@@ -1607,19 +1624,25 @@
     min-height: 0;
     padding: 0;
   }
-  .climate-cta__bg {
+  .climate-cta picture {
     position: static;
-    transform: none;
     width: 100%;
     height: 200px;
+  }
+  .climate-cta__bg {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center 30%;
   }
   .climate-cta__inner {
     position: relative;
+    left: auto;
+    top: auto;
     max-width: 100%;
+    min-width: 0;
+    margin-left: 0;
     padding: 28px 24px 32px;
-    transform: none;
   }
   .climate-cta__title {
     font-size: 20px;
