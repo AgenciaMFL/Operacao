@@ -524,6 +524,13 @@
   font-weight: 700;
 }
 
+/* Mobile-only floating mockup image (see the <=720px tier): hidden here
+   since desktop/tablet already show the dashboard screenshot via
+   .nr1-panel__bg, positioned differently (left-side cover crop). */
+.nr1-panel__mockup {
+  display: none;
+}
+
 /* Risk factor tags (section 01): pulled out of the lede's prose into a
    scannable pill row instead of a long "incluindo fatores como X, Y,
    Z" clause buried in a paragraph — easier to skim at a glance. */
@@ -1779,94 +1786,95 @@
   .climate-cta__title {
     font-size: 20px;
   }
-  /* Overlaid on a dedicated mobile photo (nr1-panel-bg-mobile.webp,
-     800x1050) instead of stacked: that image's own top ~72% is a flat
-     gradient with no mockup in it (row-by-row pixel variance confirmed
-     the busy content only starts around y=760/1050) — reserved space
-     for this exact text block, mirroring the same technique used for
-     .climate-cta/.trust-band. The panel is sized to the image's own
-     aspect-ratio so no crop/letterboxing is needed; content is
-     absolutely positioned into that reserved band instead of flowing
-     below the image as a separate solid-color block. */
+  /* Matches the Figma "Mobile" node (2926:685) for this panel: the
+     photo is no longer stretched to cover the whole card (that fought
+     text content for space and produced a growing gap at the wide end
+     of this breakpoint — see the git history for that approach).
+     Instead the card is normal document flow — gradient background
+     (already the shared base rule), text on top sized for readability,
+     then a separate floating mockup image below it, sized by its own
+     aspect-ratio instead of stretched to fill a fixed-height box. Panel
+     height is simply whatever its content needs, so there's no
+     fixed-vs-fluid mismatch left to produce a gap at any width. */
   .nr1-panel {
-    aspect-ratio: 800 / 1050;
+    display: block;
+    aspect-ratio: auto;
     min-height: 0;
+    padding: 0;
     border-radius: 28px;
   }
-  /* Sizing lives on the <picture> element, not the <img> — <picture>
-     is the real box here (a plain inline element by default), and
-     percentage/absolute sizing on the img inside doesn't reach it (see
-     .climate-cta's own picture/img split for the same fix). */
-  .nr1-panel picture {
-    position: absolute;
-    inset: 0;
-    display: block;
-  }
   .nr1-panel__bg {
+    display: none;
+  }
+  .nr1-panel__content {
     position: static;
     left: auto;
     top: auto;
-    width: 100%;
-    height: 100%;
-    object-position: center;
-  }
-  /* Fluid (vw-based clamps), not a single fixed-px value: this breakpoint
-     spans a 320-720px range (2.25x), wide enough that whatever fits
-     tightly at 320px (no overlap with the mockup below) leaves a large,
-     loose gap at 720px — same class of issue as the earlier desktop
-     .climate-cta/.trust-band gap bugs, just compressed into one
-     breakpoint instead of spread across the whole page. Each clamp's vw
-     coefficient is its max value / 7.2 (7.2 = 720/100), so the max is
-     reached exactly at 720px instead of somewhere in the middle of the
-     range (which would leave the SAME growing-gap problem for the
-     upper half of it) — keeps the content-to-mockup gap proportional
-     at any width from 320 to 720px instead of just at one of them. */
-  .nr1-panel__content {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
     width: auto;
-    max-width: 100%;
+    max-width: none;
     display: flex;
     flex-direction: column;
-    gap: clamp(5px, 1.39vw, 10px);
-    padding: clamp(9px, 2.78vw, 20px) 16px 0;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 28px 20px 0;
   }
   .nr1-panel__heading {
-    font-size: clamp(17px, 2.92vw, 21px);
+    font-size: 22px;
+    line-height: 1.2;
     margin-bottom: 0;
-    max-width: 100%;
+    max-width: none;
   }
   .nr1-checklist {
-    gap: clamp(4px, 1.11vw, 8px);
+    width: 100%;
+    gap: 10px;
     margin-bottom: 0;
   }
   .nr1-checklist__item {
-    gap: clamp(8px, 1.67vw, 12px);
-    padding: clamp(5px, 1.25vw, 9px) clamp(8px, 1.67vw, 12px);
-  }
-  .nr1-checklist__icon {
-    width: clamp(21px, 3.89vw, 28px);
-    height: clamp(21px, 3.89vw, 28px);
-  }
-  .nr1-checklist__item p {
-    font-size: clamp(11.5px, 1.875vw, 13.5px);
-    line-height: 1.2;
+    width: 100%;
   }
   .nr1-panel__closing {
-    font-size: clamp(11.5px, 1.875vw, 13.5px);
-    line-height: 1.25;
+    font-size: 14px;
     margin-bottom: 0;
-    max-width: 100%;
+    max-width: none;
   }
+  /* The shared .btn component defaults to white-space: nowrap at 17px —
+     fine everywhere else it's used, but "Quero entender os riscos" at
+     that size doesn't fit this card's content width once it's down to
+     a 320px viewport (280px card − 40px padding = 240px), and nowrap
+     was pushing the whole page into horizontal scroll. Shrunk to match
+     the reduced 14px body copy above it, with wrapping allowed as a
+     safety net rather than another nowrap overflow risk. */
   .nr1-panel .btn {
-    padding: clamp(5px, 1.11vw, 8px) clamp(14px, 2.5vw, 18px) clamp(5px, 1.11vw, 8px) clamp(5px, 1.11vw, 8px);
-    font-size: clamp(12px, 1.94vw, 14px);
+    font-size: 14px;
+    padding: 7px 16px 7px 7px;
+    white-space: normal;
   }
   .nr1-panel .btn-icon {
-    width: clamp(22px, 3.89vw, 28px);
-    height: clamp(22px, 3.89vw, 28px);
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .nr1-panel .btn-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+  /* Floating dashboard mockup (cropped from the same source photo, with
+     its own built-in glow duplicate already baked in) — shown only at
+     this tier; desktop/tablet keep .nr1-panel__bg instead (see the
+     shared base rule further up). Sized as a plain width:100% image at
+     its native aspect-ratio (not object-fit: cover into a fixed-height
+     box) so it scales proportionally with the card instead of ever
+     needing to be cropped/stretched against the text above it. */
+  .nr1-panel__mockup {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    /* Feathers the crop's top edge into whatever the gradient looks
+       like at that exact point (which shifts depending on how tall the
+       text content above ends up), instead of relying on an exact
+       color match at a hard rectangular edge. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
   }
   /* Arrow controls for the carousel below — hidden by default (see the
      unconditional .how__carousel-nav rule near .how__aside), shown only
