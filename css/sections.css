@@ -629,43 +629,69 @@
    client-supplied image) with the copy positioned to its right, clear
    of the mockup.
 
-   Height is content-driven (a flex row + padding), not tied to the
-   image's own aspect-ratio — an earlier version sized the panel via
-   aspect-ratio (taller than the image's native ratio, "to leave room
-   for the copy"), vertically centering both the fixed-px text and the
-   proportionally-scaling image inside it. Those two don't grow at the
-   same rate: past ~1400px the text column hits its max-width and its
-   height stops changing, while the aspect-ratio box keeps growing with
-   viewport width, so the gap above/below both widened without bound —
-   nearly 30% of the panel's height at very wide viewports. Same class
-   of bug as an earlier .trust-band issue, same fix: let the row's
-   height come from its actual content (here, via the same flex
-   approach the <=1024px tier already used), and crop the image to fill
-   whatever height results instead of the other way around. */
+   Height is content-driven — a plain flex row with the image and the
+   text as two ordinary flow children (matches DOM order: the <picture>
+   comes first, so it lands on the left), the row auto-sized to
+   whichever of the two is taller, instead of a fixed aspect-ratio box.
+   An earlier version sized the panel via aspect-ratio (taller than the
+   image's own native ratio, "to leave room for the copy") and
+   absolutely positioned both children inside it, vertically centered.
+   That has two failure modes, both hit in practice: past ~1400px the
+   text column hits its max-width and stops growing while the
+   aspect-ratio box keeps growing with viewport width, so the empty
+   space above/below both widened without bound (same class of bug as
+   an earlier .trust-band issue). Making the row's height track the
+   image via object-fit:cover instead (a first attempt at fixing that)
+   traded it for a worse problem: the image's own native ratio
+   (2000x351, very wide/short) is nothing like the row's necessary
+   ratio (text needs a much taller, narrower box), so covering that box
+   forced a heavy crop that sliced right through the tilted tablet
+   mockup instead of the plain green margin around it.
+
+   The real fix is to stop trying to derive one element's size from the
+   other's at all. The <picture> element (the actual flex item — sizing
+   set on the .climate-cta__bg <img> class instead had no effect on it,
+   leaving picture's width to some other auto-resolution that didn't
+   match the img at all) gets its OWN aspect-ratio (560/351), sized
+   independently by width%; the img inside just fills it at 100/100 and
+   crops via object-position to the mockup's actual bounding box in the
+   source photo (found by scanning the image for where its pixel
+   variance jumps — flat green margin vs. busy mockup content —
+   bounding box roughly x:490-1050, y:0-351 out of 2000x351). Both
+   picture and the text column are now normal flex children (no
+   position:absolute, no dependency on the row's own height), so the
+   row simply auto-sizes to whichever is taller — nothing left to grow
+   apart. */
 .climate-cta {
   position: relative;
   overflow: hidden;
   background: var(--color-teal-dark);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 24px;
   padding: 56px 6%;
 }
 
+.climate-cta picture {
+  display: block;
+  flex: 0 0 auto;
+  width: 42%;
+  max-width: 620px;
+  aspect-ratio: 560 / 351;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .climate-cta__bg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 52%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 25% center;
-  z-index: 0;
+  object-position: 34% center;
 }
 
 .climate-cta__inner {
-  position: relative;
-  z-index: 1;
+  flex: 0 1 auto;
   width: 40%;
   max-width: 560px;
 }
@@ -1447,16 +1473,24 @@
   .trust-card__title {
     font-size: 22px;
   }
+  /* align-items:stretch (not desktop's center) — this tier's fallback
+     image (a different, already-cropped asset, see the <picture>
+     source) is meant to fill the row's full height edge-to-edge like a
+     banner crop, not sit at its own deliberately-cropped desktop size.
+     Cancelling the desktop aspect-ratio lets the flex stretch algorithm
+     resolve the image's height from the row itself instead. */
   .climate-cta {
+    align-items: stretch;
     min-height: 200px;
     padding: 32px;
   }
-  /* Confined to a narrower slice than desktop's 52% — at this box, the
-     shorter fallback image (see the <picture> source) cropped that wide
-     would push the mockup itself under the text (see .nr1-panel__bg at
-     this same breakpoint for the identical fix). */
-  .climate-cta__bg {
+  .climate-cta picture {
     width: 42%;
+    max-width: none;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+  .climate-cta__bg {
     object-position: 30% center;
   }
   .climate-cta__inner {
