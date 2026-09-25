@@ -1804,13 +1804,24 @@
     display: block;
     width: 100%;
     margin-top: 20px;
+    /* Feathers the image's own top edge into the card's gradient
+       background — its gradient starts a shade darker than
+       --color-teal-dark, so a hard edge would show a faint seam
+       otherwise (same technique as .climate-cta__mockup). */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%);
   }
   .trust-card__bg {
+    /* No object-fit crop: the new photo (sent directly by the client
+       to replace the previous cropped one, which had a visible hard
+       edge where the top of the mockup got cut off) already has its
+       own generous empty band built in — shown at its native
+       800/1031 ratio, same as .nr1-panel__mockup and
+       .climate-cta__mockup, instead of being cropped to fit a
+       shorter box. */
     position: static;
     width: 100%;
     height: auto;
-    aspect-ratio: 800 / 808;
-    object-position: bottom;
   }
   .trust-card__inner {
     position: static;
