@@ -1927,10 +1927,10 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 18px;
-    padding: 40px 20px 0;
+    padding: 60px 20px 0;
   }
   .nr1-panel__heading {
-    font-size: 22px;
+    font-size: 30px;
     line-height: 1.2;
     margin-bottom: 0;
     max-width: none;
@@ -1984,8 +1984,8 @@
        like at that exact point (which shifts depending on how tall the
        text content above ends up), instead of relying on an exact
        color match at a hard rectangular edge. */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 18%);
   }
   /* Arrow controls for the carousel below — hidden by default (see the
      unconditional .how__carousel-nav rule near .how__aside), shown only
@@ -2140,6 +2140,13 @@
   .site-footer {
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+  /* .nr1-panel already ends in a solid rounded card with its own
+     margin-top — the section's full 60px padding-bottom on top of
+     that read as a huge blank void before the next section's heading
+     (120px combined with the next section's own 60px padding-top). */
+  .section--nr1 {
+    padding-bottom: 24px;
   }
   .container {
     padding-left: 20px;
