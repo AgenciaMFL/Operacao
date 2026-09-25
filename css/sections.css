@@ -670,7 +670,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 56px 6%;
+  padding: 28px 6%;
 }
 
 .climate-cta picture {
@@ -1180,11 +1180,20 @@
    width, so cover's scale factor stays 1 — this only clips, it never
    upscales, so it doesn't reintroduce the blur that displaying the
    image at native resolution was originally chosen to avoid. */
+/* aspect-ratio 2000/325 (not the earlier 2000/360) — a finer row-by-row
+   scan found the "empty gradient band" isn't a gradual fade at all: the
+   source photo is a composite, and the gradient meets the real hands+
+   tablet photo at a single hard-edge row (y=454 of 785, pixel variance
+   jumps from ~4 to ~100 in one row). The old, shallower crop kept that
+   seam inside the visible area, where it read as a stray horizontal
+   line above the tablet. Cropping from y=460 instead (just past the
+   seam, verified against the same variance scan) keeps only real photo
+   content, no seam. */
 .trust-band__bg {
   display: block;
   width: 100%;
   order: 2;
-  aspect-ratio: 2000 / 360;
+  aspect-ratio: 2000 / 325;
   height: auto;
   object-fit: cover;
   object-position: bottom;
