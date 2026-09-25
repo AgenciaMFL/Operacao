@@ -1523,6 +1523,12 @@
      already seen for other mobile <picture> sources this session). */
   .trust-band picture {
     order: 2;
+    /* Feathers the crop's top edge into the section's light background
+       — its own top-row color is close to but not an exact match for
+       the section's #f3fffb, so a hard edge would show a faint seam
+       otherwise (same technique as .trust-card__bg/.climate-cta__mockup). */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 8%);
   }
   .trust-band__bg {
     height: auto;
@@ -1755,15 +1761,18 @@
   .trust-band__inner h2.section-title {
     font-size: 24px;
   }
-  /* New mobile-only source (trust-band-bg-mobile-v2.webp, 800x1031):
-     same "crop away the reserved band, keep only the busy bottom
-     portion" treatment as the tablet-tier crop above, just re-tuned to
-     this image's own proportions — its band is taller (busy content
-     starts at 69.8% vs. the old asset's 58%), so the visible crop
-     needs its own aspect-ratio instead of inheriting the tablet
-     source's 2000/325 (tuned for the old image). */
+  /* New mobile-only source (trust-band-bg-mobile-v2.webp) — now a
+     pre-cropped 800x411 file (tight margin around the tablet+hands,
+     cropped from the original 800x1031 the client sent) instead of a
+     CSS object-fit:cover crop of the full image. The cover-crop
+     approach left a visible hard seam right above the tablet where
+     the image's own crop boundary didn't quite blend with the
+     section's light background; showing the pre-cropped file at its
+     native ratio (no object-fit) avoids that seam entirely — same
+     fix already applied to .trust-card__bg. */
   .trust-band__bg {
-    aspect-ratio: 800 / 311;
+    aspect-ratio: auto;
+    height: auto;
   }
   .checklist {
     grid-template-columns: minmax(0, 1fr);
