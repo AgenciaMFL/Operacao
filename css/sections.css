@@ -1780,18 +1780,24 @@
     font-size: 16px;
   }
   /* A dedicated mobile photo (trust-card-bg-mobile.webp, 800x921) with
-     its own reserved top band (~53% flat gradient before the metallic
-     stack appears, confirmed by row-by-row pixel-variance) — text
-     overlays that band instead of flowing above a separately-cropped
-     image strip. The card is sized to the image's own aspect-ratio so
-     there's no crop/letterboxing to fight, same technique as
-     .trust-band's own desktop overlay. */
+     its own reserved top band — text overlays that band instead of
+     flowing above a separately-cropped image strip. Pixel-exact port
+     of Figma node 2950:941 (frame 800x808): the source photo
+     (trust-card-bg-mobile.webp) is 800x921, positioned in Figma at
+     top:-113 so only the BOTTOM 808px of it show (its own top 113px
+     of blank gradient falls above the frame and is clipped) — object-
+     position:bottom on a card sized to the frame's own 800/808 ratio
+     (not the raw image's 800/921) reproduces that crop for free,
+     no pre-cropped asset needed. Text is centered, matching Figma
+     (title/lede both centered, not left-aligned like the earlier
+     guess-from-screenshot version this replaced). */
   .trust-card {
-    aspect-ratio: 800 / 921;
+    aspect-ratio: 800 / 808;
     min-height: 0;
     display: block;
     padding: 0;
     border-radius: 28px;
+    background: linear-gradient(180deg, #106b61 0%, #7eb2aa 100%);
   }
   .trust-card picture {
     position: absolute;
@@ -1802,34 +1808,47 @@
     position: static;
     width: 100%;
     height: 100%;
-    object-position: center;
+    object-position: bottom;
   }
   /* Fluid (vw-based clamps), not fixed px: this breakpoint spans a
      320-720px range, and a fixed size tuned to fit the reserved band
      at 320px would leave a huge gap at 720px (the classic issue
      already worked through for .nr1-panel's own overlay — see that
      rule's comment). Each clamp's vw coefficient is its max value /
-     7.2 (7.2 = 720/100), so the max — the client's requested 24px
-     title — is reached exactly at 720px instead of overflowing the
+     7.2 (7.2 = 720/100), so the max — Figma's own 30px title / 18px
+     lede — is reached exactly at 720px instead of overflowing the
      band at any width in between. */
   .trust-card__inner {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    /* 12.6% = 102/808 (Figma's title top / frame height), fluid down
+       to a much smaller offset at 320px. */
+    top: clamp(2%, 12.6vw, 12.6%);
     width: auto;
     max-width: 100%;
-    padding: clamp(12px, 3.89vw, 28px) 24px 0;
+    /* A fixed 20px, not a fluid percentage: Figma's own 20%-each-side
+       proportion only works once the card is already close to 720px —
+       at 320-430px it narrowed the centered title/lede into 3-4 short
+       lines each, which (even combined with the font clamps below)
+       still overlapped the mockup by 50-150px. A plain 20px gives the
+       text the width it actually needs to stay short at every size in
+       between, and the font-size clamp is what scales the block up to
+       match Figma's proportions as the card approaches 720px. */
+    padding: 0 16px;
+    text-align: center;
     transform: none;
   }
   .trust-card__title {
-    font-size: clamp(18px, 3.33vw, 24px);
-    line-height: 1.15;
-    margin-bottom: clamp(2px, 1.39vw, 10px);
+    font-size: clamp(14px, 4.17vw, 30px);
+    line-height: 1.08;
+    margin-bottom: clamp(0px, 1.39vw, 10px);
   }
   .trust-card__text {
-    font-size: clamp(10.5px, 1.94vw, 14px);
-    line-height: 1.25;
+    font-size: clamp(9px, 2.5vw, 18px);
+    line-height: 1.12;
+    max-width: 86%;
+    margin: 0 auto;
   }
   /* Matches the Figma "Mobile" node (2981:36) for this card: a plain
      rounded teal card with text in normal document flow at the top and
