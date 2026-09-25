@@ -52,7 +52,22 @@
   .hero__inner {
     position: absolute;
     top: 0;
-    left: 0;
+    /* Shifts the whole scaled canvas so .hero__copy's fixed left:320px
+       (below) lands exactly on the shared .container's own left edge
+       at every width in this tier — without this, left:0 here scales
+       320px by the same factor as everything else, which tracks
+       Figma's canvas proportionally but NOT the container's own
+       max-width:1216px/24px-padding formula (a different, non-
+       proportional rule), so the hero text drifted away from the
+       grid every other section uses — imperceptible in the middle of
+       the range, but a visible ~30px gap at the tier's wide end
+       (confirmed against a screenshot at ~1920px). Derived by solving
+       inner_left + 320px*scale = container's real left edge for
+       inner_left: container's left edge is
+       24px + max(0, (100vw-1216px)/2) (padding alone below 1216px
+       viewport width, padding + centering margin above it), and
+       320px*scale = 320px * (100vw/1920px) = 100vw/6. */
+    left: calc(24px + max(0px, 50vw - 608px) - 100vw / 6);
     width: 1920px;
     height: 760px;
     transform-origin: top left;
@@ -109,7 +124,14 @@
   .hero__inner {
     position: absolute;
     top: 0;
-    left: 0;
+    /* Same fix as the notebook tier above, re-derived for this 2560px
+       canvas and .hero__copy's 625px offset: this media query only
+       ever applies at >=1920px, always past the container's
+       1216px+padding max-width, so the "padding-only" branch (the
+       max(0, …) in the notebook tier's version) never applies here
+       and can be dropped. 625px*scale = 625px*(100vw/2560px) =
+       100vw*0.244140625. */
+    left: calc(24px + 50vw - 608px - 100vw * 0.244140625);
     width: 2560px;
     height: 760px;
     transform-origin: top left;
