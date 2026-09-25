@@ -257,12 +257,14 @@
        since that text block is scaled as a whole unit there — but mobile
        (node 2811:106) uses its own much narrower, centered composition,
        so it needs its own smaller fixed size rather than inheriting the
-       desktop one. */
-    font-size: 40px;
+       desktop one. 26px matches every other section title's mobile size
+       (see the shared h2.section-title rule). */
+    font-size: 26px;
   }
   .hero__lede {
     max-width: none;
-    font-size: 18px;
+    /* 16px matches every other section lede's mobile size. */
+    font-size: 16px;
   }
   .hero__actions {
     justify-content: center;
@@ -1705,8 +1707,8 @@
   .process-grid {
     grid-template-columns: 1fr;
   }
-  /* Already stacked (see the <=1024px tier) — just shrinks the title a
-     touch further for real phone widths. */
+  /* 26px — standardized to match every other section title on mobile
+     (see the shared h2.section-title rule further down). */
   .trust-band__inner h2.section-title {
     font-size: 26px;
   }
@@ -1717,8 +1719,9 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
+  /* 26px — standardized to match every other section title on mobile. */
   .protection__intro--split .section-title {
-    font-size: 28px;
+    font-size: 26px;
   }
   .protection__intro--split .section-lede {
     font-size: 16px;
@@ -1776,41 +1779,94 @@
   .climate-cta__title {
     font-size: 20px;
   }
-  /* Stacked instead of overlaid: at this width there's no room for the
-     mockup and the text side by side without the text having to sit
-     on top of it somewhere. The image becomes a plain in-flow block
-     with a fixed height at the top of the panel, and the text
-     content follows below it — no absolute positioning, no overlap
-     possible by construction. */
+  /* Overlaid on a dedicated mobile photo (nr1-panel-bg-mobile.webp,
+     800x1050) instead of stacked: that image's own top ~72% is a flat
+     gradient with no mockup in it (row-by-row pixel variance confirmed
+     the busy content only starts around y=760/1050) — reserved space
+     for this exact text block, mirroring the same technique used for
+     .climate-cta/.trust-band. The panel is sized to the image's own
+     aspect-ratio so no crop/letterboxing is needed; content is
+     absolutely positioned into that reserved band instead of flowing
+     below the image as a separate solid-color block. */
   .nr1-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 28px;
-    padding: 0 0 32px;
+    aspect-ratio: 800 / 1050;
     min-height: 0;
+    border-radius: 28px;
+  }
+  /* Sizing lives on the <picture> element, not the <img> — <picture>
+     is the real box here (a plain inline element by default), and
+     percentage/absolute sizing on the img inside doesn't reach it (see
+     .climate-cta's own picture/img split for the same fix). */
+  .nr1-panel picture {
+    position: absolute;
+    inset: 0;
+    display: block;
   }
   .nr1-panel__bg {
     position: static;
     left: auto;
     top: auto;
     width: 100%;
-    height: 220px;
-    object-position: center 25%;
+    height: 100%;
+    object-position: center;
   }
+  /* Fluid (vw-based clamps), not a single fixed-px value: this breakpoint
+     spans a 320-720px range (2.25x), wide enough that whatever fits
+     tightly at 320px (no overlap with the mockup below) leaves a large,
+     loose gap at 720px — same class of issue as the earlier desktop
+     .climate-cta/.trust-band gap bugs, just compressed into one
+     breakpoint instead of spread across the whole page. Each clamp's vw
+     coefficient is its max value / 7.2 (7.2 = 720/100), so the max is
+     reached exactly at 720px instead of somewhere in the middle of the
+     range (which would leave the SAME growing-gap problem for the
+     upper half of it) — keeps the content-to-mockup gap proportional
+     at any width from 320 to 720px instead of just at one of them. */
   .nr1-panel__content {
-    position: relative;
-    left: auto;
-    top: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
     width: auto;
     max-width: 100%;
-    padding: 28px 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(5px, 1.39vw, 10px);
+    padding: clamp(9px, 2.78vw, 20px) 16px 0;
   }
   .nr1-panel__heading {
-    font-size: 24px;
+    font-size: clamp(17px, 2.92vw, 21px);
+    margin-bottom: 0;
+    max-width: 100%;
+  }
+  .nr1-checklist {
+    gap: clamp(4px, 1.11vw, 8px);
+    margin-bottom: 0;
+  }
+  .nr1-checklist__item {
+    gap: clamp(8px, 1.67vw, 12px);
+    padding: clamp(5px, 1.25vw, 9px) clamp(8px, 1.67vw, 12px);
+  }
+  .nr1-checklist__icon {
+    width: clamp(21px, 3.89vw, 28px);
+    height: clamp(21px, 3.89vw, 28px);
   }
   .nr1-checklist__item p {
-    font-size: 14.5px;
+    font-size: clamp(11.5px, 1.875vw, 13.5px);
+    line-height: 1.2;
+  }
+  .nr1-panel__closing {
+    font-size: clamp(11.5px, 1.875vw, 13.5px);
+    line-height: 1.25;
+    margin-bottom: 0;
+    max-width: 100%;
+  }
+  .nr1-panel .btn {
+    padding: clamp(5px, 1.11vw, 8px) clamp(14px, 2.5vw, 18px) clamp(5px, 1.11vw, 8px) clamp(5px, 1.11vw, 8px);
+    font-size: clamp(12px, 1.94vw, 14px);
+  }
+  .nr1-panel .btn-icon {
+    width: clamp(22px, 3.89vw, 28px);
+    height: clamp(22px, 3.89vw, 28px);
   }
   /* Arrow controls for the carousel below — hidden by default (see the
      unconditional .how__carousel-nav rule near .how__aside), shown only
@@ -1957,7 +2013,16 @@
   h2.section-title,
   .how__aside .section-title,
   .final-cta h2 {
-    font-size: 30px;
+    font-size: 26px;
+  }
+  /* 16px — standardized lede size across every section on mobile/
+     tablet. .section-lede alone (lower specificity) covers the plain
+     sections (01, 04, 05's intro); the more specific selectors here
+     override sections that set their own lede size elsewhere. */
+  .section-lede,
+  .how__aside .section-lede,
+  .final-cta p {
+    font-size: 16px;
   }
   /* The carousel's own cards already end on a visually "closed" rounded
      edge, so the full 60px section padding-bottom plus the next
