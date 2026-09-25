@@ -2172,8 +2172,11 @@
      both #como-funciona and the page background are white) reads as an
      oversized empty gap where every other section-to-section transition
      only shows one of the two colors changing. Trimmed to close that
-     specific gap without touching the 60px rule anywhere else. */
+     specific gap without touching the 60px rule anywhere else. First
+     attempt (24px) still left ~88px combined with the next section's
+     own 60px top padding — cut further since the client flagged it as
+     still too much. */
   #como-funciona {
-    padding-bottom: 24px;
+    padding-bottom: 4px;
   }
 }
