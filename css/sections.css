@@ -83,9 +83,27 @@
     width: 587px;
     max-width: none;
   }
-  /* Button size now comes from the shared >=1181px .btn rule in
-     base.css (standardized to match this hero size across every CTA
-     on the page), not a hero-specific override. */
+  /* Bigger CTA than the base (mobile-tuned) size below — the button
+     read as too small against this canvas once it became the hero's
+     only action (see js/main.js hero__actions, now a single button). */
+  .hero__actions .btn {
+    height: 76px;
+    border-radius: 11px;
+    gap: 14px;
+    padding: 14px 30px 14px 14px;
+  }
+  .hero__actions .btn--primary {
+    font-size: 21px;
+  }
+  .hero__actions .btn-icon {
+    width: 42px;
+    height: 40px;
+    border-radius: 7px;
+  }
+  .hero__actions .btn-icon svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Wide tier (>=1920px): same technique, at Figma's wider "Hero WIDE"
@@ -126,6 +144,24 @@
     top: 90px;
     width: 587px;
     max-width: none;
+  }
+  .hero__actions .btn {
+    height: 76px;
+    border-radius: 11px;
+    gap: 14px;
+    padding: 14px 30px 14px 14px;
+  }
+  .hero__actions .btn--primary {
+    font-size: 21px;
+  }
+  .hero__actions .btn-icon {
+    width: 42px;
+    height: 40px;
+    border-radius: 7px;
+  }
+  .hero__actions .btn-icon svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -177,6 +213,37 @@
   gap: 11px;
 }
 
+.hero__actions .btn {
+  height: 61px;
+  border-radius: 9px;
+  gap: 11px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero__actions .btn--primary {
+  font-size: 18.3px;
+  /* Sized to content (no fixed/proportional width): a fixed 306px
+     stayed the same size while the text column shrank at narrower
+     notebook widths, so the button row ended up wider than the text
+     above it and stuck out into the image on the right. Scaling the
+     width down to match broke the button itself (text overflowing
+     past its own edges) since 306px already has little slack over
+     what the label needs — auto-sizing avoids both problems. */
+  width: auto;
+}
+
+.hero__actions .btn-icon {
+  width: 34px;
+  height: 33px;
+  border-radius: 5px;
+}
+
+.hero__actions .btn-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
 .hero__actions .btn--ghost {
   width: auto;
   font-size: 16.8px;
@@ -184,43 +251,6 @@
 }
 
 @media (max-width: 1180px) {
-  /* This tier's own hero button size — previously unscoped (applied
-     everywhere, mobile included, by default) and only overridden back
-     up to 76px at >=1181px by the notebook/wide tiers' own rules. Those
-     were removed in favor of the shared >=1181px .btn standardization
-     in base.css (every CTA now matches the hero button's size on
-     desktop), which left this one needing its own explicit ceiling so
-     it doesn't leak into that same desktop range instead (its class
-     selector, .hero__actions .btn, is more specific than a bare .btn
-     and would otherwise win over the new shared rule regardless of
-     source order). */
-  .hero__actions .btn {
-    height: 61px;
-    border-radius: 9px;
-    gap: 11px;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .hero__actions .btn--primary {
-    font-size: 18.3px;
-    /* Sized to content (no fixed/proportional width): a fixed 306px
-       stayed the same size while the text column shrank at narrower
-       notebook widths, so the button row ended up wider than the text
-       above it and stuck out into the image on the right. Scaling the
-       width down to match broke the button itself (text overflowing
-       past its own edges) since 306px already has little slack over
-       what the label needs — auto-sizing avoids both problems. */
-    width: auto;
-  }
-  .hero__actions .btn-icon {
-    width: 34px;
-    height: 33px;
-    border-radius: 5px;
-  }
-  .hero__actions .btn-icon svg {
-    width: 13px;
-    height: 13px;
-  }
   .hero {
     background-image: none;
     display: flex;

@@ -198,33 +198,6 @@ h2.section-title--light {
   transition: stroke 0.3s ease 0.12s;
 }
 
-/* Standardizes every button on the page to the hero's own desktop size
-   (previously the only one sized up from these smaller shared
-   defaults, via .hero__actions .btn — now removed in favor of this
-   shared rule, see sections.css) — the client asked for the two to
-   stop reading as different sizes depending on which section a CTA
-   happened to be in. Scoped to >=1181px only; mobile/tablet keep their
-   own per-section tuned sizes (nr1-panel, climate-cta, how__aside,
-   etc.) untouched. */
-@media (min-width: 1181px) {
-  .btn {
-    height: 76px;
-    border-radius: 11px;
-    gap: 14px;
-    padding: 14px 30px 14px 14px;
-    font-size: 21px;
-  }
-  .btn-icon {
-    width: 42px;
-    height: 40px;
-    border-radius: 7px;
-  }
-  .btn-icon svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
 .btn--primary {
   background: var(--color-coral);
   color: var(--color-white);
