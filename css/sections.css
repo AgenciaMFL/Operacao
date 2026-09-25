@@ -728,6 +728,13 @@
   margin-top: clamp(16px, 1.758vw, 45px);
 }
 
+/* Mobile-only floating mockup (see the <=720px tier): hidden here since
+   desktop/tablet already show the dashboard screenshot via
+   .climate-cta__bg, positioned differently (full-bleed background). */
+.climate-cta__mockup {
+  display: none;
+}
+
 /* =========================================================
    TRUST CARD — section 05's closing callout ("Estivemos dos dois lados
    da mesa..."), a dark rounded panel with the client's own metallic-
@@ -1763,25 +1770,22 @@
   .trust-card__title {
     font-size: 20px;
   }
-  /* Below tablet there's no room to keep the dashboard mockup and the
-     text side by side — stacks like .nr1-panel's own mobile tier: the
-     image becomes a plain in-flow block above the text instead of an
-     absolutely-positioned background behind it. */
+  /* Matches the Figma "Mobile" node (2981:36) for this card: a plain
+     rounded teal card with text in normal document flow at the top and
+     the dashboard mockup as a smaller floating image below it — not the
+     image stretched into a 200px top strip with a solid text block
+     under it (the previous approach here, and the same shape of fix
+     already applied to .nr1-panel's own mobile tier earlier). Height is
+     simply whatever the content needs, so there's no fixed-box-vs-fluid-
+     text mismatch left to produce a gap at any width. */
   .climate-cta {
     display: block;
     min-height: 0;
     padding: 0;
+    border-radius: 28px;
   }
   .climate-cta picture {
-    position: static;
-    width: 100%;
-    height: 200px;
-  }
-  .climate-cta__bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
+    display: none;
   }
   .climate-cta__inner {
     position: relative;
@@ -1790,10 +1794,20 @@
     max-width: 100%;
     min-width: 0;
     margin-left: 0;
-    padding: 28px 24px 32px;
+    padding: 32px 24px 0;
   }
   .climate-cta__title {
     font-size: 30px;
+  }
+  /* Cropped from the same source photo as the desktop/tablet banner
+     (climate-cta-bg.webp), with generous teal margin baked in on three
+     sides so it blends into the card's own solid background without
+     needing object-fit/positioning tricks — just scales with the card
+     at its native aspect-ratio like .nr1-panel__mockup does. */
+  .climate-cta__mockup {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
   }
   /* Matches the Figma "Mobile" node (2926:685) for this panel: the
      photo is no longer stretched to cover the whole card (that fought
