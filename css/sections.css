@@ -1016,64 +1016,92 @@
 /* =========================================================
    TRUST / LGPD BAND
    ========================================================= */
-/* Pixel-exact port of Figma node 2951:995 (a 2561px-wide frame — its
-   absolute px values are the real intended CSS sizes, same convention
-   as .nr1-panel/.climate-cta, not scaled-down fractions of 2561). The
-   frame's own background texture/blur-blob decorations (a separate
-   14%-opacity blend image plus two blurred ellipse SVGs) aren't
-   reconstructed — same reasoning as elsewhere: use the client's own
-   flattened tablet photo directly instead.
-
-   Text is stacked in normal flow ABOVE the image at every width (not
-   overlaid on top of it): an earlier version absolutely positioned
-   .trust-band__content over the image's own empty top band (a plain
-   gradient with no tablet in it, meant as space for the text) sized as
-   a % of the image's height, anchored to that band's bottom edge — but
-   the box's height and the content's actual height scale differently
-   across viewports (one tracks the image, the other tracks text
-   metrics), so at some widths the box ended up much taller than the
-   content needed and the surplus showed up as a large blank gap above
-   the eyebrow. Plain stacked flow has no such box to mismatch: the
-   section is only ever as tall as its content plus the (cropped, see
-   .trust-band__bg) image, at any viewport. */
-/* #eafcf5 (not the site-wide #f3fffb) matches the average pixel color
-   right at .trust-band__bg's crop line (sampled from the source photo)
-   — the generic mint used everywhere else was ~10/255 lighter, which
-   read as a faint but visible horizontal seam where the section
-   background met the top edge of the cropped image. */
+/* Pixel-exact port of Figma node 2951:995 (frame 2561x1005), fetched
+   directly via the Figma MCP — same fix already applied to
+   .climate-cta after multiple rounds of guessing from screenshots
+   went nowhere for it too. Figma's own mockup image is a SEPARATE
+   1114x566 layer, centered, starting at top:581 (57.8% of the frame's
+   1005 height) — deliberately taller than the frame and clipped by it
+   (581+566=1147 vs. the 1005-tall frame), i.e. the tablet is MEANT to
+   be cropped at the bottom. The client's own flattened photo
+   (trust-band-bg.webp, 2000x785) already bakes in an equivalent crop
+   at the same 785/1005≈2000/2561 export scale — its native aspect
+   ratio (2000/785≈2.548) already matches the frame's own (2561/1005
+   ≈2.548) almost exactly, so showing it in full, uncropped, at that
+   ratio reproduces Figma's crop for free. An earlier version instead
+   cropped this image further down (to 2000/325) to hide a seam in the
+   source photo — but that discarded most of the reserved text space
+   above the tablet and left the whole band far shorter than Figma's,
+   which is what actually read as "background cortado" (background cut
+   off) to the client. Text is absolutely positioned over the image at
+   Figma's exact left/top/width (781/86/1000 of 2561/1005 ->
+   30.5%/8.56%/39.05%), with font-size scaled fluidly by the same
+   vw-based proportion Figma's own px-of-2561 values imply — see
+   .climate-cta's own comment for why fixed-px text inside a
+   proportionally-scaling box is what caused the earlier growing-gap
+   bug in the first place, and why fluid type avoids it instead. */
 .trust-band {
   position: relative;
   overflow: hidden;
-  background: #eafcf5;
-  display: flex;
-  flex-direction: column;
+  background: #f3fffb;
+  width: 100%;
+  aspect-ratio: 2561 / 1005;
+  min-height: 540px;
+}
+
+.trust-band__bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .trust-band__content {
-  order: 1;
+  position: absolute;
+  z-index: 1;
+  left: 30.5%;
+  top: 8.56%;
+  width: 39.05%;
+  min-width: 460px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 72px 20px 16px;
+  gap: clamp(10px, 0.82vw, 21px);
   text-align: center;
 }
 
 .trust-band__inner {
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(6px, 0.937vw, 24px);
 }
 
 .trust-band__inner .eyebrow {
   color: #0ea971;
-  margin-bottom: 6px;
+  margin-bottom: 0;
+  font-size: clamp(10px, 0.547vw, 14px);
 }
 
 .trust-band__inner h2.section-title {
-  max-width: 640px;
-  margin: 0 auto 6px;
-  font-size: 42px;
-  line-height: 1.1;
-  letter-spacing: -1px;
+  /* 61% (not 610/2561=23.82%) — percentages resolve against this
+     element's own containing block, .trust-band__inner, which is
+     already scaled down to the header-container's 1000px-of-2561
+     share. 610px of Figma's 1000px-wide header-container is 61% of
+     THAT, not of the full frame; using 23.82% here double-applied the
+     frame-relative scale and left the title far too narrow, wrapping
+     the highlighted phrase onto its own 3rd line and overflowing the
+     text column into the cards/tablet below it. */
+  max-width: 61%;
+  min-width: 230px;
+  margin: 0;
+  font-size: clamp(21px, 1.874vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.4px;
   color: #053833;
 }
 
@@ -1081,15 +1109,15 @@
   color: #ffa194;
 }
 
-/* Hidden by default — the title's own max-width (640px) only forces a
-   wrap at the 42px font-size used above 1024px, and left to wrap on
-   its own it lands mid phrase ("...começam com" / "confiança"),
-   splitting the highlighted phrase across both lines. Shown only in
-   that tier so the break falls right after "Dados confiáveis" instead,
-   giving "Dados confiáveis" / "começam com confiança" — the same split
-   the text already wraps to naturally on narrow screens. At <=1024px
-   the smaller font (28px/26px) already fits on one line, so forcing a
-   break there would just add an unwanted extra line. */
+/* Hidden by default — the title's own max-width only forces a wrap at
+   the largest (>=1025px) font sizes, and left to wrap on its own it
+   lands mid phrase ("...começam com" / "confiança"), splitting the
+   highlighted phrase across both lines. Shown only in that tier so the
+   break falls right after "Dados confiáveis" instead, giving "Dados
+   confiáveis" / "começam com confiança" — the same split the text
+   already wraps to naturally on narrow screens. At <=1024px the
+   smaller font already fits on one line, so forcing a break there
+   would just add an unwanted extra line. */
 .trust-band__title-break {
   display: none;
 }
@@ -1101,31 +1129,35 @@
 }
 
 .trust-band__inner .section-lede {
-  max-width: 780px;
-  margin: 0 auto;
-  font-size: 16px;
-  line-height: 1.25;
+  /* 68% (not 680/2561=26.55%) — same containing-block fix as the
+     title above: 680px of the 1000px-wide header-container is 68% of
+     THAT element, not of the full 2561px frame. */
+  max-width: 68%;
+  min-width: 260px;
+  margin: 0;
+  font-size: clamp(13px, 0.703vw, 18px);
+  line-height: 1.2;
   color: #5a6d68;
 }
 
-/* 2 cards side by side (.trust-list__row, each flex:1) plus 1 fixed-
-   width card centered below — both rows share the same 840px column
-   and center point, exactly like the Figma frame's cards-row (840px)
-   and cards-grid-container (446px card, same center). */
+/* 2 cards side by side (.trust-list__row) plus 1 fixed-width card
+   centered below — both rows share the same column and center point,
+   matching the Figma frame's cards-row (840px) and cards-grid-
+   container (446px card, same center). 84% (not 840/2561=32.8%) since
+   .trust-list's containing block is .trust-band__content (1000px-of-
+   2561, not the full frame) — 840px of that 1000px is 84% of it. */
 .trust-list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 840px;
-  max-width: 100%;
-  margin: 28px auto 0;
-  padding: 0 var(--container-pad);
+  gap: clamp(6px, 0.429vw, 11px);
+  width: 84%;
+  min-width: 300px;
 }
 
 .trust-list__row {
   display: flex;
-  gap: 11px;
+  gap: clamp(6px, 0.429vw, 11px);
   justify-content: center;
   width: 100%;
 }
@@ -1145,61 +1177,34 @@
 .trust-list__item {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: clamp(8px, 0.625vw, 16px);
   background: #0e6a60;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  padding: 12px 22px;
+  padding: clamp(8px, 0.781vw, 20px) clamp(12px, 0.937vw, 24px);
   text-align: left;
 }
 
 .trust-list__item .checklist__check {
-  width: 24px;
-  height: 24px;
+  width: clamp(16px, 0.937vw, 24px);
+  height: clamp(16px, 0.937vw, 24px);
   border-radius: 12px;
   background: #138a7d;
+  flex-shrink: 0;
 }
 
 .trust-list__item .checklist__check svg {
-  width: 12px;
-  height: 12px;
+  width: 50%;
+  height: 50%;
 }
 
 .trust-list__item span:last-child {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 16px;
+  font-size: clamp(11px, 0.625vw, 16px);
   line-height: 1.4;
   color: var(--color-white);
   white-space: nowrap;
-}
-
-/* The source photo's top ~58% is a flat gradient with no tablet in it
-   (row-by-row pixel variance confirmed the busy content only starts
-   around y=460/785) — dead space now that the text sits above it in
-   flow instead of overlaid on top of it. Cropped via object-fit:cover
-   + object-position:bottom, keeping a bit of the gradient as a soft
-   lead-in. The crop box's width still matches the image's own rendered
-   width, so cover's scale factor stays 1 — this only clips, it never
-   upscales, so it doesn't reintroduce the blur that displaying the
-   image at native resolution was originally chosen to avoid. */
-/* aspect-ratio 2000/325 (not the earlier 2000/360) — a finer row-by-row
-   scan found the "empty gradient band" isn't a gradual fade at all: the
-   source photo is a composite, and the gradient meets the real hands+
-   tablet photo at a single hard-edge row (y=454 of 785, pixel variance
-   jumps from ~4 to ~100 in one row). The old, shallower crop kept that
-   seam inside the visible area, where it read as a stray horizontal
-   line above the tablet. Cropping from y=460 instead (just past the
-   seam, verified against the same variance scan) keeps only real photo
-   content, no seam. */
-.trust-band__bg {
-  display: block;
-  width: 100%;
-  order: 2;
-  aspect-ratio: 2000 / 325;
-  height: auto;
-  object-fit: cover;
-  object-position: bottom;
 }
 
 /* Final CTA */
@@ -1416,22 +1421,100 @@
 }
 
 @media (max-width: 1024px) {
+  /* Below the desktop tier, Figma's fluid-scaled absolute overlay (see
+     the base rules above) no longer has room: text and cards can't
+     shrink past a certain point and stay readable, but the box keeps
+     shrinking with the viewport. Falls back to plain stacked flow
+     instead — text above, image below, both sized by their own
+     content rather than pinned to Figma's proportions — same fallback
+     .climate-cta uses at this width. */
+  .trust-band {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  .trust-band__bg {
+    order: 2;
+    height: auto;
+    /* The source photo's top ~58% is a flat gradient with no tablet in
+       it (row-by-row pixel variance confirmed the busy content only
+       starts around y=460/785) — dead space now that the text sits
+       above it in flow instead of overlaid on top of it, so it's
+       cropped away here (desktop keeps the image whole, since its
+       text overlays that same band instead of wasting it). Cropping
+       from y=460 (aspect-ratio 2000/325), not further up, also clears
+       a hard-edge seam in the source photo at y=454 (pixel variance
+       jumps from ~4 to ~100 in a single row — the flat gradient
+       meeting the real hands+tablet photo) that a shallower crop left
+       inside the visible area. */
+    aspect-ratio: 2000 / 325;
+    object-fit: cover;
+    object-position: bottom;
+  }
+  .trust-band__content {
+    position: static;
+    order: 1;
+    left: auto;
+    top: auto;
+    width: 100%;
+    min-width: 0;
+    gap: 0;
+    padding: 40px 20px 16px;
+  }
+  .trust-band__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 6px;
+  }
+  .trust-band__inner .eyebrow {
+    font-size: 11.5px;
+    margin-bottom: 11px;
+  }
+  .trust-band__inner h2.section-title {
+    max-width: 640px;
+    min-width: 0;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .trust-band__inner .section-lede {
+    max-width: 780px;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+  .trust-list {
+    width: 840px;
+    max-width: 100%;
+    min-width: 0;
+    gap: 6px;
+    margin: 28px auto 0;
+    padding: 0 var(--container-pad);
+  }
   /* Cards side-by-side (nowrap, sized to content) only fits at generous
      desktop widths — narrower than that, the pair either touches the
      edges or overflows past them. Stacks to one full-width column per
      card, wrapping normally, same width as the single card below. */
   .trust-list__row {
     flex-direction: column;
+    gap: 6px;
   }
   .trust-list__row .trust-list__item {
     flex: 0 0 auto;
     width: 100%;
   }
-  .trust-list__item span:last-child {
-    white-space: normal;
+  .trust-list__item {
+    gap: 16px;
+    padding: 12px 22px;
   }
-  .trust-band__inner h2.section-title {
-    font-size: 28px;
+  .trust-list__item .checklist__check {
+    width: 24px;
+    height: 24px;
+  }
+  .trust-list__item span:last-child {
+    font-size: 16px;
+    white-space: normal;
   }
   /* Below the desktop tier, the pixel-exact absolute layout (sized for
      the full 1251px frame) no longer fits — falls back to the
