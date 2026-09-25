@@ -1799,15 +1799,18 @@
   .climate-cta__title {
     font-size: 30px;
   }
-  /* Cropped from the same source photo as the desktop/tablet banner
-     (climate-cta-bg.webp), with generous teal margin baked in on three
-     sides so it blends into the card's own solid background without
-     needing object-fit/positioning tricks — just scales with the card
-     at its native aspect-ratio like .nr1-panel__mockup does. */
+  /* Exact Figma export for this node (2981:36) — flat #106b61 (matches
+     --color-teal-dark exactly) with the mockup baked into its own
+     bottom ~43%, straight/square edges (no border-radius on the image
+     itself; the card's own overflow:hidden + border-radius below
+     handles the outer corners). No object-fit/crop/mask needed: it
+     just scales with the card at its native aspect-ratio like
+     .nr1-panel__mockup does, and the image's own built-in empty band
+     is already the gap to the text above it. */
   .climate-cta__mockup {
     display: block;
     width: 100%;
-    margin-top: 24px;
+    margin-top: 0;
   }
   /* Matches the Figma "Mobile" node (2926:685) for this panel: the
      photo is no longer stretched to cover the whole card (that fought
