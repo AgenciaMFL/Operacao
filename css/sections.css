@@ -627,49 +627,45 @@
    own full-width green band. Mirrors Figma node 2933:729: a full-bleed
    banner (dashboard mockup + textured teal background baked into one
    client-supplied image) with the copy positioned to its right, clear
-   of the mockup. left/top/width below are that frame's 1418/126/497
-   converted to % of its 2560x512 box — position only; the image itself
-   is the client's own flattened export, not reconstructed from Figma's
-   separate texture/mockup layers (same approach as .nr1-panel__bg). */
+   of the mockup.
+
+   Height is content-driven (a flex row + padding), not tied to the
+   image's own aspect-ratio — an earlier version sized the panel via
+   aspect-ratio (taller than the image's native ratio, "to leave room
+   for the copy"), vertically centering both the fixed-px text and the
+   proportionally-scaling image inside it. Those two don't grow at the
+   same rate: past ~1400px the text column hits its max-width and its
+   height stops changing, while the aspect-ratio box keeps growing with
+   viewport width, so the gap above/below both widened without bound —
+   nearly 30% of the panel's height at very wide viewports. Same class
+   of bug as an earlier .trust-band issue, same fix: let the row's
+   height come from its actual content (here, via the same flex
+   approach the <=1024px tier already used), and crop the image to fill
+   whatever height results instead of the other way around. */
 .climate-cta {
   position: relative;
   overflow: hidden;
   background: var(--color-teal-dark);
-  /* Taller than the desktop bg image's own native 2000x351 ratio, to
-     leave room for the bigger 42px/18px copy below — but the image
-     itself (.climate-cta__bg) is NOT stretched to match this ratio
-     (that upscale is what read as blurry/oversized before). Instead it
-     keeps its native proportions and is vertically centered, so the
-     panel's extra height shows as plain background-color letterboxing
-     above/below it — var(--color-teal-dark) is a near-exact match for
-     the image's own flat teal margins, so the seam is invisible. */
-  aspect-ratio: 2000 / 480;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 56px 6%;
 }
 
 .climate-cta__bg {
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2000 / 351;
+  top: 0;
+  width: 52%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 25% center;
   z-index: 0;
 }
 
 .climate-cta__inner {
-  /* left matches the Figma frame's own text position (1408px over its
-     2561px width, node 2939:811/816) — clear of the mockup, which sits
-     in the left ~55% of the image. Centered vertically in the panel
-     (not pinned to the frame's own top offset) since the panel is now
-     taller than that frame to fit the larger type. width is capped in
-     px so the column doesn't keep growing (and its lines stretching)
-     past a comfortable measure on very wide viewports. */
-  position: absolute;
+  position: relative;
   z-index: 1;
-  left: 54.98%;
-  top: 50%;
-  transform: translateY(-50%);
   width: 40%;
   max-width: 560px;
 }
@@ -1452,35 +1448,18 @@
     font-size: 22px;
   }
   .climate-cta {
-    aspect-ratio: auto;
     min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
     padding: 32px;
   }
-  /* Confined to the left portion instead of spanning the full section —
-     at this narrower box, object-fit:cover on a full-width image would
-     scale/crop the source differently than at desktop and push the
-     mockup itself under the text (see .nr1-panel__bg at this same
-     breakpoint for the identical fix). Resets the desktop-only native-
-     ratio letterboxing (top:50%/transform/height:auto) back to a plain
-     cover fill, since this tier uses the shorter fallback image (see
-     the <picture> source) at a fixed box instead. */
+  /* Confined to a narrower slice than desktop's 52% — at this box, the
+     shorter fallback image (see the <picture> source) cropped that wide
+     would push the mockup itself under the text (see .nr1-panel__bg at
+     this same breakpoint for the identical fix). */
   .climate-cta__bg {
-    top: 0;
-    transform: none;
     width: 42%;
-    height: 100%;
-    aspect-ratio: auto;
-    object-fit: cover;
     object-position: 30% center;
   }
   .climate-cta__inner {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
     width: auto;
     max-width: 320px;
   }
