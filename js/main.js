@@ -263,6 +263,27 @@
   function loadForm() {
     if (formLoaded) return;
     formLoaded = true;
+    const loader = document.getElementById("leadModalLoader");
+
+    // The GoHighLevel widget's own iframe "load" event fires once its
+    // document is in place, but the actual form fields render a bit
+    // after that (fetched from GHL's backend once the embed script
+    // initializes) — a blank white box sat there for a couple of
+    // seconds with nothing telling the visitor it was still working,
+    // which read as broken rather than loading. Three redundant
+    // signals hide the loader and fade the iframe in, whichever comes
+    // first: the iframe's own load event, any postMessage from it
+    // (GHL's embed script posts one once the form is ready to report
+    // its real height), and a hard timeout so the loader can never get
+    // stuck forever if neither fires.
+    let revealed = false;
+    function reveal() {
+      if (revealed) return;
+      revealed = true;
+      if (loader) loader.classList.add("is-hidden");
+      iframe.classList.add("is-ready");
+    }
+
     const iframe = document.createElement("iframe");
     iframe.src = "https://api.leadconnectorhq.com/widget/form/zr1L18JsHt3dC9Hc3wU1";
     iframe.id = "inline-zr1L18JsHt3dC9Hc3wU1";
@@ -280,7 +301,13 @@
     iframe.setAttribute("data-form-id", "zr1L18JsHt3dC9Hc3wU1");
     iframe.setAttribute("data-cookie-consent", "true");
     iframe.setAttribute("data-cookie-consent-provider", "auto");
+    iframe.addEventListener("load", () => setTimeout(reveal, 250));
     formHost.appendChild(iframe);
+
+    window.addEventListener("message", (e) => {
+      if (typeof e.origin === "string" && e.origin.includes("leadconnectorhq.com")) reveal();
+    });
+    setTimeout(reveal, 4000);
 
     const script = document.createElement("script");
     script.src = "https://link.msgsndr.com/js/form_embed.js";
