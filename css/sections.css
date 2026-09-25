@@ -257,9 +257,9 @@
        since that text block is scaled as a whole unit there — but mobile
        (node 2811:106) uses its own much narrower, centered composition,
        so it needs its own smaller fixed size rather than inheriting the
-       desktop one. 26px matches every other section title's mobile size
+       desktop one. 30px matches every other section title's mobile size
        (see the shared h2.section-title rule). */
-    font-size: 26px;
+    font-size: 30px;
   }
   .hero__lede {
     max-width: none;
@@ -1723,10 +1723,10 @@
   .process-grid {
     grid-template-columns: 1fr;
   }
-  /* 26px — standardized to match every other section title on mobile
+  /* 30px — standardized to match every other section title on mobile
      (see the shared h2.section-title rule further down). */
   .trust-band__inner h2.section-title {
-    font-size: 26px;
+    font-size: 30px;
   }
   .checklist {
     grid-template-columns: minmax(0, 1fr);
@@ -1735,9 +1735,9 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
-  /* 26px — standardized to match every other section title on mobile. */
+  /* 30px — standardized to match every other section title on mobile. */
   .protection__intro--split .section-title {
-    font-size: 26px;
+    font-size: 30px;
   }
   .protection__intro--split .section-lede {
     font-size: 16px;
@@ -2036,7 +2036,7 @@
   h2.section-title,
   .how__aside .section-title,
   .final-cta h2 {
-    font-size: 26px;
+    font-size: 30px;
   }
   /* 16px — standardized lede size across every section on mobile/
      tablet. .section-lede alone (lower specificity) covers the plain
