@@ -418,6 +418,25 @@
   </div>
 </div>
 
+<!-- =========================================================
+     LEAD FORM POPUP — opens on every CTA that links to #contato (see
+     js/main.js initLeadModal); the anchor itself has no dedicated
+     form/section, it was only ever a scroll target.
+     ========================================================= -->
+<div class="lead-modal" id="leadModal" aria-hidden="true">
+  <div class="lead-modal__backdrop" data-lead-modal-close></div>
+  <div class="lead-modal__panel" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+    <button type="button" class="lead-modal__close" data-lead-modal-close aria-label="Fechar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lead-modal__header">
+      <span class="lead-modal__eyebrow">SIS Mental Health</span>
+      <h3 id="leadModalTitle" class="lead-modal__title">Vamos entender os riscos da sua empresa</h3>
+    </div>
+    <div class="lead-modal__form" id="leadModalForm"></div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 </body>
 </html>

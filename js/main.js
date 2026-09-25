@@ -238,3 +238,77 @@
     if (!animating) target = window.scrollY;
   });
 })();
+
+// Lead form popup: every CTA on the page links to "#contato", but that
+// anchor was only ever a scroll target — there's no dedicated form
+// there. Intercepts those links (by href, not the inconsistently-
+// applied .cta-marker class, since a couple of them — the hero button,
+// the sticky bar — don't carry it) and opens this modal instead.
+// The GoHighLevel iframe + its embed script are only injected on the
+// first open, not on page load, so visitors who never click a CTA
+// never pull in that third-party request.
+(function initLeadModal() {
+  const modal = document.getElementById("leadModal");
+  const formHost = document.getElementById("leadModalForm");
+  if (!modal || !formHost) return;
+
+  const openTriggers = document.querySelectorAll('a[href="#contato"]');
+  const closeTriggers = modal.querySelectorAll("[data-lead-modal-close]");
+  const closeBtn = modal.querySelector(".lead-modal__close");
+  if (!openTriggers.length) return;
+
+  let formLoaded = false;
+  let lastFocused = null;
+
+  function loadForm() {
+    if (formLoaded) return;
+    formLoaded = true;
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://api.leadconnectorhq.com/widget/form/zr1L18JsHt3dC9Hc3wU1";
+    iframe.id = "inline-zr1L18JsHt3dC9Hc3wU1";
+    iframe.title = "Formulario SIS MENTAL";
+    iframe.setAttribute("data-layout", "{'id':'INLINE'}");
+    iframe.setAttribute("data-trigger-type", "alwaysShow");
+    iframe.setAttribute("data-trigger-value", "");
+    iframe.setAttribute("data-activation-type", "alwaysActivated");
+    iframe.setAttribute("data-activation-value", "");
+    iframe.setAttribute("data-deactivation-type", "neverDeactivate");
+    iframe.setAttribute("data-deactivation-value", "");
+    iframe.setAttribute("data-form-name", "Formulario SIS MENTAL");
+    iframe.setAttribute("data-height", "434");
+    iframe.setAttribute("data-layout-iframe-id", "inline-zr1L18JsHt3dC9Hc3wU1");
+    iframe.setAttribute("data-form-id", "zr1L18JsHt3dC9Hc3wU1");
+    iframe.setAttribute("data-cookie-consent", "true");
+    iframe.setAttribute("data-cookie-consent-provider", "auto");
+    formHost.appendChild(iframe);
+
+    const script = document.createElement("script");
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
+    document.body.appendChild(script);
+  }
+
+  function openModal(e) {
+    e.preventDefault();
+    lastFocused = document.activeElement;
+    loadForm();
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lead-modal-open");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeModal() {
+    if (!modal.classList.contains("is-open")) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lead-modal-open");
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+  }
+
+  openTriggers.forEach((el) => el.addEventListener("click", openModal));
+  closeTriggers.forEach((el) => el.addEventListener("click", closeModal));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+})();
