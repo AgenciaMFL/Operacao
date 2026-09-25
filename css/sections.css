@@ -1057,12 +1057,14 @@
 }
 
 /* Hidden by default — the title's own max-width (640px) only forces a
-   wrap at the 42px font-size used above 1024px, and it lands mid
-   phrase ("...começam com" / "confiança"), splitting the highlighted
-   phrase across both lines. Shown only in that tier so the break falls
-   before "com" instead, keeping "com confiança" together on line 2. At
-   <=1024px the smaller font (28px/26px) already fits on one line, so
-   forcing a break there would just add an unwanted extra line. */
+   wrap at the 42px font-size used above 1024px, and left to wrap on
+   its own it lands mid phrase ("...começam com" / "confiança"),
+   splitting the highlighted phrase across both lines. Shown only in
+   that tier so the break falls right after "Dados confiáveis" instead,
+   giving "Dados confiáveis" / "começam com confiança" — the same split
+   the text already wraps to naturally on narrow screens. At <=1024px
+   the smaller font (28px/26px) already fits on one line, so forcing a
+   break there would just add an unwanted extra line. */
 .trust-band__title-break {
   display: none;
 }
