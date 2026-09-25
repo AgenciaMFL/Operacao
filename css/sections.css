@@ -1815,8 +1815,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
-    padding: 28px 20px 0;
+    gap: 18px;
+    padding: 40px 20px 0;
   }
   .nr1-panel__heading {
     font-size: 22px;
@@ -1845,18 +1845,18 @@
      the reduced 14px body copy above it, with wrapping allowed as a
      safety net rather than another nowrap overflow risk. */
   .nr1-panel .btn {
-    font-size: 14px;
-    padding: 7px 16px 7px 7px;
+    font-size: 16px;
+    padding: 11px 22px 11px 11px;
     white-space: normal;
   }
   .nr1-panel .btn-icon {
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
     flex-shrink: 0;
   }
   .nr1-panel .btn-icon svg {
-    width: 13px;
-    height: 13px;
+    width: 15px;
+    height: 15px;
   }
   /* Floating dashboard mockup (cropped from the same source photo, with
      its own built-in glow duplicate already baked in) — shown only at
@@ -1868,7 +1868,7 @@
   .nr1-panel__mockup {
     display: block;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 24px;
     /* Feathers the crop's top edge into whatever the gradient looks
        like at that exact point (which shifts depending on how tall the
        text content above ends up), instead of relying on an exact
