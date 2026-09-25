@@ -836,14 +836,18 @@
    ========================================================= */
 .how {
   display: grid;
-  grid-template-columns: 520px minmax(0, 648px);
-  gap: 126px;
+  /* 520px aside (wider than Figma's raw 477px: the real Plus Jakarta
+     Sans webfont renders wider than this sandbox's fallback font, so
+     477px wraps the title to 4 lines instead of the Figma-exact 3 —
+     verified by loading the real font, not the fallback). The content
+     column is flexible (not a fixed px) and the gap trimmed from the
+     original 126px so the whole grid fits the shared .container's
+     1216px (this section used to widen its own container to 1350px
+     instead — standardized away so every section shares the same left/
+     right edge). */
+  grid-template-columns: 520px minmax(0, 1fr);
+  gap: 64px;
   align-items: start;
-  max-width: 1350px; /* 520px aside (wider than Figma's raw 477px: the
-    real Plus Jakarta Sans webfont renders wider than this sandbox's
-    fallback font, so 477px wraps the title to 4 lines instead of the
-    Figma-exact 3 — verified by loading the real font, not the
-    fallback) + 126 gap + 648 cards + 48px container padding */
 }
 
 .how__aside {
@@ -1212,7 +1216,7 @@
   position: relative;
   background: var(--color-teal);
   color: var(--color-white);
-  padding: 100px 0;
+  padding: 120px 0;
   text-align: center;
   overflow: hidden;
 }
@@ -1264,12 +1268,15 @@
    WHY SIS + CHECKLIST + MOCKUP
    ========================================================= */
 .why-sis {
+  /* No max-width override (used to widen to 1360px for extra mockup
+     room) — standardized to the shared .container's 1216px so this
+     section's left/right edges line up with the rest of the page. The
+     mockup column (minmax(0,1fr), not a fixed px) absorbs the
+     narrower width on its own; the text column keeps its 583px cap. */
   display: grid;
   grid-template-columns: minmax(0, 583px) minmax(0, 1fr);
   gap: 48px;
   align-items: center;
-  max-width: 1360px; /* wider than the shared .container so the mockup
-    column gets extra room without shrinking the fixed-width text column */
 }
 
 .checklist {

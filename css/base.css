@@ -70,19 +70,14 @@ p {
   padding: 0 var(--container-pad);
 }
 
-.container--wide {
-  max-width: 1251px;
-}
-
-/* Matches .why-sis's own max-width (see sections.css) so a full-width
-   element below it — the trust-card closing callout — lines up with
-   the checklist/mockup above instead of the plain .container's 1216px. */
-.container--why-sis {
-  max-width: 1360px;
-}
-
+/* 120px top/bottom — the standard desktop rhythm for every plain
+   content section (mobile/tablet knock this down to 60px, see the
+   <=1180px block in sections.css). Full-bleed accent bands with their
+   own Figma-exact internal spacing (.climate-cta, .trust-band) don't
+   use this class on purpose — imposing this on top of their own
+   fluid-scaled layout would fight it instead of matching it. */
 .section {
-  padding: 96px 0;
+  padding: 120px 0;
 }
 
 .eyebrow {
