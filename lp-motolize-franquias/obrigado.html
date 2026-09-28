@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obrigado | Franquia Motolize</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#060d02">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js"></script>
+  <script src="js/pixel.js"></script>
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1835958741094042&ev=PageView&noscript=1"></noscript>
+<header class="topbar">
+  <div class="container">
+    <a href="index.html" class="logo" aria-label="Motolize — início"><img src="img/logo-motolize.png" alt="Motolize Locadora de Motos" width="348" height="102"></a>
+  </div>
+</header>
+<main class="ty">
+  <div class="container box">
+    <div class="icon-ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h1>Obrigado pelo interesse na Motolize!</h1>
+    <p class="lead">Recebemos suas informações. Agora, escolha o melhor horário para conversar com nossa equipe e conhecer os detalhes da franquia.</p>
+    <div class="cta-row" style="display:flex;justify-content:center"><a href="#agenda" class="btn">Agendar minha apresentação</a></div>
+    <div class="calendar" id="agenda"><div class="ph">Calendário de agendamento — configure CALENDAR_URL em js/config.js</div></div>
+  </div>
+</main>
+<script>
+  (function () {
+    var url = (window.MOTOLIZE_CONFIG || {}).CALENDAR_URL;
+    if (!url) return;
+    try {
+      var lead = JSON.parse(sessionStorage.getItem("motolize_lead") || "{}");
+      var u = new URL(url);
+      if (lead.nome) u.searchParams.set("name", lead.nome);
+      if (lead.email) u.searchParams.set("email", lead.email);
+      url = u.toString();
+    } catch (e) {}
+    var f = document.createElement("iframe");
+    f.src = url; f.title = "Agendar apresentação Motolize"; f.loading = "lazy";
+    var box = document.getElementById("agenda");
+    box.innerHTML = ""; box.appendChild(f);
+  })();
+</script>
+</body>
+</html>
