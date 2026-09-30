@@ -443,7 +443,11 @@
   border-radius: 55px;
   overflow: hidden;
   margin-top: 56px;
-  aspect-ratio: 1251 / 635;
+  /* Was 1251/635 (Figma's original 3-item checklist). Taller now to make
+     room for the 4th checklist item added at the client's request
+     ("criar um plano de ação..."), whose fixed-px size doesn't scale
+     down with the panel like the percentage-based spacing around it. */
+  aspect-ratio: 1251 / 760;
 }
 
 .nr1-panel__bg {
