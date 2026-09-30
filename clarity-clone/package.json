@@ -1,0 +1,17 @@
+{
+  "name": "clarity-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "rrweb": "^2.1.6",
+    "rrweb-player": "^2.1.6"
+  }
+}
