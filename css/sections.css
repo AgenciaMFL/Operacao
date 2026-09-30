@@ -557,6 +557,42 @@
   display: none;
 }
 
+/* 1025-1180px: falls between the "notebook" tier (>=1181px, uses the
+   Figma-exact absolute layout above) and the tablet fallback
+   (<=1024px, see the flex fallback further down). Nothing previously
+   constrained the panel in this gap, so it kept the fixed
+   aspect-ratio + absolute positioning meant for >=1181px on a
+   narrower box — with 4 checklist items that pushed the button past
+   the card's bottom edge, clipped by overflow:hidden. Reuses the same
+   auto-height flex fallback as the tablet tier so this gap behaves
+   like a seamless continuation of it instead. */
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .nr1-panel {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 48px 32px;
+    min-height: 0;
+  }
+  .nr1-panel__bg {
+    left: -6%;
+    top: 0;
+    width: 42%;
+    height: 100%;
+  }
+  .nr1-panel__content {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    max-width: 420px;
+  }
+  .nr1-panel__heading {
+    font-size: 28px;
+  }
+}
+
 /* Risk factor tags (section 01): pulled out of the lede's prose into a
    scannable pill row instead of a long "incluindo fatores como X, Y,
    Z" clause buried in a paragraph — easier to skim at a glance. */
