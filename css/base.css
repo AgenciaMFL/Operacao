@@ -500,6 +500,20 @@ h2.section-title--light {
   opacity: 1;
 }
 
+/* The GHL embed script sets its own inline visibility/pointer-events on
+   the iframe once it finishes loading — after the modal is closed for
+   the first time, those inline styles override the hidden state it
+   would otherwise inherit from .lead-modal, leaving an invisible
+   ~300x310px block centered on the page that still intercepts clicks
+   (breaks reopening the modal and, on mobile, the "Como funciona"
+   carousel's back arrow, which sits under it). !important is required
+   here: a plain stylesheet rule, however specific, loses to a
+   non-!important inline style, but an !important rule still beats it. */
+.lead-modal:not(.is-open) .lead-modal__form iframe {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 /* Sits on top of the (initially blank/white) iframe while the
    GoHighLevel widget loads — a plain empty box for a few seconds read
    as broken rather than loading. */
