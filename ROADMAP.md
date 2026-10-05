@@ -60,14 +60,14 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 
 ## Fase 2 — Configuração da loja
 
-- [ ] Woo: moeda BRL, país Brasil, checkout como visitante, desativar contas obrigatórias
-- [ ] Desativar todos os gateways de pagamento e o cálculo de frete
-- [ ] Criar as categorias e os atributos (tamanho, cor, medida…)
+- [x] Woo: moeda BRL, país Brasil, checkout como visitante, desativar contas obrigatórias
+- [x] Desativar todos os gateways de pagamento e o cálculo de frete
+- [x] Criar as categorias e os atributos (tamanho, cor, medida…)
 - [ ] Montar a planilha-modelo de importação (CSV do Woo)
 - [ ] Importar os produtos padrão
 - [ ] Instalar a busca **FiboSearch** (versão grátis)
 
-## Fase 3 — Plugin "Pedido pelo WhatsApp" (MVP) — Claude
+## Fase 3 — Plugin "Pedido pelo WhatsApp" (MVP) — Claude · ✅ v0.1.0 em `plugins/mfl-pedido-whatsapp`
 
 - [ ] Método de pagamento "Combinar pelo WhatsApp"
 - [ ] Status de pedido **"Aguardando contato"**
