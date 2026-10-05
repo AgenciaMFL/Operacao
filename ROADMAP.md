@@ -5,10 +5,10 @@
 Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas **não cobra online**.
 
 - O cliente navega por um **catálogo de produtos padrão** e adiciona ao carrinho.
-- Se não encontrar o que procura, ele **adiciona o próprio produto** (nome, quantidade e, se quiser, marca/medida, valor de referência, foto ou link).
+- Se não encontrar o que procura, um botão **"Não encontrou? Fale com a gente"** abre o WhatsApp com o termo que ele buscou. O cliente **não cadastra produtos**.
 - Ao finalizar, o pedido é **salvo no WordPress** e o cliente é levado ao **WhatsApp com um recibo pronto**.
 - A **venda é fechada pelo WhatsApp**: preço final, frete e pagamento são combinados ali.
-- Os produtos solicitados pelos clientes alimentam um **ranking**. Os mais pedidos viram produtos oficiais do catálogo, que cresce conforme a demanda real, sem cadastrar ~8 mil itens de início.
+- **Só os donos da loja cadastram produtos e preços.** O catálogo começa com os produtos padrão e cresce aos poucos, sem cadastrar ~8 mil itens de início.
 
 ## Decisões já tomadas
 
@@ -18,14 +18,13 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 | Layout | Elementor (Pro recomendado para o Theme Builder e os widgets do Woo) |
 | Pagamento online | **Nenhum**. Método único "Combinar pelo WhatsApp" |
 | Catálogo inicial | Apenas os produtos padrão / mais vendidos |
-| Produto que não está no site | Cliente adiciona pelo formulário. Fica **só no pedido dele**, sem ficar público |
-| Valor informado pelo cliente | É só referência e **não entra no total oficial** |
+| Quem cadastra produtos e preços | **Somente os donos da loja**. O cliente não adiciona produtos |
+| Produto que não está no site | Botão "Não encontrou? Fale com a gente" leva ao WhatsApp. Se for vender, o dono inclui o item no pedido pelo painel |
 | Lógica do carrinho e do WhatsApp | Plugin próprio, desenvolvido neste repositório |
 
 ## Decisões assumidas (podem mudar)
 
 - [ ] Pedido **sem login** (checkout como visitante), para ter menos atrito.
-- [ ] **Upload de foto** no produto solicitado, opcional e com limite de tamanho.
 - [ ] **Um único número** de WhatsApp para receber os pedidos.
 
 ---
@@ -66,36 +65,33 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Recibo resumido + link do pedido quando o carrinho for grande demais para a URL
 - [ ] Tela de configurações: número, cabeçalho e rodapé da mensagem
 
-## Fase 4 — Produto solicitado pelo cliente — Claude
+## Fase 4 — Cadastro e "não encontrou" — Claude
 
-- [ ] Formulário "Adicionar produto que não está no site" (shortcode + widget Elementor)
-- [ ] Item entra no carrinho como **"Produto solicitado — preço a confirmar"**
-- [ ] Valor de referência exibido, mas fora do total oficial
-- [ ] Upload de foto / link de referência
-- [ ] Botão no carrinho, na **busca sem resultado** e flutuante no catálogo
-- [ ] Recibo separado em "Produtos do catálogo" e "Produtos solicitados"
+- [ ] Botão **"Não encontrou? Fale com a gente"** na busca sem resultado e no catálogo, que abre o WhatsApp com o termo buscado
+- [ ] Registro dos termos buscados sem resultado, para o dono saber o que cadastrar em seguida
+- [ ] Guia de cadastro rápido para os donos (pelo painel do Woo e por planilha)
+- [ ] Orientação para o dono incluir no pedido, pelo painel, um item que não estava no site
 
 ## Fase 5 — Layout no Elementor
 
 - [ ] Header com busca e mini-carrinho
-- [ ] Página inicial (destaques, categorias, CTA "Não achou? Peça aqui")
+- [ ] Página inicial (destaques, categorias, CTA "Não encontrou? Fale com a gente")
 - [ ] Template de arquivo/loja (Loop Grid, 12–24 por página, filtros)
 - [ ] Template de produto
 - [ ] Carrinho, Finalizar pedido, Obrigado
 - [ ] Versão mobile (é por onde a maioria dos clientes chega pelo WhatsApp)
 
-## Fase 6 — Painel de produtos solicitados — Claude
+## Fase 6 — Relatório de buscas sem resultado — Claude
 
-- [ ] Lista dos produtos solicitados, agrupando nomes parecidos, com contagem de pedidos
-- [ ] Botão **"Transformar em produto oficial"**, que cria o produto no Woo já preenchido
-- [ ] Marcar como atendido / ignorado
+- [ ] Tela no painel com os termos mais buscados que não tiveram resultado
+- [ ] Atalho "Cadastrar produto" a partir do termo
 
 ## Fase 7 — Testes e lançamento
 
 - [ ] Fluxo completo no celular (Android e iPhone) e no desktop
 - [ ] Teste com carrinho grande (limite da mensagem)
 - [ ] Teste de desempenho (PageSpeed)
-- [ ] Treinamento do atendente: como mudar o status do pedido e converter solicitações
+- [ ] Treinamento dos donos e do atendente: cadastrar produtos, mudar o status do pedido, incluir item no pedido
 - [ ] Publicação
 
 ## Fase 8 — Evolução (depois do lançamento)
@@ -103,7 +99,7 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - Importação em massa ou sincronização com ERP/fornecedor
 - MCP do WooCommerce / Elementor para o Claude operar o catálogo
 - Rodízio entre vários atendentes de WhatsApp
-- Relatórios (mais pedidos, mais solicitados, conversão)
+- Relatórios (mais pedidos, mais buscados, conversão)
 - Pagamento online opcional (Pix/cartão), se fizer sentido no futuro
 
 ---
