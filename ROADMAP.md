@@ -38,6 +38,8 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [x] **Home montada** (topo com endereço/Instagram/WhatsApp, header com menu e ícone de carrinho, banner, "Nossas Categorias", carrossel "Destaques", botão "Ver todos os produtos")
 - [x] Identidade visual definida (roxo, rosa, amarelo; logo)
 - [x] Categorias principais definidas
+- [x] WordPress, Elementor Pro e hospedagem prontos
+- [x] **MCP do WooCommerce conectado** ao Claude Code local
 - [ ] Ligar a home ao WooCommerce (ver Fase 5)
 
 ## Fase 0 — Insumos (responsável: cliente/agência)
