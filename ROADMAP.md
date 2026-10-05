@@ -1,4 +1,8 @@
-# Catálogo com Pedido pelo WhatsApp — Roadmap
+# Bazar Brinquelândia — Catálogo com Pedido pelo WhatsApp — Roadmap
+
+**Loja:** Bazar Brinquelândia Papelaria — Av. Ataulfo de Paiva, 1060 Lj D, Leblon/RJ
+**WhatsApp:** (21) 97128-1678 · **Instagram:** @bazarbrinquelandia
+**Categorias:** Papelaria · Escritório · Brinquedos · Itens de Festa
 
 ## O que estamos construindo
 
@@ -25,18 +29,24 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 ## Decisões assumidas (podem mudar)
 
 - [ ] Pedido **sem login** (checkout como visitante), para ter menos atrito.
-- [ ] **Um único número** de WhatsApp para receber os pedidos.
+- [ ] **Um único número** de WhatsApp para receber os pedidos: (21) 97128-1678, o mesmo do topo do site.
 
 ---
 
+## Status atual
+
+- [x] **Home montada** (topo com endereço/Instagram/WhatsApp, header com menu e ícone de carrinho, banner, "Nossas Categorias", carrossel "Destaques", botão "Ver todos os produtos")
+- [x] Identidade visual definida (roxo, rosa, amarelo; logo)
+- [x] Categorias principais definidas
+- [ ] Ligar a home ao WooCommerce (ver Fase 5)
+
 ## Fase 0 — Insumos (responsável: cliente/agência)
 
-- [ ] Número de WhatsApp que receberá os pedidos
+- [x] Número de WhatsApp: (21) 97128-1678 *(confirmar se é o que recebe pedidos)*
 - [ ] Lista dos produtos padrão (planilha: nome, SKU, categoria, preço, foto)
-- [ ] Árvore de categorias
+- [ ] Subcategorias dentro de Papelaria, Escritório, Brinquedos e Itens de Festa
 - [ ] Hospedagem e domínio definidos (PHP 8.2+, 2 GB+ de RAM, Redis de preferência)
 - [ ] Licença do Elementor Pro (sim/não)
-- [ ] Identidade visual (logo, cores, fontes)
 
 ## Fase 1 — Infraestrutura
 
@@ -74,8 +84,13 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 
 ## Fase 5 — Layout no Elementor
 
-- [ ] Header com busca e mini-carrinho
-- [ ] Página inicial (destaques, categorias, CTA "Não encontrou? Fale com a gente")
+- [ ] Header: ligar o ícone de carrinho ao **mini-carrinho do Woo** (contador real) e **adicionar uma busca**
+- [ ] Menu "Produtos": listar as categorias do Woo
+- [ ] Home — "Nossas Categorias": cada "Ver produtos" aponta para a página da categoria no Woo
+- [ ] Home — "Destaques": trocar os cards fixos por um **carrossel dinâmico** de produtos marcados como "Destaque" no Woo
+- [ ] Home — botões "Comprar agora": definir comportamento (adicionar ao carrinho direto ou abrir o produto) e renomear para algo como **"Adicionar ao pedido"**
+- [ ] Home — "Ver todos os produtos" aponta para a página da loja
+- [ ] Home — CTA "Não encontrou? Fale com a gente"
 - [ ] Template de arquivo/loja (Loop Grid, 12–24 por página, filtros)
 - [ ] Template de produto
 - [ ] Carrinho, Finalizar pedido, Obrigado
