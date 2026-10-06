@@ -239,9 +239,24 @@
 
   const SECOES = {};
 
-  SECOES.porque = (c) => faixaSecao('por-que-a-mfl', 'Por que a MFL Sales',
-    'Não entregamos leads. Entregamos um processo comercial funcionando.',
-    `Muitas empresas já contrataram tráfego, compraram listas ou implantaram um CRM, e continuaram sem previsibilidade de vendas. Isso acontece porque cada peça foi resolvida separadamente. A MFL Sales une estratégia, execução e tecnologia em uma única operação, ${c.b2c ? 'do primeiro contato até o fechamento da venda' : 'do primeiro contato até a reunião com o seu comercial'}.`,
+  // Por que a MFL (Figma 3092:249): pingente à esquerda, selo, título e texto à direita
+  SECOES.porque = (c) => {
+    const secao = faixaSecao('por-que-a-mfl', '', '', '', diferenciais(c), { classe: 'porque' });
+    const abertura = el('div', { class: 'porque-topo' },
+      el('img', { class: 'porque-imagem', src: 'assets/img/porque-pingente.webp', alt: '', width: '538', height: '748', loading: 'lazy', decoding: 'async' }),
+      el('div', { class: 'porque-texto revelar' },
+        el('p', { class: 'selo-secao' },
+          el('span', { class: 'selo-secao-icone' }, el('img', { src: 'assets/img/mfl-sales-icone-branco.svg', alt: '', width: '27', height: '26' })),
+          el('span', { text: 'Por que a MFL Sales' })),
+        el('h2', { class: 'porque-titulo' }, 'Não entregamos leads. Entregamos um ', el('em', { text: 'processo comercial funcionando.' })),
+        el('p', {}, rico('Muitas empresas já contrataram tráfego, compraram listas ou implantaram um CRM, e continuaram **sem previsibilidade de vendas.**')),
+        el('p', { text: `A MFL Sales une estratégia, execução e tecnologia em uma única operação, ${c.b2c ? 'do primeiro contato até o fechamento da venda' : 'do primeiro contato até a reunião com o seu comercial'}.` })));
+    secao.querySelector('.secao-cabecalho').replaceWith(abertura);
+    return secao;
+  };
+
+  // Diferenciais (abaixo da abertura da seção "Por que a MFL")
+  const diferenciais = (c) =>
     [
       bloco('', blocoTitulo('O que nos diferencia'), cartoes([
         { titulo: 'Processo completo, não peças soltas', texto: 'Atração, prospecção, CRM e follow-up são pensados juntos e conversam entre si.' },
@@ -256,7 +271,7 @@
         { titulo: 'Ajuste contínuo', texto: 'Campanhas, listas, abordagens e funil são testados e otimizados conforme os resultados.' }
       ], 3)),
       bloco('', destaque('Sua empresa foca em vender e entregar. A MFL Sales estrutura e opera a máquina que traz as oportunidades.'))
-    ]);
+    ];
 
   SECOES.como = () => faixaSecao('como-funciona', 'Como trabalhamos', 'Quatro etapas, do diagnóstico à otimização',
     'Uma operação montada em etapas claras, com acompanhamento próximo em cada uma delas.',

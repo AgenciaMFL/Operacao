@@ -357,6 +357,39 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .abertura-titulo { font-size: clamp(2rem, 9vw, 2.6rem); }
 }
 
+/* ---------- por que a MFL (Figma 3092:249) ---------- */
+
+.secao-banda.porque { padding-top: 0; }
+.porque-topo {
+  display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 580px); justify-content: center; align-items: center;
+  gap: clamp(32px, 6vw, 120px);
+}
+/* o cordão do pingente nasce na borda de cima da seção */
+.porque-imagem { width: 100%; height: auto; align-self: start; margin-top: calc(-1 * clamp(20px, 2.5vw, 48px)); }
+.porque-texto { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(16px, 1.6vw, 22px); padding: clamp(56px, 6vw, 96px) 0; }
+.porque-texto > p:not(.selo-secao) { font: 400 clamp(1.02rem, 1.35vw, 1.3rem)/1.35 'Archivo', var(--fonte); color: #5E675E; max-width: 30em; }
+.porque-texto strong { font-weight: 700; color: #3F473F; }
+.porque-titulo {
+  font: 700 clamp(1.9rem, 2.9vw, 2.45rem)/1.2 'Archivo', var(--display); letter-spacing: -.025em; color: #000;
+  text-wrap: balance;
+}
+.porque-titulo em { font-style: normal; color: #3CA55D; }
+.secao-banda.porque .blocos { margin-top: clamp(24px, 4vw, 56px); }
+
+/* selo de seção: cápsula verde com o ícone branco + rótulo (Figma) */
+.selo-secao {
+  display: inline-flex; align-items: center; gap: 14px; padding: 0 20px 0 0; border-radius: 999px; background: #081536;
+  font: 400 clamp(.82rem, 1vw, .95rem) 'Archivo', var(--fonte); letter-spacing: -.02em; color: #DCDDDC;
+}
+.selo-secao-icone { display: grid; place-items: center; height: 32px; padding: 0 20px; border-radius: 999px; background: #47BA6B; }
+.selo-secao-icone img { width: 22px; height: auto; }
+
+@media (max-width: 860px) {
+  .porque-topo { grid-template-columns: 1fr; justify-items: center; gap: 0; }
+  .porque-imagem { width: min(300px, 70vw); margin-top: 0; }
+  .porque-texto { padding: 24px 0 0; }
+}
+
 /* ---------- seções ---------- */
 
 .secao-banda { padding: clamp(72px, 9vw, 112px) 0; }
