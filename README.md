@@ -6,9 +6,9 @@ Proposta em formato de site. A capa mostra o nome do cliente e o botão **Abrir 
 
 ```
 index.html                 → a proposta (o que o cliente vê)
-editor.html                → editor para o time comercial
+editor.html                → gerador de propostas (painel do comercial)
 propostas/
-  padrao.json              → modelo padrão MFL Sales (ponto de partida)
+  padrao.json              → proposta padrão do gerador (ponto de partida)
 depoimentos/catalogo.json  → biblioteca de vídeos de depoimento (todas as propostas usam)
 assets/img                 → logo, ícone e avatares da capa
 assets/video               → vídeo de fundo da capa (MP4 + WebM) e imagem de espera
@@ -17,51 +17,31 @@ assets/css, assets/js      → visual e lógica (não precisa mexer)
 
 ## O padrão de proposta MFL Sales
 
-Consolidado a partir das propostas enviadas pelo comercial (clínicas, EcoSistemas, Quarteiro BR e Implantação Outbound) e organizado em capítulos. É um modelo **completo e modular**: traz todos os serviços da MFL e o comercial desliga o que não entra em cada proposta.
+A proposta segue a especificação do **Gerador de Propostas MFL Sales**: o conteúdo é montado a partir de poucas escolhas, e os textos mudam conforme elas.
 
-- **Capa** (layout do Figma): vídeo de fundo, faixas animadas, prova social, nome do cliente, frase de impacto e o botão "Ver meu orçamento"
-- **Abertura**: para quem é, a solução e o **resumo da proposta** (solução, contrato, início, investimento)
-1. **Diagnóstico**: o que o cliente já tem, o fluxo "da vitrine à agenda cheia" e a frase-chave
-2. **Estratégia**: visão geral das frentes, depois Inbound · Tráfego pago, Outbound, CRM e automação, Inteligência artificial e SDR (opcional)
-3. **Execução**: na prática (jornada do cliente), plano dos 90 dias, treinamento do time, entregas e resultado esperado
-4. **Por que a MFL**: números, MFL × outras agências, time
-4b. **Depoimentos**: vídeos escolhidos da biblioteca para cada cliente
-5. **Investimento**: serviços mensais (Tráfego, CRM R$ 297, Outbound, SDR) e implantação com pagamento único (à vista com desconto ou parcelado), totais, investimento em anúncios sugerido (R$ 100/dia, editável), condições e fechamento
-6. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
-
-Visual: as faixas da página alternam automaticamente entre claro (branco e azul-gelo) e escuro (tons de azul-marinho). Cada "Subtítulo de parte" abre uma faixa nova dentro do capítulo.
-
-Cada seção é montada com **blocos**, que o comercial adiciona, remove e reordena no editor:
-
-| Bloco | Uso típico |
+| Escolha | Opções |
 | --- | --- |
-| Subtítulo de parte | abre uma parte dentro do capítulo (ex.: Tráfego pago, CRM) |
-| Lista com ✓ | ativos do cliente, o que está incluso |
-| Etapas numeradas | fluxo da vitrine à venda, funil, jornada |
-| Cartões | campanhas, meses do plano, indicadores, perfil do SDR |
-| Comparativo | sem CRM × com CRM, MFL × cliente, MFL × outras agências |
-| Etiquetas | temas de campanha, segmentos |
-| Números grandes | trajetória da MFL |
-| Mensagem de exemplo | primeira mensagem para o lead |
-| Frase de destaque | frase-chave no fim de cada seção |
-| Observação | avisos e ressalvas |
+| Modelo | 1 · Inbound · 2 · Outbound com BDR + SDR · 3 · Outbound com Treinamento · 4 · Inbound + Outbound |
+| Outbound do modelo 4 | BDR + SDR ou Treinamento |
+| Público do Inbound | B2B (funil termina em reunião agendada) ou B2C (termina em proposta, pedido ou negociação) |
+| Escopo do Inbound | Meta Ads, Google Ads, Landing Page, WhatsApp, Remarketing, criativos, roteiro de atendimento, relatório mensal |
+| CRM | CRM MFL Sales (serviço separado) ou CRM do cliente |
+| Valores | Inbound, Outbound, Plano 2, CRM (R$/mês), contrato mínimo, anúncios sugerido (R$/dia), condições adicionais |
 
-Dois blocos seguidos com largura "Metade" ficam lado a lado.
+Ordem das seções: **Capa** (layout do Figma) → **Abertura** com resumo → **Por que a MFL Sales** → **Resultados** (vídeo de prova social + depoimentos da biblioteca) → **Inbound** → **Outbound** (BDR + SDR ou Treinamento) → **Tecnologia da operação** (funis e CRM) → **Investimento** → **Próximos passos**. As seções que não se aplicam ao modelo não aparecem. Campos ainda vazios aparecem em laranja (`[Nome do cliente]`, `R$ [valor]/mês`).
 
 ## Como o comercial cria uma proposta
 
-1. Abra `editor.html` e clique em **Nova (modelo)**, ou em **Abrir proposta…** para partir de uma existente.
-2. Preencha **Cliente e proposta**. Nos textos, `{cliente}` vira o nome do cliente automaticamente.
-3. Ajuste seções e blocos. Seções, blocos e serviços têm a opção **Exibir**: desligar um "Subtítulo de parte" esconde a parte inteira (ex.: Outbound).
-4. Em **Investimento**, cadastre serviços ou planos. Sem totais cadastrados, os serviços não opcionais são somados sozinhos; desligue a soma quando forem planos alternativos (Plano 1 *ou* Plano 2).
-5. Confira com **Ver capa** e **Celular**, clique em **Baixar .json** e coloque o arquivo na pasta `propostas/`.
-6. Envie o link: `https://SEU-DOMINIO/index.html?p=nome-do-arquivo`
+1. Abra `editor.html` (o gerador). O painel à esquerda tem os grupos 1 a 9: cliente, modelo, público, escopo, CRM, investimento, condições, vídeo e responsável. A caixa amarela **Falta preencher** mostra o que ainda falta.
+2. Confira com **Ver capa** e **Celular**.
+3. **Exportar PDF** abre a impressão da proposta (Salvar como PDF, A4, margens Nenhuma, gráficos de plano de fundo ligados).
+4. **Baixar .json** e coloque o arquivo em `propostas/`. Envie o link: `https://SEU-DOMINIO/index.html?p=nome-do-arquivo`
 
 ## Vídeos de depoimento
 
 A biblioteca fica em `depoimentos/catalogo.json`. Cada depoimento tem cliente, pessoa, cargo, **segmento**, resultado em destaque, uma frase e o **vídeo**: link do YouTube, do Vimeo ou um arquivo `.mp4` colocado na pasta `depoimentos/`. No YouTube a imagem de capa é gerada sozinha; para os outros, preencha `capa` com uma imagem.
 
-No editor, em **Depoimentos**, o comercial marca quais vídeos entram na proposta, filtra por segmento ou clica em **Sugerir pelo segmento do cliente** (usa o campo "Segmento do cliente"). Sem nenhum vídeo marcado, a seção não aparece. Para o cliente, cada cartão abre o vídeo num player na própria página.
+No gerador, em **8 · Vídeo de prova social**, o comercial informa o vídeo principal (link + imagem de capa) e marca outros depoimentos da biblioteca, filtrando por segmento ou clicando em **Sugerir pelo segmento** (usa o campo Segmento do cliente). Sem nenhum vídeo marcado, a seção não aparece. Para o cliente, cada cartão abre o vídeo num player na própria página.
 
 Os itens marcados como **EXEMPLO** no catálogo são espaços reservados: troque pelos depoimentos reais.
 

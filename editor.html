@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Editor de Propostas</title>
+  <title>Gerador de Propostas MFL Sales</title>
   <link rel="icon" href="assets/img/mfl-sales-icone.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/editor.css">
 </head>
 <body>
   <header class="barra">
     <div class="barra-titulo">
-      <strong>Editor de propostas</strong>
+      <strong id="pv-titulo">Gerador de Propostas</strong>
       <span id="status" class="status">Rascunho salvo no navegador</span>
     </div>
     <div class="barra-acoes">
       <button type="button" id="acao-abrir">Abrir proposta…</button>
       <button type="button" id="acao-importar">Importar arquivo</button>
-      <button type="button" id="acao-novo">Nova (modelo)</button>
+      <button type="button" id="acao-novo">Nova (padrão)</button>
       <button type="button" id="acao-capa">Ver capa</button>
       <button type="button" id="acao-aba">Abrir em nova aba</button>
       <button type="button" id="acao-baixar" class="primario">Baixar .json</button>
@@ -29,7 +29,143 @@
   </header>
 
   <div class="area">
-    <form id="formulario" class="formulario" autocomplete="off" novalidate></form>
+    <form id="painel" class="painel" autocomplete="off" novalidate>
+      <div class="topo-painel">
+        <img src="assets/img/mfl-sales-icone.png" alt="">
+        <h1>Gerador de Propostas<small>MFL Sales · a proposta ao lado atualiza enquanto você edita</small></h1>
+      </div>
+
+      <div id="aviso" class="aviso" hidden></div>
+
+      <section class="grp">
+        <span class="lbl">1 · Cliente</span>
+        <div class="field"><label for="cliente">Nome do cliente</label><input type="text" id="cliente" placeholder="Ex.: EcoSistemas Gestão e Tecnologia"></div>
+        <div class="linha">
+          <div class="field"><label for="data">Data da proposta</label><input type="date" id="data"></div>
+          <div class="field"><label for="validadeDias">Validade (dias)</label><input type="number" id="validadeDias" min="1" step="1"></div>
+        </div>
+        <div class="field"><label for="segmento">Segmento</label><input type="text" id="segmento" list="lista-segmentos" placeholder="Usado para sugerir depoimentos"><datalist id="lista-segmentos"></datalist></div>
+      </section>
+
+      <section class="grp">
+        <span class="lbl">2 · Modelo</span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="modelo" value="1"><span><b>1 · Inbound</b><span>Tráfego, captação e funil</span></span></label>
+          <label class="opt"><input type="radio" name="modelo" value="2"><span><b>2 · Outbound com BDR + SDR</b><span>A MFL Sales executa até a reunião agendada</span></span></label>
+          <label class="opt"><input type="radio" name="modelo" value="3"><span><b>3 · Outbound com Treinamento</b><span>A equipe do cliente executa os contatos</span></span></label>
+          <label class="opt"><input type="radio" name="modelo" value="4"><span><b>4 · Inbound + Outbound</b><span>Mostra os dois planos lado a lado</span></span></label>
+        </div>
+      </section>
+
+      <section class="grp" id="outTipoWrap">
+        <span class="lbl">Outbound do modelo 4</span>
+        <div class="opts duas">
+          <label class="opt"><input type="radio" name="outTipo" value="bdr"><span><b>BDR + SDR</b><span>MFL executa a prospecção</span></span></label>
+          <label class="opt"><input type="radio" name="outTipo" value="train"><span><b>Treinamento</b><span>Time do cliente executa</span></span></label>
+        </div>
+      </section>
+
+      <section class="grp" id="pubWrap">
+        <span class="lbl">3 · Público do Inbound</span>
+        <div class="opts duas">
+          <label class="opt"><input type="radio" name="pub" value="b2b"><span><b>B2B</b><span>Funil termina em reunião agendada</span></span></label>
+          <label class="opt"><input type="radio" name="pub" value="b2c"><span><b>B2C</b><span>Funil termina em proposta, pedido ou negociação</span></span></label>
+        </div>
+      </section>
+
+      <section class="grp" id="scopeWrap">
+        <span class="lbl">4 · Escopo do Inbound</span>
+        <div class="escopo">
+          <label><input type="checkbox" id="sc-meta"> Tráfego no Meta Ads</label>
+          <label><input type="checkbox" id="sc-google"> Tráfego no Google Ads</label>
+          <label><input type="checkbox" id="sc-lp"> Landing Page</label>
+          <label><input type="checkbox" id="sc-wpp"> Campanhas de conversa no WhatsApp</label>
+          <label><input type="checkbox" id="sc-remkt"> Remarketing</label>
+          <label><input type="checkbox" id="sc-criativos"> Copys, criativos estáticos e edições de vídeos</label>
+          <label><input type="checkbox" id="sc-roteiro"> Roteiro de atendimento para o time</label>
+          <label><input type="checkbox" id="sc-relatorio"> Relatório mensal de resultados</label>
+        </div>
+        <p class="hint">Só os itens marcados entram na proposta.</p>
+      </section>
+
+      <section class="grp">
+        <span class="lbl">5 · CRM</span>
+        <div class="opts duas">
+          <label class="opt"><input type="radio" name="crm" value="mfl"><span><b>CRM MFL Sales</b><span>Entra como serviço separado no investimento</span></span></label>
+          <label class="opt"><input type="radio" name="crm" value="cli"><span><b>CRM do cliente</b><span>Estruturamos o funil no CRM que ele já usa</span></span></label>
+        </div>
+      </section>
+
+      <section class="grp">
+        <span class="lbl">6 · Investimento</span>
+        <div class="field" id="fIn"><label for="vIn" id="lIn">Valor Inbound</label><div class="money"><span>R$</span><input type="text" id="vIn" inputmode="decimal" placeholder="0"><span class="suf">/mês</span></div></div>
+        <div class="field" id="fOut"><label for="vOut">Valor Outbound</label><div class="money"><span>R$</span><input type="text" id="vOut" inputmode="decimal" placeholder="0"><span class="suf">/mês</span></div></div>
+        <div class="field" id="fCombo"><label for="vCombo">Plano 2 · Inbound + Outbound</label><div class="money"><span>R$</span><input type="text" id="vCombo" inputmode="decimal" placeholder="0"><span class="suf">/mês</span></div></div>
+        <div class="field" id="fCrm"><label for="vCrm">CRM MFL Sales</label><div class="money"><span>R$</span><input type="text" id="vCrm" inputmode="decimal" placeholder="297"><span class="suf">/mês</span></div></div>
+        <div class="linha">
+          <div class="field"><label for="contrato">Contrato mínimo (meses)</label><input type="number" id="contrato" min="1" step="1"></div>
+          <div class="field" id="fVerba"><label for="verbaDia">Anúncios sugerido</label><div class="money"><span>R$</span><input type="text" id="verbaDia" inputmode="decimal" placeholder="100"><span class="suf">/dia</span></div></div>
+        </div>
+      </section>
+
+      <section class="grp">
+        <span class="lbl">7 · Condições adicionais</span>
+        <div class="field"><label for="cond">Uma por linha</label><textarea id="cond" rows="3" placeholder="Ex.: 10% de desconto no pagamento anual"></textarea><p class="hint">Cada linha vira um quadro em Condições.</p></div>
+      </section>
+
+      <section class="grp">
+        <span class="lbl">8 · Vídeo de prova social</span>
+        <div class="field"><label for="videoUrl">Link do vídeo</label><input type="url" id="videoUrl" placeholder="https://youtube.com/…"></div>
+        <div class="field">
+          <label for="thumb">Imagem de capa do vídeo</label>
+          <div class="thumbrow">
+            <input type="file" id="thumb" accept="image/*">
+            <img id="thumbPrev" alt="Prévia da capa" hidden>
+            <button type="button" class="btn-ghost" id="thumbClear" hidden>Remover</button>
+          </div>
+          <p class="hint">No YouTube a capa é gerada sozinha.</p>
+        </div>
+        <div class="field">
+          <label>Mais depoimentos da biblioteca</label>
+          <div class="depo-filtros">
+            <select id="depo-filtro" aria-label="Filtrar por segmento"></select>
+            <button type="button" class="btn-ghost" id="depo-sugerir">Sugerir pelo segmento</button>
+          </div>
+          <div id="depo-lista" class="depo-lista"></div>
+        </div>
+      </section>
+
+      <section class="grp">
+        <span class="lbl">9 · Responsável (botão de aprovar)</span>
+        <div class="linha">
+          <div class="field"><label for="r-nome">Nome</label><input type="text" id="r-nome"></div>
+          <div class="field"><label for="r-cargo">Cargo</label><input type="text" id="r-cargo"></div>
+        </div>
+        <div class="linha">
+          <div class="field"><label for="r-whatsapp">WhatsApp</label><input type="text" id="r-whatsapp" inputmode="tel" placeholder="5521999999999"></div>
+          <div class="field"><label for="r-email">E-mail</label><input type="email" id="r-email"></div>
+        </div>
+      </section>
+
+      <details class="grp avancado">
+        <summary class="lbl">Capa (avançado)</summary>
+        <div class="linha">
+          <div class="field"><label for="c-provaDestaque">Prova social</label><input type="text" id="c-provaDestaque" placeholder="+370 Negócios"></div>
+          <div class="field"><label for="c-provaTexto">Complemento</label><input type="text" id="c-provaTexto" placeholder="com resultados"></div>
+        </div>
+        <div class="field"><label for="c-rotulo">Texto acima do nome</label><input type="text" id="c-rotulo" placeholder="Proposta comercial para"></div>
+        <div class="field"><label for="c-frase">Frase de impacto</label><textarea id="c-frase" rows="3"></textarea><p class="hint">Trecho entre **asteriscos duplos** fica em negrito.</p></div>
+        <div class="field"><label for="c-faixa">Textos das faixas (um por linha)</label><textarea id="c-faixa" rows="2" placeholder="+7 anos"></textarea></div>
+        <div class="field"><label for="c-botao">Texto do botão</label><input type="text" id="c-botao" placeholder="Ver meu orçamento"></div>
+      </details>
+
+      <section class="grp">
+        <span class="lbl">Exportar</span>
+        <button type="button" class="btn" id="exportar">Exportar PDF</button>
+        <p class="note" id="nota-pdf">Na janela de impressão: Salvar como PDF, papel A4, margens Nenhuma e ative Gráficos de plano de fundo.</p>
+      </section>
+    </form>
+
     <div class="previa">
       <div class="previa-tamanhos" role="group" aria-label="Tamanho da pré-visualização">
         <button type="button" data-largura="100%" class="ativo">Computador</button>

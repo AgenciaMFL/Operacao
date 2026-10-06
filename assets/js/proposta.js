@@ -1,13 +1,15 @@
 /*
  * Proposta comercial dinâmica — MFL Sales.
- * Todo o conteúdo vem de propostas/<id>.json; este arquivo só cuida da apresentação.
+ *
+ * O conteúdo é gerado a partir das escolhas do gerador (modelo, público, CRM,
+ * escopo e valores), seguindo a especificação "Gerador de Propostas MFL Sales":
+ *   modelo 1 · Inbound
+ *   modelo 2 · Outbound com BDR + SDR
+ *   modelo 3 · Outbound com Treinamento
+ *   modelo 4 · Inbound + Outbound (Outbound BDR + SDR ou Treinamento)
  *
  *   index.html?p=nome-do-arquivo   → carrega propostas/nome-do-arquivo.json
  *   index.html?preview=1           → usado pelo editor (lê o rascunho do navegador)
- *
- * A proposta é montada por seções; cada seção tem blocos (lista, fluxo, cartões,
- * comparativo, chips, citação, destaque, nota, números). O investimento e o
- * fechamento são seções fixas no fim.
  */
 (() => {
   'use strict';
@@ -17,20 +19,36 @@
   const isPreview = params.has('preview');
   const slug = (params.get('p') || 'padrao').replace(/[^a-z0-9_-]/gi, '');
 
-  const RECORRENCIAS = {
-    mensal: { sufixo: '/mês', total: 'Investimento mensal' },
-    unico: { sufixo: '', total: 'Investimento único' },
-    trimestral: { sufixo: '/trimestre', total: 'Investimento trimestral' },
-    semestral: { sufixo: '/semestre', total: 'Investimento semestral' },
-    anual: { sufixo: '/ano', total: 'Investimento anual' }
+  // Identidade fixa da agência
+  const AGENCIA = {
+    nome: 'MFL Sales',
+    slogan: 'Estratégia · Performance · Resultados',
+    logo: 'assets/img/mfl-sales-logo.png',
+    site: 'https://www.agenciamfl.com.br',
+    instagram: '@agenciamfl'
   };
+
+  // Padrões da capa (layout do Figma) — editáveis em "Capa" no editor
+  const CAPA_PADRAO = {
+    rotulo: 'Proposta comercial para',
+    provaDestaque: '+370 Negócios',
+    provaTexto: 'com resultados',
+    frase: 'Enquanto outras agências mandam relatório 2x por semana, você acompanha **cada real investido em tempo real** e vê exatamente onde ele virou venda.',
+    faixa: ['+7 anos'],
+    botao: 'Ver meu orçamento',
+    video: 'assets/video/capa-fundo.mp4',
+    videoWebm: 'assets/video/capa-fundo.webm',
+    poster: 'assets/video/capa-fundo.jpg'
+  };
+
+  const SCOPE_PADRAO = { meta: true, google: true, lp: true, wpp: true, remkt: true, criativos: true, roteiro: true, relatorio: true };
 
   const $ = (sel) => document.querySelector(sel);
 
-  let dados = null;
+  let S = null;          // estado da proposta
   let aberta = isPreview;
   let observer = null;
-  let catalogo = [];   // biblioteca de depoimentos (depoimentos/catalogo.json)
+  let catalogo = [];     // biblioteca de depoimentos (depoimentos/catalogo.json)
 
   /* ---------- utilidades ---------- */
 
@@ -51,34 +69,14 @@
     return node;
   }
 
-  function preencher(texto) {
-    if (texto == null || texto === '') return '';
-    const p = dados.proposta || {};
-    const vars = {
-      cliente: dados.cliente?.nome,
-      empresa: dados.cliente?.nome,
-      contato: primeiroNome(dados.cliente?.contato),
-      agencia: dados.agencia?.nome,
-      responsavel: primeiroNome(p.responsavel?.nome),
-      numero: p.numero,
-      validade: dataValidade() ? formatarData(dataValidade()) : ''
-    };
-    return String(texto).replace(/\{(\w+)\}/g, (m, k) => (vars[k] ? vars[k] : m));
-  }
-
   const lista = (v) => (Array.isArray(v) ? v : []);
-  const textos = (v) => lista(v).map((t) => preencher(t)).filter(Boolean);
+  const vazio = (texto) => el('span', { class: 'ph-vazio', text: texto });
 
-  function primeiroNome(nome) {
-    return (nome || '').trim().split(/\s+/)[0] || '';
-  }
-
-  function paragrafos(texto, classe) {
-    return preencher(texto)
-      .split(/\n\s*\n/)
-      .map((t) => t.trim())
-      .filter(Boolean)
-      .map((t) => el('p', { class: classe, text: t }));
+  // Texto com trechos em **negrito**, sem interpretar HTML
+  function rico(texto) {
+    return String(texto || '').split(/\*\*(.+?)\*\*/g)
+      .map((parte, i) => (i % 2 ? el('strong', { text: parte }) : parte))
+      .filter((parte) => parte !== '');
   }
 
   function lerData(iso) {
@@ -88,61 +86,40 @@
     return new Date(a, m - 1, d);
   }
 
-  function formatarData(data) {
-    return data.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-  }
+  const formatarData = (data) => data.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
 
   function dataValidade() {
-    const base = lerData(dados.proposta?.data);
-    const dias = Number(dados.proposta?.validadeDias);
+    const base = lerData(S.data);
+    const dias = Number(S.validadeDias);
     if (!base || !dias) return null;
     base.setDate(base.getDate() + dias);
     return base;
   }
 
-  function num(v) {
-    const n = typeof v === 'number' ? v : parseFloat(String(v ?? '').replace(/\./g, '').replace(',', '.'));
-    return Number.isFinite(n) ? n : 0;
+  // Valores aceitam "1.500", "1.500,00" ou "R$ 1.500/mês"
+  const limpar = (v) => String(v ?? '').replace(/^\s*R\$\s*/i, '').replace(/\/\s*m[eê]s\s*$/i, '').trim();
+  function paraNumero(v) {
+    if (typeof v === 'number') return Number.isFinite(v) ? v : null;
+    const t = limpar(v);
+    if (!t) return null;
+    const n = Number(t.replace(/\./g, '').replace(',', '.'));
+    return Number.isFinite(n) ? n : null;
   }
+  const brl = (n) => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
 
-  // R$ 2.000 quando é inteiro, R$ 297,90 quando tem centavos
-  function moeda(v) {
-    const n = num(v);
-    return n.toLocaleString('pt-BR', {
-      style: 'currency', currency: 'BRL',
-      minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2
-    });
-  }
-
-  function recorrencia(chave) {
-    return RECORRENCIAS[chave] || RECORRENCIAS.mensal;
-  }
-
-  function ativo(secao) {
-    return secao && secao.ativo !== false;
-  }
-
-  function slugificar(t) {
-    return String(t || '')
-      .normalize('NFD').replace(/[̀-ͯ]/g, '')
-      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  // Preço por mês, ou marcador "R$ [valor]/mês" quando ainda não foi preenchido
+  function precoMes(v, classe) {
+    const n = paraNumero(v);
+    if (n == null) return el('strong', { class: classe }, vazio('R$ [valor]'), el('small', { text: '/mês' }));
+    return el('strong', { class: classe }, brl(n), el('small', { text: '/mês' }));
   }
 
   function linkContato(mensagem) {
-    const r = dados.proposta?.responsavel || {};
+    const r = S.responsavel || {};
     const zap = String(r.whatsapp || '').replace(/\D/g, '');
     if (zap) return `https://wa.me/${zap}?text=${encodeURIComponent(mensagem || '')}`;
-    if (r.email) {
-      const assunto = `Proposta comercial ${dados.proposta?.numero || ''}`.trim();
-      return `mailto:${r.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(mensagem || '')}`;
-    }
+    if (r.email) return `mailto:${r.email}?subject=${encodeURIComponent('Proposta MFL Sales')}&body=${encodeURIComponent(mensagem || '')}`;
     return null;
-  }
-
-  function marca(classe) {
-    const a = dados.agencia || {};
-    if (a.logo) return el('img', { src: a.logo, alt: a.nome || 'Logo', class: `marca-logo ${classe || ''}` });
-    return el('span', { class: 'marca-texto', text: a.nome || '' });
   }
 
   function formatarTelefone(t) {
@@ -153,20 +130,509 @@
   }
 
   function iniciais(nome) {
-    const partes = nome.trim().split(/\s+/);
+    const partes = String(nome || '').trim().split(/\s+/);
     return ((partes[0]?.[0] || '') + (partes.length > 1 ? partes[partes.length - 1][0] : '')).toUpperCase();
   }
 
-  /* ---------- capa ---------- */
+  const marca = (classe) => el('img', { src: AGENCIA.logo, alt: AGENCIA.nome, class: `marca-logo ${classe || ''}` });
+  const nomeCliente = () => (S.cliente || '').trim();
 
-  // Texto com trechos em **negrito**, sem interpretar HTML
-  function rico(texto) {
-    return preencher(texto).split(/\*\*(.+?)\*\*/g)
-      .map((parte, i) => (i % 2 ? el('strong', { text: parte }) : parte))
-      .filter((parte) => parte !== '');
+  /* ---------- configuração derivada (cfg da especificação) ---------- */
+
+  function cfg() {
+    const m = String(S.modelo || '4');
+    const hasIn = m === '1' || m === '4';
+    const mfl = S.crm !== 'cli';
+    return {
+      m, hasIn, mfl,
+      b2c: hasIn && S.pub === 'b2c',
+      crm: mfl ? 'CRM MFL Sales' : 'CRM',
+      crmDo: mfl ? 'no CRM MFL Sales' : 'no CRM da sua empresa',
+      out: m === '2' ? 'bdr' : m === '3' ? 'train' : m === '4' ? (S.outTipo === 'train' ? 'train' : 'bdr') : null,
+      sc: { ...SCOPE_PADRAO, ...(S.sc || {}) }
+    };
   }
 
-  // O vídeo é criado uma vez só: as atualizações ao vivo do editor não reiniciam o fundo
+  const anuncios = (sc) => [sc.meta && 'Meta Ads', sc.google && 'Google Ads'].filter(Boolean).join(' + ') || 'Anúncios';
+  const FUNIL_CLIENTE = 'Estruturação do funil, automações e follow-ups no CRM da sua empresa';
+
+  const itensInbound = (c) => [
+    'Estratégia de campanhas',
+    c.sc.meta && 'Tráfego no Meta Ads (Instagram e Facebook)',
+    c.sc.google && 'Tráfego no Google Ads',
+    c.sc.lp && (c.b2c ? 'Landing Page focada na oferta' : 'Landing Page focada na dor do cliente'),
+    c.sc.wpp && 'Campanhas de conversa no WhatsApp',
+    c.sc.remkt && 'Remarketing',
+    c.sc.criativos && 'Copys, criativos estáticos e edições de vídeos',
+    'Testes e otimização contínua',
+    c.sc.roteiro && 'Roteiro de atendimento para o time',
+    c.sc.relatorio && 'Relatório mensal de resultados',
+    !c.mfl && FUNIL_CLIENTE
+  ].filter(Boolean);
+
+  const itensBdr = (c) => ['Definição de ICP e segmentação', 'BDR: extração mensal de contatos e importação ' + c.crmDo,
+    'SDR: primeiro contato, cadência, qualificação e agendamento', 'Scripts, templates e ligações', 'Relatório mensal de prospecção',
+    !c.mfl && FUNIL_CLIENTE].filter(Boolean);
+
+  const itensTrain = (c) => ['Definição de ICP e segmentação', 'Extração mensal de contatos', 'Importação e organização ' + c.crmDo,
+    'Scripts, templates e cadência de contato', 'Treinamento da equipe comercial', 'Relatório mensal de prospecção',
+    !c.mfl && FUNIL_CLIENTE].filter(Boolean);
+
+  const itensCrm = (c) => ['Implantação e configuração do CRM', 'Funil de vendas personalizado', 'Integração com o WhatsApp', 'Automações e follow-ups',
+    (c.out || !c.b2c) ? 'Agendamento com lembretes de reunião' : 'Mensagens automáticas de atendimento',
+    'Recuperação de oportunidades paradas', 'Rastreamento da origem dos leads', 'Painel de resultados e IA no atendimento'];
+
+  /* ---------- componentes ---------- */
+
+  const blocoTitulo = (t) => (t ? el('h3', { class: 'bloco-titulo', text: t }) : null);
+  const bloco = (classe, ...filhos) => el('div', { class: `bloco ${classe || ''} revelar` }, ...filhos);
+  const par = (...blocos) => el('div', { class: 'blocos-par' }, ...blocos);
+
+  function listaCheck(itens, colunas = 2) {
+    return el('ul', { class: `b-lista${colunas === 2 ? ' duas-colunas' : ''}` }, itens.filter(Boolean).map((t) => el('li', {}, rico(t))));
+  }
+
+  // Etapas numeradas; { divisor: 'texto' } vira a linha de passagem para o time do cliente
+  function etapas(lista_, { inicio = 1, compacto = false } = {}) {
+    const itens = lista_.filter(Boolean);
+    let n = inicio - 1;
+    const numeradas = itens.filter((e) => !e.divisor).length;
+    const porLinha = numeradas <= 5 ? numeradas : [4, 3, 5].find((q) => numeradas % q === 0) || 4;
+    let doCliente = false;
+    return el('ol', { class: `b-fluxo${compacto ? ' compacto' : ''}`, style: compacto ? `--por-linha:${porLinha}` : null },
+      itens.map((e) => {
+        if (e.divisor) { doCliente = true; return el('li', { class: 'fluxo-divisor' }, rico(e.divisor)); }
+        n += 1;
+        return el('li', { class: `fluxo-etapa${(n - inicio + 1) % porLinha === 0 ? ' fim-linha' : ''}${doCliente || e.cliente ? ' do-cliente' : ''}` },
+          el('span', { class: 'fluxo-num', text: n }),
+          el('div', { class: 'fluxo-texto' }, el('strong', { text: e[0] }), e[1] && el('span', { text: e[1] })));
+      }));
+  }
+
+  function cartoes(lista_, colunas) {
+    const itens = lista_.filter(Boolean);
+    return el('div', { class: `b-cartoes col-${colunas || Math.min(itens.length, 3)}` },
+      itens.map((c) => el('article', { class: 'cartao' },
+        c.etiqueta && el('span', { class: 'cartao-etiqueta', text: c.etiqueta }),
+        el('h4', { text: c.titulo }),
+        c.texto && el('p', { text: c.texto }),
+        c.conteudo || null)));
+  }
+
+  const destaque = (t) => el('p', { class: 'b-destaque' }, rico(t));
+  const nota = (t) => el('p', { class: 'b-nota', text: t });
+
+  // Uma faixa da página: rótulo, título, texto de abertura e blocos
+  function faixaSecao(id, rotulo, titulo, texto, blocos, extra = {}) {
+    return el('section', { class: `secao secao-banda ${extra.classe || ''}`, id, 'data-estilo': extra.estilo || null },
+      el('div', { class: 'container' },
+        el('header', { class: 'secao-cabecalho revelar' },
+          el('span', { class: 'secao-rotulo' }, el('span', { text: rotulo })),
+          el('h2', { class: 'secao-titulo', text: titulo }),
+          texto && el('div', { class: 'secao-texto' }, el('p', {}, rico(texto)))
+        ),
+        el('div', { class: 'blocos' }, blocos.filter(Boolean))
+      ));
+  }
+
+  /* ---------- seções (ordem da especificação) ---------- */
+
+  const SECOES = {};
+
+  SECOES.porque = (c) => faixaSecao('por-que-a-mfl', 'Por que a MFL Sales',
+    'Não entregamos leads. Entregamos um processo comercial funcionando.',
+    `Muitas empresas já contrataram tráfego, compraram listas ou implantaram um CRM, e continuaram sem previsibilidade de vendas. Isso acontece porque cada peça foi resolvida separadamente. A MFL Sales une estratégia, execução e tecnologia em uma única operação, ${c.b2c ? 'do primeiro contato até o fechamento da venda' : 'do primeiro contato até a reunião com o seu comercial'}.`,
+    [
+      bloco('', blocoTitulo('O que nos diferencia'), cartoes([
+        { titulo: 'Processo completo, não peças soltas', texto: 'Atração, prospecção, CRM e follow-up são pensados juntos e conversam entre si.' },
+        c.mfl
+          ? { titulo: 'CRM próprio, implantado por nós', texto: 'Você não recebe só um acesso. Recebe o funil montado, as automações rodando e o processo desenhado para o seu negócio.' }
+          : { titulo: 'Seu CRM, organizado por nós', texto: 'Trabalhamos no CRM que sua empresa já usa e estruturamos dentro dele o funil, as etapas e as rotinas de follow-up.' },
+        c.b2c
+          ? { titulo: 'Foco em venda, não em volume', texto: 'Cada etapa é feita para atrair e levar ao seu time quem tem potencial real de compra.' }
+          : { titulo: 'Foco em reunião, não em volume', texto: 'Cada etapa é feita para qualificar e levar ao seu comercial quem tem potencial real de compra.' },
+        { titulo: 'Nenhuma oportunidade perdida', texto: 'Follow-ups, lembretes e recuperação de contatos parados garantem que nenhum lead fique esquecido.' },
+        { titulo: 'Decisões baseadas em dados', texto: 'Você acompanha de onde vêm as oportunidades, em que etapa estão e o que está convertendo.' },
+        { titulo: 'Ajuste contínuo', texto: 'Campanhas, listas, abordagens e funil são testados e otimizados conforme os resultados.' }
+      ], 3)),
+      bloco('', blocoTitulo('Como trabalhamos'), etapas([
+        ['Diagnóstico', 'Entendemos o seu negócio, o seu cliente ideal e o seu processo de venda atual'],
+        ['Estruturação', 'Montamos canais, funil, automações e materiais de abordagem'],
+        ['Execução', 'Colocamos a operação para rodar e gerar oportunidades todos os meses'],
+        ['Otimização', 'Analisamos os números e ajustamos o que traz mais resultado']
+      ])),
+      bloco('', destaque('Sua empresa foca em vender e entregar. A MFL Sales estrutura e opera a máquina que traz as oportunidades.'))
+    ]);
+
+  SECOES.resultados = (c) => {
+    const url = String(S.videoUrl || '').trim();
+    const ok = /^https?:\/\//i.test(url) || /\.(mp4|webm)$/i.test(url);
+    const fonte = ok ? fonteVideo(url) : null;
+    const capa = S.thumb || fonte?.capa;
+    const principal = el('div', { class: 'video-principal' },
+      el('button', {
+        type: 'button', class: 'depoimento-video video-grande', disabled: !fonte,
+        'aria-label': fonte ? 'Assistir ao depoimento em vídeo' : 'Vídeo ainda não adicionado',
+        onclick: () => abrirVideo({ video: url, pessoa: 'Depoimento em vídeo' })
+      },
+        capa ? el('img', { src: capa, alt: '' }) : el('span', { class: 'video-sem-capa', text: 'DEPOIMENTO EM VÍDEO' }),
+        el('span', { class: 'depoimento-play', 'aria-hidden': 'true' })
+      ),
+      fonte
+        ? el('a', { class: 'video-link', href: url, target: '_blank', rel: 'noopener', text: 'Assistir ao vídeo →' })
+        : el('p', { class: 'video-link' }, vazio('[Adicione o link do vídeo no painel]'))
+    );
+
+    const extras = lista(S.depoimentos).map((id) => catalogo.find((d) => d.id === id)).filter(Boolean);
+    return faixaSecao('resultados', 'Resultados', 'Quem já estruturou o comercial com a MFL Sales',
+      'Antes de falar do que vamos fazer, veja quem já passou por esse processo.',
+      [
+        bloco('', principal),
+        extras.length ? bloco('', blocoTitulo('Mais depoimentos'), cartoesDepoimento(extras)) : null,
+        bloco('', cartoes([
+          { titulo: 'Estratégia', texto: 'Definimos para quem vender, com qual mensagem e por quais canais.' },
+          { titulo: 'Execução', texto: 'Operamos campanhas, prospecção e follow-up com rotina e método.' },
+          { titulo: 'Tecnologia', texto: 'Funil e automações organizam cada oportunidade até o fechamento.' }
+        ], 3)),
+        bloco('', destaque(`A MFL Sales estrutura operações comerciais de aquisição, ${c.b2c ? 'do primeiro contato à venda' : 'do primeiro contato à reunião agendada'}, com método, tecnologia e acompanhamento próximo.`))
+      ]);
+  };
+
+  SECOES.inbound = (c) => {
+    const b2c = c.b2c;
+    const lp = c.sc.lp;
+    const dest = lp ? (b2c ? 'para uma Landing Page focada na oferta' : 'para uma Landing Page focada no problema')
+      : (c.sc.wpp ? 'direto para uma conversa no WhatsApp ou para um formulário' : 'direto para um formulário de contato');
+    const texto = b2c
+      ? `O Inbound alcança quem já procura o que sua empresa vende e desperta interesse em quem ainda não começou a procurar. O anúncio não leva para o site institucional. Ele leva ${dest}, onde o cliente deixa o contato e entra direto no seu atendimento.`
+      : `O Inbound captura a demanda que já existe, ou seja, pessoas e empresas que já buscam uma solução. Também alcança quem tem o problema mas ainda não começou a procurar. O anúncio não leva para o site institucional. Ele leva ${dest}, com perguntas que qualificam o lead antes do primeiro contato.`;
+    const captura = c.sc.wpp ? 'Formulário ou WhatsApp' : 'Formulário';
+    const fluxo = b2c ? [
+      [anuncios(c.sc), 'Anúncio sobre o produto ou serviço que sua empresa vende'],
+      lp && ['Landing Page', 'Página focada na oferta, não no institucional'],
+      ['Captura do contato', captura + ', com as informações do cliente'],
+      [c.crm, 'Entrada automática, com todo o contexto'],
+      ['Automação e follow-up', 'Resposta rápida e nenhum contato esquecido'],
+      ['Atendimento', 'Seu time continua a conversa já sabendo o que o cliente procura'],
+      ['Proposta, pedido ou negociação', 'Conduzidos pelo seu time até o fechamento']
+    ] : [
+      [anuncios(c.sc), 'Anúncio sobre o problema que sua empresa resolve'],
+      lp && ['Landing Page', 'Página focada na dor, não no institucional'],
+      ['Formulário de qualificação', (c.sc.wpp ? 'Formulário ou WhatsApp, ' : '') + 'informações do lead antes do primeiro contato'],
+      [c.crm, 'Entrada automática, com todo o contexto'],
+      ['Automação e follow-up', 'Nenhum lead esquecido'],
+      ['Contato comercial', 'Seu time já sabe o problema antes de ligar'],
+      ['Reunião agendada', 'Com o contexto completo do lead']
+    ];
+    const pratica = b2c
+      ? `Alguém vê um anúncio do que sua empresa vende e clica. ${lp ? 'Chega a uma página feita para aquela oferta e deixa o contato.' : 'Já cai em uma conversa ou formulário e deixa o contato.'} Em segundos, está no CRM com todas as informações e recebe a primeira mensagem. Seu time continua o atendimento até a venda.`
+      : `Alguém pesquisa pelo problema que sua empresa resolve e clica em um anúncio que fala exatamente dele. ${lp ? 'Chega a uma página feita para essa pessoa e preenche o formulário.' : 'Responde às perguntas de qualificação e deixa o contato.'} Em segundos, o lead está no CRM com todas as informações.`;
+    return faixaSecao('inbound', 'Inbound',
+      b2c ? 'Atrair clientes no momento em que eles estão prontos para comprar' : 'Capturar clientes no momento em que a necessidade aparece',
+      texto,
+      [
+        bloco('', blocoTitulo(b2c ? 'Do anúncio à venda' : 'Do anúncio à reunião'), etapas(fluxo)),
+        par(
+          bloco('', blocoTitulo('O que entregamos'), listaCheck(itensInbound(c).filter((i) => i !== FUNIL_CLIENTE), 1)),
+          bloco('', el('figure', { class: 'b-citacao caixa-pratica' }, el('figcaption', { text: 'Na prática' }), el('blockquote', { text: pratica })))
+        ),
+        bloco('', nota('A verba de anúncios é paga diretamente pelo cliente às plataformas e não está incluída neste investimento.')),
+        bloco('', destaque(b2c ? 'O objetivo não é gerar cliques. É gerar atendimentos com quem tem potencial real de compra.'
+          : 'O objetivo não é gerar formulários. É gerar conversas com quem tem potencial real de compra.'))
+      ]);
+  };
+
+  const SINAIS = 'Não buscamos contatos aleatórios. Buscamos perfis com sinais de que precisam do que vocês vendem: segmento, porte, momento de crescimento e estrutura atual.';
+
+  // Coluna "quem faz" com etapas numeradas
+  function colunaQuem(quem, titulo, texto, etapasLista, inicio, escura) {
+    return el('article', { class: `quem${escura ? ' quem-cliente' : ''}` },
+      el('span', { class: 'quem-rotulo', text: quem }),
+      el('h4', { text: titulo }),
+      texto && el('p', { text: texto }),
+      etapas(etapasLista, { inicio }));
+  }
+
+  SECOES.bdr = (c) => faixaSecao('outbound', 'Outbound',
+    'Ir até quem ainda não está procurando, mas tem o perfil para comprar',
+    'O Outbound não é disparo em massa. É um processo para encontrar quem tem o perfil ideal, chegar até o decisor e transformar o contato em reunião. Neste modelo, a MFL Sales executa toda a prospecção com dois profissionais dedicados a etapas diferentes, e o seu time recebe a reunião agendada.',
+    [
+      bloco('', el('div', { class: 'quem-grade col-3' },
+        colunaQuem('MFL Sales', 'Estratégia', 'Define quem deve ser abordado e com qual mensagem.',
+          [['ICP', 'Perfil ideal de cliente'], ['Segmentação', 'Setor, porte, região e características']], 1),
+        colunaQuem('MFL Sales · BDR', 'Construção da base', 'Encontra as empresas e os decisores certos e organiza tudo no CRM.',
+          [['Extração', 'Empresa, decisor e dados de contato'], ['Importação', 'Lista organizada ' + c.crmDo]], 3),
+        colunaQuem('MFL Sales · SDR', 'Contato e agendamento', 'Faz o primeiro contato, conduz a cadência, qualifica e agenda.',
+          [['Abordagem', 'Scripts, templates e ligações'], ['Cadência', 'Follow-ups até gerar conexão'], ['Qualificação', 'Necessidade, momento e fit'], ['Agendamento', 'Reunião na agenda do seu comercial']], 5)
+      )),
+      bloco('', etapas([{ divisor: 'A partir daqui: **o comercial da sua empresa** assume, com a reunião agendada e o contexto do lead.' },
+        ['Reunião, proposta e fechamento', 'Conduzidos pelo seu time, com todo o histórico do lead no CRM']], { inicio: 9 })),
+      bloco('', cartoes([
+        { titulo: 'Base qualificada', texto: 'Contatos que seguem o perfil ideal definido na estratégia.' },
+        { titulo: 'Cadência estruturada', texto: 'Ligações, mensagens e follow-ups com ritmo e roteiro.' },
+        { titulo: 'Reunião na agenda', texto: 'Seu time recebe o lead pronto para a conversa comercial.' }
+      ], 3)),
+      bloco('', destaque(SINAIS))
+    ]);
+
+  SECOES.train = (c) => faixaSecao('outbound', 'Outbound',
+    'Estruturar a prospecção e preparar o seu time para executar',
+    'O Outbound não é disparo em massa. É um processo para encontrar quem tem o perfil ideal, chegar até o decisor e transformar o contato em reunião. Neste modelo, a MFL Sales monta toda a inteligência e a estrutura da prospecção e treina a sua equipe comercial para executar os contatos. O conhecimento fica dentro da empresa.',
+    [
+      bloco('', el('div', { class: 'quem-grade col-2' },
+        colunaQuem('Executado pela MFL Sales', 'Inteligência, base e preparação', null, [
+          ['ICP', 'Definição do perfil ideal de cliente'],
+          ['Segmentação', 'Setor, porte, região e características'],
+          ['Extração', 'Empresa, decisor e dados de contato'],
+          ['Importação', 'Lista organizada ' + c.crmDo],
+          ['Material de abordagem', 'Scripts de ligação, templates de mensagem e cadência de follow-up'],
+          ['Treinamento', 'Preparação da equipe para abordagem, qualificação e agendamento']], 1),
+        colunaQuem('Executado pelo seu time', 'Contato e fechamento', 'Com script e cadência entregues por nós.', [
+          ['Abordagem e cadência', 'Contatos feitos com o material entregue'],
+          ['Qualificação e agendamento', 'Com o roteiro de descoberta'],
+          ['Reunião, proposta e fechamento', 'Conduzidos pelo seu time']], 7, true)
+      )),
+      bloco('', cartoes([
+        { titulo: 'O que fica com a sua empresa', texto: 'Lista qualificada, scripts, templates, cadência e um time treinado para usar tudo isso.' },
+        { titulo: 'Por que esse modelo', texto: 'Ideal para quem já tem time comercial e quer prospectar com método, sem depender de terceiros.' }
+      ], 2)),
+      bloco('', destaque(SINAIS)),
+      bloco('', destaque('Vocês recebem a lista certa, o roteiro pronto e o time preparado, e mantêm o controle da operação.'))
+    ]);
+
+  SECOES.crm = (c) => {
+    const fIn = c.b2c
+      ? ['Lead captado', 'Primeiro atendimento', 'Interesse confirmado', 'Proposta / orçamento', 'Negociação', 'Pedido / fechamento', 'Fechado ganho / perdido']
+      : ['Lead captado', 'Qualificação', 'Contato', 'Reunião agendada', 'Reunião realizada', 'Proposta', 'Negociação', 'Fechado ganho / perdido'];
+    const fOut = ['Contato importado', 'Em abordagem', 'Conexão', 'Interesse', 'Reunião agendada', 'Reunião realizada', 'Proposta', 'Negociação', 'Fechado ganho / perdido'];
+    const ambos = c.hasIn && c.out;
+    const config = c.mfl
+      ? ['Funil de vendas adaptado ao seu processo', 'Caixa de entrada unificada (WhatsApp, e-mail, formulários e ligações)', 'Automações em cada etapa do funil', 'Follow-ups automáticos',
+        (c.out || !c.b2c) ? 'Agenda integrada, com confirmação e lembrete de reunião' : 'Mensagens automáticas de boas-vindas e retomada de contato',
+        'Tarefas e distribuição de leads para o time', 'Recuperação de oportunidades paradas', 'Histórico completo de cada contato', 'Painel de acompanhamento dos resultados',
+        'Recursos de IA para apoiar o atendimento inicial e organizar as informações dos leads']
+      : ['Funil de vendas adaptado ao seu processo', 'Etapas e critérios claros para cada fase do funil', 'Cadastro organizado de leads e contatos', 'Rotinas de follow-up para cada etapa',
+        'Automações, de acordo com os recursos do seu CRM', 'Padronização dos registros e do histórico', 'Orientação do time para usar o funil no dia a dia'];
+    const funil = (t, arr) => bloco('', blocoTitulo(t), etapas(arr.map((s) => [s, ''])));
+    const configBloco = (colunas) => bloco('', blocoTitulo(c.mfl ? 'O que configuramos' : 'O que estruturamos no seu CRM'), listaCheck(config, colunas));
+    const texto = c.mfl
+      ? `${ambos ? 'Todos os canais, Inbound e Outbound, convergem para o mesmo CRM MFL Sales' : 'Todas as oportunidades entram no CRM MFL Sales'}. Montamos o funil de vendas, as automações e os follow-ups para que nenhuma oportunidade se perca entre o primeiro contato e o fechamento.`
+      : `${ambos ? 'Todos os canais, Inbound e Outbound, convergem para o CRM que sua empresa já utiliza' : 'Todas as oportunidades entram no CRM que sua empresa já utiliza'}. Estruturamos dentro dele o funil de vendas, as etapas e as rotinas de follow-up, aproveitando os recursos que a ferramenta oferece.`;
+    return faixaSecao('tecnologia', 'Tecnologia da operação',
+      'Do primeiro contato ao fechamento: um processo comercial estruturado', texto,
+      [
+        ambos ? par(funil('Funil Inbound', fIn), funil('Funil Outbound', fOut)) : par(c.hasIn ? funil('Funil Inbound', fIn) : funil('Funil Outbound', fOut), configBloco(1)),
+        ambos ? configBloco(2) : null,
+        !ambos ? bloco('', cartoes([
+          { titulo: 'Visão do funil', texto: 'Saiba quantas oportunidades existem em cada etapa.' },
+          { titulo: 'Origem dos leads', texto: 'Entenda quais canais trazem mais resultado.' },
+          { titulo: 'Rotina do time', texto: 'Cada contato com próximo passo e responsável.' }
+        ], 3)) : null,
+        bloco('', destaque('A tecnologia faz o trabalho operacional para que o comercial gaste tempo apenas com quem pode comprar.'))
+      ]);
+  };
+
+  function calcularInvestimento(c) {
+    const crm = c.mfl ? paraNumero(S.vCrm) : 0;
+    const soma = (v) => { const n = paraNumero(v); return n != null && crm != null ? n + crm : null; };
+    if (c.m === '4') {
+      return [
+        { nome: 'Plano 1 · Inbound' + (c.mfl ? ' + CRM MFL Sales' : ''), valor: soma(S.vIn) },
+        { nome: 'Plano 2 · Inbound + Outbound' + (c.mfl ? ' + CRM MFL Sales' : ''), valor: soma(S.vCombo), destaque: true }
+      ];
+    }
+    const v = c.m === '1' ? S.vIn : S.vOut;
+    return [{ nome: 'Investimento mensal total', valor: soma(v), destaque: true }];
+  }
+
+  SECOES.invest = (c) => {
+    const plano = ({ selo, rotulo, titulo, valor, cap, itens, escuro, largo }) =>
+      el('article', { class: `plano${escuro ? ' plano-destaque' : ''}${largo ? ' plano-largo' : ''}` },
+        el('div', { class: 'plano-topo' }, el('span', { class: 'plano-rotulo', text: rotulo }), selo && el('span', { class: 'plano-selo', text: selo })),
+        el('h3', { class: 'plano-nome', text: titulo }),
+        el('div', { class: 'plano-preco' }, precoMes(valor)),
+        cap && el('p', { class: 'plano-descricao', text: cap }),
+        el('ul', { class: 'plano-itens' }, itens.map((t) => el('li', { text: t }))));
+
+    const cartaoCrm = (rotulo) => plano({ rotulo, titulo: 'CRM MFL Sales', valor: S.vCrm, cap: 'Plataforma + configuração:', itens: itensCrm(c) });
+    const crmNum = paraNumero(S.vCrm);
+    let planos;
+    let totais = [];
+
+    if (c.m !== '4') {
+      const svc = c.m === '1' ? { selo: 'Gestão de tráfego', titulo: 'Inbound' + (c.b2c ? ' · B2C' : ''), v: S.vIn, itens: itensInbound(c), cap: 'Gestão completa das campanhas:' }
+        : c.m === '2' ? { selo: 'Prospecção ativa', titulo: 'Outbound com BDR + SDR', v: S.vOut, itens: itensBdr(c), cap: 'Prospecção executada pela MFL Sales:' }
+          : { selo: 'Prospecção + treinamento', titulo: 'Outbound com Treinamento', v: S.vOut, itens: itensTrain(c), cap: 'Estrutura e preparação do seu time:' };
+      planos = el('div', { class: `planos col-${c.mfl ? 2 : 1}` },
+        plano({ selo: svc.selo, rotulo: 'Serviço 1', titulo: svc.titulo, valor: svc.v, cap: svc.cap, itens: svc.itens, escuro: true, largo: !c.mfl }),
+        c.mfl ? cartaoCrm('Serviço 2') : null);
+      if (c.mfl) {
+        const a = paraNumero(svc.v);
+        totais = [{ nome: 'Investimento mensal total', composicao: `${svc.titulo} ${a != null ? brl(a) : 'R$ [valor]'} + CRM MFL Sales ${crmNum != null ? brl(crmNum) : 'R$ [valor]'}`, valor: a != null && crmNum != null ? a + crmNum : null, destaque: true }];
+      }
+    } else {
+      const itensOut = (c.out === 'bdr' ? itensBdr(c) : itensTrain(c)).filter((i) => i !== FUNIL_CLIENTE);
+      planos = el('div', { class: 'planos col-2' },
+        plano({ rotulo: 'Plano 1', titulo: 'Inbound', valor: S.vIn, cap: 'Gestão completa das campanhas:', itens: itensInbound(c) }),
+        plano({ selo: 'Recomendado', rotulo: 'Plano 2', titulo: 'Inbound + Outbound', valor: S.vCombo, cap: 'Tudo do plano Inbound, mais:', itens: itensOut, escuro: true }));
+      if (c.mfl) {
+        const a = paraNumero(S.vIn);
+        const b = paraNumero(S.vCombo);
+        const soma = (x) => (x != null && crmNum != null ? x + crmNum : null);
+        totais = [
+          { nome: 'Plano 1 · Inbound + CRM MFL Sales', composicao: `Plano escolhido + CRM MFL Sales ${crmNum != null ? brl(crmNum) : 'R$ [valor]'}`, valor: soma(a) },
+          { nome: 'Plano 2 · Inbound + Outbound + CRM MFL Sales', composicao: `Plano escolhido + CRM MFL Sales ${crmNum != null ? brl(crmNum) : 'R$ [valor]'}`, valor: soma(b), destaque: true }
+        ];
+      }
+    }
+
+    const crmLargo = c.m === '4' && c.mfl
+      ? el('article', { class: 'plano plano-crm-largo revelar' },
+        el('div', { class: 'plano-crm-info' },
+          el('span', { class: 'plano-rotulo', text: 'Serviço adicional' }),
+          el('h3', { class: 'plano-nome', text: 'CRM MFL Sales' }),
+          el('p', { class: 'plano-descricao', text: 'Plataforma + configuração, válido para os dois planos:' }),
+          el('ul', { class: 'plano-itens duas-colunas' }, itensCrm(c).map((t) => el('li', { text: t })))),
+        el('div', { class: 'plano-preco' }, precoMes(S.vCrm)))
+      : null;
+
+    const validade = dataValidade();
+    const condicoes = [
+      ['Contrato', `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}`],
+      c.hasIn && ['Mídia', 'Verba de anúncios paga à parte, direto às plataformas'],
+      ...String(S.cond || '').split('\n').map((t) => t.trim()).filter(Boolean).map((t) => ['Condição', t])
+    ].filter(Boolean);
+
+    return faixaSecao('investimento', 'Investimento', 'Plano de aquisição comercial', null, [
+      bloco('', planos),
+      crmLargo,
+      totais.length ? bloco('totais', totais.map((t) => el('div', { class: `total${t.destaque ? ' total-destaque' : ''}` },
+        el('div', { class: 'total-info' }, el('strong', { text: t.nome }), t.composicao && el('span', { text: t.composicao })),
+        el('div', { class: 'total-valor' }, t.valor != null
+          ? el('strong', {}, brl(t.valor), el('small', { text: '/mês' }))
+          : el('strong', {}, vazio('R$ [total]'), el('small', { text: '/mês' })))))) : null,
+      c.hasIn ? verbaAnuncios() : null,
+      bloco('condicoes', blocoTitulo('Condições'), el('div', { class: 'condicoes-grade' },
+        condicoes.map(([k, v]) => el('div', { class: 'condicao' }, el('span', { class: 'condicao-chave', text: k }), el('strong', { text: v }))))),
+      bloco('', nota(`Todos os valores são mensais.${validade ? ` Proposta válida até ${formatarData(validade)}.` : ''}`))
+    ], { classe: 'secao-investimento' });
+  };
+
+  // Investimento em anúncios sugerido (editável no painel)
+  function verbaAnuncios() {
+    const dia = paraNumero(S.verbaDia);
+    if (!dia) return null;
+    return el('div', { class: 'verba revelar' },
+      el('span', { class: 'verba-icone', 'aria-hidden': 'true', text: '↗' }),
+      el('div', { class: 'verba-info' },
+        el('strong', { text: 'Investimento em anúncios sugerido' }),
+        el('span', { text: 'Pago direto à Meta e ao Google, fora dos valores acima. Pode ser ajustado conforme os resultados das campanhas.' })),
+      el('div', { class: 'verba-valor' },
+        el('strong', {}, brl(dia), el('small', { text: '/dia' })),
+        el('span', { text: `≈ ${brl(dia * 30)} por mês` })));
+  }
+
+  SECOES.next = (c) => {
+    const canais = [c.hasIn && (c.sc.lp ? 'campanhas e Landing Page' : 'campanhas'), c.out && 'listas, scripts e cadência'].filter(Boolean).join(', ');
+    const inicio = c.hasIn && c.out ? 'Início das campanhas e da prospecção' : c.hasIn ? 'Início das campanhas' : 'Início da prospecção';
+    const r = S.responsavel || {};
+    const href = linkContato(`Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`);
+    return faixaSecao('proximos-passos', 'Próximos passos', 'Como começamos',
+      'Depois da aprovação, a operação é montada em etapas curtas e objetivas. Este é o caminho até as primeiras oportunidades chegarem ao seu time.',
+      [
+        bloco('', etapas([
+          ['Aprovação da proposta', 'Assinatura do contrato e definição da data de início'],
+          ['Reunião de onboarding', 'Alinhamos público, oferta, metas, processo de venda e acessos'],
+          [c.mfl ? 'Implantação do CRM MFL Sales' : 'Estruturação do funil no seu CRM', 'Funil, etapas, automações e follow-ups configurados'],
+          ['Preparação dos canais', 'Estruturação de ' + canais],
+          [inicio, 'A operação entra no ar e as oportunidades começam a ser trabalhadas'],
+          ['Acompanhamento e otimização', 'Análise dos resultados e ajustes contínuos' + ((c.hasIn && c.sc.relatorio) || c.out ? ', com relatório mensal' : '')]
+        ])),
+        bloco('', blocoTitulo('O que precisamos de vocês'), listaCheck([
+          c.hasIn && 'Acesso às contas de anúncio e às redes sociais',
+          'Informações sobre produtos, ofertas e diferenciais',
+          c.out && 'Definição conjunta do perfil ideal de cliente',
+          !c.mfl && 'Acesso administrativo ao CRM da sua empresa',
+          'Um responsável para aprovar materiais e acompanhar os resultados',
+          (c.out || !c.b2c) ? 'Agenda do comercial disponível para as reuniões' : 'Time preparado para responder os contatos rapidamente'
+        ], 2)),
+        el('div', { class: 'cta tema-escuro revelar' },
+          el('div', { class: 'cta-texto' },
+            el('h3', { text: 'Nosso objetivo não é apenas gerar leads. É construir um processo comercial que coloque sua empresa diante das pessoas certas e transforme interesse em vendas.' }),
+            href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' }, el('span', { text: 'Quero aprovar a proposta' }), el('span', { 'aria-hidden': 'true', text: '→' }))),
+          r.nome && el('div', { class: 'responsavel' },
+            el('span', { class: 'responsavel-avatar', 'aria-hidden': 'true', text: iniciais(r.nome) }),
+            el('div', {},
+              el('strong', { text: r.nome }),
+              r.cargo && el('span', { text: r.cargo }),
+              el('span', { class: 'responsavel-contatos' },
+                r.whatsapp && el('a', { href: `https://wa.me/${String(r.whatsapp).replace(/\D/g, '')}`, target: '_blank', rel: 'noopener', text: formatarTelefone(r.whatsapp) }),
+                r.email && el('a', { href: `mailto:${r.email}`, text: r.email })))))
+      ], { classe: 'secao-proximos' });
+  };
+
+  /* ---------- depoimentos em vídeo ---------- */
+
+  // Aceita link do YouTube, do Vimeo ou um arquivo de vídeo (mp4/webm)
+  function fonteVideo(url) {
+    const u = String(url || '').trim();
+    if (!u) return null;
+    const yt = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([\w-]{11})/);
+    if (yt) return { tipo: 'iframe', src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0`, capa: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` };
+    const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vm) return { tipo: 'iframe', src: `https://player.vimeo.com/video/${vm[1]}?autoplay=1` };
+    if (/^https?:\/\//i.test(u) && !/\.(mp4|webm|mov)(\?|$)/i.test(u)) return { tipo: 'link', src: u };
+    return { tipo: 'arquivo', src: u };
+  }
+
+  function abrirVideo(dep) {
+    const fonte = fonteVideo(dep.video);
+    if (!fonte) return;
+    if (fonte.tipo === 'link') { window.open(fonte.src, '_blank', 'noopener'); return; }
+    let dialogo = $('#player-depoimento');
+    if (!dialogo) {
+      dialogo = el('dialog', { id: 'player-depoimento', class: 'player' });
+      dialogo.addEventListener('close', () => dialogo.replaceChildren());
+      dialogo.addEventListener('click', (e) => { if (e.target === dialogo) dialogo.close(); });
+      document.body.append(dialogo);
+    }
+    const midia = fonte.tipo === 'iframe'
+      ? el('iframe', { src: fonte.src, title: 'Depoimento em vídeo', allow: 'autoplay; fullscreen; picture-in-picture', allowfullscreen: true })
+      : el('video', { src: fonte.src, controls: true, autoplay: true, playsinline: true });
+    dialogo.replaceChildren(
+      el('div', { class: 'player-moldura' }, midia),
+      el('div', { class: 'player-legenda' },
+        el('span', {}, el('strong', { text: dep.pessoa || dep.cliente || '' }), [dep.cargo, dep.cliente].filter(Boolean).length && dep.pessoa ? ` · ${[dep.cargo, dep.cliente].filter(Boolean).join(', ')}` : ''),
+        el('button', { type: 'button', class: 'player-fechar', onclick: () => dialogo.close(), text: 'Fechar ✕' })));
+    dialogo.showModal();
+  }
+
+  function cartoesDepoimento(lista_) {
+    return el('div', { class: `depoimentos col-${Math.min(lista_.length, 3)}` },
+      lista_.map((dep) => {
+        const fonte = fonteVideo(dep.video);
+        const capa = dep.capa || fonte?.capa;
+        return el('article', { class: 'depoimento' },
+          el('button', {
+            type: 'button', class: 'depoimento-video', disabled: !fonte,
+            'aria-label': fonte ? `Assistir ao depoimento de ${dep.pessoa || dep.cliente}` : 'Vídeo ainda não cadastrado',
+            onclick: () => abrirVideo(dep)
+          },
+            capa ? el('img', { src: capa, alt: '', loading: 'lazy' }) : null,
+            el('span', { class: 'depoimento-play', 'aria-hidden': 'true' }),
+            !fonte && el('span', { class: 'depoimento-aviso', text: 'Vídeo ainda não cadastrado' })),
+          el('div', { class: 'depoimento-info' },
+            dep.segmento && el('span', { class: 'depoimento-segmento', text: dep.segmento }),
+            dep.resultado && el('strong', { class: 'depoimento-resultado', text: dep.resultado }),
+            dep.citacao && el('p', { class: 'depoimento-citacao', text: `“${dep.citacao}”` }),
+            el('p', { class: 'depoimento-autor' },
+              el('strong', { text: dep.pessoa || dep.cliente || '' }),
+              [dep.cargo, dep.pessoa ? dep.cliente : ''].filter(Boolean).length ? el('span', { text: [dep.cargo, dep.pessoa ? dep.cliente : ''].filter(Boolean).join(' · ') }) : null)));
+      }));
+  }
+
+  /* ---------- capa (layout do Figma) ---------- */
+
   let videoCapa = null;
   function fundoVideo(src, poster, webm) {
     if (!src) return null;
@@ -181,45 +647,33 @@
     return videoCapa;
   }
 
-  // Faixa inclinada com texto repetido em movimento
-  function faixa(textosFaixa, classe) {
+  function faixaAnimada(textosFaixa, classe) {
     const itens = textosFaixa.length ? textosFaixa : ['+7 anos'];
     const sequencia = [];
     while (sequencia.length < 24) sequencia.push(...itens);
     const trilha = () => el('div', { class: 'faixa-trilha' }, sequencia.map((t) => el('span', { text: t })));
-    return el('div', { class: `capa-faixa ${classe}`, 'aria-hidden': 'true' },
-      el('div', { class: 'faixa-conteudo' }, trilha(), trilha()));
+    return el('div', { class: `capa-faixa ${classe}`, 'aria-hidden': 'true' }, el('div', { class: 'faixa-conteudo' }, trilha(), trilha()));
   }
 
   function renderCapa() {
     const capa = $('#capa');
-    const c = dados.capa || {};
-    const cli = dados.cliente || {};
-    const prova = c.provaSocial || {};
-    const textosFaixa = textos(c.faixa);
+    const c = { ...CAPA_PADRAO, ...(S.capa || {}) };
+    const textosFaixa = lista(c.faixa).filter(Boolean);
     const video = fundoVideo(c.video, c.poster, c.videoWebm);
 
     capa.replaceChildren(
-      el('div', { class: 'capa-fundo', 'aria-hidden': 'true' },
-        video,
-        el('span', { class: 'capa-luz capa-luz-1' }),
-        el('span', { class: 'capa-luz capa-luz-2' })
-      ),
-      faixa(textosFaixa, 'faixa-1'),
-      faixa(textosFaixa, 'faixa-2'),
+      el('div', { class: 'capa-fundo', 'aria-hidden': 'true' }, video, el('span', { class: 'capa-luz capa-luz-1' }), el('span', { class: 'capa-luz capa-luz-2' })),
+      faixaAnimada(textosFaixa, 'faixa-1'),
+      faixaAnimada(textosFaixa, 'faixa-2'),
       el('div', { class: 'capa-centro' },
-        (prova.destaque || prova.texto) && el('p', { class: 'capa-prova' },
-          el('img', { class: 'capa-avatares', src: c.avatares || 'assets/img/capa-avatares.png', alt: '', width: 141, height: 56 }),
-          el('span', {}, prova.destaque && el('strong', { text: preencher(prova.destaque) }), prova.texto && ` ${preencher(prova.texto)}`)
-        ),
+        (c.provaDestaque || c.provaTexto) && el('p', { class: 'capa-prova' },
+          el('img', { class: 'capa-avatares', src: 'assets/img/capa-avatares.png', alt: '', width: 141, height: 56 }),
+          el('span', {}, c.provaDestaque && el('strong', { text: c.provaDestaque }), c.provaTexto && ` ${c.provaTexto}`)),
         el('h1', { class: 'capa-titulo' },
-          el('span', { class: 'capa-rotulo', text: preencher(c.rotulo) || 'Proposta comercial para' }),
-          el('span', { class: 'capa-cliente', text: cli.nome || 'Cliente' })
-        ),
-        c.subtitulo && el('p', { class: 'capa-subtitulo' }, rico(c.subtitulo)),
-        el('button', { type: 'button', class: 'capa-botao', onclick: abrirProposta, text: preencher(c.textoBotao) || 'Ver meu orçamento' })
-      )
-    );
+          el('span', { class: 'capa-rotulo', text: c.rotulo }),
+          el('span', { class: 'capa-cliente' }, nomeCliente() || vazio('[Nome do cliente]'))),
+        c.frase && el('p', { class: 'capa-subtitulo' }, rico(c.frase)),
+        el('button', { type: 'button', class: 'capa-botao', onclick: abrirProposta, text: c.botao || 'Ver meu orçamento' })));
     if (video && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       video.play().catch(() => { /* o navegador pode bloquear; fica o poster */ });
     }
@@ -242,11 +696,7 @@
     transicaoCirculo(trocar);
   }
 
-  /*
-   * Transição circular: a partir do botão, um anel verde se expande pela tela
-   * (eco do círculo do logo) seguido pela cor de fundo da proposta. Com a tela
-   * coberta, a capa sai; depois a cobertura some em fade revelando a proposta.
-   */
+  // Transição circular: anel verde a partir do botão, depois a proposta aparece em fade
   let abrindo = false;
   function transicaoCirculo(noMeio) {
     abrindo = true;
@@ -254,36 +704,23 @@
     const r = botao ? botao.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0, height: 0 };
     const x = r.left + r.width / 2;
     const y = r.top + r.height / 2;
-    // raio até o canto mais distante da tela
     const raio = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 40;
-
     const anel = el('div', { class: 'transicao-anel', 'aria-hidden': 'true' });
     const cobertura = el('div', { class: 'transicao-cobertura', 'aria-hidden': 'true' });
     document.body.append(anel, cobertura);
-
     const curva = 'cubic-bezier(.7, 0, .2, 1)';
     const circulo = (raioPx) => `circle(${raioPx}px at ${x}px ${y}px)`;
     const duracao = 850;
-
     botao?.animate([{ transform: 'scale(1)' }, { transform: 'scale(.94)' }, { transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
-    $('.capa-centro')?.animate(
-      [{ transform: 'scale(1)', filter: 'blur(0)', opacity: 1 }, { transform: 'scale(.94)', filter: 'blur(6px)', opacity: 0 }],
-      { duration: duracao * 0.7, easing: curva, fill: 'forwards' }
-    );
+    $('.capa-centro')?.animate([{ transform: 'scale(1)', filter: 'blur(0)', opacity: 1 }, { transform: 'scale(.94)', filter: 'blur(6px)', opacity: 0 }],
+      { duration: duracao * 0.7, easing: curva, fill: 'forwards' });
     anel.animate([{ clipPath: circulo(0) }, { clipPath: circulo(raio) }], { duration: duracao, easing: curva, fill: 'forwards' });
-    const cobrir = cobertura.animate(
-      [{ clipPath: circulo(0) }, { clipPath: circulo(raio) }],
-      { duration: duracao, delay: 80, easing: curva, fill: 'forwards' }
-    );
-
+    const cobrir = cobertura.animate([{ clipPath: circulo(0) }, { clipPath: circulo(raio) }], { duration: duracao, delay: 80, easing: curva, fill: 'forwards' });
     cobrir.finished.then(() => {
       noMeio();
       anel.remove();
       const revelar = cobertura.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, easing: 'ease-out', fill: 'forwards' });
-      $('.intro .container')?.animate(
-        [{ transform: 'translateY(24px)', opacity: 0 }, { transform: 'none', opacity: 1 }],
-        { duration: 700, easing: 'cubic-bezier(.2, .7, .1, 1)' }
-      );
+      $('.intro .container')?.animate([{ transform: 'translateY(24px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 700, easing: 'cubic-bezier(.2, .7, .1, 1)' });
       revelar.finished.then(() => {
         cobertura.remove();
         $('.capa-centro')?.getAnimations().forEach((an) => an.cancel());
@@ -292,541 +729,97 @@
     });
   }
 
-  /* ---------- blocos ---------- */
-
-  function tituloBloco(b) {
-    return b.titulo ? el('h3', { class: 'bloco-titulo', text: preencher(b.titulo) }) : null;
-  }
-
-  const BLOCOS = {
-    // Lista com marcadores, em 1 ou 2 colunas
-    lista(b) {
-      const itens = textos(b.itens);
-      if (!itens.length) return null;
-      return [tituloBloco(b), el('ul', { class: `b-lista${Number(b.colunas) === 1 ? '' : ' duas-colunas'}` },
-        itens.map((t) => el('li', { text: t })))];
-    },
-
-    // Etapas numeradas em sequência (jornada, funil, processo)
-    fluxo(b) {
-      const etapas = lista(b.etapas).filter((e) => e.titulo || e.descricao);
-      if (!etapas.length) return null;
-      let n = 0;
-      const numeradas = etapas.filter((e) => e.tipo !== 'divisor').length;
-      // trilha horizontal: escolhe quantas etapas por linha para não deixar uma sozinha
-      const porLinha = numeradas <= 5 ? numeradas : [4, 3, 5].find((c) => numeradas % c === 0) || 4;
-      const compacto = !etapas.some((e) => e.descricao);
-      return [tituloBloco(b), el('ol', { class: `b-fluxo${compacto ? ' compacto' : ''}`, style: compacto ? `--por-linha:${porLinha}` : null },
-        etapas.map((e) => {
-          if (e.tipo === 'divisor') {
-            return el('li', { class: 'fluxo-divisor', text: preencher(e.titulo || e.descricao) });
-          }
-          n += 1;
-          return el('li', { class: `fluxo-etapa${n % porLinha === 0 ? ' fim-linha' : ''}` },
-            el('span', { class: 'fluxo-num', text: n }),
-            el('div', { class: 'fluxo-texto' },
-              e.titulo && el('strong', { text: preencher(e.titulo) }),
-              e.descricao && el('span', { text: preencher(e.descricao) })
-            )
-          );
-        }))];
-    },
-
-    // Cartões em grade (campanhas, perfis, meses, indicadores, condições)
-    cartoes(b) {
-      const cartoes = lista(b.cartoes).filter((c) => c.titulo || c.texto || lista(c.itens).length);
-      if (!cartoes.length) return null;
-      const colunas = Math.min(Math.max(Number(b.colunas) || Math.min(cartoes.length, 3), 1), 4);
-      return [tituloBloco(b), el('div', { class: `b-cartoes col-${colunas}` },
-        cartoes.map((c, i) =>
-          el('article', { class: 'cartao' },
-            (c.etiqueta || b.numerados) && el('span', { class: 'cartao-etiqueta', text: preencher(c.etiqueta) || String(i + 1).padStart(2, '0') }),
-            c.titulo && el('h4', { text: preencher(c.titulo) }),
-            c.texto && el('p', { text: preencher(c.texto) }),
-            textos(c.itens).length ? el('ul', {}, textos(c.itens).map((t) => el('li', { text: t }))) : null
-          )
-        ))];
-    },
-
-    // Colunas lado a lado: antes × depois, quem faz o quê
-    comparativo(b) {
-      const colunas = lista(b.colunas).filter((c) => c.titulo || textos(c.itens).length);
-      if (!colunas.length) return null;
-      return [tituloBloco(b), el('div', { class: `b-comparativo col-${Math.min(colunas.length, 3)}` },
-        colunas.map((c) =>
-          el('div', { class: `comp-coluna tom-${c.tom || 'neutro'}` },
-            el('h4', { text: preencher(c.titulo) }),
-            el('ul', {}, textos(c.itens).map((t) => el('li', { text: t })))
-          )
-        ))];
-    },
-
-    // Etiquetas curtas (temas de campanha, segmentos)
-    chips(b) {
-      const itens = textos(b.itens);
-      if (!itens.length) return null;
-      return [tituloBloco(b), el('ul', { class: 'b-chips' }, itens.map((t) => el('li', { text: t })))];
-    },
-
-    // Números grandes (trajetória, resultados)
-    numeros(b) {
-      const itens = lista(b.itens).filter((i) => i.numero || i.legenda);
-      if (!itens.length) return null;
-      return [tituloBloco(b), el('div', { class: 'b-numeros' },
-        itens.map((i) => el('div', { class: 'numero' },
-          el('strong', { text: preencher(i.numero) }),
-          el('span', { text: preencher(i.legenda) })
-        )))];
-    },
-
-    // Exemplo de mensagem/fala
-    citacao(b) {
-      if (!b.texto) return null;
-      return el('figure', { class: 'b-citacao' },
-        b.titulo && el('figcaption', { text: preencher(b.titulo) }),
-        el('blockquote', { text: preencher(b.texto) })
-      );
-    },
-
-    // Frase de impacto
-    destaque(b) {
-      if (!b.texto) return null;
-      return el('p', { class: 'b-destaque', text: preencher(b.texto) });
-    },
-
-    // Subtítulo que abre uma parte dentro de um capítulo
-    subsecao(b) {
-      if (!b.titulo && !b.rotulo) return null;
-      return el('header', { class: 'b-subsecao' },
-        b.rotulo && el('span', { class: 'b-subsecao-rotulo', text: preencher(b.rotulo) }),
-        b.titulo && el('h3', { text: preencher(b.titulo) }),
-        b.texto ? paragrafos(b.texto) : null
-      );
-    },
-
-    // Observação discreta
-    nota(b) {
-      if (!b.texto) return null;
-      return el('p', { class: 'b-nota', text: preencher(b.texto) });
-    }
-  };
-
-  function renderBlocos(blocos) {
-    const saida = [];
-    let par = null;
-    for (const b of lista(blocos)) {
-      const fn = BLOCOS[b?.tipo];
-      if (!fn) continue;
-      const conteudo = fn(b);
-      if (!conteudo) continue;
-      const node = el('div', { class: `bloco bloco-${b.tipo} revelar` }, conteudo);
-      // blocos marcados como "metade" seguidos ficam lado a lado
-      if (b.largura === 'metade') {
-        if (!par) { par = el('div', { class: 'blocos-par' }); saida.push(par); }
-        par.append(node);
-        if (par.children.length === 2) par = null;
-      } else {
-        par = null;
-        saida.push(node);
-      }
-    }
-    return saida;
-  }
-
-  /* ---------- seções ---------- */
-
-  function cabecalho(s, padrao) {
-    return el('header', { class: 'secao-cabecalho revelar' },
-      el('span', { class: 'secao-rotulo' }, el('span', { text: preencher(s.rotulo) || padrao })),
-      s.titulo && el('h2', { class: 'secao-titulo', text: preencher(s.titulo) }),
-      s.texto && el('div', { class: 'secao-texto' }, paragrafos(s.texto))
-    );
-  }
-
-  // Um capítulo é dividido em faixas: cada "Subtítulo de parte" abre uma faixa nova,
-  // e as faixas alternam claro/escuro para dar respiro na leitura.
-  function secaoConteudo(s, id) {
-    // Bloco com "Exibir" desligado some; uma parte desligada leva junto
-    // todos os blocos dela, até o próximo "Subtítulo de parte".
-    const grupos = [[]];
-    let parteOculta = false;
-    for (const b of lista(s.blocos)) {
-      if (b?.tipo === 'subsecao') parteOculta = b.ativo === false;
-      if (parteOculta || b?.ativo === false) continue;
-      if (b?.tipo === 'subsecao' && grupos[grupos.length - 1].length) grupos.push([]);
-      grupos[grupos.length - 1].push(b);
-    }
-    return el('section', { class: 'secao', id },
-      grupos.map((blocos, i) =>
-        el('div', { class: 'secao-banda', 'data-estilo': i === 0 ? (s.estilo || null) : null },
-          el('div', { class: 'container' },
-            i === 0 ? cabecalho(s, '') : null,
-            el('div', { class: 'blocos' }, renderBlocos(blocos))
-          )
-        )
-      )
-    );
-  }
-
-  function calcularInvestimento(inv) {
-    const servicos = lista(inv.servicos).filter((s) => s.ativo !== false && (s.nome || num(s.valor)));
-    let combinacoes = lista(inv.combinacoes).filter((c) => c.nome || num(c.valor));
-    // sem combinações cadastradas: soma automática dos serviços que não são opcionais
-    // (desligue com somarServicos: false quando os serviços são planos alternativos)
-    if (!combinacoes.length && servicos.length > 1 && inv.somarServicos !== false) {
-      const fixos = servicos.filter((s) => !/opcional/i.test(s.selo || ''));
-      const grupos = {};
-      for (const s of fixos) (grupos[s.recorrencia || 'mensal'] ||= []).push(s);
-      combinacoes = Object.entries(grupos).map(([rec, itens]) => ({
-        nome: `${recorrencia(rec).total} total`,
-        composicao: itens.map((s) => `${s.nome} ${moeda(s.valor)}`).join(' + '),
-        valor: itens.reduce((t, s) => t + num(s.valor), 0),
-        recorrencia: rec,
-        destaque: true
-      }));
-    }
-    return { servicos, combinacoes };
-  }
-
-  function precoEl(valor, rec, classe) {
-    return el('strong', { class: classe }, moeda(valor), el('small', { text: recorrencia(rec).sufixo }));
-  }
-
-  // Investimento em anúncios sugerido (pago direto às plataformas, fora dos valores da MFL)
-  function verbaAnuncios(v) {
-    if (!v || v.ativo === false || !num(v.valorDia)) return null;
-    const dia = num(v.valorDia);
-    return el('div', { class: 'verba revelar' },
-      el('span', { class: 'verba-icone', 'aria-hidden': 'true', text: '↗' }),
-      el('div', { class: 'verba-info' },
-        el('strong', { text: preencher(v.titulo) || 'Investimento em anúncios sugerido' }),
-        v.observacao && el('span', { text: preencher(v.observacao) })
-      ),
-      el('div', { class: 'verba-valor' },
-        el('strong', {}, moeda(dia), el('small', { text: '/dia' })),
-        el('span', { text: `≈ ${moeda(dia * 30)} por mês` })
-      )
-    );
-  }
-
-  function secaoInvestimento(inv) {
-    const { servicos, combinacoes } = calcularInvestimento(inv);
-    const condicoes = lista(inv.condicoes).filter((c) => c.titulo || c.texto);
-    const validade = dataValidade();
-
-    return el('section', { class: 'secao secao-banda secao-investimento', id: 'investimento', 'data-estilo': inv.estilo || null },
-      el('div', { class: 'container' },
-        cabecalho(inv, 'Investimento'),
-
-        servicos.length ? el('div', { class: `planos col-${servicos.length === 4 ? 2 : Math.min(servicos.length, 3)}` },
-          servicos.map((s, i) => {
-            const opcional = /opcional/i.test(s.selo || '');
-            return el('article', { class: `plano revelar${s.destaque ? ' plano-destaque' : ''}${opcional ? ' plano-opcional' : ''}` },
-              el('div', { class: 'plano-topo' },
-                el('span', { class: 'plano-rotulo', text: preencher(s.rotulo) || `Serviço ${i + 1}` }),
-                s.selo && el('span', { class: 'plano-selo', text: preencher(s.selo) })
-              ),
-              el('h3', { class: 'plano-nome', text: preencher(s.nome) }),
-              el('div', { class: 'plano-preco' },
-                precoEl(s.valor, s.recorrencia),
-                s.observacaoValor && el('span', { class: 'plano-obs', text: preencher(s.observacaoValor) })
-              ),
-              // outras formas de pagamento (ex.: à vista com desconto, parcelado no cartão)
-              lista(s.formas).filter((f) => f.rotulo || f.valor).length
-                ? el('dl', { class: 'plano-formas' },
-                    lista(s.formas).filter((f) => f.rotulo || f.valor).map((f) =>
-                      el('div', {}, el('dt', { text: preencher(f.rotulo) }), el('dd', { text: preencher(f.valor) }))))
-                : null,
-              s.descricao && el('p', { class: 'plano-descricao', text: preencher(s.descricao) }),
-              textos(s.itens).length ? el('ul', { class: 'plano-itens' }, textos(s.itens).map((t) => el('li', { text: t }))) : null
-            );
-          })
-        ) : null,
-
-        combinacoes.length ? el('div', { class: 'totais revelar' },
-          combinacoes.map((c) =>
-            el('div', { class: `total${c.destaque ? ' total-destaque' : ''}` },
-              el('div', { class: 'total-info' },
-                el('strong', { text: preencher(c.nome) }),
-                c.composicao && el('span', { text: preencher(c.composicao) })
-              ),
-              el('div', { class: 'total-valor' },
-                precoEl(c.valor, c.recorrencia),
-                c.observacao && el('span', { text: preencher(c.observacao) })
-              )
-            )
-          ),
-          validade && el('p', { class: 'total-validade', text: `Valores válidos até ${formatarData(validade)}` })
-        ) : null,
-
-        verbaAnuncios(inv.verbaAnuncios),
-        inv.nota && el('p', { class: 'b-nota revelar', text: preencher(inv.nota) }),
-
-        condicoes.length ? el('div', { class: 'condicoes revelar' },
-          el('h3', { class: 'bloco-titulo', text: 'Condições' }),
-          el('div', { class: 'condicoes-grade' },
-            condicoes.map((c) => el('div', { class: 'condicao' },
-              el('strong', { text: preencher(c.titulo) }),
-              c.texto && el('span', { text: preencher(c.texto) })
-            ))
-          )
-        ) : null,
-
-        inv.fechamento && el('p', { class: 'fechamento revelar', text: preencher(inv.fechamento) })
-      )
-    );
-  }
-
-  function secaoProximosPassos(s) {
-    const passos = textos(s.passos);
-    const r = dados.proposta?.responsavel || {};
-    const href = linkContato(preencher(s.mensagemWhatsapp));
-    return el('section', { class: 'secao secao-banda secao-proximos', id: 'proximos-passos', 'data-estilo': s.estilo || null },
-      el('div', { class: 'container' },
-        cabecalho(s, 'Próximos passos'),
-        passos.length ? el('ol', { class: 'passos revelar' },
-          passos.map((p, n) => el('li', {}, el('span', { class: 'passo-num', text: n + 1 }), el('span', { text: p })))
-        ) : null,
-        el('div', { class: 'cta tema-escuro revelar' },
-          el('div', { class: 'cta-texto' },
-            el('h3', { text: preencher(s.chamada) || 'Vamos começar?' }),
-            href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' },
-              el('span', { text: preencher(s.textoBotao) || 'Aprovar proposta' }),
-              el('span', { 'aria-hidden': 'true', text: '→' })
-            )
-          ),
-          r.nome && el('div', { class: 'responsavel' },
-            el('span', { class: 'responsavel-avatar', 'aria-hidden': 'true', text: iniciais(r.nome) }),
-            el('div', {},
-              el('strong', { text: r.nome }),
-              r.cargo && el('span', { text: r.cargo }),
-              el('span', { class: 'responsavel-contatos' },
-                r.whatsapp && el('a', { href: `https://wa.me/${String(r.whatsapp).replace(/\D/g, '')}`, target: '_blank', rel: 'noopener', text: formatarTelefone(r.whatsapp) }),
-                r.email && el('a', { href: `mailto:${r.email}`, text: r.email })
-              )
-            )
-          )
-        )
-      )
-    );
-  }
-
-  /* ---------- depoimentos ---------- */
-
-  // Aceita link do YouTube, do Vimeo ou um arquivo de vídeo (mp4/webm)
-  function fonteVideo(url) {
-    const u = String(url || '').trim();
-    if (!u) return null;
-    const yt = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([\w-]{11})/);
-    if (yt) return { tipo: 'iframe', src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0`, capa: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` };
-    const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-    if (vm) return { tipo: 'iframe', src: `https://player.vimeo.com/video/${vm[1]}?autoplay=1` };
-    return { tipo: 'arquivo', src: u };
-  }
-
-  function abrirVideo(dep) {
-    const fonte = fonteVideo(dep.video);
-    if (!fonte) return;
-    let dialogo = $('#player-depoimento');
-    if (!dialogo) {
-      dialogo = el('dialog', { id: 'player-depoimento', class: 'player' });
-      dialogo.addEventListener('close', () => dialogo.replaceChildren());
-      dialogo.addEventListener('click', (e) => { if (e.target === dialogo) dialogo.close(); });
-      document.body.append(dialogo);
-    }
-    const midia = fonte.tipo === 'iframe'
-      ? el('iframe', { src: fonte.src, title: `Depoimento de ${dep.pessoa || dep.cliente || ''}`, allow: 'autoplay; fullscreen; picture-in-picture', allowfullscreen: true })
-      : el('video', { src: fonte.src, controls: true, autoplay: true, playsinline: true });
-    dialogo.replaceChildren(
-      el('div', { class: 'player-moldura' }, midia),
-      el('div', { class: 'player-legenda' },
-        el('span', {}, el('strong', { text: dep.pessoa || dep.cliente || '' }), [dep.cargo, dep.cliente].filter(Boolean).length ? ` · ${[dep.cargo, dep.cliente].filter(Boolean).join(', ')}` : ''),
-        el('button', { type: 'button', class: 'player-fechar', onclick: () => dialogo.close(), text: 'Fechar ✕' })
-      )
-    );
-    dialogo.showModal();
-  }
-
-  function secaoDepoimentos(sec) {
-    const escolhidos = lista(sec.selecionados)
-      .map((id) => catalogo.find((d) => d.id === id))
-      .filter(Boolean);
-    if (!escolhidos.length) return null;
-    return el('section', { class: 'secao secao-banda secao-depoimentos', id: 'depoimentos', 'data-estilo': sec.estilo || null },
-      el('div', { class: 'container' },
-        cabecalho(sec, 'Depoimentos'),
-        el('div', { class: `depoimentos col-${Math.min(escolhidos.length, 3)}` },
-          escolhidos.map((dep) => {
-            const fonte = fonteVideo(dep.video);
-            const capa = dep.capa || fonte?.capa;
-            return el('article', { class: 'depoimento revelar' },
-              el('button', {
-                type: 'button', class: 'depoimento-video', disabled: !fonte,
-                'aria-label': fonte ? `Assistir ao depoimento de ${dep.pessoa || dep.cliente}` : 'Vídeo ainda não cadastrado',
-                onclick: () => abrirVideo(dep)
-              },
-                capa ? el('img', { src: capa, alt: '', loading: 'lazy' }) : null,
-                el('span', { class: 'depoimento-play', 'aria-hidden': 'true' }),
-                !fonte && el('span', { class: 'depoimento-aviso', text: 'Vídeo ainda não cadastrado' })
-              ),
-              el('div', { class: 'depoimento-info' },
-                dep.segmento && el('span', { class: 'depoimento-segmento', text: dep.segmento }),
-                dep.resultado && el('strong', { class: 'depoimento-resultado', text: dep.resultado }),
-                dep.citacao && el('p', { class: 'depoimento-citacao', text: `“${dep.citacao}”` }),
-                el('p', { class: 'depoimento-autor' },
-                  el('strong', { text: dep.pessoa || dep.cliente || '' }),
-                  [dep.cargo, dep.pessoa ? dep.cliente : ''].filter(Boolean).length ? el('span', { text: [dep.cargo, dep.pessoa ? dep.cliente : ''].filter(Boolean).join(' · ') }) : null
-                )
-              )
-            );
-          })
-        )
-      )
-    );
-  }
-
   /* ---------- página ---------- */
 
-  function renderProposta() {
-    const cli = dados.cliente || {};
-    const p = dados.proposta || {};
-    const a = dados.agencia || {};
+  const NOMES_MODELO = {
+    1: 'Inbound',
+    2: 'Outbound com BDR + SDR',
+    3: 'Outbound com Treinamento',
+    4: 'Inbound + Outbound'
+  };
 
+  function renderProposta() {
+    const c = cfg();
     $('#topo-marca').replaceChildren(marca('marca-logo-topo'));
 
-    const resumo = lista(p.resumo).filter((r) => r.rotulo || r.valor);
+    const canais = [c.hasIn && 'Inbound', c.out && 'Outbound', 'CRM', 'Automação'].filter(Boolean).join(' · ');
+    const capacidades = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação integrados'].filter(Boolean);
+    const totais = calcularInvestimento(c).map((t) => t.valor).filter((v) => v != null);
+    const data = lerData(S.data);
+
+    const resumo = [
+      { rotulo: 'Modelo', valor: NOMES_MODELO[c.m] + (c.m === '4' ? ` (${c.out === 'bdr' ? 'BDR + SDR' : 'Treinamento'})` : '') },
+      c.hasIn ? { rotulo: 'Público', valor: c.b2c ? 'B2C · até a venda' : 'B2B · até a reunião agendada' } : { rotulo: 'Execução', valor: c.out === 'bdr' ? 'MFL Sales até a reunião agendada' : 'Seu time, treinado pela MFL Sales' },
+      { rotulo: 'Contrato', valor: `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}` },
+      { rotulo: 'Investimento', valor: totais.length ? `${totais.length > 1 ? 'A partir de ' : ''}${brl(Math.min(...totais))}/mês` : null }
+    ];
+
     const intro = el('section', { class: 'intro tema-escuro', id: 'inicio' },
       el('div', { class: 'container' },
-        el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial${p.numero ? ' · Nº ' + p.numero : ''}` }),
-        el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', { text: cli.nome || '' })),
-        p.solucao && el('p', { class: 'intro-sub revelar', text: preencher(p.solucao) }),
-        resumo.length ? el('div', { class: 'resumo revelar' },
-          resumo.map((r) => el('div', { class: 'resumo-item' },
-            el('span', { text: preencher(r.rotulo) }),
-            el('strong', { text: preencher(r.valor) })
-          ))
-        ) : null,
+        el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial · ${AGENCIA.slogan}` }),
+        el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', {}, nomeCliente() || vazio('[Nome do cliente]'))),
+        el('p', { class: 'intro-sub revelar', text: 'Estruturação da Operação Comercial de Aquisição' }),
+        el('ul', { class: 'intro-capacidades revelar' }, capacidades.map((t) => el('li', { text: t }))),
+        el('div', { class: 'resumo revelar' }, resumo.map((r) => el('div', { class: 'resumo-item' },
+          el('span', { text: r.rotulo }), el('strong', {}, r.valor || vazio('R$ [total]/mês'))))),
         el('dl', { class: 'intro-meta revelar' },
-          cli.contato && el('div', {}, el('dt', { text: 'Aos cuidados de' }), el('dd', { text: cli.contato + (cli.cargo ? ` · ${cli.cargo}` : '') })),
-          lerData(p.data) && el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: formatarData(lerData(p.data)) })),
+          el('div', {}, el('dt', { text: 'Canais' }), el('dd', { text: canais })),
+          el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: data ? formatarData(data) : '' })),
           dataValidade() && el('div', {}, el('dt', { text: 'Válida até' }), el('dd', { text: formatarData(dataValidade()) })),
-          p.responsavel?.nome && el('div', {}, el('dt', { text: 'Responsável' }), el('dd', { text: p.responsavel.nome }))
-        )
-      )
-    );
+          S.responsavel?.nome && el('div', {}, el('dt', { text: 'Responsável' }), el('dd', { text: S.responsavel.nome })))));
 
-    const secoes = [];
-    const menu = [];
-    const usados = new Set(['inicio', 'investimento', 'proximos-passos']);
-    for (const s of lista(dados.secoes)) {
-      if (!ativo(s)) continue;
-      let id = slugificar(s.menu || s.rotulo || s.titulo) || 'secao';
-      while (usados.has(id)) id += '-2';
-      usados.add(id);
-      secoes.push(secaoConteudo(s, id));
-      menu.push([id, preencher(s.menu || s.rotulo || s.titulo)]);
-    }
-    const depoimentos = ativo(dados.depoimentos) ? secaoDepoimentos(dados.depoimentos) : null;
-    if (depoimentos) {
-      secoes.push(depoimentos);
-      menu.push(['depoimentos', preencher(dados.depoimentos.menu) || 'Depoimentos']);
-    }
-    if (ativo(dados.investimento)) {
-      secoes.push(secaoInvestimento(dados.investimento));
-      menu.push(['investimento', preencher(dados.investimento.menu) || 'Investimento']);
-    }
-    if (ativo(dados.proximosPassos)) {
-      secoes.push(secaoProximosPassos(dados.proximosPassos));
-      menu.push(['proximos-passos', preencher(dados.proximosPassos.menu) || 'Próximos passos']);
-    }
+    // Ordem: por que, resultados, [inbound], [bdr | train], crm, investimento, próximos passos
+    const ordem = [
+      ['porque', 'Por que a MFL'], ['resultados', 'Resultados'],
+      c.hasIn && ['inbound', 'Inbound'], c.out === 'bdr' && ['bdr', 'Outbound'], c.out === 'train' && ['train', 'Outbound'],
+      ['crm', 'Tecnologia'], ['invest', 'Investimento'], ['next', 'Próximos passos']
+    ].filter(Boolean);
+    const secoes = ordem.map(([chave]) => SECOES[chave](c));
 
-    // capítulos numerados e alternância claro/escuro (a abertura é escura, então começa no claro)
+    // Faixas alternam claro/escuro (a abertura é escura); números nos rótulos
+    let anterior = 'escuro';
     secoes.forEach((secao, i) => {
+      const tema = anterior === 'escuro' ? 'claro' : 'escuro';
+      secao.classList.add(`tema-${tema}`);
+      anterior = tema;
       secao.querySelector('.secao-rotulo')?.prepend(el('span', { class: 'secao-num', text: String(i + 1).padStart(2, '0') }));
     });
-    let anterior = 'escuro';
-    for (const banda of secoes.flatMap((secao) => (secao.classList.contains('secao-banda') ? [secao] : [...secao.querySelectorAll('.secao-banda')]))) {
-      const estilo = banda.dataset.estilo;
-      const tema = estilo === 'claro' || estilo === 'escuro' ? estilo : (anterior === 'escuro' ? 'claro' : 'escuro');
-      banda.classList.add(`tema-${tema}`);
-      anterior = tema;
-    }
 
-    $('#topo-nav').replaceChildren(...menu.map(([id, rotulo]) => el('a', { href: `#${id}`, 'data-alvo': id, text: rotulo })));
+    $('#topo-nav').replaceChildren(...ordem.map(([chave, rotulo], i) => el('a', { href: `#${secoes[i].id}`, 'data-alvo': secoes[i].id, text: rotulo })));
     $('#conteudo').replaceChildren(intro, ...secoes);
-    $('#barra-cta').replaceChildren(...barraCta());
+    $('#barra-cta').replaceChildren(...barraCta(c));
 
     $('#rodape').replaceChildren(
       el('div', { class: 'container rodape-inner' },
-        el('div', { class: 'rodape-marca' }, marca('marca-logo-rodape'), a.slogan && el('span', { text: a.slogan })),
+        el('div', { class: 'rodape-marca' }, marca('marca-logo-rodape'), el('span', { text: AGENCIA.slogan })),
         el('div', { class: 'rodape-links' },
-          a.site && el('a', { href: a.site, target: '_blank', rel: 'noopener', text: a.site.replace(/^https?:\/\//, '').replace(/\/$/, '') }),
-          a.instagram && el('a', { href: `https://instagram.com/${a.instagram.replace(/^@/, '')}`, target: '_blank', rel: 'noopener', text: a.instagram })
-        ),
-        el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${a.nome || ''}. Proposta confidencial preparada exclusivamente para ${cli.nome || 'o cliente'}.` })
-      )
-    );
+          el('a', { href: AGENCIA.site, target: '_blank', rel: 'noopener', text: 'www.agenciamfl.com.br' }),
+          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram })),
+        el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${AGENCIA.nome}. Proposta confidencial preparada exclusivamente para ${nomeCliente() || 'o cliente'}.` })));
 
     ativarRevelar();
   }
 
-  // Barra fixa no rodapé do celular: valor principal + botão de aprovação sempre à mão.
-  function barraCta() {
-    const pp = dados.proximosPassos;
-    const href = ativo(pp) ? linkContato(preencher(pp.mensagemWhatsapp)) : null;
+  // Barra fixa no rodapé do celular: valor principal + botão de aprovação
+  function barraCta(c) {
+    const href = linkContato(`Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`);
     if (!href) return [];
-    let principal = null;
-    if (ativo(dados.investimento)) {
-      const { servicos, combinacoes } = calcularInvestimento(dados.investimento);
-      const c = combinacoes.find((x) => x.destaque) || combinacoes[0];
-      const s = servicos.find((x) => x.destaque) || servicos[0];
-      if (c) principal = { rotulo: preencher(c.nome), valor: c.valor, rec: c.recorrencia };
-      else if (s) principal = { rotulo: preencher(s.nome), valor: s.valor, rec: s.recorrencia };
-    }
+    const t = calcularInvestimento(c).find((x) => x.destaque && x.valor != null) || calcularInvestimento(c).find((x) => x.valor != null);
     return [
       el('div', { class: 'barra-cta-total' },
-        principal
-          ? [el('span', { text: principal.rotulo }), precoEl(principal.valor, principal.rec)]
-          : el('strong', { text: dados.cliente?.nome || '' })
-      ),
+        t ? [el('span', { text: t.nome }), el('strong', {}, brl(t.valor), el('small', { text: '/mês' }))] : el('strong', { text: nomeCliente() })),
       el('a', { href, target: '_blank', rel: 'noopener', text: 'Aprovar' })
     ];
   }
 
-  function luminancia(hex) {
-    let h = hex.slice(1);
-    if (h.length === 3) h = h.split('').map((c) => c + c).join('');
-    const [r, g, b] = [0, 2, 4].map((i) => {
-      const c = parseInt(h.slice(i, i + 2), 16) / 255;
-      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-    });
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  }
-
-  function aplicarTema() {
-    const cor = dados.agencia?.corPrimaria;
-    const raiz = document.documentElement.style;
-    if (cor && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(cor)) {
-      raiz.setProperty('--destaque', cor);
-      // texto sobre a cor de destaque: escuro em cores claras, branco em cores escuras
-      raiz.setProperty('--sobre-destaque', luminancia(cor) > 0.35 ? '#07130B' : '#FFFFFF');
-    } else {
-      raiz.removeProperty('--destaque');
-      raiz.removeProperty('--sobre-destaque');
-    }
-    const cli = dados.cliente?.nome;
-    document.title = `Proposta Comercial${cli ? ' · ' + cli : ''}`;
-  }
-
-  function render(novosDados) {
-    dados = novosDados || {};
-    aplicarTema();
+  function render(novos) {
+    S = normalizar(novos);
+    document.documentElement.style.removeProperty('--destaque');
+    document.title = `Proposta MFL Sales${nomeCliente() ? ' - ' + nomeCliente() : ''}`;
     renderCapa();
     renderProposta();
-
     $('#estado').hidden = true;
     document.body.classList.remove('carregando');
-
     if (aberta) {
       $('#capa').hidden = true;
       $('#proposta').hidden = false;
@@ -836,6 +829,20 @@
       $('#proposta').hidden = true;
       document.body.classList.remove('aberta');
     }
+  }
+
+  // Completa campos ausentes com os padrões da especificação
+  function normalizar(d) {
+    const hoje = new Date();
+    const iso = new Date(hoje.getTime() - hoje.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    const base = {
+      cliente: '', data: iso, modelo: '4', outTipo: 'bdr', pub: 'b2b', crm: 'mfl', sc: { ...SCOPE_PADRAO },
+      vIn: '', vOut: '', vCombo: '', vCrm: '297', contrato: 3, cond: '', videoUrl: '', thumb: '',
+      verbaDia: 100, validadeDias: 7, depoimentos: [], responsavel: {}, capa: {}
+    };
+    const out = { ...base, ...(d && typeof d === 'object' ? d : {}) };
+    out.sc = { ...SCOPE_PADRAO, ...(out.sc || {}) };
+    return out;
   }
 
   /* ---------- interações ---------- */
@@ -849,10 +856,7 @@
     }
     observer = new IntersectionObserver((entradas) => {
       for (const e of entradas) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visivel');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visivel'); observer.unobserve(e.target); }
       }
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
     alvos.forEach((n) => observer.observe(n));
@@ -862,7 +866,6 @@
     const max = document.documentElement.scrollHeight - innerHeight;
     $('#progresso').style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`;
     document.body.classList.toggle('rolou', scrollY > 40);
-
     let atual = null;
     for (const link of document.querySelectorAll('#topo-nav a')) {
       const alvo = document.getElementById(link.dataset.alvo);
@@ -871,14 +874,11 @@
     for (const l of document.querySelectorAll('#topo-nav a')) {
       const era = l.classList.contains('atual');
       l.classList.toggle('atual', l === atual);
-      // o menu rola de lado: mantém a seção atual visível
       if (l === atual && !era) {
         const nav = $('#topo-nav');
         nav.scrollTo({ left: l.offsetLeft - nav.clientWidth / 2 + l.clientWidth / 2, behavior: 'smooth' });
       }
     }
-
-    // barra de aprovação: aparece depois da abertura e some quando o botão principal está na tela
     const intro = $('#inicio');
     const cta = document.querySelector('.cta');
     const passouIntro = intro && intro.getBoundingClientRect().bottom < 0;
@@ -890,10 +890,7 @@
   function mostrarErro(msg) {
     const estado = $('#estado');
     estado.classList.add('erro');
-    estado.replaceChildren(
-      el('p', { class: 'estado-titulo', text: 'Não foi possível abrir a proposta' }),
-      el('p', { text: msg })
-    );
+    estado.replaceChildren(el('p', { class: 'estado-titulo', text: 'Não foi possível abrir a proposta' }), el('p', { text: msg }));
   }
 
   async function carregar() {
@@ -912,17 +909,16 @@
     try {
       const resp = await fetch('depoimentos/catalogo.json', { cache: 'no-store' });
       if (resp.ok) catalogo = lista((await resp.json()).depoimentos);
-    } catch (e) { /* sem catálogo: a seção de depoimentos não aparece */ }
+    } catch (e) { /* sem catálogo */ }
   }
 
   // O editor envia atualizações ao vivo para a pré-visualização.
   window.addEventListener('message', (e) => {
     if (e.origin !== location.origin) return;
     if (e.data?.tipo === 'proposta:atualizar') render(e.data.dados);
-    else if (e.data?.tipo === 'proposta:capa' && dados) {
-      aberta = !e.data.mostrar;
-      render(dados);
-    } else return;
+    else if (e.data?.tipo === 'proposta:capa' && S) { aberta = !e.data.mostrar; render(S); }
+    else if (e.data?.tipo === 'proposta:imprimir') { document.querySelectorAll('.revelar').forEach((n) => n.classList.add('visivel')); window.print(); return; }
+    else return;
     aoRolar();
   });
 

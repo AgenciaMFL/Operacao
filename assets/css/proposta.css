@@ -509,6 +509,65 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 .resumo-item:last-child { border-color: var(--destaque-borda); background: linear-gradient(160deg, var(--destaque-suave), color-mix(in srgb, var(--superficie) 80%, transparent) 70%); }
 .resumo-item:last-child strong { color: var(--destaque-texto); }
 
+/* ---------- gerador: componentes ---------- */
+
+/* marcador de campo ainda não preenchido (laranja, como no gerador) */
+.ph-vazio { color: #F59E0B; }
+.capa-cliente .ph-vazio { -webkit-text-fill-color: #F59E0B; }
+.total-destaque .ph-vazio, .plano-destaque .plano-preco .ph-vazio { color: inherit; text-decoration: underline dotted; text-underline-offset: 4px; }
+
+.intro-capacidades { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.intro-capacidades li {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--linha-forte); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+}
+.intro-capacidades li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--destaque); }
+
+/* quem faz cada etapa (Outbound) */
+.quem-grade { display: grid; gap: 14px; align-items: stretch; }
+.quem-grade.col-3 { grid-template-columns: repeat(3, 1fr); }
+.quem-grade.col-2 { grid-template-columns: repeat(2, 1fr); }
+.quem {
+  display: flex; flex-direction: column; gap: 10px; min-width: 0;
+  padding: clamp(20px, 2.6vw, 28px); border-radius: var(--raio);
+  background: var(--superficie); border: 1px solid var(--linha); box-shadow: var(--sombra-cartao);
+}
+.quem h4 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; letter-spacing: -.015em; }
+.quem > p { color: var(--tinta-suave); font-size: .94rem; }
+.quem .b-fluxo { margin-top: 6px; }
+.quem-rotulo { justify-self: start; align-self: flex-start; padding: 3px 10px; border-radius: 999px; background: var(--destaque-suave); color: var(--destaque-texto); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.quem-cliente { background: var(--azul-900); border-color: var(--azul-700); color: #EEF3FB; }
+.quem-cliente > p { color: #A9B8D6; }
+.quem-cliente .quem-rotulo { background: rgba(255, 255, 255, .1); color: #EEF3FB; }
+.quem-cliente .fluxo-num { background: var(--azul-900); }
+.quem-cliente .fluxo-texto span { color: #A9B8D6; }
+.fluxo-etapa.do-cliente .fluxo-num { border-style: dashed; }
+
+/* vídeo principal de prova social */
+.video-principal { display: grid; gap: 10px; max-width: 860px; }
+.video-grande { border-radius: var(--raio); }
+.video-sem-capa { position: relative; z-index: 1; margin-top: 110px; font-size: .78rem; font-weight: 800; letter-spacing: .2em; color: rgba(255, 255, 255, .45); }
+.video-link { font-weight: 700; color: var(--destaque-texto); text-decoration: none; }
+a.video-link:hover { text-decoration: underline; }
+
+/* caixa "Na prática" */
+.caixa-pratica { max-width: none; }
+.caixa-pratica blockquote { font-size: 1rem; }
+.caixa-pratica blockquote::after { display: none; }
+
+/* condições: chave + valor */
+.condicao-chave { font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-fraca); }
+
+/* cartão largo do CRM (modelo 4) */
+.plano-largo { max-width: 640px; }
+.plano-crm-largo {
+  margin-top: 16px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+}
+.plano-crm-info { display: grid; gap: 10px; min-width: 0; }
+.plano-crm-largo .plano-preco { border-bottom: 0; padding-bottom: 0; }
+.plano-itens.duas-colunas { display: block; columns: 2; column-gap: 28px; }
+.plano-itens.duas-colunas li { break-inside: avoid; margin-bottom: 9px; }
+
 /* ---------- depoimentos ---------- */
 
 .depoimentos { display: grid; gap: 16px; }
@@ -726,6 +785,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 @media (max-width: 960px) {
   .b-cartoes.col-4 { grid-template-columns: repeat(2, 1fr); }
   .b-cartoes.col-3, .planos.col-3, .b-comparativo.col-3, .depoimentos.col-3 { grid-template-columns: 1fr 1fr; }
+  .quem-grade.col-3 { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {
@@ -735,7 +795,9 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .intro-meta dd { font-size: .92rem; }
   .b-lista.duas-colunas { columns: 1; }
   .blocos-par, .b-cartoes.col-2, .b-cartoes.col-3, .b-comparativo.col-2, .b-comparativo.col-3,
-  .planos.col-2, .planos.col-3, .depoimentos.col-2, .depoimentos.col-3 { grid-template-columns: 1fr; }
+  .planos.col-2, .planos.col-3, .depoimentos.col-2, .depoimentos.col-3, .quem-grade.col-2 { grid-template-columns: 1fr; }
+  .plano-crm-largo { grid-template-columns: 1fr; }
+  .plano-itens.duas-colunas { columns: 1; }
   .b-cartoes.col-4 { grid-template-columns: 1fr 1fr; gap: 10px; }
   .b-cartoes.col-4 .cartao { padding: 16px; }
   .b-numeros { grid-template-columns: 1fr 1fr; gap: 10px 16px; }
