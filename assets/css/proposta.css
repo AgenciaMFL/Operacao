@@ -295,7 +295,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 #conteudo { background: var(--azul-50); }
 
 .abertura {
-  position: relative; z-index: 1; isolation: isolate; overflow: hidden; color: #fff;
+  position: relative; z-index: 1; isolation: isolate; color: #fff;
   min-height: max(600px, 34.65vw);
   display: flex;
   border-radius: 0 0 clamp(36px, 4.7vw, 120px) clamp(36px, 4.7vw, 120px);
@@ -350,7 +350,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
       #0A1530;
   }
   .abertura-conteudo::before {
-    content: ''; position: absolute; inset: 30% 0 0; z-index: -1; pointer-events: none;
+    content: ''; position: absolute; inset: 30% 0 0; z-index: -1; pointer-events: none; border-radius: 0 0 clamp(36px, 4.7vw, 120px) clamp(36px, 4.7vw, 120px);
     background: linear-gradient(180deg, transparent, rgba(10, 21, 48, .85) 35%, #0A1530);
   }
   .abertura-centro { justify-content: flex-end; }
@@ -383,20 +383,23 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   box-shadow: 0 24px 60px -30px rgba(46, 138, 76, .7);
 }
 .porque .b-destaque { position: relative; }
-/* cápsula com seta animada no topo do card (no lugar do traço) */
-.porque .b-destaque::before {
+/* cápsula com seta animada: no topo do card verde e entre a abertura e a seção seguinte */
+.porque .b-destaque::before, .seta-rolar {
   position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%);
   width: 30px; height: 52px; margin: 0; border-radius: 999px;
   background: linear-gradient(180deg, #0E2560, #1F44B0); border: 2px solid #3D63D9;
   box-shadow: 0 8px 20px -8px rgba(8, 21, 54, .6);
 }
-.porque .b-destaque::after {
+.seta-rolar { top: auto; bottom: 0; transform: translate(-50%, 50%); z-index: 2; }
+.seta-rolar:hover { border-color: #6D8CF0; }
+.porque .b-destaque::after, .seta-rolar::after {
   content: ''; position: absolute; left: 50%; top: 0; width: 20px; height: 22px; margin: -11px 0 0 -10px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v15M6 13l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
   animation: seta-destaque 1.6s ease-in-out infinite;
 }
+.seta-rolar::after { top: 50%; }
 @keyframes seta-destaque { 0%, 100% { transform: translateY(-7px); opacity: .55; } 50% { transform: translateY(5px); opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .porque .b-destaque::after { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .porque .b-destaque::after, .seta-rolar::after { animation: none; } }
 
 /* selo de seção: cápsula verde com o ícone branco + rótulo (Figma) */
 .selo-secao {

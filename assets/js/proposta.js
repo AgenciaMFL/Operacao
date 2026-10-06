@@ -762,7 +762,8 @@
           el('ul', { class: 'abertura-frentes revelar' }, frentes.map((t) => el('li', { text: t })))),
         el('div', { class: 'abertura-rodape' },
           el('a', { href: AGENCIA.site, target: '_blank', rel: 'noopener', text: AGENCIA.site.replace(/^https?:\/\//, '') }),
-          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }))));
+          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }))),
+      el('a', { class: 'seta-rolar abertura-rolar', href: '#por-que-a-mfl', 'aria-label': 'Ir para a próxima seção' }));
   }
 
   // Solução em abas: Inbound | Outbound | Tecnologia (só os módulos do modelo)
