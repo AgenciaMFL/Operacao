@@ -9,9 +9,9 @@
     "corPrimaria": "#39D353"
   },
   "cliente": {
-    "nome": "Clínica Exemplo",
+    "nome": "Empresa Exemplo",
     "contato": "Nome do Contato",
-    "cargo": "Sócia-proprietária"
+    "cargo": "Diretor(a) Comercial"
   },
   "proposta": {
     "numero": "MFL-2026-000",
@@ -63,8 +63,8 @@
       "ativo": true,
       "menu": "Diagnóstico",
       "rotulo": "Diagnóstico",
-      "titulo": "Transformar a qualidade da {cliente} em uma agenda cheia e previsível",
-      "texto": "A {cliente} já tem o que o cliente procura: serviços de alto valor percebido, técnica e um atendimento de confiança. O que esta proposta resolve não é a falta de serviço. É a ausência de um fluxo constante de novos clientes chegando pelo WhatsApp e de um processo organizado para transformar cada conversa em atendimento agendado.",
+      "titulo": "Transformar a estrutura da {cliente} em uma máquina previsível de novos clientes",
+      "texto": "A {cliente} já reúne os principais ativos para vender mais: um produto ou serviço de qualidade, experiência de mercado e clientes satisfeitos. O que esta proposta resolve não é a falta de qualidade. É a ausência de um processo comercial estruturado e previsível para colocar a empresa diante de mais clientes com potencial real de compra e transformar cada contato em oportunidade de venda.",
       "blocos": [
         {
           "tipo": "lista",
@@ -148,7 +148,7 @@
             },
             {
               "titulo": "SDR (opcional)",
-              "texto": "Um especialista que responde, qualifica e agenda cada lead."
+              "texto": "Um especialista que responde, qualifica e conduz cada lead até a reunião ou proposta."
             },
             {
               "titulo": "Treinamento",
@@ -201,7 +201,7 @@
             "Produto ou serviço mais procurado",
             "Diferenciais e certificações",
             "Prova social e resultados",
-            "Oferta de entrada (avaliação, amostra ou diagnóstico)",
+            "Oferta de entrada (amostra, demonstração ou diagnóstico)",
             "Atendimento e logística na região"
           ],
           "largura": "metade"
@@ -229,7 +229,7 @@
             "Configuração de Meta Ads e Google Ads",
             "Segmentação geográfica na região do negócio",
             "Campanhas de conversa direta no WhatsApp",
-            "Remarketing para quem interagiu e não agendou",
+            "Remarketing para quem interagiu e não avançou",
             "Direcionamento de criativos e copys dos anúncios",
             "Testes A/B de público, criativo e oferta",
             "Otimização contínua das campanhas",
@@ -256,7 +256,7 @@
             },
             {
               "titulo": "Remarketing",
-              "texto": "Quem visitou o Instagram, assistiu vídeos ou chamou e não agendou."
+              "texto": "Quem visitou o site ou o Instagram, assistiu vídeos ou chamou e não avançou."
             }
           ]
         },
@@ -434,7 +434,7 @@
               "itens": [
                 "Conversas perdidas no WhatsApp",
                 "Orçamentos esquecidos sem retorno",
-                "Faltas sem recuperação",
+                "Leads que somem sem retorno",
                 "Não se sabe qual anúncio gerou o cliente"
               ]
             },
@@ -444,7 +444,7 @@
               "itens": [
                 "Todas as conversas organizadas por etapa",
                 "Follow-up automático de cada orçamento",
-                "Lembretes que reduzem faltas",
+                "Cadências que trazem o lead de volta",
                 "Origem e resultado de cada campanha"
               ]
             }
@@ -497,8 +497,8 @@
         {
           "tipo": "subsecao",
           "rotulo": "SDR · serviço opcional",
-          "titulo": "Um SDR dedicado para transformar cada lead em cliente agendado",
-          "texto": "O SDR (Sales Development Representative) faz a ponte entre o anúncio e o atendimento. Se a {cliente} optar por esse serviço, ele assume o atendimento comercial dos leads gerados pelas campanhas, da primeira mensagem à confirmação do horário."
+          "titulo": "Um SDR dedicado para transformar cada lead em oportunidade de venda",
+          "texto": "O SDR (Sales Development Representative) faz a ponte entre o primeiro contato e o vendedor. Se a {cliente} optar por esse serviço, ele assume o atendimento comercial dos leads gerados pelas campanhas e pela prospecção, da primeira mensagem até a reunião ou proposta."
         },
         {
           "tipo": "cartoes",
@@ -511,16 +511,16 @@
               "texto": "Cada contato registrado com origem, interesse e etapa do funil sempre atualizados."
             },
             {
-              "titulo": "Agendamento",
-              "texto": "Conduz a conversa, tira dúvidas e agenda o atendimento."
+              "titulo": "Qualificação e reunião",
+              "texto": "Conduz a conversa, entende a necessidade e marca a reunião ou o envio da proposta."
             },
             {
               "titulo": "Confirmação",
-              "texto": "Confirma cada horário com antecedência, reduzindo faltas e remarcações."
+              "texto": "Confirma cada reunião com antecedência, reduzindo remarcações e cancelamentos."
             },
             {
               "titulo": "Follow-up",
-              "texto": "Retoma quem não respondeu, quem pediu valores e quem faltou, até a decisão."
+              "texto": "Retoma quem não respondeu, quem pediu valores e quem esfriou, até a decisão."
             }
           ]
         },
@@ -534,12 +534,12 @@
               "texto": "Domina o CRM da operação: pipeline, automações, tarefas e histórico."
             },
             {
-              "titulo": "Experiência no nicho",
+              "titulo": "Experiência no seu mercado",
               "texto": "Conhece as dúvidas, as objeções e a linguagem do seu cliente."
             },
             {
               "titulo": "Scripts de venda",
-              "texto": "Atendimento consultivo e padronizado, com foco em agendamento e comparecimento."
+              "texto": "Atendimento consultivo e padronizado, com foco em gerar oportunidades reais de venda."
             }
           ]
         },
@@ -553,7 +553,7 @@
               "itens": [
                 "Responder rapidamente cada novo lead",
                 "Organizar e manter o CRM atualizado",
-                "Agendar, confirmar e lembrar os horários",
+                "Marcar, confirmar e lembrar as reuniões",
                 "Fazer o follow-up até a decisão"
               ]
             },
@@ -561,9 +561,9 @@
               "titulo": "A {cliente} cuida",
               "tom": "neutro",
               "itens": [
-                "Atendimento e execução do serviço",
-                "Pós-atendimento",
-                "Presença e autoridade nas redes"
+                "Reuniões e negociação com o lead qualificado",
+                "Entrega do produto ou serviço",
+                "Relacionamento e pós-venda"
               ]
             }
           ]
@@ -587,10 +587,10 @@
           "tipo": "chips",
           "titulo": "Exemplos de tema de campanha",
           "itens": [
-            "Avaliação gratuita",
-            "Serviço mais procurado",
-            "Antes e depois",
-            "Condição do mês"
+            "Solução para um problema específico",
+            "Diferenciais do produto",
+            "Prova social e cases",
+            "Condição comercial do mês"
           ]
         },
         {
@@ -599,7 +599,7 @@
           "etapas": [
             {
               "titulo": "Cliente pesquisa ou vê um anúncio",
-              "descricao": "No Google, procurando o serviço, ou em um vídeo no Instagram."
+              "descricao": "No Google, procurando a solução, ou em um anúncio no Instagram."
             },
             {
               "titulo": "Clica e cai direto no WhatsApp",
@@ -611,22 +611,22 @@
             },
             {
               "titulo": "Atendimento com roteiro definido",
-              "descricao": "Feito pelo SDR (se contratado) ou pela equipe: qualifica, tira dúvidas e agenda."
+              "descricao": "Feito pelo SDR (se contratado) ou pelo time comercial: qualifica, entende a necessidade e avança."
             },
             {
-              "titulo": "Agendamento confirmado e lembrado",
-              "descricao": "Confirmação e lembretes reduzem faltas."
+              "titulo": "Reunião ou proposta enviada",
+              "descricao": "Follow-up automático até a decisão."
             },
             {
-              "titulo": "Atendimento, pós e retorno programado",
-              "descricao": "O cliente volta e indica."
+              "titulo": "Venda, pós-venda e recompra",
+              "descricao": "O cliente volta, compra de novo e indica."
             }
           ]
         },
         {
           "tipo": "citacao",
-          "titulo": "Exemplo de primeira mensagem",
-          "texto": "Oi, Ana! Vi que você se interessou pelo nosso serviço. Aqui na {cliente} o atendimento é personalizado. Quer agendar um horário para conversarmos?"
+          "titulo": "Exemplo de primeira abordagem",
+          "texto": "Olá! Vi que você se interessou pela nossa solução. Me conta um pouco do seu cenário hoje? Assim consigo te mostrar o que faz sentido para a sua empresa."
         },
         {
           "tipo": "subsecao",
@@ -646,7 +646,7 @@
                 "Configuração das contas de anúncio",
                 "Implantação do CRM e do funil",
                 "Integração com o WhatsApp",
-                "Automações de agendamento e lembrete",
+                "Automações de follow-up e lembretes",
                 "Primeiras campanhas no ar"
               ]
             },
@@ -654,7 +654,7 @@
               "etiqueta": "Mês 2",
               "titulo": "Otimização",
               "itens": [
-                "Análise de custo por conversa e por agendamento",
+                "Análise de custo por lead e por oportunidade",
                 "Testes de criativos, públicos e ofertas",
                 "Ajuste do roteiro de atendimento",
                 "Remarketing ativo",
@@ -680,19 +680,19 @@
           "colunas": 4,
           "cartoes": [
             {
-              "titulo": "Custo por conversa",
-              "texto": "Quanto custa cada novo cliente iniciando contato."
+              "titulo": "Custo por lead",
+              "texto": "Quanto custa cada novo contato qualificado."
             },
             {
-              "titulo": "Taxa de agendamento",
-              "texto": "Conversas que viram atendimento marcado."
+              "titulo": "Taxa de conversão",
+              "texto": "Leads que viram oportunidade de venda."
             },
             {
-              "titulo": "Comparecimento",
-              "texto": "Agendamentos que de fato acontecem."
+              "titulo": "Oportunidades no funil",
+              "texto": "Reuniões e propostas em andamento."
             },
             {
-              "titulo": "Retorno sobre anúncio",
+              "titulo": "Retorno sobre investimento",
               "texto": "Faturamento gerado por real investido."
             }
           ]
@@ -716,9 +716,9 @@
               "tom": "neutro",
               "itens": [
                 "Acesso às contas (Instagram, Meta e Google)",
-                "Fotos e vídeos do espaço e da equipe",
-                "Agenda de horários sempre atualizada",
-                "Atendimento no WhatsApp (caso não contrate o SDR)"
+                "Materiais da marca: fotos, vídeos e catálogo",
+                "Time comercial disponível para as oportunidades",
+                "Atendimento dos leads (caso não contrate o SDR)"
               ]
             }
           ]
@@ -996,9 +996,9 @@
         "destaque": false,
         "itens": [
           "Organização dos leads no CRM",
-          "Agendamentos",
-          "Confirmação de agendamentos",
-          "Follow-up de leads, orçamentos e faltas",
+          "Qualificação e marcação de reuniões",
+          "Confirmação das reuniões",
+          "Follow-up de leads, propostas e contatos frios",
           "Treinado com scripts e abordagens de venda"
         ]
       }

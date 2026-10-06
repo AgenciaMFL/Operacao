@@ -110,7 +110,7 @@
         { chave: 'cliente.nome', rotulo: 'Nome do cliente (aparece na capa)' },
         { chave: 'cliente.contato', rotulo: 'Aos cuidados de', meia: true },
         { chave: 'cliente.cargo', rotulo: 'Cargo', meia: true },
-        { chave: 'proposta.solucao', rotulo: 'Solução proposta', ajuda: 'Aparece no início da proposta. Ex.: Tráfego Pago + CRM para Harmonização Facial' },
+        { chave: 'proposta.solucao', rotulo: 'Solução proposta', ajuda: 'Aparece no início da proposta. Ex.: Inbound + Outbound + CRM para captação de novos clientes' },
         { chave: 'proposta.numero', rotulo: 'Número da proposta', meia: true },
         { chave: 'proposta.data', rotulo: 'Data', tipo: 'date', meia: true },
         { chave: 'proposta.validadeDias', rotulo: 'Validade (dias)', tipo: 'number', meia: true },

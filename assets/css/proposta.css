@@ -402,7 +402,6 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .blocos > .bloco > .b-fluxo.compacto .fluxo-etapa.fim-linha::before { display: none; }
   .blocos > .bloco > .b-fluxo.compacto .fluxo-texto { padding-top: 0; }
 }
-}
 
 /* cartões */
 .b-cartoes { display: grid; gap: 14px; }
