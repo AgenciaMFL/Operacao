@@ -115,8 +115,10 @@ h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
 .capa-luz-1 { left: 98%; top: 4%; }
 .capa-luz-2 { left: 4%; top: 97%; }
 
-/* transição pixelada entre capa e proposta */
-.transicao-pixels { position: fixed; inset: 0; z-index: 60; width: 100vw; height: 100vh; pointer-events: none; }
+/* transição circular entre capa e proposta */
+.transicao-anel, .transicao-cobertura { position: fixed; inset: 0; z-index: 60; pointer-events: none; clip-path: circle(0 at 50% 50%); }
+.transicao-anel { background: linear-gradient(135deg, var(--capa-verde, #00CB40), var(--destaque)); }
+.transicao-cobertura { background: var(--fundo); }
 
 /* faixas inclinadas "+7 anos" */
 .capa-faixa {

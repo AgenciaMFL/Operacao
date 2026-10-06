@@ -238,91 +238,57 @@
     };
     try { sessionStorage.setItem(`aberta:${slug}`, '1'); } catch (e) { /* sem storage */ }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { trocar(); return; }
-    transicaoPixels(trocar);
+    transicaoCirculo(trocar);
   }
 
   /*
-   * Transição pixelada: a tela é coberta por quadradinhos que acendem em verde
-   * e escurecem; com a tela coberta, a capa sai e a proposta entra; depois os
-   * quadradinhos se apagam em ordem aleatória, revelando a proposta.
+   * Transição circular: a partir do botão, um anel verde se expande pela tela
+   * (eco do círculo do logo) seguido pela cor de fundo da proposta. Com a tela
+   * coberta, a capa sai; depois a cobertura some em fade revelando a proposta.
    */
   let abrindo = false;
-  function transicaoPixels(noMeio) {
+  function transicaoCirculo(noMeio) {
     abrindo = true;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const largura = innerWidth;
-    const altura = innerHeight;
-    const lado = Math.max(24, Math.round(Math.min(largura, altura) / 20));
-    const colunas = Math.ceil(largura / lado);
-    const linhas = Math.ceil(altura / lado);
+    const botao = $('.capa-botao');
+    const r = botao ? botao.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0, height: 0 };
+    const x = r.left + r.width / 2;
+    const y = r.top + r.height / 2;
+    // raio até o canto mais distante da tela
+    const raio = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 40;
 
-    const canvas = el('canvas', { class: 'transicao-pixels', 'aria-hidden': 'true' });
-    canvas.width = largura * dpr;
-    canvas.height = altura * dpr;
-    document.body.append(canvas);
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
+    const anel = el('div', { class: 'transicao-anel', 'aria-hidden': 'true' });
+    const cobertura = el('div', { class: 'transicao-cobertura', 'aria-hidden': 'true' });
+    document.body.append(anel, cobertura);
 
-    const css = getComputedStyle(document.documentElement);
-    const verde = css.getPropertyValue('--destaque').trim() || '#39D353';
-    const escuro = css.getPropertyValue('--fundo').trim() || '#0F1626';
+    const curva = 'cubic-bezier(.7, 0, .2, 1)';
+    const circulo = (raioPx) => `circle(${raioPx}px at ${x}px ${y}px)`;
+    const duracao = 850;
 
-    const COBRIR = 520;   // ms para cobrir a tela
-    const REVELAR = 620;  // ms para revelar a proposta
-    const BRILHO = 90;    // ms que cada pixel fica verde
-    const celulas = [];
-    for (let y = 0; y < linhas; y++) {
-      for (let x = 0; x < colunas; x++) {
-        // leve tendência diagonal deixa o efeito com direção, sem perder o aleatório
-        const vies = (x / colunas + (1 - y / linhas)) / 2;
-        celulas.push({
-          x: x * lado, y: y * lado,
-          entra: (Math.random() * 0.75 + vies * 0.25) * COBRIR,
-          sai: (Math.random() * 0.75 + vies * 0.25) * REVELAR,
-          verde: Math.random() < 0.4
-        });
-      }
-    }
+    botao?.animate([{ transform: 'scale(1)' }, { transform: 'scale(.94)' }, { transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
+    $('.capa-centro')?.animate(
+      [{ transform: 'scale(1)', filter: 'blur(0)', opacity: 1 }, { transform: 'scale(.94)', filter: 'blur(6px)', opacity: 0 }],
+      { duration: duracao * 0.7, easing: curva, fill: 'forwards' }
+    );
+    anel.animate([{ clipPath: circulo(0) }, { clipPath: circulo(raio) }], { duration: duracao, easing: curva, fill: 'forwards' });
+    const cobrir = cobertura.animate(
+      [{ clipPath: circulo(0) }, { clipPath: circulo(raio) }],
+      { duration: duracao, delay: 80, easing: curva, fill: 'forwards' }
+    );
 
-    let inicio = null;
-    let fase = 'cobrir';
-    const quadro = (agora) => {
-      if (inicio === null) inicio = agora;
-      const t = agora - inicio;
-      ctx.clearRect(0, 0, largura, altura);
-
-      if (fase === 'cobrir') {
-        for (const c of celulas) {
-          if (t < c.entra) continue;
-          ctx.fillStyle = c.verde && t < c.entra + BRILHO ? verde : escuro;
-          ctx.fillRect(c.x, c.y, lado + 1, lado + 1);
-        }
-        if (t >= COBRIR + BRILHO) {
-          ctx.fillStyle = escuro;
-          ctx.fillRect(0, 0, largura, altura);
-          noMeio();
-          fase = 'revelar';
-          inicio = agora;
-        }
-      } else {
-        let restantes = 0;
-        for (const c of celulas) {
-          if (t >= c.sai + BRILHO) continue;
-          restantes++;
-          ctx.fillStyle = c.verde && t >= c.sai ? verde : escuro;
-          ctx.globalAlpha = t >= c.sai ? 0.85 : 1;
-          ctx.fillRect(c.x, c.y, lado + 1, lado + 1);
-          ctx.globalAlpha = 1;
-        }
-        if (!restantes) {
-          canvas.remove();
-          abrindo = false;
-          return;
-        }
-      }
-      requestAnimationFrame(quadro);
-    };
-    requestAnimationFrame(quadro);
+    cobrir.finished.then(() => {
+      noMeio();
+      anel.remove();
+      const revelar = cobertura.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, easing: 'ease-out', fill: 'forwards' });
+      $('.intro .container')?.animate(
+        [{ transform: 'translateY(24px)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+        { duration: 700, easing: 'cubic-bezier(.2, .7, .1, 1)' }
+      );
+      revelar.finished.then(() => {
+        cobertura.remove();
+        $('.capa-centro')?.getAnimations().forEach((an) => an.cancel());
+        abrindo = false;
+      });
+    });
   }
 
   /* ---------- blocos ---------- */
