@@ -731,29 +731,33 @@
 
   const mensagemAprovar = () => `Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`;
 
-  // Primeira seção: só o nome do cliente e os entregáveis (sem valores)
+  // Abertura: para quem é, solução, capacidades, resumo e dados da proposta
   function hero(c) {
-    const itensCrmCliente = ['Funil de vendas adaptado ao seu processo', 'Etapas e critérios claros para cada fase do funil', 'Cadastro organizado de leads e contatos',
-      'Rotinas de follow-up para cada etapa', 'Automações, de acordo com os recursos do seu CRM', 'Orientação do time para usar o funil no dia a dia'];
-    const frentes = [
-      c.hasIn && { rotulo: 'Inbound', titulo: 'Gestão de tráfego' + (c.b2c ? ' · B2C' : ''), itens: itensInbound(c).filter((i) => i !== FUNIL_CLIENTE) },
-      c.out === 'bdr' && { rotulo: 'Outbound', titulo: 'Prospecção com BDR + SDR', itens: itensBdr(c).filter((i) => i !== FUNIL_CLIENTE) },
-      c.out === 'train' && { rotulo: 'Outbound', titulo: 'Prospecção + treinamento', itens: itensTrain(c).filter((i) => i !== FUNIL_CLIENTE) },
-      c.mfl
-        ? { rotulo: 'CRM', titulo: 'CRM MFL Sales', itens: itensCrm(c) }
-        : { rotulo: 'CRM', titulo: 'Estruturação no seu CRM', itens: itensCrmCliente }
-    ].filter(Boolean);
+    const canais = [c.hasIn && 'Inbound', c.out && 'Outbound', 'CRM', 'Automação'].filter(Boolean).join(' · ');
+    const capacidades = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação integrados'].filter(Boolean);
+    const totais = calcularInvestimento(c).map((t) => t.valor).filter((v) => v != null);
+    const data = lerData(S.data);
 
-    return el('section', { class: 'intro hero tema-escuro', id: 'inicio' },
+    const resumo = [
+      { rotulo: 'Modelo', valor: NOMES_MODELO[c.m] + (c.m === '4' ? ` (${c.out === 'bdr' ? 'BDR + SDR' : 'Treinamento'})` : '') },
+      c.hasIn ? { rotulo: 'Público', valor: c.b2c ? 'B2C · até a venda' : 'B2B · até a reunião agendada' } : { rotulo: 'Execução', valor: c.out === 'bdr' ? 'MFL Sales até a reunião agendada' : 'Seu time, treinado pela MFL Sales' },
+      { rotulo: 'Contrato', valor: `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}` },
+      { rotulo: 'Investimento', valor: totais.length ? `${totais.length > 1 ? 'A partir de ' : ''}${brl(Math.min(...totais))}/mês` : null }
+    ];
+
+    return el('section', { class: 'intro tema-escuro', id: 'inicio' },
       el('div', { class: 'container' },
-        el('p', { class: 'intro-eyebrow revelar', text: 'Proposta comercial para' }),
-        el('h1', { class: 'hero-cliente revelar' }, nomeCliente() || vazio('[Nome do cliente]')),
-        el('h2', { class: 'hero-entregaveis-titulo revelar', text: 'Entregáveis' }),
-        el('div', { class: `entregaveis col-${frentes.length} revelar` },
-          frentes.map((f) => el('article', { class: 'entregavel' },
-            el('span', { class: 'entregavel-rotulo', text: f.rotulo }),
-            el('h3', { text: f.titulo }),
-            el('ul', { class: 'plano-itens' }, f.itens.map((t) => el('li', { text: t }))))))));
+        el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial · ${AGENCIA.slogan}` }),
+        el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', {}, nomeCliente() || vazio('[Nome do cliente]'))),
+        el('p', { class: 'intro-sub revelar', text: 'Estruturação da Operação Comercial de Aquisição' }),
+        el('ul', { class: 'intro-capacidades revelar' }, capacidades.map((t) => el('li', { text: t }))),
+        el('div', { class: 'resumo revelar' }, resumo.map((r) => el('div', { class: 'resumo-item' },
+          el('span', { text: r.rotulo }), el('strong', {}, r.valor || vazio('R$ [total]/mês'))))),
+        el('dl', { class: 'intro-meta revelar' },
+          el('div', {}, el('dt', { text: 'Canais' }), el('dd', { text: canais })),
+          el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: data ? formatarData(data) : '' })),
+          dataValidade() && el('div', {}, el('dt', { text: 'Válida até' }), el('dd', { text: formatarData(dataValidade()) })),
+          S.responsavel?.nome && el('div', {}, el('dt', { text: 'Responsável' }), el('dd', { text: S.responsavel.nome })))));
   }
 
   // Faixa de números da MFL logo abaixo do hero
