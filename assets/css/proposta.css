@@ -375,6 +375,14 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 }
 .porque-titulo em { font-style: normal; color: #3CA55D; }
 .secao-banda.porque .blocos { margin-top: clamp(24px, 4vw, 56px); }
+.porque .bloco-titulo { text-align: center; font: 700 clamp(1.5rem, 2.4vw, 2rem)/1.2 'Archivo', var(--display); letter-spacing: -.02em; margin-bottom: clamp(20px, 2.6vw, 32px); }
+.porque .b-destaque {
+  max-width: none; margin: 0; padding: clamp(28px, 4vw, 48px) clamp(24px, 5vw, 64px); border-radius: 24px;
+  background: radial-gradient(120% 140% at 0% 0%, #4FC777 0%, #3CA55D 45%, #2E8A4C 100%);
+  color: #fff; text-align: center; font-weight: 600; text-wrap: balance;
+  box-shadow: 0 24px 60px -30px rgba(46, 138, 76, .7);
+}
+.porque .b-destaque::before { margin: 0 auto 18px; background: rgba(255, 255, 255, .7); }
 
 /* selo de seção: cápsula verde com o ícone branco + rótulo (Figma) */
 .selo-secao {
