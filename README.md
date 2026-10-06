@@ -10,7 +10,7 @@ editor.html                → gerador de propostas (painel do comercial)
 propostas/
   padrao.json              → proposta padrão do gerador (ponto de partida)
 depoimentos/catalogo.json  → biblioteca de vídeos de depoimento (todas as propostas usam)
-assets/img                 → logo, ícone, avatares da capa e microfone da abertura
+assets/img                 → logo, ícone, avatares da capa e fundo da abertura (abertura-fundo.webp)
 assets/video               → vídeo de fundo da capa (MP4 + WebM) e imagem de espera
 assets/css, assets/js      → visual e lógica (não precisa mexer)
 ```

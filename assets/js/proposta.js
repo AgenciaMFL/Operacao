@@ -731,40 +731,11 @@
   const mensagemAprovar = () => `Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`;
 
   // Abertura: para quem é, solução, capacidades, resumo e dados da proposta
-  // SVG decorativo da abertura (Figma 3089:8, quadro de 2560 × 887): anéis, brilhos e "MFL SALES"
-  function fundoAbertura() {
-    const ns = 'http://www.w3.org/2000/svg';
-    const no = (tag, attrs, ...filhos) => {
-      const n = document.createElementNS(ns, tag);
-      Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
-      filhos.forEach((f) => n.append(f));
-      return n;
-    };
-    const brilho = (id, cor, opacidade) => no('radialGradient', { id },
-      no('stop', { offset: '0', 'stop-color': cor, 'stop-opacity': opacidade }),
-      no('stop', { offset: '1', 'stop-color': cor, 'stop-opacity': '0' }));
-    const anel = (cx, cy, r) => no('circle', { cx, cy, r, fill: 'none', stroke: 'url(#ab-anel)', 'stroke-width': '2' });
-    return no('svg', { class: 'abertura-fundo', viewBox: '0 0 2560 887', preserveAspectRatio: 'xMidYMin slice', 'aria-hidden': 'true' },
-      no('defs', {},
-        brilho('ab-b1', '#2B5BD7', '.32'), brilho('ab-b2', '#3A6CF0', '.38'), brilho('ab-b3', '#2A4FB8', '.26'),
-        no('linearGradient', { id: 'ab-anel', x1: '0', y1: '0', x2: '0', y2: '1' },
-          no('stop', { offset: '0', 'stop-color': '#9DBDFF', 'stop-opacity': '0' }),
-          no('stop', { offset: '1', 'stop-color': '#9DBDFF', 'stop-opacity': '.08' }))),
-      anel(1300.5, -166, 1316), anel(1301, -304, 1271), anel(1301.5, -490.5, 1209.5),
-      no('circle', { cx: 2345, cy: 115, r: 860, fill: 'url(#ab-b1)' }),
-      no('circle', { cx: 1821, cy: 115, r: 860, fill: 'url(#ab-b1)' }),
-      no('circle', { cx: 1772, cy: 25, r: 600, fill: 'url(#ab-b2)' }),
-      no('circle', { cx: 124, cy: 810, r: 840, fill: 'url(#ab-b3)' }),
-      Object.assign(no('text', { x: 81, y: 1030, class: 'abertura-marca-fundo', textLength: 2397, lengthAdjust: 'spacingAndGlyphs' }), { textContent: 'MFL SALES' }));
-  }
-
   // Abertura (Figma 3089:8): marca, selo, título, frentes do modelo e contatos
   function hero(c) {
     const frentes = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação'].filter(Boolean);
 
     return el('section', { class: 'abertura', id: 'inicio' },
-      fundoAbertura(),
-      el('img', { class: 'abertura-microfone', src: 'assets/img/abertura-microfone.webp', alt: '', width: '639', height: '710', decoding: 'async' }),
       el('div', { class: 'container abertura-conteudo' },
         el('img', { class: 'abertura-logo', src: 'assets/img/mfl-sales-logo.svg', alt: AGENCIA.nome, width: '136', height: '42' }),
         el('div', { class: 'abertura-centro' },
