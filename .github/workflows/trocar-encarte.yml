@@ -1,0 +1,51 @@
+name: Trocar encarte
+
+on:
+  push:
+    branches: [main]
+    paths: ["encartes/entrada/**"]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Só simular (não troca nada)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: trocar-encarte
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  trocar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r scripts/requirements.txt
+
+      - name: Trocar imagens no Elementor
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_PAGE_IDS: ${{ vars.WP_PAGE_IDS }}
+        run: python scripts/trocar_encarte.py ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Limpar pasta de entrada
+        if: ${{ !inputs.dry_run }}
+        run: |
+          shopt -s nullglob nocaseglob
+          files=(encartes/entrada/*.{jpg,jpeg,png,webp,gif})
+          [ ${#files[@]} -eq 0 ] && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q -- "${files[@]}"
+          git commit -m "Encarte publicado em $(date +%d/%m/%Y) [skip ci]"
+          git push

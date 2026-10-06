@@ -1,2 +1,6 @@
 # Local MCP settings with secrets
 .claude/settings.json
+
+# Credenciais locais do encarte
+.env
+__pycache__/
