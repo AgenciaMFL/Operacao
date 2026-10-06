@@ -225,21 +225,104 @@
   }
 
   function abrirProposta() {
+    if (abrindo) return;
     aberta = true;
     const capa = $('#capa');
-    $('#proposta').hidden = false;
-    document.body.classList.add('aberta');
-    window.scrollTo(0, 0);
-    aoRolar();
-    capa.classList.add('saindo');
-    const fim = () => {
+    const trocar = () => {
       capa.hidden = true;
       videoCapa?.pause();
-      capa.classList.remove('saindo');
+      $('#proposta').hidden = false;
+      document.body.classList.add('aberta');
+      window.scrollTo(0, 0);
+      aoRolar();
     };
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) fim();
-    else capa.addEventListener('animationend', fim, { once: true });
     try { sessionStorage.setItem(`aberta:${slug}`, '1'); } catch (e) { /* sem storage */ }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { trocar(); return; }
+    transicaoPixels(trocar);
+  }
+
+  /*
+   * Transição pixelada: a tela é coberta por quadradinhos que acendem em verde
+   * e escurecem; com a tela coberta, a capa sai e a proposta entra; depois os
+   * quadradinhos se apagam em ordem aleatória, revelando a proposta.
+   */
+  let abrindo = false;
+  function transicaoPixels(noMeio) {
+    abrindo = true;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const largura = innerWidth;
+    const altura = innerHeight;
+    const lado = Math.max(24, Math.round(Math.min(largura, altura) / 20));
+    const colunas = Math.ceil(largura / lado);
+    const linhas = Math.ceil(altura / lado);
+
+    const canvas = el('canvas', { class: 'transicao-pixels', 'aria-hidden': 'true' });
+    canvas.width = largura * dpr;
+    canvas.height = altura * dpr;
+    document.body.append(canvas);
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    const css = getComputedStyle(document.documentElement);
+    const verde = css.getPropertyValue('--destaque').trim() || '#39D353';
+    const escuro = css.getPropertyValue('--fundo').trim() || '#0F1626';
+
+    const COBRIR = 520;   // ms para cobrir a tela
+    const REVELAR = 620;  // ms para revelar a proposta
+    const BRILHO = 90;    // ms que cada pixel fica verde
+    const celulas = [];
+    for (let y = 0; y < linhas; y++) {
+      for (let x = 0; x < colunas; x++) {
+        // leve tendência diagonal deixa o efeito com direção, sem perder o aleatório
+        const vies = (x / colunas + (1 - y / linhas)) / 2;
+        celulas.push({
+          x: x * lado, y: y * lado,
+          entra: (Math.random() * 0.75 + vies * 0.25) * COBRIR,
+          sai: (Math.random() * 0.75 + vies * 0.25) * REVELAR,
+          verde: Math.random() < 0.4
+        });
+      }
+    }
+
+    let inicio = null;
+    let fase = 'cobrir';
+    const quadro = (agora) => {
+      if (inicio === null) inicio = agora;
+      const t = agora - inicio;
+      ctx.clearRect(0, 0, largura, altura);
+
+      if (fase === 'cobrir') {
+        for (const c of celulas) {
+          if (t < c.entra) continue;
+          ctx.fillStyle = c.verde && t < c.entra + BRILHO ? verde : escuro;
+          ctx.fillRect(c.x, c.y, lado + 1, lado + 1);
+        }
+        if (t >= COBRIR + BRILHO) {
+          ctx.fillStyle = escuro;
+          ctx.fillRect(0, 0, largura, altura);
+          noMeio();
+          fase = 'revelar';
+          inicio = agora;
+        }
+      } else {
+        let restantes = 0;
+        for (const c of celulas) {
+          if (t >= c.sai + BRILHO) continue;
+          restantes++;
+          ctx.fillStyle = c.verde && t >= c.sai ? verde : escuro;
+          ctx.globalAlpha = t >= c.sai ? 0.85 : 1;
+          ctx.fillRect(c.x, c.y, lado + 1, lado + 1);
+          ctx.globalAlpha = 1;
+        }
+        if (!restantes) {
+          canvas.remove();
+          abrindo = false;
+          return;
+        }
+      }
+      requestAnimationFrame(quadro);
+    };
+    requestAnimationFrame(quadro);
   }
 
   /* ---------- blocos ---------- */
