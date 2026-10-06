@@ -255,13 +255,18 @@
         { titulo: 'Decisões baseadas em dados', texto: 'Você acompanha de onde vêm as oportunidades, em que etapa estão e o que está convertendo.' },
         { titulo: 'Ajuste contínuo', texto: 'Campanhas, listas, abordagens e funil são testados e otimizados conforme os resultados.' }
       ], 3)),
-      bloco('', blocoTitulo('Como trabalhamos'), etapas([
+      bloco('', destaque('Sua empresa foca em vender e entregar. A MFL Sales estrutura e opera a máquina que traz as oportunidades.'))
+    ]);
+
+  SECOES.como = () => faixaSecao('como-funciona', 'Como trabalhamos', 'Quatro etapas, do diagnóstico à otimização',
+    'Uma operação montada em etapas claras, com acompanhamento próximo em cada uma delas.',
+    [
+      bloco('', etapas([
         ['Diagnóstico', 'Entendemos o seu negócio, o seu cliente ideal e o seu processo de venda atual'],
         ['Estruturação', 'Montamos canais, funil, automações e materiais de abordagem'],
         ['Execução', 'Colocamos a operação para rodar e gerar oportunidades todos os meses'],
         ['Otimização', 'Analisamos os números e ajustamos o que traz mais resultado']
-      ])),
-      bloco('', destaque('Sua empresa foca em vender e entregar. A MFL Sales estrutura e opera a máquina que traz as oportunidades.'))
+      ], { compacto: true }))
     ]);
 
   SECOES.resultados = (c) => {
@@ -535,8 +540,6 @@
   SECOES.next = (c) => {
     const canais = [c.hasIn && (c.sc.lp ? 'campanhas e Landing Page' : 'campanhas'), c.out && 'listas, scripts e cadência'].filter(Boolean).join(', ');
     const inicio = c.hasIn && c.out ? 'Início das campanhas e da prospecção' : c.hasIn ? 'Início das campanhas' : 'Início da prospecção';
-    const r = S.responsavel || {};
-    const href = linkContato(`Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`);
     return faixaSecao('proximos-passos', 'Próximos passos', 'Como começamos',
       'Depois da aprovação, a operação é montada em etapas curtas e objetivas. Este é o caminho até as primeiras oportunidades chegarem ao seu time.',
       [
@@ -555,19 +558,7 @@
           !c.mfl && 'Acesso administrativo ao CRM da sua empresa',
           'Um responsável para aprovar materiais e acompanhar os resultados',
           (c.out || !c.b2c) ? 'Agenda do comercial disponível para as reuniões' : 'Time preparado para responder os contatos rapidamente'
-        ], 2)),
-        el('div', { class: 'cta tema-escuro revelar' },
-          el('div', { class: 'cta-texto' },
-            el('h3', { text: 'Nosso objetivo não é apenas gerar leads. É construir um processo comercial que coloque sua empresa diante das pessoas certas e transforme interesse em vendas.' }),
-            href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' }, el('span', { text: 'Quero aprovar a proposta' }), el('span', { 'aria-hidden': 'true', text: '→' }))),
-          r.nome && el('div', { class: 'responsavel' },
-            el('span', { class: 'responsavel-avatar', 'aria-hidden': 'true', text: iniciais(r.nome) }),
-            el('div', {},
-              el('strong', { text: r.nome }),
-              r.cargo && el('span', { text: r.cargo }),
-              el('span', { class: 'responsavel-contatos' },
-                r.whatsapp && el('a', { href: `https://wa.me/${String(r.whatsapp).replace(/\D/g, '')}`, target: '_blank', rel: 'noopener', text: formatarTelefone(r.whatsapp) }),
-                r.email && el('a', { href: `mailto:${r.email}`, text: r.email })))))
+        ], 2))
       ], { classe: 'secao-proximos' });
   };
 
@@ -738,55 +729,171 @@
     4: 'Inbound + Outbound'
   };
 
+  const mensagemAprovar = () => `Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`;
+
+  // Hero do site: título, chamada, botões e cartão de resumo da proposta
+  function hero(c) {
+    const totais = calcularInvestimento(c).map((t) => t.valor).filter((v) => v != null);
+    const validade = dataValidade();
+    const data = lerData(S.data);
+    const linhas = [
+      ['Modelo', NOMES_MODELO[c.m] + (c.m === '4' ? ` · ${c.out === 'bdr' ? 'BDR + SDR' : 'Treinamento'}` : '')],
+      c.hasIn ? ['Público', c.b2c ? 'B2C · até a venda' : 'B2B · até a reunião agendada'] : ['Execução', c.out === 'bdr' ? 'MFL Sales até a reunião agendada' : 'Seu time, treinado pela MFL Sales'],
+      ['CRM', c.mfl ? 'CRM MFL Sales' : 'CRM da sua empresa'],
+      ['Contrato', `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}`],
+      validade && ['Válida até', formatarData(validade)]
+    ].filter(Boolean);
+    const capacidades = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação integrados'].filter(Boolean);
+
+    return el('section', { class: 'intro hero tema-escuro', id: 'inicio' },
+      el('div', { class: 'container hero-grade' },
+        el('div', { class: 'hero-texto' },
+          el('p', { class: 'intro-eyebrow revelar' }, 'Proposta comercial para ', el('strong', {}, nomeCliente() || vazio('[Nome do cliente]'))),
+          el('h1', { class: 'hero-titulo revelar' }, 'Estruturação da ', el('em', { text: 'Operação Comercial' }), ' de Aquisição'),
+          el('p', { class: 'hero-sub revelar', text: [c.hasIn && 'Inbound', c.out && 'Outbound', 'CRM', 'Automação'].filter(Boolean).join(' · ') + (data ? ` — proposta preparada em ${formatarData(data)}` : '') }),
+          el('ul', { class: 'intro-capacidades revelar' }, capacidades.map((t) => el('li', { text: t }))),
+          el('div', { class: 'hero-acoes revelar' },
+            el('a', { class: 'botao botao-primario', href: '#investimento' }, 'Ver investimento', el('span', { 'aria-hidden': 'true', text: '→' })),
+            el('a', { class: 'botao botao-secundario', href: '#solucao', text: 'Como vamos fazer' }))),
+        el('aside', { class: 'hero-cartao revelar', 'aria-label': 'Resumo da proposta' },
+          el('span', { class: 'hero-cartao-rotulo', text: 'Resumo da proposta' }),
+          el('div', { class: 'hero-cartao-preco' },
+            el('span', { text: totais.length > 1 ? 'Investimento a partir de' : 'Investimento mensal' }),
+            totais.length ? el('strong', {}, brl(Math.min(...totais)), el('small', { text: '/mês' })) : el('strong', {}, vazio('R$ [total]'), el('small', { text: '/mês' }))),
+          el('dl', { class: 'hero-cartao-lista' }, linhas.map(([k, v]) => el('div', {}, el('dt', { text: k }), el('dd', { text: v })))),
+          linkContato(mensagemAprovar()) && el('a', { class: 'botao botao-primario botao-largo', href: linkContato(mensagemAprovar()), target: '_blank', rel: 'noopener', text: 'Quero aprovar' }))));
+  }
+
+  // Faixa de números da MFL logo abaixo do hero
+  function numerosMfl() {
+    return el('section', { class: 'faixa-numeros', 'aria-label': 'MFL Sales em números' },
+      el('div', { class: 'container numeros-grade' },
+        [['+370', 'negócios acelerados'], ['+R$ 10 mi', 'em receita gerada para clientes'], ['+R$ 700 mil', 'investidos em anúncios por mês'], ['+7 anos', 'de mercado, em 2 países e 25 cidades']]
+          .map(([n, t]) => el('div', { class: 'numero-item' }, el('strong', { text: n }), el('span', { text: t })))));
+  }
+
+  // Solução em abas: Inbound | Outbound | Tecnologia (só os módulos do modelo)
+  let abaAtiva = null;
+  function secaoSolucao(c) {
+    const modulos = [
+      c.hasIn && ['inbound', 'Inbound', SECOES.inbound(c)],
+      c.out === 'bdr' && ['outbound', 'Outbound · BDR + SDR', SECOES.bdr(c)],
+      c.out === 'train' && ['outbound', 'Outbound · Treinamento', SECOES.train(c)],
+      ['tecnologia', 'Tecnologia (CRM)', SECOES.crm(c)]
+    ].filter(Boolean);
+    if (!modulos.some(([id]) => id === abaAtiva)) abaAtiva = modulos[0][0];
+
+    const abas = el('div', { class: 'abas', role: 'tablist', 'aria-label': 'Frentes da solução' });
+    const paineis = [];
+    modulos.forEach(([id, rotulo, secao]) => {
+      const ativo = id === abaAtiva;
+      const botao = el('button', {
+        type: 'button', role: 'tab', id: `aba-${id}`, class: 'aba', 'aria-selected': ativo ? 'true' : 'false',
+        'aria-controls': `painel-${id}`, tabindex: ativo ? null : '-1', text: rotulo
+      });
+      botao.addEventListener('click', () => trocarAba(id));
+      botao.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const i = modulos.findIndex(([m]) => m === id);
+        const prox = modulos[(i + (e.key === 'ArrowRight' ? 1 : modulos.length - 1)) % modulos.length][0];
+        trocarAba(prox);
+        document.getElementById(`aba-${prox}`)?.focus();
+      });
+      abas.append(botao);
+      const conteudo = secao.querySelector('.container');
+      paineis.push(el('div', { class: 'painel-aba', role: 'tabpanel', id: `painel-${id}`, 'aria-labelledby': `aba-${id}`, hidden: !ativo }, [...conteudo.childNodes]));
+    });
+
+    function trocarAba(id) {
+      abaAtiva = id;
+      abas.querySelectorAll('.aba').forEach((b) => {
+        const sel = b.id === `aba-${id}`;
+        b.setAttribute('aria-selected', sel ? 'true' : 'false');
+        if (sel) b.removeAttribute('tabindex'); else b.setAttribute('tabindex', '-1');
+      });
+      paineis.forEach((p) => { p.hidden = p.id !== `painel-${id}`; });
+      paineis.forEach((p) => p.querySelectorAll('.revelar').forEach((n) => n.classList.add('visivel')));
+    }
+
+    return el('section', { class: 'secao secao-banda secao-solucao', id: 'solucao' },
+      el('div', { class: 'container' },
+        el('header', { class: 'secao-cabecalho revelar' },
+          el('span', { class: 'secao-rotulo' }, el('span', { text: 'A solução' })),
+          el('h2', { class: 'secao-titulo', text: 'Como vamos gerar oportunidades para a sua empresa' }),
+          el('div', { class: 'secao-texto' }, el('p', { text: 'Escolha uma frente para ver o que fazemos, passo a passo.' }))),
+        el('div', { class: 'abas-barra revelar' }, abas),
+        paineis));
+  }
+
+  // Perguntas frequentes, com respostas tiradas da própria proposta
+  function secaoFaq(c) {
+    const perguntas = [
+      c.hasIn && ['A verba de anúncios está incluída no investimento?',
+        `Não. A verba é paga diretamente pelo cliente às plataformas (Meta e Google), fora dos valores da MFL Sales.${paraNumero(S.verbaDia) ? ` A sugestão inicial é de ${brl(paraNumero(S.verbaDia))} por dia.` : ''}`],
+      ['Qual é o tempo mínimo de contrato?', `O contrato mínimo é de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}.`],
+      c.mfl
+        ? ['Em qual CRM a operação vai rodar?', 'No CRM MFL Sales, implantado por nós: você recebe o funil montado, as automações rodando e o processo desenhado para o seu negócio.']
+        : ['Preciso trocar o CRM que já uso?', 'Não. Estruturamos o funil, as etapas e as rotinas de follow-up dentro do CRM que sua empresa já utiliza, aproveitando os recursos que ele oferece.'],
+      c.out === 'bdr' && ['Quem faz os contatos com os leads do Outbound?', 'A MFL Sales executa toda a prospecção, com um BDR para construir a base e um SDR para abordar, qualificar e agendar. Seu comercial recebe a reunião agendada, com o contexto do lead.'],
+      c.out === 'train' && ['Quem faz os contatos com os leads do Outbound?', 'O seu time, com a lista qualificada, os scripts, os templates e a cadência entregues pela MFL Sales, depois de um treinamento para abordagem, qualificação e agendamento.'],
+      ['Como acompanho os resultados?', `Pelo painel de acompanhamento do CRM, que mostra de onde vêm as oportunidades, em que etapa estão e o que está convertendo${(c.hasIn && c.sc.relatorio) || c.out ? ', e pelo relatório mensal' : ''}.`],
+      ['O que acontece depois que eu aprovar?', 'Assinamos o contrato, fazemos a reunião de onboarding, implantamos o CRM, preparamos os canais e colocamos a operação no ar, com acompanhamento e ajustes contínuos.']
+    ].filter(Boolean);
+    return faixaSecao('duvidas', 'Dúvidas frequentes', 'Perguntas que costumamos ouvir', null, [
+      bloco('', el('div', { class: 'faq' }, perguntas.map(([p, r], i) =>
+        el('details', { class: 'faq-item', open: i === 0 }, el('summary', { text: p }), el('p', { text: r })))))
+    ]);
+  }
+
+  // Fechamento do site: frase final, botão de aprovação e responsável
+  function ctaFinal() {
+    const r = S.responsavel || {};
+    const href = linkContato(mensagemAprovar());
+    return el('section', { class: 'cta-final tema-escuro', id: 'aprovar' },
+      el('div', { class: 'container' },
+        el('div', { class: 'cta revelar' },
+          el('div', { class: 'cta-texto' },
+            el('h3', { text: 'Nosso objetivo não é apenas gerar leads. É construir um processo comercial que coloque sua empresa diante das pessoas certas e transforme interesse em vendas.' }),
+            href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' }, el('span', { text: 'Quero aprovar a proposta' }), el('span', { 'aria-hidden': 'true', text: '→' }))),
+          r.nome && el('div', { class: 'responsavel' },
+            el('span', { class: 'responsavel-avatar', 'aria-hidden': 'true', text: iniciais(r.nome) }),
+            el('div', {},
+              el('strong', { text: r.nome }),
+              r.cargo && el('span', { text: r.cargo }),
+              el('span', { class: 'responsavel-contatos' },
+                r.whatsapp && el('a', { href: `https://wa.me/${String(r.whatsapp).replace(/\D/g, '')}`, target: '_blank', rel: 'noopener', text: formatarTelefone(r.whatsapp) }),
+                r.email && el('a', { href: `mailto:${r.email}`, text: r.email })))))));
+  }
+
   function renderProposta() {
     const c = cfg();
     $('#topo-marca').replaceChildren(marca('marca-logo-topo'));
+    const topoCta = $('#topo-cta');
+    const href = linkContato(mensagemAprovar());
+    if (topoCta) { topoCta.hidden = !href; if (href) topoCta.href = href; }
 
-    const canais = [c.hasIn && 'Inbound', c.out && 'Outbound', 'CRM', 'Automação'].filter(Boolean).join(' · ');
-    const capacidades = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação integrados'].filter(Boolean);
-    const totais = calcularInvestimento(c).map((t) => t.valor).filter((v) => v != null);
-    const data = lerData(S.data);
-
-    const resumo = [
-      { rotulo: 'Modelo', valor: NOMES_MODELO[c.m] + (c.m === '4' ? ` (${c.out === 'bdr' ? 'BDR + SDR' : 'Treinamento'})` : '') },
-      c.hasIn ? { rotulo: 'Público', valor: c.b2c ? 'B2C · até a venda' : 'B2B · até a reunião agendada' } : { rotulo: 'Execução', valor: c.out === 'bdr' ? 'MFL Sales até a reunião agendada' : 'Seu time, treinado pela MFL Sales' },
-      { rotulo: 'Contrato', valor: `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}` },
-      { rotulo: 'Investimento', valor: totais.length ? `${totais.length > 1 ? 'A partir de ' : ''}${brl(Math.min(...totais))}/mês` : null }
+    // Estrutura de site: hero, números, por que, como funciona, solução (abas),
+    // resultados, investimento, próximos passos, dúvidas e fechamento
+    const secoes = [
+      ['porque', 'Por que a MFL', SECOES.porque(c)],
+      ['como', 'Como funciona', SECOES.como(c)],
+      ['solucao', 'Solução', secaoSolucao(c)],
+      ['resultados', 'Resultados', SECOES.resultados(c)],
+      ['invest', 'Investimento', SECOES.invest(c)],
+      ['next', 'Próximos passos', SECOES.next(c)],
+      ['faq', 'Dúvidas', secaoFaq(c)]
     ];
 
-    const intro = el('section', { class: 'intro tema-escuro', id: 'inicio' },
-      el('div', { class: 'container' },
-        el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial · ${AGENCIA.slogan}` }),
-        el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', {}, nomeCliente() || vazio('[Nome do cliente]'))),
-        el('p', { class: 'intro-sub revelar', text: 'Estruturação da Operação Comercial de Aquisição' }),
-        el('ul', { class: 'intro-capacidades revelar' }, capacidades.map((t) => el('li', { text: t }))),
-        el('div', { class: 'resumo revelar' }, resumo.map((r) => el('div', { class: 'resumo-item' },
-          el('span', { text: r.rotulo }), el('strong', {}, r.valor || vazio('R$ [total]/mês'))))),
-        el('dl', { class: 'intro-meta revelar' },
-          el('div', {}, el('dt', { text: 'Canais' }), el('dd', { text: canais })),
-          el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: data ? formatarData(data) : '' })),
-          dataValidade() && el('div', {}, el('dt', { text: 'Válida até' }), el('dd', { text: formatarData(dataValidade()) })),
-          S.responsavel?.nome && el('div', {}, el('dt', { text: 'Responsável' }), el('dd', { text: S.responsavel.nome })))));
-
-    // Ordem: por que, resultados, [inbound], [bdr | train], crm, investimento, próximos passos
-    const ordem = [
-      ['porque', 'Por que a MFL'], ['resultados', 'Resultados'],
-      c.hasIn && ['inbound', 'Inbound'], c.out === 'bdr' && ['bdr', 'Outbound'], c.out === 'train' && ['train', 'Outbound'],
-      ['crm', 'Tecnologia'], ['invest', 'Investimento'], ['next', 'Próximos passos']
-    ].filter(Boolean);
-    const secoes = ordem.map(([chave]) => SECOES[chave](c));
-
-    // Faixas alternam claro/escuro (a abertura é escura); números nos rótulos
+    // Faixas alternam claro/escuro depois do hero escuro
     let anterior = 'escuro';
-    secoes.forEach((secao, i) => {
+    secoes.forEach(([, , secao]) => {
       const tema = anterior === 'escuro' ? 'claro' : 'escuro';
       secao.classList.add(`tema-${tema}`);
       anterior = tema;
-      secao.querySelector('.secao-rotulo')?.prepend(el('span', { class: 'secao-num', text: String(i + 1).padStart(2, '0') }));
     });
 
-    $('#topo-nav').replaceChildren(...ordem.map(([chave, rotulo], i) => el('a', { href: `#${secoes[i].id}`, 'data-alvo': secoes[i].id, text: rotulo })));
-    $('#conteudo').replaceChildren(intro, ...secoes);
+    $('#topo-nav').replaceChildren(...secoes.map(([, rotulo, secao]) => el('a', { href: `#${secao.id}`, 'data-alvo': secao.id, text: rotulo })));
+    $('#conteudo').replaceChildren(hero(c), numerosMfl(), ...secoes.map(([, , secao]) => secao), ctaFinal());
     $('#barra-cta').replaceChildren(...barraCta(c));
 
     $('#rodape').replaceChildren(
@@ -794,7 +901,8 @@
         el('div', { class: 'rodape-marca' }, marca('marca-logo-rodape'), el('span', { text: AGENCIA.slogan })),
         el('div', { class: 'rodape-links' },
           el('a', { href: AGENCIA.site, target: '_blank', rel: 'noopener', text: 'www.agenciamfl.com.br' }),
-          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram })),
+          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }),
+          el('button', { type: 'button', class: 'rodape-pdf', onclick: imprimir, text: 'Salvar em PDF' })),
         el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${AGENCIA.nome}. Proposta confidencial preparada exclusivamente para ${nomeCliente() || 'o cliente'}.` })));
 
     ativarRevelar();
@@ -802,7 +910,7 @@
 
   // Barra fixa no rodapé do celular: valor principal + botão de aprovação
   function barraCta(c) {
-    const href = linkContato(`Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`);
+    const href = linkContato(mensagemAprovar());
     if (!href) return [];
     const t = calcularInvestimento(c).find((x) => x.destaque && x.valor != null) || calcularInvestimento(c).find((x) => x.valor != null);
     return [
@@ -880,7 +988,7 @@
       }
     }
     const intro = $('#inicio');
-    const cta = document.querySelector('.cta');
+    const cta = document.querySelector('.cta-final');
     const passouIntro = intro && intro.getBoundingClientRect().bottom < 0;
     const r = cta && cta.getBoundingClientRect();
     const ctaVisivel = r && r.top < innerHeight && r.bottom > 0;
@@ -917,17 +1025,17 @@
     if (e.origin !== location.origin) return;
     if (e.data?.tipo === 'proposta:atualizar') render(e.data.dados);
     else if (e.data?.tipo === 'proposta:capa' && S) { aberta = !e.data.mostrar; render(S); }
-    else if (e.data?.tipo === 'proposta:imprimir') { document.querySelectorAll('.revelar').forEach((n) => n.classList.add('visivel')); window.print(); return; }
+    else if (e.data?.tipo === 'proposta:imprimir') { imprimir(); return; }
     else return;
     aoRolar();
   });
 
   window.addEventListener('scroll', aoRolar, { passive: true });
   window.addEventListener('resize', aoRolar);
-  $('#botao-pdf').addEventListener('click', () => {
+  function imprimir() {
     document.querySelectorAll('.revelar').forEach((n) => n.classList.add('visivel'));
     window.print();
-  });
+  }
 
   try { if (sessionStorage.getItem(`aberta:${slug}`)) aberta = true; } catch (e) { /* sem storage */ }
 
