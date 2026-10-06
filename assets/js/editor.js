@@ -220,7 +220,7 @@
       input.value = valor ?? def.padrao ?? def.opcoes[0][0];
     } else if (def.tipo === 'color') {
       input = el('input', { id, type: 'color' });
-      input.value = /^#[0-9a-f]{6}$/i.test(valor) ? valor : '#ff5a1f';
+      input.value = /^#[0-9a-f]{6}$/i.test(valor) ? valor : '#3db65a';
     } else {
       const tipos = { number: 'number', money: 'number', date: 'date', email: 'email', url: 'text' };
       input = el('input', { id, type: tipos[def.tipo] || 'text' });

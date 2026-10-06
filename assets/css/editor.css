@@ -1,10 +1,10 @@
 :root {
   --fundo: #F4F4F5;
   --painel: #FFFFFF;
-  --tinta: #18181B;
+  --tinta: #0B111C;
   --suave: #71717A;
   --linha: #E4E4E7;
-  --destaque: #FF5A1F;
+  --destaque: #3DB65A;
   --perigo: #DC2626;
   --raio: 10px;
   --fonte: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -29,7 +29,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   cursor: pointer; font-size: 13px; font-weight: 500;
 }
 .barra-acoes button:hover { background: #27272A; }
-.barra-acoes .primario, .dialogo .primario { background: var(--destaque); border-color: var(--destaque); color: #fff; font-weight: 600; }
+.barra-acoes .primario, .dialogo .primario { background: var(--destaque); border-color: var(--destaque); color: #06120A; font-weight: 600; }
 .barra-acoes .primario:hover { filter: brightness(1.08); background: var(--destaque); }
 
 /* área principal */
@@ -57,7 +57,7 @@ input[type=text], input[type=number], input[type=date], input[type=email], selec
   width: 100%; padding: 8px 10px; border: 1px solid var(--linha); border-radius: 8px; background: #fff; outline: none;
 }
 textarea { resize: vertical; min-height: 64px; line-height: 1.5; }
-input:focus, select:focus, textarea:focus { border-color: var(--destaque); box-shadow: 0 0 0 3px rgba(255, 90, 31, .15); }
+input:focus, select:focus, textarea:focus { border-color: var(--destaque); box-shadow: 0 0 0 3px rgba(61, 182, 90, .2); }
 input[type=color] { width: 56px; height: 34px; padding: 2px; border: 1px solid var(--linha); border-radius: 8px; background: #fff; cursor: pointer; }
 
 .linha-texto { display: flex; gap: 4px; }

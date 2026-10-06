@@ -168,6 +168,7 @@
     proposta.hidden = false;
     document.body.classList.add('aberta');
     window.scrollTo(0, 0);
+    aoRolar();
     capa.classList.add('saindo');
     const fim = () => {
       capa.hidden = true;
@@ -269,14 +270,20 @@
     );
   }
 
-  function secaoInvestimento(s, i) {
+  function calcularInvestimento(s) {
     const itens = (s.itens || []).filter((it) => it.descricao || num(it.valor));
     const totais = {};
     for (const it of itens) {
       const rec = RECORRENCIAS[it.recorrencia] ? it.recorrencia : 'unico';
       totais[rec] = (totais[rec] || 0) + num(it.valor) * (num(it.quantidade) || 1);
     }
-    const ordem = Object.keys(RECORRENCIAS).filter((k) => totais[k] != null);
+    // mensal primeiro: é o número que o cliente mais procura
+    const ordem = ['mensal', ...Object.keys(RECORRENCIAS).filter((k) => k !== 'mensal')].filter((k) => totais[k] != null);
+    return { itens, totais, ordem };
+  }
+
+  function secaoInvestimento(s, i) {
+    const { itens, totais, ordem } = calcularInvestimento(s);
     const validade = dataValidade();
 
     return el('section', { class: 'secao secao-investimento', id: 'investimento' },
@@ -418,6 +425,7 @@
 
     $('#topo-nav').replaceChildren(...menu);
     $('#conteudo').replaceChildren(intro, ...secoes);
+    $('#barra-cta').replaceChildren(...barraCta());
 
     $('#rodape').replaceChildren(
       el('div', { class: 'container rodape-inner' },
@@ -436,12 +444,48 @@
     ativarRevelar();
   }
 
+  // Barra fixa no rodapé do celular: total + botão de aprovação sempre à mão.
+  function barraCta() {
+    const pp = dados.proximosPassos;
+    const href = ativo(pp) ? linkContato(preencher(pp.mensagemWhatsapp)) : null;
+    if (!href) return [];
+    const inv = dados.investimento;
+    let total = null;
+    if (ativo(inv)) {
+      const { totais, ordem } = calcularInvestimento(inv);
+      if (ordem.length) total = { rec: RECORRENCIAS[ordem[0]], valor: totais[ordem[0]] };
+    }
+    return [
+      total
+        ? el('div', { class: 'barra-cta-total' },
+            el('span', { text: total.rec.total }),
+            el('strong', {}, moeda.format(total.valor), el('small', { text: total.rec.sufixo }))
+          )
+        : el('div', { class: 'barra-cta-total' }, el('strong', { text: dados.cliente?.empresa || '' })),
+      el('a', { href, target: '_blank', rel: 'noopener', text: 'Aprovar' })
+    ];
+  }
+
+  function luminancia(hex) {
+    let h = hex.slice(1);
+    if (h.length === 3) h = h.split('').map((c) => c + c).join('');
+    const [r, g, b] = [0, 2, 4].map((i) => {
+      const c = parseInt(h.slice(i, i + 2), 16) / 255;
+      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
   function aplicarTema() {
     const cor = dados.agencia?.corPrimaria;
+    const raiz = document.documentElement.style;
     if (cor && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(cor)) {
-      document.documentElement.style.setProperty('--destaque', cor);
+      raiz.setProperty('--destaque', cor);
+      // texto sobre a cor de destaque: escuro em cores claras, branco em cores escuras
+      raiz.setProperty('--sobre-destaque', luminancia(cor) > 0.35 ? '#06120A' : '#FFFFFF');
     } else {
-      document.documentElement.style.removeProperty('--destaque');
+      raiz.removeProperty('--destaque');
+      raiz.removeProperty('--sobre-destaque');
     }
     const cli = dados.cliente?.empresa;
     document.title = `${dados.proposta?.titulo || 'Proposta Comercial'}${cli ? ' · ' + cli : ''}`;
@@ -497,7 +541,22 @@
       const alvo = document.getElementById(link.dataset.alvo);
       if (alvo && alvo.getBoundingClientRect().top < innerHeight * 0.4) atual = link;
     }
-    document.querySelectorAll('#topo-nav a').forEach((l) => l.classList.toggle('atual', l === atual));
+    for (const l of document.querySelectorAll('#topo-nav a')) {
+      const era = l.classList.contains('atual');
+      l.classList.toggle('atual', l === atual);
+      // no celular o menu rola de lado: mantém a seção atual visível
+      if (l === atual && !era) {
+        const nav = $('#topo-nav');
+        nav.scrollTo({ left: l.offsetLeft - nav.clientWidth / 2 + l.clientWidth / 2, behavior: 'smooth' });
+      }
+    }
+
+    // barra de aprovação: aparece depois da abertura e some quando o botão principal está na tela
+    const intro = $('#inicio');
+    const cta = document.querySelector('.cta');
+    const passouIntro = intro && intro.getBoundingClientRect().bottom < 0;
+    const ctaVisivel = cta && cta.getBoundingClientRect().top < innerHeight && cta.getBoundingClientRect().bottom > 0;
+    document.body.classList.toggle('mostrar-barra', Boolean(passouIntro && !ctaVisivel));
   }
 
   function mostrarErro(msg) {
