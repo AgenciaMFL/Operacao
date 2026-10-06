@@ -626,6 +626,22 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 .total-destaque .total-info span, .total-destaque .total-valor span, .total-destaque .total-valor small { color: var(--sobre-destaque); opacity: .72; }
 .total-validade { font-size: .85rem; color: var(--tinta-fraca); padding-left: 4px; }
 
+.verba {
+  margin-top: 10px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  padding: 20px clamp(20px, 3vw, 30px); border-radius: var(--raio);
+  background: var(--superficie); border: 1px dashed var(--destaque-borda); box-shadow: var(--sombra-cartao);
+}
+.verba-icone {
+  flex-shrink: 0; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--destaque-suave); color: var(--destaque-texto); font-weight: 800; font-size: 1.1rem;
+}
+.verba-info { display: grid; gap: 2px; flex: 1 1 260px; min-width: 0; }
+.verba-info strong { font-family: var(--display); font-weight: 600; font-size: 1.08rem; letter-spacing: -.015em; }
+.verba-info span { color: var(--tinta-suave); font-size: .9rem; }
+.verba-valor { display: grid; justify-items: end; gap: 2px; text-align: right; }
+.verba-valor strong { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 2.6vw, 1.9rem); letter-spacing: -.03em; color: var(--destaque-texto); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.verba-valor strong small { font-family: var(--fonte); font-size: .5em; font-weight: 700; color: var(--tinta-suave); margin-left: 3px; letter-spacing: 0; }
+.verba-valor span { font-size: .82rem; font-weight: 600; color: var(--tinta-suave); }
 .secao-investimento .b-nota { margin-top: 24px; }
 .condicoes { margin-top: clamp(40px, 5vw, 56px); }
 .condicoes-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
@@ -727,6 +743,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .resumo-item { padding: 16px; }
   .total { flex-direction: column; align-items: flex-start; gap: 8px; }
   .total-valor { justify-items: start; text-align: left; }
+  .verba-valor { justify-items: start; text-align: left; flex-basis: 100%; }
   .cta { flex-direction: column; align-items: stretch; padding: 22px; gap: 24px; }
   .cta-botao { justify-content: center; width: 100%; padding: 15px 20px; }
   .topo-inner { gap: 10px; }

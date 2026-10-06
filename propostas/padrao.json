@@ -1034,6 +1034,12 @@
         "destaque": false
       }
     ],
+    "verbaAnuncios": {
+      "ativo": true,
+      "titulo": "Investimento em anúncios sugerido",
+      "valorDia": 100,
+      "observacao": "Pago direto à Meta e ao Google, fora dos valores acima. Pode ser ajustado conforme os resultados das campanhas."
+    },
     "nota": "",
     "condicoes": [
       {
@@ -1043,10 +1049,6 @@
       {
         "titulo": "Pagamento",
         "texto": "Mensalidades por cartão ou boleto recorrente. Implantação à vista com 5% de desconto ou em 3x no cartão."
-      },
-      {
-        "titulo": "Verba de anúncios",
-        "texto": "Paga direto à Meta e ao Google, à parte. Sugestão: a partir de R$ 100 por dia."
       },
       {
         "titulo": "Suporte da equipe",

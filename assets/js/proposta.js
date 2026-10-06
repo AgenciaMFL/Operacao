@@ -492,6 +492,23 @@
     return el('strong', { class: classe }, moeda(valor), el('small', { text: recorrencia(rec).sufixo }));
   }
 
+  // Investimento em anúncios sugerido (pago direto às plataformas, fora dos valores da MFL)
+  function verbaAnuncios(v) {
+    if (!v || v.ativo === false || !num(v.valorDia)) return null;
+    const dia = num(v.valorDia);
+    return el('div', { class: 'verba revelar' },
+      el('span', { class: 'verba-icone', 'aria-hidden': 'true', text: '↗' }),
+      el('div', { class: 'verba-info' },
+        el('strong', { text: preencher(v.titulo) || 'Investimento em anúncios sugerido' }),
+        v.observacao && el('span', { text: preencher(v.observacao) })
+      ),
+      el('div', { class: 'verba-valor' },
+        el('strong', {}, moeda(dia), el('small', { text: '/dia' })),
+        el('span', { text: `≈ ${moeda(dia * 30)} por mês` })
+      )
+    );
+  }
+
   function secaoInvestimento(inv) {
     const { servicos, combinacoes } = calcularInvestimento(inv);
     const condicoes = lista(inv.condicoes).filter((c) => c.titulo || c.texto);
@@ -542,6 +559,7 @@
           validade && el('p', { class: 'total-validade', text: `Valores válidos até ${formatarData(validade)}` })
         ) : null,
 
+        verbaAnuncios(inv.verbaAnuncios),
         inv.nota && el('p', { class: 'b-nota revelar', text: preencher(inv.nota) }),
 
         condicoes.length ? el('div', { class: 'condicoes revelar' },

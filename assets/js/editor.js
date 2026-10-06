@@ -211,6 +211,10 @@
             { chave: 'destaque', rotulo: 'Destacar', tipo: 'toggle', meia: true }
           ]
         },
+        { chave: 'verbaAnuncios.ativo', rotulo: 'Mostrar investimento em anúncios sugerido', tipo: 'toggle', padrao: true },
+        { chave: 'verbaAnuncios.valorDia', rotulo: 'Anúncios: valor sugerido por dia (R$)', tipo: 'money', meia: true, ajuda: 'A proposta mostra também a estimativa mensal (x30).' },
+        { chave: 'verbaAnuncios.titulo', rotulo: 'Anúncios: título', meia: true },
+        { chave: 'verbaAnuncios.observacao', rotulo: 'Anúncios: observação', tipo: 'textarea' },
         { chave: 'nota', rotulo: 'Observação (opcional)', tipo: 'textarea' },
         {
           chave: 'condicoes', rotulo: 'Condições', tipo: 'lista', item: 'condição', resumo: (c) => c.titulo,

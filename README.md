@@ -26,7 +26,7 @@ Consolidado a partir das propostas enviadas pelo comercial (clínicas, EcoSistem
 3. **Execução**: na prática (jornada do cliente), plano dos 90 dias, treinamento do time, entregas e resultado esperado
 4. **Por que a MFL**: números, MFL × outras agências, time
 4b. **Depoimentos**: vídeos escolhidos da biblioteca para cada cliente
-5. **Investimento**: serviços mensais (Tráfego, CRM R$ 297, Outbound, SDR) e implantação com pagamento único (à vista com desconto ou parcelado), totais, condições e fechamento
+5. **Investimento**: serviços mensais (Tráfego, CRM R$ 297, Outbound, SDR) e implantação com pagamento único (à vista com desconto ou parcelado), totais, investimento em anúncios sugerido (R$ 100/dia, editável), condições e fechamento
 6. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
 
 Visual: as faixas da página alternam automaticamente entre claro (branco e azul-gelo) e escuro (tons de azul-marinho). Cada "Subtítulo de parte" abre uma faixa nova dentro do capítulo.
