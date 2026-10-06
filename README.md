@@ -9,7 +9,6 @@ index.html                 → a proposta (o que o cliente vê)
 editor.html                → editor para o time comercial
 propostas/
   padrao.json              → modelo padrão MFL Sales (ponto de partida)
-  dra-fernanda-oliveira.json, lumina-estetica.json, ecosistemas.json → propostas reais
 assets/img                 → logo e ícone da MFL Sales
 assets/css, assets/js      → visual e lógica (não precisa mexer)
 ```
@@ -47,7 +46,7 @@ Dois blocos seguidos com largura "Metade" ficam lado a lado.
 
 ## Como o comercial cria uma proposta
 
-1. Abra `editor.html` e clique em **Nova (modelo)**, ou em **Abrir proposta…** para partir de uma existente (ex.: `dra-fernanda-oliveira`).
+1. Abra `editor.html` e clique em **Nova (modelo)**, ou em **Abrir proposta…** para partir de uma existente.
 2. Preencha **Cliente e proposta**. Nos textos, `{cliente}` vira o nome do cliente automaticamente.
 3. Ajuste seções e blocos. Cada seção tem a opção **Exibir**.
 4. Em **Investimento**, cadastre serviços ou planos. Sem totais cadastrados, os serviços não opcionais são somados sozinhos; desligue a soma quando forem planos alternativos (Plano 1 *ou* Plano 2).

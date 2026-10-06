@@ -98,7 +98,7 @@
     {
       titulo: 'Cliente e proposta', caminho: null, aberto: true,
       campos: [
-        { chave: 'id', rotulo: 'Nome do arquivo', tipo: 'slug', ajuda: 'Letras minúsculas e hífens, ex.: dra-fernanda. O link fica index.html?p=dra-fernanda' },
+        { chave: 'id', rotulo: 'Nome do arquivo', tipo: 'slug', ajuda: 'Letras minúsculas e hífens, ex.: clinica-exemplo. O link fica index.html?p=clinica-exemplo' },
         { chave: 'cliente.nome', rotulo: 'Nome do cliente (aparece na capa)' },
         { chave: 'cliente.contato', rotulo: 'Aos cuidados de', meia: true },
         { chave: 'cliente.cargo', rotulo: 'Cargo', meia: true },
