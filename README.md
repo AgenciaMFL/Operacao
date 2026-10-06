@@ -9,6 +9,7 @@ index.html                 → a proposta (o que o cliente vê)
 editor.html                → editor para o time comercial
 propostas/
   padrao.json              → modelo padrão MFL Sales (ponto de partida)
+depoimentos/catalogo.json  → biblioteca de vídeos de depoimento (todas as propostas usam)
 assets/img                 → logo, ícone e avatares da capa
 assets/video               → vídeo de fundo da capa (MP4 + WebM) e imagem de espera
 assets/css, assets/js      → visual e lógica (não precisa mexer)
@@ -24,6 +25,7 @@ Consolidado a partir das propostas enviadas pelo comercial (clínicas, EcoSistem
 2. **Estratégia**: visão geral das frentes, depois Inbound · Tráfego pago, Outbound, CRM e automação, Inteligência artificial e SDR (opcional)
 3. **Execução**: na prática (jornada do cliente), plano dos 90 dias, treinamento do time, entregas e resultado esperado
 4. **Por que a MFL**: números, MFL × outras agências, time
+4b. **Depoimentos**: vídeos escolhidos da biblioteca para cada cliente
 5. **Investimento**: serviços mensais (Tráfego, CRM R$ 297, Outbound, SDR) e implantação com pagamento único (à vista com desconto ou parcelado), totais, condições e fechamento
 6. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
 
@@ -54,6 +56,14 @@ Dois blocos seguidos com largura "Metade" ficam lado a lado.
 4. Em **Investimento**, cadastre serviços ou planos. Sem totais cadastrados, os serviços não opcionais são somados sozinhos; desligue a soma quando forem planos alternativos (Plano 1 *ou* Plano 2).
 5. Confira com **Ver capa** e **Celular**, clique em **Baixar .json** e coloque o arquivo na pasta `propostas/`.
 6. Envie o link: `https://SEU-DOMINIO/index.html?p=nome-do-arquivo`
+
+## Vídeos de depoimento
+
+A biblioteca fica em `depoimentos/catalogo.json`. Cada depoimento tem cliente, pessoa, cargo, **segmento**, resultado em destaque, uma frase e o **vídeo**: link do YouTube, do Vimeo ou um arquivo `.mp4` colocado na pasta `depoimentos/`. No YouTube a imagem de capa é gerada sozinha; para os outros, preencha `capa` com uma imagem.
+
+No editor, em **Depoimentos**, o comercial marca quais vídeos entram na proposta, filtra por segmento ou clica em **Sugerir pelo segmento do cliente** (usa o campo "Segmento do cliente"). Sem nenhum vídeo marcado, a seção não aparece. Para o cliente, cada cartão abre o vídeo num player na própria página.
+
+Os itens marcados como **EXEMPLO** no catálogo são espaços reservados: troque pelos depoimentos reais.
 
 ## Publicação
 

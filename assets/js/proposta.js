@@ -30,6 +30,7 @@
   let dados = null;
   let aberta = isPreview;
   let observer = null;
+  let catalogo = [];   // biblioteca de depoimentos (depoimentos/catalogo.json)
 
   /* ---------- utilidades ---------- */
 
@@ -592,6 +593,80 @@
     );
   }
 
+  /* ---------- depoimentos ---------- */
+
+  // Aceita link do YouTube, do Vimeo ou um arquivo de vídeo (mp4/webm)
+  function fonteVideo(url) {
+    const u = String(url || '').trim();
+    if (!u) return null;
+    const yt = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([\w-]{11})/);
+    if (yt) return { tipo: 'iframe', src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0`, capa: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` };
+    const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vm) return { tipo: 'iframe', src: `https://player.vimeo.com/video/${vm[1]}?autoplay=1` };
+    return { tipo: 'arquivo', src: u };
+  }
+
+  function abrirVideo(dep) {
+    const fonte = fonteVideo(dep.video);
+    if (!fonte) return;
+    let dialogo = $('#player-depoimento');
+    if (!dialogo) {
+      dialogo = el('dialog', { id: 'player-depoimento', class: 'player' });
+      dialogo.addEventListener('close', () => dialogo.replaceChildren());
+      dialogo.addEventListener('click', (e) => { if (e.target === dialogo) dialogo.close(); });
+      document.body.append(dialogo);
+    }
+    const midia = fonte.tipo === 'iframe'
+      ? el('iframe', { src: fonte.src, title: `Depoimento de ${dep.pessoa || dep.cliente || ''}`, allow: 'autoplay; fullscreen; picture-in-picture', allowfullscreen: true })
+      : el('video', { src: fonte.src, controls: true, autoplay: true, playsinline: true });
+    dialogo.replaceChildren(
+      el('div', { class: 'player-moldura' }, midia),
+      el('div', { class: 'player-legenda' },
+        el('span', {}, el('strong', { text: dep.pessoa || dep.cliente || '' }), [dep.cargo, dep.cliente].filter(Boolean).length ? ` · ${[dep.cargo, dep.cliente].filter(Boolean).join(', ')}` : ''),
+        el('button', { type: 'button', class: 'player-fechar', onclick: () => dialogo.close(), text: 'Fechar ✕' })
+      )
+    );
+    dialogo.showModal();
+  }
+
+  function secaoDepoimentos(sec) {
+    const escolhidos = lista(sec.selecionados)
+      .map((id) => catalogo.find((d) => d.id === id))
+      .filter(Boolean);
+    if (!escolhidos.length) return null;
+    return el('section', { class: 'secao secao-banda secao-depoimentos', id: 'depoimentos', 'data-estilo': sec.estilo || null },
+      el('div', { class: 'container' },
+        cabecalho(sec, 'Depoimentos'),
+        el('div', { class: `depoimentos col-${Math.min(escolhidos.length, 3)}` },
+          escolhidos.map((dep) => {
+            const fonte = fonteVideo(dep.video);
+            const capa = dep.capa || fonte?.capa;
+            return el('article', { class: 'depoimento revelar' },
+              el('button', {
+                type: 'button', class: 'depoimento-video', disabled: !fonte,
+                'aria-label': fonte ? `Assistir ao depoimento de ${dep.pessoa || dep.cliente}` : 'Vídeo ainda não cadastrado',
+                onclick: () => abrirVideo(dep)
+              },
+                capa ? el('img', { src: capa, alt: '', loading: 'lazy' }) : null,
+                el('span', { class: 'depoimento-play', 'aria-hidden': 'true' }),
+                !fonte && el('span', { class: 'depoimento-aviso', text: 'Vídeo ainda não cadastrado' })
+              ),
+              el('div', { class: 'depoimento-info' },
+                dep.segmento && el('span', { class: 'depoimento-segmento', text: dep.segmento }),
+                dep.resultado && el('strong', { class: 'depoimento-resultado', text: dep.resultado }),
+                dep.citacao && el('p', { class: 'depoimento-citacao', text: `“${dep.citacao}”` }),
+                el('p', { class: 'depoimento-autor' },
+                  el('strong', { text: dep.pessoa || dep.cliente || '' }),
+                  [dep.cargo, dep.pessoa ? dep.cliente : ''].filter(Boolean).length ? el('span', { text: [dep.cargo, dep.pessoa ? dep.cliente : ''].filter(Boolean).join(' · ') }) : null
+                )
+              )
+            );
+          })
+        )
+      )
+    );
+  }
+
   /* ---------- página ---------- */
 
   function renderProposta() {
@@ -632,6 +707,11 @@
       usados.add(id);
       secoes.push(secaoConteudo(s, id));
       menu.push([id, preencher(s.menu || s.rotulo || s.titulo)]);
+    }
+    const depoimentos = ativo(dados.depoimentos) ? secaoDepoimentos(dados.depoimentos) : null;
+    if (depoimentos) {
+      secoes.push(depoimentos);
+      menu.push(['depoimentos', preencher(dados.depoimentos.menu) || 'Depoimentos']);
     }
     if (ativo(dados.investimento)) {
       secoes.push(secaoInvestimento(dados.investimento));
@@ -810,6 +890,13 @@
     return resp.json();
   }
 
+  async function carregarCatalogo() {
+    try {
+      const resp = await fetch('depoimentos/catalogo.json', { cache: 'no-store' });
+      if (resp.ok) catalogo = lista((await resp.json()).depoimentos);
+    } catch (e) { /* sem catálogo: a seção de depoimentos não aparece */ }
+  }
+
   // O editor envia atualizações ao vivo para a pré-visualização.
   window.addEventListener('message', (e) => {
     if (e.origin !== location.origin) return;
@@ -830,8 +917,8 @@
 
   try { if (sessionStorage.getItem(`aberta:${slug}`)) aberta = true; } catch (e) { /* sem storage */ }
 
-  carregar()
-    .then((d) => { render(d); aoRolar(); })
+  Promise.all([carregar(), carregarCatalogo()])
+    .then(([d]) => { render(d); aoRolar(); })
     .catch((err) => {
       console.error(err);
       mostrarErro(location.protocol === 'file:'

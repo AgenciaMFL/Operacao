@@ -121,3 +121,17 @@ input[type=color] { width: 56px; height: 34px; padding: 2px; border: 1px solid v
   .formulario { border-right: 0; overflow: visible; }
   .previa { height: 80vh; }
 }
+
+/* seleção de depoimentos */
+.depo-filtros { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.depo-filtros select { width: auto; flex: 1 1 160px; }
+.depo-lista { display: grid; gap: 4px; max-height: 260px; overflow-y: auto; padding: 6px; border: 1px solid var(--linha); border-radius: 8px; background: #fff; }
+.depo-item { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
+.depo-item:hover { background: var(--fundo); }
+.depo-item input { accent-color: var(--destaque); width: 16px; height: 16px; margin: 0; flex-shrink: 0; }
+.depo-texto { display: grid; min-width: 0; flex: 1; }
+.depo-texto strong { font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.depo-texto span { font-size: 11.5px; color: var(--suave); }
+.depo-sem-video { flex-shrink: 0; padding: 2px 8px; border-radius: 999px; background: #FEF3C7; color: #92400E; font-size: 11px; font-weight: 700; }
+.depo-ordem { align-items: center; }
+.depo-nome { flex: 1; min-width: 0; font-size: 12.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

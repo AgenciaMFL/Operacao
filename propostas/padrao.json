@@ -11,7 +11,8 @@
   "cliente": {
     "nome": "Empresa Exemplo",
     "contato": "Nome do Contato",
-    "cargo": "Diretor(a) Comercial"
+    "cargo": "Diretor(a) Comercial",
+    "segmento": "Serviços B2B"
   },
   "proposta": {
     "numero": "MFL-2026-000",
@@ -886,6 +887,18 @@
       ]
     }
   ],
+  "depoimentos": {
+    "ativo": true,
+    "menu": "Depoimentos",
+    "rotulo": "Depoimentos",
+    "titulo": "Quem já cresce com a MFL",
+    "texto": "Empresas como a {cliente} contando, com as próprias palavras, o que mudou na operação comercial.",
+    "selecionados": [
+      "exemplo-servicos-b2b",
+      "exemplo-tecnologia",
+      "exemplo-industria"
+    ]
+  },
   "investimento": {
     "ativo": true,
     "rotulo": "Investimento",

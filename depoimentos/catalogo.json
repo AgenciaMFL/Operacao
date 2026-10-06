@@ -1,0 +1,91 @@
+{
+  "_leia-me": "Biblioteca de vídeos de depoimento. Cada proposta escolhe quais aparecem (no editor, grupo Depoimentos). 'video' aceita link do YouTube, do Vimeo ou um arquivo .mp4 nesta pasta. 'capa' é opcional (YouTube gera a imagem sozinho). Os itens marcados como EXEMPLO são espaços reservados: substitua pelos depoimentos reais.",
+  "segmentos": [
+    "Serviços B2B",
+    "Tecnologia",
+    "Indústria",
+    "Alimentação",
+    "Saúde e estética",
+    "Varejo",
+    "Educação"
+  ],
+  "depoimentos": [
+    {
+      "id": "exemplo-servicos-b2b",
+      "cliente": "EXEMPLO · Cliente de Serviços B2B",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Serviços B2B",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    },
+    {
+      "id": "exemplo-tecnologia",
+      "cliente": "EXEMPLO · Cliente de Tecnologia",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Tecnologia",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    },
+    {
+      "id": "exemplo-industria",
+      "cliente": "EXEMPLO · Cliente de Indústria",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Indústria",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    },
+    {
+      "id": "exemplo-alimentacao",
+      "cliente": "EXEMPLO · Cliente de Alimentação",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Alimentação",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    },
+    {
+      "id": "exemplo-saude-estetica",
+      "cliente": "EXEMPLO · Cliente de Saúde e estética",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Saúde e estética",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    },
+    {
+      "id": "exemplo-varejo",
+      "cliente": "EXEMPLO · Cliente de Varejo",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Varejo",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    },
+    {
+      "id": "exemplo-educacao",
+      "cliente": "EXEMPLO · Cliente de Educação",
+      "pessoa": "Nome de quem dá o depoimento",
+      "cargo": "Cargo",
+      "segmento": "Educação",
+      "video": "",
+      "capa": "",
+      "resultado": "Resultado em destaque (ex.: +120% em leads)",
+      "citacao": "Trecho curto do depoimento, com as palavras do próprio cliente."
+    }
+  ]
+}

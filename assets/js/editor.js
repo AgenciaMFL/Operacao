@@ -110,6 +110,7 @@
         { chave: 'cliente.nome', rotulo: 'Nome do cliente (aparece na capa)' },
         { chave: 'cliente.contato', rotulo: 'Aos cuidados de', meia: true },
         { chave: 'cliente.cargo', rotulo: 'Cargo', meia: true },
+        { chave: 'cliente.segmento', rotulo: 'Segmento do cliente', tipo: 'segmento', ajuda: 'Usado para sugerir depoimentos do mesmo segmento.' },
         { chave: 'proposta.solucao', rotulo: 'Solução proposta', ajuda: 'Aparece no início da proposta. Ex.: Inbound + Outbound + CRM para captação de novos clientes' },
         { chave: 'proposta.numero', rotulo: 'Número da proposta', meia: true },
         { chave: 'proposta.data', rotulo: 'Data', tipo: 'date', meia: true },
@@ -160,6 +161,16 @@
             { chave: 'blocos', rotulo: 'Blocos de conteúdo', tipo: 'blocos' }
           ]
         }
+      ]
+    },
+    {
+      titulo: 'Depoimentos', caminho: 'depoimentos', alternavel: true,
+      campos: [
+        { chave: 'menu', rotulo: 'Nome no menu', meia: true },
+        { chave: 'rotulo', rotulo: 'Rótulo', meia: true },
+        { chave: 'titulo', rotulo: 'Título' },
+        { chave: 'texto', rotulo: 'Texto (opcional)', tipo: 'textarea' },
+        { chave: 'selecionados', rotulo: 'Vídeos desta proposta', tipo: 'depoimentos' }
       ]
     },
     {
@@ -237,6 +248,7 @@
   const iframe = $('#previa');
   let dados = {};
   let timer = null;
+  let catalogo = { segmentos: [], depoimentos: [] };   // depoimentos/catalogo.json
 
   /* ---------- utilidades ---------- */
 
@@ -500,7 +512,91 @@
     });
   }
 
+  // Segmento do cliente: texto livre com sugestões vindas do catálogo
+  function campoSegmento(def, obj) {
+    const id = novoId();
+    const lista = el('datalist', { id: `${id}-opcoes` }, catalogo.segmentos.map((s) => el('option', { value: s })));
+    const input = el('input', { id, type: 'text', list: `${id}-opcoes` });
+    input.value = obter(obj, def.chave) ?? '';
+    input.addEventListener('input', () => { definir(obj, def.chave, input.value); alterado(); });
+    return el('div', { class: 'campo' }, el('label', { for: id, text: def.rotulo }), input, lista, def.ajuda && el('small', { text: def.ajuda }));
+  }
+
+  // Seleção de vídeos de depoimento a partir do catálogo
+  function campoDepoimentos(def, obj) {
+    if (!Array.isArray(obj[def.chave])) obj[def.chave] = [];
+    const escolhidos = obj[def.chave];
+    const caixa = el('div', { class: 'campo selecao-depoimentos' });
+    let filtro = '';
+
+    const desenhar = () => {
+      const todos = catalogo.depoimentos;
+      const visiveis = todos.filter((d) => !filtro || d.segmento === filtro);
+      const segmentoCliente = (dados.cliente?.segmento || '').trim().toLowerCase();
+
+      const seletor = el('select', { 'aria-label': 'Filtrar por segmento' },
+        el('option', { value: '', text: 'Todos os segmentos' }),
+        catalogo.segmentos.map((sg) => el('option', { value: sg, text: sg })));
+      seletor.value = filtro;
+      seletor.addEventListener('change', () => { filtro = seletor.value; desenhar(); });
+
+      const sugerir = el('button', {
+        type: 'button', class: 'adicionar',
+        text: 'Sugerir pelo segmento do cliente',
+        onclick: () => {
+          const doSegmento = todos.filter((d) => (d.segmento || '').toLowerCase() === segmentoCliente).map((d) => d.id);
+          if (!doSegmento.length) { alert('Nenhum depoimento cadastrado para o segmento do cliente. Preencha o segmento em "Cliente e proposta" ou escolha manualmente.'); return; }
+          for (const idDep of doSegmento) if (!escolhidos.includes(idDep)) escolhidos.push(idDep);
+          filtro = dados.cliente?.segmento || '';
+          desenhar(); alterado();
+        }
+      });
+
+      const itens = visiveis.map((d) => {
+        const chk = el('input', { type: 'checkbox' });
+        chk.checked = escolhidos.includes(d.id);
+        chk.addEventListener('change', () => {
+          const i = escolhidos.indexOf(d.id);
+          if (chk.checked && i < 0) escolhidos.push(d.id);
+          if (!chk.checked && i >= 0) escolhidos.splice(i, 1);
+          desenhar(); alterado();
+        });
+        return el('label', { class: 'depo-item' }, chk,
+          el('span', { class: 'depo-texto' },
+            el('strong', { text: d.cliente || d.pessoa || d.id }),
+            el('span', { text: [d.segmento, d.pessoa].filter(Boolean).join(' · ') })
+          ),
+          !d.video && el('span', { class: 'depo-sem-video', text: 'sem vídeo' })
+        );
+      });
+
+      const ordem = escolhidos.map((idDep, i) => {
+        const d = todos.find((x) => x.id === idDep);
+        return el('div', { class: 'linha-texto depo-ordem' },
+          el('span', { class: 'depo-nome', text: `${i + 1}. ${d ? (d.cliente || d.pessoa) : idDep + ' (não encontrado no catálogo)'}` }),
+          botaoIcone('↑', 'Subir', () => mover(escolhidos, i, -1, desenhar)),
+          botaoIcone('↓', 'Descer', () => mover(escolhidos, i, 1, desenhar)),
+          botaoIcone('×', 'Tirar da proposta', () => { escolhidos.splice(i, 1); desenhar(); alterado(); }, 'perigo')
+        );
+      });
+
+      caixa.replaceChildren(
+        el('label', { text: def.rotulo }),
+        el('div', { class: 'depo-filtros' }, seletor, sugerir),
+        todos.length
+          ? el('div', { class: 'depo-lista' }, itens.length ? itens : el('small', { text: 'Nenhum depoimento neste segmento.' }))
+          : el('small', { text: 'Catálogo vazio ou não encontrado (depoimentos/catalogo.json).' }),
+        el('small', { text: escolhidos.length ? 'Ordem na proposta:' : 'Nenhum vídeo selecionado: a seção não aparece para o cliente.' }),
+        ...ordem
+      );
+    };
+    desenhar();
+    return caixa;
+  }
+
   function campo(def, obj) {
+    if (def.tipo === 'depoimentos') return campoDepoimentos(def, obj);
+    if (def.tipo === 'segmento') return campoSegmento(def, obj);
     if (def.tipo === 'lista') return campoLista(def, obj);
     if (def.tipo === 'blocos') return campoBlocos(def, obj);
     if (def.tipo === 'textos') return campoTextos(def, obj);
@@ -650,6 +746,13 @@
   /* ---------- início ---------- */
 
   (async () => {
+    try {
+      const resp = await fetch('depoimentos/catalogo.json', { cache: 'no-store' });
+      if (resp.ok) {
+        const c = await resp.json();
+        catalogo = { segmentos: Array.isArray(c.segmentos) ? c.segmentos : [], depoimentos: Array.isArray(c.depoimentos) ? c.depoimentos : [] };
+      }
+    } catch (e) { /* sem catálogo */ }
     let inicial = null;
     try { inicial = JSON.parse(localStorage.getItem(RASCUNHO_KEY) || 'null'); } catch (e) { /* sem rascunho */ }
     if (!formatoAtual(inicial)) {
