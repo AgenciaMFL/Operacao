@@ -1,9 +1,13 @@
 /*
- * Proposta comercial dinâmica.
- * Todo o conteúdo vem de propostas/<id>.json — este arquivo só cuida da apresentação.
+ * Proposta comercial dinâmica — MFL Sales.
+ * Todo o conteúdo vem de propostas/<id>.json; este arquivo só cuida da apresentação.
  *
  *   index.html?p=nome-do-arquivo   → carrega propostas/nome-do-arquivo.json
  *   index.html?preview=1           → usado pelo editor (lê o rascunho do navegador)
+ *
+ * A proposta é montada por seções; cada seção tem blocos (lista, fluxo, cartões,
+ * comparativo, chips, citação, destaque, nota, números). O investimento e o
+ * fechamento são seções fixas no fim.
  */
 (() => {
   'use strict';
@@ -11,17 +15,16 @@
   const PREVIEW_KEY = 'mfl-proposta-rascunho';
   const params = new URLSearchParams(location.search);
   const isPreview = params.has('preview');
-  const slug = (params.get('p') || 'exemplo').replace(/[^a-z0-9_-]/gi, '');
+  const slug = (params.get('p') || 'padrao').replace(/[^a-z0-9_-]/gi, '');
 
   const RECORRENCIAS = {
-    unico: { rotulo: 'Pagamento único', sufixo: '', total: 'Investimento único' },
-    mensal: { rotulo: 'Mensal', sufixo: '/mês', total: 'Investimento mensal' },
-    trimestral: { rotulo: 'Trimestral', sufixo: '/trimestre', total: 'Investimento trimestral' },
-    semestral: { rotulo: 'Semestral', sufixo: '/semestre', total: 'Investimento semestral' },
-    anual: { rotulo: 'Anual', sufixo: '/ano', total: 'Investimento anual' }
+    mensal: { sufixo: '/mês', total: 'Investimento mensal' },
+    unico: { sufixo: '', total: 'Investimento único' },
+    trimestral: { sufixo: '/trimestre', total: 'Investimento trimestral' },
+    semestral: { sufixo: '/semestre', total: 'Investimento semestral' },
+    anual: { sufixo: '/ano', total: 'Investimento anual' }
   };
 
-  const moeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   const $ = (sel) => document.querySelector(sel);
 
   let dados = null;
@@ -40,27 +43,30 @@
       else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
       else node.setAttribute(k, v === true ? '' : v);
     }
-    for (const f of filhos.flat()) {
-      if (f == null || f === false) continue;
+    for (const f of filhos.flat(Infinity)) {
+      if (f == null || f === false || f === '') continue;
       node.append(f instanceof Node ? f : document.createTextNode(String(f)));
     }
     return node;
   }
 
   function preencher(texto) {
-    if (!texto) return '';
+    if (texto == null || texto === '') return '';
     const p = dados.proposta || {};
     const vars = {
+      cliente: dados.cliente?.nome,
+      empresa: dados.cliente?.nome,
       contato: primeiroNome(dados.cliente?.contato),
-      contatoCompleto: dados.cliente?.contato,
-      empresa: dados.cliente?.empresa,
       agencia: dados.agencia?.nome,
       responsavel: primeiroNome(p.responsavel?.nome),
       numero: p.numero,
       validade: dataValidade() ? formatarData(dataValidade()) : ''
     };
-    return String(texto).replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? vars[k] : m));
+    return String(texto).replace(/\{(\w+)\}/g, (m, k) => (vars[k] ? vars[k] : m));
   }
+
+  const lista = (v) => (Array.isArray(v) ? v : []);
+  const textos = (v) => lista(v).map((t) => preencher(t)).filter(Boolean);
 
   function primeiroNome(nome) {
     return (nome || '').trim().split(/\s+/)[0] || '';
@@ -82,7 +88,7 @@
   }
 
   function formatarData(data) {
-    return data.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+    return data.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
   }
 
   function dataValidade() {
@@ -94,12 +100,31 @@
   }
 
   function num(v) {
-    const n = typeof v === 'number' ? v : parseFloat(String(v ?? '').replace(',', '.'));
+    const n = typeof v === 'number' ? v : parseFloat(String(v ?? '').replace(/\./g, '').replace(',', '.'));
     return Number.isFinite(n) ? n : 0;
+  }
+
+  // R$ 2.000 quando é inteiro, R$ 297,90 quando tem centavos
+  function moeda(v) {
+    const n = num(v);
+    return n.toLocaleString('pt-BR', {
+      style: 'currency', currency: 'BRL',
+      minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2
+    });
+  }
+
+  function recorrencia(chave) {
+    return RECORRENCIAS[chave] || RECORRENCIAS.mensal;
   }
 
   function ativo(secao) {
     return secao && secao.ativo !== false;
+  }
+
+  function slugificar(t) {
+    return String(t || '')
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   }
 
   function linkContato(mensagem) {
@@ -107,16 +132,28 @@
     const zap = String(r.whatsapp || '').replace(/\D/g, '');
     if (zap) return `https://wa.me/${zap}?text=${encodeURIComponent(mensagem || '')}`;
     if (r.email) {
-      const assunto = `${dados.proposta?.titulo || 'Proposta'} ${dados.proposta?.numero || ''}`.trim();
+      const assunto = `Proposta comercial ${dados.proposta?.numero || ''}`.trim();
       return `mailto:${r.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(mensagem || '')}`;
     }
     return null;
   }
 
-  function marca() {
+  function marca(classe) {
     const a = dados.agencia || {};
-    if (a.logo) return el('img', { src: a.logo, alt: a.nome || 'Logo', class: 'marca-logo' });
+    if (a.logo) return el('img', { src: a.logo, alt: a.nome || 'Logo', class: `marca-logo ${classe || ''}` });
     return el('span', { class: 'marca-texto', text: a.nome || '' });
+  }
+
+  function formatarTelefone(t) {
+    const d = String(t).replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+    if (d.length === 11) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+    if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return t;
+  }
+
+  function iniciais(nome) {
+    const partes = nome.trim().split(/\s+/);
+    return ((partes[0]?.[0] || '') + (partes.length > 1 ? partes[partes.length - 1][0] : '')).toUpperCase();
   }
 
   /* ---------- capa ---------- */
@@ -124,38 +161,38 @@
   function renderCapa() {
     const capa = $('#capa');
     const c = dados.capa || {};
+    const a = dados.agencia || {};
     const cli = dados.cliente || {};
     const p = dados.proposta || {};
     const data = lerData(p.data);
+    const pilares = textos(c.pilares);
 
     capa.replaceChildren(
       el('div', { class: 'capa-fundo', 'aria-hidden': 'true' },
         el('span', { class: 'capa-orbe capa-orbe-1' }),
         el('span', { class: 'capa-orbe capa-orbe-2' }),
-        el('span', { class: 'capa-grade' })
+        el('span', { class: 'capa-aneis' })
       ),
       el('div', { class: 'capa-topo' },
-        el('div', { class: 'capa-marca' }, marca()),
+        el('div', { class: 'capa-marca' }, marca('marca-logo-capa')),
         el('div', { class: 'capa-meta' },
           p.numero && el('span', { text: `Nº ${p.numero}` }),
           data && el('span', { text: formatarData(data) })
         )
       ),
       el('div', { class: 'capa-centro' },
-        el('p', { class: 'capa-eyebrow', text: `${p.titulo || 'Proposta Comercial'} para` }),
-        cli.logo
-          ? el('img', { class: 'capa-cliente-logo', src: cli.logo, alt: cli.empresa || '' })
-          : null,
-        el('h1', { class: 'capa-cliente', text: cli.empresa || 'Cliente' }),
-        c.saudacao && el('p', { class: 'capa-saudacao', text: preencher(c.saudacao) }),
+        el('p', { class: 'capa-eyebrow', text: preencher(c.rotulo) || 'Proposta comercial preparada para' }),
+        el('h1', { class: 'capa-cliente', text: cli.nome || 'Cliente' }),
         c.subtitulo && el('p', { class: 'capa-subtitulo', text: preencher(c.subtitulo) }),
+        c.canais && el('p', { class: 'capa-canais', text: preencher(c.canais) }),
+        pilares.length ? el('ul', { class: 'capa-pilares' }, pilares.map((t) => el('li', { text: t }))) : null,
         el('button', { type: 'button', class: 'capa-botao', onclick: abrirProposta },
           el('span', { text: preencher(c.textoBotao) || 'Abrir proposta' }),
           el('span', { class: 'capa-botao-seta', 'aria-hidden': 'true', text: '→' })
         )
       ),
       el('div', { class: 'capa-rodape' },
-        cli.contato && el('span', { text: `Preparada para ${cli.contato}${cli.cargo ? ' · ' + cli.cargo : ''}` }),
+        el('span', { text: [a.slogan, cli.contato && `A/C ${cli.contato}`].filter(Boolean).join('  ·  ') }),
         el('span', { class: 'capa-confidencial', text: 'Documento confidencial' })
       )
     );
@@ -164,8 +201,7 @@
   function abrirProposta() {
     aberta = true;
     const capa = $('#capa');
-    const proposta = $('#proposta');
-    proposta.hidden = false;
+    $('#proposta').hidden = false;
     document.body.classList.add('aberta');
     window.scrollTo(0, 0);
     aoRolar();
@@ -179,177 +215,254 @@
     try { sessionStorage.setItem(`aberta:${slug}`, '1'); } catch (e) { /* sem storage */ }
   }
 
+  /* ---------- blocos ---------- */
+
+  function tituloBloco(b) {
+    return b.titulo ? el('h3', { class: 'bloco-titulo', text: preencher(b.titulo) }) : null;
+  }
+
+  const BLOCOS = {
+    // Lista com marcadores, em 1 ou 2 colunas
+    lista(b) {
+      const itens = textos(b.itens);
+      if (!itens.length) return null;
+      return [tituloBloco(b), el('ul', { class: `b-lista${Number(b.colunas) === 1 ? '' : ' duas-colunas'}` },
+        itens.map((t) => el('li', { text: t })))];
+    },
+
+    // Etapas numeradas em sequência (jornada, funil, processo)
+    fluxo(b) {
+      const etapas = lista(b.etapas).filter((e) => e.titulo || e.descricao);
+      if (!etapas.length) return null;
+      let n = 0;
+      return [tituloBloco(b), el('ol', { class: `b-fluxo${etapas.some((e) => e.descricao) ? '' : ' compacto'}` },
+        etapas.map((e) => {
+          if (e.tipo === 'divisor') {
+            return el('li', { class: 'fluxo-divisor', text: preencher(e.titulo || e.descricao) });
+          }
+          n += 1;
+          return el('li', { class: 'fluxo-etapa' },
+            el('span', { class: 'fluxo-num', text: n }),
+            el('div', { class: 'fluxo-texto' },
+              e.titulo && el('strong', { text: preencher(e.titulo) }),
+              e.descricao && el('span', { text: preencher(e.descricao) })
+            )
+          );
+        }))];
+    },
+
+    // Cartões em grade (campanhas, perfis, meses, indicadores, condições)
+    cartoes(b) {
+      const cartoes = lista(b.cartoes).filter((c) => c.titulo || c.texto || lista(c.itens).length);
+      if (!cartoes.length) return null;
+      const colunas = Math.min(Math.max(Number(b.colunas) || Math.min(cartoes.length, 3), 1), 4);
+      return [tituloBloco(b), el('div', { class: `b-cartoes col-${colunas}` },
+        cartoes.map((c, i) =>
+          el('article', { class: 'cartao' },
+            (c.etiqueta || b.numerados) && el('span', { class: 'cartao-etiqueta', text: preencher(c.etiqueta) || String(i + 1).padStart(2, '0') }),
+            c.titulo && el('h4', { text: preencher(c.titulo) }),
+            c.texto && el('p', { text: preencher(c.texto) }),
+            textos(c.itens).length ? el('ul', {}, textos(c.itens).map((t) => el('li', { text: t }))) : null
+          )
+        ))];
+    },
+
+    // Colunas lado a lado: antes × depois, quem faz o quê
+    comparativo(b) {
+      const colunas = lista(b.colunas).filter((c) => c.titulo || textos(c.itens).length);
+      if (!colunas.length) return null;
+      return [tituloBloco(b), el('div', { class: `b-comparativo col-${Math.min(colunas.length, 3)}` },
+        colunas.map((c) =>
+          el('div', { class: `comp-coluna tom-${c.tom || 'neutro'}` },
+            el('h4', { text: preencher(c.titulo) }),
+            el('ul', {}, textos(c.itens).map((t) => el('li', { text: t })))
+          )
+        ))];
+    },
+
+    // Etiquetas curtas (temas de campanha, segmentos)
+    chips(b) {
+      const itens = textos(b.itens);
+      if (!itens.length) return null;
+      return [tituloBloco(b), el('ul', { class: 'b-chips' }, itens.map((t) => el('li', { text: t })))];
+    },
+
+    // Números grandes (trajetória, resultados)
+    numeros(b) {
+      const itens = lista(b.itens).filter((i) => i.numero || i.legenda);
+      if (!itens.length) return null;
+      return [tituloBloco(b), el('div', { class: 'b-numeros' },
+        itens.map((i) => el('div', { class: 'numero' },
+          el('strong', { text: preencher(i.numero) }),
+          el('span', { text: preencher(i.legenda) })
+        )))];
+    },
+
+    // Exemplo de mensagem/fala
+    citacao(b) {
+      if (!b.texto) return null;
+      return el('figure', { class: 'b-citacao' },
+        b.titulo && el('figcaption', { text: preencher(b.titulo) }),
+        el('blockquote', { text: preencher(b.texto) })
+      );
+    },
+
+    // Frase de impacto
+    destaque(b) {
+      if (!b.texto) return null;
+      return el('p', { class: 'b-destaque', text: preencher(b.texto) });
+    },
+
+    // Observação discreta
+    nota(b) {
+      if (!b.texto) return null;
+      return el('p', { class: 'b-nota', text: preencher(b.texto) });
+    }
+  };
+
+  function renderBlocos(blocos) {
+    const saida = [];
+    let par = null;
+    for (const b of lista(blocos)) {
+      const fn = BLOCOS[b?.tipo];
+      if (!fn) continue;
+      const conteudo = fn(b);
+      if (!conteudo) continue;
+      const node = el('div', { class: `bloco bloco-${b.tipo} revelar` }, conteudo);
+      // blocos marcados como "metade" seguidos ficam lado a lado
+      if (b.largura === 'metade') {
+        if (!par) { par = el('div', { class: 'blocos-par' }); saida.push(par); }
+        par.append(node);
+        if (par.children.length === 2) par = null;
+      } else {
+        par = null;
+        saida.push(node);
+      }
+    }
+    return saida;
+  }
+
   /* ---------- seções ---------- */
 
-  function cabecalho(indice, secao, tituloPadrao) {
-    const titulo = preencher(secao.titulo) || tituloPadrao;
-    return el('div', { class: 'secao-cabecalho revelar' },
-      el('span', { class: 'secao-indice', text: String(indice).padStart(2, '0') }),
-      el('h2', { class: 'secao-titulo', text: titulo })
+  function cabecalho(s, padrao) {
+    return el('header', { class: 'secao-cabecalho revelar' },
+      el('span', { class: 'secao-rotulo', text: preencher(s.rotulo) || padrao }),
+      s.titulo && el('h2', { class: 'secao-titulo', text: preencher(s.titulo) }),
+      s.texto && el('div', { class: 'secao-texto' }, paragrafos(s.texto))
     );
   }
 
-  function secaoApresentacao(s, i) {
-    const destaques = (s.destaques || []).filter((d) => d.numero || d.legenda);
-    return el('section', { class: 'secao secao-apresentacao', id: 'apresentacao' },
+  function secaoConteudo(s, id) {
+    return el('section', { class: `secao${s.estilo === 'escuro' ? ' secao-escura' : ''}`, id },
       el('div', { class: 'container' },
-        cabecalho(i, s, 'Quem somos'),
-        el('div', { class: 'apresentacao-grid' },
-          el('div', { class: 'texto-corrido revelar' }, paragrafos(s.texto)),
-          destaques.length
-            ? el('div', { class: 'destaques' },
-                destaques.map((d) =>
-                  el('div', { class: 'destaque revelar' },
-                    el('strong', { text: preencher(d.numero) }),
-                    el('span', { text: preencher(d.legenda) })
-                  )
-                )
-              )
-            : null
-        )
+        cabecalho(s, ''),
+        el('div', { class: 'blocos' }, renderBlocos(s.blocos))
       )
     );
   }
 
-  function secaoObjetivos(s, i) {
-    const itens = (s.itens || []).filter(Boolean);
-    return el('section', { class: 'secao secao-objetivos', id: 'objetivos' },
-      el('div', { class: 'container' },
-        cabecalho(i, s, 'Objetivos'),
-        s.texto && el('div', { class: 'texto-corrido texto-intro revelar' }, paragrafos(s.texto)),
-        el('ul', { class: 'objetivos-lista' },
-          itens.map((t, n) =>
-            el('li', { class: 'objetivo revelar', style: `--atraso:${n * 60}ms` },
-              el('span', { class: 'objetivo-check', 'aria-hidden': 'true', text: '✓' }),
-              el('span', { text: preencher(t) })
-            )
-          )
-        )
-      )
-    );
-  }
-
-  function secaoEntregaveis(s, i) {
-    const itens = (s.itens || []).filter((e) => e.titulo || e.descricao);
-    return el('section', { class: 'secao secao-entregaveis', id: 'entregaveis' },
-      el('div', { class: 'container' },
-        cabecalho(i, s, 'Entregáveis'),
-        s.texto && el('div', { class: 'texto-corrido texto-intro revelar' }, paragrafos(s.texto)),
-        el('div', { class: 'entregaveis-grid' },
-          itens.map((e, n) =>
-            el('article', { class: 'entregavel revelar', style: `--atraso:${(n % 2) * 80}ms` },
-              el('span', { class: 'entregavel-num', text: String(n + 1).padStart(2, '0') }),
-              el('h3', { text: preencher(e.titulo) }),
-              e.descricao && el('p', { text: preencher(e.descricao) }),
-              (e.detalhes || []).filter(Boolean).length
-                ? el('ul', {}, e.detalhes.filter(Boolean).map((d) => el('li', { text: preencher(d) })))
-                : null
-            )
-          )
-        )
-      )
-    );
-  }
-
-  function secaoCronograma(s, i) {
-    const etapas = (s.etapas || []).filter((e) => e.titulo || e.descricao);
-    return el('section', { class: 'secao secao-cronograma', id: 'cronograma' },
-      el('div', { class: 'container' },
-        cabecalho(i, s, 'Cronograma'),
-        el('ol', { class: 'linha-tempo' },
-          etapas.map((e) =>
-            el('li', { class: 'etapa revelar' },
-              el('span', { class: 'etapa-ponto', 'aria-hidden': 'true' }),
-              e.periodo && el('span', { class: 'etapa-periodo', text: preencher(e.periodo) }),
-              el('h3', { text: preencher(e.titulo) }),
-              e.descricao && el('p', { text: preencher(e.descricao) })
-            )
-          )
-        )
-      )
-    );
-  }
-
-  function calcularInvestimento(s) {
-    const itens = (s.itens || []).filter((it) => it.descricao || num(it.valor));
-    const totais = {};
-    for (const it of itens) {
-      const rec = RECORRENCIAS[it.recorrencia] ? it.recorrencia : 'unico';
-      totais[rec] = (totais[rec] || 0) + num(it.valor) * (num(it.quantidade) || 1);
+  function calcularInvestimento(inv) {
+    const servicos = lista(inv.servicos).filter((s) => s.nome || num(s.valor));
+    let combinacoes = lista(inv.combinacoes).filter((c) => c.nome || num(c.valor));
+    // sem combinações cadastradas: soma automática dos serviços que não são opcionais
+    // (desligue com somarServicos: false quando os serviços são planos alternativos)
+    if (!combinacoes.length && servicos.length > 1 && inv.somarServicos !== false) {
+      const fixos = servicos.filter((s) => !/opcional/i.test(s.selo || ''));
+      const grupos = {};
+      for (const s of fixos) (grupos[s.recorrencia || 'mensal'] ||= []).push(s);
+      combinacoes = Object.entries(grupos).map(([rec, itens]) => ({
+        nome: `${recorrencia(rec).total} total`,
+        composicao: itens.map((s) => `${s.nome} ${moeda(s.valor)}`).join(' + '),
+        valor: itens.reduce((t, s) => t + num(s.valor), 0),
+        recorrencia: rec,
+        destaque: true
+      }));
     }
-    // mensal primeiro: é o número que o cliente mais procura
-    const ordem = ['mensal', ...Object.keys(RECORRENCIAS).filter((k) => k !== 'mensal')].filter((k) => totais[k] != null);
-    return { itens, totais, ordem };
+    return { servicos, combinacoes };
   }
 
-  function secaoInvestimento(s, i) {
-    const { itens, totais, ordem } = calcularInvestimento(s);
+  function precoEl(valor, rec, classe) {
+    return el('strong', { class: classe }, moeda(valor), el('small', { text: recorrencia(rec).sufixo }));
+  }
+
+  function secaoInvestimento(inv) {
+    const { servicos, combinacoes } = calcularInvestimento(inv);
+    const condicoes = lista(inv.condicoes).filter((c) => c.titulo || c.texto);
     const validade = dataValidade();
 
     return el('section', { class: 'secao secao-investimento', id: 'investimento' },
       el('div', { class: 'container' },
-        cabecalho(i, s, 'Investimento'),
-        s.texto && el('div', { class: 'texto-corrido texto-intro revelar' }, paragrafos(s.texto)),
-        el('div', { class: 'investimento-grid' },
-          el('div', { class: 'investimento-itens revelar' },
-            itens.map((it) => {
-              const rec = RECORRENCIAS[it.recorrencia] || RECORRENCIAS.unico;
-              const qtd = num(it.quantidade) || 1;
-              const valor = num(it.valor);
-              const de = num(it.valorDe);
-              return el('div', { class: 'item' },
-                el('div', { class: 'item-info' },
-                  el('h3', {}, preencher(it.descricao), qtd > 1 ? el('span', { class: 'item-qtd', text: ` × ${qtd}` }) : null),
-                  it.detalhe && el('p', { text: preencher(it.detalhe) }),
-                  el('span', { class: 'item-tag', text: rec.rotulo })
-                ),
-                el('div', { class: 'item-valor' },
-                  de > valor ? el('s', { text: moeda.format(de * qtd) }) : null,
-                  el('strong', {}, moeda.format(valor * qtd), el('small', { text: rec.sufixo }))
-                )
-              );
-            })
-          ),
-          el('aside', { class: 'investimento-total revelar' },
-            ordem.map((k) =>
-              el('div', { class: 'total-linha' },
-                el('span', { text: RECORRENCIAS[k].total }),
-                el('strong', {}, moeda.format(totais[k]), el('small', { text: RECORRENCIAS[k].sufixo }))
+        cabecalho(inv, 'Investimento'),
+
+        servicos.length ? el('div', { class: `planos col-${Math.min(servicos.length, 3)}` },
+          servicos.map((s, i) => {
+            const opcional = /opcional/i.test(s.selo || '');
+            return el('article', { class: `plano revelar${s.destaque ? ' plano-destaque' : ''}${opcional ? ' plano-opcional' : ''}` },
+              el('div', { class: 'plano-topo' },
+                el('span', { class: 'plano-rotulo', text: preencher(s.rotulo) || `Serviço ${i + 1}` }),
+                s.selo && el('span', { class: 'plano-selo', text: preencher(s.selo) })
+              ),
+              el('h3', { class: 'plano-nome', text: preencher(s.nome) }),
+              el('div', { class: 'plano-preco' },
+                precoEl(s.valor, s.recorrencia),
+                s.observacaoValor && el('span', { class: 'plano-obs', text: preencher(s.observacaoValor) })
+              ),
+              s.descricao && el('p', { class: 'plano-descricao', text: preencher(s.descricao) }),
+              textos(s.itens).length ? el('ul', { class: 'plano-itens' }, textos(s.itens).map((t) => el('li', { text: t }))) : null
+            );
+          })
+        ) : null,
+
+        combinacoes.length ? el('div', { class: 'totais revelar' },
+          combinacoes.map((c) =>
+            el('div', { class: `total${c.destaque ? ' total-destaque' : ''}` },
+              el('div', { class: 'total-info' },
+                el('strong', { text: preencher(c.nome) }),
+                c.composicao && el('span', { text: preencher(c.composicao) })
+              ),
+              el('div', { class: 'total-valor' },
+                precoEl(c.valor, c.recorrencia),
+                c.observacao && el('span', { text: preencher(c.observacao) })
               )
-            ),
-            validade && el('p', { class: 'total-validade', text: `Proposta válida até ${formatarData(validade)}` })
-          )
-        ),
-        (s.condicoes || []).filter(Boolean).length
-          ? el('div', { class: 'condicoes revelar' },
-              el('h3', { text: 'Condições' }),
-              el('ul', {}, s.condicoes.filter(Boolean).map((c) => el('li', { text: preencher(c) })))
             )
-          : null,
-        s.observacao && el('div', { class: 'texto-corrido observacao revelar' }, paragrafos(s.observacao))
+          ),
+          validade && el('p', { class: 'total-validade', text: `Valores válidos até ${formatarData(validade)}` })
+        ) : null,
+
+        inv.nota && el('p', { class: 'b-nota revelar', text: preencher(inv.nota) }),
+
+        condicoes.length ? el('div', { class: 'condicoes revelar' },
+          el('h3', { class: 'bloco-titulo', text: 'Condições' }),
+          el('div', { class: 'condicoes-grade' },
+            condicoes.map((c) => el('div', { class: 'condicao' },
+              el('strong', { text: preencher(c.titulo) }),
+              c.texto && el('span', { text: preencher(c.texto) })
+            ))
+          )
+        ) : null,
+
+        inv.fechamento && el('p', { class: 'fechamento revelar', text: preencher(inv.fechamento) })
       )
     );
   }
 
-  function secaoProximosPassos(s, i) {
-    const passos = (s.passos || []).filter(Boolean);
+  function secaoProximosPassos(s) {
+    const passos = textos(s.passos);
     const r = dados.proposta?.responsavel || {};
     const href = linkContato(preencher(s.mensagemWhatsapp));
     return el('section', { class: 'secao secao-proximos', id: 'proximos-passos' },
       el('div', { class: 'container' },
-        cabecalho(i, s, 'Próximos passos'),
-        el('ol', { class: 'passos' },
-          passos.map((p, n) =>
-            el('li', { class: 'passo revelar', style: `--atraso:${n * 80}ms` },
-              el('span', { class: 'passo-num', text: n + 1 }),
-              el('span', { text: preencher(p) })
-            )
-          )
-        ),
+        cabecalho(s, 'Próximos passos'),
+        passos.length ? el('ol', { class: 'passos revelar' },
+          passos.map((p, n) => el('li', {}, el('span', { class: 'passo-num', text: n + 1 }), el('span', { text: p })))
+        ) : null,
         el('div', { class: 'cta revelar' },
-          href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' },
-            el('span', { text: preencher(s.textoBotao) || 'Aprovar proposta' }),
-            el('span', { 'aria-hidden': 'true', text: '→' })
+          el('div', { class: 'cta-texto' },
+            el('h3', { text: preencher(s.chamada) || 'Vamos começar?' }),
+            href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' },
+              el('span', { text: preencher(s.textoBotao) || 'Aprovar proposta' }),
+              el('span', { 'aria-hidden': 'true', text: '→' })
+            )
           ),
           r.nome && el('div', { class: 'responsavel' },
             el('span', { class: 'responsavel-avatar', 'aria-hidden': 'true', text: iniciais(r.nome) }),
@@ -367,101 +480,87 @@
     );
   }
 
-  function iniciais(nome) {
-    const partes = nome.trim().split(/\s+/);
-    return ((partes[0]?.[0] || '') + (partes.length > 1 ? partes[partes.length - 1][0] : '')).toUpperCase();
-  }
-
-  function formatarTelefone(t) {
-    const d = String(t).replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
-    if (d.length === 11) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
-    if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-    return t;
-  }
-
-  const SECOES = [
-    { chave: 'apresentacao', id: 'apresentacao', menu: 'Sobre', render: secaoApresentacao },
-    { chave: 'objetivos', id: 'objetivos', menu: 'Objetivos', render: secaoObjetivos },
-    { chave: 'entregaveis', id: 'entregaveis', menu: 'Entregáveis', render: secaoEntregaveis },
-    { chave: 'cronograma', id: 'cronograma', menu: 'Cronograma', render: secaoCronograma },
-    { chave: 'investimento', id: 'investimento', menu: 'Investimento', render: secaoInvestimento },
-    { chave: 'proximosPassos', id: 'proximos-passos', menu: 'Próximos passos', render: secaoProximosPassos }
-  ];
-
   /* ---------- página ---------- */
 
   function renderProposta() {
     const cli = dados.cliente || {};
     const p = dados.proposta || {};
     const a = dados.agencia || {};
+    const c = dados.capa || {};
 
-    $('#topo-marca').replaceChildren(marca());
+    $('#topo-marca').replaceChildren(marca('marca-logo-topo'));
 
     const intro = el('section', { class: 'intro', id: 'inicio' },
       el('div', { class: 'container' },
-        el('p', { class: 'intro-eyebrow revelar', text: `${p.titulo || 'Proposta Comercial'}${p.numero ? ' · Nº ' + p.numero : ''}` }),
-        el('h1', { class: 'intro-titulo revelar' },
-          el('span', { text: 'Para ' }),
-          el('em', { text: cli.empresa || '' })
-        ),
-        el('div', { class: 'intro-meta revelar' },
-          cli.contato && el('div', {}, el('span', { text: 'Aos cuidados de' }), el('strong', { text: cli.contato + (cli.cargo ? ` · ${cli.cargo}` : '') })),
-          lerData(p.data) && el('div', {}, el('span', { text: 'Data' }), el('strong', { text: formatarData(lerData(p.data)) })),
-          dataValidade() && el('div', {}, el('span', { text: 'Válida até' }), el('strong', { text: formatarData(dataValidade()) })),
-          p.responsavel?.nome && el('div', {}, el('span', { text: 'Responsável' }), el('strong', { text: p.responsavel.nome }))
+        el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial${p.numero ? ' · Nº ' + p.numero : ''}` }),
+        el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', { text: cli.nome || '' })),
+        c.subtitulo && el('p', { class: 'intro-sub revelar', text: preencher(c.subtitulo) }),
+        el('dl', { class: 'intro-meta revelar' },
+          cli.contato && el('div', {}, el('dt', { text: 'Aos cuidados de' }), el('dd', { text: cli.contato + (cli.cargo ? ` · ${cli.cargo}` : '') })),
+          lerData(p.data) && el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: formatarData(lerData(p.data)) })),
+          dataValidade() && el('div', {}, el('dt', { text: 'Válida até' }), el('dd', { text: formatarData(dataValidade()) })),
+          p.responsavel?.nome && el('div', {}, el('dt', { text: 'Responsável' }), el('dd', { text: p.responsavel.nome }))
         )
       )
     );
 
     const secoes = [];
     const menu = [];
-    let indice = 1;
-    for (const def of SECOES) {
-      const s = dados[def.chave];
+    const usados = new Set(['inicio', 'investimento', 'proximos-passos']);
+    for (const s of lista(dados.secoes)) {
       if (!ativo(s)) continue;
-      secoes.push(def.render(s, indice++));
-      menu.push(el('a', { href: `#${def.id}`, 'data-alvo': def.id, text: def.menu }));
+      let id = slugificar(s.menu || s.rotulo || s.titulo) || 'secao';
+      while (usados.has(id)) id += '-2';
+      usados.add(id);
+      secoes.push(secaoConteudo(s, id));
+      menu.push([id, preencher(s.menu || s.rotulo || s.titulo)]);
+    }
+    if (ativo(dados.investimento)) {
+      secoes.push(secaoInvestimento(dados.investimento));
+      menu.push(['investimento', preencher(dados.investimento.menu) || 'Investimento']);
+    }
+    if (ativo(dados.proximosPassos)) {
+      secoes.push(secaoProximosPassos(dados.proximosPassos));
+      menu.push(['proximos-passos', preencher(dados.proximosPassos.menu) || 'Próximos passos']);
     }
 
-    $('#topo-nav').replaceChildren(...menu);
+    $('#topo-nav').replaceChildren(...menu.map(([id, rotulo]) => el('a', { href: `#${id}`, 'data-alvo': id, text: rotulo })));
     $('#conteudo').replaceChildren(intro, ...secoes);
     $('#barra-cta').replaceChildren(...barraCta());
 
     $('#rodape').replaceChildren(
       el('div', { class: 'container rodape-inner' },
-        el('div', { class: 'rodape-marca' }, marca()),
+        el('div', { class: 'rodape-marca' }, marca('marca-logo-rodape'), a.slogan && el('span', { text: a.slogan })),
         el('div', { class: 'rodape-links' },
           a.site && el('a', { href: a.site, target: '_blank', rel: 'noopener', text: a.site.replace(/^https?:\/\//, '').replace(/\/$/, '') }),
-          a.instagram && el('a', {
-            href: `https://instagram.com/${a.instagram.replace(/^@/, '')}`,
-            target: '_blank', rel: 'noopener', text: a.instagram
-          })
+          a.instagram && el('a', { href: `https://instagram.com/${a.instagram.replace(/^@/, '')}`, target: '_blank', rel: 'noopener', text: a.instagram })
         ),
-        el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${a.nome || ''}. Proposta confidencial preparada exclusivamente para ${cli.empresa || 'o cliente'}.` })
+        el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${a.nome || ''}. Proposta confidencial preparada exclusivamente para ${cli.nome || 'o cliente'}.` })
       )
     );
 
     ativarRevelar();
   }
 
-  // Barra fixa no rodapé do celular: total + botão de aprovação sempre à mão.
+  // Barra fixa no rodapé do celular: valor principal + botão de aprovação sempre à mão.
   function barraCta() {
     const pp = dados.proximosPassos;
     const href = ativo(pp) ? linkContato(preencher(pp.mensagemWhatsapp)) : null;
     if (!href) return [];
-    const inv = dados.investimento;
-    let total = null;
-    if (ativo(inv)) {
-      const { totais, ordem } = calcularInvestimento(inv);
-      if (ordem.length) total = { rec: RECORRENCIAS[ordem[0]], valor: totais[ordem[0]] };
+    let principal = null;
+    if (ativo(dados.investimento)) {
+      const { servicos, combinacoes } = calcularInvestimento(dados.investimento);
+      const c = combinacoes.find((x) => x.destaque) || combinacoes[0];
+      const s = servicos.find((x) => x.destaque) || servicos[0];
+      if (c) principal = { rotulo: preencher(c.nome), valor: c.valor, rec: c.recorrencia };
+      else if (s) principal = { rotulo: preencher(s.nome), valor: s.valor, rec: s.recorrencia };
     }
     return [
-      total
-        ? el('div', { class: 'barra-cta-total' },
-            el('span', { text: total.rec.total }),
-            el('strong', {}, moeda.format(total.valor), el('small', { text: total.rec.sufixo }))
-          )
-        : el('div', { class: 'barra-cta-total' }, el('strong', { text: dados.cliente?.empresa || '' })),
+      el('div', { class: 'barra-cta-total' },
+        principal
+          ? [el('span', { text: principal.rotulo }), precoEl(principal.valor, principal.rec)]
+          : el('strong', { text: dados.cliente?.nome || '' })
+      ),
       el('a', { href, target: '_blank', rel: 'noopener', text: 'Aprovar' })
     ];
   }
@@ -482,13 +581,13 @@
     if (cor && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(cor)) {
       raiz.setProperty('--destaque', cor);
       // texto sobre a cor de destaque: escuro em cores claras, branco em cores escuras
-      raiz.setProperty('--sobre-destaque', luminancia(cor) > 0.35 ? '#06120A' : '#FFFFFF');
+      raiz.setProperty('--sobre-destaque', luminancia(cor) > 0.35 ? '#07130B' : '#FFFFFF');
     } else {
       raiz.removeProperty('--destaque');
       raiz.removeProperty('--sobre-destaque');
     }
-    const cli = dados.cliente?.empresa;
-    document.title = `${dados.proposta?.titulo || 'Proposta Comercial'}${cli ? ' · ' + cli : ''}`;
+    const cli = dados.cliente?.nome;
+    document.title = `Proposta Comercial${cli ? ' · ' + cli : ''}`;
   }
 
   function render(novosDados) {
@@ -527,7 +626,7 @@
           observer.unobserve(e.target);
         }
       }
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
     alvos.forEach((n) => observer.observe(n));
   }
 
@@ -544,7 +643,7 @@
     for (const l of document.querySelectorAll('#topo-nav a')) {
       const era = l.classList.contains('atual');
       l.classList.toggle('atual', l === atual);
-      // no celular o menu rola de lado: mantém a seção atual visível
+      // o menu rola de lado: mantém a seção atual visível
       if (l === atual && !era) {
         const nav = $('#topo-nav');
         nav.scrollTo({ left: l.offsetLeft - nav.clientWidth / 2 + l.clientWidth / 2, behavior: 'smooth' });
@@ -555,7 +654,8 @@
     const intro = $('#inicio');
     const cta = document.querySelector('.cta');
     const passouIntro = intro && intro.getBoundingClientRect().bottom < 0;
-    const ctaVisivel = cta && cta.getBoundingClientRect().top < innerHeight && cta.getBoundingClientRect().bottom > 0;
+    const r = cta && cta.getBoundingClientRect();
+    const ctaVisivel = r && r.top < innerHeight && r.bottom > 0;
     document.body.classList.toggle('mostrar-barra', Boolean(passouIntro && !ctaVisivel));
   }
 
@@ -605,7 +705,7 @@
     .catch((err) => {
       console.error(err);
       mostrarErro(location.protocol === 'file:'
-        ? 'Abra a proposta por um servidor (ex.: GitHub Pages) — o navegador bloqueia a leitura de arquivos locais.'
+        ? 'Abra a proposta por um servidor (ex.: GitHub Pages); o navegador bloqueia a leitura de arquivos locais.'
         : err.message);
     });
 })();

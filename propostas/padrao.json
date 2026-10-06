@@ -1,0 +1,714 @@
+{
+  "id": "padrao",
+  "agencia": {
+    "nome": "MFL Sales",
+    "slogan": "Estratégia · Performance · Resultados",
+    "logo": "assets/img/mfl-sales-logo.png",
+    "site": "https://www.agenciamfl.com.br",
+    "instagram": "@agenciamfl",
+    "corPrimaria": "#39D353"
+  },
+  "cliente": {
+    "nome": "Clínica Exemplo",
+    "contato": "Nome do Contato",
+    "cargo": "Sócia-proprietária"
+  },
+  "proposta": {
+    "numero": "MFL-2026-000",
+    "data": "2026-10-06",
+    "validadeDias": 15,
+    "responsavel": {
+      "nome": "Equipe Comercial MFL",
+      "cargo": "Consultor de Aquisição",
+      "whatsapp": "5521992287210",
+      "email": "contato@agenciamfl.com.br"
+    }
+  },
+  "capa": {
+    "rotulo": "Proposta comercial preparada para",
+    "subtitulo": "Tráfego Pago + CRM para gerar uma agenda cheia e previsível",
+    "canais": "Meta Ads · Google Ads · CRM · Automação · Atendimento via WhatsApp",
+    "pilares": [
+      "Tráfego estruturado",
+      "CRM integrado",
+      "Agenda previsível"
+    ],
+    "textoBotao": "Abrir proposta"
+  },
+  "secoes": [
+    {
+      "ativo": true,
+      "menu": "Oportunidade",
+      "rotulo": "Oportunidade",
+      "titulo": "Transformar a qualidade da {cliente} em uma agenda cheia e previsível",
+      "texto": "A {cliente} já tem o que o cliente procura: serviços de alto valor percebido, técnica e um atendimento de confiança. O que esta proposta resolve não é a falta de serviço. É a ausência de um fluxo constante de novos clientes chegando pelo WhatsApp e de um processo organizado para transformar cada conversa em atendimento agendado.",
+      "blocos": [
+        {
+          "tipo": "lista",
+          "titulo": "O que a {cliente} já tem a seu favor",
+          "colunas": 2,
+          "itens": [
+            "Serviços de alta procura e alto valor percebido",
+            "Profissionais especializados e reconhecidos",
+            "Clientes com potencial de recorrência",
+            "Atendimento personalizado e próximo",
+            "Localização estratégica na região",
+            "Marca com boa reputação entre quem já é cliente"
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Da vitrine à agenda cheia",
+          "etapas": [
+            {
+              "titulo": "Serviços da {cliente}"
+            },
+            {
+              "titulo": "Anúncios (Meta Ads + Google Ads)"
+            },
+            {
+              "titulo": "Conversa no WhatsApp"
+            },
+            {
+              "titulo": "Entrada no CRM"
+            },
+            {
+              "titulo": "Qualificação"
+            },
+            {
+              "titulo": "Atendimento agendado"
+            },
+            {
+              "titulo": "Venda realizada"
+            },
+            {
+              "titulo": "Retorno e recorrência"
+            }
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "A {cliente} já sabe entregar resultado. Nosso papel é colocá-la diante dos clientes certos e garantir que nenhuma conversa se perca antes do agendamento."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Tráfego pago",
+      "rotulo": "Tráfego pago",
+      "titulo": "Atrair clientes da região no momento em que o desejo aparece",
+      "texto": "O tráfego pago trabalha em duas frentes. O Google Ads captura quem já está procurando o serviço, e o Meta Ads (Instagram e Facebook) desperta o desejo em pessoas da região com o perfil certo. Os anúncios não levam ao perfil: levam direto a uma conversa no WhatsApp, já identificada no CRM.",
+      "blocos": [
+        {
+          "tipo": "cartoes",
+          "titulo": "Campanhas por objetivo",
+          "colunas": 3,
+          "cartoes": [
+            {
+              "etiqueta": "Porta de entrada",
+              "titulo": "Primeiro contato",
+              "texto": "Serviços de ticket menor que apresentam a {cliente} a novos clientes.",
+              "itens": [
+                "Oferta de avaliação",
+                "Serviços de entrada",
+                "Público frio da região"
+              ]
+            },
+            {
+              "etiqueta": "Alto valor",
+              "titulo": "Serviços de maior ticket",
+              "texto": "Campanhas focadas nos serviços que mais trazem faturamento.",
+              "itens": [
+                "Google Ads na pesquisa local",
+                "Meta Ads com prova social",
+                "Mensagem focada em resultado"
+              ]
+            },
+            {
+              "etiqueta": "Recorrência",
+              "titulo": "Quem já é cliente",
+              "texto": "Trazer de volta quem já confia na {cliente}.",
+              "itens": [
+                "Remarketing",
+                "Retorno programado",
+                "Reativação da base"
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "O que está incluso na gestão",
+          "colunas": 2,
+          "itens": [
+            "Estratégia e planejamento de campanhas",
+            "Configuração de Meta Ads e Google Ads",
+            "Segmentação geográfica na região do negócio",
+            "Campanhas de conversa direta no WhatsApp",
+            "Remarketing para quem interagiu e não agendou",
+            "Direcionamento de criativos e copys dos anúncios",
+            "Testes A/B de público, criativo e oferta",
+            "Otimização contínua das campanhas",
+            "Rastreamento da origem de cada cliente",
+            "Relatório mensal de resultados"
+          ]
+        },
+        {
+          "tipo": "cartoes",
+          "titulo": "Quem vamos alcançar",
+          "colunas": 4,
+          "cartoes": [
+            {
+              "titulo": "Localização",
+              "texto": "Bairros e cidades próximos à {cliente}."
+            },
+            {
+              "titulo": "Perfil",
+              "texto": "Público com poder de compra e interesse no serviço."
+            },
+            {
+              "titulo": "Intenção",
+              "texto": "Pessoas pesquisando ativamente pelo serviço no Google."
+            },
+            {
+              "titulo": "Remarketing",
+              "texto": "Quem visitou o Instagram, assistiu vídeos ou chamou e não agendou."
+            }
+          ]
+        },
+        {
+          "tipo": "nota",
+          "texto": "Comunicação responsável: os anúncios seguem as políticas de publicidade da Meta e do Google, protegendo a conta de anúncios e a reputação da {cliente}."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "CRM",
+      "rotulo": "CRM e automação",
+      "titulo": "Da primeira mensagem ao retorno: nenhum cliente se perde no caminho",
+      "texto": "Todo contato gerado pelos anúncios entra no mesmo CRM, com origem, serviço de interesse e histórico da conversa. A equipe da {cliente} passa a enxergar, em um só lugar, quem precisa de resposta, quem já agendou, quem faltou e quem está pronto para voltar.",
+      "blocos": [
+        {
+          "tipo": "fluxo",
+          "titulo": "Funil de atendimento",
+          "largura": "metade",
+          "etapas": [
+            {
+              "titulo": "Lead novo"
+            },
+            {
+              "titulo": "Primeiro atendimento"
+            },
+            {
+              "titulo": "Qualificado"
+            },
+            {
+              "titulo": "Agendado"
+            },
+            {
+              "titulo": "Compareceu"
+            },
+            {
+              "titulo": "Venda fechada"
+            },
+            {
+              "titulo": "Pós-venda"
+            },
+            {
+              "titulo": "Retorno / recorrência"
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Automações configuradas",
+          "largura": "metade",
+          "colunas": 1,
+          "itens": [
+            "Resposta imediata ao novo contato",
+            "Confirmação automática de agendamento",
+            "Lembrete 24h antes do atendimento",
+            "Recuperação de quem faltou",
+            "Follow-up de orçamentos não fechados",
+            "Mensagem de pós-atendimento",
+            "Lembrete de retorno",
+            "Reativação de clientes inativos",
+            "Pedido de avaliação no Google"
+          ]
+        },
+        {
+          "tipo": "comparativo",
+          "titulo": "O que muda na operação",
+          "colunas": [
+            {
+              "titulo": "Sem CRM",
+              "tom": "negativo",
+              "itens": [
+                "Conversas perdidas no WhatsApp",
+                "Orçamentos esquecidos sem retorno",
+                "Faltas sem recuperação",
+                "Não se sabe qual anúncio gerou o cliente"
+              ]
+            },
+            {
+              "titulo": "Com CRM",
+              "tom": "positivo",
+              "itens": [
+                "Todas as conversas organizadas por etapa",
+                "Follow-up automático de cada orçamento",
+                "Lembretes que reduzem faltas",
+                "Origem e resultado de cada campanha"
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Funções do CRM no dia a dia",
+          "colunas": 2,
+          "itens": [
+            "Centralização dos contatos do WhatsApp",
+            "Pipeline visual por etapa",
+            "Histórico completo de cada cliente",
+            "Tarefas e lembretes para a equipe",
+            "Origem de cada cliente (anúncio, Google, Instagram)",
+            "Quanto cada campanha gera em agendamentos"
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "A tecnologia reduz o trabalho operacional do atendimento para que a equipe concentre o tempo em atender bem e fechar vendas."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "SDR",
+      "rotulo": "SDR · serviço opcional",
+      "titulo": "Um SDR dedicado para transformar cada lead em cliente agendado",
+      "texto": "O SDR (Sales Development Representative) faz a ponte entre o anúncio e o atendimento. Se a {cliente} optar por esse serviço, ele assume o atendimento comercial dos leads gerados pelas campanhas, da primeira mensagem à confirmação do horário.",
+      "blocos": [
+        {
+          "tipo": "cartoes",
+          "titulo": "Responsabilidades do SDR",
+          "colunas": 2,
+          "numerados": true,
+          "cartoes": [
+            {
+              "titulo": "Organização dos leads no CRM",
+              "texto": "Cada contato registrado com origem, interesse e etapa do funil sempre atualizados."
+            },
+            {
+              "titulo": "Agendamento",
+              "texto": "Conduz a conversa, tira dúvidas e agenda o atendimento."
+            },
+            {
+              "titulo": "Confirmação",
+              "texto": "Confirma cada horário com antecedência, reduzindo faltas e remarcações."
+            },
+            {
+              "titulo": "Follow-up",
+              "texto": "Retoma quem não respondeu, quem pediu valores e quem faltou, até a decisão."
+            }
+          ]
+        },
+        {
+          "tipo": "cartoes",
+          "titulo": "Perfil do SDR",
+          "colunas": 3,
+          "cartoes": [
+            {
+              "titulo": "Experiência no MFL Sales",
+              "texto": "Domina o CRM da operação: pipeline, automações, tarefas e histórico."
+            },
+            {
+              "titulo": "Experiência no nicho",
+              "texto": "Conhece as dúvidas, as objeções e a linguagem do seu cliente."
+            },
+            {
+              "titulo": "Scripts de venda",
+              "texto": "Atendimento consultivo e padronizado, com foco em agendamento e comparecimento."
+            }
+          ]
+        },
+        {
+          "tipo": "comparativo",
+          "titulo": "Divisão de papéis",
+          "colunas": [
+            {
+              "titulo": "O SDR cuida",
+              "tom": "positivo",
+              "itens": [
+                "Responder rapidamente cada novo lead",
+                "Organizar e manter o CRM atualizado",
+                "Agendar, confirmar e lembrar os horários",
+                "Fazer o follow-up até a decisão"
+              ]
+            },
+            {
+              "titulo": "A {cliente} cuida",
+              "tom": "neutro",
+              "itens": [
+                "Atendimento e execução do serviço",
+                "Pós-atendimento",
+                "Presença e autoridade nas redes"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Na prática",
+      "rotulo": "Exemplo prático",
+      "titulo": "Na prática: como um novo cliente chega até a {cliente}",
+      "texto": "Um exemplo de jornada aplicado à operação da {cliente}. Temas, criativos e ofertas serão ajustados conforme os resultados.",
+      "blocos": [
+        {
+          "tipo": "chips",
+          "titulo": "Exemplos de tema de campanha",
+          "itens": [
+            "Avaliação gratuita",
+            "Serviço mais procurado",
+            "Antes e depois",
+            "Condição do mês"
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Como a jornada acontece",
+          "etapas": [
+            {
+              "titulo": "Cliente pesquisa ou vê um anúncio",
+              "descricao": "No Google, procurando o serviço, ou em um vídeo no Instagram."
+            },
+            {
+              "titulo": "Clica e cai direto no WhatsApp",
+              "descricao": "Com uma mensagem pronta sobre o serviço de interesse."
+            },
+            {
+              "titulo": "Entra automaticamente no CRM",
+              "descricao": "Já com origem, campanha e serviço identificados."
+            },
+            {
+              "titulo": "Atendimento com roteiro definido",
+              "descricao": "Feito pelo SDR (se contratado) ou pela equipe: qualifica, tira dúvidas e agenda."
+            },
+            {
+              "titulo": "Agendamento confirmado e lembrado",
+              "descricao": "Confirmação e lembretes reduzem faltas."
+            },
+            {
+              "titulo": "Atendimento, pós e retorno programado",
+              "descricao": "O cliente volta e indica."
+            }
+          ]
+        },
+        {
+          "tipo": "citacao",
+          "titulo": "Exemplo de primeira mensagem",
+          "texto": "Oi, Ana! Vi que você se interessou pelo nosso serviço. Aqui na {cliente} o atendimento é personalizado. Quer agendar um horário para conversarmos?"
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Plano de 90 dias",
+      "rotulo": "Plano de execução",
+      "titulo": "Os primeiros 90 dias da operação",
+      "texto": "O contrato de 3 meses foi pensado para percorrer o ciclo completo: estruturar, aprender com os dados e escalar o que dá resultado.",
+      "blocos": [
+        {
+          "tipo": "cartoes",
+          "colunas": 3,
+          "cartoes": [
+            {
+              "etiqueta": "Mês 1",
+              "titulo": "Estruturação",
+              "itens": [
+                "Diagnóstico da operação e dos serviços prioritários",
+                "Configuração das contas de anúncio",
+                "Implantação do CRM e do funil",
+                "Integração com o WhatsApp",
+                "Automações de agendamento e lembrete",
+                "Primeiras campanhas no ar"
+              ]
+            },
+            {
+              "etiqueta": "Mês 2",
+              "titulo": "Otimização",
+              "itens": [
+                "Análise de custo por conversa e por agendamento",
+                "Testes de criativos, públicos e ofertas",
+                "Ajuste do roteiro de atendimento",
+                "Remarketing ativo",
+                "Automações de follow-up e recuperação"
+              ]
+            },
+            {
+              "etiqueta": "Mês 3",
+              "titulo": "Escala",
+              "itens": [
+                "Mais verba nas campanhas que convertem",
+                "Novos criativos e ângulos",
+                "Reativação da base de clientes",
+                "Automações de retorno e recorrência",
+                "Planejamento dos próximos meses"
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "cartoes",
+          "titulo": "O que vamos acompanhar",
+          "colunas": 4,
+          "cartoes": [
+            {
+              "titulo": "Custo por conversa",
+              "texto": "Quanto custa cada novo cliente iniciando contato."
+            },
+            {
+              "titulo": "Taxa de agendamento",
+              "texto": "Conversas que viram atendimento marcado."
+            },
+            {
+              "titulo": "Comparecimento",
+              "texto": "Agendamentos que de fato acontecem."
+            },
+            {
+              "titulo": "Retorno sobre anúncio",
+              "texto": "Faturamento gerado por real investido."
+            }
+          ]
+        },
+        {
+          "tipo": "comparativo",
+          "titulo": "Divisão de responsabilidades",
+          "colunas": [
+            {
+              "titulo": "Executado pela MFL Sales",
+              "tom": "positivo",
+              "itens": [
+                "Estratégia, criação e gestão das campanhas",
+                "Implantação e automações do CRM",
+                "Roteiro de atendimento e scripts",
+                "Análise de dados e relatório mensal"
+              ]
+            },
+            {
+              "titulo": "Executado pela {cliente}",
+              "tom": "neutro",
+              "itens": [
+                "Acesso às contas (Instagram, Meta e Google)",
+                "Fotos e vídeos do espaço e da equipe",
+                "Agenda de horários sempre atualizada",
+                "Atendimento no WhatsApp (caso não contrate o SDR)"
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "Decisões baseadas em dados: todo mês a {cliente} recebe um relatório claro, mostrando quanto foi investido, quantos clientes chegaram e quantos viraram venda."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Por que a MFL",
+      "rotulo": "Por que a MFL",
+      "estilo": "escuro",
+      "titulo": "Tecnologia própria e marketing transparente",
+      "texto": "Somos uma empresa de tecnologia e assessoria em marketing. Você acompanha cada passo da estratégia em tempo real.",
+      "blocos": [
+        {
+          "tipo": "numeros",
+          "itens": [
+            {
+              "numero": "+370",
+              "legenda": "negócios acelerados"
+            },
+            {
+              "numero": "+R$ 10 mi",
+              "legenda": "em receita gerada para clientes"
+            },
+            {
+              "numero": "+R$ 700 mil",
+              "legenda": "investidos em anúncios por mês"
+            },
+            {
+              "numero": "+7 anos",
+              "legenda": "de mercado, em 2 países e 25 cidades"
+            }
+          ]
+        },
+        {
+          "tipo": "comparativo",
+          "colunas": [
+            {
+              "titulo": "Outras agências",
+              "tom": "negativo",
+              "itens": [
+                "Relatório 2x na semana",
+                "Controle dos leads em planilha",
+                "CRM externo",
+                "Automações terceirizadas",
+                "Sem acesso à operação"
+              ]
+            },
+            {
+              "titulo": "MFL Sales",
+              "tom": "positivo",
+              "itens": [
+                "Relatório ao vivo, 24h",
+                "Fluxo de vendas automatizado",
+                "CRM próprio",
+                "Automação própria no software da MFL",
+                "Acesso completo a toda a operação"
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "cartoes",
+          "titulo": "Quem cuida da sua operação",
+          "colunas": 3,
+          "cartoes": [
+            {
+              "titulo": "Gestor de Operações",
+              "texto": "Especialista em growth e gestão de projetos, responsável pelo resultado do todo."
+            },
+            {
+              "titulo": "Gestor de Fluxo de Vendas",
+              "texto": "Planeja e monitora o funil, da captação ao fechamento e à fidelização."
+            },
+            {
+              "titulo": "Gestor de Tráfego",
+              "texto": "Profissional com experiência no seu nicho, focado em campanhas de alta conversão."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "investimento": {
+    "ativo": true,
+    "rotulo": "Investimento",
+    "titulo": "Plano de aquisição de clientes",
+    "texto": "",
+    "servicos": [
+      {
+        "rotulo": "Serviço 1",
+        "selo": "Gestão de tráfego",
+        "nome": "Tráfego Pago",
+        "valor": 2000,
+        "recorrencia": "mensal",
+        "observacaoValor": "",
+        "descricao": "Gestão completa das campanhas:",
+        "destaque": true,
+        "itens": [
+          "Estratégia de campanhas por serviço",
+          "Tráfego Meta Ads (Instagram e Facebook)",
+          "Tráfego Google Ads (pesquisa local)",
+          "Campanhas de conversa no WhatsApp",
+          "Remarketing",
+          "Direcionamento de criativos e copys",
+          "Testes e otimização contínua",
+          "Roteiro de atendimento para a equipe",
+          "Relatório mensal de resultados"
+        ]
+      },
+      {
+        "rotulo": "Serviço 2",
+        "selo": "",
+        "nome": "CRM MFL Sales",
+        "valor": 297,
+        "recorrencia": "mensal",
+        "observacaoValor": "",
+        "descricao": "Plataforma + configuração:",
+        "destaque": false,
+        "itens": [
+          "Implantação e configuração do CRM",
+          "Funil de atendimento personalizado",
+          "Integração com o WhatsApp",
+          "Automações de agendamento e lembretes",
+          "Follow-up e recuperação de clientes",
+          "Fluxos de retorno e reativação",
+          "Rastreamento da origem dos leads"
+        ]
+      },
+      {
+        "rotulo": "Serviço 3",
+        "selo": "Opcional",
+        "nome": "SDR Especializado",
+        "valor": 1500,
+        "recorrencia": "mensal",
+        "observacaoValor": "+ comissionamento (a definir)",
+        "descricao": "Atendimento comercial dos leads:",
+        "destaque": false,
+        "itens": [
+          "Organização dos leads no CRM",
+          "Agendamentos",
+          "Confirmação de agendamentos",
+          "Follow-up de leads, orçamentos e faltas",
+          "Treinado com scripts e abordagens de venda"
+        ]
+      }
+    ],
+    "combinacoes": [
+      {
+        "nome": "Tráfego Pago + CRM",
+        "composicao": "R$ 2.000 + R$ 297",
+        "valor": 2297,
+        "recorrencia": "mensal",
+        "observacao": "",
+        "destaque": true
+      },
+      {
+        "nome": "Tráfego Pago + CRM + SDR",
+        "composicao": "R$ 2.000 + R$ 297 + R$ 1.500 + comissionamento",
+        "valor": 3797,
+        "recorrencia": "mensal",
+        "observacao": "+ comissionamento",
+        "destaque": false
+      }
+    ],
+    "nota": "",
+    "condicoes": [
+      {
+        "titulo": "Contrato de 3 meses",
+        "texto": "Tempo para estruturar, otimizar e escalar."
+      },
+      {
+        "titulo": "Pagamento mensal",
+        "texto": "Cartão ou boleto recorrente. Cada serviço cobrado separadamente."
+      },
+      {
+        "titulo": "Verba de anúncios",
+        "texto": "Paga direto à Meta e ao Google, à parte. Sugestão: R$ 100 por dia."
+      },
+      {
+        "titulo": "Início em até 7 dias",
+        "texto": "Onboarding começa logo após a assinatura do contrato."
+      }
+    ],
+    "fechamento": "Nosso objetivo não é apenas gerar mensagens. É transformar cada conversa em atendimento, venda e retorno para a {cliente}.",
+    "somarServicos": true
+  },
+  "proximosPassos": {
+    "ativo": true,
+    "rotulo": "Próximos passos",
+    "titulo": "Como começamos",
+    "passos": [
+      "Aprovação da proposta",
+      "Assinatura do contrato",
+      "Onboarding e acesso às contas",
+      "Campanhas no ar em até 7 dias"
+    ],
+    "chamada": "Vamos encher a agenda da {cliente}?",
+    "textoBotao": "Quero aprovar a proposta",
+    "mensagemWhatsapp": "Olá! Li a proposta {numero} da {cliente} e quero seguir com a MFL Sales."
+  }
+}

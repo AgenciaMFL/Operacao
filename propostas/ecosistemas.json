@@ -1,0 +1,675 @@
+{
+  "id": "ecosistemas",
+  "agencia": {
+    "nome": "MFL Sales",
+    "slogan": "Estratégia · Performance · Resultados",
+    "logo": "assets/img/mfl-sales-logo.png",
+    "site": "https://www.agenciamfl.com.br",
+    "instagram": "@agenciamfl",
+    "corPrimaria": "#39D353"
+  },
+  "cliente": {
+    "nome": "EcoSistemas Gestão e Tecnologia",
+    "contato": "",
+    "cargo": ""
+  },
+  "proposta": {
+    "numero": "MFL-2026-103",
+    "data": "2026-09-14",
+    "validadeDias": 15,
+    "responsavel": {
+      "nome": "Equipe Comercial MFL",
+      "cargo": "Consultor de Aquisição",
+      "whatsapp": "5521992287210",
+      "email": "contato@agenciamfl.com.br"
+    }
+  },
+  "capa": {
+    "rotulo": "Proposta comercial preparada para",
+    "subtitulo": "Estruturação da Operação Comercial de Aquisição",
+    "canais": "Inbound · Outbound · CRM · Automação · Inteligência Artificial",
+    "pilares": [
+      "Inbound estruturado",
+      "Outbound ativo",
+      "CRM + IA integrados"
+    ],
+    "textoBotao": "Abrir proposta"
+  },
+  "secoes": [
+    {
+      "ativo": true,
+      "menu": "Oportunidade",
+      "rotulo": "Oportunidade",
+      "titulo": "Transformar a capacidade técnica da EcoSistemas em uma máquina de novas oportunidades",
+      "texto": "A EcoSistemas já reúne os principais ativos para vender projetos de grande porte: experiência, autoridade, histórico de entregas e metodologia própria. O problema que esta proposta resolve não é falta de capacidade técnica. É a ausência de um processo comercial estruturado e previsível para colocar a empresa diante de mais empresas com potencial real de contratação.",
+      "blocos": [
+        {
+          "tipo": "lista",
+          "titulo": "Ativos que a EcoSistemas já possui",
+          "colunas": 2,
+          "itens": [
+            "Mais de 15 anos de experiência",
+            "Autoridade técnica consolidada",
+            "Histórico de mais de 500 projetos entregues",
+            "Metodologia própria de desenvolvimento",
+            "Capacidade técnica para projetos complexos",
+            "Atuação em diversos segmentos de mercado",
+            "Soluções de software sob medida",
+            "Estrutura preparada para grandes projetos"
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Da capacidade técnica à oportunidade comercial",
+          "etapas": [
+            {
+              "titulo": "Ativos da EcoSistemas"
+            },
+            {
+              "titulo": "Marketing"
+            },
+            {
+              "titulo": "Captação"
+            },
+            {
+              "titulo": "Qualificação"
+            },
+            {
+              "titulo": "CRM"
+            },
+            {
+              "titulo": "Diagnóstico"
+            },
+            {
+              "titulo": "Oportunidade"
+            },
+            {
+              "titulo": "Proposta"
+            },
+            {
+              "titulo": "Venda"
+            }
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "A EcoSistemas já sabe entregar. Nosso papel é estruturar o processo para encontrar, qualificar e colocar essas empresas diante do comercial."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Inbound",
+      "rotulo": "Inbound",
+      "titulo": "Capturar empresas no momento em que a necessidade aparece",
+      "texto": "O Inbound será usado para capturar demanda que já existe e também estimular potenciais compradores que ainda não sabem que precisam de uma solução sob medida. O caminho não leva o visitante à página inicial: leva a uma Landing Page focada no problema.",
+      "blocos": [
+        {
+          "tipo": "fluxo",
+          "titulo": "Do anúncio ao diagnóstico comercial",
+          "etapas": [
+            {
+              "titulo": "Meta Ads + Google Ads"
+            },
+            {
+              "titulo": "Landing Page"
+            },
+            {
+              "titulo": "Formulário de Qualificação"
+            },
+            {
+              "titulo": "GHL"
+            },
+            {
+              "titulo": "Automação + IA"
+            },
+            {
+              "titulo": "Qualificação Comercial"
+            },
+            {
+              "titulo": "Diagnóstico"
+            },
+            {
+              "titulo": "Levantamento Técnico"
+            },
+            {
+              "titulo": "Proposta"
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Temas da Landing Page",
+          "largura": "metade",
+          "colunas": 1,
+          "itens": [
+            "Desenvolvimento de software sob medida",
+            "Criação de sistemas",
+            "Sistemas personalizados",
+            "Integração de sistemas",
+            "Automação de processos",
+            "Modernização de sistemas",
+            "Desenvolvimento de plataformas",
+            "Desenvolvimento de aplicativos",
+            "Substituição de sistemas legados",
+            "Criação de MVPs"
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Informações do Formulário",
+          "largura": "metade",
+          "colunas": 1,
+          "itens": [
+            "Empresa",
+            "Cargo",
+            "Tipo de projeto",
+            "Problema que deseja resolver",
+            "Sistema atual",
+            "Prazo",
+            "Estágio do projeto",
+            "Necessidade de integração",
+            "Intenção de contratação"
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "O objetivo não é simplesmente gerar formulários. É gerar diagnósticos de projetos com potencial comercial."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Outbound",
+      "rotulo": "Outbound",
+      "titulo": "Encontrar empresas que ainda não estão procurando, mas podem precisar da EcoSistemas",
+      "texto": "O Outbound não será baseado em disparos genéricos. Será baseado em um processo de identificação de empresas com características e sinais reais de potencial necessidade de tecnologia.",
+      "blocos": [
+        {
+          "tipo": "fluxo",
+          "titulo": "Como o Outbound funciona",
+          "etapas": [
+            {
+              "titulo": "ICP",
+              "descricao": "Definição do perfil ideal de empresa"
+            },
+            {
+              "titulo": "Segmentação",
+              "descricao": "Setores, porte, localização e características"
+            },
+            {
+              "titulo": "Identificação de sinais",
+              "descricao": "Características que indicam possível necessidade"
+            },
+            {
+              "titulo": "Extração",
+              "descricao": "Empresa + contato + informações relevantes"
+            },
+            {
+              "titulo": "GHL",
+              "descricao": "Organização automática da base"
+            },
+            {
+              "tipo": "divisor",
+              "titulo": "A partir daqui: comercial da EcoSistemas executa, com script e cadência entregues por nós"
+            },
+            {
+              "titulo": "Abordagem",
+              "descricao": "Contato comercial personalizado"
+            },
+            {
+              "titulo": "Diagnóstico",
+              "descricao": "Descoberta da necessidade"
+            },
+            {
+              "titulo": "Oportunidade",
+              "descricao": "Passagem para o processo comercial"
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Sinais de oportunidade",
+          "colunas": 2,
+          "itens": [
+            "Crescimento da empresa",
+            "Expansão para novas unidades",
+            "Operação complexa",
+            "Grande volume de processos manuais",
+            "Uso excessivo de planilhas",
+            "Sistemas que não conversam entre si",
+            "ERP que não atende determinados processos",
+            "Sistema legado",
+            "Necessidade de automação",
+            "Necessidade de plataforma própria",
+            "Necessidade de modernização tecnológica"
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "Não vamos procurar empresas aleatoriamente. Vamos procurar empresas com sinais reais de necessidade. E para a etapa de abordagem, treinamos o comercial da EcoSistemas com scripts e cadência de contato prontos."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Tecnologia",
+      "rotulo": "Tecnologia da operação",
+      "titulo": "Do primeiro contato ao projeto: um processo comercial estruturado",
+      "texto": "Todos os canais, Inbound e Outbound, convergem para o mesmo CRM (GHL), garantindo que nenhuma oportunidade se perca entre o primeiro contato e a proposta.",
+      "blocos": [
+        {
+          "tipo": "fluxo",
+          "titulo": "Funil Inbound",
+          "largura": "metade",
+          "etapas": [
+            {
+              "titulo": "Lead captado"
+            },
+            {
+              "titulo": "Qualificação"
+            },
+            {
+              "titulo": "Contato"
+            },
+            {
+              "titulo": "Diagnóstico agendado"
+            },
+            {
+              "titulo": "Diagnóstico realizado"
+            },
+            {
+              "titulo": "Oportunidade"
+            },
+            {
+              "titulo": "Levantamento técnico"
+            },
+            {
+              "titulo": "Proposta"
+            },
+            {
+              "titulo": "Negociação"
+            },
+            {
+              "titulo": "Fechado ganho / perdido"
+            }
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Funil Outbound",
+          "largura": "metade",
+          "etapas": [
+            {
+              "titulo": "Empresa identificada"
+            },
+            {
+              "titulo": "Contato identificado"
+            },
+            {
+              "titulo": "Abordagem"
+            },
+            {
+              "titulo": "Contato realizado"
+            },
+            {
+              "titulo": "Interesse"
+            },
+            {
+              "titulo": "Diagnóstico"
+            },
+            {
+              "titulo": "Oportunidade"
+            },
+            {
+              "titulo": "Levantamento técnico"
+            },
+            {
+              "titulo": "Proposta"
+            },
+            {
+              "titulo": "Negociação"
+            },
+            {
+              "titulo": "Fechado ganho / perdido"
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Funções do GHL",
+          "largura": "metade",
+          "colunas": 1,
+          "itens": [
+            "Centralização dos leads",
+            "Pipeline",
+            "Histórico",
+            "Distribuição",
+            "Tarefas",
+            "Follow-ups",
+            "Automações",
+            "Recuperação de oportunidades",
+            "Organização da equipe comercial",
+            "Acompanhamento de cada oportunidade"
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Papel da IA",
+          "largura": "metade",
+          "colunas": 1,
+          "itens": [
+            "Classificação inicial",
+            "Organização das informações",
+            "Automação de etapas",
+            "Apoio à qualificação",
+            "Follow-ups",
+            "Aceleração do atendimento"
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "A tecnologia reduz trabalho operacional para que o comercial concentre seu tempo nas oportunidades que realmente importam."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Inbound na prática",
+      "rotulo": "Exemplo prático · Inbound",
+      "titulo": "Na prática: como capturar empresas que já buscam desenvolvimento de software",
+      "texto": "Um exemplo de como o processo de Inbound pode ser aplicado à EcoSistemas. Este é um exemplo de jornada. Os temas de anúncio e da Landing Page serão ajustados conforme os resultados.",
+      "blocos": [
+        {
+          "tipo": "chips",
+          "titulo": "Exemplos de tema de campanha",
+          "itens": [
+            "Sistema sob medida",
+            "Automação de processos",
+            "Modernização de sistema legado",
+            "Integração de sistemas"
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Como a jornada acontece",
+          "etapas": [
+            {
+              "titulo": "Empresa pesquisa um problema específico",
+              "descricao": "Ex.: “sistema para logística”, “automação de processos”."
+            },
+            {
+              "titulo": "Clica em um anúncio (Meta Ads / Google Ads)",
+              "descricao": "Sobre esse problema específico, não sobre a marca."
+            },
+            {
+              "titulo": "Chega em uma Landing Page focada no problema",
+              "descricao": "Não na página institucional da EcoSistemas."
+            },
+            {
+              "titulo": "Preenche o formulário de qualificação",
+              "descricao": "Tipo de projeto, sistema atual, prazo, intenção."
+            },
+            {
+              "titulo": "Entra automaticamente no GHL",
+              "descricao": "Já com esse contexto, sem retrabalho manual."
+            },
+            {
+              "titulo": "Comercial recebe um diagnóstico pré-qualificado",
+              "descricao": "Já sabe o problema do lead antes de ligar."
+            }
+          ]
+        },
+        {
+          "tipo": "citacao",
+          "titulo": "Exemplo de primeira abordagem",
+          "texto": "Vi que vocês estão buscando uma solução para [problema]. Me conta um pouco mais sobre esse cenário?"
+        },
+        {
+          "tipo": "nota",
+          "texto": "Esse é um exemplo de jornada. Os temas de anúncio, a Landing Page e as perguntas do formulário serão testados e ajustados conforme os resultados de cada campanha."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Outbound na prática",
+      "rotulo": "Exemplo prático · Outbound",
+      "titulo": "Na prática: como encontrar empresas que precisam desenvolver software",
+      "texto": "Um exemplo de como o processo de Outbound pode ser aplicado à EcoSistemas. Este é um exemplo de ICP. Outros segmentos podem ser testados e priorizados conforme os resultados.",
+      "blocos": [
+        {
+          "tipo": "chips",
+          "titulo": "ICP de exemplo: empresas médias com operações complexas",
+          "itens": [
+            "Indústria",
+            "Logística",
+            "Distribuidoras",
+            "Saúde",
+            "Construção",
+            "Agronegócio",
+            "Varejo",
+            "Serviços complexos"
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Como encontramos essas empresas",
+          "etapas": [
+            {
+              "tipo": "divisor",
+              "titulo": "Executado por nós"
+            },
+            {
+              "titulo": "Definimos o perfil",
+              "descricao": "Operação complexa, múltiplos departamentos, crescimento."
+            },
+            {
+              "titulo": "Identificamos sinais",
+              "descricao": "Excel, processos manuais, sistemas que não integram."
+            },
+            {
+              "titulo": "Encontramos os decisores",
+              "descricao": "CEO, Diretor, COO, CIO, Gerente de TI/Operações."
+            },
+            {
+              "titulo": "Extraímos e organizamos",
+              "descricao": "Empresa + decisor + contato + segmento."
+            },
+            {
+              "titulo": "Enviamos para o GHL",
+              "descricao": "Entra no pipeline de prospecção."
+            },
+            {
+              "tipo": "divisor",
+              "titulo": "Executado pelo comercial da EcoSistemas"
+            },
+            {
+              "titulo": "Abordagem personalizada",
+              "descricao": "Baseada na dor, com script entregue por nós."
+            },
+            {
+              "titulo": "Descoberta",
+              "descricao": "Problema, impacto, sistema atual, prazo."
+            },
+            {
+              "titulo": "Diagnóstico",
+              "descricao": "EcoSistemas entra com a expertise técnica."
+            },
+            {
+              "titulo": "Oportunidade",
+              "descricao": "Novo sistema, integração, automação, MVP..."
+            },
+            {
+              "titulo": "Proposta",
+              "descricao": "Projeto estruturado conforme a necessidade real."
+            }
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "A partir da abordagem (etapa 6), o comercial da EcoSistemas conduz as conversas, treinado por nós, com script de abordagem, roteiro de descoberta e cadência de follow-up prontos."
+        },
+        {
+          "tipo": "nota",
+          "texto": "Esse é apenas um exemplo. O processo será testado e otimizado para identificar quais segmentos, perfis e gatilhos geram as melhores oportunidades para a EcoSistemas."
+        }
+      ]
+    },
+    {
+      "ativo": true,
+      "menu": "Por que a MFL",
+      "rotulo": "Por que a MFL",
+      "estilo": "escuro",
+      "titulo": "Tecnologia própria e marketing transparente",
+      "texto": "Somos uma empresa de tecnologia e assessoria em marketing. Você acompanha cada passo da estratégia em tempo real.",
+      "blocos": [
+        {
+          "tipo": "numeros",
+          "itens": [
+            {
+              "numero": "+370",
+              "legenda": "negócios acelerados"
+            },
+            {
+              "numero": "+R$ 10 mi",
+              "legenda": "em receita gerada para clientes"
+            },
+            {
+              "numero": "+R$ 700 mil",
+              "legenda": "investidos em anúncios por mês"
+            },
+            {
+              "numero": "+7 anos",
+              "legenda": "de mercado, em 2 países e 25 cidades"
+            }
+          ]
+        },
+        {
+          "tipo": "comparativo",
+          "colunas": [
+            {
+              "titulo": "Outras agências",
+              "tom": "negativo",
+              "itens": [
+                "Relatório 2x na semana",
+                "Controle dos leads em planilha",
+                "CRM externo",
+                "Automações terceirizadas",
+                "Sem acesso à operação"
+              ]
+            },
+            {
+              "titulo": "MFL Sales",
+              "tom": "positivo",
+              "itens": [
+                "Relatório ao vivo, 24h",
+                "Fluxo de vendas automatizado",
+                "CRM próprio",
+                "Automação própria no software da MFL",
+                "Acesso completo a toda a operação"
+              ]
+            }
+          ]
+        },
+        {
+          "tipo": "cartoes",
+          "titulo": "Quem cuida da sua operação",
+          "colunas": 3,
+          "cartoes": [
+            {
+              "titulo": "Gestor de Operações",
+              "texto": "Especialista em growth e gestão de projetos, responsável pelo resultado do todo."
+            },
+            {
+              "titulo": "Gestor de Fluxo de Vendas",
+              "texto": "Planeja e monitora o funil, da captação ao fechamento e à fidelização."
+            },
+            {
+              "titulo": "Gestor de Tráfego",
+              "texto": "Profissional com experiência no seu nicho, focado em campanhas de alta conversão."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "investimento": {
+    "ativo": true,
+    "rotulo": "Investimento",
+    "titulo": "Plano de aquisição comercial",
+    "texto": "",
+    "servicos": [
+      {
+        "rotulo": "Plano 1",
+        "selo": "",
+        "nome": "Inbound",
+        "valor": 3000,
+        "recorrencia": "mensal",
+        "observacaoValor": "",
+        "descricao": "",
+        "destaque": false,
+        "itens": [
+          "Landing Page estratégica",
+          "Tráfego Meta Ads",
+          "Tráfego Google Ads",
+          "Estruturação dos funis de vendas",
+          "Configuração e organização do GHL",
+          "Automações comerciais",
+          "IA configurada no processo comercial",
+          "Fluxos de follow-up",
+          "Estrutura de qualificação",
+          "Organização da jornada comercial"
+        ]
+      },
+      {
+        "rotulo": "Plano 2",
+        "selo": "Recomendado",
+        "nome": "Inbound + Outbound",
+        "valor": 4000,
+        "recorrencia": "mensal",
+        "observacaoValor": "",
+        "descricao": "Tudo do Plano Inbound, mais:",
+        "destaque": true,
+        "itens": [
+          "Estratégia de Outbound",
+          "Definição e teste de ICPs",
+          "Segmentação de empresas",
+          "Estruturação do processo de prospecção",
+          "200 extrações por mês",
+          "Inserção das extrações diretamente no GHL",
+          "Organização de empresas e contatos para o comercial",
+          "Treinamento do comercial (scripts e condução do processo)"
+        ]
+      }
+    ],
+    "combinacoes": [],
+    "nota": "200 extrações/mês: empresas e contatos destinados à operação comercial da EcoSistemas, inseridos no GHL para serem trabalhados pela equipe.",
+    "condicoes": [
+      {
+        "titulo": "Contrato mínimo de 3 meses",
+        "texto": "Tempo para estruturar, testar e escalar o processo."
+      },
+      {
+        "titulo": "Verba de anúncios",
+        "texto": "Paga direto à Meta e ao Google, à parte."
+      }
+    ],
+    "fechamento": "Nosso objetivo não é apenas gerar leads. É construir um processo comercial capaz de colocar a EcoSistemas diante das empresas certas, identificar suas necessidades e transformar essas necessidades em oportunidades reais de desenvolvimento de software.",
+    "somarServicos": false
+  },
+  "proximosPassos": {
+    "ativo": true,
+    "rotulo": "Próximos passos",
+    "titulo": "Como começamos",
+    "passos": [
+      "Aprovação da proposta",
+      "Assinatura do contrato",
+      "Onboarding e acesso às contas",
+      "Campanhas no ar em até 7 dias"
+    ],
+    "chamada": "Vamos construir a máquina comercial da EcoSistemas?",
+    "textoBotao": "Quero aprovar a proposta",
+    "mensagemWhatsapp": "Olá! Li a proposta {numero} da {cliente} e quero seguir com a MFL Sales."
+  }
+}

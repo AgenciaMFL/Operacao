@@ -1,52 +1,67 @@
-# Proposta comercial dinâmica
+# Proposta comercial MFL Sales
 
-Proposta em formato de site: uma capa com o nome do cliente e o botão **Abrir proposta**, que revela a proposta completa (quem somos, objetivos, entregáveis, cronograma, investimento e próximos passos).
-
-O visual (front-end) fica fixo. **Todo o conteúdo** — nome do cliente, contato, valores, entregáveis, textos, condições, responsável — vem de um arquivo `.json` por proposta, que o comercial edita por um formulário.
+Proposta em formato de site. A capa mostra o nome do cliente e o botão **Abrir proposta**, que revela a proposta completa. O visual fica fixo; **todo o conteúdo** (cliente, seções, textos, valores, condições, responsável) vem de um arquivo `.json` por proposta, editado por um formulário.
 
 ## Estrutura
 
 ```
-index.html              → a proposta (o que o cliente vê)
-editor.html             → editor para o time comercial
-propostas/              → um arquivo .json por cliente
-  exemplo.json          → modelo base
-assets/css, assets/js   → visual e lógica (não precisa mexer)
+index.html                 → a proposta (o que o cliente vê)
+editor.html                → editor para o time comercial
+propostas/
+  padrao.json              → modelo padrão MFL Sales (ponto de partida)
+  dra-fernanda-oliveira.json, lumina-estetica.json, ecosistemas.json → propostas reais
+assets/img                 → logo e ícone da MFL Sales
+assets/css, assets/js      → visual e lógica (não precisa mexer)
 ```
+
+## O padrão de proposta MFL Sales
+
+Consolidado a partir das propostas enviadas pelo comercial:
+
+1. **Capa**: nome do cliente, solução proposta, canais e os 3 pilares
+2. **Oportunidade**: o que o cliente já tem, o fluxo "da vitrine à venda" e a frase-chave
+3. **Estratégia de aquisição**: Tráfego Pago (ou Inbound / Outbound), campanhas, o que está incluso, quem vamos alcançar
+4. **CRM e automação**: funil, automações, sem CRM × com CRM
+5. **SDR** (serviço opcional): responsabilidades, perfil, divisão de papéis
+6. **Exemplo prático**: temas de campanha, jornada do cliente, mensagem de exemplo
+7. **Plano de execução**: 90 dias (estruturação, otimização, escala), indicadores, responsabilidades
+8. **Por que a MFL**: números, MFL × outras agências, time
+9. **Investimento**: serviços ou planos, totais, condições e frase de fechamento
+10. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
+
+Cada seção é montada com **blocos**, que o comercial adiciona, remove e reordena no editor:
+
+| Bloco | Uso típico |
+| --- | --- |
+| Lista com ✓ | ativos do cliente, o que está incluso |
+| Etapas numeradas | fluxo da vitrine à venda, funil, jornada |
+| Cartões | campanhas, meses do plano, indicadores, perfil do SDR |
+| Comparativo | sem CRM × com CRM, MFL × cliente, MFL × outras agências |
+| Etiquetas | temas de campanha, segmentos |
+| Números grandes | trajetória da MFL |
+| Mensagem de exemplo | primeira mensagem para o lead |
+| Frase de destaque | frase-chave no fim de cada seção |
+| Observação | avisos e ressalvas |
+
+Dois blocos seguidos com largura "Metade" ficam lado a lado.
 
 ## Como o comercial cria uma proposta
 
-1. Abra `editor.html`.
-2. Clique em **Nova (modelo)** para começar do modelo, ou em **Abrir proposta…** para editar uma que já existe.
-3. Preencha os campos à esquerda — a pré-visualização à direita atualiza na hora.
-   - **Nome do arquivo**: ex. `bella-massa`. Vira o link da proposta.
-   - Cada seção tem a opção **Exibir**, para esconder o que não se aplica.
-   - Itens de investimento: valor, valor "de" (aparece riscado), quantidade e cobrança (mensal, único, etc.). Os totais são calculados automaticamente, separados por tipo de cobrança.
-   - Textos aceitam variáveis: `{contato}`, `{empresa}`, `{agencia}`, `{responsavel}`, `{numero}`, `{validade}`.
-4. Use **Ver capa** e **Celular** para conferir como o cliente vai ver.
-5. Clique em **Baixar .json** e envie o arquivo para a pasta `propostas/` do repositório (no GitHub: *Add file → Upload files*).
-6. Envie ao cliente o link: `https://SEU-DOMINIO/index.html?p=bella-massa`
-
-O rascunho fica salvo no navegador enquanto você edita, então dá para fechar e voltar depois.
-
-## O que o cliente vê
-
-- **Capa** em tela cheia com o nome da empresa, saudação personalizada e o botão para abrir.
-- **Proposta** com menu fixo, barra de progresso de leitura e animações ao rolar.
-- **Investimento** com os totais e a data de validade (data da proposta + dias de validade).
-- **Botão de aprovação** que abre o WhatsApp do responsável com uma mensagem pronta (ou e-mail, se não houver WhatsApp).
-- Botão **PDF** para salvar/imprimir.
+1. Abra `editor.html` e clique em **Nova (modelo)**, ou em **Abrir proposta…** para partir de uma existente (ex.: `dra-fernanda-oliveira`).
+2. Preencha **Cliente e proposta**. Nos textos, `{cliente}` vira o nome do cliente automaticamente.
+3. Ajuste seções e blocos. Cada seção tem a opção **Exibir**.
+4. Em **Investimento**, cadastre serviços ou planos. Sem totais cadastrados, os serviços não opcionais são somados sozinhos; desligue a soma quando forem planos alternativos (Plano 1 *ou* Plano 2).
+5. Confira com **Ver capa** e **Celular**, clique em **Baixar .json** e coloque o arquivo na pasta `propostas/`.
+6. Envie o link: `https://SEU-DOMINIO/index.html?p=nome-do-arquivo`
 
 ## Publicação
 
-É um site estático, sem build: qualquer hospedagem serve (GitHub Pages, Netlify, Vercel). A página precisa ser aberta por um servidor — abrir o `index.html` direto do computador (`file://`) não carrega o JSON.
-
-Para testar localmente:
+Site estático, sem build: GitHub Pages, Netlify ou Vercel servem. Precisa ser aberto por um servidor (não funciona com `file://`).
 
 ```bash
 python3 -m http.server 8000
-# http://localhost:8000/index.html?p=exemplo
+# http://localhost:8000/index.html?p=padrao
 # http://localhost:8000/editor.html
 ```
 
-> Quem tiver o link de uma proposta consegue abri-la. Use nomes de arquivo difíceis de adivinhar (ex.: `bella-massa-7f3k`) se não quiser que propostas sejam encontradas por tentativa.
+> Quem tiver o link consegue abrir a proposta. Use nomes de arquivo difíceis de adivinhar se não quiser que propostas sejam encontradas por tentativa.
