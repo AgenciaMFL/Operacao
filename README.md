@@ -28,7 +28,7 @@ A proposta segue a especificação do **Gerador de Propostas MFL Sales**: o cont
 | CRM | CRM MFL Sales (serviço separado) ou CRM do cliente |
 | Valores | Inbound, Outbound, Plano 2, CRM (R$/mês), contrato mínimo, anúncios sugerido (R$/dia), condições adicionais |
 
-Estrutura de site: **Capa** (layout do Figma) → **Hero** (título, botões e cartão de resumo com o investimento) → **Números da MFL** → **Por que a MFL Sales** → **Como funciona** (4 etapas) → **Solução em abas** (Inbound · Outbound · Tecnologia, só as frentes do modelo) → **Resultados** (vídeo + depoimentos) → **Investimento** → **Próximos passos** → **Dúvidas frequentes** → **Fechamento** com o botão de aprovação → rodapé (com Salvar em PDF). Campos ainda vazios aparecem em laranja (`[Nome do cliente]`, `R$ [valor]/mês`).
+Estrutura de site: **Capa** (layout do Figma) → **Primeira seção** (só o nome do cliente e os entregáveis de cada frente, sem valores) → **Números da MFL** → **Por que a MFL Sales** → **Como funciona** (4 etapas) → **Solução em abas** (Inbound · Outbound · Tecnologia, só as frentes do modelo) → **Resultados** (vídeo + depoimentos) → **Investimento** → **Próximos passos** → **Dúvidas frequentes** → **Fechamento** com o botão de aprovação → rodapé (com Salvar em PDF). Não há menu: só uma linha fina de progresso de leitura no topo. Campos ainda vazios aparecem em laranja (`[Nome do cliente]`, `R$ [valor]/mês`).
 
 ## Como o comercial cria uma proposta
 

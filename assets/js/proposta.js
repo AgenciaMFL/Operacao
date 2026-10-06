@@ -731,37 +731,29 @@
 
   const mensagemAprovar = () => `Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`;
 
-  // Hero do site: título, chamada, botões e cartão de resumo da proposta
+  // Primeira seção: só o nome do cliente e os entregáveis (sem valores)
   function hero(c) {
-    const totais = calcularInvestimento(c).map((t) => t.valor).filter((v) => v != null);
-    const validade = dataValidade();
-    const data = lerData(S.data);
-    const linhas = [
-      ['Modelo', NOMES_MODELO[c.m] + (c.m === '4' ? ` · ${c.out === 'bdr' ? 'BDR + SDR' : 'Treinamento'}` : '')],
-      c.hasIn ? ['Público', c.b2c ? 'B2C · até a venda' : 'B2B · até a reunião agendada'] : ['Execução', c.out === 'bdr' ? 'MFL Sales até a reunião agendada' : 'Seu time, treinado pela MFL Sales'],
-      ['CRM', c.mfl ? 'CRM MFL Sales' : 'CRM da sua empresa'],
-      ['Contrato', `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}`],
-      validade && ['Válida até', formatarData(validade)]
+    const itensCrmCliente = ['Funil de vendas adaptado ao seu processo', 'Etapas e critérios claros para cada fase do funil', 'Cadastro organizado de leads e contatos',
+      'Rotinas de follow-up para cada etapa', 'Automações, de acordo com os recursos do seu CRM', 'Orientação do time para usar o funil no dia a dia'];
+    const frentes = [
+      c.hasIn && { rotulo: 'Inbound', titulo: 'Gestão de tráfego' + (c.b2c ? ' · B2C' : ''), itens: itensInbound(c).filter((i) => i !== FUNIL_CLIENTE) },
+      c.out === 'bdr' && { rotulo: 'Outbound', titulo: 'Prospecção com BDR + SDR', itens: itensBdr(c).filter((i) => i !== FUNIL_CLIENTE) },
+      c.out === 'train' && { rotulo: 'Outbound', titulo: 'Prospecção + treinamento', itens: itensTrain(c).filter((i) => i !== FUNIL_CLIENTE) },
+      c.mfl
+        ? { rotulo: 'CRM', titulo: 'CRM MFL Sales', itens: itensCrm(c) }
+        : { rotulo: 'CRM', titulo: 'Estruturação no seu CRM', itens: itensCrmCliente }
     ].filter(Boolean);
-    const capacidades = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação integrados'].filter(Boolean);
 
     return el('section', { class: 'intro hero tema-escuro', id: 'inicio' },
-      el('div', { class: 'container hero-grade' },
-        el('div', { class: 'hero-texto' },
-          el('p', { class: 'intro-eyebrow revelar' }, 'Proposta comercial para ', el('strong', {}, nomeCliente() || vazio('[Nome do cliente]'))),
-          el('h1', { class: 'hero-titulo revelar' }, 'Estruturação da ', el('em', { text: 'Operação Comercial' }), ' de Aquisição'),
-          el('p', { class: 'hero-sub revelar', text: [c.hasIn && 'Inbound', c.out && 'Outbound', 'CRM', 'Automação'].filter(Boolean).join(' · ') + (data ? ` — proposta preparada em ${formatarData(data)}` : '') }),
-          el('ul', { class: 'intro-capacidades revelar' }, capacidades.map((t) => el('li', { text: t }))),
-          el('div', { class: 'hero-acoes revelar' },
-            el('a', { class: 'botao botao-primario', href: '#investimento' }, 'Ver investimento', el('span', { 'aria-hidden': 'true', text: '→' })),
-            el('a', { class: 'botao botao-secundario', href: '#solucao', text: 'Como vamos fazer' }))),
-        el('aside', { class: 'hero-cartao revelar', 'aria-label': 'Resumo da proposta' },
-          el('span', { class: 'hero-cartao-rotulo', text: 'Resumo da proposta' }),
-          el('div', { class: 'hero-cartao-preco' },
-            el('span', { text: totais.length > 1 ? 'Investimento a partir de' : 'Investimento mensal' }),
-            totais.length ? el('strong', {}, brl(Math.min(...totais)), el('small', { text: '/mês' })) : el('strong', {}, vazio('R$ [total]'), el('small', { text: '/mês' }))),
-          el('dl', { class: 'hero-cartao-lista' }, linhas.map(([k, v]) => el('div', {}, el('dt', { text: k }), el('dd', { text: v })))),
-          linkContato(mensagemAprovar()) && el('a', { class: 'botao botao-primario botao-largo', href: linkContato(mensagemAprovar()), target: '_blank', rel: 'noopener', text: 'Quero aprovar' }))));
+      el('div', { class: 'container' },
+        el('p', { class: 'intro-eyebrow revelar', text: 'Proposta comercial para' }),
+        el('h1', { class: 'hero-cliente revelar' }, nomeCliente() || vazio('[Nome do cliente]')),
+        el('h2', { class: 'hero-entregaveis-titulo revelar', text: 'Entregáveis' }),
+        el('div', { class: `entregaveis col-${frentes.length} revelar` },
+          frentes.map((f) => el('article', { class: 'entregavel' },
+            el('span', { class: 'entregavel-rotulo', text: f.rotulo }),
+            el('h3', { text: f.titulo }),
+            el('ul', { class: 'plano-itens' }, f.itens.map((t) => el('li', { text: t }))))))));
   }
 
   // Faixa de números da MFL logo abaixo do hero
@@ -867,10 +859,6 @@
 
   function renderProposta() {
     const c = cfg();
-    $('#topo-marca').replaceChildren(marca('marca-logo-topo'));
-    const topoCta = $('#topo-cta');
-    const href = linkContato(mensagemAprovar());
-    if (topoCta) { topoCta.hidden = !href; if (href) topoCta.href = href; }
 
     // Estrutura de site: hero, números, por que, como funciona, solução (abas),
     // resultados, investimento, próximos passos, dúvidas e fechamento
@@ -892,7 +880,6 @@
       anterior = tema;
     });
 
-    $('#topo-nav').replaceChildren(...secoes.map(([, rotulo, secao]) => el('a', { href: `#${secao.id}`, 'data-alvo': secao.id, text: rotulo })));
     $('#conteudo').replaceChildren(hero(c), numerosMfl(), ...secoes.map(([, , secao]) => secao), ctaFinal());
     $('#barra-cta').replaceChildren(...barraCta(c));
 
@@ -973,20 +960,6 @@
   function aoRolar() {
     const max = document.documentElement.scrollHeight - innerHeight;
     $('#progresso').style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`;
-    document.body.classList.toggle('rolou', scrollY > 40);
-    let atual = null;
-    for (const link of document.querySelectorAll('#topo-nav a')) {
-      const alvo = document.getElementById(link.dataset.alvo);
-      if (alvo && alvo.getBoundingClientRect().top < innerHeight * 0.4) atual = link;
-    }
-    for (const l of document.querySelectorAll('#topo-nav a')) {
-      const era = l.classList.contains('atual');
-      l.classList.toggle('atual', l === atual);
-      if (l === atual && !era) {
-        const nav = $('#topo-nav');
-        nav.scrollTo({ left: l.offsetLeft - nav.clientWidth / 2 + l.clientWidth / 2, behavior: 'smooth' });
-      }
-    }
     const intro = $('#inicio');
     const cta = document.querySelector('.cta-final');
     const passouIntro = intro && intro.getBoundingClientRect().bottom < 0;
