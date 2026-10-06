@@ -389,6 +389,16 @@
       return el('p', { class: 'b-destaque', text: preencher(b.texto) });
     },
 
+    // Subtítulo que abre uma parte dentro de um capítulo
+    subsecao(b) {
+      if (!b.titulo && !b.rotulo) return null;
+      return el('header', { class: 'b-subsecao' },
+        b.rotulo && el('span', { class: 'b-subsecao-rotulo', text: preencher(b.rotulo) }),
+        b.titulo && el('h3', { text: preencher(b.titulo) }),
+        b.texto ? paragrafos(b.texto) : null
+      );
+    },
+
     // Observação discreta
     nota(b) {
       if (!b.texto) return null;
@@ -422,17 +432,28 @@
 
   function cabecalho(s, padrao) {
     return el('header', { class: 'secao-cabecalho revelar' },
-      el('span', { class: 'secao-rotulo', text: preencher(s.rotulo) || padrao }),
+      el('span', { class: 'secao-rotulo' }, el('span', { text: preencher(s.rotulo) || padrao })),
       s.titulo && el('h2', { class: 'secao-titulo', text: preencher(s.titulo) }),
       s.texto && el('div', { class: 'secao-texto' }, paragrafos(s.texto))
     );
   }
 
+  // Um capítulo é dividido em faixas: cada "Subtítulo de parte" abre uma faixa nova,
+  // e as faixas alternam claro/escuro para dar respiro na leitura.
   function secaoConteudo(s, id) {
-    return el('section', { class: `secao${s.estilo === 'escuro' ? ' secao-escura' : ''}`, id },
-      el('div', { class: 'container' },
-        cabecalho(s, ''),
-        el('div', { class: 'blocos' }, renderBlocos(s.blocos))
+    const grupos = [[]];
+    for (const b of lista(s.blocos)) {
+      if (b?.tipo === 'subsecao' && grupos[grupos.length - 1].length) grupos.push([]);
+      grupos[grupos.length - 1].push(b);
+    }
+    return el('section', { class: 'secao', id },
+      grupos.map((blocos, i) =>
+        el('div', { class: 'secao-banda', 'data-estilo': i === 0 ? (s.estilo || null) : null },
+          el('div', { class: 'container' },
+            i === 0 ? cabecalho(s, '') : null,
+            el('div', { class: 'blocos' }, renderBlocos(blocos))
+          )
+        )
       )
     );
   }
@@ -466,7 +487,7 @@
     const condicoes = lista(inv.condicoes).filter((c) => c.titulo || c.texto);
     const validade = dataValidade();
 
-    return el('section', { class: 'secao secao-investimento', id: 'investimento' },
+    return el('section', { class: 'secao secao-banda secao-investimento', id: 'investimento', 'data-estilo': inv.estilo || null },
       el('div', { class: 'container' },
         cabecalho(inv, 'Investimento'),
 
@@ -526,13 +547,13 @@
     const passos = textos(s.passos);
     const r = dados.proposta?.responsavel || {};
     const href = linkContato(preencher(s.mensagemWhatsapp));
-    return el('section', { class: 'secao secao-proximos', id: 'proximos-passos' },
+    return el('section', { class: 'secao secao-banda secao-proximos', id: 'proximos-passos', 'data-estilo': s.estilo || null },
       el('div', { class: 'container' },
         cabecalho(s, 'Próximos passos'),
         passos.length ? el('ol', { class: 'passos revelar' },
           passos.map((p, n) => el('li', {}, el('span', { class: 'passo-num', text: n + 1 }), el('span', { text: p })))
         ) : null,
-        el('div', { class: 'cta revelar' },
+        el('div', { class: 'cta tema-escuro revelar' },
           el('div', { class: 'cta-texto' },
             el('h3', { text: preencher(s.chamada) || 'Vamos começar?' }),
             href && el('a', { class: 'cta-botao', href, target: '_blank', rel: 'noopener' },
@@ -565,11 +586,18 @@
 
     $('#topo-marca').replaceChildren(marca('marca-logo-topo'));
 
-    const intro = el('section', { class: 'intro', id: 'inicio' },
+    const resumo = lista(p.resumo).filter((r) => r.rotulo || r.valor);
+    const intro = el('section', { class: 'intro tema-escuro', id: 'inicio' },
       el('div', { class: 'container' },
         el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial${p.numero ? ' · Nº ' + p.numero : ''}` }),
         el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', { text: cli.nome || '' })),
         p.solucao && el('p', { class: 'intro-sub revelar', text: preencher(p.solucao) }),
+        resumo.length ? el('div', { class: 'resumo revelar' },
+          resumo.map((r) => el('div', { class: 'resumo-item' },
+            el('span', { text: preencher(r.rotulo) }),
+            el('strong', { text: preencher(r.valor) })
+          ))
+        ) : null,
         el('dl', { class: 'intro-meta revelar' },
           cli.contato && el('div', {}, el('dt', { text: 'Aos cuidados de' }), el('dd', { text: cli.contato + (cli.cargo ? ` · ${cli.cargo}` : '') })),
           lerData(p.data) && el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: formatarData(lerData(p.data)) })),
@@ -597,6 +625,18 @@
     if (ativo(dados.proximosPassos)) {
       secoes.push(secaoProximosPassos(dados.proximosPassos));
       menu.push(['proximos-passos', preencher(dados.proximosPassos.menu) || 'Próximos passos']);
+    }
+
+    // capítulos numerados e alternância claro/escuro (a abertura é escura, então começa no claro)
+    secoes.forEach((secao, i) => {
+      secao.querySelector('.secao-rotulo')?.prepend(el('span', { class: 'secao-num', text: String(i + 1).padStart(2, '0') }));
+    });
+    let anterior = 'escuro';
+    for (const banda of secoes.flatMap((secao) => (secao.classList.contains('secao-banda') ? [secao] : [...secao.querySelectorAll('.secao-banda')]))) {
+      const estilo = banda.dataset.estilo;
+      const tema = estilo === 'claro' || estilo === 'escuro' ? estilo : (anterior === 'escuro' ? 'claro' : 'escuro');
+      banda.classList.add(`tema-${tema}`);
+      anterior = tema;
     }
 
     $('#topo-nav').replaceChildren(...menu.map(([id, rotulo]) => el('a', { href: `#${id}`, 'data-alvo': id, text: rotulo })));

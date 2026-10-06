@@ -16,23 +16,24 @@ assets/css, assets/js      → visual e lógica (não precisa mexer)
 
 ## O padrão de proposta MFL Sales
 
-Consolidado a partir das propostas enviadas pelo comercial:
+Consolidado a partir das propostas enviadas pelo comercial e organizado em capítulos:
 
-1. **Capa** (layout do Figma): vídeo de fundo, faixas animadas, prova social, nome do cliente, frase de impacto e o botão "Ver meu orçamento"
-2. **Oportunidade**: o que o cliente já tem, o fluxo "da vitrine à venda" e a frase-chave
-3. **Estratégia de aquisição**: Tráfego Pago (ou Inbound / Outbound), campanhas, o que está incluso, quem vamos alcançar
-4. **CRM e automação**: funil, automações, sem CRM × com CRM
-5. **SDR** (serviço opcional): responsabilidades, perfil, divisão de papéis
-6. **Exemplo prático**: temas de campanha, jornada do cliente, mensagem de exemplo
-7. **Plano de execução**: 90 dias (estruturação, otimização, escala), indicadores, responsabilidades
-8. **Por que a MFL**: números, MFL × outras agências, time
-9. **Investimento**: serviços ou planos, totais, condições e frase de fechamento
-10. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
+- **Capa** (layout do Figma): vídeo de fundo, faixas animadas, prova social, nome do cliente, frase de impacto e o botão "Ver meu orçamento"
+- **Abertura**: para quem é, a solução e o **resumo da proposta** (solução, contrato, início, investimento)
+1. **Diagnóstico**: o que o cliente já tem, o fluxo "da vitrine à agenda cheia" e a frase-chave
+2. **Estratégia**: visão geral das 3 frentes, depois Tráfego pago, CRM e automação e SDR (opcional)
+3. **Execução**: na prática (jornada do cliente) e o plano dos 90 dias
+4. **Por que a MFL**: números, MFL × outras agências, time
+5. **Investimento**: serviços ou planos, totais, condições e frase de fechamento
+6. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
+
+Visual: as faixas da página alternam automaticamente entre claro (branco e azul-gelo) e escuro (tons de azul-marinho). Cada "Subtítulo de parte" abre uma faixa nova dentro do capítulo.
 
 Cada seção é montada com **blocos**, que o comercial adiciona, remove e reordena no editor:
 
 | Bloco | Uso típico |
 | --- | --- |
+| Subtítulo de parte | abre uma parte dentro do capítulo (ex.: Tráfego pago, CRM) |
 | Lista com ✓ | ativos do cliente, o que está incluso |
 | Etapas numeradas | fluxo da vitrine à venda, funil, jornada |
 | Cartões | campanhas, meses do plano, indicadores, perfil do SDR |

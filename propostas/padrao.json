@@ -16,6 +16,24 @@
   "proposta": {
     "numero": "MFL-2026-000",
     "solucao": "Tráfego Pago + CRM para gerar uma agenda cheia e previsível",
+    "resumo": [
+      {
+        "rotulo": "Solução",
+        "valor": "Tráfego Pago + CRM"
+      },
+      {
+        "rotulo": "Contrato",
+        "valor": "3 meses"
+      },
+      {
+        "rotulo": "Início",
+        "valor": "Em até 7 dias após a assinatura"
+      },
+      {
+        "rotulo": "Investimento",
+        "valor": "A partir de R$ 2.297/mês"
+      }
+    ],
     "data": "2026-10-06",
     "validadeDias": 15,
     "responsavel": {
@@ -43,8 +61,8 @@
   "secoes": [
     {
       "ativo": true,
-      "menu": "Oportunidade",
-      "rotulo": "Oportunidade",
+      "menu": "Diagnóstico",
+      "rotulo": "Diagnóstico",
       "titulo": "Transformar a qualidade da {cliente} em uma agenda cheia e previsível",
       "texto": "A {cliente} já tem o que o cliente procura: serviços de alto valor percebido, técnica e um atendimento de confiança. O que esta proposta resolve não é a falta de serviço. É a ausência de um fluxo constante de novos clientes chegando pelo WhatsApp e de um processo organizado para transformar cada conversa em atendimento agendado.",
       "blocos": [
@@ -99,11 +117,36 @@
     },
     {
       "ativo": true,
-      "menu": "Tráfego pago",
-      "rotulo": "Tráfego pago",
-      "titulo": "Atrair clientes da região no momento em que o desejo aparece",
-      "texto": "O tráfego pago trabalha em duas frentes. O Google Ads captura quem já está procurando o serviço, e o Meta Ads (Instagram e Facebook) desperta o desejo em pessoas da região com o perfil certo. Os anúncios não levam ao perfil: levam direto a uma conversa no WhatsApp, já identificada no CRM.",
+      "menu": "Estratégia",
+      "rotulo": "Estratégia",
+      "titulo": "Como vamos encher a agenda da {cliente}",
+      "texto": "Três frentes que trabalham juntas: anúncios que atraem o cliente certo, um CRM que não deixa nenhuma conversa se perder e, se a {cliente} quiser, um SDR dedicado para converter cada lead.",
       "blocos": [
+        {
+          "tipo": "cartoes",
+          "colunas": 3,
+          "numerados": true,
+          "cartoes": [
+            {
+              "titulo": "Tráfego pago",
+              "texto": "Meta Ads e Google Ads levando o cliente direto para uma conversa no WhatsApp."
+            },
+            {
+              "titulo": "CRM e automação",
+              "texto": "Cada contato organizado, com follow-up e lembretes automáticos até o agendamento."
+            },
+            {
+              "titulo": "SDR (opcional)",
+              "texto": "Um especialista que responde, qualifica e agenda cada lead gerado pelas campanhas."
+            }
+          ]
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "Tráfego pago",
+          "titulo": "Atrair clientes da região no momento em que o desejo aparece",
+          "texto": "O tráfego pago trabalha em duas frentes. O Google Ads captura quem já está procurando o serviço, e o Meta Ads (Instagram e Facebook) desperta o desejo em pessoas da região com o perfil certo. Os anúncios não levam ao perfil: levam direto a uma conversa no WhatsApp, já identificada no CRM."
+        },
         {
           "tipo": "cartoes",
           "titulo": "Campanhas por objetivo",
@@ -184,16 +227,13 @@
         {
           "tipo": "nota",
           "texto": "Comunicação responsável: os anúncios seguem as políticas de publicidade da Meta e do Google, protegendo a conta de anúncios e a reputação da {cliente}."
-        }
-      ]
-    },
-    {
-      "ativo": true,
-      "menu": "CRM",
-      "rotulo": "CRM e automação",
-      "titulo": "Da primeira mensagem ao retorno: nenhum cliente se perde no caminho",
-      "texto": "Todo contato gerado pelos anúncios entra no mesmo CRM, com origem, serviço de interesse e histórico da conversa. A equipe da {cliente} passa a enxergar, em um só lugar, quem precisa de resposta, quem já agendou, quem faltou e quem está pronto para voltar.",
-      "blocos": [
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "CRM e automação",
+          "titulo": "Da primeira mensagem ao retorno: nenhum cliente se perde no caminho",
+          "texto": "Todo contato gerado pelos anúncios entra no mesmo CRM, com origem, serviço de interesse e histórico da conversa. A equipe da {cliente} passa a enxergar, em um só lugar, quem precisa de resposta, quem já agendou, quem faltou e quem está pronto para voltar."
+        },
         {
           "tipo": "fluxo",
           "titulo": "Funil de atendimento",
@@ -284,16 +324,13 @@
         {
           "tipo": "destaque",
           "texto": "A tecnologia reduz o trabalho operacional do atendimento para que a equipe concentre o tempo em atender bem e fechar vendas."
-        }
-      ]
-    },
-    {
-      "ativo": true,
-      "menu": "SDR",
-      "rotulo": "SDR · serviço opcional",
-      "titulo": "Um SDR dedicado para transformar cada lead em cliente agendado",
-      "texto": "O SDR (Sales Development Representative) faz a ponte entre o anúncio e o atendimento. Se a {cliente} optar por esse serviço, ele assume o atendimento comercial dos leads gerados pelas campanhas, da primeira mensagem à confirmação do horário.",
-      "blocos": [
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "SDR · serviço opcional",
+          "titulo": "Um SDR dedicado para transformar cada lead em cliente agendado",
+          "texto": "O SDR (Sales Development Representative) faz a ponte entre o anúncio e o atendimento. Se a {cliente} optar por esse serviço, ele assume o atendimento comercial dos leads gerados pelas campanhas, da primeira mensagem à confirmação do horário."
+        },
         {
           "tipo": "cartoes",
           "titulo": "Responsabilidades do SDR",
@@ -366,11 +403,17 @@
     },
     {
       "ativo": true,
-      "menu": "Na prática",
-      "rotulo": "Exemplo prático",
-      "titulo": "Na prática: como um novo cliente chega até a {cliente}",
-      "texto": "Um exemplo de jornada aplicado à operação da {cliente}. Temas, criativos e ofertas serão ajustados conforme os resultados.",
+      "menu": "Execução",
+      "rotulo": "Execução",
+      "titulo": "Do primeiro anúncio aos primeiros 90 dias",
+      "texto": "Como o processo acontece no dia a dia da {cliente} e o que entregamos em cada mês do contrato.",
       "blocos": [
+        {
+          "tipo": "subsecao",
+          "rotulo": "Na prática",
+          "titulo": "Na prática: como um novo cliente chega até a {cliente}",
+          "texto": "Um exemplo de jornada aplicado à operação da {cliente}. Temas, criativos e ofertas serão ajustados conforme os resultados."
+        },
         {
           "tipo": "chips",
           "titulo": "Exemplos de tema de campanha",
@@ -415,16 +458,13 @@
           "tipo": "citacao",
           "titulo": "Exemplo de primeira mensagem",
           "texto": "Oi, Ana! Vi que você se interessou pelo nosso serviço. Aqui na {cliente} o atendimento é personalizado. Quer agendar um horário para conversarmos?"
-        }
-      ]
-    },
-    {
-      "ativo": true,
-      "menu": "Plano de 90 dias",
-      "rotulo": "Plano de execução",
-      "titulo": "Os primeiros 90 dias da operação",
-      "texto": "O contrato de 3 meses foi pensado para percorrer o ciclo completo: estruturar, aprender com os dados e escalar o que dá resultado.",
-      "blocos": [
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "Plano de execução",
+          "titulo": "Os primeiros 90 dias da operação",
+          "texto": "O contrato de 3 meses foi pensado para percorrer o ciclo completo: estruturar, aprender com os dados e escalar o que dá resultado."
+        },
         {
           "tipo": "cartoes",
           "colunas": 3,
@@ -524,7 +564,6 @@
       "ativo": true,
       "menu": "Por que a MFL",
       "rotulo": "Por que a MFL",
-      "estilo": "escuro",
       "titulo": "Tecnologia própria e marketing transparente",
       "texto": "Somos uma empresa de tecnologia e assessoria em marketing. Você acompanha cada passo da estratégia em tempo real.",
       "blocos": [

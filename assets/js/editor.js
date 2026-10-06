@@ -23,6 +23,14 @@
 
   // Campos de cada tipo de bloco de conteúdo
   const TIPOS_BLOCO = {
+    subsecao: {
+      nome: 'Subtítulo de parte',
+      campos: [
+        { chave: 'rotulo', rotulo: 'Rótulo (ex.: Tráfego pago)' },
+        { chave: 'titulo', rotulo: 'Título', tipo: 'textarea' },
+        { chave: 'texto', rotulo: 'Texto (opcional)', tipo: 'textarea' }
+      ]
+    },
     lista: {
       nome: 'Lista com ✓',
       campos: [
@@ -113,6 +121,16 @@
       ]
     },
     {
+      titulo: 'Resumo da proposta', caminho: 'proposta',
+      campos: [
+        {
+          chave: 'resumo', rotulo: 'Cartões de resumo (aparecem logo na abertura)', tipo: 'lista', item: 'cartão', resumo: (r) => r.rotulo,
+          ajuda: 'O último cartão fica em destaque; use-o para o investimento.',
+          campos: [{ chave: 'rotulo', rotulo: 'Rótulo', meia: true }, { chave: 'valor', rotulo: 'Valor', meia: true }]
+        }
+      ]
+    },
+    {
       titulo: 'Capa', caminho: 'capa',
       campos: [
         { chave: 'provaSocial.destaque', rotulo: 'Prova social: destaque', meia: true, ajuda: 'Ex.: +370 Negócios' },
@@ -138,7 +156,7 @@
             { chave: 'rotulo', rotulo: 'Rótulo (acima do título)', meia: true },
             { chave: 'titulo', rotulo: 'Título', tipo: 'textarea', ajuda: AJUDA_VARIAVEIS },
             { chave: 'texto', rotulo: 'Texto de abertura', tipo: 'textarea' },
-            { chave: 'estilo', rotulo: 'Fundo', tipo: 'select', opcoes: [['', 'Padrão'], ['escuro', 'Mais escuro (destaque)']] },
+            { chave: 'estilo', rotulo: 'Fundo', tipo: 'select', opcoes: [['', 'Automático (alterna claro e escuro)'], ['claro', 'Claro'], ['escuro', 'Escuro']] },
             { chave: 'blocos', rotulo: 'Blocos de conteúdo', tipo: 'blocos' }
           ]
         }
