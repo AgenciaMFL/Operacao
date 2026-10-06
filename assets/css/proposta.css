@@ -312,7 +312,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   display: flex; flex-direction: column; gap: clamp(28px, 4vw, 48px);
   padding-top: clamp(28px, 3.5vw, 60px); padding-bottom: clamp(28px, 3vw, 52px);
 }
-.abertura-logo { width: clamp(64px, 6vw, 92px); height: auto; }
+.abertura-logo { width: clamp(104px, 9vw, 136px); height: auto; }
 .abertura-centro { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; max-width: 760px; }
 .abertura-selo {
   display: inline-flex; align-items: center; gap: 12px; padding: 0 16px 0 0; border-radius: 999px;
@@ -321,7 +321,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   font: 400 clamp(.78rem, 1vw, .95rem) 'Archivo', var(--fonte); letter-spacing: -.02em; color: #DCDDDC;
 }
 .abertura-selo-icone { display: grid; place-items: center; height: 30px; padding: 0 14px; margin: -1px 0 -1px -1px; border-radius: 999px; background: #3CA55D; }
-.abertura-selo-icone img { width: 18px; height: 18px; filter: brightness(0) saturate(100%) invert(9%) sepia(36%) saturate(2400%) hue-rotate(205deg); }
+.abertura-selo-icone img { width: 20px; height: auto; }
 .abertura-cliente { margin-top: clamp(20px, 2.4vw, 32px); font-size: clamp(.92rem, 1.2vw, 1.05rem); color: #BCD2FF; }
 .abertura-cliente strong { color: #fff; font-weight: 700; }
 .abertura-titulo {
