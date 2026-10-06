@@ -10,7 +10,7 @@ editor.html                → gerador de propostas (painel do comercial)
 propostas/
   padrao.json              → proposta padrão do gerador (ponto de partida)
 depoimentos/catalogo.json  → biblioteca de vídeos de depoimento (todas as propostas usam)
-assets/img                 → logo, ícone, avatares da capa e fundo da abertura (hero-fundo.webp)
+assets/img                 → logo, ícone, avatares da capa e microfone da abertura
 assets/video               → vídeo de fundo da capa (MP4 + WebM) e imagem de espera
 assets/css, assets/js      → visual e lógica (não precisa mexer)
 ```
@@ -28,7 +28,7 @@ A proposta segue a especificação do **Gerador de Propostas MFL Sales**: o cont
 | CRM | CRM MFL Sales (serviço separado) ou CRM do cliente |
 | Valores | Inbound, Outbound, Plano 2, CRM (R$/mês), contrato mínimo, anúncios sugerido (R$/dia), condições adicionais |
 
-Estrutura de site: **Capa** (layout do Figma) → **Abertura** (layout do Figma com o microfone MFL ao fundo: selo, nome do cliente, título, frentes do modelo, site e Instagram) → **Números da MFL** → **Por que a MFL Sales** → **Como funciona** (4 etapas) → **Solução em abas** (Inbound · Outbound · Tecnologia, só as frentes do modelo) → **Resultados** (vídeo + depoimentos) → **Investimento** → **Próximos passos** → **Dúvidas frequentes** → **Fechamento** com o botão de aprovação → rodapé (com Salvar em PDF). Não há menu: só uma linha fina de progresso de leitura no topo. Campos ainda vazios aparecem em laranja (`[Nome do cliente]`, `R$ [valor]/mês`).
+Estrutura de site: **Capa** (layout do Figma) → **Abertura** (layout do Figma com o microfone MFL: selo, nome do cliente, título, frentes do modelo, site e Instagram) → **Por que a MFL Sales** → **Como funciona** (4 etapas) → **Solução em abas** (Inbound · Outbound · Tecnologia, só as frentes do modelo) → **Resultados** (vídeo + depoimentos) → **Investimento** → **Próximos passos** → **Dúvidas frequentes** → **Fechamento** com o botão de aprovação → rodapé (com Salvar em PDF). Não há menu: só uma linha fina de progresso de leitura no topo. Campos ainda vazios aparecem em laranja (`[Nome do cliente]`, `R$ [valor]/mês`).
 
 ## Como o comercial cria uma proposta
 

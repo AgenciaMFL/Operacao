@@ -731,33 +731,52 @@
   const mensagemAprovar = () => `Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`;
 
   // Abertura: para quem é, solução, capacidades, resumo e dados da proposta
-  // Abertura (Figma 3076:37): marca, selo, título, frentes do modelo e contatos
+  // SVG decorativo da abertura (Figma 3089:8, quadro de 2560 × 887): anéis, brilhos e "MFL SALES"
+  function fundoAbertura() {
+    const ns = 'http://www.w3.org/2000/svg';
+    const no = (tag, attrs, ...filhos) => {
+      const n = document.createElementNS(ns, tag);
+      Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+      filhos.forEach((f) => n.append(f));
+      return n;
+    };
+    const brilho = (id, cor, opacidade) => no('radialGradient', { id },
+      no('stop', { offset: '0', 'stop-color': cor, 'stop-opacity': opacidade }),
+      no('stop', { offset: '1', 'stop-color': cor, 'stop-opacity': '0' }));
+    const anel = (cx, cy, r) => no('circle', { cx, cy, r, fill: 'none', stroke: 'url(#ab-anel)', 'stroke-width': '2' });
+    return no('svg', { class: 'abertura-fundo', viewBox: '0 0 2560 887', preserveAspectRatio: 'xMidYMin slice', 'aria-hidden': 'true' },
+      no('defs', {},
+        brilho('ab-b1', '#2B5BD7', '.32'), brilho('ab-b2', '#3A6CF0', '.38'), brilho('ab-b3', '#2A4FB8', '.26'),
+        no('linearGradient', { id: 'ab-anel', x1: '0', y1: '0', x2: '0', y2: '1' },
+          no('stop', { offset: '0', 'stop-color': '#9DBDFF', 'stop-opacity': '0' }),
+          no('stop', { offset: '1', 'stop-color': '#9DBDFF', 'stop-opacity': '.08' }))),
+      anel(1300.5, -166, 1316), anel(1301, -304, 1271), anel(1301.5, -490.5, 1209.5),
+      no('circle', { cx: 2345, cy: 115, r: 860, fill: 'url(#ab-b1)' }),
+      no('circle', { cx: 1821, cy: 115, r: 860, fill: 'url(#ab-b1)' }),
+      no('circle', { cx: 1772, cy: 25, r: 600, fill: 'url(#ab-b2)' }),
+      no('circle', { cx: 124, cy: 810, r: 840, fill: 'url(#ab-b3)' }),
+      Object.assign(no('text', { x: 81, y: 1030, class: 'abertura-marca-fundo', textLength: 2397, lengthAdjust: 'spacingAndGlyphs' }), { textContent: 'MFL SALES' }));
+  }
+
+  // Abertura (Figma 3089:8): marca, selo, título, frentes do modelo e contatos
   function hero(c) {
     const frentes = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação'].filter(Boolean);
-    const [selo1, ...seloResto] = AGENCIA.slogan.split(' · ');
 
     return el('section', { class: 'abertura', id: 'inicio' },
+      fundoAbertura(),
+      el('img', { class: 'abertura-microfone', src: 'assets/img/abertura-microfone.webp', alt: '', width: '639', height: '710', decoding: 'async' }),
       el('div', { class: 'container abertura-conteudo' },
         marca('abertura-logo'),
         el('div', { class: 'abertura-centro' },
           el('p', { class: 'abertura-selo revelar' },
             el('span', { class: 'abertura-selo-icone' }, el('img', { src: 'assets/img/mfl-sales-icone.png', alt: '' })),
-            el('span', { text: [selo1, ...seloResto].join(' · ') })),
+            el('span', { text: AGENCIA.slogan })),
           el('p', { class: 'abertura-cliente revelar' }, el('span', { text: 'Proposta comercial para ' }), el('strong', {}, nomeCliente() || vazio('[Nome do cliente]'))),
           el('h1', { class: 'abertura-titulo revelar', text: 'Estruturação da operação comercial de aquisição' }),
           el('ul', { class: 'abertura-frentes revelar' }, frentes.map((t) => el('li', { text: t })))),
         el('div', { class: 'abertura-rodape' },
           el('a', { href: AGENCIA.site, target: '_blank', rel: 'noopener', text: AGENCIA.site.replace(/^https?:\/\//, '') }),
-          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }))),
-      el('a', { class: 'abertura-rolar', href: '#numeros', 'aria-label': 'Rolar para o conteúdo' }, el('span')));
-  }
-
-  // Faixa de números da MFL logo abaixo do hero
-  function numerosMfl() {
-    return el('section', { class: 'faixa-numeros', id: 'numeros', 'aria-label': 'MFL Sales em números' },
-      el('div', { class: 'container numeros-grade' },
-        [['+370', 'negócios acelerados'], ['+R$ 10 mi', 'em receita gerada para clientes'], ['+R$ 700 mil', 'investidos em anúncios por mês'], ['+7 anos', 'de mercado, em 2 países e 25 cidades']]
-          .map(([n, t]) => el('div', { class: 'numero-item' }, el('strong', { text: n }), el('span', { text: t })))));
+          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }))));
   }
 
   // Solução em abas: Inbound | Outbound | Tecnologia (só os módulos do modelo)
@@ -876,7 +895,7 @@
       anterior = tema;
     });
 
-    $('#conteudo').replaceChildren(hero(c), numerosMfl(), ...secoes.map(([, , secao]) => secao), ctaFinal());
+    $('#conteudo').replaceChildren(hero(c), ...secoes.map(([, , secao]) => secao), ctaFinal());
     $('#barra-cta').replaceChildren(...barraCta(c));
 
     $('#rodape').replaceChildren(
