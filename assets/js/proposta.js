@@ -682,7 +682,6 @@
       window.scrollTo(0, 0);
       aoRolar();
     };
-    try { sessionStorage.setItem(`aberta:${slug}`, '1'); } catch (e) { /* sem storage */ }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { trocar(); return; }
     transicaoCirculo(trocar);
   }
@@ -1014,7 +1013,6 @@
     window.print();
   }
 
-  try { if (sessionStorage.getItem(`aberta:${slug}`)) aberta = true; } catch (e) { /* sem storage */ }
 
   Promise.all([carregar(), carregarCatalogo()])
     .then(([d]) => { render(d); aoRolar(); })
