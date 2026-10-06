@@ -710,7 +710,7 @@
       noMeio();
       anel.remove();
       const revelar = cobertura.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, easing: 'ease-out', fill: 'forwards' });
-      $('.intro .container')?.animate([{ transform: 'translateY(24px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 700, easing: 'cubic-bezier(.2, .7, .1, 1)' });
+      $('.abertura-conteudo')?.animate([{ transform: 'translateY(24px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 700, easing: 'cubic-bezier(.2, .7, .1, 1)' });
       revelar.finished.then(() => {
         cobertura.remove();
         $('.capa-centro')?.getAnimations().forEach((an) => an.cancel());
@@ -731,37 +731,30 @@
   const mensagemAprovar = () => `Olá! Li a proposta da MFL Sales${nomeCliente() ? ' para ' + nomeCliente() : ''} e quero seguir.`;
 
   // Abertura: para quem é, solução, capacidades, resumo e dados da proposta
+  // Abertura (Figma 3076:37): marca, selo, título, frentes do modelo e contatos
   function hero(c) {
-    const canais = [c.hasIn && 'Inbound', c.out && 'Outbound', 'CRM', 'Automação'].filter(Boolean).join(' · ');
-    const capacidades = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação integrados'].filter(Boolean);
-    const totais = calcularInvestimento(c).map((t) => t.valor).filter((v) => v != null);
-    const data = lerData(S.data);
+    const frentes = [c.hasIn && 'Inbound estruturado', c.out && 'Outbound ativo', 'CRM + automação'].filter(Boolean);
+    const [selo1, ...seloResto] = AGENCIA.slogan.split(' · ');
 
-    const resumo = [
-      { rotulo: 'Modelo', valor: NOMES_MODELO[c.m] + (c.m === '4' ? ` (${c.out === 'bdr' ? 'BDR + SDR' : 'Treinamento'})` : '') },
-      c.hasIn ? { rotulo: 'Público', valor: c.b2c ? 'B2C · até a venda' : 'B2B · até a reunião agendada' } : { rotulo: 'Execução', valor: c.out === 'bdr' ? 'MFL Sales até a reunião agendada' : 'Seu time, treinado pela MFL Sales' },
-      { rotulo: 'Contrato', valor: `Mínimo de ${S.contrato || '[X]'} ${Number(S.contrato) === 1 ? 'mês' : 'meses'}` },
-      { rotulo: 'Investimento', valor: totais.length ? `${totais.length > 1 ? 'A partir de ' : ''}${brl(Math.min(...totais))}/mês` : null }
-    ];
-
-    return el('section', { class: 'intro tema-escuro', id: 'inicio' },
-      el('div', { class: 'container' },
-        el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial · ${AGENCIA.slogan}` }),
-        el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', {}, nomeCliente() || vazio('[Nome do cliente]'))),
-        el('p', { class: 'intro-sub revelar', text: 'Estruturação da Operação Comercial de Aquisição' }),
-        el('ul', { class: 'intro-capacidades revelar' }, capacidades.map((t) => el('li', { text: t }))),
-        el('div', { class: 'resumo revelar' }, resumo.map((r) => el('div', { class: 'resumo-item' },
-          el('span', { text: r.rotulo }), el('strong', {}, r.valor || vazio('R$ [total]/mês'))))),
-        el('dl', { class: 'intro-meta revelar' },
-          el('div', {}, el('dt', { text: 'Canais' }), el('dd', { text: canais })),
-          el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: data ? formatarData(data) : '' })),
-          dataValidade() && el('div', {}, el('dt', { text: 'Válida até' }), el('dd', { text: formatarData(dataValidade()) })),
-          S.responsavel?.nome && el('div', {}, el('dt', { text: 'Responsável' }), el('dd', { text: S.responsavel.nome })))));
+    return el('section', { class: 'abertura', id: 'inicio' },
+      el('div', { class: 'container abertura-conteudo' },
+        marca('abertura-logo'),
+        el('div', { class: 'abertura-centro' },
+          el('p', { class: 'abertura-selo revelar' },
+            el('span', { class: 'abertura-selo-icone' }, el('img', { src: 'assets/img/mfl-sales-icone.png', alt: '' })),
+            el('span', { text: [selo1, ...seloResto].join(' · ') })),
+          el('p', { class: 'abertura-cliente revelar' }, el('span', { text: 'Proposta comercial para ' }), el('strong', {}, nomeCliente() || vazio('[Nome do cliente]'))),
+          el('h1', { class: 'abertura-titulo revelar', text: 'Estruturação da operação comercial de aquisição' }),
+          el('ul', { class: 'abertura-frentes revelar' }, frentes.map((t) => el('li', { text: t })))),
+        el('div', { class: 'abertura-rodape' },
+          el('a', { href: AGENCIA.site, target: '_blank', rel: 'noopener', text: AGENCIA.site.replace(/^https?:\/\//, '') }),
+          el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }))),
+      el('a', { class: 'abertura-rolar', href: '#numeros', 'aria-label': 'Rolar para o conteúdo' }, el('span')));
   }
 
   // Faixa de números da MFL logo abaixo do hero
   function numerosMfl() {
-    return el('section', { class: 'faixa-numeros', 'aria-label': 'MFL Sales em números' },
+    return el('section', { class: 'faixa-numeros', id: 'numeros', 'aria-label': 'MFL Sales em números' },
       el('div', { class: 'container numeros-grade' },
         [['+370', 'negócios acelerados'], ['+R$ 10 mi', 'em receita gerada para clientes'], ['+R$ 700 mil', 'investidos em anúncios por mês'], ['+7 anos', 'de mercado, em 2 países e 25 cidades']]
           .map(([n, t]) => el('div', { class: 'numero-item' }, el('strong', { text: n }), el('span', { text: t })))));
