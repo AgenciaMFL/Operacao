@@ -9,7 +9,8 @@ index.html                 → a proposta (o que o cliente vê)
 editor.html                → editor para o time comercial
 propostas/
   padrao.json              → modelo padrão MFL Sales (ponto de partida)
-assets/img                 → logo e ícone da MFL Sales
+assets/img                 → logo, ícone e avatares da capa
+assets/video               → vídeo de fundo da capa (MP4 + WebM) e imagem de espera
 assets/css, assets/js      → visual e lógica (não precisa mexer)
 ```
 
@@ -17,7 +18,7 @@ assets/css, assets/js      → visual e lógica (não precisa mexer)
 
 Consolidado a partir das propostas enviadas pelo comercial:
 
-1. **Capa**: nome do cliente, solução proposta, canais e os 3 pilares
+1. **Capa** (layout do Figma): vídeo de fundo, faixas animadas, prova social, nome do cliente, frase de impacto e o botão "Ver meu orçamento"
 2. **Oportunidade**: o que o cliente já tem, o fluxo "da vitrine à venda" e a frase-chave
 3. **Estratégia de aquisição**: Tráfego Pago (ou Inbound / Outbound), campanhas, o que está incluso, quem vamos alcançar
 4. **CRM e automação**: funil, automações, sem CRM × com CRM

@@ -102,6 +102,7 @@
         { chave: 'cliente.nome', rotulo: 'Nome do cliente (aparece na capa)' },
         { chave: 'cliente.contato', rotulo: 'Aos cuidados de', meia: true },
         { chave: 'cliente.cargo', rotulo: 'Cargo', meia: true },
+        { chave: 'proposta.solucao', rotulo: 'Solução proposta', ajuda: 'Aparece no início da proposta. Ex.: Tráfego Pago + CRM para Harmonização Facial' },
         { chave: 'proposta.numero', rotulo: 'Número da proposta', meia: true },
         { chave: 'proposta.data', rotulo: 'Data', tipo: 'date', meia: true },
         { chave: 'proposta.validadeDias', rotulo: 'Validade (dias)', tipo: 'number', meia: true },
@@ -114,11 +115,15 @@
     {
       titulo: 'Capa', caminho: 'capa',
       campos: [
+        { chave: 'provaSocial.destaque', rotulo: 'Prova social: destaque', meia: true, ajuda: 'Ex.: +370 Negócios' },
+        { chave: 'provaSocial.texto', rotulo: 'Prova social: complemento', meia: true, ajuda: 'Ex.: com resultados' },
         { chave: 'rotulo', rotulo: 'Texto acima do nome' },
-        { chave: 'subtitulo', rotulo: 'Solução proposta', ajuda: 'Ex.: Tráfego Pago + CRM para Harmonização Facial' },
-        { chave: 'canais', rotulo: 'Canais', ajuda: 'Ex.: Meta Ads · Google Ads · CRM · Automação' },
-        { chave: 'pilares', rotulo: 'Pilares', tipo: 'textos', item: 'pilar' },
-        { chave: 'textoBotao', rotulo: 'Texto do botão' }
+        { chave: 'subtitulo', rotulo: 'Frase de impacto', tipo: 'textarea', ajuda: 'Coloque **entre asteriscos duplos** o trecho que deve ficar em negrito.' },
+        { chave: 'textoBotao', rotulo: 'Texto do botão' },
+        { chave: 'faixa', rotulo: 'Textos das faixas animadas', tipo: 'textos', item: 'texto' },
+        { chave: 'video', rotulo: 'Vídeo de fundo (MP4)', meia: true },
+        { chave: 'videoWebm', rotulo: 'Vídeo de fundo (WebM, opcional)', meia: true },
+        { chave: 'poster', rotulo: 'Imagem enquanto o vídeo carrega' }
       ]
     },
     {

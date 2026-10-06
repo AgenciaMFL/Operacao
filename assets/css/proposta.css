@@ -84,92 +84,117 @@ h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
 }
 @keyframes girar { to { transform: rotate(360deg); } }
 
-/* ---------- capa ---------- */
+/* ---------- capa (Figma: Agencia-MFL › Home 3076:2, quadro 2560×900) ---------- */
 
 .capa {
+  --capa-verde: #00CB40;
+  --capa-verde-escuro: #009830;
+  --capa-claro: #C6FFC6;
   position: fixed; inset: 0; z-index: 40;
-  display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
-  padding: clamp(20px, 4vw, 44px) var(--gutter);
-  background: var(--capa); color: var(--tinta);
+  display: grid; place-items: center;
+  padding: clamp(72px, 9vh, 120px) var(--gutter);
+  background: #04110A; color: #fff;
   overflow-x: hidden; overflow-y: auto;
+  isolation: isolate;
 }
 .capa.saindo { animation: capaSai 1s var(--curva) forwards; }
 @keyframes capaSai { to { transform: translateY(-100%); } }
 
-.capa-fundo { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
-.capa-orbe { position: absolute; border-radius: 50%; filter: blur(110px); background: var(--destaque); }
-.capa-orbe-1 { width: 38vmax; height: 38vmax; right: -14vmax; top: -16vmax; opacity: .18; animation: flutuar 16s ease-in-out infinite alternate; }
-.capa-orbe-2 { width: 24vmax; height: 24vmax; left: -12vmax; bottom: -14vmax; opacity: .08; animation: flutuar 20s ease-in-out infinite alternate-reverse; }
-@keyframes flutuar { to { transform: translate(-3vmax, 4vmax) scale(1.06); } }
-
-/* anéis concêntricos que ecoam o traço circular do logo */
-.capa-aneis {
-  position: absolute; right: -18vmin; top: 50%;
-  width: 92vmin; aspect-ratio: 1;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  border: 2px solid color-mix(in srgb, var(--destaque) 24%, transparent);
-  box-shadow:
-    0 0 0 9vmin var(--capa),
-    0 0 0 calc(9vmin + 2px) color-mix(in srgb, var(--destaque) 12%, transparent),
-    inset 0 0 0 9vmin var(--capa),
-    inset 0 0 0 calc(9vmin + 2px) color-mix(in srgb, var(--destaque) 14%, transparent);
-  animation: girarLento 60s linear infinite;
+.capa-fundo { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: #04110A; }
+.capa-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.capa-fundo::after {
+  /* leve escurecida nas bordas para o texto respirar sobre o vídeo */
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0, 0, 0, .05), rgba(0, 0, 0, .45));
 }
-@keyframes girarLento { to { transform: translateY(-50%) rotate(360deg); } }
-
-.capa-topo, .capa-centro, .capa-rodape { position: relative; }
-.capa-topo { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.capa-meta { display: flex; gap: 20px; font-size: .85rem; color: var(--tinta-suave); flex-wrap: wrap; font-variant-numeric: tabular-nums; }
-
-.capa-centro { max-width: 860px; animation: subir 1.1s var(--curva) both .15s; }
-.capa-eyebrow {
-  margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px;
-  font-size: .76rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--destaque);
+.capa-luz {
+  position: absolute; width: 76vmax; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 203, 64, .32) 0%, rgba(0, 152, 48, .12) 35%, transparent 68%);
+  mix-blend-mode: screen; transform: translate(-50%, -50%);
 }
-.capa-eyebrow::before { content: ''; width: 28px; height: 2px; border-radius: 2px; background: currentColor; }
+.capa-luz-1 { left: 98%; top: 4%; }
+.capa-luz-2 { left: 4%; top: 97%; }
+
+/* faixas inclinadas "+7 anos" */
+.capa-faixa {
+  position: fixed; z-index: 0; width: 140vw; height: clamp(34px, 2.04vw, 52px);
+  display: flex; align-items: center; overflow: hidden;
+  background: rgba(0, 0, 0, .42); border: .62px solid #fff;
+  transform: rotate(-5.47deg); pointer-events: none;
+}
+.faixa-1 { left: -62vw; top: clamp(18px, 3.4vw, 80px); filter: blur(2.8px); }
+.faixa-2 { left: 26vw; bottom: clamp(18px, 2.2vw, 60px); filter: blur(3.6px); }
+.faixa-conteudo { display: flex; width: max-content; animation: faixaCorre 40s linear infinite; }
+.faixa-2 .faixa-conteudo { animation-direction: reverse; }
+.faixa-trilha { display: flex; gap: clamp(14px, .87vw, 22px); padding-right: clamp(14px, .87vw, 22px); }
+.faixa-trilha span {
+  font-family: 'Archivo', var(--fonte); font-weight: 700; font-size: clamp(14px, .88vw, 22.5px);
+  letter-spacing: -.02em; text-transform: uppercase; white-space: nowrap; color: #E9FFE8;
+}
+@keyframes faixaCorre { to { transform: translateX(-50%); } }
+
+.capa-centro {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: clamp(22px, 1.9vw, 48px);
+  width: 100%; max-width: 1640px; text-align: center;
+  animation: subir 1.1s var(--curva) both .15s;
+}
+.capa-prova {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: 'Poppins', var(--fonte); font-size: clamp(13px, .75vw, 19.25px); color: #fff;
+}
+.capa-prova strong { font-weight: 700; }
+.capa-avatares { height: clamp(34px, 2.19vw, 56px); width: auto; }
+
+.capa-titulo { display: flex; flex-direction: column; align-items: center; gap: clamp(4px, .5vw, 12px); font-weight: inherit; }
+.capa-rotulo {
+  font-family: 'Archivo', var(--fonte); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(1.45rem, 2.56vw, 4.095rem); line-height: 1.03; letter-spacing: -.02em; color: #fff;
+}
 .capa-cliente {
-  font-family: var(--display); font-weight: 600;
-  font-size: clamp(2.5rem, 8vw, 6.4rem); line-height: 1; letter-spacing: -.035em;
+  max-width: 100%;
+  font-family: 'Archivo', var(--fonte); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(2.5rem, 5.04vw, 8.07rem); line-height: 1.02; letter-spacing: -.06em;
+  padding: .1em .06em .04em; margin-top: -.1em;
+  background: linear-gradient(90deg, var(--capa-claro), #fff 50%, var(--capa-claro));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
   overflow-wrap: anywhere; text-wrap: balance;
 }
-.capa-subtitulo { margin-top: 28px; max-width: 34ch; font-family: var(--display); font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 500; line-height: 1.35; letter-spacing: -.01em; }
-.capa-canais { margin-top: 12px; color: var(--tinta-suave); font-size: .95rem; }
-.capa-pilares { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
-.capa-pilares li {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--linha-forte);
-  font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta);
+.capa-subtitulo {
+  max-width: 41em;
+  font-family: 'Archivo', var(--fonte); font-weight: 400; font-size: clamp(1rem, 1.02vw, 1.625rem); line-height: 1.31;
+  color: #DADADA; text-wrap: balance;
 }
-.capa-pilares li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--destaque); }
+.capa-subtitulo strong { font-weight: 700; }
 
 .capa-botao {
-  margin-top: 36px;
-  display: inline-flex; align-items: center; gap: 14px;
-  padding: 15px 16px 15px 28px; border: 0; border-radius: 999px;
-  background: var(--destaque); color: var(--sobre-destaque);
-  font: 800 1rem var(--fonte); cursor: pointer;
-  box-shadow: 0 14px 44px -14px var(--destaque);
-  transition: transform .3s var(--curva), box-shadow .3s var(--curva);
+  margin-top: clamp(4px, .6vw, 16px);
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: min(100%, clamp(260px, 14.05vw, 360px)); height: clamp(52px, 2.58vw, 66px); padding: 0 32px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: linear-gradient(90deg, var(--capa-verde-escuro), var(--capa-verde) 50%, var(--capa-verde-escuro));
+  background-size: 200% 100%; background-position: 0 0;
+  color: #fff; font-family: 'Archivo', var(--fonte); font-weight: 700; font-size: clamp(15px, .8vw, 20.46px);
+  line-height: 1.5; text-transform: uppercase; white-space: nowrap;
+  box-shadow: 0 12px 40px -12px rgba(0, 203, 64, .55);
+  transition: background-position .5s var(--curva), transform .3s var(--curva), box-shadow .3s var(--curva);
 }
-.capa-botao:hover { transform: translateY(-2px); box-shadow: 0 18px 54px -12px var(--destaque); }
-.capa-botao:focus-visible, .cta-botao:focus-visible, .barra-cta a:focus-visible, .topo-nav a:focus-visible { outline: 2px solid var(--tinta); outline-offset: 3px; }
-.capa-botao-seta {
-  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
-  background: var(--sobre-destaque); color: var(--destaque); transition: transform .3s var(--curva);
-}
-.capa-botao:hover .capa-botao-seta { transform: translateX(4px); }
-
-.capa-rodape { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .82rem; color: var(--tinta-fraca); }
-.capa-confidencial { letter-spacing: .14em; text-transform: uppercase; font-size: .7rem; }
+.capa-botao:hover { background-position: 100% 0; transform: translateY(-2px); box-shadow: 0 18px 50px -12px rgba(0, 203, 64, .7); }
+.capa-botao:focus-visible, .cta-botao:focus-visible, .barra-cta a:focus-visible, .topo-nav a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
 @keyframes subir { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 720px) {
+  .capa-faixa { width: 220vw; }
+  .faixa-1 { left: -120vw; top: 22px; }
+  .faixa-2 { left: 0; bottom: 22px; }
+  .capa-cliente { letter-spacing: -.045em; }
+}
 
 /* ---------- marca ---------- */
 
 .marca-texto { font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: -.02em; }
 .marca-logo { width: auto; }
-.marca-logo-capa { height: clamp(44px, 6vw, 60px); }
 .marca-logo-topo { height: 34px; }
 .marca-logo-rodape { height: 44px; }
 
@@ -520,6 +545,7 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .revelar { opacity: 1; transform: none; }
+  .faixa-conteudo { animation: none; }
 }
 
 /* ---------- responsivo ---------- */
@@ -527,7 +553,6 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 @media (max-width: 960px) {
   .b-cartoes.col-4 { grid-template-columns: repeat(2, 1fr); }
   .b-cartoes.col-3, .planos.col-3, .b-comparativo.col-3 { grid-template-columns: 1fr 1fr; }
-  .capa-aneis { width: 120vmin; right: -60vmin; }
 }
 
 @media (max-width: 720px) {

@@ -158,44 +158,70 @@
 
   /* ---------- capa ---------- */
 
+  // Texto com trechos em **negrito**, sem interpretar HTML
+  function rico(texto) {
+    return preencher(texto).split(/\*\*(.+?)\*\*/g)
+      .map((parte, i) => (i % 2 ? el('strong', { text: parte }) : parte))
+      .filter((parte) => parte !== '');
+  }
+
+  // O vídeo é criado uma vez só: as atualizações ao vivo do editor não reiniciam o fundo
+  let videoCapa = null;
+  function fundoVideo(src, poster, webm) {
+    if (!src) return null;
+    if (!videoCapa || videoCapa.dataset.src !== src) {
+      videoCapa = el('video', {
+        class: 'capa-video', autoplay: true, muted: true, loop: true, playsinline: true,
+        preload: 'auto', poster: poster || null, 'aria-hidden': 'true', 'data-src': src
+      }, el('source', { src, type: 'video/mp4' }), webm && el('source', { src: webm, type: 'video/webm' }));
+      videoCapa.muted = true;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) videoCapa.removeAttribute('autoplay');
+    }
+    return videoCapa;
+  }
+
+  // Faixa inclinada com texto repetido em movimento
+  function faixa(textosFaixa, classe) {
+    const itens = textosFaixa.length ? textosFaixa : ['+7 anos'];
+    const sequencia = [];
+    while (sequencia.length < 24) sequencia.push(...itens);
+    const trilha = () => el('div', { class: 'faixa-trilha' }, sequencia.map((t) => el('span', { text: t })));
+    return el('div', { class: `capa-faixa ${classe}`, 'aria-hidden': 'true' },
+      el('div', { class: 'faixa-conteudo' }, trilha(), trilha()));
+  }
+
   function renderCapa() {
     const capa = $('#capa');
     const c = dados.capa || {};
-    const a = dados.agencia || {};
     const cli = dados.cliente || {};
-    const p = dados.proposta || {};
-    const data = lerData(p.data);
-    const pilares = textos(c.pilares);
+    const prova = c.provaSocial || {};
+    const textosFaixa = textos(c.faixa);
+    const video = fundoVideo(c.video, c.poster, c.videoWebm);
 
     capa.replaceChildren(
       el('div', { class: 'capa-fundo', 'aria-hidden': 'true' },
-        el('span', { class: 'capa-orbe capa-orbe-1' }),
-        el('span', { class: 'capa-orbe capa-orbe-2' }),
-        el('span', { class: 'capa-aneis' })
+        video,
+        el('span', { class: 'capa-luz capa-luz-1' }),
+        el('span', { class: 'capa-luz capa-luz-2' })
       ),
-      el('div', { class: 'capa-topo' },
-        el('div', { class: 'capa-marca' }, marca('marca-logo-capa')),
-        el('div', { class: 'capa-meta' },
-          p.numero && el('span', { text: `Nº ${p.numero}` }),
-          data && el('span', { text: formatarData(data) })
-        )
-      ),
+      faixa(textosFaixa, 'faixa-1'),
+      faixa(textosFaixa, 'faixa-2'),
       el('div', { class: 'capa-centro' },
-        el('p', { class: 'capa-eyebrow', text: preencher(c.rotulo) || 'Proposta comercial preparada para' }),
-        el('h1', { class: 'capa-cliente', text: cli.nome || 'Cliente' }),
-        c.subtitulo && el('p', { class: 'capa-subtitulo', text: preencher(c.subtitulo) }),
-        c.canais && el('p', { class: 'capa-canais', text: preencher(c.canais) }),
-        pilares.length ? el('ul', { class: 'capa-pilares' }, pilares.map((t) => el('li', { text: t }))) : null,
-        el('button', { type: 'button', class: 'capa-botao', onclick: abrirProposta },
-          el('span', { text: preencher(c.textoBotao) || 'Abrir proposta' }),
-          el('span', { class: 'capa-botao-seta', 'aria-hidden': 'true', text: '→' })
-        )
-      ),
-      el('div', { class: 'capa-rodape' },
-        el('span', { text: [a.slogan, cli.contato && `A/C ${cli.contato}`].filter(Boolean).join('  ·  ') }),
-        el('span', { class: 'capa-confidencial', text: 'Documento confidencial' })
+        (prova.destaque || prova.texto) && el('p', { class: 'capa-prova' },
+          el('img', { class: 'capa-avatares', src: c.avatares || 'assets/img/capa-avatares.png', alt: '', width: 141, height: 56 }),
+          el('span', {}, prova.destaque && el('strong', { text: preencher(prova.destaque) }), prova.texto && ` ${preencher(prova.texto)}`)
+        ),
+        el('h1', { class: 'capa-titulo' },
+          el('span', { class: 'capa-rotulo', text: preencher(c.rotulo) || 'Proposta comercial para' }),
+          el('span', { class: 'capa-cliente', text: cli.nome || 'Cliente' })
+        ),
+        c.subtitulo && el('p', { class: 'capa-subtitulo' }, rico(c.subtitulo)),
+        el('button', { type: 'button', class: 'capa-botao', onclick: abrirProposta, text: preencher(c.textoBotao) || 'Ver meu orçamento' })
       )
     );
+    if (video && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.play().catch(() => { /* o navegador pode bloquear; fica o poster */ });
+    }
   }
 
   function abrirProposta() {
@@ -208,6 +234,7 @@
     capa.classList.add('saindo');
     const fim = () => {
       capa.hidden = true;
+      videoCapa?.pause();
       capa.classList.remove('saindo');
     };
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) fim();
@@ -486,7 +513,6 @@
     const cli = dados.cliente || {};
     const p = dados.proposta || {};
     const a = dados.agencia || {};
-    const c = dados.capa || {};
 
     $('#topo-marca').replaceChildren(marca('marca-logo-topo'));
 
@@ -494,7 +520,7 @@
       el('div', { class: 'container' },
         el('p', { class: 'intro-eyebrow revelar', text: `Proposta comercial${p.numero ? ' · Nº ' + p.numero : ''}` }),
         el('h1', { class: 'intro-titulo revelar' }, el('span', { text: 'Para ' }), el('em', { text: cli.nome || '' })),
-        c.subtitulo && el('p', { class: 'intro-sub revelar', text: preencher(c.subtitulo) }),
+        p.solucao && el('p', { class: 'intro-sub revelar', text: preencher(p.solucao) }),
         el('dl', { class: 'intro-meta revelar' },
           cli.contato && el('div', {}, el('dt', { text: 'Aos cuidados de' }), el('dd', { text: cli.contato + (cli.cargo ? ` · ${cli.cargo}` : '') })),
           lerData(p.data) && el('div', {}, el('dt', { text: 'Preparada em' }), el('dd', { text: formatarData(lerData(p.data)) })),

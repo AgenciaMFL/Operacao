@@ -15,6 +15,7 @@
   },
   "proposta": {
     "numero": "MFL-2026-000",
+    "solucao": "Tráfego Pago + CRM para gerar uma agenda cheia e previsível",
     "data": "2026-10-06",
     "validadeDias": 15,
     "responsavel": {
@@ -25,15 +26,19 @@
     }
   },
   "capa": {
-    "rotulo": "Proposta comercial preparada para",
-    "subtitulo": "Tráfego Pago + CRM para gerar uma agenda cheia e previsível",
-    "canais": "Meta Ads · Google Ads · CRM · Automação · Atendimento via WhatsApp",
-    "pilares": [
-      "Tráfego estruturado",
-      "CRM integrado",
-      "Agenda previsível"
+    "rotulo": "Proposta comercial para",
+    "subtitulo": "Enquanto outras agências mandam relatório 2x por semana, você acompanha **cada real investido em tempo real** e vê exatamente onde ele virou venda.",
+    "provaSocial": {
+      "destaque": "+370 Negócios",
+      "texto": "com resultados"
+    },
+    "faixa": [
+      "+7 anos"
     ],
-    "textoBotao": "Abrir proposta"
+    "textoBotao": "Ver meu orçamento",
+    "video": "assets/video/capa-fundo.mp4",
+    "videoWebm": "assets/video/capa-fundo.webm",
+    "poster": "assets/video/capa-fundo.jpg"
   },
   "secoes": [
     {
