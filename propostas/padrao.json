@@ -15,15 +15,15 @@
   },
   "proposta": {
     "numero": "MFL-2026-000",
-    "solucao": "Tráfego Pago + CRM para gerar uma agenda cheia e previsível",
+    "solucao": "Estruturação da operação comercial de aquisição: Inbound, Outbound, CRM, automação e inteligência artificial",
     "resumo": [
       {
         "rotulo": "Solução",
-        "valor": "Tráfego Pago + CRM"
+        "valor": "Tráfego Pago + CRM com IA"
       },
       {
         "rotulo": "Contrato",
-        "valor": "3 meses"
+        "valor": "Mínimo de 3 meses"
       },
       {
         "rotulo": "Início",
@@ -71,47 +71,50 @@
           "titulo": "O que a {cliente} já tem a seu favor",
           "colunas": 2,
           "itens": [
-            "Serviços de alta procura e alto valor percebido",
-            "Profissionais especializados e reconhecidos",
-            "Clientes com potencial de recorrência",
-            "Atendimento personalizado e próximo",
-            "Localização estratégica na região",
-            "Marca com boa reputação entre quem já é cliente"
+            "Produto ou serviço de qualidade comprovada",
+            "Base de clientes ativos",
+            "Estrutura para atender mais clientes",
+            "Equipe especializada",
+            "Marca com boa reputação no mercado",
+            "Potencial de recorrência e indicação"
           ]
         },
         {
           "tipo": "fluxo",
-          "titulo": "Da vitrine à agenda cheia",
+          "titulo": "Da estrutura à oportunidade comercial",
           "etapas": [
             {
-              "titulo": "Serviços da {cliente}"
+              "titulo": "Ativos da {cliente}"
             },
             {
-              "titulo": "Anúncios (Meta Ads + Google Ads)"
+              "titulo": "Marketing"
             },
             {
-              "titulo": "Conversa no WhatsApp"
-            },
-            {
-              "titulo": "Entrada no CRM"
+              "titulo": "Captação"
             },
             {
               "titulo": "Qualificação"
             },
             {
-              "titulo": "Atendimento agendado"
+              "titulo": "CRM"
             },
             {
-              "titulo": "Venda realizada"
+              "titulo": "Atendimento comercial"
             },
             {
-              "titulo": "Retorno e recorrência"
+              "titulo": "Proposta / orçamento"
+            },
+            {
+              "titulo": "Venda"
+            },
+            {
+              "titulo": "Recorrência"
             }
           ]
         },
         {
           "tipo": "destaque",
-          "texto": "A {cliente} já sabe entregar resultado. Nosso papel é colocá-la diante dos clientes certos e garantir que nenhuma conversa se perca antes do agendamento."
+          "texto": "A {cliente} já sabe entregar com qualidade. Nosso papel é estruturar o processo para encontrar, qualificar e colocar os clientes certos diante do comercial."
         }
       ]
     },
@@ -119,8 +122,8 @@
       "ativo": true,
       "menu": "Estratégia",
       "rotulo": "Estratégia",
-      "titulo": "Como vamos encher a agenda da {cliente}",
-      "texto": "Três frentes que trabalham juntas: anúncios que atraem o cliente certo, um CRM que não deixa nenhuma conversa se perder e, se a {cliente} quiser, um SDR dedicado para converter cada lead.",
+      "titulo": "Como vamos gerar novas oportunidades para a {cliente}",
+      "texto": "Frentes de aquisição que trabalham juntas e convergem para um único CRM, com automação e inteligência artificial.",
       "blocos": [
         {
           "tipo": "cartoes",
@@ -128,61 +131,94 @@
           "numerados": true,
           "cartoes": [
             {
-              "titulo": "Tráfego pago",
-              "texto": "Meta Ads e Google Ads levando o cliente direto para uma conversa no WhatsApp."
+              "titulo": "Inbound · Tráfego pago",
+              "texto": "Meta Ads e Google Ads levando o cliente certo direto para uma conversa."
+            },
+            {
+              "titulo": "Outbound",
+              "texto": "Prospecção ativa de empresas com sinais reais de necessidade."
             },
             {
               "titulo": "CRM e automação",
-              "texto": "Cada contato organizado, com follow-up e lembretes automáticos até o agendamento."
+              "texto": "Todos os leads no mesmo lugar, com follow-up automático."
+            },
+            {
+              "titulo": "Inteligência artificial",
+              "texto": "Apoio na abordagem, na qualificação e nos follow-ups."
             },
             {
               "titulo": "SDR (opcional)",
-              "texto": "Um especialista que responde, qualifica e agenda cada lead gerado pelas campanhas."
+              "texto": "Um especialista que responde, qualifica e agenda cada lead."
+            },
+            {
+              "titulo": "Treinamento",
+              "texto": "O time da {cliente} operando o processo de forma independente."
             }
           ]
         },
         {
           "tipo": "subsecao",
-          "rotulo": "Tráfego pago",
-          "titulo": "Atrair clientes da região no momento em que o desejo aparece",
-          "texto": "O tráfego pago trabalha em duas frentes. O Google Ads captura quem já está procurando o serviço, e o Meta Ads (Instagram e Facebook) desperta o desejo em pessoas da região com o perfil certo. Os anúncios não levam ao perfil: levam direto a uma conversa no WhatsApp, já identificada no CRM."
+          "rotulo": "Inbound · Tráfego pago",
+          "titulo": "Capturar clientes no momento em que a necessidade aparece",
+          "texto": "O tráfego pago trabalha em duas frentes: o Google Ads captura quem já está procurando a solução, e o Meta Ads (Instagram e Facebook) apresenta a {cliente} para quem tem o perfil certo. O anúncio não leva à navegação livre pelo site: leva a um canal de conversão direto, o WhatsApp comercial ou uma Landing Page focada no problema, já identificado no CRM."
         },
         {
-          "tipo": "cartoes",
-          "titulo": "Campanhas por objetivo",
-          "colunas": 3,
-          "cartoes": [
+          "tipo": "fluxo",
+          "titulo": "Do anúncio à venda",
+          "etapas": [
             {
-              "etiqueta": "Porta de entrada",
-              "titulo": "Primeiro contato",
-              "texto": "Serviços de ticket menor que apresentam a {cliente} a novos clientes.",
-              "itens": [
-                "Oferta de avaliação",
-                "Serviços de entrada",
-                "Público frio da região"
-              ]
+              "titulo": "Meta Ads + Google Ads"
             },
             {
-              "etiqueta": "Alto valor",
-              "titulo": "Serviços de maior ticket",
-              "texto": "Campanhas focadas nos serviços que mais trazem faturamento.",
-              "itens": [
-                "Google Ads na pesquisa local",
-                "Meta Ads com prova social",
-                "Mensagem focada em resultado"
-              ]
+              "titulo": "WhatsApp ou Landing Page",
+              "descricao": "Canal de conversão direto, com o contexto do anúncio"
             },
             {
-              "etiqueta": "Recorrência",
-              "titulo": "Quem já é cliente",
-              "texto": "Trazer de volta quem já confia na {cliente}.",
-              "itens": [
-                "Remarketing",
-                "Retorno programado",
-                "Reativação da base"
-              ]
+              "titulo": "Qualificação",
+              "descricao": "Perfil, região, volume e intenção de compra"
+            },
+            {
+              "titulo": "Entrada no CRM",
+              "descricao": "Com origem, campanha e interesse identificados"
+            },
+            {
+              "titulo": "Atendimento comercial",
+              "descricao": "Time da {cliente} ou SDR, com roteiro definido"
+            },
+            {
+              "titulo": "Proposta / orçamento"
+            },
+            {
+              "titulo": "Venda e recorrência"
             }
           ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Temas de campanha",
+          "colunas": 1,
+          "itens": [
+            "Produto ou serviço mais procurado",
+            "Diferenciais e certificações",
+            "Prova social e resultados",
+            "Oferta de entrada (avaliação, amostra ou diagnóstico)",
+            "Atendimento e logística na região"
+          ],
+          "largura": "metade"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Informações qualificadas no formulário",
+          "colunas": 1,
+          "itens": [
+            "Empresa ou nome",
+            "Tipo de negócio",
+            "Cidade e estado",
+            "Volume ou porte",
+            "Solução atual ou fornecedor atual",
+            "Prazo e intenção de compra"
+          ],
+          "largura": "metade"
         },
         {
           "tipo": "lista",
@@ -229,57 +265,163 @@
           "texto": "Comunicação responsável: os anúncios seguem as políticas de publicidade da Meta e do Google, protegendo a conta de anúncios e a reputação da {cliente}."
         },
         {
+          "tipo": "destaque",
+          "texto": "O objetivo não é apenas gerar contatos. É gerar leads qualificados, prontos para o comercial converter em venda."
+        },
+        {
           "tipo": "subsecao",
-          "rotulo": "CRM e automação",
-          "titulo": "Da primeira mensagem ao retorno: nenhum cliente se perde no caminho",
-          "texto": "Todo contato gerado pelos anúncios entra no mesmo CRM, com origem, serviço de interesse e histórico da conversa. A equipe da {cliente} passa a enxergar, em um só lugar, quem precisa de resposta, quem já agendou, quem faltou e quem está pronto para voltar."
+          "rotulo": "Outbound · Prospecção ativa",
+          "titulo": "Encontrar empresas que ainda não estão procurando, mas precisam da {cliente}",
+          "texto": "Uma operação de prospecção organizada e replicável, baseada em sinais reais de necessidade, e não em disparos genéricos. O projeto vai da extração e organização dos potenciais clientes até a abordagem, o acompanhamento e a gestão das oportunidades dentro do CRM."
         },
         {
           "tipo": "fluxo",
-          "titulo": "Funil de atendimento",
-          "largura": "metade",
+          "titulo": "Como a prospecção funciona",
           "etapas": [
             {
-              "titulo": "Lead novo"
+              "tipo": "divisor",
+              "titulo": "Executado pela MFL Sales"
             },
             {
-              "titulo": "Primeiro atendimento"
+              "titulo": "ICP",
+              "descricao": "Definição do perfil de cliente ideal"
             },
             {
-              "titulo": "Qualificado"
+              "titulo": "Segmentação",
+              "descricao": "Setor, porte, região e capacidade de atendimento"
             },
             {
-              "titulo": "Agendado"
+              "titulo": "Identificação de sinais",
+              "descricao": "Características que indicam necessidade real"
             },
             {
-              "titulo": "Compareceu"
+              "titulo": "Extração",
+              "descricao": "Empresa, decisor, contato e informações relevantes"
             },
             {
-              "titulo": "Venda fechada"
+              "titulo": "Organização no CRM",
+              "descricao": "Base importada e segmentada automaticamente"
             },
             {
-              "titulo": "Pós-venda"
+              "tipo": "divisor",
+              "titulo": "Executado pelo comercial da {cliente}, com scripts e cadências entregues por nós"
             },
             {
-              "titulo": "Retorno / recorrência"
+              "titulo": "Abordagem",
+              "descricao": "Contato personalizado, baseado na dor"
+            },
+            {
+              "titulo": "Follow-up",
+              "descricao": "Cadência definida até a resposta"
+            },
+            {
+              "titulo": "Qualificação",
+              "descricao": "Problema, impacto, prazo e potencial"
+            },
+            {
+              "titulo": "Oportunidade",
+              "descricao": "Passagem para o processo de vendas"
             }
           ]
         },
         {
           "tipo": "lista",
-          "titulo": "Automações configuradas",
-          "largura": "metade",
+          "titulo": "Estruturação da operação Outbound",
+          "colunas": 2,
+          "itens": [
+            "Definição do Perfil de Cliente Ideal (ICP)",
+            "Critérios para identificar potenciais clientes",
+            "Estruturação da base de prospecção",
+            "Configuração das ferramentas de extração de leads",
+            "Organização e segmentação dos dados",
+            "Importação dos leads no CRM",
+            "Definição das etapas da prospecção",
+            "Criação das cadências de contato",
+            "Scripts de abordagem",
+            "Definição dos canais de prospecção",
+            "Rotinas de follow-up",
+            "Processo de qualificação e passagem para vendas"
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Sinais de oportunidade",
+          "colunas": 2,
+          "itens": [
+            "Empresa em crescimento ou abrindo novas unidades",
+            "Operação com muitos processos manuais",
+            "Insatisfação com o fornecedor ou a solução atual",
+            "Redes, franquias ou múltiplas unidades",
+            "Expansão de portfólio ou novo produto",
+            "Empresa dentro da região que a {cliente} atende"
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "Não vamos prospectar aleatoriamente. Vamos priorizar empresas com sinais reais de oportunidade, onde a {cliente} consegue entregar com qualidade."
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "CRM e automação",
+          "titulo": "Da primeira mensagem ao fechamento: nenhuma oportunidade se perde no caminho",
+          "texto": "O CRM é configurado como centro de controle da operação comercial, de acordo com o processo da {cliente}, e não com uma configuração genérica. Inbound e Outbound convergem para um fluxo único, sem planilhas paralelas."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "CRM e funil de vendas",
+          "colunas": 1,
+          "itens": [
+            "Configuração do CRM e dos funis",
+            "Definição das etapas comerciais",
+            "Campos e segmentação dos leads",
+            "Tarefas e dashboards",
+            "Critérios de movimentação dos leads",
+            "Passagem entre marketing, prospecção e vendas"
+          ],
+          "largura": "metade"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Automações comerciais",
           "colunas": 1,
           "itens": [
             "Resposta imediata ao novo contato",
-            "Confirmação automática de agendamento",
-            "Lembrete 24h antes do atendimento",
-            "Recuperação de quem faltou",
-            "Follow-up de orçamentos não fechados",
-            "Mensagem de pós-atendimento",
-            "Lembrete de retorno",
-            "Reativação de clientes inativos",
-            "Pedido de avaliação no Google"
+            "Criação automática de tarefas e follow-ups",
+            "Lembretes, confirmações e notificações",
+            "Atualização automática de etapas",
+            "Distribuição de leads para o time",
+            "Recuperação e reativação de oportunidades"
+          ],
+          "largura": "metade"
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "O fluxo único da operação",
+          "etapas": [
+            {
+              "titulo": "Captação"
+            },
+            {
+              "titulo": "Organização no CRM"
+            },
+            {
+              "titulo": "Abordagem"
+            },
+            {
+              "titulo": "Follow-up automatizado"
+            },
+            {
+              "titulo": "Qualificação"
+            },
+            {
+              "titulo": "Oportunidade"
+            },
+            {
+              "titulo": "Venda"
+            },
+            {
+              "titulo": "Recorrência"
+            }
           ]
         },
         {
@@ -309,21 +451,48 @@
           ]
         },
         {
+          "tipo": "destaque",
+          "texto": "A tecnologia cuida da organização, dos lembretes e da manutenção do funil, para que o time foque no que gera resultado: a conversa com o cliente."
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "Inteligência artificial",
+          "titulo": "IA aplicada à operação comercial",
+          "texto": "A IA atua como apoio constante ao longo de todo o processo: reduz o tempo gasto em tarefas repetitivas e ajuda o time a priorizar os contatos com maior potencial de conversão."
+        },
+        {
           "tipo": "lista",
-          "titulo": "Funções do CRM no dia a dia",
+          "titulo": "Como a IA ajuda",
           "colunas": 2,
           "itens": [
-            "Centralização dos contatos do WhatsApp",
-            "Pipeline visual por etapa",
-            "Histórico completo de cada cliente",
-            "Tarefas e lembretes para a equipe",
-            "Origem de cada cliente (anúncio, Google, Instagram)",
-            "Quanto cada campanha gera em agendamentos"
+            "Personalização de abordagens e mensagens",
+            "Apoio na qualificação dos leads",
+            "Geração de follow-ups",
+            "Organização e análise de informações",
+            "Automatização de tarefas",
+            "Identificação de oportunidades e gargalos"
           ]
         },
         {
-          "tipo": "destaque",
-          "texto": "A tecnologia reduz o trabalho operacional do atendimento para que a equipe concentre o tempo em atender bem e fechar vendas."
+          "tipo": "fluxo",
+          "titulo": "Na rotina do time",
+          "etapas": [
+            {
+              "titulo": "Lead chega"
+            },
+            {
+              "titulo": "IA sugere a abordagem"
+            },
+            {
+              "titulo": "Time personaliza e envia"
+            },
+            {
+              "titulo": "IA organiza o follow-up"
+            },
+            {
+              "titulo": "Oportunidade avança no CRM"
+            }
+          ]
         },
         {
           "tipo": "subsecao",
@@ -405,8 +574,8 @@
       "ativo": true,
       "menu": "Execução",
       "rotulo": "Execução",
-      "titulo": "Do primeiro anúncio aos primeiros 90 dias",
-      "texto": "Como o processo acontece no dia a dia da {cliente} e o que entregamos em cada mês do contrato.",
+      "titulo": "Do primeiro contato aos primeiros 90 dias",
+      "texto": "Como o processo acontece no dia a dia da {cliente}, o que entregamos e como o time é preparado.",
       "blocos": [
         {
           "tipo": "subsecao",
@@ -557,6 +726,86 @@
         {
           "tipo": "destaque",
           "texto": "Decisões baseadas em dados: todo mês a {cliente} recebe um relatório claro, mostrando quanto foi investido, quantos clientes chegaram e quantos viraram venda."
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "Treinamento do time",
+          "titulo": "O time da {cliente} operando de forma independente",
+          "texto": "Além de implantar a estrutura, treinamos o time responsável de ponta a ponta, para que a operação continue rodando sem depender de terceiros."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "O que o treinamento cobre",
+          "colunas": 2,
+          "itens": [
+            "Identificação do público-alvo",
+            "Extração de leads com as ferramentas definidas",
+            "Organização e validação da base",
+            "Operação e distribuição no CRM",
+            "Execução da prospecção e das cadências",
+            "Acompanhamento de follow-ups",
+            "Qualificação de oportunidades reais",
+            "Gestão da operação por indicadores"
+          ]
+        },
+        {
+          "tipo": "destaque",
+          "texto": "Ao final, o time sabe extrair novos leads, alimentar o CRM, prospectar, fazer follow-up e acompanhar toda a operação."
+        },
+        {
+          "tipo": "subsecao",
+          "rotulo": "Entregas",
+          "titulo": "O que a {cliente} recebe",
+          "texto": ""
+        },
+        {
+          "tipo": "lista",
+          "titulo": "",
+          "colunas": 2,
+          "itens": [
+            "Operação de Inbound estruturada",
+            "Operação de Outbound estruturada",
+            "Processo de extração de leads definido",
+            "Base de prospecção organizada",
+            "CRM configurado",
+            "Funis comerciais estruturados",
+            "Cadências e scripts de abordagem",
+            "Automações e recursos de IA aplicados",
+            "Indicadores e acompanhamento comercial",
+            "Processo de qualificação definido",
+            "Time treinado de ponta a ponta",
+            "Processo comercial documentado e replicável"
+          ]
+        },
+        {
+          "tipo": "fluxo",
+          "titulo": "Resultado esperado: o time sabe…",
+          "etapas": [
+            {
+              "titulo": "Quem prospectar"
+            },
+            {
+              "titulo": "Como encontrar"
+            },
+            {
+              "titulo": "Como abordar"
+            },
+            {
+              "titulo": "Quando fazer follow-up"
+            },
+            {
+              "titulo": "Como qualificar"
+            },
+            {
+              "titulo": "Como registrar e acompanhar"
+            },
+            {
+              "titulo": "Como converter em venda"
+            },
+            {
+              "titulo": "Como gerar recorrência"
+            }
+          ]
         }
       ]
     },
@@ -644,52 +893,105 @@
     "texto": "",
     "servicos": [
       {
-        "rotulo": "Serviço 1",
+        "ativo": true,
+        "rotulo": "",
         "selo": "Gestão de tráfego",
-        "nome": "Tráfego Pago",
+        "nome": "Tráfego Pago · Inbound",
         "valor": 2000,
         "recorrencia": "mensal",
         "observacaoValor": "",
+        "formas": [],
         "descricao": "Gestão completa das campanhas:",
         "destaque": true,
         "itens": [
-          "Estratégia de campanhas por serviço",
-          "Tráfego Meta Ads (Instagram e Facebook)",
-          "Tráfego Google Ads (pesquisa local)",
-          "Campanhas de conversa no WhatsApp",
+          "Estratégia de campanhas",
+          "Meta Ads (Instagram e Facebook)",
+          "Google Ads (pesquisa local)",
+          "Campanhas de conversa no WhatsApp ou Landing Page",
           "Remarketing",
           "Direcionamento de criativos e copys",
           "Testes e otimização contínua",
-          "Roteiro de atendimento para a equipe",
           "Relatório mensal de resultados"
         ]
       },
       {
-        "rotulo": "Serviço 2",
+        "ativo": true,
+        "rotulo": "",
         "selo": "",
         "nome": "CRM MFL Sales",
         "valor": 297,
         "recorrencia": "mensal",
-        "observacaoValor": "",
-        "descricao": "Plataforma + configuração:",
+        "observacaoValor": "Cobrado a partir da ativação da ferramenta",
+        "formas": [],
+        "descricao": "Automação, IA e gestão de leads:",
         "destaque": false,
         "itens": [
           "Implantação e configuração do CRM",
-          "Funil de atendimento personalizado",
+          "Funis comerciais personalizados",
           "Integração com o WhatsApp",
-          "Automações de agendamento e lembretes",
-          "Follow-up e recuperação de clientes",
-          "Fluxos de retorno e reativação",
-          "Rastreamento da origem dos leads"
+          "Automações de follow-up e lembretes",
+          "Recursos de IA aplicados",
+          "Dashboards e rastreamento da origem dos leads"
         ]
       },
       {
-        "rotulo": "Serviço 3",
+        "ativo": true,
+        "rotulo": "",
+        "selo": "Pagamento único",
+        "nome": "Implantação da Operação Outbound",
+        "valor": 9000,
+        "recorrencia": "unico",
+        "observacaoValor": "Inclui 3 meses de suporte desde o início da 1ª etapa",
+        "formas": [
+          {
+            "rotulo": "À vista (5% de desconto)",
+            "valor": "R$ 8.550"
+          },
+          {
+            "rotulo": "Cartão de crédito",
+            "valor": "3x de R$ 3.000"
+          }
+        ],
+        "descricao": "Implantação completa:",
+        "destaque": false,
+        "itens": [
+          "Definição de ICP e segmentação",
+          "Ferramentas e processo de extração de leads",
+          "Base de prospecção organizada",
+          "Cadências e scripts de abordagem",
+          "Processo de qualificação definido",
+          "Treinamento do time de ponta a ponta",
+          "Processo documentado e replicável"
+        ]
+      },
+      {
+        "ativo": false,
+        "rotulo": "",
+        "selo": "",
+        "nome": "Operação Outbound contínua",
+        "valor": 2000,
+        "recorrencia": "mensal",
+        "observacaoValor": "",
+        "formas": [],
+        "descricao": "Prospecção ativa todo mês:",
+        "destaque": false,
+        "itens": [
+          "Estratégia de Outbound e teste de ICPs",
+          "200 extrações de empresas por mês",
+          "Inserção das extrações direto no CRM",
+          "Organização de empresas e contatos para o comercial",
+          "Treinamento do comercial (scripts e condução)"
+        ]
+      },
+      {
+        "ativo": true,
+        "rotulo": "",
         "selo": "Opcional",
         "nome": "SDR Especializado",
         "valor": 1500,
         "recorrencia": "mensal",
         "observacaoValor": "+ comissionamento (a definir)",
+        "formas": [],
         "descricao": "Atendimento comercial dos leads:",
         "destaque": false,
         "itens": [
@@ -722,23 +1024,23 @@
     "nota": "",
     "condicoes": [
       {
-        "titulo": "Contrato de 3 meses",
-        "texto": "Tempo para estruturar, otimizar e escalar."
+        "titulo": "Contrato mínimo de 3 meses",
+        "texto": "Contados desde o início da 1ª etapa: tempo para estruturar, testar e escalar."
       },
       {
-        "titulo": "Pagamento mensal",
-        "texto": "Cartão ou boleto recorrente. Cada serviço cobrado separadamente."
+        "titulo": "Pagamento",
+        "texto": "Mensalidades por cartão ou boleto recorrente. Implantação à vista com 5% de desconto ou em 3x no cartão."
       },
       {
         "titulo": "Verba de anúncios",
-        "texto": "Paga direto à Meta e ao Google, à parte. Sugestão: R$ 100 por dia."
+        "texto": "Paga direto à Meta e ao Google, à parte. Sugestão: a partir de R$ 100 por dia."
       },
       {
-        "titulo": "Início em até 7 dias",
-        "texto": "Onboarding começa logo após a assinatura do contrato."
+        "titulo": "Suporte da equipe",
+        "texto": "3 meses de acompanhamento da implantação, do treinamento e dos primeiros ciclos."
       }
     ],
-    "fechamento": "Nosso objetivo não é apenas gerar mensagens. É transformar cada conversa em atendimento, venda e retorno para a {cliente}.",
+    "fechamento": "Nosso objetivo não é apenas gerar leads. É construir um processo comercial capaz de colocar a {cliente} diante dos clientes certos e transformar cada oportunidade em venda e recorrência.",
     "somarServicos": true
   },
   "proximosPassos": {
@@ -749,9 +1051,9 @@
       "Aprovação da proposta",
       "Assinatura do contrato",
       "Onboarding e acesso às contas",
-      "Campanhas no ar em até 7 dias"
+      "Primeiras campanhas e prospecção no ar"
     ],
-    "chamada": "Vamos encher a agenda da {cliente}?",
+    "chamada": "Vamos construir a máquina comercial da {cliente}?",
     "textoBotao": "Quero aprovar a proposta",
     "mensagemWhatsapp": "Olá! Li a proposta {numero} da {cliente} e quero seguir com a MFL Sales."
   }

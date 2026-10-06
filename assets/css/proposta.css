@@ -393,14 +393,15 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 
 /* fluxo compacto (só títulos) fora de um par: vira trilha horizontal em telas largas */
 @media (min-width: 900px) {
-  .blocos > .bloco > .b-fluxo.compacto { grid-template-columns: repeat(4, 1fr); gap: 28px 16px; }
+  .blocos > .bloco > .b-fluxo.compacto { grid-template-columns: repeat(var(--por-linha, 4), 1fr); gap: 28px 16px; }
   .blocos > .bloco > .b-fluxo.compacto .fluxo-etapa { grid-template-columns: 1fr; gap: 12px; padding-bottom: 0; }
   .blocos > .bloco > .b-fluxo.compacto .fluxo-etapa::before {
     left: 44px; right: -10px; top: 17px; bottom: auto; width: auto; height: 2px;
     background: linear-gradient(90deg, var(--destaque-borda), var(--linha));
   }
-  .blocos > .bloco > .b-fluxo.compacto .fluxo-etapa:nth-child(4n)::before { display: none; }
+  .blocos > .bloco > .b-fluxo.compacto .fluxo-etapa.fim-linha::before { display: none; }
   .blocos > .bloco > .b-fluxo.compacto .fluxo-texto { padding-top: 0; }
+}
 }
 
 /* cartões */
@@ -540,6 +541,10 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 }
 .plano-preco small, .total-valor small, .barra-cta-total small { font-family: var(--fonte); font-size: .5em; font-weight: 700; letter-spacing: 0; color: var(--tinta-suave); margin-left: 3px; }
 .plano-obs { font-size: .85rem; font-weight: 600; color: var(--tinta-suave); }
+.plano-formas { display: grid; gap: 6px; margin-top: -4px; padding-bottom: 14px; border-bottom: 1px solid var(--linha); }
+.plano-formas div { display: flex; justify-content: space-between; gap: 12px; font-size: .9rem; }
+.plano-formas dt { color: var(--tinta-suave); }
+.plano-formas dd { font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .plano-descricao { font-size: .9rem; font-weight: 700; color: var(--tinta-suave); }
 .plano-itens { display: grid; gap: 9px; }
 .plano-itens li { position: relative; padding-left: 26px; font-size: .94rem; line-height: 1.45; }

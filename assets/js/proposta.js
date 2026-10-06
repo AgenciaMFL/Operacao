@@ -311,13 +311,17 @@
       const etapas = lista(b.etapas).filter((e) => e.titulo || e.descricao);
       if (!etapas.length) return null;
       let n = 0;
-      return [tituloBloco(b), el('ol', { class: `b-fluxo${etapas.some((e) => e.descricao) ? '' : ' compacto'}` },
+      const numeradas = etapas.filter((e) => e.tipo !== 'divisor').length;
+      // trilha horizontal: escolhe quantas etapas por linha para não deixar uma sozinha
+      const porLinha = numeradas <= 5 ? numeradas : [4, 3, 5].find((c) => numeradas % c === 0) || 4;
+      const compacto = !etapas.some((e) => e.descricao);
+      return [tituloBloco(b), el('ol', { class: `b-fluxo${compacto ? ' compacto' : ''}`, style: compacto ? `--por-linha:${porLinha}` : null },
         etapas.map((e) => {
           if (e.tipo === 'divisor') {
             return el('li', { class: 'fluxo-divisor', text: preencher(e.titulo || e.descricao) });
           }
           n += 1;
-          return el('li', { class: 'fluxo-etapa' },
+          return el('li', { class: `fluxo-etapa${n % porLinha === 0 ? ' fim-linha' : ''}` },
             el('span', { class: 'fluxo-num', text: n }),
             el('div', { class: 'fluxo-texto' },
               e.titulo && el('strong', { text: preencher(e.titulo) }),
@@ -441,8 +445,13 @@
   // Um capítulo é dividido em faixas: cada "Subtítulo de parte" abre uma faixa nova,
   // e as faixas alternam claro/escuro para dar respiro na leitura.
   function secaoConteudo(s, id) {
+    // Bloco com "Exibir" desligado some; uma parte desligada leva junto
+    // todos os blocos dela, até o próximo "Subtítulo de parte".
     const grupos = [[]];
+    let parteOculta = false;
     for (const b of lista(s.blocos)) {
+      if (b?.tipo === 'subsecao') parteOculta = b.ativo === false;
+      if (parteOculta || b?.ativo === false) continue;
       if (b?.tipo === 'subsecao' && grupos[grupos.length - 1].length) grupos.push([]);
       grupos[grupos.length - 1].push(b);
     }
@@ -459,7 +468,7 @@
   }
 
   function calcularInvestimento(inv) {
-    const servicos = lista(inv.servicos).filter((s) => s.nome || num(s.valor));
+    const servicos = lista(inv.servicos).filter((s) => s.ativo !== false && (s.nome || num(s.valor)));
     let combinacoes = lista(inv.combinacoes).filter((c) => c.nome || num(c.valor));
     // sem combinações cadastradas: soma automática dos serviços que não são opcionais
     // (desligue com somarServicos: false quando os serviços são planos alternativos)
@@ -491,7 +500,7 @@
       el('div', { class: 'container' },
         cabecalho(inv, 'Investimento'),
 
-        servicos.length ? el('div', { class: `planos col-${Math.min(servicos.length, 3)}` },
+        servicos.length ? el('div', { class: `planos col-${servicos.length === 4 ? 2 : Math.min(servicos.length, 3)}` },
           servicos.map((s, i) => {
             const opcional = /opcional/i.test(s.selo || '');
             return el('article', { class: `plano revelar${s.destaque ? ' plano-destaque' : ''}${opcional ? ' plano-opcional' : ''}` },
@@ -504,6 +513,12 @@
                 precoEl(s.valor, s.recorrencia),
                 s.observacaoValor && el('span', { class: 'plano-obs', text: preencher(s.observacaoValor) })
               ),
+              // outras formas de pagamento (ex.: à vista com desconto, parcelado no cartão)
+              lista(s.formas).filter((f) => f.rotulo || f.valor).length
+                ? el('dl', { class: 'plano-formas' },
+                    lista(s.formas).filter((f) => f.rotulo || f.valor).map((f) =>
+                      el('div', {}, el('dt', { text: preencher(f.rotulo) }), el('dd', { text: preencher(f.valor) }))))
+                : null,
               s.descricao && el('p', { class: 'plano-descricao', text: preencher(s.descricao) }),
               textos(s.itens).length ? el('ul', { class: 'plano-itens' }, textos(s.itens).map((t) => el('li', { text: t }))) : null
             );

@@ -169,15 +169,19 @@
         { chave: 'titulo', rotulo: 'Título', meia: true },
         { chave: 'texto', rotulo: 'Texto (opcional)', tipo: 'textarea' },
         {
-          chave: 'servicos', rotulo: 'Serviços / planos', tipo: 'lista', item: 'serviço', resumo: (s) => s.nome,
-          novo: () => ({ rotulo: '', selo: '', nome: '', valor: 0, recorrencia: 'mensal', observacaoValor: '', descricao: '', destaque: false, itens: [] }),
+          chave: 'servicos', rotulo: 'Serviços / planos (desmarque "Exibir" nos que não entram nesta proposta)', tipo: 'lista', item: 'serviço', resumo: (s) => s.nome, alternavel: true,
+          novo: () => ({ ativo: true, rotulo: '', selo: '', nome: '', valor: 0, recorrencia: 'mensal', observacaoValor: '', formas: [], descricao: '', destaque: false, itens: [] }),
           campos: [
-            { chave: 'rotulo', rotulo: 'Rótulo (ex.: Serviço 1)', meia: true },
+            { chave: 'rotulo', rotulo: 'Rótulo (vazio = Serviço 1, 2, 3…)', meia: true },
             { chave: 'selo', rotulo: 'Selo (ex.: Recomendado, Opcional)', meia: true, ajuda: 'Com o selo "Opcional", o serviço fica fora da soma automática.' },
             { chave: 'nome', rotulo: 'Nome do serviço' },
             { chave: 'valor', rotulo: 'Valor (R$)', tipo: 'money', meia: true },
             { chave: 'recorrencia', rotulo: 'Cobrança', tipo: 'select', opcoes: RECORRENCIAS, meia: true },
             { chave: 'observacaoValor', rotulo: 'Observação do valor', ajuda: 'Ex.: + comissionamento (a definir)' },
+            {
+              chave: 'formas', rotulo: 'Outras formas de pagamento (opcional)', tipo: 'lista', item: 'forma', resumo: (f) => f.rotulo,
+              campos: [{ chave: 'rotulo', rotulo: 'Forma', meia: true, ajuda: 'Ex.: À vista (5% de desconto)' }, { chave: 'valor', rotulo: 'Valor', meia: true, ajuda: 'Ex.: R$ 8.550' }]
+            },
             { chave: 'descricao', rotulo: 'Frase antes dos itens', ajuda: 'Ex.: Gestão completa das campanhas:' },
             { chave: 'destaque', rotulo: 'Destacar este serviço', tipo: 'toggle' },
             ITENS('O que inclui', 'item')
@@ -467,7 +471,7 @@
 
   // Blocos de conteúdo de uma seção: o tipo define os campos
   function campoBlocos(def, obj) {
-    return campoLista({ ...def, item: 'bloco' }, obj, {
+    return campoLista({ ...def, item: 'bloco', alternavel: true }, obj, {
       resumo: (b) => {
         const tipo = TIPOS_BLOCO[b.tipo]?.nome || 'Bloco';
         const texto = b.titulo || b.texto || '';

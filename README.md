@@ -16,15 +16,15 @@ assets/css, assets/js      → visual e lógica (não precisa mexer)
 
 ## O padrão de proposta MFL Sales
 
-Consolidado a partir das propostas enviadas pelo comercial e organizado em capítulos:
+Consolidado a partir das propostas enviadas pelo comercial (clínicas, EcoSistemas, Quarteiro BR e Implantação Outbound) e organizado em capítulos. É um modelo **completo e modular**: traz todos os serviços da MFL e o comercial desliga o que não entra em cada proposta.
 
 - **Capa** (layout do Figma): vídeo de fundo, faixas animadas, prova social, nome do cliente, frase de impacto e o botão "Ver meu orçamento"
 - **Abertura**: para quem é, a solução e o **resumo da proposta** (solução, contrato, início, investimento)
 1. **Diagnóstico**: o que o cliente já tem, o fluxo "da vitrine à agenda cheia" e a frase-chave
-2. **Estratégia**: visão geral das 3 frentes, depois Tráfego pago, CRM e automação e SDR (opcional)
-3. **Execução**: na prática (jornada do cliente) e o plano dos 90 dias
+2. **Estratégia**: visão geral das frentes, depois Inbound · Tráfego pago, Outbound, CRM e automação, Inteligência artificial e SDR (opcional)
+3. **Execução**: na prática (jornada do cliente), plano dos 90 dias, treinamento do time, entregas e resultado esperado
 4. **Por que a MFL**: números, MFL × outras agências, time
-5. **Investimento**: serviços ou planos, totais, condições e frase de fechamento
+5. **Investimento**: serviços mensais (Tráfego, CRM R$ 297, Outbound, SDR) e implantação com pagamento único (à vista com desconto ou parcelado), totais, condições e fechamento
 6. **Próximos passos**: botão de aprovação pelo WhatsApp e contato do responsável
 
 Visual: as faixas da página alternam automaticamente entre claro (branco e azul-gelo) e escuro (tons de azul-marinho). Cada "Subtítulo de parte" abre uma faixa nova dentro do capítulo.
@@ -50,7 +50,7 @@ Dois blocos seguidos com largura "Metade" ficam lado a lado.
 
 1. Abra `editor.html` e clique em **Nova (modelo)**, ou em **Abrir proposta…** para partir de uma existente.
 2. Preencha **Cliente e proposta**. Nos textos, `{cliente}` vira o nome do cliente automaticamente.
-3. Ajuste seções e blocos. Cada seção tem a opção **Exibir**.
+3. Ajuste seções e blocos. Seções, blocos e serviços têm a opção **Exibir**: desligar um "Subtítulo de parte" esconde a parte inteira (ex.: Outbound).
 4. Em **Investimento**, cadastre serviços ou planos. Sem totais cadastrados, os serviços não opcionais são somados sozinhos; desligue a soma quando forem planos alternativos (Plano 1 *ou* Plano 2).
 5. Confira com **Ver capa** e **Celular**, clique em **Baixar .json** e coloque o arquivo na pasta `propostas/`.
 6. Envie o link: `https://SEU-DOMINIO/index.html?p=nome-do-arquivo`
