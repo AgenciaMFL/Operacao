@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Proposta Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/proposta.css">
+</head>
+<body class="carregando">
+  <div id="estado" class="estado" role="status">
+    <div class="estado-spinner" aria-hidden="true"></div>
+    <p>Carregando proposta…</p>
+  </div>
+
+  <section id="capa" class="capa" hidden></section>
+
+  <div id="proposta" class="proposta" hidden>
+    <header class="topo">
+      <div class="topo-inner">
+        <a href="#inicio" class="topo-marca" id="topo-marca"></a>
+        <nav class="topo-nav" id="topo-nav" aria-label="Seções da proposta"></nav>
+        <button type="button" class="topo-pdf" id="botao-pdf" title="Salvar como PDF">PDF</button>
+      </div>
+      <div class="topo-progresso"><span id="progresso"></span></div>
+    </header>
+    <main id="conteudo"></main>
+    <footer class="rodape" id="rodape"></footer>
+  </div>
+
+  <script src="assets/js/proposta.js"></script>
+</body>
+</html>

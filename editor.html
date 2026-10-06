@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Editor de Propostas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/editor.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="barra-titulo">
+      <strong>Editor de propostas</strong>
+      <span id="status" class="status">Rascunho salvo no navegador</span>
+    </div>
+    <div class="barra-acoes">
+      <button type="button" id="acao-abrir">Abrir proposta…</button>
+      <button type="button" id="acao-importar">Importar arquivo</button>
+      <button type="button" id="acao-novo">Nova (modelo)</button>
+      <button type="button" id="acao-capa">Ver capa</button>
+      <button type="button" id="acao-aba">Abrir em nova aba</button>
+      <button type="button" id="acao-baixar" class="primario">Baixar .json</button>
+      <input type="file" id="arquivo" accept=".json,application/json" hidden>
+    </div>
+  </header>
+
+  <div class="area">
+    <form id="formulario" class="formulario" autocomplete="off" novalidate></form>
+    <div class="previa">
+      <div class="previa-tamanhos" role="group" aria-label="Tamanho da pré-visualização">
+        <button type="button" data-largura="100%" class="ativo">Computador</button>
+        <button type="button" data-largura="390px">Celular</button>
+      </div>
+      <div class="previa-moldura"><iframe id="previa" title="Pré-visualização da proposta" src="index.html?preview=1"></iframe></div>
+    </div>
+  </div>
+
+  <dialog id="dialogo-abrir" class="dialogo">
+    <form method="dialog">
+      <h2>Abrir proposta publicada</h2>
+      <p>Digite o nome do arquivo que está na pasta <code>propostas/</code> (sem o <code>.json</code>).</p>
+      <input type="text" id="abrir-nome" placeholder="ex.: bella-massa" pattern="[a-zA-Z0-9_-]+" required>
+      <div class="dialogo-acoes">
+        <button value="cancelar" formnovalidate>Cancelar</button>
+        <button value="ok" class="primario">Abrir</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="assets/js/editor.js"></script>
+</body>
+</html>
