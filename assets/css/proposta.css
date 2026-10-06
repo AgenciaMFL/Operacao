@@ -291,6 +291,9 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 
 /* ---------- abertura (Figma 3089:8) ---------- */
 
+/* fundo claro atrás dos cantos arredondados da abertura */
+#conteudo { background: var(--azul-50); }
+
 .abertura {
   position: relative; z-index: 1; isolation: isolate; overflow: hidden; color: #fff;
   min-height: max(600px, 34.65vw);
