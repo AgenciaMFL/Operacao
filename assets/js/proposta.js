@@ -341,7 +341,7 @@
           { titulo: 'Tecnologia', texto: 'Funil e automações organizam cada oportunidade até o fechamento.' }
         ], 3)),
         bloco('', destaque(`A MFL Sales estrutura operações comerciais de aquisição, ${c.b2c ? 'do primeiro contato à venda' : 'do primeiro contato à reunião agendada'}, com método, tecnologia e acompanhamento próximo.`))
-      ]);
+      ], { classe: 'resultados-centro' });
   };
 
   SECOES.inbound = (c) => {

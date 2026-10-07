@@ -555,6 +555,16 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .quem-topo .quem-rotulo { order: -1; grid-column: 1 / -1; justify-self: start; }
 }
 
+/* resultados: tudo centralizado em volta do vídeo */
+.resultados-centro .secao-cabecalho { margin-inline: auto; justify-items: center; text-align: center; }
+.resultados-centro .secao-texto p { margin-inline: auto; }
+.resultados-centro .video-principal { margin-inline: auto; justify-items: center; width: 100%; }
+.resultados-centro .video-principal > .depoimento-video { width: 100%; }
+.resultados-centro .bloco-titulo { text-align: center; }
+.resultados-centro .b-cartoes .cartao { text-align: center; }
+.resultados-centro .b-destaque { margin-inline: auto; text-align: center; }
+.resultados-centro .b-destaque::before { margin-inline: auto; }
+
 /* ---------- seções ---------- */
 
 .secao-banda { padding: clamp(72px, 9vw, 112px) 0; }
