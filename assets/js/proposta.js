@@ -391,10 +391,21 @@
   const SINAIS = 'Não buscamos contatos aleatórios. Buscamos perfis com sinais de que precisam do que vocês vendem: segmento, porte, momento de crescimento e estrutura atual.';
 
   // Coluna "quem faz" com etapas numeradas
+  // Ícone de cada cartão "quem faz" (traço 24 × 24)
+  const ICONES_QUEM = {
+    'Estratégia': 'M12 3a9 9 0 1 0 9 9M12 7a5 5 0 1 0 5 5M12 11a1 1 0 1 0 1 1M21 3l-9 9',
+    'Construção da base': 'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6',
+    'Contato e agendamento': 'M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 10h16M9 3v4M15 3v4M9 15l2 2 4-4',
+    'Inteligência, base e preparação': 'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z',
+    'Contato e fechamento': 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12zM9 12l2 2 4-4'
+  };
+
   function colunaQuem(quem, titulo, texto, etapasLista, inicio, escura) {
     return el('article', { class: `quem${escura ? ' quem-cliente' : ''}` },
-      el('span', { class: 'quem-rotulo', text: quem }),
-      el('h4', { text: titulo }),
+      el('div', { class: 'quem-topo' },
+        ICONES_QUEM[titulo] && el('span', { class: 'quem-icone' }, icone(ICONES_QUEM[titulo])),
+        el('h4', { text: titulo }),
+        el('span', { class: 'quem-rotulo', text: quem })),
       texto && el('p', { text: texto }),
       etapas(etapasLista, { inicio }));
   }
