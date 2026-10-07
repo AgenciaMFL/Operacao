@@ -415,6 +415,74 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .porque-texto { padding: 24px 0 0; }
 }
 
+/* ---------- como trabalhamos: linha do tempo vertical ---------- */
+
+.secao-cabecalho.centro { margin-inline: auto; justify-items: center; text-align: center; }
+.secao-cabecalho.centro .secao-texto p { margin-inline: auto; }
+
+.linha-tempo {
+  --progresso: 0; --marcador: 56px;
+  position: relative; list-style: none; margin: 0 auto; padding: 0; max-width: 980px;
+  display: grid; gap: clamp(28px, 5vw, 64px);
+}
+.linha-tempo-trilho {
+  position: absolute; top: calc(var(--marcador) / 2); bottom: calc(var(--marcador) / 2); left: 50%; width: 2px; margin-left: -1px;
+  border-radius: 2px; background: var(--linha-forte);
+}
+.linha-tempo-trilho span {
+  position: absolute; inset: 0; border-radius: inherit; transform-origin: top; transform: scaleY(var(--progresso));
+  background: linear-gradient(180deg, var(--destaque), #3CA55D);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--destaque) 60%, transparent);
+}
+.etapa-v { display: grid; grid-template-columns: 1fr var(--marcador) 1fr; gap: clamp(20px, 3vw, 40px); align-items: center; }
+.etapa-v-marcador {
+  grid-column: 2; grid-row: 1; position: relative; z-index: 1;
+  display: grid; place-items: center; width: var(--marcador); height: var(--marcador); border-radius: 50%;
+  font: 700 1.15rem 'Archivo', var(--display); color: var(--tinta-suave);
+  background: var(--fundo-secao); border: 2px solid var(--linha-forte);
+  transition: background .5s var(--curva), color .5s var(--curva), border-color .5s var(--curva), box-shadow .5s var(--curva);
+}
+.etapa-v.ativa .etapa-v-marcador {
+  background: var(--destaque); border-color: var(--destaque); color: #0A1530;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--destaque) 18%, transparent);
+}
+.etapa-v-cartao {
+  grid-row: 1; position: relative; display: grid; gap: 8px; padding: clamp(22px, 2.6vw, 32px);
+  border-radius: 20px; background: var(--superficie); border: 1px solid var(--linha);
+  transition: border-color .5s var(--curva), transform .5s var(--curva);
+}
+.etapa-v:nth-child(even) .etapa-v-cartao { grid-column: 1; }
+.etapa-v:nth-child(odd) .etapa-v-cartao { grid-column: 3; }
+.etapa-v.ativa .etapa-v-cartao { border-color: color-mix(in srgb, var(--destaque) 45%, transparent); }
+.etapa-v-icone {
+  display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 6px; border-radius: 12px;
+  color: var(--destaque); background: color-mix(in srgb, var(--destaque) 12%, transparent);
+}
+.etapa-v-icone svg { width: 22px; height: 22px; }
+.etapa-v-rotulo { font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--destaque-texto); }
+.etapa-v-cartao h3 { font: 700 clamp(1.25rem, 2vw, 1.5rem)/1.2 'Archivo', var(--display); letter-spacing: -.02em; }
+.etapa-v-cartao p { color: var(--tinta-suave); }
+
+/* entrada ao rolar: cada cartão desliza do lado em que está */
+.etapa-v.revelar { transform: none; }
+.etapa-v.revelar .etapa-v-cartao, .etapa-v.revelar .etapa-v-marcador { transition-property: opacity, transform, background, color, border-color, box-shadow; transition-duration: .8s; transition-timing-function: var(--curva); }
+.etapa-v.revelar .etapa-v-marcador { transform: scale(.4); }
+.etapa-v.revelar:nth-child(even) .etapa-v-cartao { transform: translateX(-48px); }
+.etapa-v.revelar:nth-child(odd) .etapa-v-cartao { transform: translateX(48px); }
+.etapa-v.revelar.visivel .etapa-v-cartao, .etapa-v.revelar.visivel .etapa-v-marcador { transform: none; }
+
+@media (max-width: 720px) {
+  .linha-tempo { --marcador: 44px; }
+  .linha-tempo-trilho { left: calc(var(--marcador) / 2); }
+  .etapa-v { grid-template-columns: var(--marcador) 1fr; gap: 16px; align-items: start; }
+  .etapa-v-marcador { grid-column: 1; }
+  .etapa-v:nth-child(even) .etapa-v-cartao, .etapa-v:nth-child(odd) .etapa-v-cartao { grid-column: 2; }
+  .etapa-v.revelar:nth-child(even) .etapa-v-cartao, .etapa-v.revelar:nth-child(odd) .etapa-v-cartao { transform: translateY(32px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .etapa-v.revelar .etapa-v-cartao, .etapa-v.revelar .etapa-v-marcador { transform: none !important; }
+}
+
 /* ---------- seções ---------- */
 
 .secao-banda { padding: clamp(72px, 9vw, 112px) 0; }

@@ -273,16 +273,42 @@
       bloco('', destaque('Sua empresa foca em vender e entregar. A MFL Sales estrutura e opera a máquina que traz as oportunidades.'))
     ];
 
-  SECOES.como = () => faixaSecao('como-funciona', 'Como trabalhamos', 'Quatro etapas, do diagnóstico à otimização',
-    'Uma operação montada em etapas claras, com acompanhamento próximo em cada uma delas.',
-    [
-      bloco('', etapas([
-        ['Diagnóstico', 'Entendemos o seu negócio, o seu cliente ideal e o seu processo de venda atual'],
-        ['Estruturação', 'Montamos canais, funil, automações e materiais de abordagem'],
-        ['Execução', 'Colocamos a operação para rodar e gerar oportunidades todos os meses'],
-        ['Otimização', 'Analisamos os números e ajustamos o que traz mais resultado']
-      ], { compacto: true }))
-    ]);
+  // Ícones de traço simples (24 × 24) para a linha do tempo
+  function icone(d) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    Object.entries({ viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true' })
+      .forEach(([k, v]) => svg.setAttribute(k, v));
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', d);
+    svg.append(path);
+    return svg;
+  }
+
+  // Como trabalhamos: linha do tempo vertical; cada etapa aparece ao rolar e a linha vai se preenchendo
+  SECOES.como = () => {
+    const passos = [
+      ['Diagnóstico', 'Entendemos o seu negócio, o seu cliente ideal e o seu processo de venda atual.', 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4'],
+      ['Estruturação', 'Montamos canais, funil, automações e materiais de abordagem.', 'M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5M3 18l9 5 9-5'],
+      ['Execução', 'Colocamos a operação para rodar e gerar oportunidades todos os meses.', 'M5 12h14M13 6l6 6-6 6'],
+      ['Otimização', 'Analisamos os números e ajustamos o que traz mais resultado.', 'M4 19h16M6 15l4-4 3 3 6-7M15 7h4v4']
+    ];
+    return el('section', { class: 'secao secao-banda como', id: 'como-funciona' },
+      el('div', { class: 'container' },
+        el('header', { class: 'secao-cabecalho centro revelar' },
+          el('span', { class: 'secao-rotulo' }, el('span', { text: 'Como trabalhamos' })),
+          el('h2', { class: 'secao-titulo', text: 'Quatro etapas, do diagnóstico à otimização' }),
+          el('div', { class: 'secao-texto' }, el('p', { text: 'Uma operação montada em etapas claras, com acompanhamento próximo em cada uma delas.' }))),
+        el('ol', { class: 'linha-tempo' },
+          el('li', { class: 'linha-tempo-trilho', 'aria-hidden': 'true' }, el('span')),
+          passos.map(([titulo, texto, d], i) => el('li', { class: 'etapa-v revelar' },
+            el('span', { class: 'etapa-v-marcador', text: String(i + 1) }),
+            el('div', { class: 'etapa-v-cartao' },
+              el('span', { class: 'etapa-v-icone' }, icone(d)),
+              el('span', { class: 'etapa-v-rotulo', text: `Etapa ${String(i + 1).padStart(2, '0')}` }),
+              el('h3', { text: titulo }),
+              el('p', { text: texto })))))));
+  };
 
   SECOES.resultados = (c) => {
     const url = String(S.videoUrl || '').trim();
@@ -959,7 +985,22 @@
     alvos.forEach((n) => observer.observe(n));
   }
 
+  // Linha do tempo: preenche o trilho até a altura de leitura e acende as etapas que já passaram
+  function atualizarLinhaTempo() {
+    const linha = document.querySelector('.linha-tempo');
+    if (!linha) return;
+    const r = linha.getBoundingClientRect();
+    const leitura = innerHeight * 0.6;
+    const p = r.height > 0 ? Math.min(Math.max((leitura - r.top) / r.height, 0), 1) : 0;
+    linha.style.setProperty('--progresso', p.toFixed(4));
+    linha.querySelectorAll('.etapa-v').forEach((etapa) => {
+      const m = etapa.querySelector('.etapa-v-marcador').getBoundingClientRect();
+      etapa.classList.toggle('ativa', m.top + m.height / 2 <= leitura);
+    });
+  }
+
   function aoRolar() {
+    atualizarLinhaTempo();
     const max = document.documentElement.scrollHeight - innerHeight;
     $('#progresso').style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`;
     const intro = $('#inicio');
