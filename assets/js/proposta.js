@@ -377,7 +377,7 @@
       b2c ? 'Atrair clientes no momento em que eles estão prontos para comprar' : 'Capturar clientes no momento em que a necessidade aparece',
       texto,
       [
-        bloco('', blocoTitulo(b2c ? 'Do anúncio à venda' : 'Do anúncio à reunião'), etapas(fluxo)),
+        bloco('', blocoTitulo(b2c ? 'Do anúncio à venda' : 'Do anúncio à reunião'), etapas(fluxo, { compacto: true })),
         par(
           bloco('', blocoTitulo('O que entregamos'), listaCheck(itensInbound(c).filter((i) => i !== FUNIL_CLIENTE), 1)),
           bloco('', el('figure', { class: 'b-citacao caixa-pratica' }, el('figcaption', { text: 'Na prática' }), el('blockquote', { text: pratica })))
@@ -837,7 +837,7 @@
 
     return el('section', { class: 'secao secao-banda secao-solucao', id: 'solucao' },
       el('div', { class: 'container' },
-        el('header', { class: 'secao-cabecalho revelar' },
+        el('header', { class: 'secao-cabecalho centro revelar' },
           el('span', { class: 'secao-rotulo' }, el('span', { text: 'A solução' })),
           el('h2', { class: 'secao-titulo', text: 'Como vamos gerar oportunidades para a sua empresa' }),
           el('div', { class: 'secao-texto' }, el('p', { text: 'Escolha uma frente para ver o que fazemos, passo a passo.' }))),

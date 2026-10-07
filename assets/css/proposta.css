@@ -483,6 +483,45 @@ body.rolou .topo { border-bottom-color: var(--linha); }
   .etapa-v.revelar .etapa-v-cartao, .etapa-v.revelar .etapa-v-marcador { transform: none !important; }
 }
 
+/* ---------- solução em abas: leitura escaneável ---------- */
+
+.secao-solucao .abas-barra { display: flex; justify-content: center; }
+.painel-aba { padding-top: clamp(8px, 2vw, 24px); }
+/* abertura da frente: título à esquerda, explicação à direita */
+.painel-aba > .secao-cabecalho {
+  max-width: none; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); column-gap: clamp(28px, 5vw, 72px); row-gap: 14px;
+  align-items: end; padding-bottom: clamp(28px, 4vw, 44px); border-bottom: 1px solid var(--linha);
+}
+.painel-aba > .secao-cabecalho .secao-rotulo { grid-column: 1 / -1; }
+.painel-aba > .secao-cabecalho .secao-texto p { max-width: 56ch; }
+/* blocos agrupados em cartões para separar "como funciona", "o que entregamos" e "na prática" */
+.painel-aba .blocos { gap: clamp(20px, 2.6vw, 28px); }
+.painel-aba .blocos > .bloco:not(:has(.quem-grade, .b-cartoes, .b-destaque, .b-nota, .b-subsecao)),
+.painel-aba .blocos-par > .bloco {
+  padding: clamp(22px, 3vw, 36px); border-radius: 20px; background: var(--superficie); border: 1px solid var(--linha);
+  box-shadow: var(--sombra-cartao);
+}
+.painel-aba .blocos-par { gap: clamp(20px, 2.6vw, 28px); align-items: start; }
+.painel-aba .bloco-titulo { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; font-size: clamp(1.05rem, 1.5vw, 1.2rem); }
+.painel-aba .bloco-titulo::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--destaque); flex-shrink: 0; }
+.painel-aba .b-lista li + li { margin-top: 2px; }
+/* "na prática": cartão de destaque suave, texto maior */
+.painel-aba .caixa-pratica { height: 100%; align-content: start; }
+.painel-aba .caixa-pratica figcaption { color: var(--destaque-texto); }
+.painel-aba .caixa-pratica blockquote { font-size: clamp(1.02rem, 1.3vw, 1.12rem); line-height: 1.6; padding: 0; background: none; border: 0; }
+.painel-aba .blocos-par > .bloco:has(.caixa-pratica) { background: color-mix(in srgb, var(--destaque) 8%, var(--superficie)); border-color: color-mix(in srgb, var(--destaque) 30%, transparent); }
+/* frase final da frente em faixa escura */
+.painel-aba .b-destaque {
+  max-width: none; padding: clamp(26px, 3.4vw, 40px) clamp(24px, 4vw, 48px); border-radius: 20px;
+  background: #0A1530; color: #fff;
+}
+.painel-aba .b-nota { max-width: none; }
+
+@media (max-width: 720px) {
+  .painel-aba > .secao-cabecalho { grid-template-columns: 1fr; }
+  .painel-aba .blocos-par { grid-template-columns: 1fr; }
+}
+
 /* ---------- seções ---------- */
 
 .secao-banda { padding: clamp(72px, 9vw, 112px) 0; }
