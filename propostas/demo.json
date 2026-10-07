@@ -1,0 +1,39 @@
+{
+  "id": "demo",
+  "versao": 2,
+  "cliente": "Empresa Exemplo",
+  "data": "2026-10-07",
+  "validadeDias": 7,
+  "segmento": "Serviços B2B",
+  "modelo": "4",
+  "outTipo": "bdr",
+  "pub": "b2b",
+  "crm": "mfl",
+  "sc": {
+    "meta": true,
+    "google": true,
+    "lp": true,
+    "wpp": true,
+    "remkt": true,
+    "criativos": true,
+    "roteiro": true,
+    "relatorio": true
+  },
+  "vIn": "2500",
+  "vOut": "4200",
+  "vCombo": "5900",
+  "vCrm": "297",
+  "contrato": 3,
+  "cond": "Primeiro mês com setup incluso",
+  "verbaDia": 100,
+  "videoUrl": "",
+  "thumb": "",
+  "depoimentos": [],
+  "responsavel": {
+    "nome": "Equipe Comercial MFL",
+    "cargo": "Consultor de Aquisição",
+    "whatsapp": "5521992287210",
+    "email": "contato@agenciamfl.com.br"
+  },
+  "capa": {}
+}
