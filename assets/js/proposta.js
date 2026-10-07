@@ -339,8 +339,7 @@
           { titulo: 'Estratégia', texto: 'Definimos para quem vender, com qual mensagem e por quais canais.' },
           { titulo: 'Execução', texto: 'Operamos campanhas, prospecção e follow-up com rotina e método.' },
           { titulo: 'Tecnologia', texto: 'Funil e automações organizam cada oportunidade até o fechamento.' }
-        ], 3)),
-        bloco('', destaque(`A MFL Sales estrutura operações comerciais de aquisição, ${c.b2c ? 'do primeiro contato à venda' : 'do primeiro contato à reunião agendada'}, com método, tecnologia e acompanhamento próximo.`))
+        ], 3))
       ], { classe: 'resultados-centro' });
   };
 
