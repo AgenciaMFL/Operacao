@@ -45,14 +45,27 @@ No gerador, em **8 · Vídeo de prova social**, o comercial informa o vídeo pri
 
 Os itens marcados como **EXEMPLO** no catálogo são espaços reservados: troque pelos depoimentos reais.
 
-## Publicação
+## Publicação (Hostinger)
 
-Site estático, sem build: GitHub Pages, Netlify ou Vercel servem. Precisa ser aberto por um servidor (não funciona com `file://`).
+O site roda em qualquer hospedagem com PHP (na Hostinger: **Criar site → Site PHP/HTML**). Não precisa de banco de dados.
 
-```bash
-python3 -m http.server 8000
-# http://localhost:8000/index.html?p=padrao
-# http://localhost:8000/editor.html
+```
+index.html          → proposta do cliente:  https://SEU-DOMINIO/?p=CODIGO
+editor.php          → editor com login:     https://SEU-DOMINIO/editor.php  (editor.html redireciona para ele)
+api/                → servidor: login, publicar, ler e listar propostas
+api/config.php      → usuários do comercial (senha guardada como hash). Fica fora do Git
+dados/              → propostas publicadas (criada sozinha, bloqueada para o navegador). Fica fora do Git
+.htaccess           → protege o editor, a pasta dados/ e os arquivos internos
 ```
 
-> Quem tiver o link consegue abrir a proposta. Use nomes de arquivo difíceis de adivinhar se não quiser que propostas sejam encontradas por tentativa.
+**Fluxo do comercial:** entra no `editor.php` com e-mail e senha, edita a proposta, clica em **Publicar** e recebe o link (`?p=` + código de 10 letras) com botões de copiar e enviar no WhatsApp. Publicar de novo atualiza o mesmo link. **Propostas publicadas** lista tudo o que já foi publicado, com copiar link, abrir, editar e duplicar.
+
+**PDF:** botão Exportar PDF no editor e Salvar em PDF no rodapé da proposta (impressão do navegador, gratuita). Melhor resultado no Chrome do computador.
+
+**Cadastrar alguém ou trocar senha:** gere a linha com `php api/criar-usuario.php email@agenciamfl.com.br "senha"` e cole em `api/config.php` (modelo em `api/config.exemplo.php`).
+
+**Ao atualizar o site:** envie os arquivos novos, mas não apague `api/config.php` nem a pasta `dados/` do servidor.
+
+Para testar localmente com o servidor: `php -S localhost:8000` e abra `http://localhost:8000/editor.php`. Sem PHP (`python3 -m http.server`), o editor funciona só com rascunho e `.json`, e a proposta lê os arquivos de `propostas/` (ex.: `?p=demo`).
+
+> Quem tiver o link consegue abrir a proposta. Os códigos são aleatórios e as páginas não aparecem no Google.

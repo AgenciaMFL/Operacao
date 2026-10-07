@@ -120,6 +120,28 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-
 .previa-moldura { flex: 1; display: flex; justify-content: center; padding: 0 12px 12px; min-height: 0; }
 .previa iframe { width: 100%; height: 100%; border: 0; border-radius: var(--raio); background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.08); transition: width .25s; }
 
+/* publicação (só no site com servidor) */
+.barra-acoes .publicar { padding-inline: 18px; }
+.usuario { display: inline-flex; align-items: center; gap: 8px; margin-left: 6px; padding-left: 12px; border-left: 1px solid #3F3F46; font-size: 12.5px; color: #A1A1AA; }
+.usuario button { padding: 5px 10px !important; }
+.status a { color: #39D353; }
+.link-caixa { display: flex; gap: 8px; }
+.link-caixa input { flex: 1; min-width: 0; font-size: 13px; }
+.link-caixa button { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--green); cursor: pointer; }
+.botao-link { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--ui-line); background: #fff; color: var(--ui-fg); font-weight: 600; text-decoration: none; }
+.botao-link:hover { border-color: var(--ui-focus); color: var(--ui-focus); }
+.dialogo-largo { width: min(760px, calc(100vw - 32px)); }
+.dialogo-medio { width: min(560px, calc(100vw - 32px)); }
+.dialogo-acoes { flex-wrap: wrap; }
+.lista-itens { display: grid; gap: 8px; margin-top: 12px; max-height: 60vh; overflow-y: auto; }
+.lista-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border: 1px solid var(--ui-line); border-radius: 10px; }
+.lista-item strong { display: block; font-size: 14px; }
+.lista-item small { color: var(--ui-muted); font-size: 12px; }
+.lista-item .acoes { display: flex; gap: 6px; flex-wrap: wrap; }
+.lista-item .acoes button, .lista-item .acoes a { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--ui-line); background: #fff; font-size: 12.5px; font-weight: 600; cursor: pointer; color: var(--ui-fg); text-decoration: none; }
+.lista-item .acoes button:hover, .lista-item .acoes a:hover { border-color: var(--ui-focus); color: var(--ui-focus); }
+.lista-vazia { padding: 18px; text-align: center; color: var(--ui-muted); }
+
 /* diálogo */
 .dialogo { border: 0; border-radius: 14px; padding: 24px; width: min(420px, calc(100vw - 32px)); box-shadow: 0 20px 60px rgba(0,0,0,.25); }
 .dialogo::backdrop { background: rgba(0,0,0,.4); }

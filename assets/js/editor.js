@@ -17,6 +17,8 @@
   let catalogo = { segmentos: [], depoimentos: [] };
   let timer = null;
   let filtroDepo = '';
+  let online = false;      // editor aberto no site com servidor (login + publicar)
+  let pendente = false;    // há alterações ainda não publicadas
 
   const hojeIso = () => {
     const d = new Date();
@@ -25,7 +27,7 @@
 
   function normalizar(d) {
     const base = {
-      versao: 2, id: '', cliente: '', data: hojeIso(), validadeDias: 7, segmento: '',
+      versao: 2, id: '', idPublicado: '', cliente: '', data: hojeIso(), validadeDias: 7, segmento: '',
       modelo: '4', outTipo: 'bdr', pub: 'b2b', crm: 'mfl', sc: { ...SCOPE_PADRAO },
       vIn: '', vOut: '', vCombo: '', vCrm: '297', contrato: 3, cond: '', verbaDia: 100,
       videoUrl: '', thumb: '', depoimentos: [], responsavel: {}, capa: {}
@@ -181,10 +183,11 @@
     atualizarPainel();
     clearTimeout(timer);
     $('status').textContent = 'Salvando…';
+    pendente = true;
     timer = setTimeout(() => {
       salvarRascunho();
       enviarParaPrevia();
-      $('status').textContent = 'Rascunho salvo no navegador';
+      atualizarStatus();
     }, 200);
   }
 
@@ -204,7 +207,18 @@
     recriarPainel();
     salvarRascunho();
     enviarParaPrevia();
-    $('status').textContent = origem ? `Carregado: ${origem}` : 'Rascunho salvo no navegador';
+    pendente = false;
+    atualizarStatus(origem ? `Carregado: ${origem}` : '');
+  }
+
+  function atualizarStatus(textoFixo) {
+    const status = $('status');
+    status.replaceChildren();
+    if (textoFixo) { status.textContent = textoFixo; return; }
+    if (!online) { status.textContent = 'Rascunho salvo no navegador'; return; }
+    if (!S.idPublicado) { status.textContent = 'Ainda não publicada'; return; }
+    status.append(pendente ? 'Alterações ainda não publicadas · ' : 'Publicada · ',
+      Object.assign(document.createElement('a'), { href: linkDe(S.idPublicado), target: '_blank', rel: 'noopener', textContent: 'abrir link' }));
   }
 
   async function buscar(nome) {
@@ -276,6 +290,7 @@
     try {
       const modelo = await buscar(MODELO);
       modelo.id = '';
+      modelo.idPublicado = '';
       modelo.data = hojeIso();
       carregarDados(modelo, 'proposta padrão');
     } catch (err) { alert(err.message); }
@@ -319,6 +334,129 @@
     if (mostrandoCapa) iframe.contentWindow?.postMessage({ tipo: 'proposta:capa', mostrar: true }, location.origin);
   });
 
+  /* ---------- publicação (site hospedado com o servidor PHP) ---------- */
+
+  const linkDe = (id) => new URL(`./?p=${id}`, location.href).href;
+
+  async function api(caminho, opcoes = {}) {
+    const headers = { 'X-MFL': '1' };
+    if (opcoes.body) headers['Content-Type'] = 'application/json';
+    const resp = await fetch(`api/${caminho}`, { cache: 'no-store', credentials: 'same-origin', ...opcoes, headers });
+    if (!(resp.headers.get('content-type') || '').includes('application/json')) throw new Error('sem-servidor');
+    const json = await resp.json();
+    if (resp.status === 401) { location.href = 'editor.php'; throw new Error(json.erro || 'Faça login novamente.'); }
+    if (!resp.ok) throw new Error(json.erro || 'Não foi possível concluir.');
+    return json;
+  }
+
+  function ativarModoOnline(u) {
+    online = true;
+    $('acao-publicar').hidden = false;
+    $('acao-lista').hidden = false;
+    $('usuario').hidden = false;
+    $('usuario-nome').textContent = u.nome || u.email;
+    $('acao-abrir').hidden = true;
+    $('acao-baixar').classList.remove('primario');
+    atualizarStatus();
+  }
+
+  async function copiar(texto, botao) {
+    try { await navigator.clipboard.writeText(texto); } catch (e) {
+      const campo = $('publicado-link');
+      campo.value = texto; campo.select(); document.execCommand('copy');
+    }
+    if (botao) {
+      const antes = botao.textContent;
+      botao.textContent = 'Copiado!';
+      setTimeout(() => { botao.textContent = antes; }, 1500);
+    }
+  }
+
+  function mostrarPublicado(id, novo) {
+    const link = linkDe(id);
+    $('publicado-titulo').textContent = novo ? 'Proposta publicada' : 'Proposta atualizada';
+    $('publicado-link').value = link;
+    $('publicado-abrir').href = link;
+    $('publicado-whats').href = `https://wa.me/?text=${encodeURIComponent(`Olá! Segue a proposta comercial da MFL Sales${S.cliente ? ` para ${S.cliente}` : ''}: ${link}`)}`;
+    $('dialogo-publicado').showModal();
+  }
+
+  $('publicado-copiar').addEventListener('click', (e) => copiar($('publicado-link').value, e.currentTarget));
+
+  $('acao-publicar').addEventListener('click', async (e) => {
+    const falta = [...document.querySelectorAll('#aviso li')].map((li) => li.textContent);
+    if (falta.length && !confirm(`Ainda falta preencher:\n• ${falta.join('\n• ')}\n\nPublicar mesmo assim?`)) return;
+    const botao = e.currentTarget;
+    botao.disabled = true;
+    botao.textContent = 'Publicando…';
+    try {
+      const r = await api('publicar.php', { method: 'POST', body: JSON.stringify({ id: S.idPublicado || '', dados: S }) });
+      S.idPublicado = r.id;
+      pendente = false;
+      salvarRascunho();
+      atualizarStatus();
+      mostrarPublicado(r.id, r.novo);
+    } catch (err) {
+      alert(`Não foi possível publicar: ${err.message}`);
+    } finally {
+      botao.disabled = false;
+      botao.textContent = 'Publicar';
+    }
+  });
+
+  let publicadas = [];
+  const dataHora = (iso) => new Date(iso).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+  function desenharLista() {
+    const busca = slugificar($('lista-busca').value);
+    const itens = publicadas.filter((p) => !busca || slugificar(p.cliente).includes(busca));
+    const caixa = $('lista-itens');
+    if (!itens.length) {
+      caixa.replaceChildren(Object.assign(document.createElement('p'), { className: 'lista-vazia', textContent: publicadas.length ? 'Nenhuma proposta com esse nome.' : 'Nenhuma proposta publicada ainda.' }));
+      return;
+    }
+    caixa.replaceChildren(...itens.map((p) => {
+      const linha = Object.assign(document.createElement('div'), { className: 'lista-item' });
+      const info = document.createElement('div');
+      info.append(Object.assign(document.createElement('strong'), { textContent: p.cliente || '(sem nome do cliente)' }),
+        Object.assign(document.createElement('small'), { textContent: `Atualizada em ${dataHora(p.atualizadoEm)} por ${p.atualizadoPor}` }));
+      const acoes = Object.assign(document.createElement('div'), { className: 'acoes' });
+      const botao = (rotulo, fn) => { const b = Object.assign(document.createElement('button'), { type: 'button', textContent: rotulo }); b.addEventListener('click', fn); return b; };
+      acoes.append(
+        botao('Copiar link', (ev) => copiar(linkDe(p.id), ev.currentTarget)),
+        Object.assign(document.createElement('a'), { href: linkDe(p.id), target: '_blank', rel: 'noopener', textContent: 'Abrir' }),
+        botao('Editar', () => abrirPublicada(p.id, false)),
+        botao('Duplicar', () => abrirPublicada(p.id, true)));
+      linha.append(info, acoes);
+      return linha;
+    }));
+  }
+
+  async function abrirPublicada(id, duplicar) {
+    if (pendente && !confirm('O rascunho atual tem alterações não publicadas. Substituir mesmo assim?')) return;
+    try {
+      const d = await api(`proposta.php?id=${id}`);
+      $('dialogo-lista').close();
+      if (duplicar) carregarDados({ ...d, idPublicado: '', cliente: d.cliente ? `${d.cliente} (cópia)` : '' }, 'cópia de proposta publicada');
+      else carregarDados({ ...d, idPublicado: id });
+    } catch (err) { alert(err.message); }
+  }
+
+  $('acao-lista').addEventListener('click', async () => {
+    $('lista-busca').value = '';
+    $('lista-itens').replaceChildren(Object.assign(document.createElement('p'), { className: 'lista-vazia', textContent: 'Carregando…' }));
+    $('dialogo-lista').showModal();
+    try { publicadas = (await api('lista.php')).propostas || []; desenharLista(); } catch (err) {
+      $('lista-itens').replaceChildren(Object.assign(document.createElement('p'), { className: 'lista-vazia', textContent: err.message }));
+    }
+  });
+  $('lista-busca').addEventListener('input', desenharLista);
+
+  $('acao-sair').addEventListener('click', async () => {
+    try { await api('sair.php', { method: 'POST' }); } catch (e) { /* segue para a tela de login */ }
+    location.href = 'editor.php';
+  });
+
   /* ---------- início ---------- */
 
   (async () => {
@@ -335,5 +473,12 @@
       try { inicial = await buscar(MODELO); } catch (e) { inicial = {}; }
     }
     carregarDados(inicial);
+
+    // No site hospedado, o servidor confirma o login e libera o botão Publicar
+    try {
+      const sessao = await api('sessao.php');
+      if (sessao.logado) ativarModoOnline(sessao);
+      else location.href = 'editor.php';
+    } catch (e) { /* sem servidor (arquivos abertos localmente): só rascunho e .json */ }
   })();
 })();

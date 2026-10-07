@@ -1,0 +1,21 @@
+# Proposta comercial MFL Sales (Hostinger / Apache / LiteSpeed)
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # O editor só abre pelo editor.php, que pede login
+  RewriteRule ^editor\.html$ editor.php [L,QSA]
+  # Pastas e arquivos internos não são acessíveis pelo navegador
+  RewriteRule ^dados(/|$) - [F,L]
+</IfModule>
+
+<FilesMatch "^(config\.php|config\.exemplo\.php|_base\.php|criar-usuario\.php|README\.md|\.gitignore)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

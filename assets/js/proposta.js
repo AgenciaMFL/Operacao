@@ -1034,6 +1034,13 @@
         if (rascunho) return JSON.parse(rascunho);
       } catch (e) { /* cai para o arquivo */ }
     }
+    // Proposta publicada pelo editor (servidor PHP); se não houver, arquivo da pasta propostas/
+    if (/^[a-z0-9]{10}$/.test(slug)) {
+      try {
+        const api = await fetch(`api/proposta.php?id=${slug}`, { cache: 'no-store' });
+        if (api.ok && (api.headers.get('content-type') || '').includes('application/json')) return await api.json();
+      } catch (e) { /* sem servidor: tenta o arquivo */ }
+    }
     const resp = await fetch(`propostas/${slug}.json`, { cache: 'no-store' });
     if (!resp.ok) throw new Error(`Proposta "${slug}" não encontrada.`);
     return resp.json();

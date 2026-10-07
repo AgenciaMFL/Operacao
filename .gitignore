@@ -1,2 +1,6 @@
 # Local MCP settings with secrets
 .claude/settings.json
+
+# Servidor de propostas: senhas e propostas publicadas ficam fora do Git
+api/config.php
+dados/
