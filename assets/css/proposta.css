@@ -1030,6 +1030,32 @@ a.video-link:hover { text-decoration: underline; }
   background: var(--destaque-suave); color: var(--destaque-texto); font-size: .62rem; font-weight: 900;
 }
 
+/* cartões de plano: cartão branco dentro de uma moldura cinza suave (sem botão) */
+.planos { gap: 36px; padding: 12px; }
+.plano, .plano-destaque, .plano-crm-largo {
+  gap: 18px; padding: clamp(24px, 3vw, 34px); border-radius: 28px;
+  background: #FFFFFF; border: 0; color: #0A1530;
+  box-shadow: 0 0 0 12px rgba(223, 228, 237, .75), 0 0 0 13px rgba(255, 255, 255, .9), 0 34px 60px -34px rgba(10, 21, 48, .45);
+}
+.plano-destaque, .tema-claro .plano-destaque, .tema-escuro .plano-destaque { box-shadow: 0 0 0 12px rgba(60, 165, 93, .18), 0 0 0 13px rgba(255, 255, 255, .9), 0 34px 60px -30px rgba(46, 138, 76, .45); }
+.plano-crm-largo { margin: 12px; }
+.plano-rotulo { font-size: .78rem; font-weight: 500; letter-spacing: .06em; color: #7A8295; }
+.plano-selo { padding: 8px 16px; font-size: .82rem; font-weight: 600; letter-spacing: 0; text-transform: none; background: #E3E6EC; color: #0A1530; }
+.plano-destaque .plano-selo { background: #3CA55D; color: #fff; }
+.plano-nome { color: #0A1530; }
+.plano-preco { display: flex; align-items: baseline; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid #DADFE6; }
+.plano-preco strong {
+  font-family: 'Archivo', var(--display); font-weight: 500; font-size: clamp(2.6rem, 5vw, 3.6rem); letter-spacing: -.045em; line-height: 1; color: #0A1530;
+}
+.plano-preco strong small { font-size: .3em; font-weight: 500; color: #4A5163; margin-left: 8px; letter-spacing: 0; }
+.plano-descricao { color: #4A5163; font-weight: 600; }
+.plano-itens { gap: 14px; }
+.plano-itens li { padding-left: 34px; font-size: 1rem; color: #1F2638; }
+.plano-itens li::before {
+  content: ''; top: .05em; width: 22px; height: 22px; background: #0A1530 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 13px no-repeat;
+}
+.plano-destaque .plano-itens li::before { background-color: #3CA55D; }
+
 .totais { margin-top: 20px; display: grid; gap: 10px; }
 .total {
   display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
