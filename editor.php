@@ -15,7 +15,15 @@ header('X-Robots-Tag: noindex, nofollow');
 header('Cache-Control: no-store');
 if (usuarioAtual()) {
   header('Content-Type: text/html; charset=utf-8');
-  readfile(__DIR__ . '/editor.html');
+  // Versão dos arquivos no endereço: o navegador e o cache da hospedagem sempre pegam a versão nova
+  $versao = static fn(string $arquivo): string => (string)@filemtime(__DIR__ . '/' . $arquivo);
+  $html = file_get_contents(__DIR__ . '/editor.html');
+  $html = str_replace('assets/js/editor.js"', 'assets/js/editor.js?v=' . $versao('assets/js/editor.js') . '"', $html);
+  $html = str_replace('assets/css/editor.css"', 'assets/css/editor.css?v=' . $versao('assets/css/editor.css') . '"', $html);
+  $html = str_replace('index.html?preview=1"', 'index.html?preview=1&v=' . $versao('assets/js/proposta.js') . '"', $html);
+  // avisa o editor de que está no site com servidor (login + publicar)
+  $html = str_replace('<script src="assets/js/editor.js', "<script>window.MFL_SERVIDOR = true;</script>\n  <script src=\"assets/js/editor.js", $html);
+  echo $html;
   exit;
 }
 $email = htmlspecialchars((string)($_POST['email'] ?? ''), ENT_QUOTES, 'UTF-8');

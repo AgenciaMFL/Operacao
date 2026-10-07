@@ -479,6 +479,13 @@
       const sessao = await api('sessao.php');
       if (sessao.logado) ativarModoOnline(sessao);
       else location.href = 'editor.php';
-    } catch (e) { /* sem servidor (arquivos abertos localmente): só rascunho e .json */ }
+    } catch (e) {
+      // sem servidor (arquivos abertos localmente): só rascunho e .json.
+      // No site hospedado isso é um problema: mostra o motivo em vez de esconder o Publicar em silêncio.
+      if (window.MFL_SERVIDOR) {
+        atualizarStatus(`Publicar indisponível: ${e.message === 'sem-servidor' ? 'a pasta api/ não respondeu' : e.message}`);
+        $('status').style.color = '#FCA5A5';
+      }
+    }
   })();
 })();

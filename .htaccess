@@ -19,3 +19,10 @@ DirectoryIndex index.html
     Deny from all
   </IfModule>
 </FilesMatch>
+
+# Sempre conferir se há versão nova de páginas, scripts e estilos (evita o navegador mostrar a versão antiga)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|php|js|css|json)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
