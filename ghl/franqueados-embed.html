@@ -17,7 +17,7 @@
   .sb-form-wrap {
     position: relative;
     width: 100%;
-    min-height: 852px;
+    min-height: 725px;
     border-radius: 16px;
     overflow: hidden;
   }
@@ -26,7 +26,7 @@
     z-index: 1;
     display: block;
     width: 100%;
-    height: 852px;
+    height: 725px;
     border: 0;
     opacity: 0;
     transition: opacity .45s ease;
@@ -50,8 +50,8 @@
     animation: sb-shimmer 1.2s linear infinite;
   }
   .sb-skel .l { width: 32%; height: 14px; margin: 0 0 10px; }
-  .sb-skel .f { height: 54px; margin: 0 0 24px; border-radius: 12px; }
-  .sb-skel .b { height: 58px; margin-top: 8px; border-radius: 12px;
+  .sb-skel .f { height: 46px; margin: 0 0 18px; border-radius: 10px; }
+  .sb-skel .b { height: 50px; margin-top: 6px; border-radius: 10px;
     background: linear-gradient(90deg, #F9C79A 25%, #FCDDBF 50%, #F9C79A 75%); background-size: 200% 100%; }
   @keyframes sb-shimmer { to { background-position: -200% 0; } }
 
@@ -141,7 +141,7 @@
 (function () {
   var FORM_ID = 'CqGKznxCqF4qGLk10GTN';
   var FORM_NAME = 'Franqueados';
-  var HEIGHT = 852;
+  var HEIGHT = 725;
   var GATILHO = 'a[href$="#formulario-franquia"], .sb-abrir-form, .sb-abrir-form a';
 
   var SKELETON = '<div class="sb-skel" aria-hidden="true">' +
