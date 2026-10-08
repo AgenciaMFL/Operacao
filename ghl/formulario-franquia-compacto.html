@@ -39,6 +39,21 @@
 #_builder-form#_builder-form .multiselect__single { color: #0B2A33 !important; font-weight: 500 !important; }
 #_builder-form#_builder-form .multiselect__select { height: 44px !important; }
 
+/* Campo de busca escondido dentro da lista: não recebe o estilo dos campos */
+#_builder-form#_builder-form .multiselect input,
+#_builder-form#_builder-form .multiselect input:hover,
+#_builder-form#_builder-form .multiselect input:focus {
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 14.5px !important;
+}
+
 /* Placeholder */
 #_builder-form#_builder-form :is(input, textarea):is([type], :not([type]))::placeholder,
 #_builder-form#_builder-form .multiselect__placeholder { color: #9AA6AA !important; font-weight: 400 !important; }
