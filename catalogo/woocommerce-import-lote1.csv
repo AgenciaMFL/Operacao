@@ -1,0 +1,1858 @@
+Type,SKU,Name,Published,Is featured?,Visibility in catalog,In stock?,Regular price,Categories,"GTIN, UPC, EAN, or ISBN",Parent,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global
+variable,GRP-438791064,Adesivo Natalino de para,1,0,visible,1,,Itens de Festa > Natal,,,Opção,"438791064, 438795882",1,0
+variation,438791064,,1,,,1,3.9,,7899183980062,GRP-438791064,Opção,438791064,,0
+variation,438795882,,1,,,1,3.5,,7899183980031,GRP-438791064,Opção,438795882,,0
+variable,GRP-438795884,Guardanapo Decorativo de Natal,1,0,visible,1,,Itens de Festa > Natal,,,Opção,"438795884, 360",1,0
+variation,438795884,,1,,,1,7.0,,7899183994403,GRP-438795884,Opção,438795884,,0
+variation,438795878,,1,,,1,7.0,,7908870407666,GRP-438795884,Opção,360,,0
+variable,GRP-438787134,Balão Metalizado 100cm,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"N*0 Rose, N*1 Dourado, N*1 Prata, N*3 Rose, N*4 Pink, N*5 Rose, N*7 Arco-iris, N*9 Pink, N*9 Rose, N*0 Arco-iris, N*0 Dourado, N*0 Pink, N*0 Prata, N*0 Zul, N*1 Rose, N*2 Arco-iris, N*2 Azul, N*2 Dourado, N*2 Pink, N*2 Prata, N*2 Rose, N*3 Arco-iris, N*3 Azul, N*3 Pink, N*3 Prata, N*4 Arco-iris, N*4 Azul, N*4 Dourado, N*4 Prata, N*5 Dourado, N*5 Prta, N*6 Arco-iris, N5 Rosa, N7 Prata, N8 Arco-iris, N9 Prata, N8 Arco-iris (438786119)",1,0
+variation,438787134,,1,,,1,12.9,,7897778482014,GRP-438787134,Opção,N*0 Rose,,0
+variation,438787133,,1,,,1,12.9,,7897778293016,GRP-438787134,Opção,N*1 Dourado,,0
+variation,438787132,,1,,,1,12.9,,7897778331015,GRP-438787134,Opção,N*1 Prata,,0
+variation,438788500,,1,,,1,12.9,,7897778485015,GRP-438787134,Opção,N*3 Rose,,0
+variation,438788499,,1,,,1,12.9,,7897778410017,GRP-438787134,Opção,N*4 Pink,,0
+variation,438788498,,1,,,1,12.9,,7897778487019,GRP-438787134,Opção,N*5 Rose,,0
+variation,438788497,,1,,,1,12.9,,7897778529016,GRP-438787134,Opção,N*7 Arco-iris,,0
+variation,438787130,,1,,,1,12.9,,7897778415012,GRP-438787134,Opção,N*9 Pink,,0
+variation,438787131,,1,,,1,12.9,,7897778493010,GRP-438787134,Opção,N*9 Rose,,0
+variation,438786114,,1,,,1,12.9,,7897778522017,GRP-438787134,Opção,N*0 Arco-iris,,0
+variation,438787138,,1,,,1,12.9,,7897778292019,GRP-438787134,Opção,N*0 Dourado,,0
+variation,438787172,,1,,,1,12.9,,7897778406010,GRP-438787134,Opção,N*0 Pink,,0
+variation,438787159,,1,,,1,12.9,,7897778330018,GRP-438787134,Opção,N*0 Prata,,0
+variation,438787173,,1,,,1,12.9,,7897778444012,GRP-438787134,Opção,N*0 Zul,,0
+variation,438787137,,1,,,1,12.9,,7897778483011,GRP-438787134,Opção,N*1 Rose,,0
+variation,438786112,,1,,,1,12.9,,7897778524011,GRP-438787134,Opção,N*2 Arco-iris,,0
+variation,438787148,,1,,,1,12.9,,7897778446016,GRP-438787134,Opção,N*2 Azul,,0
+variation,438787164,,1,,,1,12.9,,7897778294013,GRP-438787134,Opção,N*2 Dourado,,0
+variation,438787158,,1,,,1,12.9,,7897778408014,GRP-438787134,Opção,N*2 Pink,,0
+variation,438787163,,1,,,1,12.9,,7897778332012,GRP-438787134,Opção,N*2 Prata,,0
+variation,438787156,,1,,,1,12.9,,7897778484018,GRP-438787134,Opção,N*2 Rose,,0
+variation,438786121,,1,,,1,12.9,,7897778525018,GRP-438787134,Opção,N*3 Arco-iris,,0
+variation,438787171,,1,,,1,12.9,,7897778447013,GRP-438787134,Opção,N*3 Azul,,0
+variation,438787162,,1,,,1,12.9,,7897778409011,GRP-438787134,Opção,N*3 Pink,,0
+variation,438787161,,1,,,1,12.9,,7897778333019,GRP-438787134,Opção,N*3 Prata,,0
+variation,438786116,,1,,,1,12.9,,7897778526015,GRP-438787134,Opção,N*4 Arco-iris,,0
+variation,438787166,,1,,,1,12.9,,7897778448010,GRP-438787134,Opção,N*4 Azul,,0
+variation,438787168,,1,,,1,12.9,,7897778296017,GRP-438787134,Opção,N*4 Dourado,,0
+variation,438787175,,1,,,1,12.9,,7897778334016,GRP-438787134,Opção,N*4 Prata,,0
+variation,438787160,,1,,,1,12.9,,7897778297014,GRP-438787134,Opção,N*5 Dourado,,0
+variation,438787169,,1,,,1,12.9,,7897778335013,GRP-438787134,Opção,N*5 Prta,,0
+variation,438786115,,1,,,1,12.9,,7897778528019,GRP-438787134,Opção,N*6 Arco-iris,,0
+variation,438787170,,1,,,1,12.9,,7897778411014,GRP-438787134,Opção,N5 Rosa,,0
+variation,438787146,,1,,,1,12.9,,7897778337017,GRP-438787134,Opção,N7 Prata,,0
+variation,438786113,,1,,,1,12.9,,7897778530012,GRP-438787134,Opção,N8 Arco-iris,,0
+variation,438787176,,1,,,1,12.9,,7897778339011,GRP-438787134,Opção,N9 Prata,,0
+variation,438786119,,1,,,1,12.9,,7897778531019,GRP-438787134,Opção,N8 Arco-iris (438786119),,0
+variable,GRP-438788493,Balão Metalizado 40cm,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"N*0 Arco-iris, N*0 Prata, N*0 Rose, N*1 Dourado, N*2 Dourado, N*2 Prata, N*2 Rose, N*5 Pink, N*6 Azul, N*0 Azul, N*0 Dourado, N*0 Pink, N*1 Azul, N*1 Pink, N*1 Prata, N*2 Azul, N*2 Pink, N*3 Dourado, N*3 Prata, N*3 Rose, N*3 Azul, N*3 Pink, N*4 Prata, N*4 Dourado, N*4 Rose, N*4 Azul, N*4 Pink, N*5 Prata, N*5 Rose, N*5 Azul, N*6 Dourado, N*6 Rose, N*6 Prata, N7 Pink, N8 Azul, N8 Pink, N9 Azul, N9 Pink, N7 Prata, N8 Prata, N9 Dourado, N9 Prata, N9 Rose, 8 Aprox Regina",1,0
+variation,438788493,,1,,,1,3.7,,7897778254017,GRP-438788493,Opção,N*0 Arco-iris,,0
+variation,438788494,,1,,,1,3.7,,7897778064012,GRP-438788493,Opção,N*0 Prata,,0
+variation,438788492,,1,,,1,3.7,,7897778216015,GRP-438788493,Opção,N*0 Rose,,0
+variation,438788491,,1,,,1,3.7,,7897778027017,GRP-438788493,Opção,N*1 Dourado,,0
+variation,438788490,,1,,,1,3.7,,7897778028014,GRP-438788493,Opção,N*2 Dourado,,0
+variation,438788489,,1,,,1,3.7,,7897778066016,GRP-438788493,Opção,N*2 Prata,,0
+variation,438788488,,1,,,1,3.7,,7897778218019,GRP-438788493,Opção,N*2 Rose,,0
+variation,438788482,,1,,,1,3.7,,7897778145018,GRP-438788493,Opção,N*5 Pink,,0
+variation,438788496,,1,,,1,3.7,,7897778184017,GRP-438788493,Opção,N*6 Azul,,0
+variation,438787180,,1,,,1,3.7,,7897778178016,GRP-438788493,Opção,N*0 Azul,,0
+variation,438787174,,1,,,1,3.7,,7897778026010,GRP-438788493,Opção,N*0 Dourado,,0
+variation,438787179,,1,,,1,3.7,,7897778140013,GRP-438788493,Opção,N*0 Pink,,0
+variation,438787177,,1,,,1,3.7,,7897778179013,GRP-438788493,Opção,N*1 Azul,,0
+variation,438787178,,1,,,1,3.7,,7897778141010,GRP-438788493,Opção,N*1 Pink,,0
+variation,438796300,,1,,,1,3.7,,7897778065019,GRP-438788493,Opção,N*1 Prata,,0
+variation,438787182,,1,,,1,3.7,,7897778180019,GRP-438788493,Opção,N*2 Azul,,0
+variation,438787181,,1,,,1,3.7,,7897778142017,GRP-438788493,Opção,N*2 Pink,,0
+variation,438786290,,1,,,1,3.7,,7897778029011,GRP-438788493,Opção,N*3 Dourado,,0
+variation,438786289,,1,,,1,3.7,,7897778067013,GRP-438788493,Opção,N*3 Prata,,0
+variation,438786291,,1,,,1,3.7,,7897778219016,GRP-438788493,Opção,N*3 Rose,,0
+variation,438787184,,1,,,1,3.7,,7897778181016,GRP-438788493,Opção,N*3 Azul,,0
+variation,438787183,,1,,,1,3.7,,7897778143014,GRP-438788493,Opção,N*3 Pink,,0
+variation,438786294,,1,,,1,3.7,,7897778068010,GRP-438788493,Opção,N*4 Prata,,0
+variation,438786295,,1,,,1,3.7,,7897778030017,GRP-438788493,Opção,N*4 Dourado,,0
+variation,438786292,,1,,,1,3.7,,7897778220012,GRP-438788493,Opção,N*4 Rose,,0
+variation,438787186,,1,,,1,3.7,,7897778182013,GRP-438788493,Opção,N*4 Azul,,0
+variation,438787185,,1,,,1,3.7,,7897778144011,GRP-438788493,Opção,N*4 Pink,,0
+variation,438786297,,1,,,1,3.7,,7897778069017,GRP-438788493,Opção,N*5 Prata,,0
+variation,438786296,,1,,,1,3.7,,7897778221019,GRP-438788493,Opção,N*5 Rose,,0
+variation,438787187,,1,,,1,3.7,,7897778183010,GRP-438788493,Opção,N*5 Azul,,0
+variation,438786299,,1,,,1,3.7,,7897778032011,GRP-438788493,Opção,N*6 Dourado,,0
+variation,438797525,,1,,,1,3.7,,7897778222016,GRP-438788493,Opção,N*6 Rose,,0
+variation,438786301,,1,,,1,3.7,,7897778070013,GRP-438788493,Opção,N*6 Prata,,0
+variation,438787189,,1,,,1,3.7,,7897778147012,GRP-438788493,Opção,N7 Pink,,0
+variation,438787191,,1,,,1,3.7,,7897778186011,GRP-438788493,Opção,N8 Azul,,0
+variation,438787192,,1,,,1,3.7,,7897778148019,GRP-438788493,Opção,N8 Pink,,0
+variation,438787194,,1,,,1,3.7,,7897778187018,GRP-438788493,Opção,N9 Azul,,0
+variation,438787193,,1,,,1,3.7,,7897778149016,GRP-438788493,Opção,N9 Pink,,0
+variation,438786303,,1,,,1,3.7,,7897778071010,GRP-438788493,Opção,N7 Prata,,0
+variation,438786307,,1,,,1,3.7,,7897778072017,GRP-438788493,Opção,N8 Prata,,0
+variation,438786308,,1,,,1,3.7,,7897778035012,GRP-438788493,Opção,N9 Dourado,,0
+variation,438786310,,1,,,1,3.7,,7897778073014,GRP-438788493,Opção,N9 Prata,,0
+variation,438786309,,1,,,1,3.7,,7897778225017,GRP-438788493,Opção,N9 Rose,,0
+variation,438789802,,1,,,1,3.7,,7897778262012,GRP-438788493,Opção,8 Aprox Regina,,0
+variable,GRP-438788194,Fita de Cetim 10mts,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"N*01 Azul Royal, N*01 Branco, N*01 Marfim, N*01 Prata, N*01 Preto, N*01 Turquesa, N*01 Vermelho, N*02 Amarelo, N*02 Amarelo Canario, N*02 Azul Bebe, N*02 Azul Royal, N*02 Bordo, N*02 Branco, N*02 Laranja, N*02 Lilas, N*02 Marfim, N*02 Ouro, N*02 Preto, N*05 Az Marinho, N*05 Azul Bebe, N*05 Azul Royal, N*05 Bordo, N*05 Branco, N*05 Laranja, N*05 Lilas, N*05 Marrom, N*05 Ouro, N*05 Ouro Velho, N*05 Prata, N*05 Preto, N*05 Roxo, N*09 Amarelo Canario, N*09 Az Marinho, N*09 Azul Bebe, N*09 Azul Royal, N*09 Branco, N*09 Laranja, N*09 Marfim, N*09 Marrom, N*09 Ouro, N*09 Pink Escuro, N*09 Preto, N*09 Verde Folha, N*09 Verde Musgo",1,0
+variation,438788194,,1,,,1,3.0,,7890265016891,GRP-438788194,Opção,N*01 Azul Royal,,0
+variation,438788189,,1,,,1,3.0,,7890265016747,GRP-438788194,Opção,N*01 Branco,,0
+variation,438788190,,1,,,1,3.0,,7890265016754,GRP-438788194,Opção,N*01 Marfim,,0
+variation,438788198,,1,,,1,3.0,,7890265278473,GRP-438788194,Opção,N*01 Prata,,0
+variation,438788193,,1,,,1,3.0,,7890265016884,GRP-438788194,Opção,N*01 Preto,,0
+variation,438788195,,1,,,1,3.0,,7890265016907,GRP-438788194,Opção,N*01 Turquesa,,0
+variation,438788191,,1,,,1,3.0,,7890265016846,GRP-438788194,Opção,N*01 Vermelho,,0
+variation,438788204,,1,,,1,3.5,,7890265017126,GRP-438788194,Opção,N*02 Amarelo,,0
+variation,438788219,,1,,,1,3.5,,7890265017317,GRP-438788194,Opção,N*02 Amarelo Canario,,0
+variation,438788214,,1,,,1,3.5,,7890265017263,GRP-438788194,Opção,N*02 Azul Bebe,,0
+variation,438788209,,1,,,1,3.5,,7890265017218,GRP-438788194,Opção,N*02 Azul Royal,,0
+variation,438788207,,1,,,1,3.5,,7890265017195,GRP-438788194,Opção,N*02 Bordo,,0
+variation,438788199,,1,,,1,3.5,,7890265017065,GRP-438788194,Opção,N*02 Branco,,0
+variation,438788205,,1,,,1,3.5,,7890265017157,GRP-438788194,Opção,N*02 Laranja,,0
+variation,438788220,,1,,,1,3.5,,7890265017324,GRP-438788194,Opção,N*02 Lilas,,0
+variation,438788200,,1,,,1,3.5,,7890265017072,GRP-438788194,Opção,N*02 Marfim,,0
+variation,438788213,,1,,,1,3.5,,7890265017249,GRP-438788194,Opção,N*02 Ouro,,0
+variation,438788208,,1,,,1,3.5,,7890265017201,GRP-438788194,Opção,N*02 Preto,,0
+variation,438788240,,1,,,1,4.9,,7890265019137,GRP-438788194,Opção,N*05 Az Marinho,,0
+variation,438788237,,1,,,1,4.9,,7890265019113,GRP-438788194,Opção,N*05 Azul Bebe,,0
+variation,438788231,,1,,,1,4.9,,7890265019045,GRP-438788194,Opção,N*05 Azul Royal,,0
+variation,438788229,,1,,,1,4.9,,7890265019021,GRP-438788194,Opção,N*05 Bordo,,0
+variation,438788223,,1,,,1,4.9,,7890265019328,GRP-438788194,Opção,N*05 Branco,,0
+variation,438788226,,1,,,1,4.9,,7890265018963,GRP-438788194,Opção,N*05 Laranja,,0
+variation,438788242,,1,,,1,4.9,,7890265019175,GRP-438788194,Opção,N*05 Lilas,,0
+variation,438788227,,1,,,1,4.9,,7890265018987,GRP-438788194,Opção,N*05 Marrom,,0
+variation,438788236,,1,,,1,4.9,,7890265019090,GRP-438788194,Opção,N*05 Ouro,,0
+variation,438788244,,1,,,1,4.6,,7890265309115,GRP-438788194,Opção,N*05 Ouro Velho,,0
+variation,438788243,,1,,,1,4.9,,7890265279333,GRP-438788194,Opção,N*05 Prata,,0
+variation,438788230,,1,,,1,4.9,,7890265019038,GRP-438788194,Opção,N*05 Preto,,0
+variation,438788228,,1,,,1,4.6,,7890265019014,GRP-438788194,Opção,N*05 Roxo,,0
+variation,438788268,,1,,,1,8.2,,7890265019595,GRP-438788194,Opção,N*09 Amarelo Canario,,0
+variation,438788266,,1,,,1,7.5,,7890265019564,GRP-438788194,Opção,N*09 Az Marinho,,0
+variation,438788263,,1,,,1,8.2,,7890265019540,GRP-438788194,Opção,N*09 Azul Bebe,,0
+variation,438788257,,1,,,1,8.2,,7890265019496,GRP-438788194,Opção,N*09 Azul Royal,,0
+variation,438788247,,1,,,1,8.5,,7890265019236,GRP-438788194,Opção,N*09 Branco,,0
+variation,438788251,,1,,,1,8.2,,7890265019434,GRP-438788194,Opção,N*09 Laranja,,0
+variation,438788248,,1,,,1,8.2,,7890265019243,GRP-438788194,Opção,N*09 Marfim,,0
+variation,438788252,,1,,,1,8.2,,7890265019458,GRP-438788194,Opção,N*09 Marrom,,0
+variation,438788262,,1,,,1,8.2,,7890265019526,GRP-438788194,Opção,N*09 Ouro,,0
+variation,438788259,,1,,,1,7.5,,7890265279364,GRP-438788194,Opção,N*09 Pink Escuro,,0
+variation,438788255,,1,,,1,8.2,,7890265019489,GRP-438788194,Opção,N*09 Preto,,0
+variation,438788260,,1,,,1,8.2,,7890265019533,GRP-438788194,Opção,N*09 Verde Folha,,0
+variation,438788264,,1,,,1,8.2,,7890265019557,GRP-438788194,Opção,N*09 Verde Musgo,,0
+variable,GRP-16316,Caneta Esferográfica BL-FR7 FRIXION,1,1,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Azul Claro, Laranja, Marrom, Preta, Rosa, Roxa, Verde, Verde Claro, Vermelha",1,0
+variation,16316,,1,,,1,24.3,,4902505322723,GRP-16316,Opção,Azul,,0
+variation,43872211,,1,,,1,24.3,,4902505322747,GRP-16316,Opção,Azul Claro,,0
+variation,16335,,1,,,1,24.3,,4902505358074,GRP-16316,Opção,Laranja,,0
+variation,43872209,,1,,,1,24.3,,4902505391682,GRP-16316,Opção,Marrom,,0
+variation,16314,,1,,,1,24.3,,4902505322709,GRP-16316,Opção,Preta,,0
+variation,16334,,1,,,1,24.3,,4902505358067,GRP-16316,Opção,Rosa,,0
+variation,16317,,1,,,1,24.3,,4902505322754,GRP-16316,Opção,Roxa,,0
+variation,43872210,,1,,,1,24.3,,4902505322730,GRP-16316,Opção,Verde,,0
+variation,43872212,,1,,,1,24.3,,4902505391675,GRP-16316,Opção,Verde Claro,,0
+variation,16315,,1,,,1,24.3,,4902505322716,GRP-16316,Opção,Vermelha,,0
+variable,GRP-43866029,Caneta STABILO Point 88,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Am Fluor, Am Pele, Amarelo, Amarelo Limao, Azul Ceu, Azul Escuro, Azul Glacial, Azul Royal, Bege, Cinza Claro, Cinza Escuro, Lilas Claro, Marrom Umber, Ocre, Rosa Chiclete, Rosa Claro 29, Rosa Fluor, Vd Água, Vd Musgo, Verde Neon, Verde Oliva",1,0
+variation,43866029,,1,,,1,12.2,,4006381438544,GRP-43866029,Opção,Am Fluor,,0
+variation,43866039,,1,,,1,12.2,,4006381333962,GRP-43866029,Opção,Am Pele,,0
+variation,43866023,,1,,,1,12.2,,4006381105293,GRP-43866029,Opção,Amarelo,,0
+variation,43867958,,1,,,1,12.2,,4006381493062,GRP-43866029,Opção,Amarelo Limao,,0
+variation,43867971,,1,,,1,12.2,,4006381493420,GRP-43866029,Opção,Azul Ceu,,0
+variation,43866036,,1,,,1,12.2,,4006381105279,GRP-43866029,Opção,Azul Escuro,,0
+variation,43867957,,1,,,1,12.2,,4006381492942,GRP-43866029,Opção,Azul Glacial,,0
+variation,43866032,,1,,,1,12.2,,4006381333801,GRP-43866029,Opção,Azul Royal,,0
+variation,43866028,,1,,,1,12.2,,4006381186452,GRP-43866029,Opção,Bege,,0
+variation,5468735,,1,,,1,12.2,,4006381333979,GRP-43866029,Opção,Cinza Claro,,0
+variation,14057,,1,,,1,12.2,,4006381333986,GRP-43866029,Opção,Cinza Escuro,,0
+variation,43866037,,1,,,1,12.2,,4006381186483,GRP-43866029,Opção,Lilas Claro,,0
+variation,43867964,,1,,,1,12.2,,4006381493246,GRP-43866029,Opção,Marrom Umber,,0
+variation,43867966,,1,,,1,12.2,,4006381493307,GRP-43866029,Opção,Ocre,,0
+variation,43867969,,1,,,1,12.2,,4006381493000,GRP-43866029,Opção,Rosa Chiclete,,0
+variation,43867956,,1,,,1,12.2,,4006381493093,GRP-43866029,Opção,Rosa Claro 29,,0
+variation,43866026,,1,,,1,12.2,,4006381438568,GRP-43866029,Opção,Rosa Fluor,,0
+variation,43866027,,1,,,1,12.2,,4006381333795,GRP-43866029,Opção,Vd Água,,0
+variation,43866019,,1,,,1,12.2,,4006381186476,GRP-43866029,Opção,Vd Musgo,,0
+variation,43866033,,1,,,1,12.2,,4006381438551,GRP-43866029,Opção,Verde Neon,,0
+variation,43866035,,1,,,1,12.2,,4006381105255,GRP-43866029,Opção,Verde Oliva,,0
+variable,GRP-438787571,Vela Metalizada 6cm,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Azul Bebe N 5, Azul N 0, Azul N 1, Azul N 4, Azul N 8, Azul N 9, Azul n7, Ouro 1, Ouro 2, Ouro 3, Ouro 4, Ouro 5, Ouro 7, Ouro 8, Ouro 9, Ouro ?, Prata 0, Prata 2, Prata 3, Prata 4, Prata 5, Prata 6, Prata 8, Prata 9, Prata ?, Rosa Bebe, Rosa Bebe N 1, Rosa Bebe N 3, Rosa Bebe N 4, Rosa Bebe N 5, Rosa Bebe N 6, Rosa Bebe N 7, Rosa Bebe N 8, Rosa Bebe n2, Rosa Bebe n9, Rose G. ?, Rose Gold n*0, Rose Gold n*1, Rose Gold n*2, Rose Gold n*3, Rose Gold n*4, Rose Gold n*5, Rose Gold n*6, Rose Gold n*7, Rose Gold n*8, Rose Gold n*9, Rs Bebe ?, Zul n02",1,0
+variation,438787571,,1,,,1,5.0,,7897774579015,GRP-438787571,Opção,Azul Bebe N 5,,0
+variation,438787584,,1,,,1,2.0,,7897774530016,GRP-438787571,Opção,Azul N 0,,0
+variation,438787591,,1,,,1,5.0,,7897774531013,GRP-438787571,Opção,Azul N 1,,0
+variation,438787580,,1,,,1,3.9,,7897774534014,GRP-438787571,Opção,Azul N 4,,0
+variation,438787586,,1,,,1,2.0,,7897774538012,GRP-438787571,Opção,Azul N 8,,0
+variation,438787577,,1,,,1,2.0,,7897774539019,GRP-438787571,Opção,Azul N 9,,0
+variation,438787575,,1,,,1,2.0,,7897774537015,GRP-438787571,Opção,Azul n7,,0
+variation,438787071,,1,,,1,5.8,,7897774542019,GRP-438787571,Opção,Ouro 1,,0
+variation,438787076,,1,,,1,5.8,,7897774543016,GRP-438787571,Opção,Ouro 2,,0
+variation,438787073,,1,,,1,5.8,,7897774544013,GRP-438787571,Opção,Ouro 3,,0
+variation,438787074,,1,,,1,5.8,,7897774545010,GRP-438787571,Opção,Ouro 4,,0
+variation,438787072,,1,,,1,5.8,,7897774546017,GRP-438787571,Opção,Ouro 5,,0
+variation,438787077,,1,,,1,5.8,,7897774548011,GRP-438787571,Opção,Ouro 7,,0
+variation,438787078,,1,,,1,5.8,,7897774549018,GRP-438787571,Opção,Ouro 8,,0
+variation,438787079,,1,,,1,5.8,,7897774550014,GRP-438787571,Opção,Ouro 9,,0
+variation,438787069,,1,,,1,5.8,,7897774551011,GRP-438787571,Opção,Ouro ?,,0
+variation,438787081,,1,,,1,5.8,,7897774552018,GRP-438787571,Opção,Prata 0,,0
+variation,438787083,,1,,,1,5.8,,7897774554012,GRP-438787571,Opção,Prata 2,,0
+variation,438787084,,1,,,1,5.8,,7897774555019,GRP-438787571,Opção,Prata 3,,0
+variation,438787085,,1,,,1,5.8,,7897774556016,GRP-438787571,Opção,Prata 4,,0
+variation,438787086,,1,,,1,5.8,,7897774557013,GRP-438787571,Opção,Prata 5,,0
+variation,438787087,,1,,,1,2.0,,7897774558010,GRP-438787571,Opção,Prata 6,,0
+variation,438787089,,1,,,1,2.0,,7897774560013,GRP-438787571,Opção,Prata 8,,0
+variation,438787090,,1,,,1,2.0,,7897774561010,GRP-438787571,Opção,Prata 9,,0
+variation,438792468,,1,,,1,5.8,,7897774562017,GRP-438787571,Opção,Prata ?,,0
+variation,438787582,,1,,,1,5.8,,7897774563014,GRP-438787571,Opção,Rosa Bebe,,0
+variation,438787592,,1,,,1,5.8,,7897774564011,GRP-438787571,Opção,Rosa Bebe N 1,,0
+variation,438787569,,1,,,1,5.8,,7897774566015,GRP-438787571,Opção,Rosa Bebe N 3,,0
+variation,438787578,,1,,,1,5.8,,7897774567012,GRP-438787571,Opção,Rosa Bebe N 4,,0
+variation,438787566,,1,,,1,5.8,,7897774568019,GRP-438787571,Opção,Rosa Bebe N 5,,0
+variation,438787565,,1,,,1,5.8,,7897774569016,GRP-438787571,Opção,Rosa Bebe N 6,,0
+variation,438787573,,1,,,1,5.8,,7897774570012,GRP-438787571,Opção,Rosa Bebe N 7,,0
+variation,438787585,,1,,,1,5.8,,7897774571019,GRP-438787571,Opção,Rosa Bebe N 8,,0
+variation,438787568,,1,,,1,5.8,,7897774565018,GRP-438787571,Opção,Rosa Bebe n2,,0
+variation,438787567,,1,,,1,5.8,,7897774572016,GRP-438787571,Opção,Rosa Bebe n9,,0
+variation,438792466,,1,,,1,5.8,,7897774529010,GRP-438787571,Opção,Rose G. ?,,0
+variation,438788071,,1,,,1,5.8,,7897774519011,GRP-438787571,Opção,Rose Gold n*0,,0
+variation,438788067,,1,,,1,5.8,,7897774520017,GRP-438787571,Opção,Rose Gold n*1,,0
+variation,438788068,,1,,,1,5.8,,7897774521014,GRP-438787571,Opção,Rose Gold n*2,,0
+variation,438788070,,1,,,1,5.8,,7897774522011,GRP-438787571,Opção,Rose Gold n*3,,0
+variation,438788072,,1,,,1,5.8,,7897774523018,GRP-438787571,Opção,Rose Gold n*4,,0
+variation,438788073,,1,,,1,5.8,,7897774524015,GRP-438787571,Opção,Rose Gold n*5,,0
+variation,438788074,,1,,,1,5.8,,7897774525012,GRP-438787571,Opção,Rose Gold n*6,,0
+variation,438788069,,1,,,1,5.8,,7897774526019,GRP-438787571,Opção,Rose Gold n*7,,0
+variation,438788075,,1,,,1,5.8,,7897774527016,GRP-438787571,Opção,Rose Gold n*8,,0
+variation,438788076,,1,,,1,5.8,,7897774528013,GRP-438787571,Opção,Rose Gold n*9,,0
+variation,438792469,,1,,,1,5.8,,7897774573013,GRP-438787571,Opção,Rs Bebe ?,,0
+variation,438787589,,1,,,1,2.0,,7897774532010,GRP-438787571,Opção,Zul n02,,0
+variable,GRP-21799,Tinta Óleo 20ml,1,1,visible,1,,Papelaria > Arte e Pintura,,,Opção,"303 Am Brilhante Claro, 304 Am Napoles Carne, 305 Az Ftalocianina, 306 Azul Hortensia, 307 Alaranjado, 309 Az Celeste, 311 Gris Neutro, 312 Vm Cadmio, 313 Vermelhao Frances, 315 Magenta, 316 Rs Escuro, 317 Pele, 318 Br Zinco, 319 Br Titanio, 320 Preto, 321 Violeta Cobalto, 322 Vd Musgo, 323 Am Limao, 324 Am Cadmio, 327 Vermelhao Chines, 328 Laca Geranio, 329 Azul Real, 330 Violeta Permanente Escuro, 331 Az Prussia, 332 Vd Permanente Escuro, 333 Vd Paul Veronese, 334 Vd Oliva, 335 Laca Orquidea, 337 Ma Van Dyck, 338 Am Napoles Rosado, 340 Am Cadmio Claro, 342 Am Napoles, 343 Vm Cadmio Claro, 344 Vm Cadmio Escuro, 345 Laca de Garanca Rs, 347 Az Ceruleo, 348 Ultramar Claro, 352 Vd Permanente Claro, 355 Sombra Natural, 356 Sombra Queimada, 362 Verde Ingles Escuro, 363 Azul Turquesa, 364 Vd Ingles 5, 365 Verde de Hooker, 378 Laca de Garanza Clara, 379 Carmim, 380 Am Oxido Transparente, 389 Branco Irisdescente, 399 Gris de Payne",1,0
+variation,21799,,1,,,1,16.6,,7891153013756,GRP-21799,Opção,303 Am Brilhante Claro,,0
+variation,21800,,1,,,1,16.6,,7891153013770,GRP-21799,Opção,304 Am Napoles Carne,,0
+variation,22966,,1,,,1,16.6,,7891153141091,GRP-21799,Opção,305 Az Ftalocianina,,0
+variation,21803,,1,,,1,16.6,,7891153013831,GRP-21799,Opção,306 Azul Hortensia,,0
+variation,21809,,1,,,1,16.6,,7891153013978,GRP-21799,Opção,307 Alaranjado,,0
+variation,22968,,1,,,1,16.6,,7891153141114,GRP-21799,Opção,309 Az Celeste,,0
+variation,438789849,,1,,,1,16.6,,7891153013893,GRP-21799,Opção,311 Gris Neutro,,0
+variation,22969,,1,,,1,16.6,,7891153141121,GRP-21799,Opção,312 Vm Cadmio,,0
+variation,22970,,1,,,1,16.6,,7891153141138,GRP-21799,Opção,313 Vermelhao Frances,,0
+variation,22971,,1,,,1,16.6,,7891153141145,GRP-21799,Opção,315 Magenta,,0
+variation,22972,,1,,,1,16.6,,7891153141152,GRP-21799,Opção,316 Rs Escuro,,0
+variation,23010,,1,,,1,16.6,,7891153141534,GRP-21799,Opção,317 Pele,,0
+variation,22973,,1,,,1,16.6,,7891153141169,GRP-21799,Opção,318 Br Zinco,,0
+variation,22974,,1,,,1,16.6,,7891153141176,GRP-21799,Opção,319 Br Titanio,,0
+variation,22975,,1,,,1,16.6,,7891153141183,GRP-21799,Opção,320 Preto,,0
+variation,22976,,1,,,1,16.6,,7891153141190,GRP-21799,Opção,321 Violeta Cobalto,,0
+variation,22977,,1,,,1,16.6,,7891153141206,GRP-21799,Opção,322 Vd Musgo,,0
+variation,22978,,1,,,1,16.6,,7891153141213,GRP-21799,Opção,323 Am Limao,,0
+variation,22979,,1,,,1,16.6,,7891153141220,GRP-21799,Opção,324 Am Cadmio,,0
+variation,22982,,1,,,1,16.6,,7891153141251,GRP-21799,Opção,327 Vermelhao Chines,,0
+variation,22983,,1,,,1,16.6,,7891153141268,GRP-21799,Opção,328 Laca Geranio,,0
+variation,21802,,1,,,1,16.6,,7891153013817,GRP-21799,Opção,329 Azul Real,,0
+variation,22984,,1,,,1,16.6,,7891153141275,GRP-21799,Opção,330 Violeta Permanente Escuro,,0
+variation,23011,,1,,,1,16.6,,7891153141541,GRP-21799,Opção,331 Az Prussia,,0
+variation,22985,,1,,,1,16.6,,7891153141282,GRP-21799,Opção,332 Vd Permanente Escuro,,0
+variation,22986,,1,,,1,16.6,,7891153141299,GRP-21799,Opção,333 Vd Paul Veronese,,0
+variation,22987,,1,,,1,16.6,,7891153141305,GRP-21799,Opção,334 Vd Oliva,,0
+variation,21801,,1,,,1,16.6,,7891153013794,GRP-21799,Opção,335 Laca Orquidea,,0
+variation,22989,,1,,,1,16.6,,7891153141329,GRP-21799,Opção,337 Ma Van Dyck,,0
+variation,22990,,1,,,1,16.6,,7891153141336,GRP-21799,Opção,338 Am Napoles Rosado,,0
+variation,22991,,1,,,1,16.6,,7891153141343,GRP-21799,Opção,340 Am Cadmio Claro,,0
+variation,22992,,1,,,1,16.6,,7891153141350,GRP-21799,Opção,342 Am Napoles,,0
+variation,22993,,1,,,1,16.6,,7891153141367,GRP-21799,Opção,343 Vm Cadmio Claro,,0
+variation,22994,,1,,,1,16.6,,7891153141381,GRP-21799,Opção,344 Vm Cadmio Escuro,,0
+variation,22995,,1,,,1,16.6,,7891153141398,GRP-21799,Opção,345 Laca de Garanca Rs,,0
+variation,22998,,1,,,1,16.6,,7891153141411,GRP-21799,Opção,347 Az Ceruleo,,0
+variation,22999,,1,,,1,16.6,,7891153141428,GRP-21799,Opção,348 Ultramar Claro,,0
+variation,23000,,1,,,1,16.6,,7891153141435,GRP-21799,Opção,352 Vd Permanente Claro,,0
+variation,23003,,1,,,1,16.6,,7891153141466,GRP-21799,Opção,355 Sombra Natural,,0
+variation,23004,,1,,,1,16.6,,7891153141473,GRP-21799,Opção,356 Sombra Queimada,,0
+variation,21808,,1,,,1,16.6,,7891153013954,GRP-21799,Opção,362 Verde Ingles Escuro,,0
+variation,21807,,1,,,1,16.6,,7891153013916,GRP-21799,Opção,363 Azul Turquesa,,0
+variation,23007,,1,,,1,16.6,,7891153141503,GRP-21799,Opção,364 Vd Ingles 5,,0
+variation,21875,,1,,,1,14.7,,7891153019369,GRP-21799,Opção,365 Verde de Hooker,,0
+variation,21879,,1,,,1,16.6,,7891153019468,GRP-21799,Opção,378 Laca de Garanza Clara,,0
+variation,23009,,1,,,1,16.6,,7891153141527,GRP-21799,Opção,379 Carmim,,0
+variation,21797,,1,,,1,16.6,,7891153013640,GRP-21799,Opção,380 Am Oxido Transparente,,0
+variation,438795582,,1,,,1,13.6,,7891153142333,GRP-21799,Opção,389 Branco Irisdescente,,0
+variation,23015,,1,,,1,16.6,,7891153141596,GRP-21799,Opção,399 Gris de Payne,,0
+simple,438798197,Sacola para Presente de Natal,1,0,visible,1,5.5,Itens de Festa > Natal,7899183994953,,,,,
+variable,GRP-438797347,Caneta STABILO Pen 68,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Amarelo, Amarelo (43866046), Azul, Azul (438797356), Azul (438797351), Cinza, Cinza (438797337), Cinza Claro, Laranja, Laranja (438797352), Lilas, Marrom, Ocre, Preto, Salmao, Vd Esmeralda, Verde, Verde (438797339), Verde (438797342), Verde (438797343), Verde Militar, Verde Militar (438797345), Vermelha, Vermelho",1,0
+variation,438797347,,1,,,1,11.2,,4006381333160,GRP-438797347,Opção,Amarelo,,0
+variation,43866046,,1,,,1,11.2,,4006381333290,GRP-438797347,Opção,Amarelo (43866046),,0
+variation,438797350,,1,,,1,11.2,,4006381333214,GRP-438797347,Opção,Azul,,0
+variation,438797356,,1,,,1,11.2,,4006381333078,GRP-438797347,Opção,Azul (438797356),,0
+variation,438797351,,1,,,1,11.2,,4006381333399,GRP-438797347,Opção,Azul (438797351),,0
+variation,438797332,,1,,,1,11.2,,4006381333542,GRP-438797347,Opção,Cinza,,0
+variation,438797337,,1,,,1,11.2,,4006381333535,GRP-438797347,Opção,Cinza (438797337),,0
+variation,438797336,,1,,,1,11.2,,4006381333528,GRP-438797347,Opção,Cinza Claro,,0
+variation,438789929,,1,,,1,11.2,,4006381333368,GRP-438797347,Opção,Laranja,,0
+variation,438797352,,1,,,1,11.2,,4006381121095,GRP-438797347,Opção,Laranja (438797352),,0
+variation,43866057,,1,,,1,11.2,,4006381333375,GRP-438797347,Opção,Lilas,,0
+variation,43866056,,1,,,1,11.2,,4006381333306,GRP-438797347,Opção,Marrom,,0
+variation,438790496,,1,,,1,11.2,,4006381333481,GRP-438797347,Opção,Ocre,,0
+variation,14047,,1,,,1,11.2,,4006381333313,GRP-438797347,Opção,Preto,,0
+variation,438789932,,1,,,1,11.2,,4006381333177,GRP-438797347,Opção,Salmao,,0
+variation,43873450,,1,,,1,11.2,,4006381333238,GRP-438797347,Opção,Vd Esmeralda,,0
+variation,438797340,,1,,,1,11.2,,4006381121071,GRP-438797347,Opção,Verde,,0
+variation,438797339,,1,,,1,11.2,,4006381333115,GRP-438797347,Opção,Verde (438797339),,0
+variation,438797342,,1,,,1,11.2,,4006381333221,GRP-438797347,Opção,Verde (438797342),,0
+variation,438797343,,1,,,1,11.2,,4006381333283,GRP-438797347,Opção,Verde (438797343),,0
+variation,438797331,,1,,,1,11.2,,4006381333351,GRP-438797347,Opção,Verde Militar,,0
+variation,438797345,,1,,,1,11.2,,4006381333429,GRP-438797347,Opção,Verde Militar (438797345),,0
+variation,43866059,,1,,,1,11.2,,4006381333269,GRP-438797347,Opção,Vermelha,,0
+variation,43866053,,1,,,1,11.2,,4006381333320,GRP-438797347,Opção,Vermelho,,0
+variable,GRP-21788,Tinta Acrílica 20ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"302 Amarelo Escuro, 305 Az Ftalocianina, 306 Azul Hortensia, 310 Cor de Carne Clara, 311 Gris Neutro, 316 Rosa Escuro, 319 Br de Titanio, 320 Preto, 321 Violeta Cobalto, 322 Vd.musgo, 323 Am Limao, 324 Am Cadmio, 325 Laranja de Cadmio, 326 Am Pele, 328 Laca Geranio, 330 Violeta Permanente Escuro, 331 Az Prussia, 332 Vd Permanente Escuro, 334 Vd Oliva, 335 Laca Orquidea, 336 Terra de Siena Natural, 339 Am Indiano, 341 Am Cadmio Escuro, 342 Am Napoles, 343 Vm Cadmio Claro, 344 Vm.cadmio Escuro], 346 Alizarin Crimson, 347 Az Ceruleo, 348 Ultramar Claro, 350 Vermelho Claro, 353 Vd Vessie, 354 Terra Verde, 355 Sombra Natural, 365 Vd Hooker, 366 Vermelho Veneza, 379 Carmim, 385 Ouro Iridesc., 386 Prata Iridesc, 387 Cobre Iridesc., 389 Br Iridesc, 396 Sepia, 399 Gris de Payne",1,0
+variation,21788,,1,,,1,11.2,,7891153012926,GRP-21788,Opção,302 Amarelo Escuro,,0
+variation,22792,,1,,,1,11.2,,7891153131092,GRP-21788,Opção,305 Az Ftalocianina,,0
+variation,21791,,1,,,1,11.2,,7891153013008,GRP-21788,Opção,306 Azul Hortensia,,0
+variation,21785,,1,,,1,11.2,,7891153012841,GRP-21788,Opção,310 Cor de Carne Clara,,0
+variation,21784,,1,,,1,11.2,,7891153012803,GRP-21788,Opção,311 Gris Neutro,,0
+variation,22796,,1,,,1,11.2,,7891153131139,GRP-21788,Opção,316 Rosa Escuro,,0
+variation,22797,,1,,,1,11.2,,7891153131146,GRP-21788,Opção,319 Br de Titanio,,0
+variation,22799,,1,,,1,11.2,,7891153131153,GRP-21788,Opção,320 Preto,,0
+variation,22800,,1,,,1,11.2,,7891153131160,GRP-21788,Opção,321 Violeta Cobalto,,0
+variation,22801,,1,,,1,11.2,,7891153131177,GRP-21788,Opção,322 Vd.musgo,,0
+variation,22802,,1,,,1,11.2,,7891153131184,GRP-21788,Opção,323 Am Limao,,0
+variation,22803,,1,,,1,11.2,,7891153131191,GRP-21788,Opção,324 Am Cadmio,,0
+variation,22804,,1,,,1,11.2,,7891153131207,GRP-21788,Opção,325 Laranja de Cadmio,,0
+variation,22805,,1,,,1,11.2,,7891153131214,GRP-21788,Opção,326 Am Pele,,0
+variation,22806,,1,,,1,11.2,,7891153131221,GRP-21788,Opção,328 Laca Geranio,,0
+variation,22807,,1,,,1,11.2,,7891153131245,GRP-21788,Opção,330 Violeta Permanente Escuro,,0
+variation,22808,,1,,,1,11.2,,7891153131252,GRP-21788,Opção,331 Az Prussia,,0
+variation,22809,,1,,,1,11.2,,7891153131269,GRP-21788,Opção,332 Vd Permanente Escuro,,0
+variation,22810,,1,,,1,11.2,,7891153131276,GRP-21788,Opção,334 Vd Oliva,,0
+variation,21786,,1,,,1,11.2,,7891153012865,GRP-21788,Opção,335 Laca Orquidea,,0
+variation,22811,,1,,,1,11.2,,7891153131283,GRP-21788,Opção,336 Terra de Siena Natural,,0
+variation,21795,,1,,,1,11.2,,7891153013251,GRP-21788,Opção,339 Am Indiano,,0
+variation,22814,,1,,,1,11.2,,7891153131313,GRP-21788,Opção,341 Am Cadmio Escuro,,0
+variation,22815,,1,,,1,11.2,,7891153131320,GRP-21788,Opção,342 Am Napoles,,0
+variation,22816,,1,,,1,11.2,,7891153131337,GRP-21788,Opção,343 Vm Cadmio Claro,,0
+variation,22817,,1,,,1,11.2,,7891153131344,GRP-21788,Opção,344 Vm.cadmio Escuro],,0
+variation,22818,,1,,,1,11.2,,7891153131351,GRP-21788,Opção,346 Alizarin Crimson,,0
+variation,22819,,1,,,1,11.2,,7891153131368,GRP-21788,Opção,347 Az Ceruleo,,0
+variation,22820,,1,,,1,11.2,,7891153131375,GRP-21788,Opção,348 Ultramar Claro,,0
+variation,21790,,1,,,1,11.2,,7891153012988,GRP-21788,Opção,350 Vermelho Claro,,0
+variation,22821,,1,,,1,11.2,,7891153131382,GRP-21788,Opção,353 Vd Vessie,,0
+variation,22822,,1,,,1,11.2,,7891153131399,GRP-21788,Opção,354 Terra Verde,,0
+variation,22823,,1,,,1,11.2,,7891153131405,GRP-21788,Opção,355 Sombra Natural,,0
+variation,22829,,1,,,1,11.2,,7891153131467,GRP-21788,Opção,365 Vd Hooker,,0
+variation,21787,,1,,,1,11.2,,7891153012889,GRP-21788,Opção,366 Vermelho Veneza,,0
+variation,21794,,1,,,1,11.2,,7891153013213,GRP-21788,Opção,379 Carmim,,0
+variation,22830,,1,,,1,11.2,,7891153131474,GRP-21788,Opção,385 Ouro Iridesc.,,0
+variation,22832,,1,,,1,11.2,,7891153131481,GRP-21788,Opção,386 Prata Iridesc,,0
+variation,22833,,1,,,1,11.2,,7891153131498,GRP-21788,Opção,387 Cobre Iridesc.,,0
+variation,22835,,1,,,1,11.2,,7891153131511,GRP-21788,Opção,389 Br Iridesc,,0
+variation,21827,,1,,,1,11.2,,7891153015385,GRP-21788,Opção,396 Sepia,,0
+variation,21872,,1,,,1,11.2,,7891153018973,GRP-21788,Opção,399 Gris de Payne,,0
+variable,GRP-22297,Tinta Tecido 37ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"503 Az Celeste, 505 Am Ouro, 508 Vermelho Escarlate, 510 Vd Folha, 511 Vd Bandeira, 512 Vd Veronese, 513 Vd Musgo, 516 Violeta, 517 Laranja, 519 Branco, 535 Az Mar, 536 Am Cadmio, 537 Rosa, 539 Siena Natural, 540 Violeta Cobalto, 541 Vm Vivo, 542 Rosa Escuro, 640 Pitaya, 815 Castanho Claro, 834 Branco, 896 Rustico, 985 Vd Kiwi, 994 Cinza Chumbo, Az Bebe 811, Azul Ultramar 543, Coral 586, Fluor Amarelo Limao 102, Fluor Amarelo Ouro 108, Fluor Azul 109, Fluor Verde 101, Fluor Vermelho 103",1,0
+variation,22297,,1,,,1,7.4,,7891153041247,GRP-22297,Opção,503 Az Celeste,,0
+variation,22299,,1,,,1,7.4,,7891153041261,GRP-22297,Opção,505 Am Ouro,,0
+variation,438788746,,1,,,1,6.1,,7891153041285,GRP-22297,Opção,508 Vermelho Escarlate,,0
+variation,22303,,1,,,1,7.4,,7891153041308,GRP-22297,Opção,510 Vd Folha,,0
+variation,22304,,1,,,1,7.4,,7891153041315,GRP-22297,Opção,511 Vd Bandeira,,0
+variation,22305,,1,,,1,7.4,,7891153041322,GRP-22297,Opção,512 Vd Veronese,,0
+variation,22306,,1,,,1,7.4,,7891153041339,GRP-22297,Opção,513 Vd Musgo,,0
+variation,22308,,1,,,1,7.4,,7891153041353,GRP-22297,Opção,516 Violeta,,0
+variation,22309,,1,,,1,7.4,,7891153041360,GRP-22297,Opção,517 Laranja,,0
+variation,22311,,1,,,1,7.4,,7891153041384,GRP-22297,Opção,519 Branco,,0
+variation,21817,,1,,,1,7.4,,7891153014173,GRP-22297,Opção,535 Az Mar,,0
+variation,22314,,1,,,1,7.4,,7891153041421,GRP-22297,Opção,536 Am Cadmio,,0
+variation,22315,,1,,,1,7.4,,7891153041438,GRP-22297,Opção,537 Rosa,,0
+variation,22317,,1,,,1,6.1,,7891153041452,GRP-22297,Opção,539 Siena Natural,,0
+variation,22318,,1,,,1,7.4,,7891153041469,GRP-22297,Opção,540 Violeta Cobalto,,0
+variation,22319,,1,,,1,7.4,,7891153041476,GRP-22297,Opção,541 Vm Vivo,,0
+variation,22320,,1,,,1,6.5,,7891153041483,GRP-22297,Opção,542 Rosa Escuro,,0
+variation,43872126,,1,,,1,7.4,,7891153090405,GRP-22297,Opção,640 Pitaya,,0
+variation,43873795,,1,,,1,7.4,,7891153090467,GRP-22297,Opção,815 Castanho Claro,,0
+variation,438788747,,1,,,1,7.4,,7891153072456,GRP-22297,Opção,834 Branco,,0
+variation,22631,,1,,,1,7.4,,7891153072555,GRP-22297,Opção,896 Rustico,,0
+variation,22579,,1,,,1,7.4,,7891153068169,GRP-22297,Opção,985 Vd Kiwi,,0
+variation,22629,,1,,,1,7.4,,7891153072395,GRP-22297,Opção,994 Cinza Chumbo,,0
+variation,21814,,1,,,1,7.4,,7891153014111,GRP-22297,Opção,Az Bebe 811,,0
+variation,438797820,,1,,,1,7.4,,7891153000541,GRP-22297,Opção,Azul Ultramar 543,,0
+variation,21731,,1,,,1,7.4,,7891153000428,GRP-22297,Opção,Coral 586,,0
+variation,438796266,,1,,,1,7.9,,7891153040011,GRP-22297,Opção,Fluor Amarelo Limao 102,,0
+variation,438797805,,1,,,1,7.9,,7891153040059,GRP-22297,Opção,Fluor Amarelo Ouro 108,,0
+variation,438797806,,1,,,1,7.9,,7891153040066,GRP-22297,Opção,Fluor Azul 109,,0
+variation,438797807,,1,,,1,7.9,,7891153040004,GRP-22297,Opção,Fluor Verde 101,,0
+variation,438797804,,1,,,1,7.9,,7891153040028,GRP-22297,Opção,Fluor Vermelho 103,,0
+variable,GRP-14049,Marca Texto STABILO Boss,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo, Azul, Laranja, Pastel Amarelo, Pastel Azul, Pastel Coral, Pastel Fuchsia, Pastel Lilas, Pastel Limao, Pastel Pessego, Pastel Rosa, Pastel Rosa Esc, Pastel Verde, Verde, Verde Neon, Vermelho, Violeta",1,0
+variation,14049,,1,,,1,15.8,,4006381333627,GRP-14049,Opção,Amarelo,,0
+variation,14050,,1,,,1,15.8,,4006381333634,GRP-14049,Opção,Azul,,0
+variation,438790102,,1,,,1,15.8,,4006381333672,GRP-14049,Opção,Laranja,,0
+variation,438790106,,1,,,1,15.8,,4006381492416,GRP-14049,Opção,Pastel Amarelo,,0
+variation,43869143,,1,,,1,15.8,,4006381492324,GRP-14049,Opção,Pastel Azul,,0
+variation,43876614,,1,,,1,15.5,,4006381558013,GRP-14049,Opção,Pastel Coral,,0
+variation,438790104,,1,,,1,15.8,,4006381566032,GRP-14049,Opção,Pastel Fuchsia,,0
+variation,43869149,,1,,,1,15.8,,4006381492355,GRP-14049,Opção,Pastel Lilas,,0
+variation,43876613,,1,,,1,15.8,,4006381557924,GRP-14049,Opção,Pastel Limao,,0
+variation,43869146,,1,,,1,15.8,,4006381492386,GRP-14049,Opção,Pastel Pessego,,0
+variation,43869147,,1,,,1,15.8,,4006381492294,GRP-14049,Opção,Pastel Rosa,,0
+variation,438790109,,1,,,1,15.8,,4006381557955,GRP-14049,Opção,Pastel Rosa Esc,,0
+variation,43869144,,1,,,1,15.8,,4006381492263,GRP-14049,Opção,Pastel Verde,,0
+variation,438790110,,1,,,1,15.8,,4006381333665,GRP-14049,Opção,Verde,,0
+variation,14051,,1,,,1,15.8,,4006381333641,GRP-14049,Opção,Verde Neon,,0
+variation,14052,,1,,,1,15.8,,4006381333658,GRP-14049,Opção,Vermelho,,0
+variation,14039,,1,,,1,15.8,,4006381118743,GRP-14049,Opção,Violeta,,0
+variable,GRP-438787165,Balão Metalizado N 100cm,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"4 Rose, 6 Azul, 6 Dourado, 6 Pink, 6 Prata, 6 Rose, 7 Azul, 7 Dourado, 7 Pink, 7 Rose, 8 Pink, 8 Prata, 8 Rose, 9 Azul, 7 Vermelho Regina",1,0
+variation,438787165,,1,,,1,12.9,,7897778486012,GRP-438787165,Opção,4 Rose,,0
+variation,438787155,,1,,,1,12.9,,7897778450013,GRP-438787165,Opção,6 Azul,,0
+variation,438787151,,1,,,1,12.9,,7897778298011,GRP-438787165,Opção,6 Dourado,,0
+variation,438787153,,1,,,1,12.9,,7897778412011,GRP-438787165,Opção,6 Pink,,0
+variation,438787152,,1,,,1,12.9,,7897778336010,GRP-438787165,Opção,6 Prata,,0
+variation,438787154,,1,,,1,12.9,,7897778490019,GRP-438787165,Opção,6 Rose,,0
+variation,438787147,,1,,,1,12.9,,7897778451010,GRP-438787165,Opção,7 Azul,,0
+variation,438787145,,1,,,1,12.9,,7897778299018,GRP-438787165,Opção,7 Dourado,,0
+variation,438787149,,1,,,1,12.9,,7897778413018,GRP-438787165,Opção,7 Pink,,0
+variation,438787150,,1,,,1,12.9,,7897778491016,GRP-438787165,Opção,7 Rose,,0
+variation,438787142,,1,,,1,12.9,,7897778414015,GRP-438787165,Opção,8 Pink,,0
+variation,438787141,,1,,,1,12.9,,7897778338014,GRP-438787165,Opção,8 Prata,,0
+variation,438787143,,1,,,1,12.9,,7897778492013,GRP-438787165,Opção,8 Rose,,0
+variation,438787139,,1,,,1,12.9,,7897778453014,GRP-438787165,Opção,9 Azul,,0
+variation,438789803,,1,,,1,12.9,,7897778375019,GRP-438787165,Opção,7 Vermelho Regina,,0
+variable,GRP-438792909,Vela Pick Metalizada,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Dourada Número 0 01 Un, Dourada Número 1 01 Un, Dourada Número 2 01 Un, Dourada Número 3 01 Un, Dourada Número 4 01 Un, Dourada Número 5 01 Un, Dourada Número 6 01 Un, Dourada Número 7 01 Un, Dourada Número 8 01 Un., Dourada Número 9 01 Un, Prata Interrogacao 01 Un, Prata Número 0 01 Un, Prata Número 1 01 Un, Prata Número 2 01 Un, Prata Número 3 01 Un, Prata Número 4 01 Un, Prata Número 5 01 Un, Prata Número 6 01 Un, Prata Número 7 01 Un, Prata Número 8 01 Un, Prata Número 9 01 Un",1,0
+variation,438792909,,1,,,1,7.3,,7891175358705,GRP-438792909,Opção,Dourada Número 0 01 Un,,0
+variation,438792910,,1,,,1,7.3,,7891175358729,GRP-438792909,Opção,Dourada Número 1 01 Un,,0
+variation,438792911,,1,,,1,7.3,,7891175358743,GRP-438792909,Opção,Dourada Número 2 01 Un,,0
+variation,438792912,,1,,,1,7.3,,7891175358767,GRP-438792909,Opção,Dourada Número 3 01 Un,,0
+variation,438792913,,1,,,1,7.3,,7891175358781,GRP-438792909,Opção,Dourada Número 4 01 Un,,0
+variation,438792914,,1,,,1,7.3,,7891175358804,GRP-438792909,Opção,Dourada Número 5 01 Un,,0
+variation,438792915,,1,,,1,7.3,,7891175358828,GRP-438792909,Opção,Dourada Número 6 01 Un,,0
+variation,438792916,,1,,,1,7.3,,7891175358842,GRP-438792909,Opção,Dourada Número 7 01 Un,,0
+variation,438793674,,1,,,1,7.3,,7891175358866,GRP-438792909,Opção,Dourada Número 8 01 Un.,,0
+variation,438792917,,1,,,1,7.3,,7891175358880,GRP-438792909,Opção,Dourada Número 9 01 Un,,0
+variation,438792918,,1,,,1,6.8,,7891175358903,GRP-438792909,Opção,Prata Interrogacao 01 Un,,0
+variation,438792919,,1,,,1,7.3,,7891175358927,GRP-438792909,Opção,Prata Número 0 01 Un,,0
+variation,438792920,,1,,,1,7.3,,,GRP-438792909,Opção,Prata Número 1 01 Un,,0
+variation,438792921,,1,,,1,7.3,,7891175358965,GRP-438792909,Opção,Prata Número 2 01 Un,,0
+variation,438792922,,1,,,1,7.3,,7891175358972,GRP-438792909,Opção,Prata Número 3 01 Un,,0
+variation,438792923,,1,,,1,6.8,,7891175359009,GRP-438792909,Opção,Prata Número 4 01 Un,,0
+variation,438792924,,1,,,1,6.8,,7891175359023,GRP-438792909,Opção,Prata Número 5 01 Un,,0
+variation,438792925,,1,,,1,7.3,,7891175359047,GRP-438792909,Opção,Prata Número 6 01 Un,,0
+variation,438792926,,1,,,1,7.3,,7891175359061,GRP-438792909,Opção,Prata Número 7 01 Un,,0
+variation,438792927,,1,,,1,7.3,,7891175359085,GRP-438792909,Opção,Prata Número 8 01 Un,,0
+variation,438792928,,1,,,1,6.8,,7891175359108,GRP-438792909,Opção,Prata Número 9 01 Un,,0
+variable,GRP-43868702,Pasta Aba Elástico Ofício 2cm Top Line,1,0,visible,1,,Escritório,,,Opção,"Am, Az, Pt, Vd, Vm",1,0
+variation,43868702,,1,,,1,14.9,,7897832844482,GRP-43868702,Opção,Am,,0
+variation,43868705,,1,,,1,14.9,,7897832844505,GRP-43868702,Opção,Az,,0
+variation,43868703,,1,,,1,14.9,,7897832844543,GRP-43868702,Opção,Pt,,0
+variation,43868707,,1,,,1,14.9,,7897832844628,GRP-43868702,Opção,Vd,,0
+variation,43868706,,1,,,1,14.9,,7897832845342,GRP-43868702,Opção,Vm,,0
+variable,GRP-438789674,Massinha de Modelar,1,0,visible,1,,Brinquedos,,,Opção,"150g 102 Amarelo Limao, 150g 109 Azul, 150g 809 Lilas Bebe, 150g Branco Neve, 150g Verde Acrilex, 150g Violeta, 6 Cores Acrilex",1,0
+variation,438789674,,1,,,1,9.6,,7891153073019,GRP-438789674,Opção,150g 102 Amarelo Limao,,0
+variation,438789675,,1,,,1,9.6,,7891153073040,GRP-438789674,Opção,150g 109 Azul,,0
+variation,438789676,,1,,,1,9.6,,7891153097176,GRP-438789674,Opção,150g 809 Lilas Bebe,,0
+variation,22616,,1,,,1,9.6,,7891153070377,GRP-438789674,Opção,150g Branco Neve,,0
+variation,438790455,,1,,,1,9.6,,7891153073002,GRP-438789674,Opção,150g Verde Acrilex,,0
+variation,22595,,1,,,1,9.6,,7891153069951,GRP-438789674,Opção,150g Violeta,,0
+variation,22645,,1,,,1,4.1,,7891153073217,GRP-438789674,Opção,6 Cores Acrilex,,0
+variable,GRP-43872056,Pasta Aba Elástico Ofício Line,1,0,visible,1,,Escritório,,,Opção,"Amarela, Azul, Cristal, Rosa, Verde, Vermelha, Vermelha (438793284)",1,0
+variation,43872056,,1,,,1,5.5,,7897832840415,GRP-43872056,Opção,Amarela,,0
+variation,43872051,,1,,,1,5.5,,7897832840453,GRP-43872056,Opção,Azul,,0
+variation,40176,,1,,,1,5.5,,7897832840491,GRP-43872056,Opção,Cristal,,0
+variation,43872054,,1,,,1,5.5,,7897832845427,GRP-43872056,Opção,Rosa,,0
+variation,43872055,,1,,,1,5.5,,7897832840576,GRP-43872056,Opção,Verde,,0
+variation,43872057,,1,,,1,5.5,,7897832840613,GRP-43872056,Opção,Vermelha,,0
+variation,438793284,,1,,,1,4.8,,7897237363984,GRP-43872056,Opção,Vermelha (438793284),,0
+variable,GRP-438797044,Caneta Esferográfica,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"062 Fine Faber Castell Verm, Az bp-1rt-m-l PILOT, Az Retratil 0.7 Super Grip, Cristal Needle 07, Vm bp-1rt-m-l PILOT",1,0
+variation,438797044,,1,,,1,3.9,,7754111562027,GRP-438797044,Opção,062 Fine Faber Castell Verm,,0
+variation,16349,,1,,,1,4.3,,4902505482052,GRP-438797044,Opção,Az bp-1rt-m-l PILOT,,0
+variation,38347,,1,,,1,11.9,,7897424080335,GRP-438797044,Opção,Az Retratil 0.7 Super Grip,,0
+variation,13260,,1,,,1,2.4,,,GRP-438797044,Opção,Cristal Needle 07,,0
+variation,5468628,,1,,,1,4.3,,4902505482045,GRP-438797044,Opção,Vm bp-1rt-m-l PILOT,,0
+variable,GRP-5469293,Pacote de Papel de Seda c/100,1,1,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"Amarelo fls, Azul Claro Fhs, Azul Escuro Fhs, Lilas fls, Rosa Claro Flhs, Verde Claro fls, Verde Escuro fls, Vermelho fls",1,0
+variation,5469293,,1,,,1,49.95,,7899014918295,GRP-5469293,Opção,Amarelo fls,,0
+variation,5469290,,1,,,1,49.95,,7899014918325,GRP-5469293,Opção,Azul Claro Fhs,,0
+variation,5469291,,1,,,1,43.0,,7899014918332,GRP-5469293,Opção,Azul Escuro Fhs,,0
+variation,5469288,,1,,,1,49.95,,7899014918370,GRP-5469293,Opção,Lilas fls,,0
+variation,5469289,,1,,,1,49.95,,7899014918455,GRP-5469293,Opção,Rosa Claro Flhs,,0
+variation,5469294,,1,,,1,49.95,,7899014918318,GRP-5469293,Opção,Verde Claro fls,,0
+variation,5469295,,1,,,1,43.0,,7899014918509,GRP-5469293,Opção,Verde Escuro fls,,0
+variation,43871224,,1,,,1,0.6,,7899014918523,GRP-5469293,Opção,Vermelho fls,,0
+variable,GRP-22101,Tinta Fosca Art 37ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"501 Turquesa, 503 Az Celeste, 505 Am Ouro, 507 Vm Fogo, 515 Ceramica Clara, 516 Violeta, 517 Laranja, 518 Salmao, 526 Marrom Esc, 528 Lilas, 541 Vm Vivo, 542 Rosa Escuro, 570 Verde Pistache, 574 Cinza Lunar, 579 Az Hortensia, 585 Capuccino, 596 Az Petroleo, 802 Vd Maca, 805 Goiaba Queimada, 817 Areia, 820 Verde Primavera, 834 Palha, 896 Rustico, 915 Orquidea, Cereja 826",1,0
+variation,22101,,1,,,1,6.95,,7891153032061,GRP-22101,Opção,501 Turquesa,,0
+variation,22102,,1,,,1,6.95,,7891153032078,GRP-22101,Opção,503 Az Celeste,,0
+variation,22104,,1,,,1,6.95,,7891153032092,GRP-22101,Opção,505 Am Ouro,,0
+variation,22105,,1,,,1,6.95,,7891153032108,GRP-22101,Opção,507 Vm Fogo,,0
+variation,21985,,1,,,1,6.1,,7891153025292,GRP-22101,Opção,515 Ceramica Clara,,0
+variation,438789327,,1,,,1,6.95,,7891153032146,GRP-22101,Opção,516 Violeta,,0
+variation,21777,,1,,,1,6.95,,7891153009063,GRP-22101,Opção,517 Laranja,,0
+variation,21986,,1,,,1,6.95,,7891153025315,GRP-22101,Opção,518 Salmao,,0
+variation,21988,,1,,,1,6.95,,7891153025377,GRP-22101,Opção,526 Marrom Esc,,0
+variation,438789326,,1,,,1,6.95,,7891153032177,GRP-22101,Opção,528 Lilas,,0
+variation,21992,,1,,,1,6.95,,7891153025452,GRP-22101,Opção,541 Vm Vivo,,0
+variation,22116,,1,,,1,6.95,,7891153032214,GRP-22101,Opção,542 Rosa Escuro,,0
+variation,438789328,,1,,,1,6.95,,7891153025575,GRP-22101,Opção,570 Verde Pistache,,0
+variation,22247,,1,,,1,6.95,,7891153036717,GRP-22101,Opção,574 Cinza Lunar,,0
+variation,22017,,1,,,1,6.95,,7891153026015,GRP-22101,Opção,579 Az Hortensia,,0
+variation,22003,,1,,,1,6.95,,7891153025711,GRP-22101,Opção,585 Capuccino,,0
+variation,22006,,1,,,1,6.95,,7891153025773,GRP-22101,Opção,596 Az Petroleo,,0
+variation,22004,,1,,,1,6.95,,7891153025735,GRP-22101,Opção,802 Vd Maca,,0
+variation,22005,,1,,,1,6.95,,7891153025759,GRP-22101,Opção,805 Goiaba Queimada,,0
+variation,22011,,1,,,1,6.95,,7891153025872,GRP-22101,Opção,817 Areia,,0
+variation,438787973,,1,,,1,6.95,,7891153025933,GRP-22101,Opção,820 Verde Primavera,,0
+variation,22028,,1,,,1,6.95,,7891153026213,GRP-22101,Opção,834 Palha,,0
+variation,22647,,1,,,1,6.95,,7891153074092,GRP-22101,Opção,896 Rustico,,0
+variation,438789329,,1,,,1,6.95,,7891153074221,GRP-22101,Opção,915 Orquidea,,0
+variation,438797814,,1,,,1,6.95,,7891153026077,GRP-22101,Opção,Cereja 826,,0
+variable,GRP-5469500,Pasta Aba Elástico Ofício 4cm Top Line,1,1,visible,1,,Escritório,,,Opção,"Am, Az, Cristal, Pt, Vm",1,0
+variation,5469500,,1,,,1,18.8,,7897832844802,GRP-5469500,Opção,Am,,0
+variation,43868717,,1,,,1,18.8,,7897832844826,GRP-5469500,Opção,Az,,0
+variation,40183,,1,,,1,18.8,,7897832844840,GRP-5469500,Opção,Cristal,,0
+variation,43868718,,1,,,1,18.8,,7897832844864,GRP-5469500,Opção,Pt,,0
+variation,43868719,,1,,,1,18.8,,7897832845380,GRP-5469500,Opção,Vm,,0
+variable,GRP-438792577,Fita Cetim 10mts 7mm,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"N.01 04 Rosa Bebe Kit, N.01 118 Verde Bandeira, N.01 120 Marinho Kit, N.01 132 Amarelo Canario, N.01 140 Lilas, N.01 191 Lavanda, N.01 29 Violeta, N.01 32 Marrom, N.01 37 Bordo, N.01 72 Pink Escuro, N.01 80 Verde Água, N.01 87 Ouro Kit, N.01 89 Salmao",1,0
+variation,438792577,,1,,,1,3.0,,7890265016778,GRP-438792577,Opção,N.01 04 Rosa Bebe Kit,,0
+variation,438795300,,1,,,1,3.0,,7890265086733,GRP-438792577,Opção,N.01 118 Verde Bandeira,,0
+variation,438792580,,1,,,1,3.0,,7890265016969,GRP-438792577,Opção,N.01 120 Marinho Kit,,0
+variation,438795301,,1,,,1,3.0,,7890265016990,GRP-438792577,Opção,N.01 132 Amarelo Canario,,0
+variation,438793589,,1,,,1,3.0,,7890265017003,GRP-438792577,Opção,N.01 140 Lilas,,0
+variation,438793590,,1,,,1,3.0,,7898613652319,GRP-438792577,Opção,N.01 191 Lavanda,,0
+variation,438793585,,1,,,1,3.0,,7898613652234,GRP-438792577,Opção,N.01 29 Violeta,,0
+variation,438794209,,1,,,1,3.0,,7890265016853,GRP-438792577,Opção,N.01 32 Marrom,,0
+variation,438794188,,1,,,1,3.0,,7890265016877,GRP-438792577,Opção,N.01 37 Bordo,,0
+variation,438794189,,1,,,1,3.0,,7890265278343,GRP-438792577,Opção,N.01 72 Pink Escuro,,0
+variation,438793587,,1,,,1,3.0,,7890265278350,GRP-438792577,Opção,N.01 80 Verde Água,,0
+variation,438792579,,1,,,1,3.0,,7890265016921,GRP-438792577,Opção,N.01 87 Ouro Kit,,0
+variation,438795299,,1,,,1,3.0,,7898613652258,GRP-438792577,Opção,N.01 89 Salmao,,0
+variable,GRP-438797986,Pincel Art Chato Sintético,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"320 06, Cl 121s 20, Cl 121s/10, Cl 121s/12, Cl 121s/8, Cl 16, Cl 18",1,0
+variation,438797986,,1,,,1,26.2,,7898428602325,GRP-438797986,Opção,320 06,,0
+variation,438796008,,1,,,1,28.6,,7898428609782,GRP-438797986,Opção,Cl 121s 20,,0
+variation,438788414,,1,,,1,13.2,,7898428609737,GRP-438797986,Opção,Cl 121s/10,,0
+variation,438788417,,1,,,1,16.6,,7898428609744,GRP-438797986,Opção,Cl 121s/12,,0
+variation,438788416,,1,,,1,12.4,,7898428609720,GRP-438797986,Opção,Cl 121s/8,,0
+variation,438791025,,1,,,1,18.5,,7898428609768,GRP-438797986,Opção,Cl 16,,0
+variation,438791026,,1,,,1,22.6,,7898428609775,GRP-438797986,Opção,Cl 18,,0
+variable,GRP-43868282,Pacote Papel de Seda 48x60,1,1,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"Laranja, Marrom 100 Flhs, Prata, Preto 100 Flhs, Rosa 100 Flhs",1,0
+variation,43868282,,1,,,1,43.0,,7899014918363,GRP-43868282,Opção,Laranja,,0
+variation,43868280,,1,,,1,49.95,,7899014918387,GRP-43868282,Opção,Marrom 100 Flhs,,0
+variation,43868276,,1,,,1,53.2,,7898248396725,GRP-43868282,Opção,Prata,,0
+variation,43868277,,1,,,1,0.6,,7899014918448,GRP-43868282,Opção,Preto 100 Flhs,,0
+variation,438786467,,1,,,1,43.0,,7899014918424,GRP-43868282,Opção,Rosa 100 Flhs,,0
+variable,GRP-438788707,Pasta com Zíper Medio,1,1,visible,1,,Escritório,,,Opção,"Azul Yes, Branco Yes, Rosa Yes, Vermelho",1,0
+variation,438788707,,1,,,1,18.3,,4713195040350,GRP-438788707,Opção,Azul Yes,,0
+variation,438788706,,1,,,1,18.3,,4713195029324,GRP-438788707,Opção,Branco Yes,,0
+variation,438788704,,1,,,1,18.3,,4713195040367,GRP-438788707,Opção,Rosa Yes,,0
+variation,438788705,,1,,,1,18.3,,4713195040381,GRP-438788707,Opção,Vermelho,,0
+variable,GRP-438788700,"Pasta Zíper Flex C/costura 33cmx24,5cm Transparente",1,0,visible,1,,Escritório,,,Opção,"Azul Yes, Branco Yes, Vermelha Yes",1,0
+variation,438788700,,1,,,1,21.4,,4713195040305,GRP-438788700,Opção,Azul Yes,,0
+variation,438788703,,1,,,1,21.4,,4713195029287,GRP-438788700,Opção,Branco Yes,,0
+variation,438788702,,1,,,1,21.4,,4713195040336,GRP-438788700,Opção,Vermelha Yes,,0
+variable,GRP-438788697,"Pasta Zíper Flex C/costura 39,5cmx 28,5cm Transparente",1,0,visible,1,,Escritório,,,Opção,"Azul Yes, Branco Yes, Rosa Yes, Vermelha Yes",1,0
+variation,438788697,,1,,,1,31.8,,4713195040251,GRP-438788697,Opção,Azul Yes,,0
+variation,438790746,,1,,,1,31.8,,4713195029249,GRP-438788697,Opção,Branco Yes,,0
+variation,438788699,,1,,,1,31.8,,4713195040268,GRP-438788697,Opção,Rosa Yes,,0
+variation,438788698,,1,,,1,31.8,,4713195040282,GRP-438788697,Opção,Vermelha Yes,,0
+variable,GRP-438786494,Vela Parabéns Glitter,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Dourada N* 3, Dourada N* 7, Dourada n*2, Dourada n*4, Dourada n*5, Dourada n*6, Prata n*2, Prata n*3, Prata n*4, Prata n*5, Prata n*6, Prata n*7, Prata n*8, Prata n*9",1,0
+variation,438786494,,1,,,1,4.8,,7891175447478,GRP-438786494,Opção,Dourada N* 3,,0
+variation,438786522,,1,,,1,4.8,,7891175447515,GRP-438786494,Opção,Dourada N* 7,,0
+variation,438786493,,1,,,1,4.8,,7891175447461,GRP-438786494,Opção,Dourada n*2,,0
+variation,438786519,,1,,,1,4.8,,7891175447485,GRP-438786494,Opção,Dourada n*4,,0
+variation,438786520,,1,,,1,4.8,,7891175447492,GRP-438786494,Opção,Dourada n*5,,0
+variation,438786521,,1,,,1,4.5,,7891175447508,GRP-438786494,Opção,Dourada n*6,,0
+variation,438785998,,1,,,1,4.5,,7891175447577,GRP-438786494,Opção,Prata n*2,,0
+variation,438785999,,1,,,1,4.5,,7891175447607,GRP-438786494,Opção,Prata n*3,,0
+variation,438786000,,1,,,1,4.8,,7891175447614,GRP-438786494,Opção,Prata n*4,,0
+variation,438786001,,1,,,1,4.8,,7891175447621,GRP-438786494,Opção,Prata n*5,,0
+variation,438786002,,1,,,1,4.8,,7891175447638,GRP-438786494,Opção,Prata n*6,,0
+variation,438786003,,1,,,1,4.8,,7891175447645,GRP-438786494,Opção,Prata n*7,,0
+variation,438786004,,1,,,1,4.5,,7891175447652,GRP-438786494,Opção,Prata n*8,,0
+variation,438786005,,1,,,1,4.5,,7891175447669,GRP-438786494,Opção,Prata n*9,,0
+variable,GRP-438791130,Fita Cetim 10mts 11mm c/10mts,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"N.02 04 Rosa Bebe, N.02 108 Verde Musgo Atacado - Peca - Kit, N.02 147 Rosa Medio Atacado - Peca - Kit, N.02 179 Prata, N.02 26 Vermelho, N.02 76 Verde Folha",1,0
+variation,438791130,,1,,,1,3.5,,7890265017096,GRP-438791130,Opção,N.02 04 Rosa Bebe,,0
+variation,438798379,,1,,,1,3.5,,7890265017270,GRP-438791130,Opção,N.02 108 Verde Musgo Atacado - Peca - Kit,,0
+variation,438798380,,1,,,1,3.5,,7898613652371,GRP-438791130,Opção,N.02 147 Rosa Medio Atacado - Peca - Kit,,0
+variation,438791133,,1,,,1,3.5,,7890265278633,GRP-438791130,Opção,N.02 179 Prata,,0
+variation,438791131,,1,,,1,3.5,,7890265017164,GRP-438791130,Opção,N.02 26 Vermelho,,0
+variation,438791132,,1,,,1,3.5,,7890265017256,GRP-438791130,Opção,N.02 76 Verde Folha,,0
+variable,GRP-438797244,Caneta Esferográfica Super Grip 0.7,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"438797244, Preta, Vermelha",1,0
+variation,438797244,,1,,,1,2.0,,7897424007325,GRP-438797244,Opção,438797244,,0
+variation,38348,,1,,,1,11.9,,7897424080342,GRP-438797244,Opção,Preta,,0
+variation,38349,,1,,,1,11.9,,7897424080359,GRP-438797244,Opção,Vermelha,,0
+variable,GRP-438789905,"Caneta STABILO Point 88 Fine 0,4mm",1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Lilas, Preto, Rosa Escuro, Roxo, Verde, Vermelha",1,0
+variation,438789905,,1,,,1,11.7,,4006381574549,GRP-438789905,Opção,Lilas,,0
+variation,14038,,1,,,1,12.2,,4006381105316,GRP-438789905,Opção,Preto,,0
+variation,438789928,,1,,,1,12.2,,4006381105347,GRP-438789905,Opção,Rosa Escuro,,0
+variation,438789918,,1,,,1,12.2,,4006381333948,GRP-438789905,Opção,Roxo,,0
+variation,438789927,,1,,,1,12.2,,4006381492973,GRP-438789905,Opção,Verde,,0
+variation,438789924,,1,,,1,12.2,,4006381105262,GRP-438789905,Opção,Vermelha,,0
+variable,GRP-22643,Massa de Modelar Soft,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"150g 103 Vermelho, 150g Azul Bebe, 150g Chocolate, 150g Laranja, 150g Maravilha, 150g Rosa Bebe, 150g Salmao Bebe, 500g 103 Vermelha, 500g 418 Branco Neve, 500g 516 Violeta, 500g 814 Chocolate, 500g Maravilha",1,0
+variation,22643,,1,,,1,9.6,,7891153073194,GRP-22643,Opção,150g 103 Vermelho,,0
+variation,43872119,,1,,,1,8.6,,7891153097114,GRP-22643,Opção,150g Azul Bebe,,0
+variation,438791440,,1,,,1,9.6,,7891153070346,GRP-22643,Opção,150g Chocolate,,0
+variation,22635,,1,,,1,9.6,,7891153073026,GRP-22643,Opção,150g Laranja,,0
+variation,22636,,1,,,1,9.6,,7891153073033,GRP-22643,Opção,150g Maravilha,,0
+variation,43872123,,1,,,1,9.6,,7891153097152,GRP-22643,Opção,150g Rosa Bebe,,0
+variation,438797643,,1,,,1,9.6,,7891153097336,GRP-22643,Opção,150g Salmao Bebe,,0
+variation,22644,,1,,,1,21.95,,7891153073200,GRP-22643,Opção,500g 103 Vermelha,,0
+variation,22617,,1,,,1,21.95,,7891153070391,GRP-22643,Opção,500g 418 Branco Neve,,0
+variation,22597,,1,,,1,21.95,,7891153069999,GRP-22643,Opção,500g 516 Violeta,,0
+variation,22615,,1,,,1,21.95,,7891153070360,GRP-22643,Opção,500g 814 Chocolate,,0
+variation,22641,,1,,,1,21.95,,7891153073095,GRP-22643,Opção,500g Maravilha,,0
+variable,GRP-43877112,Vela de Aniversário N,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"1 Cintilante, 3 Cintilante, 4 Cintilante, 5 Cintilante, 7 Cintilante",1,0
+variation,43877112,,1,,,1,7.3,,7899895724695,GRP-43877112,Opção,1 Cintilante,,0
+variation,43877114,,1,,,1,7.3,,7899895724718,GRP-43877112,Opção,3 Cintilante,,0
+variation,43877116,,1,,,1,7.3,,7899895724725,GRP-43877112,Opção,4 Cintilante,,0
+variation,43877115,,1,,,1,7.3,,7899895724732,GRP-43877112,Opção,5 Cintilante,,0
+variation,43877113,,1,,,1,7.3,,7899895724756,GRP-43877112,Opção,7 Cintilante,,0
+variable,GRP-438791736,Micangao 6/0,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"021 Espelhado 50grs Cristal Multiplo, 022c Espelhado 50grs Caramelo Multiplo, 024 Espelhado 50grs Verde Limao Multiplo, 027b Espelhado 50grs Verde Bandeira Multiplo, 028 Espelhado 50grs Azul Royal Multiplo, 029b Espelhado 50grs Laranja Multiplo, 030 Espelhado 50grs Amarelo Multiplo, 041 Opaco 50grs Branco Multiplo, 042 Opaco 50grs Amarelo Multiplo, 043 Opaco 50grs Azul Bebe Multiplo, 044 Opaco 50grs Verde Limao Multiplo, 045 Opaco 50grs Vermelho Multiplo, 046 Opaco 50grs Marrom Multiplo, 047 Opaco 50grs Verde Bandeira Multiplo, 048 Opaco 50grs Azul Royal Multiplo, 050 Opaco 50grs Laranja Multiplo, 101 Transparente Brilho 50grs Cristal Multiplo, 106 Transparente Brilho 50grs Azul Multiplo, 107 Opaca Brilho 50grs Verde Multiplo, 129 Opaco Lustrado 50grs Grafite Multiplo",1,0
+variation,438791736,,1,,,1,7.5,,7890265630400,GRP-438791736,Opção,021 Espelhado 50grs Cristal Multiplo,,0
+variation,438791737,,1,,,1,7.5,,7890265216741,GRP-438791736,Opção,022c Espelhado 50grs Caramelo Multiplo,,0
+variation,438791738,,1,,,1,7.5,,7890265056590,GRP-438791736,Opção,024 Espelhado 50grs Verde Limao Multiplo,,0
+variation,438791739,,1,,,1,7.5,,7890265656820,GRP-438791736,Opção,027b Espelhado 50grs Verde Bandeira Multiplo,,0
+variation,438791740,,1,,,1,7.5,,7890265055876,GRP-438791736,Opção,028 Espelhado 50grs Azul Royal Multiplo,,0
+variation,438791741,,1,,,1,7.5,,7890265056460,GRP-438791736,Opção,029b Espelhado 50grs Laranja Multiplo,,0
+variation,438791742,,1,,,1,7.5,,7890265278022,GRP-438791736,Opção,030 Espelhado 50grs Amarelo Multiplo,,0
+variation,438791743,,1,,,1,8.9,,7890265056934,GRP-438791736,Opção,041 Opaco 50grs Branco Multiplo,,0
+variation,438791744,,1,,,1,8.9,,7890265277421,GRP-438791736,Opção,042 Opaco 50grs Amarelo Multiplo,,0
+variation,438791745,,1,,,1,8.9,,7890265656844,GRP-438791736,Opção,043 Opaco 50grs Azul Bebe Multiplo,,0
+variation,438791746,,1,,,1,8.9,,7890265056514,GRP-438791736,Opção,044 Opaco 50grs Verde Limao Multiplo,,0
+variation,438791747,,1,,,1,8.9,,7890265060436,GRP-438791736,Opção,045 Opaco 50grs Vermelho Multiplo,,0
+variation,438791748,,1,,,1,8.9,,7890265056798,GRP-438791736,Opção,046 Opaco 50grs Marrom Multiplo,,0
+variation,438791749,,1,,,1,8.9,,7890265498567,GRP-438791736,Opção,047 Opaco 50grs Verde Bandeira Multiplo,,0
+variation,438791750,,1,,,1,8.9,,7890265055821,GRP-438791736,Opção,048 Opaco 50grs Azul Royal Multiplo,,0
+variation,438791751,,1,,,1,8.9,,7890265278015,GRP-438791736,Opção,050 Opaco 50grs Laranja Multiplo,,0
+variation,438791752,,1,,,1,7.5,,7890265087969,GRP-438791736,Opção,101 Transparente Brilho 50grs Cristal Multiplo,,0
+variation,438791753,,1,,,1,7.5,,7890265088010,GRP-438791736,Opção,106 Transparente Brilho 50grs Azul Multiplo,,0
+variation,438791754,,1,,,1,8.9,,7890265086726,GRP-438791736,Opção,107 Opaca Brilho 50grs Verde Multiplo,,0
+variation,438791756,,1,,,1,8.9,,7890265049073,GRP-438791736,Opção,129 Opaco Lustrado 50grs Grafite Multiplo,,0
+variable,GRP-22128,Tinta Acrílica Brilhante 37ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"501 Az Turquesa, 503 Az Celeste, 505 Am Ouro, 513 Vd Musgo, 519 Branco, 520 Preto, 537 Rosa, 542 Rosa Escuro",1,0
+variation,22128,,1,,,1,9.9,,7891153033006,GRP-22128,Opção,501 Az Turquesa,,0
+variation,22129,,1,,,1,9.9,,7891153033013,GRP-22128,Opção,503 Az Celeste,,0
+variation,22131,,1,,,1,9.9,,7891153033037,GRP-22128,Opção,505 Am Ouro,,0
+variation,22136,,1,,,1,9.9,,7891153033082,GRP-22128,Opção,513 Vd Musgo,,0
+variation,22139,,1,,,1,9.9,,7891153033112,GRP-22128,Opção,519 Branco,,0
+variation,22140,,1,,,1,9.9,,7891153033129,GRP-22128,Opção,520 Preto,,0
+variation,22146,,1,,,1,9.9,,7891153033181,GRP-22128,Opção,537 Rosa,,0
+variation,22148,,1,,,1,8.7,,7891153033204,GRP-22128,Opção,542 Rosa Escuro,,0
+variable,GRP-438792898,Vela Pick Colors,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Branca Número 0 01 Un, Branca Número 1 01 Un, Branca Número 2 01 Un, Branca Número 3 01 Un, Branca Número 4 01 Un, Branca Número 5 01 Un, Branca Número 6 01 Un, Branca Número 7 01 Un, Branca Número 8 01 Un, Branca Número 9 01 Un",1,0
+variation,438792898,,1,,,1,6.8,,7891175357388,GRP-438792898,Opção,Branca Número 0 01 Un,,0
+variation,438792899,,1,,,1,6.8,,7891175357401,GRP-438792898,Opção,Branca Número 1 01 Un,,0
+variation,438792900,,1,,,1,6.8,,7891175357425,GRP-438792898,Opção,Branca Número 2 01 Un,,0
+variation,438792901,,1,,,1,6.8,,7891175357449,GRP-438792898,Opção,Branca Número 3 01 Un,,0
+variation,438792902,,1,,,1,6.8,,7891175357463,GRP-438792898,Opção,Branca Número 4 01 Un,,0
+variation,438792903,,1,,,1,6.8,,7891175357487,GRP-438792898,Opção,Branca Número 5 01 Un,,0
+variation,438792904,,1,,,1,6.8,,7891175357500,GRP-438792898,Opção,Branca Número 6 01 Un,,0
+variation,438792905,,1,,,1,6.8,,7891175357524,GRP-438792898,Opção,Branca Número 7 01 Un,,0
+variation,438792906,,1,,,1,6.8,,7891175357548,GRP-438792898,Opção,Branca Número 8 01 Un,,0
+variation,438792907,,1,,,1,6.8,,7891175357562,GRP-438792898,Opção,Branca Número 9 01 Un,,0
+variable,GRP-438789691,Caderno Universitário Espiral,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"160 fls Laranja Neon Tilibra, Lilas 160 fls Jandaia, Neon 80 fls Ls, Neon Rs 80 fls, Neon Verde Tilibra 80 fls, Verde Neon 160 fls Tilibra",1,0
+variation,438789691,,1,,,1,72.6,,7891027315641,GRP-438789691,Opção,160 fls Laranja Neon Tilibra,,0
+variation,438789705,,1,,,1,47.95,,7894494688546,GRP-438789691,Opção,Lilas 160 fls Jandaia,,0
+variation,43875960,,1,,,1,46.5,,7891027302436,GRP-438789691,Opção,Neon 80 fls Ls,,0
+variation,43875961,,1,,,1,46.5,,7891027302474,GRP-438789691,Opção,Neon Rs 80 fls,,0
+variation,438789689,,1,,,1,43.5,,7891027315627,GRP-438789691,Opção,Neon Verde Tilibra 80 fls,,0
+variation,438789690,,1,,,1,72.6,,7891027315610,GRP-438789691,Opção,Verde Neon 160 fls Tilibra,,0
+variable,GRP-10510,Pincel Tigre,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"141 20 Marta, 266 4 Ponei, 266 6 Ponei, 802 16 Pinctore Cerda Brasil, 816 20 Cerda Brasil, 843 10, 843 12, 843 14, 843 16, 844 12, 847 12, 847 16",1,0
+variation,10510,,1,,,1,47.2,,7891395005519,GRP-10510,Opção,141 20 Marta,,0
+variation,11946,,1,,,1,3.2,,7891395008909,GRP-10510,Opção,266 4 Ponei,,0
+variation,11947,,1,,,1,3.3,,7891395008916,GRP-10510,Opção,266 6 Ponei,,0
+variation,438796695,,1,,,1,6.9,,7891395011527,GRP-10510,Opção,802 16 Pinctore Cerda Brasil,,0
+variation,438796694,,1,,,1,9.9,,7891395012302,GRP-10510,Opção,816 20 Cerda Brasil,,0
+variation,46623,,1,,,1,11.4,,7891395053275,GRP-10510,Opção,843 10,,0
+variation,46624,,1,,,1,13.6,,7891395053282,GRP-10510,Opção,843 12,,0
+variation,46625,,1,,,1,14.5,,7891395053299,GRP-10510,Opção,843 14,,0
+variation,46626,,1,,,1,16.5,,7891395053305,GRP-10510,Opção,843 16,,0
+variation,46640,,1,,,1,19.4,,7891395053367,GRP-10510,Opção,844 12,,0
+variation,46658,,1,,,1,12.6,,7891395053442,GRP-10510,Opção,847 12,,0
+variation,46660,,1,,,1,17.4,,7891395053466,GRP-10510,Opção,847 16,,0
+variable,GRP-438798020,Pulseira Identificacao Laser Pro,1,0,visible,1,,Escritório,,,Opção,"Amarelo Fluorescente pct.c/50 Tecnomidia, Azul Claro pct.c/50 - Tecnomidia, Laranja Fluorescente pct.c/50 - Tecnomidia, Pink pct.c/50 - Tecnomidia, Verde Limao pct.c/50 - Tecnomidia",1,0
+variation,438798020,,1,,,1,22.8,,7898392255497,GRP-438798020,Opção,Amarelo Fluorescente pct.c/50 Tecnomidia,,0
+variation,438798021,,1,,,1,22.8,,7898392255404,GRP-438798020,Opção,Azul Claro pct.c/50 - Tecnomidia,,0
+variation,438798022,,1,,,1,22.8,,7898392255411,GRP-438798020,Opção,Laranja Fluorescente pct.c/50 - Tecnomidia,,0
+variation,438798023,,1,,,1,22.8,,7898392255480,GRP-438798020,Opção,Pink pct.c/50 - Tecnomidia,,0
+variation,438798024,,1,,,1,22.8,,7898392255459,GRP-438798020,Opção,Verde Limao pct.c/50 - Tecnomidia,,0
+variable,GRP-43872773,Marcador Dual Brush CIS,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo, Amarelo Claro, Amarelo Neon, Amarelo Ouro, Amarelo Pastel, Caramelo, Cinza Escuro, Laranja, Laranja Claro, Laranja Escuro, Laranja Neon, Laranja Pastel, Marrom Claro, Marrom Terra, Ocre, Rosa, Turquesa, Vd Oliva, Verde, Verde Abacate, Verde Jade, Verde Limao, Vermelho",1,0
+variation,43872773,,1,,,1,9.9,,7909438008875,GRP-43872773,Opção,Amarelo,,0
+variation,438790726,,1,,,1,9.9,,7909438011806,GRP-43872773,Opção,Amarelo Claro,,0
+variation,438796451,,1,,,1,9.9,,7909438022840,GRP-43872773,Opção,Amarelo Neon,,0
+variation,438790725,,1,,,1,9.9,,7909438011837,GRP-43872773,Opção,Amarelo Ouro,,0
+variation,438796442,,1,,,1,9.9,,7909438011967,GRP-43872773,Opção,Amarelo Pastel,,0
+variation,43874008,,1,,,1,9.9,,7909438011844,GRP-43872773,Opção,Caramelo,,0
+variation,43873983,,1,,,1,9.9,,7909438011677,GRP-43872773,Opção,Cinza Escuro,,0
+variation,43872413,,1,,,1,9.9,,7909438008851,GRP-43872773,Opção,Laranja,,0
+variation,43874000,,1,,,1,9.9,,7909438011820,GRP-43872773,Opção,Laranja Claro,,0
+variation,438796441,,1,,,1,9.9,,7909438011745,GRP-43872773,Opção,Laranja Escuro,,0
+variation,438796439,,1,,,1,9.9,,7909438022857,GRP-43872773,Opção,Laranja Neon,,0
+variation,438787939,,1,,,1,9.9,,7909438011950,GRP-43872773,Opção,Laranja Pastel,,0
+variation,43874009,,1,,,1,9.9,,7909438011851,GRP-43872773,Opção,Marrom Claro,,0
+variation,43873989,,1,,,1,9.9,,7909438011714,GRP-43872773,Opção,Marrom Terra,,0
+variation,438790722,,1,,,1,9.9,,7909438008790,GRP-43872773,Opção,Ocre,,0
+variation,43873994,,1,,,1,9.9,,7909438011776,GRP-43872773,Opção,Rosa,,0
+variation,43874006,,1,,,1,9.9,,7909438011899,GRP-43872773,Opção,Turquesa,,0
+variation,43872786,,1,,,1,9.9,,7909438008738,GRP-43872773,Opção,Vd Oliva,,0
+variation,438796436,,1,,,1,9.9,,7909438008752,GRP-43872773,Opção,Verde,,0
+variation,43873993,,1,,,1,9.9,,7909438011783,GRP-43872773,Opção,Verde Abacate,,0
+variation,43873988,,1,,,1,9.9,,7909438011691,GRP-43872773,Opção,Verde Jade,,0
+variation,43873997,,1,,,1,9.9,,7909438011790,GRP-43872773,Opção,Verde Limao,,0
+variation,43872412,,1,,,1,9.9,,7909438008837,GRP-43872773,Opção,Vermelho,,0
+variable,GRP-43871288,Pincel Art Red Sintético,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"111s Cl 10, 311 8 Keramik, Cl 12 111s Keramik",1,0
+variation,43871288,,1,,,1,36.8,,7898428613710,GRP-43871288,Opção,111s Cl 10,,0
+variation,43869325,,1,,,1,21.7,,7898428602127,GRP-43871288,Opção,311 8 Keramik,,0
+variation,43872118,,1,,,1,38.5,,7898428613727,GRP-43871288,Opção,Cl 12 111s Keramik,,0
+variable,GRP-16696,Caneta UNI POSCA pc3m,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo, Azul Esc, Branca, Prata, Preta, Rosa, Verde, Vermelho",1,0
+variation,16696,,1,,,1,39.4,,4902778915820,GRP-16696,Opção,Amarelo,,0
+variation,16693,,1,,,1,39.4,,4902778915783,GRP-16696,Opção,Azul Esc,,0
+variation,16700,,1,,,1,39.4,,4902778915912,GRP-16696,Opção,Branca,,0
+variation,16702,,1,,,1,39.4,,4902778915936,GRP-16696,Opção,Prata,,0
+variation,16692,,1,,,1,39.4,,4902778915776,GRP-16696,Opção,Preta,,0
+variation,16697,,1,,,1,39.4,,4902778915837,GRP-16696,Opção,Rosa,,0
+variation,16695,,1,,,1,39.4,,4902778915806,GRP-16696,Opção,Verde,,0
+variation,16694,,1,,,1,39.4,,4902778915790,GRP-16696,Opção,Vermelho,,0
+variable,GRP-438795263,Copo de Papel 250ml -,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Azul Macaron, Dourado Rajado, Lilas Macaron, Prata Brilhante, Prata Rajado, Rose Brilhante, Rose Rajado",1,0
+variation,438795263,,1,,,1,6.2,,7908716201861,GRP-438795263,Opção,Azul Macaron,,0
+variation,438795915,,1,,,1,8.9,,7908716202066,GRP-438795263,Opção,Dourado Rajado,,0
+variation,438795905,,1,,,1,6.2,,7908716201878,GRP-438795263,Opção,Lilas Macaron,,0
+variation,438795275,,1,,,1,8.9,,7908716201922,GRP-438795263,Opção,Prata Brilhante,,0
+variation,438795916,,1,,,1,8.9,,7908716202073,GRP-438795263,Opção,Prata Rajado,,0
+variation,438795277,,1,,,1,8.9,,7908716201939,GRP-438795263,Opção,Rose Brilhante,,0
+variation,438795917,,1,,,1,8.9,,7908716202080,GRP-438795263,Opção,Rose Rajado,,0
+variable,GRP-43869579,Caneta BIC,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"4 Cores Esferográfica, 4 Cores Fsh Azul, 4 Cores Fsh Rosa, Cristal",1,0
+variation,43869579,,1,,,1,11.8,,070330100664,GRP-43869579,Opção,4 Cores Esferográfica,,0
+variation,10234,,1,,,1,13.9,,070330526082,GRP-43869579,Opção,4 Cores Fsh Azul,,0
+variation,43870664,,1,,,1,16.7,,070330526099,GRP-43869579,Opção,4 Cores Fsh Rosa,,0
+variation,13213,,1,,,1,1.5,,,GRP-43869579,Opção,Cristal,,0
+variable,GRP-43875327,Vela Aniversário,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"N0 Cintilante Prata, N1 Cintilante Prata, N2 Cintilante Prata, N3 Cintilante Prata, N4 Cintilante Prata, N5 Cintilante Prata, N6 Cintilante Prata, N7 Cintilante Prata, N8 Cintilante Prata, N9 Cintilante Prata",1,0
+variation,43875327,,1,,,1,7.3,,7899895744686,GRP-43875327,Opção,N0 Cintilante Prata,,0
+variation,43875328,,1,,,1,7.3,,7899895744693,GRP-43875327,Opção,N1 Cintilante Prata,,0
+variation,43875329,,1,,,1,7.3,,7899895744709,GRP-43875327,Opção,N2 Cintilante Prata,,0
+variation,43875330,,1,,,1,7.3,,7899895744716,GRP-43875327,Opção,N3 Cintilante Prata,,0
+variation,43875331,,1,,,1,7.3,,7899895744723,GRP-43875327,Opção,N4 Cintilante Prata,,0
+variation,43875332,,1,,,1,7.3,,7899895744730,GRP-43875327,Opção,N5 Cintilante Prata,,0
+variation,43875333,,1,,,1,7.3,,7899895744747,GRP-43875327,Opção,N6 Cintilante Prata,,0
+variation,43875334,,1,,,1,7.3,,7899895744754,GRP-43875327,Opção,N7 Cintilante Prata,,0
+variation,43875335,,1,,,1,7.3,,7899895744761,GRP-43875327,Opção,N8 Cintilante Prata,,0
+variation,43875336,,1,,,1,7.3,,7899895744778,GRP-43875327,Opção,N9 Cintilante Prata,,0
+variable,GRP-438793692,Balão metal.c100 Cm,1,1,visible,1,,Itens de Festa > Balões,,,Opção,"N.0 Dourado, N.0 Prata, N.0 Rose Gold, N.1 Dourado, N.1 Prata, N.1 Rose Gold, N.2 Dourado, N.2 Prata, N.2 Rose Gold, N.3 Dourado, N.3 Prata, N.3 Rose Gold, N.4 Dourado, N.4 Prata, N.4 Rose Gold, N.5 Dourado, N.8 Dourado",1,0
+variation,438793692,,1,,,1,12.9,,0736532682864,GRP-438793692,Opção,N.0 Dourado,,0
+variation,438793693,,1,,,1,12.9,,0736532683458,GRP-438793692,Opção,N.0 Prata,,0
+variation,438793694,,1,,,1,12.9,,0606529206093,GRP-438793692,Opção,N.0 Rose Gold,,0
+variation,438793695,,1,,,1,12.9,,0736532687067,GRP-438793692,Opção,N.1 Dourado,,0
+variation,438793696,,1,,,1,12.9,,0736532685421,GRP-438793692,Opção,N.1 Prata,,0
+variation,438793697,,1,,,1,12.9,,0606529206000,GRP-438793692,Opção,N.1 Rose Gold,,0
+variation,438793698,,1,,,1,12.9,,0736532687890,GRP-438793692,Opção,N.2 Dourado,,0
+variation,438793699,,1,,,1,12.9,,0736532683335,GRP-438793692,Opção,N.2 Prata,,0
+variation,438793700,,1,,,1,12.9,,0606529206017,GRP-438793692,Opção,N.2 Rose Gold,,0
+variation,438793701,,1,,,1,19.9,,0736532683175,GRP-438793692,Opção,N.3 Dourado,,0
+variation,438793702,,1,,,1,19.9,,0736532686039,GRP-438793692,Opção,N.3 Prata,,0
+variation,438793703,,1,,,1,19.9,,0606529206024,GRP-438793692,Opção,N.3 Rose Gold,,0
+variation,438793704,,1,,,1,19.9,,0736532683762,GRP-438793692,Opção,N.4 Dourado,,0
+variation,438793705,,1,,,1,19.9,,0736532683045,GRP-438793692,Opção,N.4 Prata,,0
+variation,438793706,,1,,,1,12.9,,0606529206031,GRP-438793692,Opção,N.4 Rose Gold,,0
+variation,438793707,,1,,,1,19.9,,0736532681164,GRP-438793692,Opção,N.5 Dourado,,0
+variation,438793708,,1,,,1,19.9,,0736532687623,GRP-438793692,Opção,N.8 Dourado,,0
+variable,GRP-438789364,Caderno Brochura 48fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Amarelo, Azul, Verde, Vermelho",1,0
+variation,438789364,,1,,,1,11.9,,7891027116767,GRP-438789364,Opção,Amarelo,,0
+variation,438789362,,1,,,1,11.9,,7891027116743,GRP-438789364,Opção,Azul,,0
+variation,438789361,,1,,,1,11.9,,7891027116750,GRP-438789364,Opção,Verde,,0
+variation,438789363,,1,,,1,11.9,,7891027116774,GRP-438789364,Opção,Vermelho,,0
+variable,GRP-438793683,Sacola para Presente de Papel,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"438793683, 438793682",1,0
+variation,438793683,,1,,,1,9.9,,7899183994977,GRP-438793683,Opção,438793683,,0
+variation,438793682,,1,,,1,8.5,,7899183994960,GRP-438793683,Opção,438793682,,0
+variable,GRP-438797701,Tinta de Tecido 37ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"506 Ceramica Acrilex, 531 Marrom Acrilex, 813 Rosa Bebe Acrilex, Amarelo Limao 504, Azul Marinho 544, Azul Petroleo 596, Chocolate 814, Cinza, Cinza Lunar 574, Verde Olivia 545, Verde Pistache, Vermelho Fogo, Violeta Metalica",1,0
+variation,438797701,,1,,,1,7.4,,7891153041704,GRP-438797701,Opção,506 Ceramica Acrilex,,0
+variation,438797700,,1,,,1,7.4,,7891153041407,GRP-438797701,Opção,531 Marrom Acrilex,,0
+variation,438789228,,1,,,1,7.4,,7891153014159,GRP-438797701,Opção,813 Rosa Bebe Acrilex,,0
+variation,438789234,,1,,,1,7.4,,7891153041254,GRP-438797701,Opção,Amarelo Limao 504,,0
+variation,438789237,,1,,,1,7.4,,7891153041506,GRP-438797701,Opção,Azul Marinho 544,,0
+variation,438789238,,1,,,1,5.9,,7891153040097,GRP-438797701,Opção,Azul Petroleo 596,,0
+variation,438789232,,1,,,1,7.4,,7891153089614,GRP-438797701,Opção,Chocolate 814,,0
+variation,438789243,,1,,,1,7.4,,7891153068121,GRP-438797701,Opção,Cinza,,0
+variation,438789235,,1,,,1,7.4,,7891153041643,GRP-438797701,Opção,Cinza Lunar 574,,0
+variation,438789233,,1,,,1,7.4,,7891153041513,GRP-438797701,Opção,Verde Olivia 545,,0
+variation,438789241,,1,,,1,7.4,,7891153041766,GRP-438797701,Opção,Verde Pistache,,0
+variation,438789242,,1,,,1,7.4,,7891153041278,GRP-438797701,Opção,Vermelho Fogo,,0
+variation,43876707,,1,,,1,10.4,,7891153049885,GRP-438797701,Opção,Violeta Metalica,,0
+variable,GRP-22401,Caneta p/ Tecido,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"501 Azul Turquesa Acripen, 503 Azul Celeste Acrilpen, 505 Amarelo Ouro Acrilpen, 507 Vermelho Fogo Acrilpen, 513 Verde Musgo Acrilpen, 516 Violeta Acrilpen, 517 Laranja Acrilpen, 520 Preto Acripen, 531 Marrom Acripen, 537 Rosa Acrilpen, 565 Vinho Acrilpen",1,0
+variation,22401,,1,,,1,11.2,,7891153044323,GRP-22401,Opção,501 Azul Turquesa Acripen,,0
+variation,22413,,1,,,1,11.2,,7891153044439,GRP-22401,Opção,503 Azul Celeste Acrilpen,,0
+variation,22402,,1,,,1,11.2,,7891153044330,GRP-22401,Opção,505 Amarelo Ouro Acrilpen,,0
+variation,22403,,1,,,1,11.2,,7891153044347,GRP-22401,Opção,507 Vermelho Fogo Acrilpen,,0
+variation,22405,,1,,,1,11.2,,7891153044361,GRP-22401,Opção,513 Verde Musgo Acrilpen,,0
+variation,22406,,1,,,1,11.2,,7891153044378,GRP-22401,Opção,516 Violeta Acrilpen,,0
+variation,22407,,1,,,1,11.2,,7891153044385,GRP-22401,Opção,517 Laranja Acrilpen,,0
+variation,22409,,1,,,1,11.2,,7891153044392,GRP-22401,Opção,520 Preto Acripen,,0
+variation,22410,,1,,,1,11.2,,7891153044408,GRP-22401,Opção,531 Marrom Acripen,,0
+variation,22412,,1,,,1,11.2,,7891153044422,GRP-22401,Opção,537 Rosa Acrilpen,,0
+variation,22411,,1,,,1,11.2,,7891153044415,GRP-22401,Opção,565 Vinho Acrilpen,,0
+variable,GRP-438789367,Caderno Brochura 96fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Amarelo, Azul, Verde, Vermelho",1,0
+variation,438789367,,1,,,1,17.8,,7891027116804,GRP-438789367,Opção,Amarelo,,0
+variation,438789366,,1,,,1,17.8,,7891027116781,GRP-438789367,Opção,Azul,,0
+variation,438789365,,1,,,1,17.8,,7891027116798,GRP-438789367,Opção,Verde,,0
+variation,438789368,,1,,,1,17.8,,7891027116811,GRP-438789367,Opção,Vermelho,,0
+variable,GRP-43875851,Caderno Universitário Espiral 80fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Neon Az, Neon Br, Neon Pt",1,0
+variation,43875851,,1,,,1,46.5,,7891027302375,GRP-43875851,Opção,Neon Az,,0
+variation,43875898,,1,,,1,46.5,,7891027302399,GRP-43875851,Opção,Neon Br,,0
+variation,43875895,,1,,,1,46.5,,7891027302450,GRP-43875851,Opção,Neon Pt,,0
+variable,GRP-438791607,Caderno Espiral Universitário Pp 1x1 80fls Stilo,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Azul Pastel Fsc, Lilas Pastel Fsc, Preto, Rosa Pastel Fsc, Verde Pastel Fsc",1,0
+variation,438791607,,1,,,1,29.8,,7894494688607,GRP-438791607,Opção,Azul Pastel Fsc,,0
+variation,438793537,,1,,,1,29.8,,7894494688614,GRP-438791607,Opção,Lilas Pastel Fsc,,0
+variation,438795376,,1,,,1,32.3,,7894494778773,GRP-438791607,Opção,Preto,,0
+variation,438793538,,1,,,1,29.8,,7894494688621,GRP-438791607,Opção,Rosa Pastel Fsc,,0
+variation,438791608,,1,,,1,29.8,,7894494688638,GRP-438791607,Opção,Verde Pastel Fsc,,0
+variable,GRP-438797907,Caneta Energel Infree 0.7mm,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Cinza, Laranja, Preta, Rosa, Vermelha, Violeta",1,0
+variation,438797907,,1,,,1,23.3,,4902506358660,GRP-438797907,Opção,Azul,,0
+variation,438794853,,1,,,1,7.9,,4902506382337,GRP-438797907,Opção,Cinza,,0
+variation,438794849,,1,,,1,7.9,,4902506358677,GRP-438797907,Opção,Laranja,,0
+variation,438797908,,1,,,1,23.3,,4902506349729,GRP-438797907,Opção,Preta,,0
+variation,438794850,,1,,,1,7.9,,4902506382344,GRP-438797907,Opção,Rosa,,0
+variation,438794852,,1,,,1,7.9,,4902506382313,GRP-438797907,Opção,Vermelha,,0
+variation,438794851,,1,,,1,7.9,,4902506382351,GRP-438797907,Opção,Violeta,,0
+variable,GRP-43872218,Caneta BIC Needle Ultra Fine 0.7,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul Claro, Pt, Rosa, Roxa, Vm",1,0
+variation,43872218,,1,,,1,2.6,,070330199446,GRP-43872218,Opção,Azul Claro,,0
+variation,43869582,,1,,,1,2.6,,070330199378,GRP-43872218,Opção,Pt,,0
+variation,43872219,,1,,,1,2.6,,070330199415,GRP-43872218,Opção,Rosa,,0
+variation,43872216,,1,,,1,2.6,,070330199460,GRP-43872218,Opção,Roxa,,0
+variation,43869581,,1,,,1,2.6,,070330199392,GRP-43872218,Opção,Vm,,0
+variable,GRP-438793722,Balão metal.c45 Cm Redondo,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"Azul, Azul Che, Azul Safira, Azul Tiffany, Dourado, Dourado Cro, Pink Che, Prata, Rosa Cro, Rose Gold Che, Verde Cro, Vermelho",1,0
+variation,438793722,,1,,,1,11.0,,736532688514,GRP-438793722,Opção,Azul,,0
+variation,438792968,,1,,,1,8.9,,0736532682604,GRP-438793722,Opção,Azul Che,,0
+variation,438793723,,1,,,1,8.9,,0606529209094,GRP-438793722,Opção,Azul Safira,,0
+variation,438793724,,1,,,1,8.9,,0736532682512,GRP-438793722,Opção,Azul Tiffany,,0
+variation,438794222,,1,,,1,8.9,,606529207700,GRP-438793722,Opção,Dourado,,0
+variation,438793725,,1,,,1,8.9,,0736532680112,GRP-438793722,Opção,Dourado Cro,,0
+variation,438792967,,1,,,1,8.9,,0736532686381,GRP-438793722,Opção,Pink Che,,0
+variation,438793727,,1,,,1,8.9,,606529207694,GRP-438793722,Opção,Prata,,0
+variation,438793728,,1,,,1,8.9,,736532682260,GRP-438793722,Opção,Rosa Cro,,0
+variation,438792966,,1,,,1,8.9,,736532686145,GRP-438793722,Opção,Rose Gold Che,,0
+variation,438793729,,1,,,1,8.9,,0736532685339,GRP-438793722,Opção,Verde Cro,,0
+variation,438794223,,1,,,1,8.9,,736532682840,GRP-438793722,Opção,Vermelho,,0
+variable,GRP-16462,Caneta UNI POSCA pc1mr,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo, Branco, Laranja, Ouro, Prata, Preto, Violeta",1,0
+variation,16462,,1,,,1,39.6,,4902778089798,GRP-16462,Opção,Amarelo,,0
+variation,16461,,1,,,1,39.6,,4902778089781,GRP-16462,Opção,Branco,,0
+variation,16463,,1,,,1,39.6,,4902778089804,GRP-16462,Opção,Laranja,,0
+variation,43866018,,1,,,1,39.6,,4902778089910,GRP-16462,Opção,Ouro,,0
+variation,16467,,1,,,1,39.6,,4902778089927,GRP-16462,Opção,Prata,,0
+variation,43866017,,1,,,1,39.6,,4902778089866,GRP-16462,Opção,Preto,,0
+variation,16464,,1,,,1,39.6,,4902778089835,GRP-16462,Opção,Violeta,,0
+variable,GRP-438788772,Forminha Laminada,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"N*4 Azul Bebe, N*4 Fuicsia Colors, N*4 Ouro Rose, N*4 Prata, N*5 Azul Bebe, N*5 Lilas, N*5 Ouro, N*5 Rosa Bebe, N*5 Verde Escuro, N*5 Vermelha",1,0
+variation,438788772,,1,,,1,6.9,,7899895748301,GRP-438788772,Opção,N*4 Azul Bebe,,0
+variation,438788773,,1,,,1,6.6,,7891175002332,GRP-438788772,Opção,N*4 Fuicsia Colors,,0
+variation,438788110,,1,,,1,6.9,,7891175461245,GRP-438788772,Opção,N*4 Ouro Rose,,0
+variation,438788775,,1,,,1,6.9,,7891175004329,GRP-438788772,Opção,N*4 Prata,,0
+variation,438789158,,1,,,1,6.4,,7899895748318,GRP-438788772,Opção,N*5 Azul Bebe,,0
+variation,438789160,,1,,,1,6.4,,7899895748257,GRP-438788772,Opção,N*5 Lilas,,0
+variation,438789161,,1,,,1,6.2,,7891175004459,GRP-438788772,Opção,N*5 Ouro,,0
+variation,438789163,,1,,,1,6.4,,7899895748349,GRP-438788772,Opção,N*5 Rosa Bebe,,0
+variation,438789164,,1,,,1,6.4,,7891175004497,GRP-438788772,Opção,N*5 Verde Escuro,,0
+variation,438789165,,1,,,1,6.4,,7891175004510,GRP-438788772,Opção,N*5 Vermelha,,0
+variable,GRP-20164,Caderno Broch 48fls Mais+,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Am, Az, Vd, Vm",1,0
+variation,20164,,1,,,1,7.2,,7891027116682,GRP-20164,Opção,Am,,0
+variation,20162,,1,,,1,7.2,,7891027116668,GRP-20164,Opção,Az,,0
+variation,20163,,1,,,1,7.2,,7891027116675,GRP-20164,Opção,Vd,,0
+variation,20165,,1,,,1,7.2,,7891027116699,GRP-20164,Opção,Vm,,0
+variable,GRP-16711,Caneta UNI POSCA pc5m,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Branca, Ouro, Prata, Preta, Verde, Vermelho",1,0
+variation,16711,,1,,,1,36.9,,4902778916254,GRP-16711,Opção,Branca,,0
+variation,16712,,1,,,1,36.9,,4902778916261,GRP-16711,Opção,Ouro,,0
+variation,16713,,1,,,1,36.9,,4902778916278,GRP-16711,Opção,Prata,,0
+variation,16703,,1,,,1,36.9,,4902778916117,GRP-16711,Opção,Preta,,0
+variation,16706,,1,,,1,36.9,,4902778916148,GRP-16711,Opção,Verde,,0
+variation,16705,,1,,,1,36.9,,4902778916131,GRP-16711,Opção,Vermelho,,0
+variable,GRP-47499,Cartucho HP,1,0,visible,1,,Escritório,,,Opção,"122 Color, 122 Preto, 662 Color, 662 Preto, 664 Color, 664 Preto, 667 Black, 667 Colorido, 668 Preto, 670 Amarelo, 670 Ciano, 670 Magenta, 670 Preto",1,0
+variation,47499,,1,,,1,177.0,,885631033593,GRP-47499,Opção,122 Color,,0
+variation,47498,,1,,,1,144.0,,885631033586,GRP-47499,Opção,122 Preto,,0
+variation,47524,,1,,,1,127.0,,886112695705,GRP-47499,Opção,662 Color,,0
+variation,47523,,1,,,1,116.0,,886112695699,GRP-47499,Opção,662 Preto,,0
+variation,47568,,1,,,1,126.0,,889296597131,GRP-47499,Opção,664 Color,,0
+variation,47569,,1,,,1,115.0,,889296597155,GRP-47499,Opção,664 Preto,,0
+variation,438783382,,1,,,1,115.0,,193015522466,GRP-47499,Opção,667 Black,,0
+variation,438783526,,1,,,1,126.0,,193015522442,GRP-47499,Opção,667 Colorido,,0
+variation,438798167,,1,,,1,133.0,,197498125831,GRP-47499,Opção,668 Preto,,0
+variation,47518,,1,,,1,132.5,,886112694562,GRP-47499,Opção,670 Amarelo,,0
+variation,47516,,1,,,1,132.5,,886112694548,GRP-47499,Opção,670 Ciano,,0
+variation,47517,,1,,,1,132.5,,886112694555,GRP-47499,Opção,670 Magenta,,0
+variation,438791048,,1,,,1,132.5,,886112694531,GRP-47499,Opção,670 Preto,,0
+variable,GRP-21741,Tinta Art Fosca 250ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"503 Azul Celeste, 507 Vm Fogo, 510 Verde Folha, 513 Verde Musgo, 517 Laranja, 519 Branco, 520 Preto, 528 Lilas, 531 Marrom, Marrom Escuro 526, Rosa 537",1,0
+variation,21741,,1,,,1,36.7,,7891153000602,GRP-21741,Opção,503 Azul Celeste,,0
+variation,50741,,1,,,1,36.7,,7891153032023,GRP-21741,Opção,507 Vm Fogo,,0
+variation,21742,,1,,,1,36.7,,7891153000664,GRP-21741,Opção,510 Verde Folha,,0
+variation,21743,,1,,,1,36.7,,7891153000688,GRP-21741,Opção,513 Verde Musgo,,0
+variation,21824,,1,,,1,36.7,,7891153015026,GRP-21741,Opção,517 Laranja,,0
+variation,22099,,1,,,1,36.7,,7891153032030,GRP-21741,Opção,519 Branco,,0
+variation,22100,,1,,,1,36.7,,7891153032047,GRP-21741,Opção,520 Preto,,0
+variation,22456,,1,,,1,36.7,,7891153048536,GRP-21741,Opção,528 Lilas,,0
+variation,21744,,1,,,1,36.7,,7891153000701,GRP-21741,Opção,531 Marrom,,0
+variation,22439,,1,,,1,36.7,,7891153047409,GRP-21741,Opção,Marrom Escuro 526,,0
+variation,5470156,,1,,,1,36.7,,7891153015002,GRP-21741,Opção,Rosa 537,,0
+variable,GRP-43869583,Caneta BIC Esferográfica Bold 1.6,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Az, Pt, Vm",1,0
+variation,43869583,,1,,,1,3.0,,070330179134,GRP-43869583,Opção,Az,,0
+variation,43869585,,1,,,1,3.0,,070330179127,GRP-43869583,Opção,Pt,,0
+variation,43869584,,1,,,1,3.0,,070330188075,GRP-43869583,Opção,Vm,,0
+variable,GRP-22640,Massa de Modelar 500gr,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"105 Laranja, Amarelo, Preto",1,0
+variation,22640,,1,,,1,21.95,,7891153073088,GRP-22640,Opção,105 Laranja,,0
+variation,22639,,1,,,1,21.95,,7891153073071,GRP-22640,Opção,Amarelo,,0
+variation,43873270,,1,,,1,21.95,,7891153097435,GRP-22640,Opção,Preto,,0
+variable,GRP-438794858,Agenda Planner,1,0,visible,1,,Escritório,,,Opção,"2026, 2026 (438796137), 2027, 2027 (438797963)",1,0
+variation,438794858,,1,,,1,34.8,,7908174970545,GRP-438794858,Opção,2026,,0
+variation,438796137,,1,,,1,34.8,,7908174970538,GRP-438794858,Opção,2026 (438796137),,0
+variation,438797957,,1,,,1,35.9,,7908174984313,GRP-438794858,Opção,2027,,0
+variation,438797963,,1,,,1,35.9,,7908174984290,GRP-438794858,Opção,2027 (438797963),,0
+variable,GRP-438795146,Marcador Compactor Destaq d-cx/12,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Amarelo, Azul, Laranja, Rosa, Verde",1,0
+variation,438795146,,1,,,1,4.5,,7896572025793,GRP-438795146,Opção,Amarelo,,0
+variation,438795144,,1,,,1,4.5,,7896572025779,GRP-438795146,Opção,Azul,,0
+variation,438795147,,1,,,1,4.5,,7896572025816,GRP-438795146,Opção,Laranja,,0
+variation,438795148,,1,,,1,4.5,,7896572025830,GRP-438795146,Opção,Rosa,,0
+variation,438795145,,1,,,1,4.5,,7896572026998,GRP-438795146,Opção,Verde,,0
+variable,GRP-438795203,La Mollet 40g c/5,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"604 0769 Chiclete Atacado - Pacote - Circulo, 604 1245 Canario Atacado - Pacote - Circulo, 604 2309 Flash Atacado - Pacote - Circulo, 604 3182 Pitaya Atacado - Pacote - Circulo, 604 6040 Lirio Atacado - Pacote - Circulo, 604 6313 Amora Atacado - Pacote - Circulo, 604 8860 Noturno Atacado - Pacote - Circulo, 604 9601 Matizada Capuccino Atacado - Pacote - Circulo",1,0
+variation,438795203,,1,,,1,8.1,,7891113497244,GRP-438795203,Opção,604 0769 Chiclete Atacado - Pacote - Circulo,,0
+variation,438795204,,1,,,1,8.1,,7891113330022,GRP-438795203,Opção,604 1245 Canario Atacado - Pacote - Circulo,,0
+variation,438795205,,1,,,1,8.1,,7891113032476,GRP-438795203,Opção,604 2309 Flash Atacado - Pacote - Circulo,,0
+variation,438795206,,1,,,1,8.1,,7891113580410,GRP-438795203,Opção,604 3182 Pitaya Atacado - Pacote - Circulo,,0
+variation,438795207,,1,,,1,8.1,,7891113337311,GRP-438795203,Opção,604 6040 Lirio Atacado - Pacote - Circulo,,0
+variation,438795208,,1,,,1,9.6,,7891113580427,GRP-438795203,Opção,604 6313 Amora Atacado - Pacote - Circulo,,0
+variation,438795209,,1,,,1,8.1,,7891113330046,GRP-438795203,Opção,604 8860 Noturno Atacado - Pacote - Circulo,,0
+variation,438795210,,1,,,1,8.1,,7891113330695,GRP-438795203,Opção,604 9601 Matizada Capuccino Atacado - Pacote - Circulo,,0
+variable,GRP-38381,Marcador p/ Quadro,1,0,visible,1,,Escritório,,,Opção,"Br Az, Br Quartet Ponta Fina Preto, Br Vd, Br Vm",1,0
+variation,38381,,1,,,1,14.3,,7897424081387,GRP-38381,Opção,Br Az,,0
+variation,438788921,,1,,,1,8.4,,7891027317249,GRP-38381,Opção,Br Quartet Ponta Fina Preto,,0
+variation,38383,,1,,,1,14.3,,7897424081400,GRP-38381,Opção,Br Vd,,0
+variation,38384,,1,,,1,14.3,,7897424081417,GRP-38381,Opção,Br Vm,,0
+variable,GRP-34329,Cola Polar,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"1000 G, 1000g Compactor, 250g Br, Branca 250 g-cx/12, Branca 40g-di/12",1,0
+variation,34329,,1,,,1,42.6,,7896572014155,GRP-34329,Opção,1000 G,,0
+variation,438790707,,1,,,1,47.9,,7896572038441,GRP-34329,Opção,1000g Compactor,,0
+variation,34327,,1,,,1,16.4,,7896572014117,GRP-34329,Opção,250g Br,,0
+variation,438795140,,1,,,1,16.4,,7896572014124,GRP-34329,Opção,Branca 250 g-cx/12,,0
+variation,438795139,,1,,,1,3.6,,7896572014063,GRP-34329,Opção,Branca 40g-di/12,,0
+variable,GRP-438795813,Fita Adesiva Color 48 X 50,1,0,visible,1,,Escritório,,,Opção,"438795813, 47386",1,0
+variation,438795813,,1,,,1,6.9,,,GRP-438795813,Opção,438795813,,0
+variation,47386,,1,,,1,17.8,,,GRP-438795813,Opção,47386,,0
+variable,GRP-21913,Guache Esc 250ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Am Pele, Az Celeste, Az Turquesa, Laranja, Magenta 549, Marrom, Vd Folha",1,0
+variation,21913,,1,,,1,14.4,,7891153020235,GRP-21913,Opção,Am Pele,,0
+variation,21903,,1,,,1,14.4,,7891153020136,GRP-21913,Opção,Az Celeste,,0
+variation,21902,,1,,,1,14.4,,7891153020129,GRP-21913,Opção,Az Turquesa,,0
+variation,21908,,1,,,1,14.4,,7891153020181,GRP-21913,Opção,Laranja,,0
+variation,21923,,1,,,1,14.4,,7891153020341,GRP-21913,Opção,Magenta 549,,0
+variation,21911,,1,,,1,14.4,,7891153020211,GRP-21913,Opção,Marrom,,0
+variation,21906,,1,,,1,14.4,,7891153020167,GRP-21913,Opção,Vd Folha,,0
+variable,GRP-438791915,Caixa Arquivo Morto Polidello Ofício,1,0,visible,1,,Escritório,,,Opção,"Amarelo, Azul, Branco, Cinza, Preto, Verde",1,0
+variation,438791915,,1,,,1,9.95,,7897832850193,GRP-438791915,Opção,Amarelo,,0
+variation,438786556,,1,,,1,9.95,,7897832850216,GRP-438791915,Opção,Azul,,0
+variation,438786320,,1,,,1,9.95,,7897832850230,GRP-438791915,Opção,Branco,,0
+variation,438787664,,1,,,1,9.95,,7897832850254,GRP-438791915,Opção,Cinza,,0
+variation,438789356,,1,,,1,9.95,,7897832850278,GRP-438791915,Opção,Preto,,0
+variation,438796095,,1,,,1,9.95,,7897832850292,GRP-438791915,Opção,Verde,,0
+variable,GRP-22881,Tinta Acrílica 250ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"308 Azul Cobalto, 320 Preto, 322 Verde Musgo, 328 Vm Laca Geranio, 331 Az da Prussia, 340 Am Cadmio Claro, 344 Vm de Cadmio Esc, 357 Terra de Siena Queimada, 363 Azul Turquesa, 364 Verde Ingles",1,0
+variation,22881,,1,,,1,62.7,,7891153133515,GRP-22881,Opção,308 Azul Cobalto,,0
+variation,22885,,1,,,1,62.7,,7891153133553,GRP-22881,Opção,320 Preto,,0
+variation,22887,,1,,,1,62.7,,7891153133577,GRP-22881,Opção,322 Verde Musgo,,0
+variation,22891,,1,,,1,97.9,,7891153133614,GRP-22881,Opção,328 Vm Laca Geranio,,0
+variation,22892,,1,,,1,66.4,,7891153133621,GRP-22881,Opção,331 Az da Prussia,,0
+variation,22895,,1,,,1,62.7,,7891153133652,GRP-22881,Opção,340 Am Cadmio Claro,,0
+variation,22897,,1,,,1,62.7,,7891153133676,GRP-22881,Opção,344 Vm de Cadmio Esc,,0
+variation,22900,,1,,,1,62.7,,7891153133706,GRP-22881,Opção,357 Terra de Siena Queimada,,0
+variation,22902,,1,,,1,39.9,,7891153133720,GRP-22881,Opção,363 Azul Turquesa,,0
+variation,22903,,1,,,1,62.7,,7891153133737,GRP-22881,Opção,364 Verde Ingles,,0
+variable,GRP-438794646,Tinta Tecido fosca/37ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo Gema, Caramelo, Lilas, Marfim, Preto, Turquesa",1,0
+variation,438794646,,1,,,1,7.4,,7891153088549,GRP-438794646,Opção,Amarelo Gema,,0
+variation,438791474,,1,,,1,7.4,,7891153041605,GRP-438794646,Opção,Caramelo,,0
+variation,438791471,,1,,,1,7.4,,7891153041711,GRP-438794646,Opção,Lilas,,0
+variation,438791472,,1,,,1,7.4,,7891153041728,GRP-438794646,Opção,Marfim,,0
+variation,438791470,,1,,,1,7.4,,7891153041391,GRP-438794646,Opção,Preto,,0
+variation,438791475,,1,,,1,7.4,,7891153089317,GRP-438794646,Opção,Turquesa,,0
+variable,GRP-438791602,Caderno Espiral Universitário Capa Dura 1x1 96fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Amarelo Stomp Fsc, Azul Stomp Fsc, Verde Stomp Fsc, Vermelho Stomp Fsc",1,0
+variation,438791602,,1,,,1,17.7,,7894494640742,GRP-438791602,Opção,Amarelo Stomp Fsc,,0
+variation,438791603,,1,,,1,17.7,,7894494640759,GRP-438791602,Opção,Azul Stomp Fsc,,0
+variation,438791604,,1,,,1,17.7,,7894494640766,GRP-438791602,Opção,Verde Stomp Fsc,,0
+variation,438791605,,1,,,1,17.7,,7894494640773,GRP-438791602,Opção,Vermelho Stomp Fsc,,0
+variable,GRP-438795853,Vela Palito,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Azul 10 Un, Azul 10 Un., Branca 10 Un., Rosa 10 Un., Vermelha 10 Un.",1,0
+variation,438795853,,1,,,1,2.7,,7891175475556,GRP-438795853,Opção,Azul 10 Un,,0
+variation,438798191,,1,,,1,2.95,,7899743870345,GRP-438795853,Opção,Azul 10 Un.,,0
+variation,438798192,,1,,,1,2.95,,7899743870352,GRP-438795853,Opção,Branca 10 Un.,,0
+variation,438798193,,1,,,1,2.95,,7899743870369,GRP-438795853,Opção,Rosa 10 Un.,,0
+variation,438798194,,1,,,1,2.95,,7899743870376,GRP-438795853,Opção,Vermelha 10 Un.,,0
+variable,GRP-438792986,Marcador Quadro,1,0,visible,1,,Escritório,,,Opção,"Branco Radex Br (az), Branco Radex Br (pt), Branco Radex Br (vd), Branco Radex Br (vm), Branco Slim Azul, Branco Slim Preto",1,0
+variation,438792986,,1,,,1,3.9,,7897254100777,GRP-438792986,Opção,Branco Radex Br (az),,0
+variation,438792985,,1,,,1,3.9,,7897254100746,GRP-438792986,Opção,Branco Radex Br (pt),,0
+variation,438792987,,1,,,1,3.9,,7897254100760,GRP-438792986,Opção,Branco Radex Br (vd),,0
+variation,438792988,,1,,,1,3.9,,7897254100753,GRP-438792986,Opção,Branco Radex Br (vm),,0
+variation,438794779,,1,,,1,2.9,,7908704506671,GRP-438792986,Opção,Branco Slim Azul,,0
+variation,438794778,,1,,,1,2.9,,7908704506688,GRP-438792986,Opção,Branco Slim Preto,,0
+variable,GRP-43876481,Balão n9 c/25un,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"Cromo Azul Art Latex, Cromo Ouro Art Latex, Cromo Prata Art Latex, Cromo Rose Gold Art Latex",1,0
+variation,43876481,,1,,,1,27.5,,7896872429710,GRP-43876481,Opção,Cromo Azul Art Latex,,0
+variation,43876487,,1,,,1,27.5,,7896872429802,GRP-43876481,Opção,Cromo Ouro Art Latex,,0
+variation,43876480,,1,,,1,27.5,,7896872429703,GRP-43876481,Opção,Cromo Prata Art Latex,,0
+variation,43876483,,1,,,1,5.9,,7896872429727,GRP-43876481,Opção,Cromo Rose Gold Art Latex,,0
+variable,GRP-438797190,Schneider Line-up 0.4mm,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"438797190, 438797203, 438797204, 438797201, 438797202, 438797199, 438797200, 438797206, 438797197, 438797195, 438797196, 438797193, 438797194, 438797191, 438797192, 438797198, 438797205",1,0
+variation,438797190,,1,,,1,4.9,,4004675104311,GRP-438797190,Opção,438797190,,0
+variation,438797203,,1,,,1,4.9,,4004675104526,GRP-438797190,Opção,438797203,,0
+variation,438797204,,1,,,1,4.9,,4004675104229,GRP-438797190,Opção,438797204,,0
+variation,438797201,,1,,,1,4.9,,4004675104403,GRP-438797190,Opção,438797201,,0
+variation,438797202,,1,,,1,4.9,,4004675103833,GRP-438797190,Opção,438797202,,0
+variation,438797199,,1,,,1,4.9,,4004675103802,GRP-438797190,Opção,438797199,,0
+variation,438797200,,1,,,1,4.9,,4004675104588,GRP-438797190,Opção,438797200,,0
+variation,438797206,,1,,,1,4.9,,4004675104250,GRP-438797190,Opção,438797206,,0
+variation,438797197,,1,,,1,4.9,,4004675104168,GRP-438797190,Opção,438797197,,0
+variation,438797195,,1,,,1,4.9,,4004675104496,GRP-438797190,Opção,438797195,,0
+variation,438797196,,1,,,1,4.9,,4004675104137,GRP-438797190,Opção,438797196,,0
+variation,438797193,,1,,,1,4.9,,4004675104557,GRP-438797190,Opção,438797193,,0
+variation,438797194,,1,,,1,4.9,,4004675103864,GRP-438797190,Opção,438797194,,0
+variation,438797191,,1,,,1,4.9,,4004675104045,GRP-438797190,Opção,438797191,,0
+variation,438797192,,1,,,1,4.9,,4004675104014,GRP-438797190,Opção,438797192,,0
+variation,438797198,,1,,,1,4.9,,4004675104076,GRP-438797190,Opção,438797198,,0
+variation,438797205,,1,,,1,4.9,,4004675103895,GRP-438797190,Opção,438797205,,0
+variable,GRP-438797166,Liqeo Super Fina Líquida,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"438797166, 438797188, 438797185, 438797186, 438797183, 438797184, 438797181, 438797182, 438797179, 438797180, 438797187, 438797177, 438797175, 438797176, 438797174, 438797171, 438797172, 438797169, 438797167, 438797168, 438797165, 438797178, 438797227",1,0
+variation,438797166,,1,,,1,4.9,,7897476686042,GRP-438797166,Opção,438797166,,0
+variation,438797188,,1,,,1,4.9,,7897476686059,GRP-438797166,Opção,438797188,,0
+variation,438797185,,1,,,1,4.9,,7897476600109,GRP-438797166,Opção,438797185,,0
+variation,438797186,,1,,,1,4.9,,7897476604749,GRP-438797166,Opção,438797186,,0
+variation,438797183,,1,,,1,4.9,,7897476686103,GRP-438797166,Opção,438797183,,0
+variation,438797184,,1,,,1,4.9,,7897476600116,GRP-438797166,Opção,438797184,,0
+variation,438797181,,1,,,1,4.9,,7897476686097,GRP-438797166,Opção,438797181,,0
+variation,438797182,,1,,,1,4.9,,7897476686004,GRP-438797166,Opção,438797182,,0
+variation,438797179,,1,,,1,4.9,,7897476686035,GRP-438797166,Opção,438797179,,0
+variation,438797180,,1,,,1,4.9,,7897476600079,GRP-438797166,Opção,438797180,,0
+variation,438797187,,1,,,1,4.9,,7897476686011,GRP-438797166,Opção,438797187,,0
+variation,438797177,,1,,,1,4.9,,7897476686134,GRP-438797166,Opção,438797177,,0
+variation,438797175,,1,,,1,4.9,,7897476604718,GRP-438797166,Opção,438797175,,0
+variation,438797176,,1,,,1,4.9,,7897476686028,GRP-438797166,Opção,438797176,,0
+variation,438797174,,1,,,1,4.9,,7897476685991,GRP-438797166,Opção,438797174,,0
+variation,438797171,,1,,,1,4.9,,7897476686066,GRP-438797166,Opção,438797171,,0
+variation,438797172,,1,,,1,4.9,,7897476600093,GRP-438797166,Opção,438797172,,0
+variation,438797169,,1,,,1,4.9,,7897476600086,GRP-438797166,Opção,438797169,,0
+variation,438797167,,1,,,1,4.9,,7897476600123,GRP-438797166,Opção,438797167,,0
+variation,438797168,,1,,,1,4.9,,7897476686127,GRP-438797166,Opção,438797168,,0
+variation,438797165,,1,,,1,4.9,,7897476686080,GRP-438797166,Opção,438797165,,0
+variation,438797178,,1,,,1,4.9,,7897476686110,GRP-438797166,Opção,438797178,,0
+variation,438797227,,1,,,1,4.9,,7897476604725,GRP-438797166,Opção,438797227,,0
+variable,GRP-438794312,Copo Papel,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"180 Ml Festa Colors Azul Royal 08 Un, 180 Ml Festa Colors Pink 08 Un, 180 Ml Festa Colors Rosa Quartz 08 Un, 180 Ml Festa Colors Roxo 08 Un, 180 Ml Festa Colors Verde Escuro 08 Un, 180 Ml Festa Feliz Aniversário 08 Un, 180 Ml Festa Safari 2 08 Un., 180 Ml Frutinhas 08 Un.",1,0
+variation,438794312,,1,,,1,12.7,,7891175475853,GRP-438794312,Opção,180 Ml Festa Colors Azul Royal 08 Un,,0
+variation,438794320,,1,,,1,8.9,,7899895739033,GRP-438794312,Opção,180 Ml Festa Colors Pink 08 Un,,0
+variation,438794316,,1,,,1,12.7,,7891175477741,GRP-438794312,Opção,180 Ml Festa Colors Rosa Quartz 08 Un,,0
+variation,438794322,,1,,,1,8.9,,7891175477581,GRP-438794312,Opção,180 Ml Festa Colors Roxo 08 Un,,0
+variation,438794317,,1,,,1,9.4,,17891175451403,GRP-438794312,Opção,180 Ml Festa Colors Verde Escuro 08 Un,,0
+variation,438794305,,1,,,1,8.9,,7899743854086,GRP-438794312,Opção,180 Ml Festa Feliz Aniversário 08 Un,,0
+variation,438798170,,1,,,1,14.1,,7899743854369,GRP-438794312,Opção,180 Ml Festa Safari 2 08 Un.,,0
+variation,438798187,,1,,,1,21.95,,7899895793882,GRP-438794312,Opção,180 Ml Frutinhas 08 Un.,,0
+variable,GRP-43876896,Lumi Color 200-sl,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Am, Am (38402), Az, Laranja, Rosa, Verde, Vermelho, Violeta",1,0
+variation,43876896,,1,,,1,5.5,,7897424082186,GRP-43876896,Opção,Am,,0
+variation,38402,,1,,,1,5.5,,7897424082124,GRP-43876896,Opção,Am (38402),,0
+variation,38401,,1,,,1,5.5,,7897424082117,GRP-43876896,Opção,Az,,0
+variation,38403,,1,,,1,5.5,,7897424082131,GRP-43876896,Opção,Laranja,,0
+variation,38404,,1,,,1,5.5,,7897424082148,GRP-43876896,Opção,Rosa,,0
+variation,38405,,1,,,1,5.5,,7897424082155,GRP-43876896,Opção,Verde,,0
+variation,43876512,,1,,,1,5.5,,7897424082162,GRP-43876896,Opção,Vermelho,,0
+variation,38406,,1,,,1,5.5,,7897424082179,GRP-43876896,Opção,Violeta,,0
+variable,GRP-438796546,Sacola para Presente,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"438796546, 7382, 7384",1,0
+variation,438796546,,1,,,1,8.5,,7898633033822,GRP-438796546,Opção,438796546,,0
+variation,438797476,,1,,,1,5.5,,7908168273829,GRP-438796546,Opção,7382,,0
+variation,438797477,,1,,,1,3.5,,7908168273843,GRP-438796546,Opção,7384,,0
+variable,GRP-438798246,Agenda Planner Wire-o,1,0,visible,1,,Escritório,,,Opção,"2027 Classica Semanal Anotacoes A5 Caramelo, 2027 Classica Semanal Anotacoes A5 Preto, 2027 Classica Semanal Notas c/ Divisorias A5 Verde Oliva, 2027 Relicario Diária A5 Realeza Marinho, 2027 Relicario Semanal Anotacoes A5 Botanica, 2027 Relicario Semanal Notas c/ Divisorias A5 Realeza Marinho, 2027 Veredas Semanal Notas c/ Divisorias A5 Verde, 2027 Veredas Semanal Office 15.5x9 Gelo",1,0
+variation,438798246,,1,,,1,93.9,,7899866834088,GRP-438798246,Opção,2027 Classica Semanal Anotacoes A5 Caramelo,,0
+variation,438798245,,1,,,1,93.9,,7899866834071,GRP-438798246,Opção,2027 Classica Semanal Anotacoes A5 Preto,,0
+variation,438798249,,1,,,1,123.9,,7899866834101,GRP-438798246,Opção,2027 Classica Semanal Notas c/ Divisorias A5 Verde Oliva,,0
+variation,438798244,,1,,,1,121.95,,7899866833968,GRP-438798246,Opção,2027 Relicario Diária A5 Realeza Marinho,,0
+variation,438798247,,1,,,1,93.9,,7899866833975,GRP-438798246,Opção,2027 Relicario Semanal Anotacoes A5 Botanica,,0
+variation,438798250,,1,,,1,123.9,,7899866833982,GRP-438798246,Opção,2027 Relicario Semanal Notas c/ Divisorias A5 Realeza Marinho,,0
+variation,438798248,,1,,,1,123.9,,7899866834149,GRP-438798246,Opção,2027 Veredas Semanal Notas c/ Divisorias A5 Verde,,0
+variation,438798251,,1,,,1,63.3,,7899866834033,GRP-438798246,Opção,2027 Veredas Semanal Office 15.5x9 Gelo,,0
+variable,GRP-438797956,Agenda Grande,1,0,visible,1,,Escritório,,,Opção,"2027, 2027 (438797965), 2027 (438797964), 2027 (438797967), 2027 (438797966), 2027 (438797969), 2027 (438797968)",1,0
+variation,438797956,,1,,,1,26.5,,7908174984009,GRP-438797956,Opção,2027,,0
+variation,438797965,,1,,,1,26.5,,7908174984245,GRP-438797956,Opção,2027 (438797965),,0
+variation,438797964,,1,,,1,26.5,,7908174983965,GRP-438797956,Opção,2027 (438797964),,0
+variation,438797967,,1,,,1,26.5,,7908174984269,GRP-438797956,Opção,2027 (438797967),,0
+variation,438797966,,1,,,1,26.5,,7908174984207,GRP-438797956,Opção,2027 (438797966),,0
+variation,438797969,,1,,,1,26.5,,7908174984061,GRP-438797956,Opção,2027 (438797969),,0
+variation,438797968,,1,,,1,26.5,,7908174984221,GRP-438797956,Opção,2027 (438797968),,0
+variable,GRP-438796956,Refil para Caneta Pincel Aquarela,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"438796956, 438796957, 438796960, 438796959, 438796962, 438796963, 438796965, 438796968, 438796967, 438796970, 438796971, 438796973, 438796961, 438796964, 438796966, 438796969",1,0
+variation,438796956,,1,,,1,4.9,,7898419167048,GRP-438796956,Opção,438796956,,0
+variation,438796957,,1,,,1,4.9,,7898419167031,GRP-438796956,Opção,438796957,,0
+variation,438796960,,1,,,1,4.9,,7898419166911,GRP-438796956,Opção,438796960,,0
+variation,438796959,,1,,,1,4.9,,7898419166973,GRP-438796956,Opção,438796959,,0
+variation,438796962,,1,,,1,4.9,,7898419166966,GRP-438796956,Opção,438796962,,0
+variation,438796963,,1,,,1,4.9,,7898419166997,GRP-438796956,Opção,438796963,,0
+variation,438796965,,1,,,1,4.9,,7898419166904,GRP-438796956,Opção,438796965,,0
+variation,438796968,,1,,,1,4.9,,7898419166959,GRP-438796956,Opção,438796968,,0
+variation,438796967,,1,,,1,4.9,,7898419167017,GRP-438796956,Opção,438796967,,0
+variation,438796970,,1,,,1,4.9,,7898419166942,GRP-438796956,Opção,438796970,,0
+variation,438796971,,1,,,1,4.9,,7898419167055,GRP-438796956,Opção,438796971,,0
+variation,438796973,,1,,,1,4.9,,7898419167024,GRP-438796956,Opção,438796973,,0
+variation,438796961,,1,,,1,4.9,,7898419166935,GRP-438796956,Opção,438796961,,0
+variation,438796964,,1,,,1,4.9,,7898419166928,GRP-438796956,Opção,438796964,,0
+variation,438796966,,1,,,1,4.9,,7898419167000,GRP-438796956,Opção,438796966,,0
+variation,438796969,,1,,,1,4.9,,7898419166980,GRP-438796956,Opção,438796969,,0
+variable,GRP-43868081,"Pasta Plast C/elast 3,5cm Aleveolar",1,0,visible,1,,Escritório,,,Opção,"Azul Polycart, Preto Polycart, Vermelha Polycart",1,0
+variation,43868081,,1,,,1,7.9,,7897478401674,GRP-43868081,Opção,Azul Polycart,,0
+variation,5469159,,1,,,1,9.5,,7897478403074,GRP-43868081,Opção,Preto Polycart,,0
+variation,5469157,,1,,,1,7.9,,7897478401698,GRP-43868081,Opção,Vermelha Polycart,,0
+variable,GRP-43875902,Caderno Universitário Espiral 160fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Neon Az, Neon Ll, Neon Rs",1,0
+variation,43875902,,1,,,1,72.6,,7891027302382,GRP-43875902,Opção,Neon Az,,0
+variation,43875913,,1,,,1,72.6,,7891027302443,GRP-43875902,Opção,Neon Ll,,0
+variation,43875909,,1,,,1,72.6,,7891027302481,GRP-43875902,Opção,Neon Rs,,0
+variable,GRP-438788044,Ecolapis Max Sem Borracha 2hb Faber Castell,1,0,visible,1,,Papelaria > Lápis e Acessórios,,,Opção,"438788044, 438788046, 438788045, 438788047",1,0
+variation,438788044,,1,,,1,1.7,,7891360491439,GRP-438788044,Opção,438788044,,0
+variation,438788046,,1,,,1,1.7,,7891360471196,GRP-438788044,Opção,438788046,,0
+variation,438788045,,1,,,1,1.7,,7891360491415,GRP-438788044,Opção,438788045,,0
+variation,438788047,,1,,,1,1.7,,7891360484653,GRP-438788044,Opção,438788047,,0
+variable,GRP-5469541,Marca Texto BIC,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Amarelo Marking, Rosa Marking, Verde Marking, Verde Marking (5469545)",1,0
+variation,5469541,,1,,,1,4.5,,070330331679,GRP-5469541,Opção,Amarelo Marking,,0
+variation,5469547,,1,,,1,4.5,,070330331655,GRP-5469541,Opção,Rosa Marking,,0
+variation,43872215,,1,,,1,4.5,,0070330331631,GRP-5469541,Opção,Verde Marking,,0
+variation,5469545,,1,,,1,4.5,,070330331631,GRP-5469541,Opção,Verde Marking (5469545),,0
+variable,GRP-438795910,Prato de Papel -,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Prata Brilhante, Prata Rajado, Rose Rajado",1,0
+variation,438795910,,1,,,1,10.9,,7908716201953,GRP-438795910,Opção,Prata Brilhante,,0
+variation,438795913,,1,,,1,19.9,,7908716202042,GRP-438795910,Opção,Prata Rajado,,0
+variation,438795914,,1,,,1,19.9,,7908716202059,GRP-438795910,Opção,Rose Rajado,,0
+variable,GRP-5468885,Balão n9 Liso,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"Az Claro Art-latex, Branco Art-latex, Laranja Art-latex, Verde Claro Art-latex",1,0
+variation,5468885,,1,,,1,17.8,,7896872415539,GRP-5468885,Opção,Az Claro Art-latex,,0
+variation,5469633,,1,,,1,17.8,,7896872415546,GRP-5468885,Opção,Branco Art-latex,,0
+variation,5468880,,1,,,1,17.8,,7896872415560,GRP-5468885,Opção,Laranja Art-latex,,0
+variation,5468884,,1,,,1,17.8,,7896872415645,GRP-5468885,Opção,Verde Claro Art-latex,,0
+variable,GRP-438790558,Celofane 80cmx100cm,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Amarelo Dani, Azul Claro Dani, Laranja Dani, Rosa Dani, Roxo Dani, Verde Escuro",1,0
+variation,438790558,,1,,,1,4.5,,7897864860818,GRP-438790558,Opção,Amarelo Dani,,0
+variation,438790557,,1,,,1,4.5,,7897864860825,GRP-438790558,Opção,Azul Claro Dani,,0
+variation,438790553,,1,,,1,4.5,,7897864860566,GRP-438790558,Opção,Laranja Dani,,0
+variation,438790554,,1,,,1,4.5,,7897864860849,GRP-438790558,Opção,Rosa Dani,,0
+variation,438790556,,1,,,1,4.5,,7897864860887,GRP-438790558,Opção,Roxo Dani,,0
+variation,438797682,,1,,,1,6.5,,7897364800715,GRP-438790558,Opção,Verde Escuro,,0
+variable,GRP-438794695,Vela Metalizada 3cm,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"8 Degra Rs 0, 8 Degra Rs 1, 8 Degra Rs 2, 8 Degra Rs 3, 8 Degra Rs 4, 8 Degra Rs 5, 8 Degra Rs 6, 8 Degra Rs 7, 8 Degra Rs 8, 8 Degra Rs 9",1,0
+variation,438794695,,1,,,1,6.3,,7897774585016,GRP-438794695,Opção,8 Degra Rs 0,,0
+variation,438794696,,1,,,1,6.3,,7897774586013,GRP-438794695,Opção,8 Degra Rs 1,,0
+variation,438794697,,1,,,1,6.3,,7897774587010,GRP-438794695,Opção,8 Degra Rs 2,,0
+variation,438794698,,1,,,1,6.3,,7897774588017,GRP-438794695,Opção,8 Degra Rs 3,,0
+variation,438794699,,1,,,1,6.3,,7897774589014,GRP-438794695,Opção,8 Degra Rs 4,,0
+variation,438794700,,1,,,1,6.3,,7897774590010,GRP-438794695,Opção,8 Degra Rs 5,,0
+variation,438794701,,1,,,1,6.3,,7897774591017,GRP-438794695,Opção,8 Degra Rs 6,,0
+variation,438794702,,1,,,1,6.3,,7897774592014,GRP-438794695,Opção,8 Degra Rs 7,,0
+variation,438794703,,1,,,1,6.3,,7897774593011,GRP-438794695,Opção,8 Degra Rs 8,,0
+variation,438794704,,1,,,1,6.3,,7897774594018,GRP-438794695,Opção,8 Degra Rs 9,,0
+variable,GRP-438794070,Refil de Tinta EPSON,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"504 Amarelo, 504 Ciano, 504 Magenta, 504 Preto, 544 Amarelo, 544 Ciano, 544 Magenta, 544 Preto, 664 Amarelo, 664 Ciano, 664 Magenta, 664 Preto",1,0
+variation,438794070,,1,,,1,76.0,,010343988521,GRP-438794070,Opção,504 Amarelo,,0
+variation,438794068,,1,,,1,76.0,,010343988507,GRP-438794070,Opção,504 Ciano,,0
+variation,438794069,,1,,,1,76.0,,010343988514,GRP-438794070,Opção,504 Magenta,,0
+variation,438793528,,1,,,1,89.0,,010343988491,GRP-438794070,Opção,504 Preto,,0
+variation,438793821,,1,,,1,76.0,,010343988569,GRP-438794070,Opção,544 Amarelo,,0
+variation,438793819,,1,,,1,76.0,,010343988545,GRP-438794070,Opção,544 Ciano,,0
+variation,438793820,,1,,,1,76.0,,010343988552,GRP-438794070,Opção,544 Magenta,,0
+variation,438797985,,1,,,1,76.0,,010343988538,GRP-438794070,Opção,544 Preto,,0
+variation,43873189,,1,,,1,76.0,,010343885325,GRP-438794070,Opção,664 Amarelo,,0
+variation,43873186,,1,,,1,76.0,,010343885301,GRP-438794070,Opção,664 Ciano,,0
+variation,43873188,,1,,,1,76.0,,010343885318,GRP-438794070,Opção,664 Magenta,,0
+variation,43873187,,1,,,1,76.0,,010343885295,GRP-438794070,Opção,664 Preto,,0
+variable,GRP-438797953,Agenda Pequena,1,0,visible,1,,Escritório,,,Opção,"2027, 2027 (438797955), 2027 (438797958), 2027 (438797971), 2027 (438797970), 2027 (438797973), 2027 (438797972), 2027 (438797974)",1,0
+variation,438797953,,1,,,1,20.5,,7908174984276,GRP-438797953,Opção,2027,,0
+variation,438797955,,1,,,1,20.5,,7908174984214,GRP-438797953,Opção,2027 (438797955),,0
+variation,438797958,,1,,,1,20.5,,7908174984153,GRP-438797953,Opção,2027 (438797958),,0
+variation,438797971,,1,,,1,20.5,,7908174983873,GRP-438797953,Opção,2027 (438797971),,0
+variation,438797970,,1,,,1,20.5,,7908174984078,GRP-438797953,Opção,2027 (438797970),,0
+variation,438797973,,1,,,1,20.5,,7908174984139,GRP-438797953,Opção,2027 (438797973),,0
+variation,438797972,,1,,,1,20.5,,7908174984016,GRP-438797953,Opção,2027 (438797972),,0
+variation,438797974,,1,,,1,20.5,,7908174984238,GRP-438797953,Opção,2027 (438797974),,0
+variable,GRP-22107,Tinta Fosca Art 37 Ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"510 Vd Folha, 519 Branca, 520 Preta, 545 Vd Oliva, 549 Magenta, 568 Az Ceruleo, 815 Castanho Claro",1,0
+variation,22107,,1,,,1,6.95,,7891153032122,GRP-22107,Opção,510 Vd Folha,,0
+variation,22110,,1,,,1,6.95,,7891153032153,GRP-22107,Opção,519 Branca,,0
+variation,22111,,1,,,1,6.95,,7891153032160,GRP-22107,Opção,520 Preta,,0
+variation,22117,,1,,,1,6.95,,7891153032221,GRP-22107,Opção,545 Vd Oliva,,0
+variation,21993,,1,,,1,6.95,,7891153025476,GRP-22107,Opção,549 Magenta,,0
+variation,21996,,1,,,1,6.95,,7891153025551,GRP-22107,Opção,568 Az Ceruleo,,0
+variation,22010,,1,,,1,6.1,,7891153025858,GRP-22107,Opção,815 Castanho Claro,,0
+variable,GRP-21940,Tinta Art Fosca 100ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"501 Az Turquesa, 503 Az Celeste, 516 Violeta, 519 Branco, 520 Preto, 531 Marrom, 577 Turquesa, Laranja, Rosa 537, Vm Fogo 507",1,0
+variation,21940,,1,,,1,16.9,,7891153023151,GRP-21940,Opção,501 Az Turquesa,,0
+variation,21941,,1,,,1,16.9,,7891153023175,GRP-21940,Opção,503 Az Celeste,,0
+variation,21948,,1,,,1,14.9,,7891153023311,GRP-21940,Opção,516 Violeta,,0
+variation,21934,,1,,,1,16.9,,7891153021263,GRP-21940,Opção,519 Branco,,0
+variation,21954,,1,,,1,16.9,,7891153023472,GRP-21940,Opção,520 Preto,,0
+variation,21953,,1,,,1,16.9,,7891153023458,GRP-21940,Opção,531 Marrom,,0
+variation,43870343,,1,,,1,16.9,,7891153023939,GRP-21940,Opção,577 Turquesa,,0
+variation,21951,,1,,,1,16.9,,7891153023397,GRP-21940,Opção,Laranja,,0
+variation,5470158,,1,,,1,16.9,,7891153023359,GRP-21940,Opção,Rosa 537,,0
+variation,21944,,1,,,1,14.9,,7891153023236,GRP-21940,Opção,Vm Fogo 507,,0
+variable,GRP-438796374,Refil de Discos e Elástico -,1,0,visible,1,,Escritório,,,Opção,"Amarelo Cerrado, Amarelo M, Amarelo Neon, Azul Atlantico, Laranja Neon, Prata M, Rosa Bebe, Rosa Neon, Rosa S, Verde Neon, Verde Pantanal, Vermelho",1,0
+variation,438796374,,1,,,1,39.9,,7895099705614,GRP-438796374,Opção,Amarelo Cerrado,,0
+variation,438796373,,1,,,1,39.9,,7895098727167,GRP-438796374,Opção,Amarelo M,,0
+variation,438796380,,1,,,1,39.9,,7895089710748,GRP-438796374,Opção,Amarelo Neon,,0
+variation,438796370,,1,,,1,39.9,,7895099704402,GRP-438796374,Opção,Azul Atlantico,,0
+variation,438796378,,1,,,1,39.9,,7895099710724,GRP-438796374,Opção,Laranja Neon,,0
+variation,438796371,,1,,,1,39.9,,7895098729932,GRP-438796374,Opção,Prata M,,0
+variation,438796375,,1,,,1,39.9,,7898539398872,GRP-438796374,Opção,Rosa Bebe,,0
+variation,438796379,,1,,,1,39.9,,7895099710731,GRP-438796374,Opção,Rosa Neon,,0
+variation,438796369,,1,,,1,39.9,,7895099705669,GRP-438796374,Opção,Rosa S,,0
+variation,438796376,,1,,,1,39.9,,7895099710755,GRP-438796374,Opção,Verde Neon,,0
+variation,438796372,,1,,,1,39.9,,7895099705720,GRP-438796374,Opção,Verde Pantanal,,0
+variation,438796377,,1,,,1,39.9,,7895098728409,GRP-438796374,Opção,Vermelho,,0
+variable,GRP-16325,Marcador para Quadro Wbma Vbm,1,0,visible,1,,Escritório,,,Opção,"Preto, Vm",1,0
+variation,16325,,1,,,1,22.0,,4902505355769,GRP-16325,Opção,Preto,,0
+variation,16326,,1,,,1,22.0,,4902505355776,GRP-16325,Opção,Vm,,0
+variable,GRP-438793676,Vela Super Estelar,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Dourada 01 Un., Rosa 01 Un., Rosa 01 Un. (438798176), Verde 01 Un., Vermelha 01 Un",1,0
+variation,438793676,,1,,,1,9.8,,7891175357005,GRP-438793676,Opção,Dourada 01 Un.,,0
+variation,438790793,,1,,,1,8.95,,17891175445518,GRP-438793676,Opção,Rosa 01 Un.,,0
+variation,438798176,,1,,,1,9.8,,7891175445511,GRP-438793676,Opção,Rosa 01 Un. (438798176),,0
+variation,438798190,,1,,,1,9.8,,7899895794285,GRP-438793676,Opção,Verde 01 Un.,,0
+variation,438792929,,1,,,1,9.8,,7891175445528,GRP-438793676,Opção,Vermelha 01 Un,,0
+variable,GRP-438789687,Caderno Brochura 1/4,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Laranja 96 fls Tilibra, Roxo 48 fls Tilibra",1,0
+variation,438789687,,1,,,1,8.9,,7891027317393,GRP-438789687,Opção,Laranja 96 fls Tilibra,,0
+variation,438789686,,1,,,1,7.2,,7891027317423,GRP-438789687,Opção,Roxo 48 fls Tilibra,,0
+variable,GRP-5468881,Balão n9 Liso c/50un,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"Lilas Art-latex, Vd Esc Art-latex, Verm Artlatex",1,0
+variation,5468881,,1,,,1,17.8,,7896872415577,GRP-5468881,Opção,Lilas Art-latex,,0
+variation,43868835,,1,,,1,17.8,,7896872415638,GRP-5468881,Opção,Vd Esc Art-latex,,0
+variation,5470162,,1,,,1,17.8,,7896872415652,GRP-5468881,Opção,Verm Artlatex,,0
+variable,GRP-438797208,Staedtler Triplus Fineliner,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"438797208, 438797207, 438797210, 438797209, 438797212, 438797211, 438797213, 438797215, 438797218, 438797217, 438797222, 438797223",1,0
+variation,438797208,,1,,,1,3.5,,4007817050286,GRP-438797208,Opção,438797208,,0
+variation,438797207,,1,,,1,3.5,,4007817334171,GRP-438797208,Opção,438797207,,0
+variation,438797210,,1,,,1,3.5,,4007817050200,GRP-438797208,Opção,438797210,,0
+variation,438797209,,1,,,1,3.5,,4007817334058,GRP-438797208,Opção,438797209,,0
+variation,438797212,,1,,,1,3.5,,4007817050361,GRP-438797208,Opção,438797212,,0
+variation,438797211,,1,,,1,3.5,,4007817334386,GRP-438797208,Opção,438797211,,0
+variation,438797213,,1,,,1,3.5,,4007817334287,GRP-438797208,Opção,438797213,,0
+variation,438797215,,1,,,1,3.5,,4007817050248,GRP-438797208,Opção,438797215,,0
+variation,438797218,,1,,,1,3.5,,4007817187401,GRP-438797208,Opção,438797218,,0
+variation,438797217,,1,,,1,3.5,,4007817334379,GRP-438797208,Opção,438797217,,0
+variation,438797222,,1,,,1,3.5,,4007817050446,GRP-438797208,Opção,438797222,,0
+variation,438797223,,1,,,1,3.5,,4007817050408,GRP-438797208,Opção,438797223,,0
+variable,GRP-43872742,Caneta Energel Makkuro 0.5 Mm,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Az, Preta",1,0
+variation,43872742,,1,,,1,10.5,,884851022561,GRP-43872742,Opção,Az,,0
+variation,43873318,,1,,,1,10.5,,884851022547,GRP-43872742,Opção,Preta,,0
+variable,GRP-438794491,Forminha Laminada c/50un,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"N.5 Ouro Esperanca, N.5 Prata Esperanca",1,0
+variation,438794491,,1,,,1,7.5,,7896276907630,GRP-438794491,Opção,N.5 Ouro Esperanca,,0
+variation,438794481,,1,,,1,7.5,,7896276907654,GRP-438794491,Opção,N.5 Prata Esperanca,,0
+variable,GRP-5468883,Pacote de Balão,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"N*9 Liso Azul Art-latex, N*9 Liso Preto Art-latex, N9 Liso Rosa Art-latex, N9 Liso Verde Limao Art-latex",1,0
+variation,5468883,,1,,,1,17.8,,7896872415522,GRP-5468883,Opção,N*9 Liso Azul Art-latex,,0
+variation,5468886,,1,,,1,17.8,,7896872415591,GRP-5468883,Opção,N*9 Liso Preto Art-latex,,0
+variation,5469634,,1,,,1,17.8,,7896872415676,GRP-5468883,Opção,N9 Liso Rosa Art-latex,,0
+variation,5469738,,1,,,1,17.8,,7896872415614,GRP-5468883,Opção,N9 Liso Verde Limao Art-latex,,0
+variable,GRP-14805,Pasta C/aba Elástica 40mm,1,0,visible,1,,Escritório,,,Opção,"Azul Yes, Rosa Yes, Verde Yes, Vermelha Yes",1,0
+variation,14805,,1,,,1,34.1,,4713195014610,GRP-14805,Opção,Azul Yes,,0
+variation,43866155,,1,,,1,34.1,,4713195062116,GRP-14805,Opção,Rosa Yes,,0
+variation,43866153,,1,,,1,32.1,,4713195014634,GRP-14805,Opção,Verde Yes,,0
+variation,14806,,1,,,1,32.1,,4713195014627,GRP-14805,Opção,Vermelha Yes,,0
+variable,GRP-438797104,Caneta POSCA pc-1mr,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo, Azul, Lilas, Rosa, Verde, Verde Metalizado, Vermelha",1,0
+variation,438797104,,1,,,1,39.6,,4902778107812,GRP-438797104,Opção,Amarelo,,0
+variation,43876599,,1,,,1,39.6,,4902778089873,GRP-438797104,Opção,Azul,,0
+variation,43876598,,1,,,1,39.6,,4902778249437,GRP-438797104,Opção,Lilas,,0
+variation,438797100,,1,,,1,39.6,,4902778089897,GRP-438797104,Opção,Rosa,,0
+variation,438797103,,1,,,1,39.6,,4902778089811,GRP-438797104,Opção,Verde,,0
+variation,438797105,,1,,,1,39.6,,4902778089880,GRP-438797104,Opção,Verde Metalizado,,0
+variation,438797102,,1,,,1,39.6,,4902778089903,GRP-438797104,Opção,Vermelha,,0
+variable,GRP-438790559,Papel de Presente 70cmx100cm 01 Folha,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"438790559, 438790561, 438790560",1,0
+variation,438790559,,1,,,1,4.0,,7891313608822,GRP-438790559,Opção,438790559,,0
+variation,438790561,,1,,,1,4.0,,7891313608839,GRP-438790559,Opção,438790561,,0
+variation,438790560,,1,,,1,4.0,,7891313608853,GRP-438790559,Opção,438790560,,0
+variable,GRP-438794866,Agenda Executiva,1,0,visible,1,,Escritório,,,Opção,"2026, 2027, 2027 (438797959), 2027 (438797961), 2027 (438797960), 2027 (438797962)",1,0
+variation,438794866,,1,,,1,34.8,,7908174968986,GRP-438794866,Opção,2026,,0
+variation,438797954,,1,,,1,35.5,,7908174984429,GRP-438794866,Opção,2027,,0
+variation,438797959,,1,,,1,35.5,,7908174984382,GRP-438794866,Opção,2027 (438797959),,0
+variation,438797961,,1,,,1,35.5,,7908174984375,GRP-438794866,Opção,2027 (438797961),,0
+variation,438797960,,1,,,1,35.5,,7908174984399,GRP-438794866,Opção,2027 (438797960),,0
+variation,438797962,,1,,,1,35.5,,7908174984405,GRP-438794866,Opção,2027 (438797962),,0
+variable,GRP-438787805,Canudo de Papel 6mmx200mm c/12 Un List,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Ouro Metalizado, Prata Metalizado, Preto",1,0
+variation,438787805,,1,,,1,3.8,,7897774301012,GRP-438787805,Opção,Ouro Metalizado,,0
+variation,438787807,,1,,,1,3.8,,7897774300015,GRP-438787805,Opção,Prata Metalizado,,0
+variation,438787810,,1,,,1,3.3,,7897774319017,GRP-438787805,Opção,Preto,,0
+variable,GRP-438792726,Ag Anual Espiral,1,0,visible,1,,Escritório,,,Opção,"192f, 196f, 200f Clean",1,0
+variation,438792726,,1,,,1,47.4,,7891321101131,GRP-438792726,Opção,192f,,0
+variation,438792719,,1,,,1,74.3,,7891321101148,GRP-438792726,Opção,196f,,0
+variation,438794803,,1,,,1,30.9,,7891321107348,GRP-438792726,Opção,200f Clean,,0
+variable,GRP-43873676,Vela No,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"0 Solid Colors Branca, 2 Solid Colors Branca, 3 Solid Colors Branca, 4 Solid Colors Branca, 6 Solid Colors Branca, 7 Solid Colors Branca, 8 Solid Colors Branca, 9 Solid Colors Branca",1,0
+variation,43873676,,1,,,1,5.2,,7891175199346,GRP-43873676,Opção,0 Solid Colors Branca,,0
+variation,43873679,,1,,,1,5.2,,7891175198783,GRP-43873676,Opção,2 Solid Colors Branca,,0
+variation,43873680,,1,,,1,5.2,,7891175198851,GRP-43873676,Opção,3 Solid Colors Branca,,0
+variation,43873681,,1,,,1,5.2,,7891175198929,GRP-43873676,Opção,4 Solid Colors Branca,,0
+variation,43873683,,1,,,1,5.2,,7891175199063,GRP-43873676,Opção,6 Solid Colors Branca,,0
+variation,43873684,,1,,,1,5.2,,7891175199131,GRP-43873676,Opção,7 Solid Colors Branca,,0
+variation,43873686,,1,,,1,5.2,,7891175199209,GRP-43873676,Opção,8 Solid Colors Branca,,0
+variation,43873687,,1,,,1,5.2,,7891175199278,GRP-43873676,Opção,9 Solid Colors Branca,,0
+variable,GRP-438789673,Tempera Guache,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"250 Ml Amarelo, 500 Ml Acrilex Azul Turquesa 501, 500 Ml Amarelo Ouro 505, 500 Ml Branco, 500 Ml Preto",1,0
+variation,438789673,,1,,,1,14.4,,7891153020143,GRP-438789673,Opção,250 Ml Amarelo,,0
+variation,438797410,,1,,,1,25.6,,7891153020242,GRP-438789673,Opção,500 Ml Acrilex Azul Turquesa 501,,0
+variation,438791420,,1,,,1,25.6,,7891153020259,GRP-438789673,Opção,500 Ml Amarelo Ouro 505,,0
+variation,438791421,,1,,,1,25.6,,7891153020280,GRP-438789673,Opção,500 Ml Branco,,0
+variation,438791422,,1,,,1,25.6,,7891153020297,GRP-438789673,Opção,500 Ml Preto,,0
+variable,GRP-16320,Refil Quadro,1,0,visible,1,,Escritório,,,Opção,"Branco Azul, Branco Verde, Branco Vermelho, Branco Violeta",1,0
+variation,16320,,1,,,1,9.8,,4902505343568,GRP-16320,Opção,Branco Azul,,0
+variation,16321,,1,,,1,9.8,,4902505343575,GRP-16320,Opção,Branco Verde,,0
+variation,16319,,1,,,1,9.8,,4902505343551,GRP-16320,Opção,Branco Vermelho,,0
+variation,16337,,1,,,1,9.8,,4902505370724,GRP-16320,Opção,Branco Violeta,,0
+variable,GRP-438789305,Copo de Festa Mania 300ml,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Azul, Azul de Bolinha, Preto, Rosa, Rosa de Bolinha, Verde, Vermelho de Bolinha",1,0
+variation,438789305,,1,,,1,18.2,,7896343086145,GRP-438789305,Opção,Azul,,0
+variation,438789311,,1,,,1,13.3,,7896343086183,GRP-438789305,Opção,Azul de Bolinha,,0
+variation,438789309,,1,,,1,18.2,,7896343086152,GRP-438789305,Opção,Preto,,0
+variation,438789307,,1,,,1,18.2,,7896343086114,GRP-438789305,Opção,Rosa,,0
+variation,438789306,,1,,,1,13.3,,7896343086176,GRP-438789305,Opção,Rosa de Bolinha,,0
+variation,438789308,,1,,,1,18.2,,7896343086138,GRP-438789305,Opção,Verde,,0
+variation,438789310,,1,,,1,14.8,,7896343086206,GRP-438789305,Opção,Vermelho de Bolinha,,0
+variable,GRP-17762,Pena Caligrafa,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"17762, 17760, 17752, 17754, 17755, 17757, 438797989",1,0
+variation,17762,,1,,,1,4.6,,,GRP-17762,Opção,17762,,0
+variation,17760,,1,,,1,6.5,,,GRP-17762,Opção,17760,,0
+variation,17752,,1,,,1,13.5,,,GRP-17762,Opção,17752,,0
+variation,17754,,1,,,1,9.6,,,GRP-17762,Opção,17754,,0
+variation,17755,,1,,,1,8.2,,,GRP-17762,Opção,17755,,0
+variation,17757,,1,,,1,8.6,,,GRP-17762,Opção,17757,,0
+variation,438797989,,1,,,1,10.2,,,GRP-17762,Opção,438797989,,0
+variable,GRP-438787974,Fita Corretiva Recarregável Mercur 6m,1,0,visible,1,,Escritório,,,Opção,"Azul, Rosa",1,0
+variation,438787974,,1,,,1,15.6,,7896342914852,GRP-438787974,Opção,Azul,,0
+variation,438787975,,1,,,1,15.6,,7896342914869,GRP-438787974,Opção,Rosa,,0
+variable,GRP-438796902,Regua de 30cm,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"438796902, 438796904, 438796903, 438796906, 438796905, 438796908, 438796907",1,0
+variation,438796902,,1,,,1,3.2,,7897832842297,GRP-438796902,Opção,438796902,,0
+variation,438796904,,1,,,1,3.2,,7891027325428,GRP-438796902,Opção,438796904,,0
+variation,438796903,,1,,,1,3.2,,7891027279967,GRP-438796902,Opção,438796903,,0
+variation,438796906,,1,,,1,3.2,,7891027231620,GRP-438796902,Opção,438796906,,0
+variation,438796905,,1,,,1,3.2,,7891027230012,GRP-438796902,Opção,438796905,,0
+variation,438796908,,1,,,1,4.9,,7897832867221,GRP-438796902,Opção,438796908,,0
+variation,438796907,,1,,,1,4.9,,7897832867191,GRP-438796902,Opção,438796907,,0
+variable,GRP-438791121,Marca Texto Grifpen,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo Pastel, Azul Pastel, Laranja, Laranja Pastel, Lilas Pastel, Rosa, Rosa Pastel, Verde",1,0
+variation,438791121,,1,,,1,5.8,,7891360659891,GRP-438791121,Opção,Amarelo Pastel,,0
+variation,43871344,,1,,,1,5.8,,7891360653615,GRP-438791121,Opção,Azul Pastel,,0
+variation,28292,,1,,,1,5.8,,7891360623137,GRP-438791121,Opção,Laranja,,0
+variation,43874979,,1,,,1,5.8,,7891360659884,GRP-438791121,Opção,Laranja Pastel,,0
+variation,43871341,,1,,,1,5.8,,7891360653509,GRP-438791121,Opção,Lilas Pastel,,0
+variation,50789,,1,,,1,5.8,,7891360623151,GRP-438791121,Opção,Rosa,,0
+variation,43871342,,1,,,1,5.8,,7891360653370,GRP-438791121,Opção,Rosa Pastel,,0
+variation,28291,,1,,,1,5.8,,7891360623113,GRP-438791121,Opção,Verde,,0
+variable,GRP-438798067,Agenda Diária Safira Essencial Redoma,1,0,visible,1,,Escritório,,,Opção,"Preta, Verde",1,0
+variation,438798067,,1,,,1,33.9,,7898104624160,GRP-438798067,Opção,Preta,,0
+variation,438798068,,1,,,1,33.9,,7898104625013,GRP-438798067,Opção,Verde,,0
+variable,GRP-28293,Caneta Fine Pen,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Azul Escuro, Preta, Vermelha",1,0
+variation,28293,,1,,,1,8.5,,7891360623236,GRP-28293,Opção,Azul,,0
+variation,438791884,,1,,,1,8.5,,7891360644118,GRP-28293,Opção,Azul Escuro,,0
+variation,28294,,1,,,1,8.5,,7891360623250,GRP-28293,Opção,Preta,,0
+variation,28295,,1,,,1,8.5,,7891360623274,GRP-28293,Opção,Vermelha,,0
+variable,GRP-43872934,Caneta PILOT g-2 07,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Preta, Vermelha",1,0
+variation,43872934,,1,,,1,22.3,,4902505163180,GRP-43872934,Opção,Azul,,0
+variation,43872936,,1,,,1,22.3,,4902505163166,GRP-43872934,Opção,Preta,,0
+variation,43872935,,1,,,1,22.3,,4902505163173,GRP-43872934,Opção,Vermelha,,0
+variable,GRP-29033,Tingecor Guarany 40g,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Amarelo, Azul Marinho, Marrom, Preto, Turquesa, Verde, Vermelho, Violeta",1,0
+variation,29033,,1,,,1,9.2,,7891988000013,GRP-29033,Opção,Amarelo,,0
+variation,29036,,1,,,1,9.2,,7891988000068,GRP-29033,Opção,Azul Marinho,,0
+variation,29041,,1,,,1,9.2,,7891988000112,GRP-29033,Opção,Marrom,,0
+variation,29042,,1,,,1,9.2,,7891988000136,GRP-29033,Opção,Preto,,0
+variation,29035,,1,,,1,9.2,,7891988000044,GRP-29033,Opção,Turquesa,,0
+variation,29038,,1,,,1,9.2,,7891988000082,GRP-29033,Opção,Verde,,0
+variation,29034,,1,,,1,9.2,,7891988000020,GRP-29033,Opção,Vermelho,,0
+variation,29039,,1,,,1,8.3,,7891988000099,GRP-29033,Opção,Violeta,,0
+variable,GRP-5469166,Caixa p/ Correio Tipo,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"0, 2, 3, 4",1,0
+variation,5469166,,1,,,1,2.4,,,GRP-5469166,Opção,0,,0
+variation,11005,,1,,,1,6.3,,,GRP-5469166,Opção,2,,0
+variation,12405,,1,,,1,9.9,,,GRP-5469166,Opção,3,,0
+variation,13737,,1,,,1,14.6,,,GRP-5469166,Opção,4,,0
+variable,GRP-438791457,Acrílica Fosca 37ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo Cadmio, Azul Hortensia, Grafite, Pink, Rosa, Violeta Cobalto",1,0
+variation,438791457,,1,,,1,8.7,,7891153035123,GRP-438791457,Opção,Amarelo Cadmio,,0
+variation,438791463,,1,,,1,8.7,,7891153016436,GRP-438791457,Opção,Azul Hortensia,,0
+variation,438791456,,1,,,1,8.7,,7891153081199,GRP-438791457,Opção,Grafite,,0
+variation,438795995,,1,,,1,8.7,,7891153079530,GRP-438791457,Opção,Pink,,0
+variation,438791458,,1,,,1,8.7,,7891153079493,GRP-438791457,Opção,Rosa,,0
+variation,438791459,,1,,,1,8.7,,7891153080970,GRP-438791457,Opção,Violeta Cobalto,,0
+variable,GRP-438793380,Marcador Multimark 1.0,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Az Metalizado 813, Br 713, Ouro 807, Prata 817, Pt 712, Rs Metalizado 815",1,0
+variation,438793380,,1,,,1,11.5,,7891360690993,GRP-438793380,Opção,Az Metalizado 813,,0
+variation,438793462,,1,,,1,11.5,,7891360690863,GRP-438793380,Opção,Br 713,,0
+variation,438793377,,1,,,1,11.5,,7891360691006,GRP-438793380,Opção,Ouro 807,,0
+variation,438793376,,1,,,1,11.5,,7891360691013,GRP-438793380,Opção,Prata 817,,0
+variation,438793378,,1,,,1,11.5,,7891360690924,GRP-438793380,Opção,Pt 712,,0
+variation,438793379,,1,,,1,11.5,,7891360691044,GRP-438793380,Opção,Rs Metalizado 815,,0
+variable,GRP-438792866,"Caneta Energel X Retratil 0,5mm",1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul Pet, Marrom, Rosa, Verde Cl, Violeta",1,0
+variation,438792866,,1,,,1,11.4,,884851037473,GRP-438792866,Opção,Azul Pet,,0
+variation,438792868,,1,,,1,12.4,,884851037497,GRP-438792866,Opção,Marrom,,0
+variation,438792869,,1,,,1,12.4,,884851037527,GRP-438792866,Opção,Rosa,,0
+variation,438797910,,1,,,1,12.4,,884851037510,GRP-438792866,Opção,Verde Cl,,0
+variation,438792870,,1,,,1,12.4,,884851037558,GRP-438792866,Opção,Violeta,,0
+variable,GRP-32841,Pacote Prato Quad Md c/10un,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Branco Prafesta, Cristal",1,0
+variation,32841,,1,,,1,13.5,,7896343085179,GRP-32841,Opção,Branco Prafesta,,0
+variation,32840,,1,,,1,13.5,,7896343085162,GRP-32841,Opção,Cristal,,0
+variable,GRP-5468970,Caneta Kilometrica,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"100 1.0 Media Azul, 100 1.0 Media Preta, 100 1.0 Media Verde, Vermelha 1.0 M",1,0
+variation,5468970,,1,,,1,1.8,,7501030683476,GRP-5468970,Opção,100 1.0 Media Azul,,0
+variation,438790026,,1,,,1,1.8,,7501030683469,GRP-5468970,Opção,100 1.0 Media Preta,,0
+variation,438790027,,1,,,1,2.5,,7703486037944,GRP-5468970,Opção,100 1.0 Media Verde,,0
+variation,5468967,,1,,,1,1.8,,7501030683483,GRP-5468970,Opção,Vermelha 1.0 M,,0
+variable,GRP-43873781,Cola Glitter 23g,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"105 Laranja, 201 Ouro, 202 Prata, 204 Azul, 209 Cristal, 527 Pink, Verde, Vermelha",1,0
+variation,43873781,,1,,,1,4.95,,7891153097954,GRP-43873781,Opção,105 Laranja,,0
+variation,21754,,1,,,1,4.95,,7891153003689,GRP-43873781,Opção,201 Ouro,,0
+variation,21770,,1,,,1,4.95,,7891153006345,GRP-43873781,Opção,202 Prata,,0
+variation,21771,,1,,,1,4.95,,7891153006369,GRP-43873781,Opção,204 Azul,,0
+variation,21774,,1,,,1,4.8,,7891153006420,GRP-43873781,Opção,209 Cristal,,0
+variation,43873780,,1,,,1,4.95,,7891153097978,GRP-43873781,Opção,527 Pink,,0
+variation,21773,,1,,,1,4.95,,7891153006406,GRP-43873781,Opção,Verde,,0
+variation,21772,,1,,,1,4.95,,7891153006383,GRP-43873781,Opção,Vermelha,,0
+variable,GRP-438795844,Regua 30cm Flex,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Amarelo Limao, Azul, Transparente",1,0
+variation,438795844,,1,,,1,9.9,,7891153122472,GRP-438795844,Opção,Amarelo Limao,,0
+variation,438795845,,1,,,1,9.9,,7891153122397,GRP-438795844,Opção,Azul,,0
+variation,438795843,,1,,,1,9.9,,7891153122458,GRP-438795844,Opção,Transparente,,0
+variable,GRP-24778,Forma Cupcake Imperm c/45un,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Amarelo, Branco, Fucsia, Laranja, Lilas, Marrom, Preto, Vd Escuro, Vd Limao, Vermelho",1,0
+variation,24778,,1,,,1,7.5,,7891175270540,GRP-24778,Opção,Amarelo,,0
+variation,24777,,1,,,1,7.5,,7891175270533,GRP-24778,Opção,Branco,,0
+variation,24780,,1,,,1,7.5,,7891175270588,GRP-24778,Opção,Fucsia,,0
+variation,24834,,1,,,1,7.5,,7891175276375,GRP-24778,Opção,Laranja,,0
+variation,24781,,1,,,1,7.5,,7891175270595,GRP-24778,Opção,Lilas,,0
+variation,43865811,,1,,,1,7.5,,7891175276399,GRP-24778,Opção,Marrom,,0
+variation,43865810,,1,,,1,7.5,,7891175276382,GRP-24778,Opção,Preto,,0
+variation,24782,,1,,,1,7.5,,7891175270601,GRP-24778,Opção,Vd Escuro,,0
+variation,24783,,1,,,1,7.5,,7891175270618,GRP-24778,Opção,Vd Limao,,0
+variation,24784,,1,,,1,7.5,,7891175270625,GRP-24778,Opção,Vermelho,,0
+variable,GRP-20168,Caderno Broch Capa Dura 1/4 Mais+ 96fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Am, Az, Vd, Vm",1,0
+variation,20168,,1,,,1,8.9,,7891027116729,GRP-20168,Opção,Am,,0
+variation,20166,,1,,,1,8.9,,7891027116705,GRP-20168,Opção,Az,,0
+variation,20167,,1,,,1,8.9,,7891027116712,GRP-20168,Opção,Vd,,0
+variation,20169,,1,,,1,8.9,,7891027116736,GRP-20168,Opção,Vm,,0
+variable,GRP-21676,Guache Esc 15 Ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Am Pele, Az Celeste 503, Az Turqueza, Branco 519, Laranja 517, Magenta 549, Marrom 531, Rosa, Vd Folha 510, Verm Fogo 507, Violeta 516",1,0
+variation,21676,,1,,,1,1.5,,78910799,GRP-21676,Opção,Am Pele,,0
+variation,21660,,1,,,1,1.5,,78910690,GRP-21676,Opção,Az Celeste 503,,0
+variation,21659,,1,,,1,1.5,,78910683,GRP-21676,Opção,Az Turqueza,,0
+variation,21669,,1,,,1,1.5,,78910751,GRP-21676,Opção,Branco 519,,0
+variation,21668,,1,,,1,1.5,,78910744,GRP-21676,Opção,Laranja 517,,0
+variation,21677,,1,,,1,1.5,,78910805,GRP-21676,Opção,Magenta 549,,0
+variation,21673,,1,,,1,1.5,,78910775,GRP-21676,Opção,Marrom 531,,0
+variation,438798168,,1,,,1,1.5,,78910782,GRP-21676,Opção,Rosa,,0
+variation,21664,,1,,,1,1.5,,78910720,GRP-21676,Opção,Vd Folha 510,,0
+variation,21663,,1,,,1,1.5,,78910713,GRP-21676,Opção,Verm Fogo 507,,0
+variation,29230,,1,,,1,1.5,,78928176,GRP-21676,Opção,Violeta 516,,0
+variable,GRP-438788825,Prato Laminado Redondo,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"N2 Regina, N3 Regina, N4 Regina, N6 Regina",1,0
+variation,438788825,,1,,,1,2.1,,7891175003421,GRP-438788825,Opção,N2 Regina,,0
+variation,438788826,,1,,,1,2.4,,7891175003438,GRP-438788825,Opção,N3 Regina,,0
+variation,438788827,,1,,,1,2.85,,7891175003445,GRP-438788825,Opção,N4 Regina,,0
+variation,438788835,,1,,,1,4.2,,7891175003469,GRP-438788825,Opção,N6 Regina,,0
+variable,GRP-43875035,Porta Objetos Dellocolor,1,0,visible,1,,Escritório,,,Opção,"Azul Claro, Cristal, Preto, Rosa",1,0
+variation,43875035,,1,,,1,11.0,,7897832859509,GRP-43875035,Opção,Azul Claro,,0
+variation,43875032,,1,,,1,11.0,,7897832851169,GRP-43875035,Opção,Cristal,,0
+variation,43876749,,1,,,1,11.0,,7897832851206,GRP-43875035,Opção,Preto,,0
+variation,438793569,,1,,,1,11.0,,7897832859523,GRP-43875035,Opção,Rosa,,0
+variable,GRP-438790035,La Mollet 40g,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"604 0010 Branco 10 Mts, 604 0142 Pimenta 10 Mts, 604 0325 Amarelo Candy, 604 0409 Ametista, 604 0447 Militar, 604 0530 Pacifico 10 Mts, 604 0640 Marinho 10 Mts, 604 0700 Aluminio 10 Mts, 604 0782 Laranja Neon 10 Mts, 604 0940 Preto 10 Mts, 604 9172 Matizada Amuleto Atacado, 604 9563 Matizada Vinhedo",1,0
+variation,438790035,,1,,,1,8.1,,7891113350105,GRP-438790035,Opção,604 0010 Branco 10 Mts,,0
+variation,438790037,,1,,,1,8.1,,7891113351423,GRP-438790035,Opção,604 0142 Pimenta 10 Mts,,0
+variation,438790038,,1,,,1,8.1,,7891113353250,GRP-438790035,Opção,604 0325 Amarelo Candy,,0
+variation,438794707,,1,,,1,8.1,,7891113354097,GRP-438790035,Opção,604 0409 Ametista,,0
+variation,438790040,,1,,,1,8.1,,7891113354479,GRP-438790035,Opção,604 0447 Militar,,0
+variation,438790042,,1,,,1,8.1,,7891113355308,GRP-438790035,Opção,604 0530 Pacifico 10 Mts,,0
+variation,438790044,,1,,,1,8.1,,7891113356404,GRP-438790035,Opção,604 0640 Marinho 10 Mts,,0
+variation,438790047,,1,,,1,8.1,,7891113357012,GRP-438790035,Opção,604 0700 Aluminio 10 Mts,,0
+variation,438790050,,1,,,1,9.6,,7891113462525,GRP-438790035,Opção,604 0782 Laranja Neon 10 Mts,,0
+variation,438790051,,1,,,1,8.1,,7891113359405,GRP-438790035,Opção,604 0940 Preto 10 Mts,,0
+variation,438793074,,1,,,1,8.1,,7891113359122,GRP-438790035,Opção,604 9172 Matizada Amuleto Atacado,,0
+variation,438793077,,1,,,1,8.1,,7891113592871,GRP-438790035,Opção,604 9563 Matizada Vinhedo,,0
+variable,GRP-43867614,Pasta Sanf A4 c/12 Divisórias Line,1,0,visible,1,,Escritório,,,Opção,"Azul, Cristal, Rosa",1,0
+variation,43867614,,1,,,1,39.4,,7897832846127,GRP-43867614,Opção,Azul,,0
+variation,43867613,,1,,,1,39.4,,7897832846141,GRP-43867614,Opção,Cristal,,0
+variation,43867612,,1,,,1,37.8,,7897832849067,GRP-43867614,Opção,Rosa,,0
+variable,GRP-43870302,Pasta Polipropileno Dac 20mm,1,0,visible,1,,Escritório,,,Opção,"Am, Vd, Vm",1,0
+variation,43870302,,1,,,1,6.0,,7897237364004,GRP-43870302,Opção,Am,,0
+variation,43870307,,1,,,1,8.95,,7897237364127,GRP-43870302,Opção,Vd,,0
+variation,43870306,,1,,,1,8.95,,7897237364141,GRP-43870302,Opção,Vm,,0
+variable,GRP-43875409,Anilina em Po 5g,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Amarelo Ouro, Azul, Laranja, Preta, Roxo, Vermelho",1,0
+variation,43875409,,1,,,1,7.7,,7898395600072,GRP-43875409,Opção,Amarelo Ouro,,0
+variation,438790437,,1,,,1,7.7,,7898395600102,GRP-43875409,Opção,Azul,,0
+variation,438790438,,1,,,1,7.7,,7898395600133,GRP-43875409,Opção,Laranja,,0
+variation,438790436,,1,,,1,7.7,,7898395600256,GRP-43875409,Opção,Preta,,0
+variation,438790441,,1,,,1,7.7,,7898395600140,GRP-43875409,Opção,Roxo,,0
+variation,438790439,,1,,,1,7.7,,7898395600089,GRP-43875409,Opção,Vermelho,,0
+variable,GRP-438788102,Vela Estrela,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"438788102, Ouro 13.5 Cm 04 Un, Pink 13.5 Cm 04 Un, Prata 13.5 Cm 04 Un",1,0
+variation,438788102,,1,,,1,4.3,,7891175031530,GRP-438788102,Opção,438788102,,0
+variation,438795856,,1,,,1,4.8,,7899895783180,GRP-438788102,Opção,Ouro 13.5 Cm 04 Un,,0
+variation,438795857,,1,,,1,4.8,,7899895783203,GRP-438788102,Opção,Pink 13.5 Cm 04 Un,,0
+variation,438797419,,1,,,1,4.65,,7899895783197,GRP-438788102,Opção,Prata 13.5 Cm 04 Un,,0
+variable,GRP-38291,PILOT Color,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"850 Jr Az, 850 Jr Pr, 850 Jr Verde, 850 Jr Vm",1,0
+variation,38291,,1,,,1,5.8,,7897424003150,GRP-38291,Opção,850 Jr Az,,0
+variation,38292,,1,,,1,5.8,,7897424003167,GRP-38291,Opção,850 Jr Pr,,0
+variation,38293,,1,,,1,5.8,,7897424003174,GRP-38291,Opção,850 Jr Verde,,0
+variation,38294,,1,,,1,5.8,,7897424003181,GRP-38291,Opção,850 Jr Vm,,0
+variable,GRP-13826,Caneta Slider Xb,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Az, Az Claro, Laranja, Preto, Rosa, Verde, Vermelho, Violeta",1,0
+variation,13826,,1,,,1,14.5,,4004675044075,GRP-13826,Opção,Az,,0
+variation,13831,,1,,,1,13.7,,4004675054197,GRP-13826,Opção,Az Claro,,0
+variation,13828,,1,,,1,14.5,,4004675054104,GRP-13826,Opção,Laranja,,0
+variation,13824,,1,,,1,14.5,,4004675044006,GRP-13826,Opção,Preto,,0
+variation,13830,,1,,,1,14.5,,4004675054166,GRP-13826,Opção,Rosa,,0
+variation,13832,,1,,,1,14.5,,4004675054227,GRP-13826,Opção,Verde,,0
+variation,13825,,1,,,1,14.5,,4004675044037,GRP-13826,Opção,Vermelho,,0
+variation,13829,,1,,,1,14.5,,4004675054135,GRP-13826,Opção,Violeta,,0
+variable,GRP-438793953,Caixa Arquivo Morto Polidello Gigante,1,0,visible,1,,Escritório,,,Opção,"Amarelo, Azul, Verde, Vermelho",1,0
+variation,438793953,,1,,,1,16.9,,7897832850339,GRP-438793953,Opção,Amarelo,,0
+variation,438793952,,1,,,1,16.9,,7897832850353,GRP-438793953,Opção,Azul,,0
+variation,438793951,,1,,,1,16.9,,7897832850438,GRP-438793953,Opção,Verde,,0
+variation,438793950,,1,,,1,16.9,,7897832850452,GRP-438793953,Opção,Vermelho,,0
+variable,GRP-438791715,Micanga 50grs 10/0 Espelhado,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"022 Caramelo Claro Multiplo, 022c Caramelo Escuro Multiplo, 023 Azul Multiplo, 024 Multiplo, 025 Vermelho Multiplo, 027b Verde Multiplo, 028 Azul Royal Multiplo, 029b Laranja Multiplo, 030 Amarelo Multiplo, 053 Marrom Multiplo",1,0
+variation,438791715,,1,,,1,7.5,,7890265013470,GRP-438791715,Opção,022 Caramelo Claro Multiplo,,0
+variation,438791716,,1,,,1,7.5,,7890265656684,GRP-438791715,Opção,022c Caramelo Escuro Multiplo,,0
+variation,438791717,,1,,,1,7.5,,7890265258246,GRP-438791715,Opção,023 Azul Multiplo,,0
+variation,438791718,,1,,,1,7.5,,,GRP-438791715,Opção,024 Multiplo,,0
+variation,438791719,,1,,,1,7.5,,7890265049127,GRP-438791715,Opção,025 Vermelho Multiplo,,0
+variation,438791720,,1,,,1,7.5,,7890265054091,GRP-438791715,Opção,027b Verde Multiplo,,0
+variation,438791721,,1,,,1,7.5,,7890265053889,GRP-438791715,Opção,028 Azul Royal Multiplo,,0
+variation,438791722,,1,,,1,7.5,,7890265255757,GRP-438791715,Opção,029b Laranja Multiplo,,0
+variation,438791723,,1,,,1,7.5,,7890265054671,GRP-438791715,Opção,030 Amarelo Multiplo,,0
+variation,438791724,,1,,,1,7.5,,7890265498550,GRP-438791715,Opção,053 Marrom Multiplo,,0
+variable,GRP-438783470,Cartucho HP 667xl,1,0,visible,1,,Escritório,,,Opção,"Colorido, Preto",1,0
+variation,438783470,,1,,,1,300.0,,193015522480,GRP-438783470,Opção,Colorido,,0
+variation,438783525,,1,,,1,300.0,,193015522503,GRP-438783470,Opção,Preto,,0
+variable,GRP-43866068,Caneta Uniball Signo,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul Claro, Laranja, Pink, Verde, Vermelho, Violeta",1,0
+variation,43866068,,1,,,1,12.9,,4902778781302,GRP-43866068,Opção,Azul Claro,,0
+variation,43866071,,1,,,1,12.9,,4902778781289,GRP-43866068,Opção,Laranja,,0
+variation,16660,,1,,,1,12.9,,4902778781326,GRP-43866068,Opção,Pink,,0
+variation,43866070,,1,,,1,12.9,,4902778781296,GRP-43866068,Opção,Verde,,0
+variation,16659,,1,,,1,12.9,,4902778781272,GRP-43866068,Opção,Vermelho,,0
+variation,50831,,1,,,1,12.9,,4902778781319,GRP-43866068,Opção,Violeta,,0
+variable,GRP-438793709,Balão metal.c40 Cm,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"N.0 Nacarado, N.1 Nacarado, N.2 Nacarado, N.3 Nacarado, N.4 Nacarado, N.5 Nacarado, N.6 Nacarado, N.8 Nacarado, N.9 Nacarado",1,0
+variation,438793709,,1,,,1,3.7,,0606529206291,GRP-438793709,Opção,N.0 Nacarado,,0
+variation,438793710,,1,,,1,3.7,,0606529206208,GRP-438793709,Opção,N.1 Nacarado,,0
+variation,438793711,,1,,,1,4.2,,0606529206215,GRP-438793709,Opção,N.2 Nacarado,,0
+variation,438793712,,1,,,1,3.7,,0606529206222,GRP-438793709,Opção,N.3 Nacarado,,0
+variation,438793713,,1,,,1,3.7,,0606529206239,GRP-438793709,Opção,N.4 Nacarado,,0
+variation,438793714,,1,,,1,3.7,,0606529206246,GRP-438793709,Opção,N.5 Nacarado,,0
+variation,438793715,,1,,,1,3.7,,0606529206253,GRP-438793709,Opção,N.6 Nacarado,,0
+variation,438793717,,1,,,1,3.7,,0606529206277,GRP-438793709,Opção,N.8 Nacarado,,0
+variation,438793718,,1,,,1,3.7,,0606529206284,GRP-438793709,Opção,N.9 Nacarado,,0
+variable,GRP-43871966,Tinta Acrílica 60ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Neon Azul, Neon Laranja, Neon Maravilha, Neon Verde, Neon Vermelho",1,0
+variation,43871966,,1,,,1,15.2,,7891153089119,GRP-43871966,Opção,Neon Azul,,0
+variation,43871962,,1,,,1,15.2,,7891153089072,GRP-43871966,Opção,Neon Laranja,,0
+variation,43873191,,1,,,1,15.2,,7891153089096,GRP-43871966,Opção,Neon Maravilha,,0
+variation,43873192,,1,,,1,15.2,,7891153089034,GRP-43871966,Opção,Neon Verde,,0
+variation,43871965,,1,,,1,15.2,,7891153089010,GRP-43871966,Opção,Neon Vermelho,,0
+variable,GRP-43877107,Vela Aniversário N,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"0 Cintilante, 2 Cintilante, 6 Cintilante, 8 Cintelante",1,0
+variation,43877107,,1,,,1,7.3,,7899895724688,GRP-43877107,Opção,0 Cintilante,,0
+variation,43877110,,1,,,1,7.3,,7899895724701,GRP-43877107,Opção,2 Cintilante,,0
+variation,43877111,,1,,,1,7.3,,7899895724749,GRP-43877107,Opção,6 Cintilante,,0
+variation,43877109,,1,,,1,7.3,,7899895724763,GRP-43877107,Opção,8 Cintelante,,0
+variable,GRP-21917,Tempera Guache 500ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"507 Vermelho Fogo, 510 Verde Folha, 517 Laranja, Azul Celeste 503, Marrom 531, Rosa 537",1,0
+variation,21917,,1,,,1,25.6,,7891153020266,GRP-21917,Opção,507 Vermelho Fogo,,0
+variation,22484,,1,,,1,25.6,,7891153050911,GRP-21917,Opção,510 Verde Folha,,0
+variation,22122,,1,,,1,25.6,,7891153032757,GRP-21917,Opção,517 Laranja,,0
+variation,438797809,,1,,,1,25.6,,7891153050874,GRP-21917,Opção,Azul Celeste 503,,0
+variation,438797803,,1,,,1,25.6,,7891153032771,GRP-21917,Opção,Marrom 531,,0
+variation,438797808,,1,,,1,25.6,,7891153032795,GRP-21917,Opção,Rosa 537,,0
+variable,GRP-22225,Tinta Acrílica Metalizada 60ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"532 Ouro, 533 Prata, 548 Ouro Velho",1,0
+variation,22225,,1,,,1,24.4,,7891153036007,GRP-22225,Opção,532 Ouro,,0
+variation,22226,,1,,,1,24.4,,7891153036014,GRP-22225,Opção,533 Prata,,0
+variation,22227,,1,,,1,24.4,,7891153036038,GRP-22225,Opção,548 Ouro Velho,,0
+variable,GRP-38344,Caneta PILOT 1.0,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Pt Bps-grip",1,0
+variation,38344,,1,,,1,11.9,,7897424080250,GRP-38344,Opção,Azul,,0
+variation,38345,,1,,,1,11.9,,7897424080267,GRP-38344,Opção,Pt Bps-grip,,0
+variable,GRP-438795278,Guardanapo de Papel -,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Dourado Listrado, Lilas Macaron, Lilas Macaron (438796264), Prata Rajado, Rose Gold Listrado, Rose Gold Rajado",1,0
+variation,438795278,,1,,,1,9.9,,7908716202509,GRP-438795278,Opção,Dourado Listrado,,0
+variation,438795907,,1,,,1,6.95,,7908716202639,GRP-438795278,Opção,Lilas Macaron,,0
+variation,438796264,,1,,,1,6.95,,7908716207276,GRP-438795278,Opção,Lilas Macaron (438796264),,0
+variation,438795267,,1,,,1,9.9,,7908716202486,GRP-438795278,Opção,Prata Rajado,,0
+variation,438795912,,1,,,1,9.9,,7908716202523,GRP-438795278,Opção,Rose Gold Listrado,,0
+variation,438795268,,1,,,1,9.9,,7908716202493,GRP-438795278,Opção,Rose Gold Rajado,,0
+variable,GRP-32844,Pacote Prato Quad Gd c/10un,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Br, Cristal Prafesta",1,0
+variation,32844,,1,,,1,22.2,,7896343085278,GRP-32844,Opção,Br,,0
+variation,32843,,1,,,1,22.2,,7896343085261,GRP-32844,Opção,Cristal Prafesta,,0
+variable,GRP-438788447,Etiqueta Pimaco Escolar 35x78mm,1,0,visible,1,,Escritório,,,Opção,"Azul, Vermelha",1,0
+variation,438788447,,1,,,1,6.95,,7896041959086,GRP-438788447,Opção,Azul,,0
+variation,438788448,,1,,,1,6.95,,7896041959062,GRP-438788447,Opção,Vermelha,,0
+variable,GRP-438791725,Micanga 50grs 10/0 Opaco,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"041 Branco Multiplo, 042 Amarelo Multiplo, 043 Azul Bebe Multiplo, 044 Verde Limao Multiplo, 045 Vermelho Multiplo, 047 Verde Bandeira Multiplo, 048 Azul Royal Multiplo, 050 Laranja Multiplo",1,0
+variation,438791725,,1,,,1,8.9,,7890265283538,GRP-438791725,Opção,041 Branco Multiplo,,0
+variation,438791726,,1,,,1,8.9,,7890265014101,GRP-438791725,Opção,042 Amarelo Multiplo,,0
+variation,438791727,,1,,,1,7.5,,7890265053735,GRP-438791725,Opção,043 Azul Bebe Multiplo,,0
+variation,438791728,,1,,,1,7.5,,7890265054121,GRP-438791725,Opção,044 Verde Limao Multiplo,,0
+variation,438791729,,1,,,1,7.5,,7890265054251,GRP-438791725,Opção,045 Vermelho Multiplo,,0
+variation,438791730,,1,,,1,7.5,,7890265278176,GRP-438791725,Opção,047 Verde Bandeira Multiplo,,0
+variation,438791731,,1,,,1,7.5,,7890265053681,GRP-438791725,Opção,048 Azul Royal Multiplo,,0
+variation,438791732,,1,,,1,7.5,,7890265284092,GRP-438791725,Opção,050 Laranja Multiplo,,0
+variable,GRP-43873281,PILOT Office Pen 1.0 Mm,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Azul, Preta, Verde, Vermelho",1,0
+variation,43873281,,1,,,1,8.5,,7897424082919,GRP-43873281,Opção,Azul,,0
+variation,43869755,,1,,,1,8.5,,7897424082926,GRP-43873281,Opção,Preta,,0
+variation,438797033,,1,,,1,8.5,,7897424082940,GRP-43873281,Opção,Verde,,0
+variation,43873280,,1,,,1,8.5,,7897424082933,GRP-43873281,Opção,Vermelho,,0
+variable,GRP-43871044,Papel Plus A4 120g/m2 c/20fls,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Amarelo Lumi, Azul, Laranja, Pink Lumi, Vermelho",1,0
+variation,43871044,,1,,,1,13.3,,7898306087541,GRP-43871044,Opção,Amarelo Lumi,,0
+variation,43868493,,1,,,1,13.3,,7898306087503,GRP-43871044,Opção,Azul,,0
+variation,43871043,,1,,,1,13.3,,7898306087497,GRP-43871044,Opção,Laranja,,0
+variation,43868486,,1,,,1,13.3,,7898306087534,GRP-43871044,Opção,Pink Lumi,,0
+variation,43868488,,1,,,1,13.3,,7898306087473,GRP-43871044,Opção,Vermelho,,0
+variable,GRP-27941,Lápis Eco Grip,1,0,visible,1,,Papelaria > Lápis e Acessórios,,,Opção,"2001 Faber Castell, 2001 Neon Fabe-castel, Neon Faber Castel",1,0
+variation,27941,,1,,,1,2.0,,7891360493402,GRP-27941,Opção,2001 Faber Castell,,0
+variation,438786263,,1,,,1,2.0,,7891360677901,GRP-27941,Opção,2001 Neon Fabe-castel,,0
+variation,438786264,,1,,,1,2.0,,7891360677796,GRP-27941,Opção,Neon Faber Castel,,0
+variable,GRP-438786553,Vela Candy Colors,1,0,visible,1,,Itens de Festa > Velas,,,Opção,"Rosa n*0, Rosa Pastel N* 6, Rosa Pastel N* 8, Rosa Pastel n*7, Verde Interrogacao, Verde Pastel N* 0, Verde Pastel N* 6, Verde Pastel n*3, Verde Pastel n*4, Verde Pastel n*7, Verde Pastel n*8, Verde Pastel n*9",1,0
+variation,438786553,,1,,,1,6.2,,7891175439817,GRP-438786553,Opção,Rosa n*0,,0
+variation,438786511,,1,,,1,6.2,,7891175439879,GRP-438786553,Opção,Rosa Pastel N* 6,,0
+variation,438786514,,1,,,1,2.0,,7891175439893,GRP-438786553,Opção,Rosa Pastel N* 8,,0
+variation,438786516,,1,,,1,6.2,,7891175439886,GRP-438786553,Opção,Rosa Pastel n*7,,0
+variation,438789710,,1,,,1,6.7,,7891175448079,GRP-438786553,Opção,Verde Interrogacao,,0
+variation,438786507,,1,,,1,6.7,,7891175447973,GRP-438786553,Opção,Verde Pastel N* 0,,0
+variation,438786509,,1,,,1,2.0,,7891175448031,GRP-438786553,Opção,Verde Pastel N* 6,,0
+variation,438786517,,1,,,1,6.7,,7891175448000,GRP-438786553,Opção,Verde Pastel n*3,,0
+variation,438786505,,1,,,1,6.7,,7891175448017,GRP-438786553,Opção,Verde Pastel n*4,,0
+variation,438786502,,1,,,1,6.7,,7891175448048,GRP-438786553,Opção,Verde Pastel n*7,,0
+variation,438786506,,1,,,1,6.7,,7891175448055,GRP-438786553,Opção,Verde Pastel n*8,,0
+variation,438786501,,1,,,1,6.7,,7891175448062,GRP-438786553,Opção,Verde Pastel n*9,,0
+variable,GRP-38351,Caneta Super Grip 1.0,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Preta, Vermelha",1,0
+variation,38351,,1,,,1,11.9,,7897424080427,GRP-38351,Opção,Preta,,0
+variation,38352,,1,,,1,11.9,,7897424080434,GRP-38351,Opção,Vermelha,,0
+variable,GRP-438797251,Marcador Permanente,1,0,visible,1,,Escritório,,,Opção,"438797251, Preto Vmp",1,0
+variation,438797251,,1,,,1,3.9,,9555684606587,GRP-438797251,Opção,438797251,,0
+variation,438790992,,1,,,1,3.2,,7899014980438,GRP-438797251,Opção,Preto Vmp,,0
+variable,GRP-438796241,Tinta Acrílica,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Brilhante 37 Ml 510 Verde Folha, Brilhante 37 Ml 517 Laranja, Brilhante 37 Ml 531 Marrom",1,0
+variation,438796241,,1,,,1,9.9,,7891153033075,GRP-438796241,Opção,Brilhante 37 Ml 510 Verde Folha,,0
+variation,438796242,,1,,,1,9.9,,7891153033105,GRP-438796241,Opção,Brilhante 37 Ml 517 Laranja,,0
+variation,438796243,,1,,,1,9.9,,7891153033143,GRP-438796241,Opção,Brilhante 37 Ml 531 Marrom,,0
+variable,GRP-438793357,Agenda Semanal,1,0,visible,1,,Escritório,,,Opção,"Coral Lomb 17 X 24 Classica Redoma Preta, Coral Lomb 17 X 24 Classica Redoma Sortida",1,0
+variation,438793357,,1,,,1,32.8,,7898708913066,GRP-438793357,Opção,Coral Lomb 17 X 24 Classica Redoma Preta,,0
+variation,438793358,,1,,,1,32.8,,7898708913073,GRP-438793357,Opção,Coral Lomb 17 X 24 Classica Redoma Sortida,,0
+variable,GRP-438796234,Caixa de Presente,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"438796234, 438798136, 438798135",1,0
+variation,438796234,,1,,,1,9.9,,,GRP-438796234,Opção,438796234,,0
+variation,438798136,,1,,,1,17.6,,7908168264216,GRP-438796234,Opção,438798136,,0
+variation,438798135,,1,,,1,9.9,,7908168264209,GRP-438796234,Opção,438798135,,0
+variable,GRP-438791015,Sacola Textur Medio Col Monaco,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"Dourado, Preta",1,0
+variation,438791015,,1,,,1,6.9,,7897660222452,GRP-438791015,Opção,Dourado,,0
+variation,438791014,,1,,,1,6.9,,7897660222063,GRP-438791015,Opção,Preta,,0
+variable,GRP-438796487,Fitilho 5mmx50m,1,0,visible,1,,Itens de Festa > Embalagens e Presentes,,,Opção,"Amarelo Candy, Azul Candy, Dourado, Laranja, Lilas, Pink, Prata, Preto, Rosa Antigo, Rosa Bebe, Rosa Claro, Rose Candy, Verde Candy, Vermelho",1,0
+variation,438796487,,1,,,1,3.9,,7908609014479,GRP-438796487,Opção,Amarelo Candy,,0
+variation,438796476,,1,,,1,3.9,,7908609014400,GRP-438796487,Opção,Azul Candy,,0
+variation,438796489,,1,,,1,3.9,,7908609014486,GRP-438796487,Opção,Dourado,,0
+variation,438796480,,1,,,1,3.9,,7908609014431,GRP-438796487,Opção,Laranja,,0
+variation,438796494,,1,,,1,3.9,,7908609014387,GRP-438796487,Opção,Lilas,,0
+variation,438796475,,1,,,1,3.9,,7908609014462,GRP-438796487,Opção,Pink,,0
+variation,438796677,,1,,,1,3.9,,7908609014493,GRP-438796487,Opção,Prata,,0
+variation,438796478,,1,,,1,3.9,,7908609014516,GRP-438796487,Opção,Preto,,0
+variation,438793744,,1,,,1,3.9,,7898086992219,GRP-438796487,Opção,Rosa Antigo,,0
+variation,438793745,,1,,,1,3.9,,7898086992226,GRP-438796487,Opção,Rosa Bebe,,0
+variation,438796481,,1,,,1,3.9,,7908609014455,GRP-438796487,Opção,Rosa Claro,,0
+variation,438796484,,1,,,1,3.9,,7908609014448,GRP-438796487,Opção,Rose Candy,,0
+variation,438796492,,1,,,1,3.9,,7908609014424,GRP-438796487,Opção,Verde Candy,,0
+variation,438796899,,1,,,1,3.9,,7908609014509,GRP-438796487,Opção,Vermelho,,0
+variable,GRP-30256,Baralho Copag,1,1,visible,1,,Brinquedos,,,Opção,"139, 139 -sm- Naipe Grande, 157",1,0
+variation,30256,,1,,,1,29.5,,7896008910112,GRP-30256,Opção,139,,0
+variation,438789611,,1,,,1,29.5,,7896008910211,GRP-30256,Opção,139 -sm- Naipe Grande,,0
+variation,30261,,1,,,1,21.9,,7896008920517,GRP-30256,Opção,157,,0
+variable,GRP-7102,Cartucho EPSON,1,0,visible,1,,Escritório,,,Opção,"194 Amarelo, 194 Ciano, 194 Magenta, 196 Amarelo, 196 Ciano, 196 Magenta, 197 Preto, 296 Amarelo, 296 Ciano, 296 Magenta, 296 Preto, 504 Ciano",1,0
+variation,7102,,1,,,1,62.0,,010343902268,GRP-7102,Opção,194 Amarelo,,0
+variation,7100,,1,,,1,62.0,,010343902244,GRP-7102,Opção,194 Ciano,,0
+variation,7101,,1,,,1,62.0,,010343902251,GRP-7102,Opção,194 Magenta,,0
+variation,7106,,1,,,1,57.0,,010343902985,GRP-7102,Opção,196 Amarelo,,0
+variation,7104,,1,,,1,57.0,,010343902961,GRP-7102,Opção,196 Ciano,,0
+variation,7105,,1,,,1,57.0,,010343902978,GRP-7102,Opção,196 Magenta,,0
+variation,43871907,,1,,,1,81.0,,010343902350,GRP-7102,Opção,197 Preto,,0
+variation,43866010,,1,,,1,72.0,,010343922969,GRP-7102,Opção,296 Amarelo,,0
+variation,43866011,,1,,,1,72.0,,010343922945,GRP-7102,Opção,296 Ciano,,0
+variation,43866008,,1,,,1,72.0,,010343922952,GRP-7102,Opção,296 Magenta,,0
+variation,43866009,,1,,,1,66.0,,010343922938,GRP-7102,Opção,296 Preto,,0
+variation,438783537,,1,,,1,76.0,,010343938755,GRP-7102,Opção,504 Ciano,,0
+variable,GRP-438788805,Bandeja Laminada,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"N1, N4, N6, N7",1,0
+variation,438788805,,1,,,1,0.7,,7891175000635,GRP-438788805,Opção,N1,,0
+variation,438788806,,1,,,1,5.7,,7891175000666,GRP-438788805,Opção,N4,,0
+variation,438788807,,1,,,1,8.5,,7891175030953,GRP-438788805,Opção,N6,,0
+variation,438788808,,1,,,1,11.7,,7891175000680,GRP-438788805,Opção,N7,,0
+variable,GRP-438794110,Massa EVA,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"250 G 20 C, 480g 8c Sortidas",1,0
+variation,438794110,,1,,,1,32.6,,7897771306713,GRP-438794110,Opção,250 G 20 C,,0
+variation,438794108,,1,,,1,3.9,,7908609002254,GRP-438794110,Opção,480g 8c Sortidas,,0
+variable,GRP-438790611,Caneta Trilux,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"032 M Azul Faber Castell, 032 M Preta Faber Fastell, 032 M Vermelho Faber Fastell, 032 Medium Verde Faber Castell",1,0
+variation,438790611,,1,,,1,2.0,,7754111532013,GRP-438790611,Opção,032 M Azul Faber Castell,,0
+variation,438790610,,1,,,1,2.0,,7754111532037,GRP-438790611,Opção,032 M Preta Faber Fastell,,0
+variation,438790609,,1,,,1,2.0,,7754111532020,GRP-438790611,Opção,032 M Vermelho Faber Fastell,,0
+variation,438790608,,1,,,1,2.0,,7754111532044,GRP-438790611,Opção,032 Medium Verde Faber Castell,,0
+variable,GRP-438787968,Etiqueta Tp Coracao,1,0,visible,1,,Escritório,,,Opção,"Multicolor Pastel Pimaco, Vermelho Pimaco",1,0
+variation,438787968,,1,,,1,7.8,,7896041997446,GRP-438787968,Opção,Multicolor Pastel Pimaco,,0
+variation,43870128,,1,,,1,7.8,,7896041907650,GRP-438787968,Opção,Vermelho Pimaco,,0
+variable,GRP-43875440,Pasta Polipropileno Econ Lb 55mm,1,0,visible,1,,Escritório,,,Opção,"43875440, 43869119, 43870297, 43870298, 43870299, 43870300, 43870932",1,0
+variation,43875440,,1,,,1,6.7,,7897237371279,GRP-43875440,Opção,43875440,,0
+variation,43869119,,1,,,1,8.9,,7897237371293,GRP-43875440,Opção,43869119,,0
+variation,43870297,,1,,,1,8.9,,7897237371330,GRP-43875440,Opção,43870297,,0
+variation,43870298,,1,,,1,8.9,,7897237371316,GRP-43875440,Opção,43870298,,0
+variation,43870299,,1,,,1,8.9,,7897237371217,GRP-43875440,Opção,43870299,,0
+variation,43870300,,1,,,1,13.2,,7897237371231,GRP-43875440,Opção,43870300,,0
+variation,43870932,,1,,,1,8.9,,7897237371194,GRP-43875440,Opção,43870932,,0
+variable,GRP-31072,Etiqueta Tp 12 c/210un,1,0,visible,1,,Escritório,,,Opção,"Ouro, Prata",1,0
+variation,31072,,1,,,1,7.8,,7896041959222,GRP-31072,Opção,Ouro,,0
+variation,31073,,1,,,1,7.8,,7896041959239,GRP-31072,Opção,Prata,,0
+variable,GRP-16322,Refil de Quadro,1,0,visible,1,,Escritório,,,Opção,"Br Laranja, Br Preto",1,0
+variation,16322,,1,,,1,9.8,,4902505343582,GRP-16322,Opção,Br Laranja,,0
+variation,16318,,1,,,1,9.8,,4902505343544,GRP-16322,Opção,Br Preto,,0
+simple,43867672,Pincel Art Mini Red 313-2 Keramik,1,0,visible,1,26.4,Papelaria > Arte e Pintura,7898428608426,,,,,
+variable,GRP-438792849,Cachepo Papel 7x9cm 10un,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Azul Claro, Branco, Pink, Vermelho",1,0
+variation,438792849,,1,,,1,11.6,,7899474258993,GRP-438792849,Opção,Azul Claro,,0
+variation,438792848,,1,,,1,11.6,,7899474258955,GRP-438792849,Opção,Branco,,0
+variation,438792847,,1,,,1,11.6,,7899474258917,GRP-438792849,Opção,Pink,,0
+variation,438792846,,1,,,1,11.6,,7899474258894,GRP-438792849,Opção,Vermelho,,0
+variable,GRP-438789852,Tinta Óleo Acrilex 20ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"336, 353, 354, 386, 396",1,0
+variation,438789852,,1,,,1,16.6,,7891153141312,GRP-438789852,Opção,336,,0
+variation,438789858,,1,,,1,16.6,,7891153141442,GRP-438789852,Opção,353,,0
+variation,438789856,,1,,,1,16.6,,7891153141459,GRP-438789852,Opção,354,,0
+variation,438789854,,1,,,1,14.7,,7891153142302,GRP-438789852,Opção,386,,0
+variation,438789855,,1,,,1,16.6,,7891153141589,GRP-438789852,Opção,396,,0
+variable,GRP-438792879,Refil Energel lrn5 0.5,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Azul, Preta",1,0
+variation,438792879,,1,,,1,3.9,,7908429607288,GRP-438792879,Opção,Azul,,0
+variation,438792878,,1,,,1,8.9,,,GRP-438792879,Opção,Preta,,0
+variable,GRP-438790908,Balão Metalizado 45cm Redondo Parabéns,1,0,visible,1,,Itens de Festa > Balões,,,Opção,"Rs Un, Vm Un",1,0
+variation,438790908,,1,,,1,8.9,,606529209407,GRP-438790908,Opção,Rs Un,,0
+variation,438790910,,1,,,1,8.9,,606529209483,GRP-438790908,Opção,Vm Un,,0
+variable,GRP-438791948,Vale 2005 c/100fls,1,0,visible,1,,Escritório,,,Opção,"Amarelo, Azul, Branco, Rosa, Verde",1,0
+variation,438791948,,1,,,1,4.2,,7898270620164,GRP-438791948,Opção,Amarelo,,0
+variation,438791947,,1,,,1,4.2,,7898270620157,GRP-438791948,Opção,Azul,,0
+variation,438791946,,1,,,1,4.2,,7898270620065,GRP-438791948,Opção,Branco,,0
+variation,438791949,,1,,,1,4.2,,7898270620416,GRP-438791948,Opção,Rosa,,0
+variation,438791950,,1,,,1,4.2,,7898270620423,GRP-438791948,Opção,Verde,,0
+variable,GRP-50892,"Caneta Compactor 0,7",1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Pt, Rosa, Roxa",1,0
+variation,50892,,1,,,1,1.8,,7896572000561,GRP-50892,Opção,Pt,,0
+variation,50891,,1,,,1,1.8,,7896572022792,GRP-50892,Opção,Rosa,,0
+variation,34468,,1,,,1,1.8,,7896572024246,GRP-50892,Opção,Roxa,,0
+variable,GRP-438792811,Marcador Compactor Destaq Permanente,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Marrom, Preto, Rosa, Vermelha",1,0
+variation,438792811,,1,,,1,4.8,,7896572038618,GRP-438792811,Opção,Azul,,0
+variation,438792814,,1,,,1,4.8,,7896572038694,GRP-438792811,Opção,Marrom,,0
+variation,438792813,,1,,,1,4.8,,7896572038670,GRP-438792811,Opção,Preto,,0
+variation,438792815,,1,,,1,4.8,,7896572038779,GRP-438792811,Opção,Rosa,,0
+variation,438792812,,1,,,1,4.8,,7896572038632,GRP-438792811,Opção,Vermelha,,0
+variable,GRP-43868103,Pacote Prato Red Gd c/10un,1,0,visible,1,,Itens de Festa > Descartáveis e Decoração,,,Opção,"Branco Prafesta, Cristal Prafesta",1,0
+variation,43868103,,1,,,1,19.7,,7896343085407,GRP-43868103,Opção,Branco Prafesta,,0
+variation,43868102,,1,,,1,19.7,,7896343085254,GRP-43868103,Opção,Cristal Prafesta,,0
+variable,GRP-438786922,Caneta Supersoft 1.0mm,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Azul Claro, Lilas Faber Castel, Rosa Faber Castel, Verde Claro, Verde Claro (438794244)",1,0
+variation,438786922,,1,,,1,10.2,,7891360673187,GRP-438786922,Opção,Azul,,0
+variation,438786928,,1,,,1,10.2,,7891360673217,GRP-438786922,Opção,Azul Claro,,0
+variation,438786927,,1,,,1,10.2,,7891360673224,GRP-438786922,Opção,Lilas Faber Castel,,0
+variation,438786926,,1,,,1,10.2,,7891360673231,GRP-438786922,Opção,Rosa Faber Castel,,0
+variation,438786924,,1,,,1,10.2,,7891360673248,GRP-438786922,Opção,Verde Claro,,0
+variation,438794244,,1,,,1,10.2,,7891360673200,GRP-438786922,Opção,Verde Claro (438794244),,0
+variable,GRP-38337,Almofada P/carimbo,1,0,visible,1,,Escritório,,,Opção,"N3 PILOT, N3 Pt PILOT, N3 S/tinta PILOT, N3 Vm PILOT",1,0
+variation,38337,,1,,,1,25.95,,7897424021956,GRP-38337,Opção,N3 PILOT,,0
+variation,43868673,,1,,,1,25.95,,7897424021963,GRP-38337,Opção,N3 Pt PILOT,,0
+variation,43868672,,1,,,1,23.8,,7897424022007,GRP-38337,Opção,N3 S/tinta PILOT,,0
+variation,438797637,,1,,,1,25.95,,7897424021994,GRP-38337,Opção,N3 Vm PILOT,,0
+variable,GRP-438798275,Ag Anual Cost c/2,1,0,visible,1,,Escritório,,,Opção,"176f Buoss, 176f Office",1,0
+variation,438798275,,1,,,1,55.7,,7891321098264,GRP-438798275,Opção,176f Buoss,,0
+variation,438792938,,1,,,1,76.4,,7891321098011,GRP-438798275,Opção,176f Office,,0
+variable,GRP-42866,Lapiseira Pentel 07,1,0,visible,1,,Papelaria > Lápis e Acessórios,,,Opção,"Branca, Prata, Vermelha",1,0
+variation,42866,,1,,,1,32.0,,7898419153904,GRP-42866,Opção,Branca,,0
+variation,42883,,1,,,1,29.9,,7898419156745,GRP-42866,Opção,Prata,,0
+variation,42908,,1,,,1,32.0,,7898419160889,GRP-42866,Opção,Vermelha,,0
+variable,GRP-11428,Caneta Compactor 07 Mm,1,0,visible,1,,Papelaria > Canetas e Marcadores,,,Opção,"Azul, Preta",1,0
+variation,11428,,1,,,1,1.8,,7896572000547,GRP-11428,Opção,Azul,,0
+variation,34488,,1,,,1,1.8,,7896572025335,GRP-11428,Opção,Preta,,0
+variable,GRP-45550,Fita PVC 48x50,1,0,visible,1,,Escritório,,,Opção,"Marrom, Transparente",1,0
+variation,45550,,1,,,1,7.5,,7899320374624,GRP-45550,Opção,Marrom,,0
+variation,45549,,1,,,1,6.9,,7899320374099,GRP-45550,Opção,Transparente,,0
+simple,11968,Pacote de Papel Almaco c/10 Unid,1,0,visible,1,5.0,Papelaria > Material Escolar,,,,,,
+variable,GRP-15065,Pasta Plast Grampo Mola A4,1,0,visible,1,,Escritório,,,Opção,"Az Yes, Verm Yes",1,0
+variation,15065,,1,,,1,29.5,,4713195030818,GRP-15065,Opção,Az Yes,,0
+variation,438789866,,1,,,1,25.0,,4713195811912,GRP-15065,Opção,Verm Yes,,0
+variable,GRP-32816,Elástico Mercur Super,1,0,visible,1,,Escritório,,,Opção,"100 Pcs Amarelo, 1200 Pcs Amarelo",1,0
+variation,32816,,1,,,1,8.7,,7896342910373,GRP-32816,Opção,100 Pcs Amarelo,,0
+variation,32815,,1,,,1,73.4,,7896342907267,GRP-32816,Opção,1200 Pcs Amarelo,,0
+variable,GRP-438792725,Ag Anual Cost,1,0,visible,1,,Escritório,,,Opção,"160f, 160f Kbom Pink, 160f Kbom Preta Pis 1.77 Cofins 8.16",1,0
+variation,438792725,,1,,,1,35.9,,7891321101032,GRP-438792725,Opção,160f,,0
+variation,438798272,,1,,,1,21.9,,7891321101056,GRP-438792725,Opção,160f Kbom Pink,,0
+variation,438798273,,1,,,1,21.9,,7891321101049,GRP-438792725,Opção,160f Kbom Preta Pis 1.77 Cofins 8.16,,0
+variable,GRP-438790825,Cadeado Tsa C Combinacao,1,0,visible,1,,Escritório,,,Opção,"Azul, Verde, Vermelho",1,0
+variation,438790825,,1,,,1,57.5,,7899653287417,GRP-438790825,Opção,Azul,,0
+variation,438790826,,1,,,1,57.5,,7899653287448,GRP-438790825,Opção,Verde,,0
+variation,438790824,,1,,,1,57.5,,7899653287394,GRP-438790825,Opção,Vermelho,,0
+variable,GRP-438796310,Tinta Nankin Prof 20ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"505 Amarelo Ouro, 507 Vermelho Fogo, 511 Verde Bandeira, 520 Preto, 531 Marrom",1,0
+variation,438796310,,1,,,1,4.2,,7891153051093,GRP-438796310,Opção,505 Amarelo Ouro,,0
+variation,438796250,,1,,,1,4.2,,7891153051109,GRP-438796310,Opção,507 Vermelho Fogo,,0
+variation,438796313,,1,,,1,4.2,,7891153051116,GRP-438796310,Opção,511 Verde Bandeira,,0
+variation,438796312,,1,,,1,4.2,,7891153051130,GRP-438796310,Opção,520 Preto,,0
+variation,438796311,,1,,,1,4.2,,7891153000855,GRP-438796310,Opção,531 Marrom,,0
+variable,GRP-438791642,Etiqueta Multi Uso,1,0,visible,1,,Escritório,,,Opção,"N*04 10 Mts Aprox 333 Un, N*05, N*06",1,0
+variation,438791642,,1,,,1,7.2,,192505355669,GRP-438791642,Opção,N*04 10 Mts Aprox 333 Un,,0
+variation,438791647,,1,,,1,4.2,,192505355676,GRP-438791642,Opção,N*05,,0
+variation,438791644,,1,,,1,5.7,,192505355683,GRP-438791642,Opção,N*06,,0
+variable,GRP-438794645,T.fosca p/ Artesanato 37ml,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Amarelo Bebe, Amarelo Limao, Azul Country, Azul Ultramar, Chocolate, Verde Country",1,0
+variation,438794645,,1,,,1,6.95,,7891153025797,GRP-438794645,Opção,Amarelo Bebe,,0
+variation,438794643,,1,,,1,6.95,,7891153032085,GRP-438794645,Opção,Amarelo Limao,,0
+variation,438791427,,1,,,1,5.8,,7891153026039,GRP-438794645,Opção,Azul Country,,0
+variation,438794644,,1,,,1,6.95,,7891153025438,GRP-438794645,Opção,Azul Ultramar,,0
+variation,438791426,,1,,,1,6.95,,7891153025834,GRP-438794645,Opção,Chocolate,,0
+variation,438795994,,1,,,1,6.95,,7891153025971,GRP-438794645,Opção,Verde Country,,0
+variable,GRP-43866603,Marcador Permanente Ponta Fina,1,0,visible,1,,Escritório,,,Opção,"Az, Verm Acrilex",1,0
+variation,43866603,,1,,,1,6.9,,7891153082165,GRP-43866603,Opção,Az,,0
+variation,438790537,,1,,,1,6.9,,7891153082189,GRP-43866603,Opção,Verm Acrilex,,0
+variable,GRP-438797776,Esmalte vitral/37ml,1,0,visible,1,,Brinquedos,,,Opção,"Bronze Onu 556, Cobre, Ouro, Preto Onu 1263. Tinta. Quant. Ltda. 3. Ii.",1,0
+variation,438797776,,1,,,1,13.2,,7891153083261,GRP-438797776,Opção,Bronze Onu 556,,0
+variation,438791455,,1,,,1,13.2,,7891153083254,GRP-438797776,Opção,Cobre,,0
+variation,438791454,,1,,,1,11.7,,7891153083216,GRP-438797776,Opção,Ouro,,0
+variation,438793860,,1,,,1,13.2,,7891153083094,GRP-438797776,Opção,Preto Onu 1263. Tinta. Quant. Ltda. 3. Ii.,,0
+variable,GRP-438788048,Ecolapis Max com Borracha 2hb Faber Castell,1,0,visible,1,,Papelaria > Lápis e Acessórios,,,Opção,"438788048, 438788050, 438788049, 438788051",1,0
+variation,438788048,,1,,,1,1.9,,7891360491446,GRP-438788048,Opção,438788048,,0
+variation,438788050,,1,,,1,1.9,,7891360491293,GRP-438788048,Opção,438788050,,0
+variation,438788049,,1,,,1,1.9,,7891360548294,GRP-438788048,Opção,438788049,,0
+variation,438788051,,1,,,1,1.9,,7891360484981,GRP-438788048,Opção,438788051,,0
+simple,438796260,Pacote de Papel Cavalete Duplo Ofício,1,0,visible,1,36.7,Papelaria > Material Escolar,,,,,,
+variable,GRP-438795892,Placa Brilhante - Leq,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"Azul Nacarada, Dourada, Prata, Rosa Nacarada",1,0
+variation,438795892,,1,,,1,29.95,,7908716203001,GRP-438795892,Opção,Azul Nacarada,,0
+variation,438795894,,1,,,1,29.95,,7908716203025,GRP-438795892,Opção,Dourada,,0
+variation,438795895,,1,,,1,19.9,,7908716203018,GRP-438795892,Opção,Prata,,0
+variation,438795893,,1,,,1,29.95,,7908716202998,GRP-438795892,Opção,Rosa Nacarada,,0
+variable,GRP-43866184,Fita Refor Euro 50mmx5m,1,0,visible,1,,Escritório,,,Opção,"Az, Br, Pt, Vd, Vm",1,0
+variation,43866184,,1,,,1,13.7,,7899320383466,GRP-43866184,Opção,Az,,0
+variation,5470013,,1,,,1,10.6,,7899320383459,GRP-43866184,Opção,Br,,0
+variation,45554,,1,,,1,10.6,,7899320375591,GRP-43866184,Opção,Pt,,0
+variation,5470012,,1,,,1,13.7,,7899320383442,GRP-43866184,Opção,Vd,,0
+variation,45555,,1,,,1,13.7,,7899320375607,GRP-43866184,Opção,Vm,,0
+variable,GRP-438791798,Pc-5m Caneta POSCA,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Amarelo, Azul, Laranja, Rosa, Violeta, Vm Vinho",1,0
+variation,438791798,,1,,,1,36.9,,4902778916162,GRP-438791798,Opção,Amarelo,,0
+variation,438792587,,1,,,1,36.9,,4902778916124,GRP-438791798,Opção,Azul,,0
+variation,438791801,,1,,,1,36.9,,4902778916193,GRP-438791798,Opção,Laranja,,0
+variation,438791800,,1,,,1,36.9,,4902778916179,GRP-438791798,Opção,Rosa,,0
+variation,438791799,,1,,,1,36.9,,4902778916186,GRP-438791798,Opção,Violeta,,0
+variation,438794077,,1,,,1,36.9,,4902778107485,GRP-438791798,Opção,Vm Vinho,,0
+variable,GRP-438795646,Porta Canetas/clips Dellocolor,1,0,visible,1,,Escritório,,,Opção,"438795646, 438795649, 438795648, 438795650",1,0
+variation,438795646,,1,,,1,9.9,,7897832851329,GRP-438795646,Opção,438795646,,0
+variation,438795649,,1,,,1,12.9,,7897832851343,GRP-438795646,Opção,438795649,,0
+variation,438795648,,1,,,1,9.9,,7897832851381,GRP-438795646,Opção,438795648,,0
+variation,438795650,,1,,,1,19.7,,7897832867115,GRP-438795646,Opção,438795650,,0
+variable,GRP-22097,Tinta Art Fosco 250ml,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"501 Az Turq, Amarelo Ouro",1,0
+variation,22097,,1,,,1,36.7,,7891153032009,GRP-22097,Opção,501 Az Turq,,0
+variation,22098,,1,,,1,36.7,,7891153032016,GRP-22097,Opção,Amarelo Ouro,,0
+variable,GRP-438794822,Lapiseira p200 Cores Trad Japonesas 0.5mm,1,0,visible,1,,Papelaria > Lápis e Acessórios,,,Opção,"438794822, 438794821, 438794824, 438794827",1,0
+variation,438794822,,1,,,1,29.9,,7908429608049,GRP-438794822,Opção,438794822,,0
+variation,438794821,,1,,,1,29.9,,7908429607929,GRP-438794822,Opção,438794821,,0
+variation,438794824,,1,,,1,29.9,,7908429608285,GRP-438794822,Opção,438794824,,0
+variation,438794827,,1,,,1,29.9,,7908429608162,GRP-438794822,Opção,438794827,,0
+variable,GRP-438792773,Cad. Brochura Peq. Caligrafia 48fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Amarelo Cdura, Azul Cdura, Verde Cdura, Vermelho Cdura",1,0
+variation,438792773,,1,,,1,8.8,,7897571922267,GRP-438792773,Opção,Amarelo Cdura,,0
+variation,438792774,,1,,,1,8.8,,7897571922236,GRP-438792773,Opção,Azul Cdura,,0
+variation,438792775,,1,,,1,8.8,,7897571922243,GRP-438792773,Opção,Verde Cdura,,0
+variation,438792776,,1,,,1,8.8,,7897571922250,GRP-438792773,Opção,Vermelho Cdura,,0
+variable,GRP-438791833,Oxford Caderno 1mat 80fls,1,0,visible,1,,Papelaria > Cadernos,,,Opção,"Preto, Rosa, Verde",1,0
+variation,438791833,,1,,,1,61.4,,8427291053737,GRP-438791833,Opção,Preto,,0
+variation,438791816,,1,,,1,39.9,,8427291053454,GRP-438791833,Opção,Rosa,,0
+variation,438791813,,1,,,1,61.4,,,GRP-438791833,Opção,Verde,,0
+variable,GRP-438797023,Caneta Brush Marker Artiliner,1,0,visible,1,,Papelaria > Arte e Pintura,,,Opção,"Am Fluorescente, Az Turqueza, Laranja, Magenta, Marrom, Violeta",1,0
+variation,438797023,,1,,,1,10.0,,4549441011528,GRP-438797023,Opção,Am Fluorescente,,0
+variation,438797013,,1,,,1,10.0,,4549441004988,GRP-438797023,Opção,Az Turqueza,,0
+variation,438797012,,1,,,1,10.0,,4549441004742,GRP-438797023,Opção,Laranja,,0
+variation,438797025,,1,,,1,10.0,,4549441004803,GRP-438797023,Opção,Magenta,,0
+variation,438797018,,1,,,1,10.0,,4549441004841,GRP-438797023,Opção,Marrom,,0
+variation,438797016,,1,,,1,10.0,,4549441004704,GRP-438797023,Opção,Violeta,,0
+variable,GRP-438796754,Papeis Criativos,1,0,visible,1,,Papelaria > Material Escolar,,,Opção,"438796754, 438796753, 438796756, 438796758, 438796759, 438796762, 438796764, 438796763, 438796766",1,0
+variation,438796754,,1,,,1,5.9,,7895096687937,GRP-438796754,Opção,438796754,,0
+variation,438796753,,1,,,1,5.9,,7895096687944,GRP-438796754,Opção,438796753,,0
+variation,438796756,,1,,,1,5.9,,7895096688071,GRP-438796754,Opção,438796756,,0
+variation,438796758,,1,,,1,5.9,,7895096688316,GRP-438796754,Opção,438796758,,0
+variation,438796759,,1,,,1,5.9,,7895096688286,GRP-438796754,Opção,438796759,,0
+variation,438796762,,1,,,1,5.9,,7895096688255,GRP-438796754,Opção,438796762,,0
+variation,438796764,,1,,,1,5.9,,7895096688262,GRP-438796754,Opção,438796764,,0
+variation,438796763,,1,,,1,5.9,,7895096688293,GRP-438796754,Opção,438796763,,0
+variation,438796766,,1,,,1,5.9,,7895096688231,GRP-438796754,Opção,438796766,,0
+simple,30258,Baralho Copag Plástico Class,1,1,visible,1,148.5,Brinquedos,7896008916787,,,,,
+variable,GRP-438798267,Brincando de Engenheiro,1,1,visible,1,,Brinquedos,,,Opção,"N1 - 42 Pcs, N2 - 53 Pcs",1,0
+variation,438798267,,1,,,1,21.4,,7896640452759,GRP-438798267,Opção,N1 - 42 Pcs,,0
+variation,438798268,,1,,,1,26.7,,7896640452766,GRP-438798267,Opção,N2 - 53 Pcs,,0
+simple,7144,Bola de Futebol N 8 P/b Apolo,1,0,visible,1,6.5,Brinquedos,,,,,,
+simple,43871066,Pulseiras Maxxi Bands Pacote c/10 UNI,1,0,visible,1,4.0,Brinquedos,,,,,,
+variable,GRP-438797949,Chaveiro Mosquetao,1,0,visible,1,,Brinquedos,,,Opção,"438797949, 438783255",1,0
+variation,438797949,,1,,,1,6.8,,,GRP-438797949,Opção,438797949,,0
+variation,438783255,,1,,,1,5.7,,,GRP-438797949,Opção,438783255,,0
+simple,438795930,Bola de Futebol 80137,1,0,visible,1,35.2,Brinquedos,7898745171351,,,,,
+variable,GRP-43875380,Banheira Inflável,1,0,visible,1,,Brinquedos,,,Opção,"130l Mor, 550l Arco-iris",1,0
+variation,43875380,,1,,,1,57.5,,7896020617822,GRP-43875380,Opção,130l Mor,,0
+variation,438791790,,1,,,1,195.0,,7896020617853,GRP-43875380,Opção,550l Arco-iris,,0
+simple,438795931,Bola Futebol 43045,1,0,visible,1,46.2,Brinquedos,7899790963731,,,,,
+simple,12282,Bola Borracha,1,0,visible,1,3.8,Brinquedos,,,,,,
+variable,GRP-438797873,Amiguinhos de Silicone - Toque e Sinta:,1,0,visible,1,,Brinquedos,,,Opção,"5 Bebes Dinossauros, 5 Piratas Traquinas, 5 Princesinhas, 5 Unicornios Magicos",1,0
+variation,438797873,,1,,,1,65.9,,9786556176833,GRP-438797873,Opção,5 Bebes Dinossauros,,0
+variation,438797874,,1,,,1,65.9,,9786556176840,GRP-438797873,Opção,5 Piratas Traquinas,,0
+variation,438797875,,1,,,1,65.9,,9786556176857,GRP-438797873,Opção,5 Princesinhas,,0
+variation,438797876,,1,,,1,65.9,,9786556176864,GRP-438797873,Opção,5 Unicornios Magicos,,0
+simple,25200,Massinha Adesiva 35g Pritt,1,0,visible,1,29.5,Brinquedos,7891200000128,,,,,
+simple,438789197,Massinha de Modelar Acrilex,1,0,visible,1,7.3,Brinquedos,7891153073224,,,,,
+simple,438795335,Material Dourado do Aluno em Madeira c/111pcs,1,0,visible,1,15.9,Brinquedos,7893254157957,,,,,
+simple,9397,Chaveiro Mania,1,0,visible,1,7.9,Brinquedos,,,,,,
+simple,438794499,Stiica e Pula Massinha 20 G Unicornio,1,0,visible,1,19.7,Brinquedos,7898723630740,,,,,
+simple,438794498,Stiica e Pula Massinha 20g Dinossauro,1,0,visible,1,19.7,Brinquedos,7898723630764,,,,,
+simple,438794789,C4982 Hw Novos Carrinhos Basicos,1,0,visible,1,25.2,Brinquedos,027084120134,,,,,
+variable,GRP-22702,Esmalte Vitral 37ml,1,0,visible,1,,Brinquedos,,,Opção,"519 Branco, 548 Ouro Velho",1,0
+variation,22702,,1,,,1,13.2,,7891153083087,GRP-22702,Opção,519 Branco,,0
+variation,43868499,,1,,,1,13.2,,7891153083247,GRP-22702,Opção,548 Ouro Velho,,0
+variable,GRP-438798129,Tab Squishy,1,0,visible,1,,Brinquedos,,,Opção,"438798129, 438798137",1,0
+variation,438798129,,1,,,1,20.9,,7899900108175,GRP-438798129,Opção,438798129,,0
+variation,438798137,,1,,,1,20.9,,7899900038144,GRP-438798129,Opção,438798137,,0
+simple,11418,Bola de Frescobol,1,0,visible,1,16.8,Brinquedos,,,,,,
+simple,438794347,Lousa Mágica Apaga,1,0,visible,1,40.7,Brinquedos,7899632527060,,,,,
+simple,5813,Bola de Ping Pong,1,0,visible,1,2.5,Brinquedos,,,,,,
+simple,43872875,Apagador Magnetico P/quadro Branco Verm,1,0,visible,1,1.9,Brinquedos,7898542890790,,,,,
+simple,438797391,Medalha Nt Plast. Infantil c/ Cordao,1,0,visible,1,23.95,Brinquedos,000810700220,,,,,
+simple,43878269,Bola Vinil Bico Jaca Sem Pint,1,0,visible,1,8.7,Brinquedos,,,,,,
+simple,438798001,Lousa Verde Std Mold Madeira Pinus 60x80,1,0,visible,1,42.8,Brinquedos,7896774014526,,,,,
+simple,14519,Pacote Bola de Gude Pequena c/10un,1,0,visible,1,2.0,Brinquedos,,,,,,
+simple,438789655,Colete Inflável Infantil Premium,1,0,visible,1,33.2,Brinquedos,7896020618140,,,,,
+simple,438785611,Mt de Contact Lousa Autoadesivo 45mm,1,0,visible,1,11.0,Brinquedos,,,,,,
+simple,43878265,Bola Massagem Ant Stress Cravo,1,0,visible,1,8.8,Brinquedos,7899455907551,,,,,
+simple,438788867,Maquinas Gulliver Transatlantico,1,0,visible,1,53.2,Brinquedos,7892005012682,,,,,
+simple,438796020,Baby Spinner,1,0,visible,1,76.6,Brinquedos,7908770618100,,,,,
+simple,438795692,Gummy Mania Hot Dog,1,0,visible,1,3.9,Brinquedos,7898656687835,,,,,
+simple,438798004,Lousa Verde Std Mold Madeira Pinus 50x70,1,0,visible,1,33.9,Brinquedos,7896774014618,,,,,
+simple,36435,Massinha Uti Guti c/12 Cores,1,0,visible,1,6.8,Brinquedos,7896931800252,,,,,
+simple,438794120,Oculos Bast.neon Coracao 5h,1,0,visible,1,7.8,Brinquedos,7897775424017,,,,,
+variable,GRP-43871059,Pulseiras Maxxi Bands c/100,1,0,visible,1,,Brinquedos,,,Opção,"Amarelo Florescente Pacote UNI, Verde Florescente Pacote, Vermelha",1,0
+variation,43871059,,1,,,1,26.0,,7899441200888,GRP-43871059,Opção,Amarelo Florescente Pacote UNI,,0
+variation,43871058,,1,,,1,26.0,,7899441200741,GRP-43871059,Opção,Verde Florescente Pacote,,0
+variation,43874098,,1,,,1,26.0,,7899441200871,GRP-43871059,Opção,Vermelha,,0
+simple,438794440,Bola de Borracha,1,0,visible,1,9.5,Brinquedos,7890026994086,,,,,
+simple,438798149,Dinossauro Morde Dedo,1,0,visible,1,27.8,Brinquedos,7908417108728,,,,,
+simple,438798003,Lousa Verde Std Mold Madeira Pinus 40x60,1,0,visible,1,26.8,Brinquedos,7896774014519,,,,,
+simple,438796485,Material Dourado do Aluno 62 Pcs Smmart,1,0,visible,1,20.2,Brinquedos,7890613873879,,,,,
+simple,438789455,Massinha de Modela Soft 15 Cores,1,0,visible,1,10.3,Brinquedos,7891153095295,,,,,
