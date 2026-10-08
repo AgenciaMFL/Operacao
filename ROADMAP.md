@@ -67,7 +67,7 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Importar os produtos padrão
 - [ ] Instalar a busca **FiboSearch** (versão grátis)
 
-## Fase 3 — Plugin "Pedido pelo WhatsApp" (MVP) — Claude · ✅ v0.1.0 em `plugins/mfl-pedido-whatsapp`
+## Fase 3 — Plugin "Pedido pelo WhatsApp" (MVP) — Claude · ✅ v0.1.0 em `plugins/mfl-pedido-whatsapp` — instalado e testado na loja (checkout clássico + recibo no WhatsApp)
 
 - [ ] Método de pagamento "Combinar pelo WhatsApp"
 - [ ] Status de pedido **"Aguardando contato"**
@@ -97,6 +97,13 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Template de produto
 - [ ] Carrinho, Finalizar pedido, Obrigado
 - [ ] Versão mobile (é por onde a maioria dos clientes chega pelo WhatsApp)
+
+## Fase 5.1 — Visual (depois que tudo estiver funcionando)
+
+- [ ] Checkout, carrinho, loja e página do produto com a identidade da home (roxo/rosa/amarelo, cantos arredondados, botões rosa)
+- [ ] Trocar "Detalhes de cobrança" por "Seus dados" e enxugar "Informação adicional"
+- [ ] Página "Pedido recebido" com o visual da marca
+- [ ] Revisão no tamanho de celular (F12 → modo dispositivo)
 
 ## Fase 6 — Relatório de buscas sem resultado — Claude
 
