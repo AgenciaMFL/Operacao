@@ -1,0 +1,261 @@
+<!--
+  Sbelt Laser - Formulário de franqueados (GHL) na página + popup
+  Cole num widget HTML do Elementor (um só, em qualquer lugar da página).
+
+  - Onde este bloco estiver, aparece o formulário (use na última seção).
+  - Qualquer botão com link "#formulario-franquia" abre o popup.
+    Também funciona com a classe CSS "sb-abrir-form" no botão.
+  - Velocidade: conexões com o GHL abertas cedo, formulário carregado antes
+    de a pessoa chegar na seção, popup pré-carregado em segundo plano e
+    esqueleto animado enquanto carrega.
+-->
+<link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin>
+<link rel="preconnect" href="https://link.msgsndr.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.leadconnectorhq.com">
+
+<style>
+  .sb-form-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 852px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .sb-form-wrap iframe {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 852px;
+    border: 0;
+    opacity: 0;
+    transition: opacity .45s ease;
+  }
+  .sb-form-wrap.sb-ready iframe { opacity: 1; }
+
+  /* Esqueleto (aparece enquanto o formulário carrega) */
+  .sb-skel {
+    position: absolute; inset: 0; z-index: 2;
+    padding: 28px 24px;
+    background: #fff;
+    transition: opacity .35s ease, visibility .35s;
+  }
+  .sb-form-wrap.sb-ready .sb-skel { opacity: 0; visibility: hidden; }
+  .sb-skel i {
+    display: block;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #F4EFEA 25%, #FBF7F3 50%, #F4EFEA 75%);
+    background-size: 200% 100%;
+    animation: sb-shimmer 1.2s linear infinite;
+  }
+  .sb-skel .l { width: 32%; height: 14px; margin: 0 0 10px; }
+  .sb-skel .f { height: 54px; margin: 0 0 24px; border-radius: 12px; }
+  .sb-skel .b { height: 58px; margin-top: 8px; border-radius: 12px;
+    background: linear-gradient(90deg, #F9C79A 25%, #FCDDBF 50%, #F9C79A 75%); background-size: 200% 100%; }
+  @keyframes sb-shimmer { to { background-position: -200% 0; } }
+
+  /* Popup */
+  .sb-modal {
+    position: fixed; inset: 0; z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+    visibility: hidden; pointer-events: none;
+  }
+  .sb-modal.sb-open { visibility: visible; pointer-events: auto; }
+  .sb-modal__overlay {
+    position: absolute; inset: 0;
+    background: rgba(11, 42, 51, .62);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    opacity: 0; transition: opacity .35s ease;
+  }
+  .sb-modal.sb-open .sb-modal__overlay { opacity: 1; }
+  .sb-modal__box {
+    position: relative;
+    width: 100%; max-width: 560px;
+    max-height: calc(100vh - 48px);
+    display: flex; flex-direction: column;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px -20px rgba(11, 42, 51, .55), 0 0 0 1px rgba(245, 132, 31, .15);
+    opacity: 0;
+    transform: translateY(40px) scale(.94);
+    transition: transform .55s cubic-bezier(.2, .9, .25, 1.15), opacity .35s ease;
+  }
+  .sb-modal.sb-open .sb-modal__box { opacity: 1; transform: none; }
+  /* faixa laranja animada no topo */
+  .sb-modal__box::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(90deg, #F7941D, #F26A1B, #F7941D);
+    background-size: 200% 100%;
+    animation: sb-flow 3s linear infinite;
+  }
+  @keyframes sb-flow { to { background-position: -200% 0; } }
+  .sb-modal__head { padding: 26px 56px 6px 24px; }
+  .sb-modal__head h3 {
+    margin: 0; color: #0B2A33; font-size: 22px; font-weight: 800; line-height: 1.2;
+  }
+  .sb-modal__head h3 span { color: #F5841F; }
+  .sb-modal__head p { margin: 6px 0 0; color: #5B6B70; font-size: 14px; }
+  .sb-modal__body { overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 0 0 20px 20px; }
+  .sb-modal__body .sb-form-wrap { border-radius: 0; }
+  .sb-modal__close {
+    position: absolute; top: 16px; right: 16px; z-index: 3;
+    width: 38px; height: 38px; border: 0; border-radius: 50%;
+    background: #FFF3E8; color: #F26A1B;
+    font-size: 22px; line-height: 38px; text-align: center; cursor: pointer;
+    transition: transform .25s ease, background .2s;
+  }
+  .sb-modal__close:hover { transform: rotate(90deg); background: #FFE4CC; }
+  html.sb-lock, html.sb-lock body { overflow: hidden !important; }
+
+  /* Celular: sobe de baixo como uma gaveta */
+  @media (max-width: 600px) {
+    .sb-modal { align-items: flex-end; padding: 0; }
+    .sb-modal__box {
+      max-width: none; max-height: 92vh;
+      border-radius: 22px 22px 0 0;
+      transform: translateY(100%);
+      transition: transform .5s cubic-bezier(.2, .9, .25, 1);
+    }
+    .sb-modal__box::before { border-radius: 22px 22px 0 0; }
+    .sb-modal__body { border-radius: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-modal__box, .sb-modal__overlay, .sb-form-wrap iframe { transition: none; }
+    .sb-skel i, .sb-modal__box::before { animation: none; }
+  }
+</style>
+
+<!-- Formulário na página -->
+<div id="sb-form-inline" class="sb-form-wrap"></div>
+
+<!-- Popup -->
+<div id="sb-modal" class="sb-modal" role="dialog" aria-modal="true" aria-labelledby="sb-modal-title" aria-hidden="true">
+  <div class="sb-modal__overlay" data-sb-close></div>
+  <div class="sb-modal__box">
+    <button type="button" class="sb-modal__close" data-sb-close aria-label="Fechar">&times;</button>
+    <div class="sb-modal__head">
+      <h3 id="sb-modal-title">Seja um <span>franqueado</span> Sbelt Laser</h3>
+      <p>Preencha seus dados e nossa equipe de expansão entra em contato.</p>
+    </div>
+    <div class="sb-modal__body">
+      <div id="sb-form-popup" class="sb-form-wrap"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var FORM_ID = 'CqGKznxCqF4qGLk10GTN';
+  var FORM_NAME = 'Franqueados';
+  var HEIGHT = 852;
+  var GATILHO = 'a[href$="#formulario-franquia"], .sb-abrir-form, .sb-abrir-form a';
+
+  var SKELETON = '<div class="sb-skel" aria-hidden="true">' +
+    '<i class="l"></i><i class="f"></i><i class="l"></i><i class="f"></i>' +
+    '<i class="l"></i><i class="f"></i><i class="l"></i><i class="f"></i>' +
+    '<i class="l"></i><i class="f"></i><i class="b"></i></div>';
+
+  var embedLoaded = false;
+  function loadEmbedScript() {
+    if (embedLoaded) return;
+    embedLoaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  // Cria o iframe do GHL (mesmos atributos do código de incorporação original)
+  function mount(wrap, iframeId) {
+    if (!wrap || wrap.dataset.sbMounted) return;
+    wrap.dataset.sbMounted = '1';
+    wrap.insertAdjacentHTML('afterbegin', SKELETON);
+    var f = document.createElement('iframe');
+    var attrs = {
+      'id': iframeId,
+      'title': FORM_NAME,
+      'data-layout': "{'id':'INLINE'}",
+      'data-trigger-type': 'alwaysShow',
+      'data-trigger-value': '',
+      'data-activation-type': 'alwaysActivated',
+      'data-activation-value': '',
+      'data-deactivation-type': 'neverDeactivate',
+      'data-deactivation-value': '',
+      'data-form-name': FORM_NAME,
+      'data-height': String(HEIGHT),
+      'data-layout-iframe-id': iframeId,
+      'data-form-id': FORM_ID,
+      'data-cookie-consent': 'true',
+      'data-cookie-consent-provider': 'auto'
+    };
+    Object.keys(attrs).forEach(function (k) { f.setAttribute(k, attrs[k]); });
+    f.addEventListener('load', function () { wrap.classList.add('sb-ready'); });
+    f.src = 'https://api.leadconnectorhq.com/widget/form/' + FORM_ID;
+    wrap.appendChild(f);
+    loadEmbedScript();
+  }
+
+  var inline = document.getElementById('sb-form-inline');
+  var popupWrap = document.getElementById('sb-form-popup');
+  var modal = document.getElementById('sb-modal');
+
+  // Move o popup para o <body> para não ficar preso dentro de seções do Elementor
+  document.body.appendChild(modal);
+
+  // Formulário da página: carrega quando a pessoa estiver chegando perto da seção
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) {
+        mount(inline, 'inline-' + FORM_ID);
+        io.disconnect();
+      }
+    }, { rootMargin: '1500px 0px' });
+    io.observe(inline);
+  } else {
+    mount(inline, 'inline-' + FORM_ID);
+  }
+
+  // Popup: pré-carrega em segundo plano depois que a página termina de carregar
+  function preloadPopup() { mount(popupWrap, 'popup-' + FORM_ID); }
+  window.addEventListener('load', function () {
+    (window.requestIdleCallback || function (cb) { setTimeout(cb, 1500); })(preloadPopup, { timeout: 3000 });
+  });
+  // ...ou antes, assim que a pessoa encosta/passa o mouse num botão
+  ['pointerover', 'touchstart', 'focusin'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      if (e.target.closest && e.target.closest(GATILHO)) preloadPopup();
+    }, { passive: true });
+  });
+
+  var lastFocus = null;
+  function openModal() {
+    preloadPopup();
+    lastFocus = document.activeElement;
+    modal.classList.add('sb-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('sb-lock');
+    setTimeout(function () { modal.querySelector('.sb-modal__close').focus(); }, 50);
+  }
+  function closeModal() {
+    modal.classList.remove('sb-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('sb-lock');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest(GATILHO);
+    if (t) { e.preventDefault(); openModal(); return; }
+    if (e.target.closest && e.target.closest('[data-sb-close]')) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('sb-open')) closeModal();
+  });
+
+  // Permite abrir direto pelo link: site.com.br/franqueados/#formulario-franquia
+  if (location.hash === '#formulario-franquia') openModal();
+})();
+</script>
