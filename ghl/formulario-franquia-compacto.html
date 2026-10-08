@@ -54,6 +54,21 @@
   font-size: 14.5px !important;
 }
 
+/* Texto da lista centralizado na altura (o GHL coloca margens próprias nele) */
+#_builder-form#_builder-form .multiselect__tags * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  vertical-align: middle !important;
+}
+#_builder-form#_builder-form :is(.multiselect__placeholder, .multiselect__single) {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  line-height: 1.2 !important;
+}
+
 /* Placeholder */
 #_builder-form#_builder-form :is(input, textarea):is([type], :not([type]))::placeholder,
 #_builder-form#_builder-form .multiselect__placeholder { color: #9AA6AA !important; font-weight: 400 !important; }
