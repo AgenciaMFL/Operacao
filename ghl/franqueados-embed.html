@@ -132,7 +132,7 @@
 <div id="sb-form-inline" class="sb-form-wrap"></div>
 
 <!-- Popup -->
-<div id="sb-modal" class="sb-modal" role="dialog" aria-modal="true" aria-labelledby="sb-modal-title" aria-hidden="true">
+<div id="sb-modal" class="sb-modal" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="sb-modal-title" aria-hidden="true">
   <div class="sb-modal__overlay" data-sb-close></div>
   <div class="sb-modal__box">
     <button type="button" class="sb-modal__close" data-sb-close aria-label="Fechar">&times;</button>
@@ -140,7 +140,7 @@
       <h3 id="sb-modal-title">Seja um <span>franqueado</span> Sbelt Laser</h3>
       <p>Preencha seus dados e nossa equipe de expansão entra em contato.</p>
     </div>
-    <div class="sb-modal__body">
+    <div class="sb-modal__body" data-lenis-prevent>
       <div id="sb-form-popup" class="sb-form-wrap"></div>
     </div>
   </div>
@@ -237,12 +237,14 @@
     modal.classList.add('sb-open');
     modal.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('sb-lock');
+    if (window.lenis && window.lenis.stop) window.lenis.stop(); // rolagem suave do site (Lenis)
     setTimeout(function () { modal.querySelector('.sb-modal__close').focus(); }, 50);
   }
   function closeModal() {
     modal.classList.remove('sb-open');
     modal.setAttribute('aria-hidden', 'true');
     document.documentElement.classList.remove('sb-lock');
+    if (window.lenis && window.lenis.start) window.lenis.start();
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
