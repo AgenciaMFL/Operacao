@@ -31,6 +31,7 @@
     opacity: 0;
     transition: opacity .45s ease;
   }
+  .sb-form-wrap.sb-ready { min-height: 0; }
   .sb-form-wrap.sb-ready iframe { opacity: 1; }
 
   /* Esqueleto (aparece enquanto o formulário carrega) */
@@ -91,13 +92,7 @@
     animation: sb-flow 3s linear infinite;
   }
   @keyframes sb-flow { to { background-position: -200% 0; } }
-  .sb-modal__head { padding: 26px 56px 6px 24px; }
-  .sb-modal__head h3 {
-    margin: 0; color: #0B2A33; font-size: 22px; font-weight: 800; line-height: 1.2;
-  }
-  .sb-modal__head h3 span { color: #F5841F; }
-  .sb-modal__head p { margin: 6px 0 0; color: #5B6B70; font-size: 14px; }
-  .sb-modal__body { overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 0 0 20px 20px; }
+  .sb-modal__body { padding-top: 6px; overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 20px; }
   .sb-modal__body .sb-form-wrap { border-radius: 0; }
   .sb-modal__close {
     position: absolute; top: 16px; right: 16px; z-index: 3;
@@ -132,14 +127,10 @@
 <div id="sb-form-inline" class="sb-form-wrap"></div>
 
 <!-- Popup -->
-<div id="sb-modal" class="sb-modal" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="sb-modal-title" aria-hidden="true">
+<div id="sb-modal" class="sb-modal" data-lenis-prevent role="dialog" aria-modal="true" aria-label="Formulário para ser franqueado Sbelt Laser" aria-hidden="true">
   <div class="sb-modal__overlay" data-sb-close></div>
   <div class="sb-modal__box">
     <button type="button" class="sb-modal__close" data-sb-close aria-label="Fechar">&times;</button>
-    <div class="sb-modal__head">
-      <h3 id="sb-modal-title">Seja um <span>franqueado</span> Sbelt Laser</h3>
-      <p>Preencha seus dados e nossa equipe de expansão entra em contato.</p>
-    </div>
     <div class="sb-modal__body" data-lenis-prevent>
       <div id="sb-form-popup" class="sb-form-wrap"></div>
     </div>
