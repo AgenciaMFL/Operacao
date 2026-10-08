@@ -112,6 +112,11 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 
 ## Fase 7 — Testes e lançamento
 
+- [ ] **Reativar o LiteSpeed Cache** (desativado em 08/10 por vazamento do link privado): excluir cookie e query string `woo-share`, Purge All, testar em janela anônima
+- [ ] Voltar o WhatsApp do número de teste para 5521971281678
+- [ ] Desligar o modo "Em breve" e o link privado
+- [ ] Trocar chave do Woo, senhas de aplicativo e chave do Magnific; revisar "Temp User" e plugin de login temporário
+- [ ] Substituir as imagens ilustrativas (tag `foto-ilustrativa`) pelas fotos reais
 - [ ] Fluxo completo no celular (Android e iPhone) e no desktop
 - [ ] Teste com carrinho grande (limite da mensagem)
 - [ ] Teste de desempenho (PageSpeed)
