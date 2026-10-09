@@ -103,7 +103,7 @@ Ao tocar no ícone ☰, abre um menu pela lateral esquerda (referência: menu de
 
 - [ ] Topo roxo: "Olá! Bem-vindo à Brinquelândia" + botão "Falar no WhatsApp"
 - [ ] Bloco "Retire na loja": Av. Ataulfo de Paiva, 1060 Lj D – Leblon/RJ (link para o mapa)
-- [ ] Links: Início · Todos os produtos · Destaques · Sobre nós · Contato
+- [ ] Links: Início · Todos os produtos · Destaques (sem "Sobre nós" e "Contato")
 - [ ] Categorias com seta (›) que expande as subcategorias: Papelaria (Arte e Pintura, Cadernos, Canetas e Marcadores, Lápis e Acessórios, Material Escolar) · Escritório · Brinquedos · Itens de Festa (Balões, Velas, Natal, Embalagens e Presentes, Descartáveis e Decoração)
 - [ ] Rodapé do menu: Instagram @bazarbrinquelandia e WhatsApp (21) 97128-1678
 - [ ] Ícones na cor da marca, fundo branco, fechar com ✕ ou tocando fora
