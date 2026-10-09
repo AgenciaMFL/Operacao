@@ -10,6 +10,9 @@ Plugin do WooCommerce para a Bazar Brinquelândia: o cliente monta o carrinho, f
 - **Recibo no WhatsApp**: nº do pedido, cliente, entrega, itens com SKU, quantidades, valores e total estimado. Itens sem preço aparecem como "sob consulta". Se o texto passar do limite, vai um resumo com o link do pedido completo.
 - **Página "Pedido recebido"**: abre o WhatsApp automaticamente (só na primeira visita) e mostra um botão reserva.
 - Botões de compra passam a mostrar **"Adicionar ao pedido"**.
+- Títulos do checkout: "Detalhes de cobrança" vira **"Seus dados"**, "Informação adicional" vira **"Observações"** e "Seu pedido" vira **"Resumo do pedido"**.
+- **"Não encontrou? Fale com a gente"**: aparece quando a busca ou a categoria não tem produtos e abre o WhatsApp com o termo buscado. Também existe como shortcode `[mfl_nao_encontrou]` para usar em qualquer página do Elementor.
+- **WooCommerce → Buscas sem resultado**: lista o que os clientes procuraram e não acharam, com quantidade, data e um atalho "Cadastrar produto".
 - Compatível com HPOS e com o checkout em blocos (onde só o método de pagamento é adicionado; ver abaixo).
 
 ## Instalação

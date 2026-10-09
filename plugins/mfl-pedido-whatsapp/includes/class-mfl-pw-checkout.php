@@ -20,6 +20,8 @@ class MFL_PW_Checkout {
 		add_action( 'woocommerce_admin_order_data_after_billing_address', array( __CLASS__, 'admin_display' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'toggle_script' ) );
 
+		add_filter( 'gettext_woocommerce', array( __CLASS__, 'headings' ), 10, 2 );
+
 		add_filter( 'woocommerce_product_add_to_cart_text', array( __CLASS__, 'add_to_cart_text' ), 10, 2 );
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( __CLASS__, 'add_to_cart_text' ), 10, 2 );
 	}
@@ -86,11 +88,31 @@ class MFL_PW_Checkout {
 		$fields['billing'] = $billing;
 
 		if ( isset( $fields['order']['order_comments'] ) ) {
-			$fields['order']['order_comments']['label']       = 'Observações';
-			$fields['order']['order_comments']['placeholder'] = 'Alguma informação sobre o pedido?';
+			$fields['order']['order_comments']['label']       = false; // O título da seção já diz "Observações".
+			$fields['order']['order_comments']['placeholder'] = 'Alguma informação sobre o pedido? (opcional)';
 		}
 
 		return $fields;
+	}
+
+	/**
+	 * Títulos do checkout: não há cobrança no site, então "Detalhes de cobrança" vira "Seus dados".
+	 */
+	public static function headings( $translation, $text ) {
+		// Só no checkout: "Additional information" também é o nome de uma aba na página do produto.
+		if ( ! did_action( 'wp' ) || ! is_checkout() || is_admin() ) {
+			return $translation;
+		}
+		switch ( $text ) {
+			case 'Billing details':
+			case 'Billing &amp; Shipping':
+				return 'Seus dados';
+			case 'Additional information':
+				return 'Observações';
+			case 'Your order':
+				return 'Resumo do pedido';
+		}
+		return $translation;
 	}
 
 	public static function validate( $data, $errors ) {

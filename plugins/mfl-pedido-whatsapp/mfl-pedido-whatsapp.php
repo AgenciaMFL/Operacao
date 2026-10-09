@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       MFL Pedido pelo WhatsApp
  * Description:       Transforma o checkout do WooCommerce em envio de pedido pelo WhatsApp: salva o pedido, gera o recibo e abre a conversa com a loja.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Author:            Agência MFL
  * Requires at least: 6.5
  * Requires PHP:      7.4
@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MFL_PW_VERSION', '0.1.0' );
+define( 'MFL_PW_VERSION', '0.2.0' );
 define( 'MFL_PW_FILE', __FILE__ );
 define( 'MFL_PW_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MFL_PW_URL', plugin_dir_url( __FILE__ ) );
@@ -44,10 +44,12 @@ add_action(
 		require_once MFL_PW_DIR . 'includes/class-mfl-pw-status.php';
 		require_once MFL_PW_DIR . 'includes/class-mfl-pw-checkout.php';
 		require_once MFL_PW_DIR . 'includes/class-mfl-pw-obrigado.php';
+		require_once MFL_PW_DIR . 'includes/class-mfl-pw-busca.php';
 
 		MFL_PW_Status::init();
 		MFL_PW_Checkout::init();
 		MFL_PW_Obrigado::init();
+		MFL_PW_Busca::init();
 
 		add_filter(
 			'woocommerce_payment_gateways',
