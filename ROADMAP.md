@@ -98,6 +98,18 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Carrinho, Finalizar pedido, Obrigado
 - [ ] Versão mobile (é por onde a maioria dos clientes chega pelo WhatsApp)
 
+### Menu lateral (off-canvas)
+Ao tocar no ícone ☰, abre um menu pela lateral esquerda (referência: menu de app de loja de brinquedos).
+
+- [ ] Topo roxo: "Olá! Bem-vindo à Brinquelândia" + botão "Falar no WhatsApp"
+- [ ] Bloco "Retire na loja": Av. Ataulfo de Paiva, 1060 Lj D – Leblon/RJ (link para o mapa)
+- [ ] Links: Início · Todos os produtos · Destaques · Sobre nós · Contato
+- [ ] Categorias com seta (›) que expande as subcategorias: Papelaria (Arte e Pintura, Cadernos, Canetas e Marcadores, Lápis e Acessórios, Material Escolar) · Escritório · Brinquedos · Itens de Festa (Balões, Velas, Natal, Embalagens e Presentes, Descartáveis e Decoração)
+- [ ] Rodapé do menu: Instagram @bazarbrinquelandia e WhatsApp (21) 97128-1678
+- [ ] Ícones na cor da marca, fundo branco, fechar com ✕ ou tocando fora
+- [ ] Celular: ☰ substitui o menu do topo. Computador: menu do topo continua, e o ☰ aparece como "Categorias"
+- [ ] Fora do modelo atual (não entra): "Acesse sua conta", "Pedidos", "Entregar em CEP"
+
 ## Fase 5.1 — Visual (depois que tudo estiver funcionando)
 
 - [ ] Checkout, carrinho, loja e página do produto com a identidade da home (roxo/rosa/amarelo, cantos arredondados, botões rosa)
