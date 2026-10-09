@@ -105,7 +105,7 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Página "Pedido recebido" com o visual da marca
 - [ ] Revisão no tamanho de celular (F12 → modo dispositivo)
 
-## Fase 6 — Relatório de buscas sem resultado — Claude
+## Fase 6 — Relatório de buscas sem resultado — Claude · ✅ incluído no plugin v0.2.0 (WooCommerce → Buscas sem resultado)
 
 - [ ] Tela no painel com os termos mais buscados que não tiveram resultado
 - [ ] Atalho "Cadastrar produto" a partir do termo
