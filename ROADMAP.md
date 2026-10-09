@@ -77,7 +77,7 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Recibo resumido + link do pedido quando o carrinho for grande demais para a URL
 - [ ] Tela de configurações: número, cabeçalho e rodapé da mensagem
 
-## Fase 4 — Cadastro e "não encontrou" — Claude · ✅ plugin v0.2.0 (falta instalar e testar)
+## Fase 4 — Cadastro e "não encontrou" — Claude · ✅ plugin v0.2.0 instalado e testado na loja
 
 - [ ] Botão **"Não encontrou? Fale com a gente"** na busca sem resultado e no catálogo, que abre o WhatsApp com o termo buscado
 - [ ] Registro dos termos buscados sem resultado, para o dono saber o que cadastrar em seguida
