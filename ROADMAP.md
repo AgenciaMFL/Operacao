@@ -40,6 +40,8 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [x] Categorias principais definidas
 - [x] WordPress, Elementor Pro e hospedagem prontos
 - [x] **MCP do WooCommerce conectado** ao Claude Code local
+- [x] **Lote 1 importado:** 260 produtos (1.597 variações), todos com foto ilustrativa em WebP (tag `foto-ilustrativa`)
+- [x] Elementor MCP conectado
 - [ ] Ligar a home ao WooCommerce (ver Fase 5)
 
 ## Fase 0 — Insumos (responsável: cliente/agência)
