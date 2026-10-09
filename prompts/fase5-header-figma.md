@@ -22,7 +22,7 @@ atualize o RELATORIO.md.
    @https://www.figma.com/design/C23ByCz4hyo8cvyeKY4CPx/Agencia-MFL?node-id=3119-82&m=dev
 
    - Crie o header como template de HEADER no Theme Builder do Elementor
-     Pro, condição "Site inteiro", como RASCUNHO até eu aprovar.
+     Pro, condição "Site inteiro".
    - Leia o frame pelo Figma MCP (get_design_context + get_screenshot)
      e reproduza fielmente: cores, fontes, tamanhos, espaçamentos, raios,
      sombra e alinhamentos. O frame tem 2560px de largura; a área de
@@ -73,23 +73,25 @@ atualize o RELATORIO.md.
      o modelo de "Elementor Canvas" para "Elementor Largura total"
      (ou o padrão do tema), para que use o header global do item 1.
    - Se a home tiver rodapé próprio dentro da página, transforme-o em
-     template de FOOTER no Theme Builder ("Site inteiro", rascunho) e
+     template de FOOTER no Theme Builder ("Site inteiro") e
      remova da página.
    - Confira o que já está na 2060: carrossel de Destaques com os 10
      produtos reais e fotos novas; selos com cor por categoria; links
      "Ver todos os produtos"/banner → /loja/ e "Ver produtos" de cada
      categoria → /categoria-produto/[slug]/.
 
-4. PRÉ-VISUALIZAÇÃO (NÃO PUBLIQUE)
-   - Gere pré-visualização e me mostre prints, em computador e celular:
-     home (2060), menu lateral aberto, /loja/, uma página de produto,
-     resultado de busca e carrinho com 1 item.
-   - Compare lado a lado com o print do Figma e liste as diferenças que
-     sobraram.
-   - Plano de publicação (só quando eu aprovar): copiar o conteúdo da 2060
-     para a Inicio (ID 10, que continua sendo a página inicial) com o
-     novo modelo de página, publicar header/footer, manter a 2059 como
-     backup. Não execute agora.
+4. PUBLICAR (sem pré-visualização e sem prints)
+   - O site está no modo "Em breve", então publicar não expõe nada ao
+     público. Pode publicar direto.
+   - Publique o header (e o footer, se criado) com condição "Site inteiro".
+   - Copie o conteúdo da 2060 para a Inicio (ID 10, que continua sendo a
+     página inicial) com o novo modelo de página e publique.
+   - Mantenha a 2059 e os rascunhos duplicados como backup, para desfazer.
+   - Me devolva só os LINKS publicados: home, /loja/, uma categoria, um
+     produto e o /carrinho/, e o link de edição no Elementor de cada
+     template criado (header, footer e home).
+   - No relatório, liste em uma linha cada diferença que ficou em relação
+     ao Figma, se houver, e como desfazer a publicação.
 
 NÃO FAÇA: não reative o LiteSpeed, não use o link privado, não altere o
 número do WhatsApp do plugin (segue o de teste), não mexa no checkout/
