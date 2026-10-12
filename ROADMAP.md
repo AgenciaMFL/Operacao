@@ -86,7 +86,7 @@ Um site em **WordPress + WooCommerce + Elementor** que funciona como loja, mas *
 - [ ] Guia de cadastro rápido para os donos (pelo painel do Woo e por planilha)
 - [ ] Orientação para o dono incluir no pedido, pelo painel, um item que não estava no site
 
-## Fase 5 — Layout no Elementor
+## Fase 5 — Layout no Elementor · ✅ header global (Figma), menu lateral, home publicada (09/10)
 
 - [ ] Header: ligar o ícone de carrinho ao **mini-carrinho do Woo** (contador real) e **adicionar uma busca**
 - [ ] Menu "Produtos": listar as categorias do Woo
