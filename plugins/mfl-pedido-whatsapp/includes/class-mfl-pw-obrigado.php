@@ -13,9 +13,87 @@ class MFL_PW_Obrigado {
 		add_action( 'woocommerce_before_thankyou', array( __CLASS__, 'render' ), 5 );
 		add_filter( 'woocommerce_thankyou_order_received_text', array( __CLASS__, 'received_text' ), 10, 2 );
 		add_shortcode( 'mfl_whatsapp_pedido', array( __CLASS__, 'shortcode' ) );
+		add_filter( 'woocommerce_locate_template', array( __CLASS__, 'locate_template' ), 10, 2 );
+		add_filter( 'woocommerce_get_order_item_totals', array( __CLASS__, 'order_totals' ), 10, 2 );
 	}
 
-	private static function is_ours( $order ) {
+	/**
+	 * Usa os modelos do plugin para "Pedido recebido" e dados do cliente
+	 * (sem e-mail, data, método de pagamento e "endereço de cobrança").
+	 */
+	public static function locate_template( $template, $template_name ) {
+		$ours = array( 'checkout/thankyou.php', 'order/order-details-customer.php' );
+		if ( in_array( $template_name, $ours, true ) ) {
+			$file = MFL_PW_DIR . 'templates/' . $template_name;
+			if ( file_exists( $file ) ) {
+				return $file;
+			}
+		}
+		return $template;
+	}
+
+	/**
+	 * Tabela do pedido: sem a linha "Método de pagamento" e com "Total estimado".
+	 */
+	public static function order_totals( $rows, $order ) {
+		if ( ! self::is_ours( $order ) ) {
+			return $rows;
+		}
+		unset( $rows['payment_method'] );
+		if ( isset( $rows['order_total'] ) ) {
+			$rows['order_total']['label'] = 'Total estimado:';
+		}
+		return $rows;
+	}
+
+	/**
+	 * Bloco "Seus dados" (nome, WhatsApp e recebimento), sem e-mail.
+	 */
+	public static function dados_cliente( WC_Order $order ) {
+		$entrega = $order->get_meta( MFL_PW_Checkout::META_ENTREGA );
+		$nome    = trim( $order->get_billing_first_name() . ' ' . $order->get_billing_last_name() );
+
+		ob_start();
+		?>
+		<section class="mfl-pw-dados">
+			<h2 class="mfl-pw-dados__titulo">Seus dados</h2>
+			<div class="mfl-pw-dados__card">
+				<?php if ( $nome ) : ?>
+					<p><strong>Nome:</strong> <?php echo esc_html( $nome ); ?></p>
+				<?php endif; ?>
+				<?php if ( $order->get_billing_phone() ) : ?>
+					<p><strong>WhatsApp:</strong> <?php echo esc_html( $order->get_billing_phone() ); ?></p>
+				<?php endif; ?>
+				<?php if ( 'entrega' === $entrega ) : ?>
+					<p><strong>Recebimento:</strong> Entrega (frete combinado pelo WhatsApp)</p>
+					<p>
+						<?php
+						$linhas = array_filter( array( $order->get_billing_address_1(), $order->get_billing_address_2(), $order->get_billing_city() ) );
+						echo esc_html( implode( ' – ', $linhas ) );
+						?>
+					</p>
+				<?php else : ?>
+					<p><strong>Recebimento:</strong> Retirada na loja</p>
+					<p><?php echo esc_html( self::endereco_loja() ); ?></p>
+				<?php endif; ?>
+			</div>
+		</section>
+		<?php
+		return ob_get_clean();
+	}
+
+	private static function endereco_loja() {
+		$partes = array_filter(
+			array(
+				get_option( 'woocommerce_store_address' ),
+				get_option( 'woocommerce_store_address_2' ),
+				get_option( 'woocommerce_store_city' ),
+			)
+		);
+		return implode( ' – ', $partes );
+	}
+
+	public static function is_ours( $order ) {
 		return $order instanceof WC_Order && MFL_PW_Gateway::ID === $order->get_payment_method();
 	}
 
