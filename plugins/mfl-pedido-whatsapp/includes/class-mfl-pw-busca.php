@@ -73,8 +73,13 @@ class MFL_PW_Busca {
 			return;
 		}
 
+		// Só buscas de produto feitas por pessoas (robôs de busca não contam).
+		if ( 'product' !== get_query_var( 'post_type' ) || self::is_bot() ) {
+			return;
+		}
+
 		$term = mb_strtolower( self::current_term() );
-		if ( '' === $term || mb_strlen( $term ) > 80 ) {
+		if ( mb_strlen( $term ) < 2 || mb_strlen( $term ) > 80 ) {
 			return;
 		}
 
@@ -94,6 +99,11 @@ class MFL_PW_Busca {
 		}
 
 		update_option( self::OPTION, $data, false );
+	}
+
+	private static function is_bot() {
+		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) ) : '';
+		return '' === $agent || (bool) preg_match( '/bot|crawl|spider|slurp|facebookexternalhit|preview|curl|wget|python|headless/', $agent );
 	}
 
 	public static function admin_menu() {
