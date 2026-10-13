@@ -2,7 +2,8 @@
 /**
  * Página "Pedido recebido" (substitui checkout/thankyou.php do WooCommerce).
  *
- * Mostra: quadro do WhatsApp, detalhes do pedido e "Seus dados".
+ * Mostra: quadro do WhatsApp, detalhes do pedido, "Seus dados" e "Continuar comprando".
+ * Visual em assets/css/obrigado.css.
  * Não mostra: e-mail, data, método de pagamento nem "endereço de cobrança".
  *
  * @var WC_Order|false $order
@@ -33,6 +34,10 @@ if ( $order && ! MFL_PW_Obrigado::is_ours( $order ) ) {
 			<?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
 			<?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
 			<?php echo MFL_PW_Obrigado::dados_cliente( $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escapado em dados_cliente(). ?>
+
+			<p class="mfl-pw-continuar">
+				<a class="mfl-pw-continuar__botao" href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">Continuar comprando</a>
+			</p>
 
 		<?php endif; ?>
 

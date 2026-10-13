@@ -1,0 +1,388 @@
+/*
+ * Página "Pedido recebido" (MFL Pedido pelo WhatsApp).
+ * Cores: troque as variáveis abaixo pelas da marca, se precisar
+ * (ex.: no CSS personalizado do Elementor: .mfl-pw-pedido { --mfl-roxo: #...; }).
+ */
+.mfl-pw-pedido {
+	--mfl-roxo: #6b2fa8;
+	--mfl-rosa: #e6337a;
+	--mfl-verde: #25d366;
+	--mfl-verde-escuro: #1ebe5b;
+	--mfl-texto: #1f1a2e;
+	--mfl-cinza: #6f6a7d;
+	--mfl-borda: #ece8f3;
+	--mfl-fundo: #faf8fd;
+	--mfl-raio: 20px;
+
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 32px 16px 56px;
+	color: var(--mfl-texto);
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.mfl-pw-pedido *,
+.mfl-pw-pedido *::before,
+.mfl-pw-pedido *::after {
+	box-sizing: border-box;
+}
+
+/* Cartões */
+.mfl-pw-obrigado,
+.mfl-pw-pedido .woocommerce-order-details,
+.mfl-pw-dados {
+	background: #fff;
+	border: 1px solid var(--mfl-borda);
+	border-radius: var(--mfl-raio);
+	box-shadow: 0 6px 24px rgba(40, 20, 80, .06);
+	margin: 0 0 20px;
+}
+
+/* Quadro de sucesso */
+.mfl-pw-obrigado {
+	text-align: center;
+	padding: 40px 28px 32px;
+	background: linear-gradient(180deg, #f1fbf4 0%, #fff 70%);
+}
+
+.mfl-pw-obrigado__icone {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	margin: 0 0 16px;
+	border-radius: 50%;
+	background: var(--mfl-verde);
+	box-shadow: 0 0 0 8px rgba(37, 211, 102, .15);
+	color: #fff;
+	animation: mfl-pw-pop .45s cubic-bezier(.2, .9, .3, 1.3) both;
+}
+
+.mfl-pw-obrigado__icone svg {
+	width: 32px;
+	height: 32px;
+}
+
+@keyframes mfl-pw-pop {
+	from { transform: scale(.4); opacity: 0; }
+	to   { transform: scale(1); opacity: 1; }
+}
+
+.mfl-pw-obrigado__numero {
+	margin: 0 0 4px;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--mfl-cinza);
+}
+
+.mfl-pw-obrigado__titulo {
+	margin: 0 0 8px;
+	font-size: 28px;
+	line-height: 1.2;
+	font-weight: 800;
+	color: var(--mfl-texto);
+}
+
+.mfl-pw-obrigado__texto {
+	max-width: 440px;
+	margin: 0 auto 24px;
+	color: var(--mfl-cinza);
+}
+
+.mfl-pw-pedido a.mfl-pw-botao,
+.mfl-pw-pedido a.mfl-pw-botao:visited {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	min-height: 52px;
+	padding: 0 32px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--mfl-verde);
+	color: #fff;
+	font-size: 16px;
+	font-weight: 700;
+	text-decoration: none;
+	box-shadow: 0 8px 20px rgba(37, 211, 102, .35);
+	transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.mfl-pw-pedido a.mfl-pw-botao:hover,
+.mfl-pw-pedido a.mfl-pw-botao:focus-visible {
+	background: var(--mfl-verde-escuro);
+	color: #fff;
+	transform: translateY(-1px);
+	box-shadow: 0 10px 24px rgba(37, 211, 102, .45);
+}
+
+.mfl-pw-botao svg {
+	width: 22px;
+	height: 22px;
+	flex: none;
+}
+
+.mfl-pw-obrigado__dica {
+	margin: 14px 0 0;
+	font-size: 13px;
+	color: var(--mfl-cinza);
+}
+
+/* Títulos dos cartões */
+.mfl-pw-pedido .woocommerce-order-details__title,
+.mfl-pw-dados__titulo {
+	margin: 0;
+	padding: 20px 24px;
+	border-bottom: 1px solid var(--mfl-borda);
+	font-size: 17px;
+	font-weight: 700;
+	color: var(--mfl-texto);
+}
+
+/* Detalhes do pedido */
+.mfl-pw-pedido .woocommerce-order-details {
+	overflow: hidden;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details {
+	width: 100%;
+	margin: 0;
+	border: 0;
+	border-collapse: collapse;
+	border-radius: 0;
+	background: transparent;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details thead {
+	display: none;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details th,
+.mfl-pw-pedido .woocommerce-table--order-details td {
+	padding: 14px 24px;
+	border: 0;
+	border-top: 1px solid var(--mfl-borda);
+	background: transparent;
+	text-align: left;
+	vertical-align: top;
+	font-weight: 400;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details tbody tr:first-child td {
+	border-top: 0;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details td:last-child {
+	text-align: right;
+	white-space: nowrap;
+	font-weight: 600;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details .product-name a {
+	color: var(--mfl-texto);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details .product-name a:hover {
+	color: var(--mfl-roxo);
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details .product-quantity {
+	margin-left: 4px;
+	font-weight: 600;
+	color: var(--mfl-cinza);
+}
+
+.mfl-pw-pedido .wc-item-meta {
+	margin: 4px 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: 13px;
+	color: var(--mfl-cinza);
+}
+
+.mfl-pw-pedido .wc-item-meta li,
+.mfl-pw-pedido .wc-item-meta p {
+	display: inline;
+	margin: 0;
+}
+
+.mfl-pw-pedido .wc-item-meta .wc-item-meta-label {
+	font-weight: 400;
+	float: none;
+}
+
+/* Rodapé da tabela: subtotal e total */
+.mfl-pw-pedido .woocommerce-table--order-details tfoot th,
+.mfl-pw-pedido .woocommerce-table--order-details tfoot td {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: var(--mfl-fundo);
+	color: var(--mfl-cinza);
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details tfoot tr:first-child th,
+.mfl-pw-pedido .woocommerce-table--order-details tfoot tr:first-child td {
+	padding-top: 16px;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details tfoot tr:last-child th,
+.mfl-pw-pedido .woocommerce-table--order-details tfoot tr:last-child td {
+	padding-top: 14px;
+	padding-bottom: 18px;
+	border-top: 1px dashed var(--mfl-borda);
+	color: var(--mfl-texto);
+	font-size: 18px;
+	font-weight: 800;
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details tfoot tr:last-child td {
+	color: var(--mfl-roxo);
+}
+
+.mfl-pw-pedido .woocommerce-table--order-details tfoot small {
+	display: block;
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--mfl-cinza);
+}
+
+/* Botão "Pedir novamente" do Woo: não faz sentido aqui */
+.mfl-pw-pedido .order-again {
+	display: none;
+}
+
+/* Seus dados */
+.mfl-pw-dados__lista {
+	margin: 0;
+	padding: 8px 24px;
+}
+
+.mfl-pw-dados__item {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	padding: 14px 0;
+	border-top: 1px solid var(--mfl-borda);
+}
+
+.mfl-pw-dados__item:first-child {
+	border-top: 0;
+}
+
+.mfl-pw-dados__icone {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	background: #f3edfb;
+	color: var(--mfl-roxo);
+}
+
+.mfl-pw-dados__icone svg {
+	width: 20px;
+	height: 20px;
+}
+
+.mfl-pw-dados__rotulo {
+	display: block;
+	margin: 0 0 2px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	color: var(--mfl-cinza);
+}
+
+.mfl-pw-dados__valor {
+	display: block;
+	margin: 0;
+	font-weight: 600;
+	color: var(--mfl-texto);
+}
+
+.mfl-pw-dados__extra {
+	display: block;
+	margin: 2px 0 0;
+	font-size: 14px;
+	color: var(--mfl-cinza);
+}
+
+/* Continuar comprando */
+.mfl-pw-continuar {
+	margin: 28px 0 0;
+	text-align: center;
+}
+
+.mfl-pw-pedido a.mfl-pw-continuar__botao,
+.mfl-pw-pedido a.mfl-pw-continuar__botao:visited {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 48px;
+	padding: 0 32px;
+	border-radius: 999px;
+	background: var(--mfl-rosa);
+	color: #fff;
+	font-weight: 700;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: filter .15s ease, transform .15s ease;
+}
+
+.mfl-pw-pedido a.mfl-pw-continuar__botao:hover {
+	color: #fff;
+	filter: brightness(.92);
+	transform: translateY(-1px);
+}
+
+/* Celular */
+@media (max-width: 600px) {
+	.mfl-pw-pedido {
+		padding: 20px 12px 40px;
+	}
+
+	.mfl-pw-obrigado {
+		padding: 32px 18px 24px;
+	}
+
+	.mfl-pw-obrigado__titulo {
+		font-size: 23px;
+	}
+
+	.mfl-pw-pedido a.mfl-pw-botao,
+	.mfl-pw-pedido a.mfl-pw-continuar__botao {
+		width: 100%;
+		padding: 0 20px;
+	}
+
+	.mfl-pw-pedido .woocommerce-order-details__title,
+	.mfl-pw-dados__titulo {
+		padding: 16px 18px;
+	}
+
+	.mfl-pw-pedido .woocommerce-table--order-details th,
+	.mfl-pw-pedido .woocommerce-table--order-details td {
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+
+	.mfl-pw-dados__lista {
+		padding: 4px 18px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mfl-pw-obrigado__icone {
+		animation: none;
+	}
+}
