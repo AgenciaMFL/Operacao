@@ -124,6 +124,25 @@ Ao tocar no ícone ☰, abre um menu pela lateral esquerda (referência: menu de
 - [ ] Tela no painel com os termos mais buscados que não tiveram resultado
 - [ ] Atalho "Cadastrar produto" a partir do termo
 
+## Fase 5.2 — Estrutura final das páginas (ordem de execução)
+
+- [x] Loja / Categoria / Busca — layout do Figma 3129:3, container do header, cards compactos
+- [ ] Loja — faixa de preço (plugin v0.3.1+), clique no nome da categoria expande, "Ordenar por" personalizado
+- [ ] Carrinho lateral (gaveta pela direita) — opção "nativo + complemento"
+- [ ] Página de produto — Figma 3145:79 adaptado (prompts/fase51-produto.md)
+- [ ] Página Carrinho (/carrinho/) — visual da marca
+- [ ] Finalizar compra — visual da marca (sem mudar campos/fluxo do plugin)
+- [ ] Pedido recebido — visual da marca + botão do WhatsApp
+- [ ] Página 404 — com busca e link para a Loja
+- [ ] Revisão geral no celular (home → loja → produto → carrinho → checkout → WhatsApp)
+
+## Fase 6.5 — Segurança (depois da estrutura pronta)
+
+- [ ] Auditoria de segurança completa do plugin
+- [ ] Trocar chave do Woo, senhas de aplicativo e chave do Magnific
+- [ ] Excluir "Temp User"; revisar usuários e permissões
+- [ ] Atualizações (WordPress, Woo, Elementor) e backup automático da Hostinger
+
 ## Fase 7 — Testes e lançamento
 
 - [ ] **Reativar o LiteSpeed Cache** (desativado em 08/10 por vazamento do link privado): excluir cookie e query string `woo-share`, Purge All, testar em janela anônima
