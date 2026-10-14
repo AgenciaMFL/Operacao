@@ -35,7 +35,8 @@ class MFL_PW_Seguranca {
 		add_filter( 'the_generator', '__return_empty_string' );
 
 		// Descoberta de usuários.
-		add_action( 'template_redirect', array( __CLASS__, 'block_author_archive' ) );
+		// Prioridade 1: antes do redirect_canonical, que levaria ?author=N para /author/{login}/.
+		add_action( 'template_redirect', array( __CLASS__, 'block_author_archive' ), 1 );
 		add_filter( 'rest_request_before_callbacks', array( __CLASS__, 'block_rest_users' ), 10, 3 );
 		add_filter( 'oembed_response_data', array( __CLASS__, 'oembed_without_author' ) );
 
@@ -43,6 +44,9 @@ class MFL_PW_Seguranca {
 		add_filter( 'authenticate', array( __CLASS__, 'check_login' ), 99, 1 );
 		add_action( 'wp_login_failed', array( __CLASS__, 'register_failure' ) );
 		add_action( 'wp_login', array( __CLASS__, 'clear_failures' ) );
+
+		// Título das abas: "Página | Bazar Brinquelândia".
+		add_filter( 'document_title_separator', array( __CLASS__, 'title_separator' ) );
 
 		// Cabeçalhos de segurança no site.
 		add_action( 'send_headers', array( __CLASS__, 'security_headers' ) );
@@ -110,6 +114,10 @@ class MFL_PW_Seguranca {
 
 	public static function clear_failures() {
 		delete_transient( self::key() );
+	}
+
+	public static function title_separator() {
+		return '|';
 	}
 
 	public static function security_headers() {

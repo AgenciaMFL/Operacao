@@ -7,7 +7,7 @@
  * (categoria, preço, ordenação). O shortcode [mfl_filtro] gera o botão liga/desliga.
  *
  * Preço no Loop Grid do Elementor: o WooCommerce só aplica a faixa de preço
- * (?min_price/?max_price) e a ordenação por preço (?orderby=price|price-desc) na
+ * (?min_price/?max_price) e a ordenação por preço/vendas (?orderby=price|price-desc|popularity) na
  * consulta principal. O Loop Grid com "Consulta atual" roda uma consulta própria,
  * então price_clauses() repete essas regras nela, usando a mesma tabela do Woo.
  */
@@ -90,7 +90,7 @@ class MFL_PW_Filtros {
 	}
 
 	/**
-	 * Aplica faixa de preço e ordenação por preço em consultas SECUNDÁRIAS de produtos
+	 * Aplica faixa de preço e ordenação por preço/mais vendidos em consultas SECUNDÁRIAS de produtos
 	 * (ex.: Loop Grid do Elementor) numa página de listagem de produtos.
 	 */
 	public static function price_clauses( $args, $query ) {
@@ -111,7 +111,7 @@ class MFL_PW_Filtros {
 		$max     = $has_max ? floatval( wp_unslash( $_GET['max_price'] ) ) : PHP_INT_MAX;
 		// phpcs:enable
 
-		$sort = in_array( $orderby, array( 'price', 'price-desc' ), true );
+		$sort = in_array( $orderby, array( 'price', 'price-desc', 'popularity' ), true );
 		if ( ! $has_min && ! $has_max && ! $sort ) {
 			return $args;
 		}
@@ -134,6 +134,9 @@ class MFL_PW_Filtros {
 			$args['orderby'] = ' mfl_price_lookup.min_price ASC, mfl_price_lookup.product_id ASC ';
 		} elseif ( 'price-desc' === $orderby ) {
 			$args['orderby'] = ' mfl_price_lookup.max_price DESC, mfl_price_lookup.product_id DESC ';
+		} elseif ( 'popularity' === $orderby ) {
+			// Mais vendidos; empate (ex.: tudo com 0 vendas) fica pelos mais recentes.
+			$args['orderby'] = " mfl_price_lookup.total_sales DESC, {$wpdb->posts}.post_date DESC, {$wpdb->posts}.ID DESC ";
 		}
 
 		return $args;

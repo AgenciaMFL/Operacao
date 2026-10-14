@@ -14,8 +14,9 @@ Plugin do WooCommerce para a Bazar Brinquelândia: o cliente monta o carrinho, f
 - **"Não encontrou? Fale com a gente"**: aparece quando a busca ou a categoria não tem produtos e abre o WhatsApp com o termo buscado. Também existe como shortcode `[mfl_nao_encontrou]` para usar em qualquer página do Elementor.
 - **WooCommerce → Buscas sem resultado**: lista o que os clientes procuraram e não acharam, com quantidade, data e um atalho "Cadastrar produto".
 - **Filtros "Destaques" e "Em promoção"** na Loja/Categoria/busca: por URL (`?destaques=1`, `?promocao=1`) ou pelo shortcode `[mfl_filtro tipo="destaques"]` / `[mfl_filtro tipo="promocao"]`, que gera um botão liga/desliga (classes `.mfl-filtro`, `.is-active`, `.mfl-filtro__chave`, `.mfl-filtro__rotulo` para estilizar).
-- **Preço no Loop Grid do Elementor:** a faixa de preço (`?min_price`/`?max_price`) e a ordenação por preço (`?orderby=price` / `price-desc`) também valem para o Loop Grid com "Consulta atual" na Loja/Categoria/busca (o Woo sozinho só aplica na consulta principal).
+- **Preço no Loop Grid do Elementor:** a faixa de preço (`?min_price`/`?max_price`) e a ordenação por preço e mais vendidos (`?orderby=price` / `price-desc` / `popularity`) também valem para o Loop Grid com "Consulta atual" na Loja/Categoria/busca (o Woo sozinho só aplica na consulta principal).
 - **Segurança sem plugin extra:** XML-RPC desligado, versão do WordPress escondida, descoberta de usuários bloqueada (`?author=N` e `/wp-json/wp/v2/users` sem login), login bloqueado por 15 min após 6 erros do mesmo IP, mensagem de erro de login genérica, editor de arquivos do painel desligado e cabeçalhos de segurança (nosniff, SAMEORIGIN, Referrer-Policy, Permissions-Policy).
+- Título das abas no formato **"Página | Bazar Brinquelândia"**.
 - **Leveza:** sem scripts de emoji/oEmbed no `<head>` e no máximo 5 revisões por página/produto.
 - Compatível com HPOS e com o checkout em blocos (onde só o método de pagamento é adicionado; ver abaixo).
 
