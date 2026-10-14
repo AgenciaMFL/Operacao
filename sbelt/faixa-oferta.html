@@ -1,0 +1,78 @@
+<!--
+  Sbelt Laser - Faixa laranja rolante (substitui o carrossel de imagens "VOCÊ GANHOU 10 SESSÕES")
+  Cole num widget HTML do Elementor no lugar do carrossel.
+  - TEXTO: troque só na constante TEXTO do script.
+  - ICONE: URL do símbolo da Sbelt (flor) na biblioteca de mídia. Se ficar vazio, usa um losango.
+-->
+<style>
+  .sb-faixa {
+    --sb-faixa-cor: #F5841F;      /* ajuste para a cor exata da faixa atual */
+    --sb-faixa-altura: 56px;
+    --sb-faixa-velocidade: 28s;   /* maior = mais devagar */
+    position: relative;
+    width: 100%;
+    height: var(--sb-faixa-altura);
+    overflow: hidden;
+    background: var(--sb-faixa-cor);
+    box-shadow: 0 12px 30px -10px rgba(11, 42, 51, .35);
+    display: flex;
+    align-items: center;
+  }
+  .sb-faixa__trilho {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    width: max-content;
+    animation: sb-faixa-rolar var(--sb-faixa-velocidade) linear infinite;
+  }
+  .sb-faixa__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+    padding-right: 22px;
+    white-space: nowrap;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+  }
+  .sb-faixa__icone { width: 26px; height: 26px; object-fit: contain; flex: none; }
+  .sb-faixa__losango { width: 10px; height: 10px; background: #FFFFFF; transform: rotate(45deg); flex: none; }
+  @keyframes sb-faixa-rolar { to { transform: translateX(-50%); } }
+  @media (max-width: 600px) {
+    .sb-faixa { --sb-faixa-altura: 46px; }
+    .sb-faixa__item { font-size: 14px; gap: 16px; padding-right: 16px; }
+    .sb-faixa__icone { width: 20px; height: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sb-faixa__trilho { animation: none; }
+  }
+</style>
+
+<div class="sb-faixa" role="marquee" aria-label="10 sessões de axila por R$ 4,99">
+  <div class="sb-faixa__trilho" aria-hidden="true"></div>
+</div>
+
+<script>
+(function () {
+  var TEXTO = '10 SESSÕES DE AXILA POR R$ 4,99';
+  var ICONE = ''; // ex.: 'https://sbeltlaser.com.br/wp-content/uploads/....png'
+  var REPETICOES = 8; // por metade do trilho (o trilho é duplicado para o loop não ter emenda)
+
+  document.querySelectorAll('.sb-faixa').forEach(function (faixa) {
+    var trilho = faixa.querySelector('.sb-faixa__trilho');
+    if (!trilho || trilho.dataset.sbPronto) return;
+    trilho.dataset.sbPronto = '1';
+    faixa.setAttribute('aria-label', TEXTO);
+
+    var simbolo = ICONE
+      ? '<img class="sb-faixa__icone" src="' + ICONE + '" alt="" loading="lazy">'
+      : '<span class="sb-faixa__losango"></span>';
+    var item = '<span class="sb-faixa__item">' + TEXTO + simbolo + '</span>';
+    var metade = new Array(REPETICOES + 1).join(item);
+    trilho.innerHTML = metade + metade;
+  });
+})();
+</script>
