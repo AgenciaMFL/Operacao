@@ -280,6 +280,9 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 
 ## 10. Abrir uma unidade nova (resumo)
 
+> Processo atual, manual. O plano para automatizar (WordPress + Snapshot do GHL + n8n) está em
+> [`PLANO-AUTOMACAO.md`](PLANO-AUTOMACAO.md).
+
 1. GHL: sub-conta própria (conferir antes de criar qualquer coisa), calendário (fuso São Paulo,
    15/15 min, vagas por horário), formulário com redirect `.../sucesso/?...&franquiaId=X`,
    2 workflows com o Custom Data completo da seção 3.3, publicados; token com scopes de leitura + `contacts.write`.
@@ -317,3 +320,4 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **14/10/2026** — Leads/agendamentos da Pátio não chegavam na Spa: Custom Data dos workflows só tinha
   `franquiaId` (PHP respondia 400). Corrigido o "Agendamento Confirmado - Pátio" (primeiro sucesso: Cintia Santos).
   Recusas 400 da Spa por regra de agenda (Kauane). Criada a tela "Reprocessar Spa" para reenviar os pendentes.
+  Proposto o plano de automação da abertura de unidades (`PLANO-AUTOMACAO.md`).
