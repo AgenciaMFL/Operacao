@@ -169,6 +169,8 @@ class MFL_PW_Obrigado {
 	}
 
 	private static function box( WC_Order $order ) {
+		// Sem esc_url(): ele apaga as quebras de linha (%0A) do recibo. O link é montado
+		// só com https://wa.me/, dígitos e texto em rawurlencode(), então esc_attr() basta.
 		$link    = MFL_PW_Mensagem::link( $order );
 		$gateway = mfl_pw_gateway();
 
@@ -188,7 +190,7 @@ class MFL_PW_Obrigado {
 			<p class="mfl-pw-obrigado__texto">
 				<?php echo $auto ? 'Estamos abrindo o WhatsApp com o resumo do seu pedido…' : 'Agora é só enviar o resumo pelo WhatsApp para combinarmos pagamento e entrega.'; ?>
 			</p>
-			<a class="mfl-pw-botao" href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener">
+			<a class="mfl-pw-botao" href="<?php echo esc_attr( $link ); ?>" target="_blank" rel="noopener">
 				<?php echo self::icone_whatsapp(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG fixo. ?>
 				<span>Enviar pedido pelo WhatsApp</span>
 			</a>
@@ -196,7 +198,7 @@ class MFL_PW_Obrigado {
 		</div>
 		<?php if ( $auto ) : ?>
 		<script>
-			setTimeout( function () { window.location.href = <?php echo wp_json_encode( esc_url_raw( $link ) ); ?>; }, 1200 );
+			setTimeout( function () { window.location.href = <?php echo wp_json_encode( $link ); ?>; }, 1200 );
 		</script>
 		<?php endif; ?>
 		<?php
