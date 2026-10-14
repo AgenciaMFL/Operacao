@@ -132,11 +132,14 @@ Ao tocar no ícone ☰, abre um menu pela lateral esquerda (referência: menu de
 - [ ] Página de produto — Figma 3145:79 adaptado (prompts/fase51-produto.md)
 - [ ] Página Carrinho (/carrinho/) — visual da marca
 - [ ] Finalizar compra — visual da marca (sem mudar campos/fluxo do plugin)
-- [ ] Pedido recebido — visual da marca + botão do WhatsApp
+- [x] Pedido recebido — visual da marca + botão do WhatsApp (plugin 0.4.1)
+- [x] Rodapés por página — Loja (azul), Produto (lilás), Carrinho (amarelo)
 - [ ] Página 404 — com busca e link para a Loja
 - [ ] Revisão geral no celular (home → loja → produto → carrinho → checkout → WhatsApp)
 
 ## Fase 6.5 — Segurança (depois da estrutura pronta)
+
+- [x] Endurecimento no plugin 0.5.0 (XML-RPC, usuários, login, cabeçalhos, editor de arquivos)
 
 - [ ] Auditoria de segurança completa do plugin
 - [ ] Trocar chave do Woo, senhas de aplicativo e chave do Magnific

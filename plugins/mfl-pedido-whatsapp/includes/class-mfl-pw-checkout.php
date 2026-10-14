@@ -168,13 +168,11 @@ class MFL_PW_Checkout {
 	}
 
 	public static function add_to_cart_text( $text, $product = null ) {
-		// Produto sem estoque/sem preço ou com variações (na listagem) mantém o texto padrão do Woo.
+		// Produto sem estoque ou sem preço mantém o texto padrão do Woo ("Leia mais").
 		if ( ! $product || ! $product->is_purchasable() || ! $product->is_in_stock() ) {
 			return $text;
 		}
-		if ( ! $product->is_type( 'simple' ) && 'woocommerce_product_add_to_cart_text' === current_filter() ) {
-			return $text;
-		}
-		return 'Adicionar ao pedido';
+		// Na listagem, produto com opções leva à página dele para escolher a opção.
+		return apply_filters( 'mfl_pw_add_to_cart_text', 'Adicionar carrinho', $product );
 	}
 }
