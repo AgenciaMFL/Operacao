@@ -1,0 +1,319 @@
+# Sbelt Laser — Integração GHL + WordPress + Spa Solutions
+
+Documento principal do projeto (versão 5, atualizada em 14/10/2026). Substitui o
+`resumo-projeto-sbelt-laser-v4.md` do pacote zip. Onde algo não foi confirmado,
+está marcado como **a confirmar**.
+
+> **Credenciais não ficam neste repositório.** Senha da API da Spa Solutions,
+> tokens `pit-` do GHL e a chave da rota `/debug` só existem no snippet que roda
+> no WordPress. A cópia em `codigo/integracao-spa-solutions.php` está com esses
+> valores trocados por `COLE_AQUI_*`.
+
+---
+
+## 1. Como o funil funciona
+
+```
+1. Lead preenche o formulário do GHL da unidade
+   → Workflow "Lead Cadastrado - Sbelt <unidade>" → Webhook POST /wp-json/leads/v1/ghl-lead
+   → PHP cadastra/atualiza o lead na Spa Solutions (POST /api/Lead)
+   → PHP grava "Status Integração Spa" no contato do GHL (só onde o token tem contacts.write)
+2. Formulário redireciona para /sucesso/?...&franquiaId=X
+   → bloqueio de duplicado: consulta /ja-agendou (Imperatriz e Pátio Alcântara)
+   → avisa os GTM (evento lead_cadastrado) e redireciona (página inteira) pro widget do calendário
+3. Lead escolhe o horário no calendário do GHL
+   → Workflow "Agendamento Confirmado - Sbelt <unidade>" → Webhook POST /wp-json/leads/v1/ghl-agendamento
+   → PHP agenda a avaliação na Spa (POST /api/SessaoAvaliacao/SalvarSessaoAvaliacao)
+   → marca o telefone como "já agendou" (90 dias, por unidade) e atualiza o status no GHL
+4. Calendário redireciona para /obrigado/?first_name=...&contact_id=...(&franquiaId=10)
+   → a página busca data/hora e endereço em /proxima-consulta e avisa os GTM (agendamento_confirmado)
+```
+
+A unidade é decidida **só pelo `franquiaId`** que vem no Custom Data dos webhooks
+e na URL do `/sucesso/`. O PHP não fixa unidade nenhuma no envio para a Spa.
+
+---
+
+## 2. Unidades
+
+| franquiaId | Unidade | GHL Location ID | GHL Calendar ID | GTM próprio |
+|---|---|---|---|---|
+| **9** | Imperatriz | `qj2BSucIGAVOYtqGSRAL` | `QNYwNncYrOsRIpy9GU7B` | — |
+| **10** | Pátio Alcântara | `E0WCDN9MyksqIgQyNX70` | `HQW8VN5uNrB0bqTxzbep` | `GTM-56846GTT` |
+
+- Imperatriz: R Coronel Mário Andreazza, 379 — Loja 02 e 03 — Imperatriz, MA (DDD 99)
+- Pátio Alcântara: Praça Carlos Gianelli, S/N — Loja 317 — Alcântara, São Gonçalo/RJ — CEP 24710-465 (DDD 21)
+- `GTM-WGCH58VW`: GTM que já existia no `/sucesso/` e `/obrigado/`. **A confirmar** se é geral do site ou da Imperatriz.
+- `franquiaId 10` = Pátio Alcântara: na prática funciona (leads e agendamentos chegam na unidade
+  "SBELT LASER - PATIO ALCANTARA" do painel da Spa), mas nunca foi confirmado por escrito com o TI.
+
+---
+
+## 3. GHL — configuração por unidade
+
+### 3.1 Calendários
+
+| Item | Imperatriz | Pátio Alcântara |
+|---|---|---|
+| Nome | Avaliação Comercial - Sbelt Imperatriz2 | Avaliação Comercial - Sbelt Pátio Alcântara |
+| Tipo / equipe | Round Robin, 4 usuários "Sala 1..4 Avaliação" | 1 usuário (Paulo Lacerda) |
+| Vagas por horário | 4 (uma por sala) | 4 via Booking rules → **Maximum bookings per slot = 4** |
+| Duração / intervalo | 15 / 15 min | 15 / 15 min |
+| Fuso | America/Sao_Paulo | America/Sao_Paulo (**estava Los_Angeles**, corrigido em 05/10) |
+| Dias | Weekly hours seg–sex 08:00–17:00 em cada sala | Weekly hours **todos desligados**; só Date-specific hours |
+| Datas especiais | **12/10/2026 Unavailable** nas 4 salas (feriado) | **21, 22, 23, 24 e 26/10/2026, 09:00–21:00** (25 fechado) |
+| Date range | 8 dias rolantes (hoje = dia 1) | vazio (sem limite; quem limita são as datas específicas) |
+| Redirect da confirmação | `/obrigado/?first_name={{contact.first_name}}&contact_id={{contact.id}}` | o mesmo + `&franquiaId=10` (**a confirmar** se foi salvo) |
+
+Observações:
+- A disponibilidade da Pátio fica no **schedule do usuário** (Availability → Paulo Lacerda → Edit).
+  Se o Paulo entrar em outro calendário, mudar o schedule afeta os dois.
+- Sala 3 da Imperatriz tinha uma data especial errada (**1–5/09/2027**, sobra da inauguração
+  30/09–05/10/2026). Orientado a apagar — **a confirmar**.
+- Pátio usa 1 usuário com 4 vagas por horário: **a confirmar** com 2 agendamentos no mesmo horário
+  que o GHL não trava pela agenda do Paulo.
+- Para fechar/abrir um dia: Date-specific hours → "+ Add date specific hours" → escolher a data →
+  lixeira no intervalo (= Unavailable) ou definir o horário → Submit. No Round Robin, **em cada sala**.
+
+### 3.2 Formulários (Settings → On Submit → Redirect)
+
+- Imperatriz: `https://sbeltlaser.com.br/sucesso/?first_name={{contact.first_name}}&telefone={{contact.phone}}&email={{contact.email}}&contact_id={{contact.id}}&franquiaId=9`
+- Pátio Alcântara: `https://sbeltlaser.com.br/sucesso/?first_name={{contact.first_name}}&telefone={{contact.phone}}&email={{contact.email}}&franquiaId=10`
+
+Sem `franquiaId` o `/sucesso/` mostra erro de propósito.
+
+### 3.3 Workflows — Custom Data obrigatório
+
+**Quando o webhook tem Custom Data, o PHP lê SÓ o Custom Data** (ignora os dados padrão do GHL).
+Faltou um campo obrigatório → o PHP responde 400 e nada chega na Spa. Foi exatamente o que
+quebrou a Pátio Alcântara até 14/10 (os workflows tinham só `franquiaId`).
+
+**"Lead Cadastrado - Sbelt <unidade>"** → Webhook POST `https://sbeltlaser.com.br/wp-json/leads/v1/ghl-lead`
+
+| Chave | Valor | Obrigatório |
+|---|---|---|
+| `nome` | Contact.Full Name | sim |
+| `telefone` | Contact.Phone | sim |
+| `email` | Contact.Email | não |
+| `midia` | igual ao workflow da Imperatriz | não (vira "outros") |
+| `franquiaId` | 9 ou 10 | sim (sem ele vai FranquiaId 0) |
+| `contact_id` | Contact.ID | não (necessário pra escrita de volta no GHL) |
+
+**"Agendamento Confirmado - Sbelt <unidade>"** → trigger Customer Booked Appointment, filtro "In calendar"
+= calendário da unidade → Webhook POST `https://sbeltlaser.com.br/wp-json/leads/v1/ghl-agendamento`
+
+| Chave | Valor | Obrigatório |
+|---|---|---|
+| `franquiaId` | 9 ou 10 | sim |
+| `nome` | Contact.Full Name | não |
+| `telefone` | Contact.Phone | sim |
+| `email` | Contact.Email | não |
+| `contact_id` | Contact.ID | não |
+| `datahorainicio` | Appointment.Start Date Time | sim |
+| `datahorafim` | Appointment.End Date Time | não (PHP calcula +15 min) |
+
+Configuração da Pátio confirmada por print em 14/10 (agendamento). **A confirmar**: Custom Data
+completo no "Lead Cadastrado - Pátio Alcântara".
+
+Workflows precisam estar **Published** — em Draft nada dispara, nem com "Run test".
+
+### 3.4 Private Integration Tokens (um por sub-conta)
+
+- Imperatriz: `calendars.readonly`, `calendars/events.readonly`, `contacts.readonly`, `contacts.write`
+- Pátio Alcântara: só leitura (**sem `contacts.write`** → escrita de volta no contato não funciona,
+  e tags via API também não)
+
+### 3.5 Lendo os Execution logs do GHL
+
+- Workflow → **Execution logs** → linha "Webhook" → **View details** mostra a resposta do WordPress.
+- "This execution is from an older version of the workflow" = rodou antes da última alteração salva.
+- Resposta 5xx do WordPress → o GHL marca **Retry** e tenta de novo sozinho. 4xx → Failed direto.
+- O ícone de seta na coluna Actions **não reexecuta**: só abre a configuração da ação naquela versão.
+  O GHL não tem botão de reenviar — por isso existe a tela "Reprocessar Spa" (seção 5.3).
+
+---
+
+## 4. Spa Solutions
+
+### 4.1 Painel
+- Leads da integração ficam em **Comercial → Leads** (filtro de data, status e unidade no topo).
+  A tela **Clientes** só tem quem comprou — é normal estar vazia para leads novos.
+- Unidade é escolhida no seletor do topo ("SBELT LASER - PATIO ALCANTARA").
+- Lead criado pela integração aparece com Origem "Online", Cadastrado por "Api".
+
+### 4.2 API (manual "Integração Spa Solutions - Leads e Avaliação", 24 págs.)
+
+Base: `http://sbeltapi.spasolutions.com.br` (http, não https). Login `Sbelt`.
+
+| Endpoint | Uso |
+|---|---|
+| `POST /api/Login/Validar` | token JWT em texto puro, **válido 30 min**, sem refresh |
+| `POST /api/Lead` | cadastra lead (Nome, Telefone, Origem e FranquiaId obrigatórios); 201 |
+| `PUT /api/Lead/{id}` | atualização parcial; 200 corpo vazio |
+| `GET /api/Lead/{id}` | lead completo (inclui Status) |
+| `DELETE /api/Lead/{id}/{franquiaId}` | exclui lead |
+| `POST /api/SessaoAvaliacao/BuscarHorarioDisponiveis` | horários livres da agenda de avaliação |
+| `POST /api/SessaoAvaliacao/SalvarSessaoAvaliacao` | agenda avaliação (15 min) → lead vira "Agendado" |
+| `POST /api/SessaoAvaliacao/ConfirmarAgendamento` | status "Confirmado" |
+| `POST /api/SessaoAvaliacao/ReagendarAgendamento` | muda data/hora |
+| `GET /api/SessaoAvaliacao/GetSessaoAvaliacaoDetalhes/{id}` | detalhes da sessão |
+| `POST /api/SessaoAvaliacao/ListarAgendamentosAvaliacao` | **lista avaliações da franquia num período** (nome, telefone, data, status) |
+| `POST /api/SessaoAvaliacao/ListarAgendamentosAvaliacaoLead` | avaliações de um lead (telefone + e-mail exatos) |
+| `POST /api/SessaoAvaliacao/CancelarSessaoAvaliacao` | cancela avaliação |
+| `POST /api/clientes/BuscarClientePorTelefone` | diz se o telefone já é **cliente** (comparação exata) |
+| `/api/evento/SalvarSessao`, `AtualizarStatus`, `Reagendar` | sessões de clientes — **"em desenvolvimento"** |
+
+- Status de lead: Novo, EmAndamento, LigarNovamente, NaoAtendeu, Agendado, Confirmado, Compareceu, Convertido.
+- **Não existe webhook** e **não existe endpoint para listar sessões de depilação**.
+- Erros de agenda vêm como **400 em texto puro**: "Unidade fechada no dia", "fora do horário de
+  funcionamento", "agenda sem horário configurado", "Horário Indisponível para agendamento!".
+  Erros de "agenda de avaliação não configurada" / "Colaborador da API não configurado" vêm como 404.
+
+---
+
+## 5. WordPress
+
+### 5.1 Snippets (Code Snippets)
+
+| Snippet | Arquivo de referência | Status |
+|---|---|---|
+| Integração principal (um único snippet para todas as unidades) | `codigo/integracao-spa-solutions.php` (sem credenciais) | produção |
+| Reprocessar Spa (temporário, só admin) | `codigo/snippet-reprocessar-spa.php` | instalado em 14/10 para recuperar agendamentos; **desativar depois** |
+| GTM só na landing da Pátio | `codigo/snippet-gtm-landing-patio.php` | entregue; **a confirmar** se instalado |
+
+Regras: ao recolar o snippet principal, **desativar o antigo antes** (duas cópias = erro fatal
+"Cannot redeclare function"). Para mudanças pequenas, **editar o snippet existente** em vez de colar outro.
+
+### 5.2 Rotas (`/wp-json/leads/v1/`)
+
+| Rota | Método | Quem chama |
+|---|---|---|
+| `/ghl-lead` | POST | workflow Lead Cadastrado |
+| `/ghl-agendamento` | POST | workflow Agendamento Confirmado |
+| `/proxima-consulta?contact_id=` | GET | página `/obrigado/` |
+| `/ja-agendou?telefone=&franquia_id=` | GET | página `/sucesso/` |
+| `/agendamento-info?telefone=` | GET | sem uso |
+| `/debug?chave=...` | GET | temporária — último lead, último resultado da Spa, última consulta de calendário |
+
+### 5.3 Tela "Reprocessar Spa" (Ferramentas → Reprocessar Spa)
+
+Recupera agendamentos que estão no calendário do GHL mas não chegaram na Spa.
+1. Escolher a unidade → **"1. Buscar pendentes"**: lista os agendamentos do calendário GHL (−30/+90 dias,
+   ignora cancelados), lista as avaliações da Spa no mesmo período e compara pelos **últimos 8 dígitos
+   do telefone**. Mostra "Sim" / "NÃO - pendente" e o que a Spa devolveu.
+2. **"2. Processar"** com "Só simular" marcado → confere nomes e `datahorainicio`.
+3. Desmarcar "Só simular" → **"2. Processar"**: envia no máximo 10 por clique pelo mesmo caminho do
+   webhook de agendamento (lead + avaliação no dia/hora escolhido no GHL). Os que sobram ficam na caixa.
+4. Resultado `status 200` = foi; `502` com `{"status":400}` = a Spa recusou o horário.
+
+### 5.4 Páginas (Elementor, bloco HTML)
+
+| Página | Arquivo | O que faz |
+|---|---|---|
+| `/sucesso/` | `codigo/sucesso.html` | mapa franquiaId → calendário; tira o +55; bloqueio de duplicado (9 e 10); 2 GTM; evento `lead_cadastrado`; espera o GTM até 1,5 s e redireciona |
+| `/obrigado/` | `codigo/obrigado.html` | comprovante; busca data/endereço em `/proxima-consulta` (4 tentativas); 2 GTM; evento `agendamento_confirmado` |
+
+**A confirmar**: se a versão final do `sucesso.html` (com bloqueio para a unidade 10) foi colada.
+
+---
+
+## 6. Google Tag Manager
+
+- Os dois containers (`GTM-WGCH58VW` e `GTM-56846GTT`) carregam **sempre** no `/sucesso/` e no `/obrigado/`
+  (as páginas são compartilhadas pelas unidades).
+- As páginas avisam a unidade pelo dataLayer:
+  - início da página: `{ franquiaId }` (se vier na URL)
+  - `/sucesso/`: `{ event: 'lead_cadastrado', franquiaId, unidade }`
+  - `/obrigado/`: `{ event: 'agendamento_confirmado', franquiaId, unidade }`
+- **A fazer em cada GTM**: variável Data Layer `franquiaId`; acionadores Custom Event `lead_cadastrado`
+  e `agendamento_confirmado` com filtro `franquiaId` = 10 (Pátio) ou 9 (Imperatriz/sem filtro se geral);
+  usar esses acionadores nas tags de conversão em vez de Page View.
+- O widget do calendário é domínio do GHL — não recebe GTM pelo WordPress.
+
+---
+
+## 7. Problemas conhecidos no PHP (ainda não corrigidos)
+
+1. **Token da Spa em cache por 38 min, mas vale 30.** Entre o min 30 e 38, `spa_agendar` e
+   `spa_buscar_horarios` falham (não têm retry). Correção: `38 * MINUTE_IN_SECONDS` → `25 * MINUTE_IN_SECONDS`.
+2. **Mensagem de erro da Spa se perde** (`"body": null`): a Spa responde texto puro e o PHP só lê JSON.
+   Correção sugerida em 14/10 (na `spa_agendar`): `'body' => json_decode($corpo, true) ?? $corpo`. **A confirmar** se aplicada.
+3. **Dedup de lead por telefone não separa unidade** (`spa_lead_<telefone>`): mesmo telefone em outra
+   unidade atualiza o lead antigo em vez de criar um na unidade nova.
+4. **`franquiaId` não é validado** contra `SBELT_UNIDADES` (ausente → FranquiaId 0).
+5. **Webhooks sem autenticação** (`/ghl-lead`, `/ghl-agendamento` aceitam POST de qualquer um).
+6. **`/debug` expõe dados pessoais** (headers, corpo e calendário inteiro) — remover.
+7. **`update_option` de debug a cada `/obrigado/`** com a resposta inteira da API (opções autoload).
+8. **Telefone do bloqueio de duplicado**: `/sucesso/` consulta sem o 55; o webhook marca com o formato do
+   GHL (provavelmente com 55). Se não baterem, o bloqueio nunca dispara. **A confirmar** com
+   `/ja-agendou` de um telefone que já agendou (com e sem 55).
+9. Comentários dizem "2 salas"; são 4. `GHL_WEBHOOK_URL` e `/agendamento-info` sem uso.
+
+---
+
+## 8. Pendências
+
+1. Ajustar a **agenda de avaliação da Pátio no painel da Spa** para aceitar o que o GHL oferece
+   (21–24 e 26/10, 09–21h, 4 por horário) — agendamentos fora disso são recusados com 400
+   (caso Kauane, 14/10). Alternativa: reduzir o GHL ao que a Spa aceita.
+2. Terminar o reprocessamento dos pendentes da Pátio e **desativar o snippet "Reprocessar Spa"**.
+3. Confirmar Custom Data completo do workflow "Lead Cadastrado - Pátio Alcântara".
+4. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
+5. Aplicar as correções 1 e 2 da seção 7 (token 25 min; mensagem da Spa).
+6. Pátio: `contacts.write` no token + `contact_id` nos workflows (escrita de volta e tags).
+7. Remover a rota `/debug`; rotacionar a senha da API da Spa; limpar leads de teste no GHL **e** na Spa.
+8. Confirmar com o TI: `franquiaId 10`; endpoint para listar sessões de depilação (seção 9).
+9. Arquivar o calendário antigo (Personal) da Imperatriz; apagar a data 2027 da Sala 3.
+10. Testar o bloqueio de duplicado com telefone real (seção 7, item 8).
+
+---
+
+## 9. Ideia em aberto: tag no GHL para quem agendou depilação
+
+A API não lista sessões de depilação nem tem webhook. Sinal possível hoje: **"virou cliente"**
+(`BuscarClientePorTelefone`) e status do lead (Compareceu/Convertido via `GET /api/Lead/{id}`).
+Proposta: verificação diária no WordPress (WP-Cron) sobre os leads dos últimos 60 dias → tag
+`cliente-spa` no GHL (exige `contacts.write`). Alternativas: comercial marca no GHL (tag ou pipeline
+com workflow), ou export manual da Spa → import no GHL com tag. Aguardando decisão e resposta do TI.
+
+---
+
+## 10. Abrir uma unidade nova (resumo)
+
+1. GHL: sub-conta própria (conferir antes de criar qualquer coisa), calendário (fuso São Paulo,
+   15/15 min, vagas por horário), formulário com redirect `.../sucesso/?...&franquiaId=X`,
+   2 workflows com o Custom Data completo da seção 3.3, publicados; token com scopes de leitura + `contacts.write`.
+2. PHP: nova entrada em `SBELT_UNIDADES` (location, token, calendar, endereço).
+3. `/sucesso/`: nova linha em `CALENDARIOS_POR_UNIDADE` e `NOMES_POR_UNIDADE`; incluir no bloqueio de duplicado.
+4. Spa: confirmar o franquiaId com o TI e que a agenda de avaliação da unidade está configurada
+   com os mesmos dias/horários/vagas do GHL.
+5. Teste ponta a ponta com telefone novo; conferir Execution logs (Finished) e o lead em Comercial → Leads.
+
+---
+
+## 11. Descobertas (não repetir os erros)
+
+- Custom Data presente no webhook = PHP ignora os dados padrão do GHL. Todos os campos obrigatórios
+  precisam estar no Custom Data.
+- Fuso do schedule do usuário no GHL pode vir como Los_Angeles: conferir sempre (desloca 4 h).
+- Date-specific hours **somam** às Weekly hours: para abrir só datas específicas, desligar as semanais.
+- `{{appointment.only_start_time}}` não resolve no redirect da confirmação; só `{{contact.*}}`.
+- Widget do GHL não preenche telefone em iframe de outro domínio → redirect de página inteira.
+- Workflow em Draft não dispara nada.
+- Tipo de calendário não muda depois de criado (Personal → Round Robin exige calendário novo e ID novo).
+- Apagar contato no GHL não apaga o lead na Spa; não há sincronização Spa → GHL.
+- Painel da Spa: leads em Comercial → Leads, não em Clientes; filtros de data escondem registros.
+- Duas cópias do snippet principal ativas = erro fatal.
+
+---
+
+## 12. Histórico
+
+- **05/10/2026** — Projeto analisado (pacote zip v4). Pátio Alcântara: fuso corrigido para São Paulo;
+  aberta só para 21–24 e 26/10, 09–21h.
+- **09/10/2026** — Imperatriz: 12/10 (feriado) fechado nas 4 salas. GTM da Pátio (`GTM-56846GTT`) no
+  `/obrigado/` e `/sucesso/` junto com o `GTM-WGCH58VW`, com eventos `lead_cadastrado` e `agendamento_confirmado`.
+- **12/10/2026** — Pátio: 4 vagas por horário; bloqueio de duplicado estendido à unidade 10 no `/sucesso/`.
+- **14/10/2026** — Leads/agendamentos da Pátio não chegavam na Spa: Custom Data dos workflows só tinha
+  `franquiaId` (PHP respondia 400). Corrigido o "Agendamento Confirmado - Pátio" (primeiro sucesso: Cintia Santos).
+  Recusas 400 da Spa por regra de agenda (Kauane). Criada a tela "Reprocessar Spa" para reenviar os pendentes.

@@ -1,0 +1,426 @@
+<!-- Unidade do agendamento para os dois GTM (vem da URL, se existir) -->
+<script>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    var franquiaId = parseInt(new URLSearchParams(window.location.search).get('franquiaId'), 10);
+    if (!isNaN(franquiaId)) {
+      window.dataLayer.push({ franquiaId: franquiaId });
+    }
+  })();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WGCH58VW');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGCH58VW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Google Tag Manager - Pátio Alcântara -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-56846GTT');</script>
+<!-- End Google Tag Manager - Pátio Alcântara -->
+
+<!-- Google Tag Manager (noscript) - Pátio Alcântara -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56846GTT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) - Pátio Alcântara -->
+
+<style>
+  .sbelt-obrigado-wrap {
+    --teal-deep: #0f3d4a;
+    --teal-mid: #144a5a;
+    --orange: #ff7a3d;
+    --text-dark: #2b2320;
+    --text-muted: #6b5d55;
+
+    position: relative;
+    min-height: 100vh;
+    padding: 56px 20px 40px;
+    background-image: url('https://sbeltlaser.com.br/wp-content/uploads/2026/08/s1-1-scaled.webp');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-color: #fdf1e7; /* cor de fallback enquanto a imagem carrega */
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .sbelt-obrigado-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .sbelt-obrigado-wrap h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4.2vw, 42px);
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin: 0 0 8px;
+    text-align: center;
+  }
+
+  .sbelt-obrigado-wrap p.sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin: 0 0 40px;
+    text-align: center;
+    max-width: 460px;
+  }
+
+  /* --- Ticket --- */
+  .sbelt-ticket {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 920px;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .sbelt-ticket-body {
+    flex: 1 1 auto;
+    background: linear-gradient(120deg, var(--teal-mid) 0%, var(--teal-deep) 35%, #1a5f73 65%, var(--teal-mid) 100%);
+    background-size: 300% 300%;
+    animation: sbeltTealFlow 10s ease infinite;
+    color: #eaf4f6;
+    padding: 44px 40px;
+  }
+
+  @keyframes sbeltTealFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .sbelt-ticket-brand {
+    height: 40px;
+    margin-bottom: 26px;
+  }
+  .sbelt-ticket-brand img {
+    height: 100%;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+
+  .sbelt-ticket-body h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 34px;
+    margin: 0 0 26px;
+    color: #ffffff;
+  }
+
+  .sbelt-ticket-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16.5px;
+    margin-bottom: 15px;
+    color: #d9ebee;
+  }
+
+  .sbelt-ticket-row svg {
+    width: 19px;
+    height: 19px;
+    color: var(--orange);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .sbelt-ticket-row strong { color: #ffffff; font-weight: 600; }
+
+  .sbelt-ticket-divider {
+    position: relative;
+    width: 0;
+    border-left: 2px dashed rgba(255,255,255,0.25);
+    background: var(--teal-deep);
+  }
+  .sbelt-ticket-divider::before,
+  .sbelt-ticket-divider::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background: #ffffff; /* bolinha branca, recorte de ticket real (sempre branca, independente do fundo) */
+    border-radius: 50%;
+  }
+  .sbelt-ticket-divider::before { top: -16px; }
+  .sbelt-ticket-divider::after { bottom: -16px; }
+
+  .sbelt-ticket-stub {
+    flex: 0 0 220px;
+    background: linear-gradient(160deg, var(--orange) 0%, #e85f24 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 32px 22px;
+  }
+
+  .sbelt-ticket-stub .emblem {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    opacity: 0.95;
+  }
+
+  .sbelt-ticket-stub .emblem-mobile { display: none; }
+
+  .sbelt-ticket-stub .legenda {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #fff;
+    text-align: center;
+    opacity: 0.92;
+    max-width: 170px;
+  }
+
+  .sbelt-ticket-stub .barcode {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .sbelt-obrigado-wrap {
+      background-image: url('https://sbeltlaser.com.br/wp-content/uploads/2026/08/s1_mobile_2-scaled.webp');
+      padding: 40px 14px 32px;
+      min-height: 150svh;
+    }
+
+    .sbelt-obrigado-eyebrow { margin-bottom: 10px; }
+    .sbelt-obrigado-wrap p.sub { margin-bottom: 28px; font-size: 14.5px; }
+
+    /* Ticket estreito e centralizado, flutuando sobre a foto - igual referência */
+    .sbelt-ticket {
+      flex-direction: column;
+      width: auto;
+      max-width: 300px;
+      margin: 0 auto;
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .sbelt-ticket-body {
+      border-radius: 22px 22px 0 0;
+      padding: 26px 22px 22px;
+      text-align: center;
+    }
+
+    .sbelt-ticket-brand {
+      display: flex;
+      justify-content: center;
+    }
+
+    .sbelt-ticket-body h2 { font-size: 28px; margin-bottom: 18px; }
+    .sbelt-ticket-brand { height: 28px; margin-bottom: 18px; }
+    .sbelt-ticket-row {
+      font-size: 14px;
+      gap: 7px;
+      margin-bottom: 11px;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sbelt-ticket-row svg { width: 16px; height: 16px; margin-top: 0; }
+
+    /* divider vertical (desktop) escondido; usamos recorte nas laterais do stub */
+    .sbelt-ticket-divider { display: none; }
+
+    .sbelt-ticket-stub {
+      flex: none;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 0 0 22px 22px;
+      border-top: 2px dashed rgba(255,255,255,0.35);
+      padding: 22px 20px 24px;
+      gap: 14px;
+    }
+
+    /* Recorte real (buraco transparente) na linha do "picote", deixando o
+       fundo verdadeiro (foto) aparecer, em vez de uma bolinha branca sólida */
+    .sbelt-ticket-body {
+      -webkit-mask-image:
+        radial-gradient(circle 14px at 0 100%, transparent 99%, black 100%),
+        radial-gradient(circle 14px at 100% 100%, transparent 99%, black 100%);
+      mask-image:
+        radial-gradient(circle 14px at 0 100%, transparent 99%, black 100%),
+        radial-gradient(circle 14px at 100% 100%, transparent 99%, black 100%);
+      -webkit-mask-composite: source-in, source-in;
+      mask-composite: intersect;
+    }
+
+    .sbelt-ticket-stub {
+      -webkit-mask-image:
+        radial-gradient(circle 14px at 0 0, transparent 99%, black 100%),
+        radial-gradient(circle 14px at 100% 0, transparent 99%, black 100%);
+      mask-image:
+        radial-gradient(circle 14px at 0 0, transparent 99%, black 100%),
+        radial-gradient(circle 14px at 100% 0, transparent 99%, black 100%);
+      -webkit-mask-composite: source-in, source-in;
+      mask-composite: intersect;
+    }
+
+    .sbelt-ticket-stub .emblem { width: 40px; height: 40px; }
+    .sbelt-ticket-stub .emblem-desktop { display: none; }
+    .sbelt-ticket-stub .emblem-mobile { display: block; }
+    .sbelt-ticket-stub .legenda { font-size: 12.5px; max-width: 220px; }
+    .sbelt-ticket-stub .barcode { max-width: 170px; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="sbelt-obrigado-wrap">
+  <span class="sbelt-obrigado-eyebrow">Agendamento confirmado</span>
+  <h1>Tudo pronto!</h1>
+  <p class="sub">Guarde este comprovante.</p>
+
+  <div class="sbelt-ticket">
+    <div class="sbelt-ticket-body">
+      <div class="sbelt-ticket-brand">
+        <img src="https://sbeltlaser.com.br/wp-content/uploads/2026/04/group_45.webp" alt="Sbelt Laser" />
+      </div>
+
+      <h2>Comprovante de cortesia</h2>
+
+      <div class="sbelt-ticket-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Cliente: <strong id="sbelt-nome">—</strong></span>
+      </div>
+
+      <div class="sbelt-ticket-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+        <span>Data e horário: <strong id="sbelt-data-horario">—</strong></span>
+      </div>
+
+      <div class="sbelt-ticket-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Comparecer no endereço: <strong id="sbelt-endereco">—</strong></span>
+      </div>
+    </div>
+
+    <div class="sbelt-ticket-divider"></div>
+
+    <div class="sbelt-ticket-stub">
+      <img class="emblem emblem-desktop" src="https://sbeltlaser.com.br/wp-content/uploads/2026/08/desktop-emblema.webp" alt="" />
+      <img class="emblem emblem-mobile" src="https://sbeltlaser.com.br/wp-content/uploads/2026/08/mask_group.webp" alt="" />
+      <p class="legenda">Apresente este código na unidade e ganhe um presente especial</p>
+      <img class="barcode" src="https://sbeltlaser.com.br/wp-content/uploads/2026/08/codigo-de-barras.webp" alt="" />
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+
+    var chavesNome = ['first_name', 'firstName', 'leadName', 'FullName', 'fullName', 'nome', 'name'];
+    var nome = null;
+    for (var i = 0; i < chavesNome.length; i++) {
+      var v = params.get(chavesNome[i]);
+      if (v) { nome = v; break; }
+    }
+    if (nome) {
+      document.getElementById('sbelt-nome').textContent = decodeURIComponent(nome.replace(/\+/g, ' '));
+    }
+
+    function formatarDataHora(valor) {
+      var dataObj = new Date(valor);
+      if (!isNaN(dataObj.getTime())) {
+        return dataObj.toLocaleString('pt-BR', {
+          day: '2-digit', month: '2-digit', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+      }
+      return valor;
+    }
+
+    var chavesData = ['data_hora', 'dataHora', 'start_time', 'startTime', 'only_start_time'];
+    var dataHoraNaUrl = null;
+    for (var j = 0; j < chavesData.length; j++) {
+      var d = params.get(chavesData[j]);
+      if (d) { dataHoraNaUrl = d; break; }
+    }
+    if (dataHoraNaUrl) {
+      document.getElementById('sbelt-data-horario').textContent = formatarDataHora(dataHoraNaUrl);
+      return;
+    }
+
+    var contactId = null;
+    var chavesContactId = ['contact_id', 'contactId', 'contactID'];
+    for (var k = 0; k < chavesContactId.length; k++) {
+      var c = params.get(chavesContactId[k]);
+      if (c) { contactId = c; break; }
+    }
+
+    if (!contactId) {
+      return;
+    }
+
+    var tentativas = 0;
+    var maxTentativas = 4;
+
+    function buscarAgendamento() {
+      tentativas++;
+      fetch('/wp-json/leads/v1/proxima-consulta?contact_id=' + encodeURIComponent(contactId))
+        .then(function (r) { return r.json(); })
+        .then(function (resposta) {
+          if (resposta && resposta.encontrado && resposta.dataHoraInicio) {
+            document.getElementById('sbelt-data-horario').textContent = formatarDataHora(resposta.dataHoraInicio);
+
+            if (resposta.unidadeEndereco) {
+              document.getElementById('sbelt-endereco').textContent = resposta.unidadeEndereco;
+            }
+
+            // avisa os dois GTM de qual unidade é o agendamento - cada
+            // container filtra a conversão pela variável franquiaId
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'agendamento_confirmado',
+              franquiaId: Number(resposta.franquiaId),
+              unidade: resposta.unidadeNome || ''
+            });
+          } else if (tentativas < maxTentativas) {
+            setTimeout(buscarAgendamento, 2000);
+          }
+        })
+        .catch(function () {
+          if (tentativas < maxTentativas) {
+            setTimeout(buscarAgendamento, 2000);
+          }
+        });
+    }
+
+    buscarAgendamento();
+  })();
+</script>

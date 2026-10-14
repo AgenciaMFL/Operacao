@@ -1,0 +1,226 @@
+<!-- Unidade do lead para os dois GTM (vem da URL) -->
+<script>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    var franquiaId = parseInt(new URLSearchParams(window.location.search).get('franquiaId'), 10);
+    if (!isNaN(franquiaId)) {
+      window.dataLayer.push({ franquiaId: franquiaId });
+    }
+  })();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WGCH58VW');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGCH58VW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Google Tag Manager - Pátio Alcântara -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-56846GTT');</script>
+<!-- End Google Tag Manager - Pátio Alcântara -->
+
+<!-- Google Tag Manager (noscript) - Pátio Alcântara -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56846GTT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) - Pátio Alcântara -->
+
+<style>
+  .sbelt-redirect-wrap {
+    --bg-white: #ffffff;
+    --orange: #ff7a3d;
+    --orange-lighter: #fff2e9;
+    --text-dark: #2b2320;
+    --text-muted: #9a8a80;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 72px 20px;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 0%, var(--orange-lighter) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 60% at 85% 100%, var(--orange-lighter) 0%, transparent 55%),
+      var(--bg-white);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: center;
+  }
+  .sbelt-redirect-inner { max-width: 420px; }
+  .sbelt-spinner {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 24px;
+    border: 4px solid var(--orange-lighter);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: sbeltSpin 0.8s linear infinite;
+  }
+  @keyframes sbeltSpin {
+    to { transform: rotate(360deg); }
+  }
+  .sbelt-redirect-inner h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--text-dark);
+    margin: 0 0 10px;
+  }
+  .sbelt-redirect-inner p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+  .sbelt-redirect-inner a {
+    color: var(--orange);
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<div class="sbelt-redirect-wrap">
+  <div class="sbelt-redirect-inner">
+    <div class="sbelt-spinner"></div>
+    <h1>Preparando seu agendamento...</h1>
+    <p>Você vai ser redirecionado em instantes.<br>Se nada acontecer, <a id="sbelt-link-manual" href="#">clique aqui</a>.</p>
+  </div>
+</div>
+<script>
+  (function () {
+    /**
+     * -------------------------------------------------------------------
+     * MAPA DE UNIDADES -> Calendar ID do GHL
+     * -------------------------------------------------------------------
+     * Mesmo franquiaId usado no PHP (integracao-spa-solutions.php).
+     * Calendar ID não é dado sensível, então pode ficar no front-end.
+     *
+     * Pra adicionar uma unidade nova no futuro: só acrescentar uma linha
+     * aqui, e configurar o redirect do formulário daquela unidade
+     * (Settings > On Submit > Redirect to URL) terminando com
+     * "&franquiaId=X".
+     * -------------------------------------------------------------------
+     */
+    var CALENDARIOS_POR_UNIDADE = {
+      9:  'QNYwNncYrOsRIpy9GU7B', // Imperatriz (Round Robin, 4 salas)
+      10: 'HQW8VN5uNrB0bqTxzbep'  // Pátio Alcântara (4 vagas por horário)
+    };
+
+    // nome da unidade enviado pros GTM junto com o evento de lead
+    var NOMES_POR_UNIDADE = {
+      9:  'Imperatriz',
+      10: 'Pátio Alcântara'
+    };
+
+    var params = new URLSearchParams(window.location.search);
+    var chavesNome = ['first_name', 'firstName', 'leadName', 'FullName', 'fullName', 'nome', 'name'];
+    var chavesTelefone = ['telefone', 'phone', 'telephone', 'contact_phone'];
+    var chavesEmail = ['email', 'e-mail', 'contact_email'];
+    function buscar(chaves) {
+      for (var i = 0; i < chaves.length; i++) {
+        var v = params.get(chaves[i]);
+        if (v) return v;
+      }
+      return null;
+    }
+    var nome = buscar(chavesNome);
+    var telefone = buscar(chavesTelefone);
+    var email = buscar(chavesEmail);
+
+    // franquiaId é OBRIGATÓRIO - sem default. Se não vier um valor válido,
+    // paramos aqui e mostramos erro em vez de arriscar mandar o lead pro
+    // calendário da unidade errada silenciosamente.
+    var franquiaId = parseInt(params.get('franquiaId'), 10);
+    if (isNaN(franquiaId) || !CALENDARIOS_POR_UNIDADE.hasOwnProperty(franquiaId)) {
+      document.querySelector('.sbelt-spinner').style.display = 'none';
+      document.querySelector('.sbelt-redirect-inner h1').textContent = 'Não foi possível identificar sua unidade';
+      document.querySelector('.sbelt-redirect-inner p').innerHTML =
+        'Por favor, entre em contato pelo WhatsApp da sua unidade pra agendar sua avaliação.';
+      return; // não redireciona pra lugar nenhum
+    }
+    var calendarId = CALENDARIOS_POR_UNIDADE[franquiaId];
+
+    // O widget espera o telefone em formato local (DDD + número), sem o "+55"
+    // na frente - remove o código do país se vier no formato internacional
+    if (telefone) {
+      var apenasDigitos = telefone.replace(/\D/g, '');
+      if (apenasDigitos.length > 11 && apenasDigitos.indexOf('55') === 0) {
+        apenasDigitos = apenasDigitos.slice(2);
+      }
+      telefone = apenasDigitos;
+    }
+
+    function mostrarBloqueioJaAgendou() {
+      document.querySelector('.sbelt-spinner').style.display = 'none';
+      document.querySelector('.sbelt-redirect-inner h1').textContent = 'Você já tem uma avaliação agendada';
+      document.querySelector('.sbelt-redirect-inner p').innerHTML =
+        'Identificamos um agendamento em aberto para esse telefone. Em caso de dúvidas, entre em contato pelo WhatsApp da unidade.';
+    }
+
+    function redirecionarPraCalendario() {
+      var srcParams = new URLSearchParams();
+      if (nome) srcParams.set('first_name', nome);
+      if (telefone) srcParams.set('phone', telefone);
+      if (email) srcParams.set('email', email);
+      var baseSrc = 'https://api.leadconnectorhq.com/widget/booking/' + calendarId;
+      var srcFinal = srcParams.toString() ? (baseSrc + '?' + srcParams.toString()) : baseSrc;
+      // link manual de segurança (caso o redirect automático seja bloqueado
+      // pelo navegador, tipo alguns bloqueadores de pop-up/redirect)
+      document.getElementById('sbelt-link-manual').href = srcFinal;
+
+      // redirect de verdade (navegação de página inteira, igual o teste que
+      // funcionou 100% - é isso que garante o telefone vir preenchido)
+      var redirecionou = false;
+      function irPraCalendario() {
+        if (redirecionou) return;
+        redirecionou = true;
+        window.location.replace(srcFinal);
+      }
+
+      // avisa os dois GTM do lead ANTES de sair da página - sem isso o
+      // redirect quase imediato pode cortar o disparo das tags. Redireciona
+      // quando o GTM confirmar, ou em no máximo 1,5s (se o GTM estiver
+      // bloqueado/lento, o cliente não fica preso aqui)
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'lead_cadastrado',
+        franquiaId: franquiaId,
+        unidade: NOMES_POR_UNIDADE[franquiaId] || '',
+        eventCallback: irPraCalendario,
+        eventTimeout: 1500
+      });
+      setTimeout(irPraCalendario, 1500);
+    }
+
+    // BLOQUEIO DE AGENDAMENTO DUPLICADO - ativo pra Imperatriz (9) e
+    // Pátio Alcântara (10). Pra ativar em outra unidade, acrescentar o
+    // franquiaId dela nessa condição.
+    if ((franquiaId === 9 || franquiaId === 10) && telefone) {
+      fetch('/wp-json/leads/v1/ja-agendou?telefone=' + encodeURIComponent(telefone) + '&franquia_id=' + franquiaId)
+        .then(function (r) { return r.json(); })
+        .then(function (resposta) {
+          if (resposta && resposta.jaAgendou) {
+            mostrarBloqueioJaAgendou();
+          } else {
+            redirecionarPraCalendario();
+          }
+        })
+        .catch(function () {
+          // se a checagem falhar por qualquer motivo (rede, erro no servidor),
+          // deixa passar em vez de bloquear gente legítima por um problema técnico
+          redirecionarPraCalendario();
+        });
+    } else {
+      redirecionarPraCalendario();
+    }
+  })();
+</script>
