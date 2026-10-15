@@ -1,0 +1,25 @@
+REVOKE EXECUTE ON FUNCTION public.delete_email(text, bigint) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.get_coupon_by_partner_token(text) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.increment_coupon_usage(text) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.enqueue_email(text, jsonb) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.move_to_dlq(text, text, bigint, jsonb) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.email_queue_dispatch() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.read_email_batch(text, integer, integer) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.get_crosstraining_dashboard_stats() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.increment_partner_clicks(text) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.release_stock(text, integer) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.reserve_stock(text, integer) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.email_queue_wake() FROM anon, authenticated, public;
+
+GRANT EXECUTE ON FUNCTION public.delete_email(text, bigint) TO service_role;
+GRANT EXECUTE ON FUNCTION public.get_coupon_by_partner_token(text) TO service_role;
+GRANT EXECUTE ON FUNCTION public.increment_coupon_usage(text) TO service_role;
+GRANT EXECUTE ON FUNCTION public.enqueue_email(text, jsonb) TO service_role;
+GRANT EXECUTE ON FUNCTION public.move_to_dlq(text, text, bigint, jsonb) TO service_role;
+GRANT EXECUTE ON FUNCTION public.email_queue_dispatch() TO service_role;
+GRANT EXECUTE ON FUNCTION public.read_email_batch(text, integer, integer) TO service_role;
+GRANT EXECUTE ON FUNCTION public.get_crosstraining_dashboard_stats() TO service_role;
+GRANT EXECUTE ON FUNCTION public.increment_partner_clicks(text) TO service_role;
+GRANT EXECUTE ON FUNCTION public.release_stock(text, integer) TO service_role;
+GRANT EXECUTE ON FUNCTION public.reserve_stock(text, integer) TO service_role;
+GRANT EXECUTE ON FUNCTION public.email_queue_wake() TO service_role;

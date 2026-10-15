@@ -1,0 +1,1 @@
+DELETE FROM public.abandoned_checkouts WHERE session_token = 'test-admin-alert-20260821';

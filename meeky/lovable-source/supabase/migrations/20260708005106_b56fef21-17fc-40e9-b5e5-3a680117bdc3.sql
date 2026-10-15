@@ -1,0 +1,1 @@
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS purchase_event_sent_at TIMESTAMPTZ;

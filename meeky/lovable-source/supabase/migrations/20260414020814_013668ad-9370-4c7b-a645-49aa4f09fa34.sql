@@ -1,0 +1,1 @@
+DELETE FROM orders WHERE coupon_code = 'TAYANE' AND customer_name = 'Jooky';

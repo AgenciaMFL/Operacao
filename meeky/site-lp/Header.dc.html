@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+<style>
+  @keyframes move-up-alternate{0%{transform:translateY(0)}50%{transform:translateY(80%)}51%{transform:translateY(-80%)}to{transform:translateY(0)}}
+  @keyframes menu-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+</style>
+<script src="./meeky-form-modal.js"></script>
+</helmet>
+<div style="position:relative;background:rgba(255,255,255,.88);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid rgba(0,0,0,.07);font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif">
+  <div style="max-width:1320px;margin:0 auto;padding-left:{{ padX }};padding-right:{{ padX }};height:74px;display:flex;align-items:center;justify-content:space-between;gap:28px">
+    <a href="Home.html" style="display:flex;align-items:center;flex:0 0 auto;text-decoration:none">
+      <img src="assets/logo-meeky.svg" alt="Meeky" style="width:104px;height:auto;display:block" />
+    </a>
+
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:34px;flex-wrap:wrap;justify-content:center">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+          <div style="position:relative;display:flex;align-items:center" onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}">
+            <a href="{{ it.href }}" style="font-size:14px;font-weight:500;letter-spacing:.005em;text-decoration:none;padding:3px 0;color:{{ it.color }};background-image:linear-gradient(#C4863B,#C4863B);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1.5px;transition:background-size .4s cubic-bezier(.16,.84,.44,1),color .3s" style-hover="background-size:100% 1.5px;color:#C4863B">{{ it.label }}</a>
+            <sc-if value="{{ it.open }}">
+              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:16px;min-width:240px;z-index:20">
+                <div style="display:flex;flex-direction:column;padding:8px;border-radius:18px;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 26px 46px -28px rgba(10,10,10,.55);animation:menu-in .22s cubic-bezier(.16,.84,.44,1) both">
+                  <sc-for list="{{ it.children }}" as="c" hint-placeholder-count="2">
+                    <a href="{{ c.href }}" style="display:block;padding:13px 15px;border-radius:12px;font-size:14px;font-weight:500;letter-spacing:-.005em;color:#1A1A1A;text-decoration:none;white-space:nowrap;transition:background-color .25s,color .25s" style-hover="background-color:rgba(196,134,59,.1);color:#C4863B">{{ c.label }}</a>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </nav>
+      <a href="https://meeky.com.br/checkout" style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:999px;border:1px solid rgba(0,0,0,.22);overflow:hidden;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#111;text-decoration:none;background-color:#ffffff;background-image:linear-gradient(100deg,#C99450 0 50%,rgba(201,148,80,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),border-color .35s,color .35s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#ffffff;background-position:0 0;border-color:#C99450;transform:translateY(-2px)"><span style="display:block;padding:12px 30px">Comprar</span></a>
+    </sc-if>
+
+    <sc-if value="{{ isMobile }}">
+      <button type="button" aria-label="Menu" onClick="{{ toggle }}" style="flex:0 0 auto;width:46px;height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;border:1px solid rgba(0,0,0,.14);border-radius:14px;background:rgba(255,255,255,.6);cursor:pointer">
+        <span style="display:block;width:19px;height:1.6px;background:#0A0A0A;border-radius:2px;transition:transform .3s cubic-bezier(.16,.84,.44,1),opacity .2s;transform:{{ bar1 }}"></span>
+        <span style="display:block;width:19px;height:1.6px;background:#0A0A0A;border-radius:2px;transition:opacity .2s;opacity:{{ barMid }}"></span>
+        <span style="display:block;width:19px;height:1.6px;background:#0A0A0A;border-radius:2px;transition:transform .3s cubic-bezier(.16,.84,.44,1);transform:{{ bar3 }}"></span>
+      </button>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ open }}">
+    <div style="position:absolute;top:74px;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid rgba(0,0,0,.07);box-shadow:0 24px 40px -28px rgba(10,10,10,.45);padding:14px 20px 22px;animation:menu-in .28s cubic-bezier(.16,.84,.44,1) both">
+      <nav style="display:flex;flex-direction:column">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column">
+            <a href="{{ it.href }}" onClick="{{ close }}" style="display:block;padding:14px 2px;font-size:17px;font-weight:500;letter-spacing:-.01em;text-decoration:none;color:{{ it.color }};border-bottom:1px solid rgba(0,0,0,.06)">{{ it.label }}</a>
+            <sc-if value="{{ it.hasChildren }}">
+              <div style="display:flex;flex-direction:column;padding-left:16px">
+                <sc-for list="{{ it.children }}" as="c" hint-placeholder-count="2">
+                  <a href="{{ c.href }}" onClick="{{ close }}" style="display:block;padding:12px 2px;font-size:15px;font-weight:400;letter-spacing:-.005em;text-decoration:none;color:#5A5A5A;border-bottom:1px solid rgba(0,0,0,.06)">{{ c.label }}</a>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </nav>
+      <a href="https://meeky.com.br/checkout" style="margin-top:18px;display:flex;align-items:center;justify-content:center;padding:17px 30px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s" style-hover="color:#0A0A0A;background-position:0 0">Comprar agora</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ formOpen }}">
+    <div onClick="{{ closeForm }}" style="position:fixed;inset:0;z-index:400;background:rgba(6,6,6,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box">
+      <div onClick="{{ stopClose }}" style="position:relative;width:min(560px,100%);max-height:88vh;background:#141414;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.1)">
+          <span style="font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#DEA85E">Quero comprar</span>
+          <button type="button" onClick="{{ closeForm }}" aria-label="Fechar" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#F9F8F6;font-size:18px;line-height:1;cursor:pointer;transition:background .3s" style-hover="background:rgba(255,255,255,.1)">×</button>
+        </div>
+        <iframe src="https://api.leadconnectorhq.com/widget/form/CpduQRS40KxxCGUNOgLR" id="popup-CpduQRS40KxxCGUNOgLR" title="Form 0" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate" data-form-name="Form 0" data-layout-iframe-id="popup-CpduQRS40KxxCGUNOgLR" data-form-id="CpduQRS40KxxCGUNOgLR" data-cookie-consent="true" data-cookie-consent-provider="auto" style="width:100%;flex:1;min-height:560px;border:none;display:block;background:#141414"></iframe>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:74},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;produto&quot;,&quot;sobre&quot;,&quot;duvidas&quot;,&quot;contato&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { isMobile: false, open: false, openMenu: null };
+  componentDidMount() {
+    const check = () => {
+      const w = document.documentElement.clientWidth || window.innerWidth || 0;
+      if (!w) return;
+      const m = w <= 860;
+      if (m !== this.state.isMobile) this.setState({ isMobile: m, open: false });
+    };
+    this._check = check;
+    window.addEventListener('resize', check);
+    if (window.ResizeObserver) { this._ro = new ResizeObserver(check); this._ro.observe(document.documentElement); }
+    requestAnimationFrame(check);
+    setTimeout(check, 300);
+    check();
+  }
+  componentWillUnmount() {
+    if (this._check) window.removeEventListener('resize', this._check);
+    if (this._ro) this._ro.disconnect();
+  }
+  renderVals() {
+    const active = String(this.props.active || 'home').toLowerCase();
+    const children = {
+      produto: [
+        { label: 'Meeky F5 ANC Pro', href: 'Produto.html' },
+        { label: 'Motion 1', href: 'Motion1.html' }
+      ]
+    };
+    const items = [
+      { id: 'home', label: 'Home', href: 'Home.html' },
+      { id: 'produto', label: 'Produto', href: 'Produto.html' },
+      { id: 'sobre', label: 'Sobre', href: 'Sobre.html' },
+      { id: 'duvidas', label: 'Dúvidas', href: 'Duvidas.html' },
+      { id: 'contato', label: 'Contato', href: 'Contato.html' }
+    ].map(i => Object.assign({}, i, {
+      color: i.id === active ? '#C4863B' : '#1A1A1A',
+      children: children[i.id] || [],
+      hasChildren: !!children[i.id],
+      open: !!children[i.id] && this.state.openMenu === i.id,
+      onEnter: children[i.id] ? () => this.setState({ openMenu: i.id }) : null,
+      onLeave: children[i.id] ? () => this.setState({ openMenu: null }) : null
+    }));
+    const m = this.state.isMobile, open = m && this.state.open;
+    return {
+      items,
+      isMobile: m,
+      isDesktop: !m,
+      open,
+      padX: m ? '20px' : '40px',
+      bar1: open ? 'translateY(6.6px) rotate(45deg)' : 'none',
+      bar3: open ? 'translateY(-6.6px) rotate(-45deg)' : 'none',
+      barMid: open ? 0 : 1,
+      toggle: () => this.setState(s => ({ open: !s.open })),
+      close: () => this.setState({ open: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

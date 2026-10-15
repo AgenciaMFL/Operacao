@@ -1,0 +1,1 @@
+UPDATE public.vip_events SET offer_price_label = 'R$297 no evento', offer_extra = 'Frete grátis', social_cause = NULL WHERE campaign_key = 'racevalley2026';

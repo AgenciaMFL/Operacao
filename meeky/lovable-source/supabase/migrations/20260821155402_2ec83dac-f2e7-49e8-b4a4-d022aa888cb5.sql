@@ -1,0 +1,1 @@
+ALTER TABLE public.abandoned_checkouts ADD COLUMN IF NOT EXISTS admin_alert_sent_at timestamptz;

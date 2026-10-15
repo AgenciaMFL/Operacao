@@ -1,0 +1,43 @@
+project_id = "abmbodewtnldwvgqwbno"
+
+[functions.process-email-queue]
+verify_jwt = true
+
+[functions.send-transactional-email]
+verify_jwt = true
+
+[functions.preview-transactional-email]
+verify_jwt = false
+
+[functions.handle-email-unsubscribe]
+verify_jwt = false
+
+[functions.handle-email-suppression]
+verify_jwt = false
+
+[functions.get-public-config]
+verify_jwt = false
+
+[functions.validate-coupon]
+verify_jwt = false
+
+[functions.partner-redirect]
+verify_jwt = false
+[functions.create-exit-intent-lead]
+verify_jwt = false
+[functions.send-exit-intent-email]
+verify_jwt = false
+
+
+[functions.vip-leads-list]
+verify_jwt = false
+
+[functions.notify-tracking]
+verify_jwt = true
+
+[functions.reprocess-order]
+verify_jwt = false
+
+[functions.claim-purchase-event]
+verify_jwt = false
+

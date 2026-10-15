@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Fallback www -> apex redirect. The canonical 301 must be a Cloudflare Redirect Rule;
+         this only prevents duplicate www rendering if that rule is missing. -->
+    <script>
+      (function () {
+        var h = location.hostname;
+        if (h === 'www.meeky.com.br') {
+          location.replace('https://meeky.com.br' + location.pathname + location.search + location.hash);
+        }
+      })();
+    </script>
+    <meta name="facebook-domain-verification" content="kwxujio5m1r5vqrkjohr417sqcgouq" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Self-hosted variable fonts: preload in parallel with the main CSS to remove the serialized @import hop. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-wght-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-latin-wght-normal.woff2" crossorigin>
+
+    <!-- Home LCP image: static preload so the browser discovers it before JS hydration. -->
+    <link rel="preload" as="image" href="/hero-home.webp" fetchpriority="high">
+
+    <!-- Per-route LCP image preloads (other pages) are injected by the SEO component via react-helmet during prerender. -->
+
+
+    <!-- Preconnect Supabase -->
+    <link rel="preconnect" href="https://abmbodewtnldwvgqwbno.supabase.co">
+    <!-- Per-page head tags (title, description, canonical, og, twitter, robots) are injected by the SEO component via react-helmet during prerender. Do not add static fallbacks here. -->
+    <meta name="author" content="Meeky Audio" />
+
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:url" content="https://meeky.com.br">
+    <meta name="twitter:image" content="https://meeky.com.br/og-image.jpg">
+
+    <!-- JSON-LD: Organization (server-side for AI crawlers) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Meeky Audio",
+      "legalName": "Barganha Mix Ltda",
+      "url": "https://meeky.com.br",
+      "logo": "https://meeky.com.br/favicon.png",
+      "image": "https://meeky.com.br/og-image.jpg",
+      "description": "Marca brasileira de headphones com cancelamento de ruído ativo para foco, produtividade e alta performance.",
+      "foundingDate": "2025",
+      "founder": [
+        {"@type": "Person", "name": "Filipe Cardoso"},
+        {"@type": "Person", "name": "Fernanda Micchi"}
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-12-99107-4311",
+        "contactType": "customer service",
+        "availableLanguage": "Portuguese",
+        "email": "contato@meeky.com.br"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Fabio, 396",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "postalCode": "03378-060",
+        "addressCountry": "BR"
+      },
+      "taxID": "43.341.597/0001-40",
+      "sameAs": ["https://instagram.com/meeky.br"]
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Meeky Audio",
+      "url": "https://meeky.com.br",
+      "description": "Headphones com cancelamento de ruído ativo para foco, produtividade e alta performance.",
+      "publisher": {"@type": "Organization", "name": "Meeky Audio"}
+    }
+    </script>
+
+    <!-- Consent Mode v2 (default denied). Analytics/ads tags only load after user consent. -->
+    <script>
+      (function () {
+        // gtag stub + dataLayer so early consent calls are preserved before GTM/GA load.
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+        // Consent Mode v2 defaults: everything denied until user chooses.
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          analytics_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          functionality_storage: 'granted',
+          security_storage: 'granted',
+          wait_for_update: 500
+        });
+
+        // fbq stub — queue events; do NOT load fbevents.js until consent.
+        window.fbq = window.fbq || function () {
+          if (window.fbq.callMethod) { window.fbq.callMethod.apply(window.fbq, arguments); }
+          else { (window.fbq.queue = window.fbq.queue || []).push(arguments); }
+        };
+        window.fbq.queue = window.fbq.queue || [];
+        window.fbq.loaded = true;
+        window.fbq.version = '2.0';
+        window._fbq = window._fbq || window.fbq;
+
+        var analyticsLoaded = false;
+        var adsLoaded = false;
+
+        // Loaders exposed globally so the React consent banner can trigger them.
+        window.__loadAnalyticsTags = function () {
+          if (analyticsLoaded) return;
+          analyticsLoaded = true;
+          // Google Tag Manager
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s),
+                dl = l !== 'dataLayer' ? '&l=' + l : '';
+            j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', 'GTM-KWMG33GN');
+
+          // gtag.js (GA4)
+          var g = document.createElement('script');
+          g.async = true;
+          g.src = 'https://www.googletagmanager.com/gtag/js?id=G-DZYX7DKNFB';
+          document.head.appendChild(g);
+          gtag('js', new Date());
+          gtag('config', 'G-DZYX7DKNFB');
+        };
+
+        window.__loadAdsTags = function () {
+          if (adsLoaded) return;
+          adsLoaded = true;
+          // Meta Pixel
+          var p = document.createElement('script');
+          p.async = true;
+          p.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          document.head.appendChild(p);
+          fbq('init', '1661170241699314');
+          fbq('track', 'PageView');
+
+          // OpenAI Ads Pixel (snippet oficial da conta) — carregado só após consentimento.
+          !function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"NM9Phga1JvFu2NYPWbDJUa",debug:false});
+
+          // TikTok Pixel (snippet oficial da conta) — carregado só após consentimento de publicidade.
+          !function (w, d, t) {
+            w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for( var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+            ttq.load('CR3RISJC77U222FMO130');
+            ttq.page();
+          }(window, document, 'ttq');
+          window.__ttqLoadedAt = Date.now();
+
+
+          // Replay de eventos de funil que ocorreram antes do consentimento.
+          if (window.__oaiqPending && window.__oaiqPending.length) {
+            window.__oaiqPending.forEach(function (e) { window.oaiq('measure', e[0], e[1]); });
+            window.__oaiqPending.length = 0;
+          }
+        };
+
+
+        function loadMerchantWidget() {
+          var s = document.createElement('script');
+          s.src = 'https://www.gstatic.com/shopping/merchant/merchantwidget.js';
+          s.async = true;
+          s.onload = function () {
+            if (window.merchantwidget) {
+              merchantwidget.start({ merchant_id: 5766308264, position: 'BOTTOM_RIGHT', region: 'BR' });
+            }
+          };
+          document.head.appendChild(s);
+        }
+
+        var widgetLoaded = false;
+        function loadWidgetOnce() {
+          if (widgetLoaded) return; widgetLoaded = true;
+          loadMerchantWidget();
+        }
+        ['scroll', 'click', 'touchstart', 'keydown'].forEach(function (ev) {
+          window.addEventListener(ev, loadWidgetOnce, { once: true, passive: true });
+        });
+        setTimeout(loadWidgetOnce, 6000);
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- GTM/Meta Pixel noscript fallbacks intentionally omitted: they would fire unconditionally, bypassing consent. -->
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

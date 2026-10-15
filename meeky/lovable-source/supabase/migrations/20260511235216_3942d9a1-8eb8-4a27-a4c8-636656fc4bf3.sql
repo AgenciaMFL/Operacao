@@ -1,0 +1,1 @@
+ALTER TABLE public.orders ALTER COLUMN shipping_cost SET DEFAULT 0;

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1661170241699314');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+<style>
+  @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes move-up-alternate{0%{transform:translateY(0)}50%{transform:translateY(80%)}51%{transform:translateY(-80%)}to{transform:translateY(0)}}
+  body { margin:0; background:#fff; color:#0A0A0A; font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a { color:#C4863B; text-decoration:none; }
+  a:hover { color:#8A5C1E; }
+  img, video { max-width:100%; display:block; }
+</style>
+<script src="./meeky-form-modal.js"></script>
+</helmet>
+<div ref="{{ rootRef }}" style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#0A0A0A">
+
+  <div style="position:fixed;top:0;left:0;right:0;z-index:200">
+    <dc-import name="Header" active="sobre" hint-size="100%,74px"></dc-import>
+  </div>
+
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <section style="padding-top:74px;background:#EFE7DC">
+    <div style="position:relative;background-image:url('assets/sobre-hero.webp');background-size:cover;background-position:center center;background-repeat:no-repeat;min-height:min(46vw,660px);display:flex;align-items:center">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(243,238,230,.97) 0 30%,rgba(243,238,230,.82) 44%,rgba(243,238,230,0) 62%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1320px;margin:0 auto;width:100%;box-sizing:border-box;padding-left:{{ heroPadL }};padding-right:{{ secPadX }}">
+        <div style="max-width:560px">
+          <h1 style="margin:0;font-size:{{ h1Size }};font-weight:700;letter-spacing:-.035em;line-height:1.06;text-wrap:balance;color:#0A0A0A">Tecnologia brasileira para foco e performance.</h1>
+          <p style="margin:22px 0 0;max-width:480px;font-size:{{ leadP }};line-height:1.55;color:#3D3A35;text-wrap:pretty">Dois fones, dois modos de escutar: o silêncio de quem precisa se concentrar e a atenção de quem treina em movimento.</p>
+          <p style="margin:20px 0 0;max-width:480px;font-size:13.5px;line-height:1.5;color:#6E675E">Operada por Barganha Mix Ltda · CNPJ 43.341.597/0001-40 · Certificação Anatel · Garantia 12 meses no Brasil</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}">
+  <section style="padding-top:74px;background:#EFE7DC">
+    <div style="position:relative;background-color:#EFE7DC;background-image:url('assets/sobre-hero-mobile.webp');background-size:cover;background-position:center 22%;background-repeat:no-repeat;min-height:0;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;padding:70% 20px 34px;text-align:center">
+      <div style="position:absolute;left:0;right:0;bottom:0;height:56%;background:linear-gradient(180deg,rgba(244,240,233,0) 0%,rgba(244,240,233,.92) 26%,#F4F0E9 46%,#F4F0E9 100%);pointer-events:none"></div>
+      <div style="position:relative">
+      <h1 style="margin:0;font-size:{{ h1Size }};font-weight:700;letter-spacing:-.035em;line-height:1.08;text-wrap:balance;color:#0A0A0A">Tecnologia brasileira para foco e performance.</h1>
+      <p style="margin:18px auto 0;max-width:380px;font-size:{{ leadP }};line-height:1.55;color:#3D3A35;text-wrap:pretty">Dois fones, dois modos de escutar: o silêncio de quem precisa se concentrar e a atenção de quem treina em movimento.</p>
+      <p style="margin:18px auto 0;max-width:380px;font-size:13px;line-height:1.5;color:#6E675E">Operada por Barganha Mix Ltda · CNPJ 43.341.597/0001-40 · Certificação Anatel · Garantia 12 meses no Brasil</p>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section style="background:#FFFFFF;border-top:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);padding:19px 0;overflow:hidden">
+    <div style="display:flex;width:max-content;animation:meeky-marquee 34s linear infinite">
+      <div style="display:flex;align-items:center;gap:38px;flex:0 0 auto;padding-right:38px"><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span></div>
+      <div style="display:flex;align-items:center;gap:38px;flex:0 0 auto;padding-right:38px"><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span></div>
+    </div>
+  </section>
+
+  <div style="background:#fff;display:grid;grid-template-columns:{{ splitCols }};align-items:center;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}" data-reveal="">
+    <div style="display:flex;align-items:center;justify-content:center;padding-left:{{ secPadX }};padding-right:{{ secPadX }}">
+      <img src="assets/meeky-logo-3d.webp" alt="Logo MEEKY em 3D" style="width:{{ logoW }};height:auto">
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;padding:{{ splitPad }};text-align:{{ splitAlign }}">
+      <h2 style="margin:0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.06;text-wrap:balance">Do problema real ao produto.</h2>
+      <p style="margin:24px 0 0;font-size:{{ bodyP }};line-height:1.65;max-width:520px;color:#5A5A5A;text-wrap:pretty">A Meeky nasceu de uma dor real que o Filipe vivia no dia a dia: a dificuldade de manter foco, produtividade e equilíbrio em meio ao excesso de barulho, distrações e ansiedade.</p>
+      <p style="margin:18px 0 0;font-size:{{ bodyP }};line-height:1.65;max-width:520px;color:#5A5A5A;text-wrap:pretty">Uma viagem à China — contato direto com fábricas, processos de produção e tendências do mercado de áudio — mostrou o potencial do produto. O Brasil mostrou a dor do público. A Meeky nasceu no encontro dessas duas visões.</p>
+    </div>
+  </div>
+
+  <section style="background:#0C0C0C;color:#F9F8F6;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
+    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }};text-align:center" data-reveal="">
+      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#DEA85E"><span style="width:26px;height:1px;background:#DEA85E;display:inline-block"></span>Desenvolvimento</div>
+      <h2 style="margin:20px auto 0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;max-width:800px;line-height:1.1">Do conceito ao F5 ANC Pro.</h2>
+      <p style="margin:24px auto 0;max-width:720px;font-size:{{ bodyP }};line-height:1.65;color:rgba(249,248,246,.7);text-wrap:pretty">A escolha do produto passou por análise de mercado, contato com fornecedores, avaliação de qualidade de construção, conforto, bateria, Bluetooth, cancelamento ativo de ruído e certificação para venda no Brasil.</p>
+      <div style="margin-top:52px;display:grid;grid-template-columns:{{ statCols }};gap:14px;text-align:left">
+        <sc-for list="{{ devStats }}" as="s" hint-placeholder-count="4">
+          <div style="padding:{{ statPad }};border-radius:26px;background:radial-gradient(130% 120% at 0% 0%,rgba(226,173,104,.16),rgba(255,255,255,.03) 52%,rgba(255,255,255,.02) 100%);border:1px solid rgba(255,255,255,.1);transition:transform .5s cubic-bezier(.16,.84,.44,1),border-color .45s" style-hover="transform:translateY(-6px);border-color:rgba(226,173,104,.5)">
+            <b style="display:block;font-size:{{ statNum }};font-weight:700;letter-spacing:-.03em;color:#DEA85E;margin-bottom:10px">{{ s.n }}</b>
+            <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(249,248,246,.62)">{{ s.k }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
+    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }};text-align:center" data-reveal="">
+      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>Fundadores</div>
+      <h2 style="margin:20px auto 0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.06;max-width:16ch;text-wrap:balance">Quem está por trás da Meeky.</h2>
+      <div style="margin-top:48px;display:grid;grid-template-columns:{{ founderCols }};gap:16px;text-align:left">
+        <sc-for list="{{ founders }}" as="f" hint-placeholder-count="2">
+          <div style="padding:{{ founderPad }};border-radius:26px;border:1px solid #EFE9DF;background:radial-gradient(130% 120% at 0% 0%,rgba(196,134,59,.16),rgba(251,248,243,.9) 52%,rgba(251,248,243,.85) 100%);transition:transform .5s cubic-bezier(.16,.84,.44,1),border-color .45s" style-hover="transform:translateY(-6px);border-color:rgba(196,134,59,.55)">
+            <h3 style="margin:0;font-size:{{ founderName }};font-weight:600;letter-spacing:-.015em">{{ f.name }}</h3>
+            <p style="margin:8px 0 0;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:#C4863B">{{ f.role }}</p>
+            <p style="margin:20px 0 0;font-size:{{ bodyP }};line-height:1.65;color:#5A5A5A;text-wrap:pretty">{{ f.bio }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#0C0C0C;color:#F9F8F6;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
+    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }};text-align:center" data-reveal="">
+      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#DEA85E"><span style="width:26px;height:1px;background:#DEA85E;display:inline-block"></span>Em números</div>
+      <h2 style="margin:20px auto 0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.1;max-width:800px">O que os clientes já confirmaram.</h2>
+      <div style="margin-top:44px;display:grid;grid-template-columns:{{ statCols }};gap:14px;text-align:left">
+        <sc-for list="{{ numbers }}" as="s" hint-placeholder-count="4">
+          <div style="padding:{{ statPad }};border-radius:26px;background:radial-gradient(130% 120% at 0% 0%,rgba(226,173,104,.16),rgba(255,255,255,.03) 52%,rgba(255,255,255,.02) 100%);border:1px solid rgba(255,255,255,.1);transition:transform .5s cubic-bezier(.16,.84,.44,1),border-color .45s" style-hover="transform:translateY(-6px);border-color:rgba(226,173,104,.5)">
+            <b style="display:block;font-size:{{ statNum }};font-weight:700;letter-spacing:-.03em;color:#DEA85E;margin-bottom:10px">{{ s.n }}</b>
+            <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(249,248,246,.62)">{{ s.k }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <section style="position:relative;background:#050505 url('assets/bg-final.webp') center center/cover no-repeat;color:#F9F8F6;padding:150px 24px;box-sizing:border-box;display:grid;place-items:center;text-align:center;overflow:hidden">
+    <div style="position:relative;max-width:{{ ctaMax }};margin:0 auto" data-reveal="">
+      <h2 style="margin:0 auto;font-size:{{ ctaH2 }};font-weight:700;letter-spacing:-.03em;line-height:1.16;text-wrap:balance">A Meeky nasceu para devolver às pessoas o controle do próprio ambiente.</h2>
+      <div style="margin-top:38px">
+        <a href="Produto.html" style="display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:999px;border:none;overflow:hidden;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#C99450;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;box-shadow:0 10px 26px -14px rgba(196,134,59,.9);transition:background-position .5s cubic-bezier(.3,.7,.4,1),transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(0,0,0,.55)"><span style="display:block;padding:19px 42px">Conhecer o produto</span></a>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}">
+  <section style="position:relative;background:#050505 url('assets/bg-final-mobile.webp') center center/cover no-repeat;color:#F9F8F6;padding:80px 20px;box-sizing:border-box;display:grid;place-items:center;text-align:center;overflow:hidden">
+    <div style="position:relative;max-width:{{ ctaMax }}" data-reveal="">
+      <h2 style="margin:0;font-size:{{ ctaH2 }};font-weight:700;letter-spacing:-.03em;line-height:1.14;text-wrap:balance">A Meeky nasceu para devolver às pessoas o controle do próprio ambiente.</h2>
+      <a href="Produto.html" style="margin:30px auto 0;width:min(340px,100%);box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:19px 24px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#fff;text-decoration:none;background-color:#C99450;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s" style-hover="color:#0A0A0A;background-position:0 0">Conhecer o produto</a>
+    </div>
+  </section>
+  </sc-if>
+
+  <dc-import name="Footer" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = (() => { const w = (typeof document !== 'undefined' && document.documentElement.clientWidth) || 1440; return { isMobile: w <= 860, vw: w }; })();
+  renderVals() {
+    const m = this.state.isMobile;
+    const mid = !m && this.state.vw < 1100;
+    return {
+      rootRef: this._rootRef || (this._rootRef = React.createRef()),
+      isMobile: m, isDesktop: !m,
+      secPadY: m ? '60px' : '130px',
+      secPadX: m ? '20px' : '40px',
+      heroPadTop: m ? '38px' : '72px',
+      heroCols: m ? '1fr' : 'minmax(0,.9fr) minmax(0,1.1fr)',
+      heroTextOrder: m ? '2' : '1',
+      heroImgH: m ? '260px' : '560px',
+      heroPadL: m ? '20px' : 'clamp(40px,6vw,90px)',
+      ctaH2: m ? '26px' : 'clamp(26px,2.3vw,34px)',
+      ctaMax: m ? '340px' : '560px',
+      h1Size: m ? '38px' : 'clamp(42px,4.6vw,64px)',
+      h2Size: m ? '34px' : 'clamp(36px,3.9vw,54px)',
+      leadP: m ? '18px' : '21px',
+      bodyP: m ? '17px' : '19px',
+      splitCols: m ? '1fr' : '1fr 1fr',
+      splitPad: m ? '24px 20px 0' : '0 clamp(32px,6vw,90px) 0 0',
+      splitAlign: m ? 'center' : 'left',
+      logoW: m ? '78%' : '82%',
+      statCols: m ? '1fr 1fr' : (mid ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))'),
+      statPad: m ? '28px 22px' : '44px 36px',
+      statNum: m ? '32px' : '46px',
+      founderCols: m ? '1fr' : 'repeat(2,minmax(0,1fr))',
+      founderPad: m ? '32px 26px' : '48px 44px',
+      founderName: m ? '22px' : '24px',
+      devStats: [
+        { n: '20dB', k: 'ANC Ativo' },
+        { n: '70h', k: 'Bateria' },
+        { n: '5.4', k: 'BT Multiponto' },
+        { n: '40mm', k: 'Driver Hi-Fi' }
+      ],
+      numbers: [
+        { n: '5,0/5', k: 'Avaliação média' },
+        { n: '+500', k: 'Avaliações verificadas' },
+        { n: 'Top 7', k: 'TechTudo ANC 2026' },
+        { n: '12m', k: 'Garantia Brasil' }
+      ],
+      founders: [
+        { name: 'Filipe Cardoso', role: 'Cofundador', bio: 'Engenheiro e empreendedor no mercado de tecnologia e marketplaces. Lidera produto, fornecedores e estratégia comercial — do conceito ao headphone que você tem nas mãos.' },
+        { name: 'Fernanda Micchi', role: 'Cofundadora', bio: 'Especialista em RH, saúde emocional e desenvolvimento humano. Conecta tecnologia com foco, presença e bem-estar.' }
+      ]
+    };
+  }
+  componentDidMount() { this.setupViewport(); this.setupReveal(); this.setupSmoothScroll(); }
+  componentDidUpdate() { this.setupReveal(); }
+  setupViewport() {
+    const check = () => {
+      const el = this._rootRef && this._rootRef.current;
+      const w = (el && el.getBoundingClientRect().width) || document.documentElement.clientWidth || window.innerWidth || 0;
+      if (!w) return;
+      const m = w <= 860;
+      if (m !== this.state.isMobile || w !== this.state.vw) this.setState({ isMobile: m, vw: w });
+    };
+    this._onMq = check;
+    window.addEventListener('resize', check);
+    if (window.ResizeObserver) {
+      this._ro = new ResizeObserver(check);
+      this._ro.observe(document.documentElement);
+      const el = this._rootRef && this._rootRef.current;
+      if (el) this._ro.observe(el);
+    }
+    requestAnimationFrame(check);
+    setTimeout(check, 300);
+    check();
+  }
+  setupSmoothScroll() {
+    if (window.__meekyLenis) return;
+    const start = () => {
+      if (!window.Lenis) return;
+      const opts = { duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, touchMultiplier: 1.6 };
+      const canScroll = el => {
+        if (!el || el.scrollHeight <= el.clientHeight + 4) return false;
+        const prev = el.scrollTop;
+        el.scrollTop = prev + 2;
+        const moved = el.scrollTop !== prev;
+        el.scrollTop = prev;
+        return moved;
+      };
+      const root = document.scrollingElement || document.documentElement;
+      if (!canScroll(root)) {
+        let found = null;
+        const walk = el => {
+          if (found || !el) return;
+          if (el !== root && canScroll(el)) { found = el; return; }
+          for (const c of el.children) walk(c);
+        };
+        walk(document.body);
+        if (!found) return;
+        opts.wrapper = found;
+        opts.content = found.firstElementChild || found;
+      }
+      const lenis = new window.Lenis(opts);
+      window.__meekyLenis = lenis;
+      let lastFrame = 0;
+      const raf = t => { lastFrame = t; lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+      setInterval(() => { const n = performance.now(); if (n - lastFrame > 100) lenis.raf(n); }, 16);
+    };
+    if (window.Lenis) return start();
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.onload = start;
+    document.head.appendChild(s);
+  }
+  setupReveal() {
+    const nodes = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]:not([data-reveal-ready])'));
+    nodes.forEach(el => {
+      el.setAttribute('data-reveal-ready', '');
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(26px)';
+      el.style.transition = 'opacity .9s cubic-bezier(.16,.84,.44,1), transform .9s cubic-bezier(.16,.84,.44,1)';
+    });
+    if (!this._onScroll) {
+      this._onScroll = () => this.tickReveal();
+      window.addEventListener('scroll', this._onScroll, true);
+      window.addEventListener('resize', this._onScroll);
+      this._poll = setInterval(this._onScroll, 400);
+    }
+    this.tickReveal();
+  }
+  tickReveal() {
+    const h = window.innerHeight || document.documentElement.clientHeight || 0;
+    const list = document.querySelectorAll('[data-reveal-ready]:not([data-reveal-done])');
+    if (!list.length) { clearInterval(this._poll); this._poll = null; return; }
+    list.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (!h || r.top < h * 0.88) {
+        el.setAttribute('data-reveal-done', '');
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+  }
+  componentWillUnmount() {
+    if (this._onMq) window.removeEventListener('resize', this._onMq);
+    if (this._ro) this._ro.disconnect();
+    clearInterval(this._poll);
+    if (this._onScroll) {
+      window.removeEventListener('scroll', this._onScroll, true);
+      window.removeEventListener('resize', this._onScroll);
+    }
+  }
+}
+</script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWMG33GN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

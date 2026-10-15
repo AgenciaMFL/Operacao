@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meeky.com.br/sitemap.xml

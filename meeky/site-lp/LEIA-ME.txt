@@ -1,0 +1,20 @@
+Meeky - site estatico (pronto para Netlify)
+
+Arquivos:
+  index.html   -> Home (pagina inicial)
+  Home.html, Produto.html, Motion1.html, Sobre.html, Duvidas.html, Contato.html
+  Header.dc.html / Footer.dc.html -> menu e rodape compartilhados (nao renomear)
+  support.js, meeky-3d.js, image-slot.js, meeky-form-modal.js
+  assets/ -> imagens, video (.webm) e o modelo 3D (fone-meeky-v5.glb)
+
+Como publicar:
+  Arraste a pasta inteira para o Netlify Drop (app.netlify.com/drop).
+  Mantenha a estrutura: as paginas carregam os assets por caminho relativo.
+
+Sem tela de carregamento: as paginas abrem direto e os assets sao baixados
+sob demanda pelo navegador (por isso ficam em /assets em vez de embutidos).
+
+Recursos externos (precisam de internet):
+  - three.js (visualizador 3D) via esm.sh
+  - fonte SF Pro Display via fonts.cdnfonts.com
+  - formulario LeadConnector (popup dos botoes e pagina de contato)
