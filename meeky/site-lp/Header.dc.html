@@ -13,7 +13,7 @@
   @keyframes move-up-alternate{0%{transform:translateY(0)}50%{transform:translateY(80%)}51%{transform:translateY(-80%)}to{transform:translateY(0)}}
   @keyframes menu-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 </style>
-<script src="./meeky-form-modal.js?v=20261015c"></script>
+<script src="./meeky-form-modal.js?v=20261015d"></script>
 </helmet>
 <div style="position:relative;background:rgba(255,255,255,.88);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid rgba(0,0,0,.07);font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif">
   <div style="max-width:1320px;margin:0 auto;padding-left:{{ padX }};padding-right:{{ padX }};height:74px;display:flex;align-items:center;justify-content:space-between;gap:28px">
@@ -129,9 +129,9 @@ class Component extends DCLogic {
       onLeave: children[i.id] ? () => this.setState({ openMenu: null }) : null
     }));
     const m = this.state.isMobile, open = m && this.state.open;
-    // Checkout da loja (meeky.com.br) já com o produto da página: Motion 1 ou F5 ANC Pro
+    // Checkout (cópia do checkout da loja no site da LP) já com o produto da página: Motion 1 ou F5 ANC Pro
     const isMotion = /motion1/i.test((typeof location !== 'undefined' && location.pathname) || '');
-    const checkoutHref = 'https://meeky.com.br/checkout?produto=' + (isMotion ? 'motion1' : 'f5') + '&qty=1';
+    const checkoutHref = 'Checkout.html?produto=' + (isMotion ? 'motion1' : 'f5') + '&qty=1';
     return {
       items,
       checkoutHref,

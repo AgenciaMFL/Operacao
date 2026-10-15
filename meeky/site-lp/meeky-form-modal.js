@@ -3,7 +3,7 @@
 
   // Formulários do GoHighLevel abertos em popup.
   // "checkout_f5" / "checkout_motion1" = dados do comprador antes do pagamento, um formulário por produto
-  //   (links para meeky.com.br/checkout?produto=...). Ao enviar, a pessoa segue para o checkout da loja
+  //   (links para Checkout.html?produto=...). Ao enviar, a pessoa segue para o checkout
   //   já com nome, e-mail e telefone preenchidos.
   // "volume" = cotação para compra em volume (botões com data-meeky-form="volume").
   var FORMS = {
@@ -34,6 +34,8 @@
   };
 
   var EMBED_SRC = 'https://link.msgsndr.com/js/form_embed.js';
+  // Links de compra: checkout do site da LP (Checkout.html / /lp/Checkout) ou o da loja (meeky.com.br/checkout)
+  var CHECKOUT_RE = /(meeky\.com\.br\/checkout|(^|\/)Checkout(\.html)?(\?|$))/i;
   var modals = {}, current = null, lastFocus = null;
   var pending = null; // { href, product, captured: {}, done }
 
@@ -294,7 +296,7 @@
 
     var token = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2);
     try { sessionStorage.setItem(STORE.sessionKey, token); } catch (e) {}
-    var url = new URL(p.href);
+    var url = new URL(p.href, location.href);
     url.searchParams.set('resume', token);
     var utm = new URLSearchParams(location.search);
     var body = {
@@ -327,7 +329,7 @@
     if (!el || el.hasAttribute('data-go')) return null;
     if (el.hasAttribute('data-meeky-form')) return el.getAttribute('data-meeky-form') || 'checkout';
     var href = el.getAttribute('data-href') || el.getAttribute('href') || '';
-    if (/meeky\.com\.br\/checkout/i.test(href)) return 'checkout';
+    if (CHECKOUT_RE.test(href)) return 'checkout';
     if (/\/pre-cadastro|#comprar/i.test(href)) return 'checkout';
     return null;
   }
@@ -352,8 +354,8 @@
     e.stopPropagation();
     if (key === 'checkout') {
       var target = el.getAttribute('data-href') || el.getAttribute('href') || '';
-      var href = withTracking(/meeky\.com\.br\/checkout/i.test(target) ? target : 'https://meeky.com.br/checkout?produto=f5&qty=1');
-      var prod = (new URL(href).searchParams.get('produto') || 'f5').toLowerCase();
+      var href = withTracking(CHECKOUT_RE.test(target) ? target : 'Checkout.html?produto=f5&qty=1');
+      var prod = (new URL(href, location.href).searchParams.get('produto') || 'f5').toLowerCase();
       if (!FORMS['checkout_' + prod]) prod = 'f5';
       key = 'checkout_' + prod;
       pending = { href: href, product: prod, key: key, captured: {}, done: false };
@@ -365,7 +367,7 @@
   // para o popup abrir já pronto
   function preload() {
     var hasVolume = document.querySelector('[data-meeky-form="volume"]');
-    var links = [].slice.call(document.querySelectorAll('a[href*="meeky.com.br/checkout"],a[data-href*="meeky.com.br/checkout"]'));
+    var links = [].slice.call(document.querySelectorAll('a[href],a[data-href]')).filter(function (a) { return CHECKOUT_RE.test(a.getAttribute('data-href') || a.getAttribute('href') || ''); });
     links.forEach(function (a) {
       var h = a.getAttribute('data-href') || a.getAttribute('href') || '';
       build(/produto=motion1/i.test(h) ? 'checkout_motion1' : 'checkout_f5');
