@@ -2,13 +2,19 @@
   if (window.__meekyFormModal) return;
 
   // Formulários do GoHighLevel abertos em popup.
-  // "checkout" = dados do comprador antes do pagamento (todos os links para meeky.com.br/checkout).
-  //   Ao enviar, a pessoa segue para o checkout da loja já com nome, e-mail e telefone preenchidos.
-  // "volume"   = cotação para compra em volume (botões com data-meeky-form="volume").
+  // "checkout_f5" / "checkout_motion1" = dados do comprador antes do pagamento, um formulário por produto
+  //   (links para meeky.com.br/checkout?produto=...). Ao enviar, a pessoa segue para o checkout da loja
+  //   já com nome, e-mail e telefone preenchidos.
+  // "volume" = cotação para compra em volume (botões com data-meeky-form="volume").
   var FORMS = {
-    checkout: {
-      id: 'CpduQRS40KxxCGUNOgLR', name: 'Formulario Checkout', height: 470,
-      eyebrow: 'Finalizar compra', title: 'Seus dados para o pedido',
+    checkout_f5: {
+      id: 'CpduQRS40KxxCGUNOgLR', name: 'Formulario Checkout Meeky F5', height: 434, checkout: true,
+      eyebrow: 'Meeky F5 ANC Pro', title: 'Seus dados para o pedido',
+      sub: 'Preencha e siga direto para o pagamento seguro.'
+    },
+    checkout_motion1: {
+      id: 'pr5mwxAGVCq4cvyWbe8s', name: 'Formulario Checkout Motion 1', height: 434, checkout: true,
+      eyebrow: 'Meeky Motion 1', title: 'Seus dados para o pedido',
       sub: 'Preencha e siga direto para o pagamento seguro.'
     },
     volume: {
@@ -17,7 +23,6 @@
       sub: 'Condições especiais para empresas e grandes quantidades. Nossa equipe responde rápido.'
     }
   };
-  FORMS['default'] = FORMS.checkout;
 
   // Checkout da loja (Lovable/Supabase). A chave é a "publishable" (pública por natureza,
   // a mesma que o site da loja já expõe no navegador).
@@ -137,7 +142,7 @@
       if (m.loads < 0) { m.loads = 1; return; }
       m.loads++;
       // Se o GHL recarregar o iframe depois do envio, consideramos o formulário enviado
-      if (key === 'checkout' && m.loads > 1 && pending && current === m) onSubmitted('iframe-reload');
+      if (f.checkout && m.loads > 1 && pending && current === m) onSubmitted('iframe-reload');
     });
 
     card.appendChild(close);
@@ -156,7 +161,7 @@
   }
 
   function show(key) {
-    key = FORMS[key] ? key : 'checkout';
+    key = FORMS[key] ? key : 'checkout_f5';
     var m = build(key);
     if (m.used) resetForm(m);
     current = m;
@@ -176,7 +181,7 @@
     var m = current;
     if (!m) return;
     current = null;
-    if (m === modals.checkout && pending && !pending.done) pending = null;
+    if (pending && m === modals[pending.key] && !pending.done) pending = null;
     m.overlay.style.opacity = '0';
     m.card.style.transform = 'translateY(16px) scale(.98)';
     if (window.__meekyLenis) window.__meekyLenis.start();
@@ -265,7 +270,7 @@
   function onSubmitted(why) {
     if (!pending || pending.done || pending.waiting) return;
     pending.waiting = true;
-    var m = modals.checkout;
+    var m = modals[pending.key];
     if (m) { m.used = true; m.going.style.display = 'flex'; }
     // dá um instante para o GHL terminar de enviar e gravar o contato
     setTimeout(function () {
@@ -281,7 +286,7 @@
     var c = p.captured;
     if (!c.name && (c.first || c.last)) c.name = [c.first, c.last].filter(Boolean).join(' ');
     var go = function (url) {
-      var a = modals.checkout && modals.checkout.going.querySelector('[data-go]');
+      var a = modals[p.key] && modals[p.key].going.querySelector('[data-go]');
       if (a) { a.href = url; a.removeAttribute('data-href'); }
       location.href = url;
     };
@@ -349,7 +354,9 @@
       var target = el.getAttribute('data-href') || el.getAttribute('href') || '';
       var href = withTracking(/meeky\.com\.br\/checkout/i.test(target) ? target : 'https://meeky.com.br/checkout?produto=f5&qty=1');
       var prod = (new URL(href).searchParams.get('produto') || 'f5').toLowerCase();
-      pending = { href: href, product: prod, captured: {}, done: false };
+      if (!FORMS['checkout_' + prod]) prod = 'f5';
+      key = 'checkout_' + prod;
+      pending = { href: href, product: prod, key: key, captured: {}, done: false };
     }
     show(key);
   }, true);
@@ -358,10 +365,13 @@
   // para o popup abrir já pronto
   function preload() {
     var hasVolume = document.querySelector('[data-meeky-form="volume"]');
-    var hasBuy = document.querySelector('a[href*="meeky.com.br/checkout"],a[data-href*="meeky.com.br/checkout"]');
-    if (hasBuy) build('checkout');
+    var links = [].slice.call(document.querySelectorAll('a[href*="meeky.com.br/checkout"],a[data-href*="meeky.com.br/checkout"]'));
+    links.forEach(function (a) {
+      var h = a.getAttribute('data-href') || a.getAttribute('href') || '';
+      build(/produto=motion1/i.test(h) ? 'checkout_motion1' : 'checkout_f5');
+    });
     if (hasVolume) build('volume');
-    if ((!hasBuy || !hasVolume) && (preload.tries = (preload.tries || 0) + 1) < 20) setTimeout(preload, 500);
+    if ((!links.length || !hasVolume) && (preload.tries = (preload.tries || 0) + 1) < 20) setTimeout(preload, 500);
   }
   function schedulePreload() {
     var run = function () { (window.requestIdleCallback || function (cb) { setTimeout(cb, 300); })(preload); };
