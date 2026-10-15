@@ -29,7 +29,6 @@
   };
 
   var EMBED_SRC = 'https://link.msgsndr.com/js/form_embed.js';
-  var DEBUG = /[?&]ghl-debug/.test(location.search);
   var modals = {}, current = null, lastFocus = null;
   var pending = null; // { href, product, captured: {}, done }
 
@@ -39,21 +38,6 @@
     l.rel = 'preconnect'; l.href = h; l.crossOrigin = '';
     document.head.appendChild(l);
   });
-
-  function log() {
-    if (!DEBUG) return;
-    var args = [].slice.call(arguments);
-    console.log.apply(console, ['[meeky-form]'].concat(args));
-    var box = document.getElementById('meeky-ghl-debug');
-    if (!box) {
-      box = document.createElement('pre');
-      box.id = 'meeky-ghl-debug';
-      box.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:100000;max-width:min(560px,95vw);max-height:40vh;overflow:auto;margin:0;padding:10px;background:rgba(0,0,0,.85);color:#9f9;font:11px/1.4 monospace;border-radius:8px;white-space:pre-wrap';
-      document.body.appendChild(box);
-    }
-    box.textContent += args.map(function (a) { return typeof a === 'string' ? a : JSON.stringify(a); }).join(' ').slice(0, 600) + '\n';
-    box.scrollTop = box.scrollHeight;
-  }
 
   function ensureEmbedScript() {
     if (document.querySelector('script[src*="link.msgsndr.com/js/form_embed.js"]')) return;
@@ -148,12 +132,12 @@
       document.head.appendChild(st);
     }
 
-    var loads = 0;
     iframe.addEventListener('load', function () {
-      loads++;
-      log('iframe load #' + loads, key);
+      var m = modals[key];
+      if (m.loads < 0) { m.loads = 1; return; }
+      m.loads++;
       // Se o GHL recarregar o iframe depois do envio, consideramos o formulário enviado
-      if (key === 'checkout' && loads > 1 && pending && current === modals.checkout) onSubmitted('iframe-reload');
+      if (key === 'checkout' && m.loads > 1 && pending && current === m) onSubmitted('iframe-reload');
     });
 
     card.appendChild(close);
@@ -167,13 +151,14 @@
     overlay.addEventListener('click', function (e) { if (e.target === overlay) hide(); });
     document.body.appendChild(overlay);
     ensureEmbedScript();
-    modals[key] = { overlay: overlay, card: card, iframe: iframe, going: going };
+    modals[key] = { overlay: overlay, card: card, iframe: iframe, going: going, loads: 0, used: false, formId: f.id };
     return modals[key];
   }
 
   function show(key) {
     key = FORMS[key] ? key : 'checkout';
     var m = build(key);
+    if (m.used) resetForm(m);
     current = m;
     m.going.style.display = 'none';
     m.overlay.style.display = 'flex';
@@ -202,6 +187,29 @@
   }
 
   function onKey(e) { if (e.key === 'Escape') hide(); }
+
+  // Volta o formulário ao estado inicial (depois de um envio já feito)
+  function resetForm(m) {
+    m.used = false;
+    m.loads = -1; // a próxima carga é o formulário "novo", não um envio
+    m.iframe.src = 'https://api.leadconnectorhq.com/widget/form/' + m.formId + '?r=' + Date.now();
+  }
+
+  // Voltou do checkout pelo botão "voltar": fecha o popup e deixa o formulário pronto de novo
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    pending = null;
+    Object.keys(modals).forEach(function (k) {
+      var m = modals[k];
+      m.going.style.display = 'none';
+      m.overlay.style.opacity = '0';
+      m.overlay.style.display = 'none';
+      if (m.used) resetForm(m);
+    });
+    current = null;
+    if (window.__meekyLenis) window.__meekyLenis.start();
+    document.documentElement.style.overflow = '';
+  });
 
   // ---------- Dados enviados no formulário do GHL ----------
 
@@ -247,7 +255,6 @@
 
   window.addEventListener('message', function (ev) {
     if (!/leadconnectorhq\.com|msgsndr\.com|leadconnector|gohighlevel/i.test(ev.origin || '')) return;
-    log('msg', ev.origin, ev.data);
     if (!pending || pending.done) return;
     harvest(ev.data, pending.captured, 0);
     var txt = '';
@@ -258,9 +265,8 @@
   function onSubmitted(why) {
     if (!pending || pending.done || pending.waiting) return;
     pending.waiting = true;
-    log('submit detectado:', why);
     var m = modals.checkout;
-    if (m) m.going.style.display = 'flex';
+    if (m) { m.used = true; m.going.style.display = 'flex'; }
     // dá um instante para o GHL terminar de enviar e gravar o contato
     setTimeout(function () {
       harvestStorage(pending.captured);
@@ -274,11 +280,11 @@
     p.done = true;
     var c = p.captured;
     if (!c.name && (c.first || c.last)) c.name = [c.first, c.last].filter(Boolean).join(' ');
-    log('dados capturados:', c);
     var go = function (url) {
       var a = modals.checkout && modals.checkout.going.querySelector('[data-go]');
       if (a) { a.href = url; a.removeAttribute('data-href'); }
-      log('indo para', url); if (!DEBUG) location.href = url; else log('(modo diagnóstico: não redireciona sozinho — use o link "Se não abrir, clique aqui")'); };
+      location.href = url;
+    };
     if (!c.email || !EMAIL_RE.test(c.email)) return go(p.href);
 
     var token = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2);
@@ -307,7 +313,7 @@
       keepalive: true,
       headers: { 'Content-Type': 'application/json', apikey: STORE.anonKey, Authorization: 'Bearer ' + STORE.anonKey },
       body: JSON.stringify(body)
-    }).then(function (r) { log('loja respondeu', r.status); finish(); }, function (e) { log('erro loja', String(e)); finish(); });
+    }).then(finish, finish);
   }
 
   // ---------- Cliques ----------
@@ -344,7 +350,6 @@
       var href = withTracking(/meeky\.com\.br\/checkout/i.test(target) ? target : 'https://meeky.com.br/checkout?produto=f5&qty=1');
       var prod = (new URL(href).searchParams.get('produto') || 'f5').toLowerCase();
       pending = { href: href, product: prod, captured: {}, done: false };
-      log('checkout pendente', pending);
     }
     show(key);
   }, true);
