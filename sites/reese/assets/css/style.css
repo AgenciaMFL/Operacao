@@ -569,3 +569,11 @@ body.menu-open .wa-float { opacity: 0; pointer-events: none; }
 @media (min-width: 900px) { .feature__tag--out { right: -6%; } }
 @media (max-width: 899px) { .feature__tag { right: .8rem; } .seal { width: 112px; height: 112px; } .hero .seal { left: -12px !important; } }
 main { overflow-x: clip; }
+
+/* Hero claro (bege quente) */
+.hero--light { color: var(--ink); background: linear-gradient(180deg, var(--sand-100), var(--sand-200)); }
+.hero--light .hero__glow { opacity: .7; }
+.hero--light .hero__glow--a { background: radial-gradient(circle, #f9f4ea, transparent 62%); }
+.hero--light .hero__glow--b { background: radial-gradient(circle, #d4b593, transparent 62%); opacity: .55; }
+.hero--light .seal { background: var(--moss-800); color: var(--sand-100); }
+.marquee--dark { background: var(--brown-700); color: var(--sand-100); border-color: transparent; }
