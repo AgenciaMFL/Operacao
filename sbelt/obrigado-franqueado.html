@@ -1,0 +1,195 @@
+<!--
+  Sbelt Laser - Página de obrigado (franqueados)
+  Cole num único widget HTML do Elementor, em página com modelo "Elementor Canvas".
+  Vídeo: YouTube Shorts OE0kccRahQA (carrega só ao tocar, para a página abrir rápido).
+-->
+<style>
+  .sb-obg, .sb-obg * { box-sizing: border-box; }
+  .sb-obg {
+    --laranja: #F58220;
+    --laranja-2: #F26A1B;
+    --petroleo: #0B2A33;
+    --texto: #4A5B60;
+    --creme: #FFF8F2;
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 16px 56px;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(245, 130, 32, .14), transparent 60%),
+      radial-gradient(700px 420px at -10% 110%, rgba(11, 42, 51, .08), transparent 60%),
+      var(--creme);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--petroleo);
+  }
+  .sb-obg__wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    grid-template-areas: "topo midia" "passos midia";
+    column-gap: 56px;
+    align-items: center;
+  }
+  .sb-obg__topo { grid-area: topo; align-self: end; }
+  .sb-obg__corpo { grid-area: passos; align-self: start; }
+  .sb-obg__midia { grid-area: midia; }
+  .sb-obg__selo {
+    width: 64px; height: 64px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--laranja), var(--laranja-2));
+    box-shadow: 0 14px 30px -12px rgba(242, 106, 27, .8);
+    margin-bottom: 22px;
+    animation: sb-pop .6s cubic-bezier(.2, .9, .25, 1.3) both;
+  }
+  .sb-obg__selo svg { width: 30px; height: 30px; }
+  @keyframes sb-pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .sb-obg h1 {
+    margin: 0 0 14px;
+    font-size: clamp(30px, 4.4vw, 46px);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -.5px;
+  }
+  .sb-obg h1 span { color: var(--laranja); }
+  .sb-obg__lead { margin: 0 0 28px; font-size: 18px; line-height: 1.6; color: var(--texto); max-width: 520px; }
+  .sb-obg__passos { list-style: none; margin: 0 0 32px; padding: 0; display: grid; gap: 14px; max-width: 520px; }
+  .sb-obg__passos li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1.5px solid #F1E6DB;
+    border-radius: 14px;
+    font-size: 15.5px; line-height: 1.5; color: var(--texto);
+  }
+  .sb-obg__passos b { color: var(--petroleo); display: block; margin-bottom: 2px; }
+  .sb-obg__num {
+    flex: none; width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: #FFF3E8; color: var(--laranja-2);
+    font-weight: 800; font-size: 14px;
+  }
+  .sb-obg__btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 54px; padding: 0 28px;
+    border-radius: 12px;
+    background: var(--petroleo); color: #fff !important;
+    font-weight: 700; font-size: 15px; text-decoration: none !important;
+    transition: transform .15s, box-shadow .2s;
+    box-shadow: 0 12px 24px -14px rgba(11, 42, 51, .7);
+  }
+  .sb-obg__btn:hover { transform: translateY(-2px); }
+
+  /* Vídeo vertical (Shorts) */
+  .sb-obg__video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--petroleo) center / cover no-repeat;
+    box-shadow: 0 30px 60px -24px rgba(11, 42, 51, .55), 0 0 0 6px #fff;
+    cursor: pointer;
+    border: 0; padding: 0;
+    display: block;
+  }
+  .sb-obg__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .sb-obg__video::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(11, 42, 51, 0) 55%, rgba(11, 42, 51, .55));
+    transition: opacity .2s;
+  }
+  .sb-obg__play {
+    position: absolute; left: 50%; top: 50%; z-index: 2;
+    width: 76px; height: 76px; margin: -38px 0 0 -38px;
+    border-radius: 50%;
+    background: var(--laranja);
+    display: grid; place-items: center;
+    box-shadow: 0 0 0 10px rgba(245, 130, 32, .28);
+    animation: sb-pulso 1.8s ease-out infinite;
+  }
+  .sb-obg__play svg { width: 30px; height: 30px; margin-left: 4px; }
+  @keyframes sb-pulso { 0% { box-shadow: 0 0 0 0 rgba(245, 130, 32, .5); } 100% { box-shadow: 0 0 0 22px rgba(245, 130, 32, 0); } }
+  .sb-obg__legenda {
+    position: absolute; left: 0; right: 0; bottom: 18px; z-index: 2;
+    text-align: center; color: #fff; font-weight: 700; font-size: 14px;
+  }
+  .sb-obg__video.sb-tocando::after, .sb-obg__video.sb-tocando .sb-obg__play, .sb-obg__video.sb-tocando .sb-obg__legenda { display: none; }
+
+  @media (max-width: 860px) {
+    .sb-obg { padding: 32px 16px 44px; }
+    .sb-obg__wrap { grid-template-columns: 1fr; grid-template-areas: "topo" "midia" "passos"; row-gap: 28px; }
+    .sb-obg__topo { text-align: center; }
+    .sb-obg__selo { margin-left: auto; margin-right: auto; }
+    .sb-obg__lead { margin: 0 auto; }
+    .sb-obg__passos { margin-left: auto; margin-right: auto; }
+    .sb-obg__midia { max-width: 300px; width: 100%; margin: 0 auto; }
+    .sb-obg__btn { width: 100%; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sb-obg__selo, .sb-obg__play { animation: none; }
+  }
+</style>
+
+<main class="sb-obg">
+  <div class="sb-obg__wrap">
+    <div class="sb-obg__topo">
+      <div class="sb-obg__selo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <h1>Recebemos seus dados, <span>futuro franqueado!</span></h1>
+      <p class="sb-obg__lead">Obrigado pelo interesse em fazer parte da Sbelt Laser. Nossa equipe de expansão vai analisar suas informações e entrar em contato pelo WhatsApp informado.</p>
+    </div>
+
+    <div class="sb-obg__corpo">
+      <ol class="sb-obg__passos">
+        <li><span class="sb-obg__num">1</span><span><b>Assista ao vídeo</b>Conheça um pouco mais sobre a Sbelt Laser enquanto preparamos o seu contato.</span></li>
+        <li><span class="sb-obg__num">2</span><span><b>Fique de olho no WhatsApp</b>É por lá que a equipe de expansão vai falar com você.</span></li>
+        <li><span class="sb-obg__num">3</span><span><b>Tenha suas dúvidas em mãos</b>Na conversa, apresentamos o modelo de negócio e os próximos passos.</span></li>
+      </ol>
+
+      <a class="sb-obg__btn" href="/">Voltar para o site</a>
+    </div>
+
+    <div class="sb-obg__midia">
+      <button type="button" class="sb-obg__video" id="sb-obg-video" aria-label="Assistir ao vídeo da Sbelt Laser">
+        <span class="sb-obg__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+        </span>
+        <span class="sb-obg__legenda">Toque para assistir</span>
+      </button>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var VIDEO_ID = 'OE0kccRahQA';
+  var box = document.getElementById('sb-obg-video');
+  if (!box) return;
+
+  // Capa do vídeo (recortada no centro para o formato vertical)
+  box.style.backgroundImage = "url('https://i.ytimg.com/vi/" + VIDEO_ID + "/hqdefault.jpg')";
+
+  // Abre a conexão com o YouTube quando a pessoa encosta no vídeo
+  var aquecido = false;
+  function aquecer() {
+    if (aquecido) return; aquecido = true;
+    ['https://www.youtube-nocookie.com', 'https://i.ytimg.com'].forEach(function (u) {
+      var l = document.createElement('link'); l.rel = 'preconnect'; l.href = u; document.head.appendChild(l);
+    });
+  }
+  box.addEventListener('pointerover', aquecer, { passive: true });
+  box.addEventListener('touchstart', aquecer, { passive: true });
+
+  box.addEventListener('click', function () {
+    if (box.classList.contains('sb-tocando')) return;
+    box.classList.add('sb-tocando');
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+    f.title = 'Vídeo Sbelt Laser';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    box.appendChild(f);
+  });
+})();
+</script>
