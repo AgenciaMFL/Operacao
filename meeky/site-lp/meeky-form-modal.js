@@ -140,7 +140,7 @@
     // Aviso "levando você para o pagamento" (só no checkout)
     var going = document.createElement('div');
     going.style.cssText = 'display:none;position:absolute;inset:0;border-radius:18px;background:#111;z-index:3;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#F9F8F6;font-size:16px;text-align:center;padding:24px';
-    going.innerHTML = '<div style="width:34px;height:34px;border:3px solid rgba(222,168,94,.25);border-top-color:#DEA85E;border-radius:50%;animation:meeky-spin .8s linear infinite"></div><div>Tudo certo! Levando você para o pagamento…</div>';
+    going.innerHTML = '<div style="width:34px;height:34px;border:3px solid rgba(222,168,94,.25);border-top-color:#DEA85E;border-radius:50%;animation:meeky-spin .8s linear infinite"></div><div>Tudo certo! Levando você para o pagamento…</div><a data-go href="#" target="_top" style="font-size:13px;color:#DEA85E;text-decoration:underline">Se não abrir, clique aqui</a>';
     if (!document.getElementById('meeky-spin-kf')) {
       var st = document.createElement('style');
       st.id = 'meeky-spin-kf';
@@ -252,7 +252,7 @@
     harvest(ev.data, pending.captured, 0);
     var txt = '';
     try { txt = typeof ev.data === 'string' ? ev.data : JSON.stringify(ev.data); } catch (e) {}
-    if (/submitted|sticky|thank|success|redirect/i.test(txt) || pending.captured.email) onSubmitted('message');
+    if (/submitted|set-sticky|thank/i.test(txt)) onSubmitted('message');
   });
 
   function onSubmitted(why) {
@@ -275,7 +275,10 @@
     var c = p.captured;
     if (!c.name && (c.first || c.last)) c.name = [c.first, c.last].filter(Boolean).join(' ');
     log('dados capturados:', c);
-    var go = function (url) { log('indo para', url); if (!DEBUG) location.href = url; else setTimeout(function () { location.href = url; }, 4000); };
+    var go = function (url) {
+      var a = modals.checkout && modals.checkout.going.querySelector('[data-go]');
+      if (a) { a.href = url; a.removeAttribute('data-href'); }
+      log('indo para', url); if (!DEBUG) location.href = url; else log('(modo diagnóstico: não redireciona sozinho — use o link "Se não abrir, clique aqui")'); };
     if (!c.email || !EMAIL_RE.test(c.email)) return go(p.href);
 
     var token = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2);
@@ -310,9 +313,9 @@
   // ---------- Cliques ----------
 
   function formKey(el) {
-    if (!el) return null;
+    if (!el || el.hasAttribute('data-go')) return null;
     if (el.hasAttribute('data-meeky-form')) return el.getAttribute('data-meeky-form') || 'checkout';
-    var href = el.getAttribute('href') || '';
+    var href = el.getAttribute('data-href') || el.getAttribute('href') || '';
     if (/meeky\.com\.br\/checkout/i.test(href)) return 'checkout';
     if (/\/pre-cadastro|#comprar/i.test(href)) return 'checkout';
     return null;
@@ -337,7 +340,8 @@
     e.preventDefault();
     e.stopPropagation();
     if (key === 'checkout') {
-      var href = withTracking(/meeky\.com\.br\/checkout/i.test(el.getAttribute('href') || '') ? el.getAttribute('href') : 'https://meeky.com.br/checkout?produto=f5&qty=1');
+      var target = el.getAttribute('data-href') || el.getAttribute('href') || '';
+      var href = withTracking(/meeky\.com\.br\/checkout/i.test(target) ? target : 'https://meeky.com.br/checkout?produto=f5&qty=1');
       var prod = (new URL(href).searchParams.get('produto') || 'f5').toLowerCase();
       pending = { href: href, product: prod, captured: {}, done: false };
       log('checkout pendente', pending);
@@ -349,7 +353,7 @@
   // para o popup abrir já pronto
   function preload() {
     var hasVolume = document.querySelector('[data-meeky-form="volume"]');
-    var hasBuy = document.querySelector('a[href*="meeky.com.br/checkout"]');
+    var hasBuy = document.querySelector('a[href*="meeky.com.br/checkout"],a[data-href*="meeky.com.br/checkout"]');
     if (hasBuy) build('checkout');
     if (hasVolume) build('volume');
     if ((!hasBuy || !hasVolume) && (preload.tries = (preload.tries || 0) + 1) < 20) setTimeout(preload, 500);
