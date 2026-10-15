@@ -1,0 +1,74 @@
+<!--
+title: Contato e agendamento · Reese São José dos Campos
+description: Agende sua avaliação pelo WhatsApp (12) 99135-9788 ou visite a clínica na Av. Barão do Rio Branco, 287.
+active: contato
+body_class: page-light
+-->
+    <section class="page-hero bg-sand grain">
+      <svg class="page-hero__mono" aria-hidden="true" style="color:var(--moss-600)">{{mono}}</svg>
+      <div class="wrap">
+        <p class="eyebrow reveal">Contato</p>
+        <h1 class="reveal" style="--d:.1s">Vamos <em>conversar?</em></h1>
+        <p class="lead reveal" style="--d:.2s">Agende sua avaliação ou tire suas dúvidas. Nossa equipe responde com carinho e agilidade.</p>
+      </div>
+    </section>
+
+    <section class="section bg-paper">
+      <div class="wrap grid-2" style="align-items:start">
+        <div class="reveal">
+          <div class="channels">
+            <a class="channel channel--wa" data-wa href="#">
+              <span class="channel__k">WhatsApp</span>
+              <span class="channel__v">(12) 99135-9788</span>
+              <span class="link" style="align-self:start;margin-top:.6rem">Chamar no WhatsApp {{arrow}}</span>
+            </a>
+            <a class="channel" href="https://www.instagram.com/reese.wellness/" target="_blank" rel="noopener">
+              <span class="channel__k">Instagram</span>
+              <span class="channel__v">@reese.wellness</span>
+            </a>
+            <div class="channel">
+              <span class="channel__k">Endereço</span>
+              <span class="channel__v">Av. Barão do Rio Branco, 287, Loja 05</span>
+              <span class="muted">São José dos Campos/SP · CEP 12242-800</span>
+            </div>
+            <div class="channel">
+              <span class="channel__k">Horário · E-mail</span>
+              <span class="channel__v"><span class="tbc">[a confirmar]</span></span>
+              <span class="muted"><span class="tbc">[a confirmar]</span></span>
+            </div>
+          </div>
+          <div class="map">
+            <iframe title="Mapa: Av. Barão do Rio Branco, 287, São José dos Campos" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Av.+Bar%C3%A3o+do+Rio+Branco,+287,+S%C3%A3o+Jos%C3%A9+dos+Campos+-+SP,+12242-800&output=embed"></iframe>
+          </div>
+        </div>
+
+        <form class="form reveal" id="formulario" style="--d:.1s;scroll-margin-top:110px" novalidate>
+          <div class="form__fields">
+            <h2>Prefere que a gente <em>entre em contato?</em></h2>
+            <div class="field"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" required></div>
+            <div class="field-row">
+              <div class="field"><label for="f-wa">WhatsApp</label><input id="f-wa" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(12) 9 0000-0000" required></div>
+              <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+            </div>
+            <div class="field">
+              <label for="f-area">Qual área te interessa?</label>
+              <select id="f-area" name="area" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>Emagrecimento e Lipedema</option>
+                <option>Saúde Hormonal</option>
+                <option>Endocrinologia e Nutrologia</option>
+                <option>Injetáveis</option>
+                <option>Pele</option>
+                <option>Sobrancelhas, Lábios e Cílios</option>
+                <option>Remoção</option>
+                <option>Ainda não sei</option>
+              </select>
+            </div>
+            <div class="field"><label for="f-msg">Mensagem (opcional)</label><textarea id="f-msg" name="mensagem"></textarea></div>
+            <label class="consent"><input type="checkbox" name="consentimento" required> <span>Li e concordo com a <a href="privacidade.html">Política de Privacidade</a> e autorizo o contato da clínica pelos canais informados.</span></label>
+            <button class="btn btn--light" type="submit">Quero ser contatada {{arr}}</button>
+          </div>
+          <div class="form__success" tabindex="-1" role="status">Recebemos seu contato! Em breve nossa equipe vai falar com você pelo WhatsApp.</div>
+        </form>
+      </div>
+    </section>
