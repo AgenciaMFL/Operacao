@@ -377,8 +377,8 @@ body.menu-open .header { color: var(--sand-100) !important; background: transpar
 .quotes { display: grid; gap: 1.2rem; margin-top: 3.5rem; }
 @media (min-width: 900px) { .quotes { grid-template-columns: repeat(3, 1fr); } .quotes > :nth-child(2) { translate: 0 2.5rem; } }
 .quote { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem; min-height: 340px; padding: 2.2rem 2rem 2rem; border-radius: var(--radius); background: var(--sand-100); color: var(--moss-900); }
-.on-dark .quote:nth-child(2) { background: var(--brown-700); color: var(--sand-100); }
-.on-dark .quote:nth-child(3) { background: var(--moss-600); color: var(--sand-100); }
+.quote:nth-child(2) { background: var(--brown-700); color: var(--sand-100); }
+.quote:nth-child(3) { background: var(--moss-600); color: var(--sand-100); }
 .quote__mark { font-family: var(--f-display); font-size: 5rem; line-height: .6; height: 2.2rem; opacity: .5; }
 .quote blockquote { margin: 0; font-family: var(--f-display); font-weight: 300; font-size: clamp(1.35rem, 1.1rem + .8vw, 1.75rem); line-height: 1.25; }
 .quote figcaption { display: flex; align-items: center; gap: .9rem; font-size: .85rem; }
@@ -600,3 +600,31 @@ h3, .h3 { font-variation-settings: "opsz" 36; letter-spacing: 0; }
 .area__num, .diff__n { font-size: .8rem; opacity: .7; }
 .footer__legal { font-size: .85rem; opacity: .75; }
 .field label, .field legend { font-size: .8rem; opacity: .9; }
+
+/* ---------- Paleta clara e arejada ----------
+   Musgo médio e natural no lugar do verde quase preto; marrom mais quente;
+   seções escuras só onde dão ritmo; rodapé em marrom-grafite. */
+:root {
+  --moss-950: #3a4530;
+  --moss-900: #4b5939;
+  --moss-800: #55643f;
+  --moss-700: #617048;
+  --moss-600: #5b6b47;
+  --moss-400: #8a9572;
+  --brown-900: #5b4030;
+  --brown-700: #6e4c36;
+  --clay: #a8724f;
+  --ink: #2b2620;
+}
+.quote { background: var(--sand-100); }
+.bg-paper .quote:first-child { background: var(--sand-200); }
+.page-hero.hero--light { background: linear-gradient(180deg, var(--sand-100), var(--sand-200)); color: var(--ink); }
+.page-hero.hero--light .page-hero__mono { color: var(--moss-600); opacity: .08; }
+.media { background:
+    radial-gradient(120% 80% at 20% 15%, rgba(239, 231, 216, .32), transparent 55%),
+    radial-gradient(90% 70% at 85% 90%, rgba(140, 100, 72, .6), transparent 60%),
+    linear-gradient(160deg, #7a8760, #55643f 55%, #5b4331); }
+.media--sand { background: radial-gradient(120% 90% at 30% 10%, #fbf7ef, transparent 55%), radial-gradient(90% 80% at 80% 100%, #b99878, transparent 60%), linear-gradient(170deg, #e4d6bd, #c9b190); }
+.media--brown { background: radial-gradient(100% 80% at 25% 20%, rgba(207, 190, 159, .45), transparent 55%), radial-gradient(80% 70% at 80% 85%, #55643f, transparent 60%), linear-gradient(170deg, #9a7052, #5b4030); }
+.footer { background: #2f2923; }
+.wa-float__ic { background: var(--moss-600); }
