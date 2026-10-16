@@ -42,7 +42,7 @@
   --gray-500: #7f7d75;
   --gray-300: #bebab0;
 
-  --f-display: "Canela Display", "Canela", "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --f-display: "Canela Display", "Fraunces", Georgia, serif;
   --f-sans: "DM Sans", "Helvetica Neue", Arial, sans-serif;
 
   --gutter: clamp(1rem, 4vw, 3.5rem);
