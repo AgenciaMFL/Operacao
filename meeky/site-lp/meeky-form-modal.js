@@ -139,26 +139,27 @@
       document.head.appendChild(st);
     }
 
-    iframe.addEventListener('load', function () {
-      var m = modals[key];
-      if (m.loads < 0) { m.loads = 1; return; }
-      m.loads++;
-      // Se o GHL recarregar o iframe depois do envio, consideramos o formulário enviado
-      if (f.checkout && m.loads > 1 && pending && current === m) onSubmitted('iframe-reload');
-    });
+
+    var manual = document.createElement('a');
+    manual.href = '#';
+    manual.textContent = 'Já enviou seus dados? Continuar para o pagamento →';
+    manual.style.cssText = 'display:none;margin:14px 0 0;text-align:center;font-size:13.5px;color:#DEA85E;text-decoration:underline';
+    manual.addEventListener('click', function (e) { e.preventDefault(); onSubmitted('manual'); });
 
     card.appendChild(close);
     card.appendChild(eyebrow);
     card.appendChild(title);
     card.appendChild(sub);
     card.appendChild(iframe);
+    iframe.addEventListener('load', function () { if (modals[key]) modals[key].loadedAt = Date.now(); });
+    if (f.checkout) card.appendChild(manual);
     card.appendChild(going);
     overlay.appendChild(card);
 
     overlay.addEventListener('click', function (e) { if (e.target === overlay) hide(); });
     document.body.appendChild(overlay);
     ensureEmbedScript();
-    modals[key] = { overlay: overlay, card: card, iframe: iframe, going: going, loads: 0, used: false, formId: f.id };
+    modals[key] = { overlay: overlay, card: card, iframe: iframe, going: going, manual: manual, loads: 0, used: false, formId: f.id };
     return modals[key];
   }
 
@@ -168,6 +169,8 @@
     if (m.used) resetForm(m);
     current = m;
     m.going.style.display = 'none';
+    m.manual.style.display = 'none';
+    if (pending && pending.key === key) watchSubmit(m);
     m.overlay.style.display = 'flex';
     lastFocus = document.activeElement;
     if (window.__meekyLenis) window.__meekyLenis.stop();
@@ -260,17 +263,63 @@
     } catch (e) {}
   }
 
+  var MIN_FILL_MS = 3000; // ninguém preenche nome, e-mail e telefone em menos que isso
+
+  // Sinal de envio do GHL: ao enviar, o form_embed salva o contato ("set-sticky-contacts").
+  // Mensagens de configuração/altura do formulário (que citam "thank you" etc.) são ignoradas.
+  function isSubmitMessage(data) {
+    if (Array.isArray(data)) return data[0] === 'set-sticky-contacts';
+    if (data && typeof data === 'object') {
+      var t = String(data.type || data.event || data.action || '');
+      return /^(form[-_ ]?submit(ted)?|set-sticky-contacts)$/i.test(t);
+    }
+    return false;
+  }
+
   window.addEventListener('message', function (ev) {
     if (!/leadconnectorhq\.com|msgsndr\.com|leadconnector|gohighlevel/i.test(ev.origin || '')) return;
-    if (!pending || pending.done) return;
+    if (!pending || pending.done || !isSubmitMessage(ev.data)) return;
     harvest(ev.data, pending.captured, 0);
-    var txt = '';
-    try { txt = typeof ev.data === 'string' ? ev.data : JSON.stringify(ev.data); } catch (e) {}
-    if (/submitted|set-sticky|thank/i.test(txt)) onSubmitted('message');
+    onSubmitted('message');
   });
+
+  function storageSnapshot() {
+    var snap = {};
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i), v = localStorage.getItem(k);
+        if (v && v.indexOf('@') > -1) snap[k] = v;
+      }
+    } catch (e) {}
+    return snap;
+  }
+
+  // Segundo sinal de envio: o contato do GHL aparece/muda no armazenamento do navegador
+  function watchSubmit(m) {
+    var p = pending, before = storageSnapshot();
+    p.openedAt = Date.now();
+    clearInterval(p.timer);
+    p.timer = setInterval(function () {
+      if (pending !== p || p.done || current !== m) { clearInterval(p.timer); return; }
+      var now = storageSnapshot();
+      Object.keys(now).forEach(function (k) {
+        if (now[k] !== before[k]) {
+          var c = {}; harvest(now[k], c, 0);
+          if (c.email) { harvest(now[k], p.captured, 0); onSubmitted('storage'); }
+        }
+      });
+      if (Date.now() - p.openedAt > 20000) m.manual.style.display = 'block';
+    }, 600);
+  }
 
   function onSubmitted(why) {
     if (!pending || pending.done || pending.waiting) return;
+    if (why !== 'manual') {
+      var m0 = modals[pending.key], t = Date.now();
+      // sinais logo após abrir o popup ou carregar o formulário são do carregamento, não de um envio
+      if (t - (pending.openedAt || 0) < MIN_FILL_MS) return;
+      if (m0 && t - (m0.loadedAt || 0) < MIN_FILL_MS) return;
+    }
     pending.waiting = true;
     var m = modals[pending.key];
     if (m) { m.used = true; m.going.style.display = 'flex'; }
@@ -292,11 +341,11 @@
       if (a) { a.href = url; a.removeAttribute('data-href'); }
       location.href = url;
     };
-    if (!c.email || !EMAIL_RE.test(c.email)) return go(p.href);
+    if (!c.email || !EMAIL_RE.test(c.email)) return go(new URL(p.href, document.baseURI).toString());
 
     var token = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2);
     try { sessionStorage.setItem(STORE.sessionKey, token); } catch (e) {}
-    var url = new URL(p.href, location.href);
+    var url = new URL(p.href, document.baseURI);
     url.searchParams.set('resume', token);
     var utm = new URLSearchParams(location.search);
     var body = {
@@ -337,7 +386,7 @@
   // Leva UTMs e cupom da página atual para o checkout da loja
   function withTracking(href) {
     try {
-      var u = new URL(href, location.href);
+      var u = new URL(href, document.baseURI);
       var here = new URLSearchParams(location.search);
       here.forEach(function (v, k) {
         if (/^(utm_|cupom$|coupon$|ref$|gclid$|fbclid$)/i.test(k) && !u.searchParams.has(k)) u.searchParams.set(k, v);
@@ -355,7 +404,7 @@
     if (key === 'checkout') {
       var target = el.getAttribute('data-href') || el.getAttribute('href') || '';
       var href = withTracking(CHECKOUT_RE.test(target) ? target : 'Checkout.html?produto=f5&qty=1');
-      var prod = (new URL(href, location.href).searchParams.get('produto') || 'f5').toLowerCase();
+      var prod = (new URL(href, document.baseURI).searchParams.get('produto') || 'f5').toLowerCase();
       if (!FORMS['checkout_' + prod]) prod = 'f5';
       key = 'checkout_' + prod;
       pending = { href: href, product: prod, key: key, captured: {}, done: false };
