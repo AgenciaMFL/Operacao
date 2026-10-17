@@ -628,3 +628,14 @@ h3, .h3 { font-variation-settings: "opsz" 36; letter-spacing: 0; }
 .media--brown { background: radial-gradient(100% 80% at 25% 20%, rgba(207, 190, 159, .45), transparent 55%), radial-gradient(80% 70% at 80% 85%, #55643f, transparent 60%), linear-gradient(170deg, #9a7052, #5b4030); }
 .footer { background: #2f2923; }
 .wa-float__ic { background: var(--moss-600); }
+
+/* ---------- Texto em coluna única, alinhado à esquerda ---------- */
+.editorial__body { display: flex; flex-direction: column; gap: 1.1rem; max-width: 62ch; margin-top: 2.5rem; }
+@media (min-width: 900px) { .editorial__body { display: flex; margin-top: 3rem; } }
+.editorial__body > * { margin: 0; }
+.editorial__body p { margin: 0; }
+.editorial__body .squiggle { margin-block: 1rem; }
+.dropcap::first-letter { float: none; font: inherit; color: inherit; padding: 0; }
+p { text-wrap: pretty; text-align: left; }
+.wrap.editorial { max-width: var(--max); }
+.editorial h2 { max-width: 20ch; }
