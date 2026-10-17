@@ -636,6 +636,6 @@ h3, .h3 { font-variation-settings: "opsz" 36; letter-spacing: 0; }
 .editorial__body p { margin: 0; }
 .editorial__body .squiggle { margin-block: 1rem; }
 .dropcap::first-letter { float: none; font: inherit; color: inherit; padding: 0; }
-p { text-wrap: pretty; text-align: left; }
+p { text-wrap: pretty; }
 .wrap.editorial { max-width: var(--max); }
 .editorial h2 { max-width: 20ch; }
