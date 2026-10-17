@@ -264,6 +264,16 @@
   }
 
   var MIN_FILL_MS = 3000; // ninguém preenche nome, e-mail e telefone em menos que isso
+  var GHL_SAVE_MS = 3500; // tempo para o GHL concluir o envio do formulário ao CRM
+
+  // Telefone no formato do checkout (DDD + número, 10 ou 11 dígitos).
+  // O GHL devolve no formato internacional (+55 DDD número): tira o 55 do país.
+  function brPhone(v) {
+    var d = String(v || '').replace(/\D/g, '');
+    if (d.length > 11 && d.indexOf('55') === 0) d = d.slice(2);
+    if (d.length > 11 && d[0] === '0') d = d.slice(1);
+    return d.length >= 10 ? d : null;
+  }
 
   // Sinal de envio do GHL: ao enviar, o form_embed salva o contato ("set-sticky-contacts").
   // Mensagens de configuração/altura do formulário (que citam "thank you" etc.) são ignoradas.
@@ -323,11 +333,12 @@
     pending.waiting = true;
     var m = modals[pending.key];
     if (m) { m.used = true; m.going.style.display = 'flex'; }
-    // dá um instante para o GHL terminar de enviar e gravar o contato
+    // espera o GHL terminar de enviar o contato para o CRM antes de sair da página
+    // (sair cedo demais interrompe o envio e o lead não chega)
     setTimeout(function () {
       harvestStorage(pending.captured);
       goToCheckout();
-    }, 900);
+    }, GHL_SAVE_MS);
   }
 
   function goToCheckout() {
@@ -351,7 +362,7 @@
     var body = {
       session_token: token,
       email: c.email,
-      phone: c.phone || null,
+      phone: brPhone(c.phone),
       name: c.name || null,
       product_id: STORE.skus[p.product] || STORE.skus.f5,
       quantity: Math.max(1, parseInt(url.searchParams.get('qty') || '1', 10) || 1),
