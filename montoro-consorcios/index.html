@@ -50,12 +50,11 @@ section{padding:96px 0}
 .btn svg{width:20px;height:20px;flex-shrink:0}
 .btn .arr{width:18px;height:18px;transition:transform .25s}
 .btn:hover .arr{transform:translateX(5px)}
-.btn-wa{background:linear-gradient(135deg,#34E37E 0%,#1FBF5B 55%,#14A34B 100%);box-shadow:0 0 0 1px rgba(20,163,75,.5),0 12px 30px -10px rgba(37,211,102,.8);animation:glow 2.6s ease-in-out infinite}
-.btn-wa:hover{box-shadow:0 0 0 1px rgba(20,163,75,.5),0 18px 44px -8px rgba(37,211,102,.95)}
-.btn-blue{background:linear-gradient(135deg,#4A92D1,#2B6499);box-shadow:0 12px 30px -12px rgba(57,125,186,.8)}
+.btn-wa,.btn-blue{background:linear-gradient(135deg,#5AA2E0 0%,#397DBA 50%,#2B6499 100%);box-shadow:0 0 0 1px rgba(43,100,153,.6),0 12px 30px -10px rgba(57,125,186,.85);animation:glow 2.6s ease-in-out infinite}
+.btn-wa:hover,.btn-blue:hover{box-shadow:0 0 0 1px rgba(43,100,153,.6),0 18px 44px -8px rgba(90,162,224,.95)}
 .btn-lg{padding:22px 34px;font-size:16px}
 @keyframes shine{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
-@keyframes glow{0%,100%{box-shadow:0 0 0 1px rgba(20,163,75,.5),0 12px 30px -10px rgba(37,211,102,.75)}50%{box-shadow:0 0 0 1px rgba(20,163,75,.5),0 14px 42px -6px rgba(37,211,102,.95)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px rgba(43,100,153,.6),0 12px 30px -10px rgba(57,125,186,.75)}50%{box-shadow:0 0 0 1px rgba(43,100,153,.6),0 14px 44px -6px rgba(90,162,224,.95)}}
 .cta-note{font-size:13px;color:var(--muted);margin-top:14px}
 .dark .cta-note{color:#8FA2B5}
 
@@ -166,17 +165,17 @@ section{padding:96px 0}
 
 /* Method: sticky intro left, stacking cards right */
 .method-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:start}
-.method-intro{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.method-intro{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;gap:18px}
 .method-intro .btn{align-self:flex-start;margin-top:8px}
-.stack{padding-block:22vh 26vh;display:flex;flex-direction:column;gap:30vh}
-.scard{position:sticky;top:calc(22vh + var(--i) * 18px);background:linear-gradient(160deg,#123F69 0%,#0A2D4F 100%);border:1px solid rgba(111,163,211,.28);border-radius:24px;padding:34px 32px;min-height:260px;display:flex;flex-direction:column;gap:14px;box-shadow:0 -20px 50px -20px rgba(0,0,0,.6);transform-origin:center top;will-change:transform}
+.stack{padding-block:max(80px,calc(50vh - 400px)) 0;display:flex;flex-direction:column;gap:14px}
+.scard{position:sticky;top:calc(max(80px,50vh - 400px) + var(--i) * 14px);background:linear-gradient(160deg,#123F69 0%,#0A2D4F 100%);border:1px solid rgba(111,163,211,.28);border-radius:20px;padding:20px 22px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px 18px;box-shadow:0 -14px 34px -16px rgba(0,0,0,.65);transform-origin:center top;will-change:transform}
+.stack-end{height:55vh}
 .scard.hl{background:linear-gradient(160deg,#2B6499 0%,#123F69 100%);border-color:rgba(111,163,211,.55)}
-.scard .ico{width:58px;height:58px;border-radius:16px;background:rgba(111,163,211,.16);color:var(--blue-soft)}
+.scard .ico{grid-row:span 2;width:54px;height:54px;border-radius:15px;background:rgba(111,163,211,.16);color:var(--blue-soft)}
 .scard .ico svg{width:28px;height:28px}
-.scard .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.scard .badge{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:999px;padding:6px 11px}
-.scard h3{font-size:26px}
-.scard p{font-size:16px;color:#C7D3DF;line-height:1.55;max-width:420px}
+.scard .badge{grid-column:3;grid-row:1;align-self:start;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:999px;padding:6px 11px}
+.scard h3{font-size:20px;grid-column:2;align-self:end}
+.scard p{font-size:15px;color:#C7D3DF;line-height:1.45;grid-column:2/4;align-self:start}
 
 /* Authority */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
@@ -291,8 +290,13 @@ footer a:hover{color:#fff}
   .method-grid{grid-template-columns:1fr;gap:36px}
   .method-intro{position:static;min-height:0}
   .stack{padding-block:0;gap:16px}
-  .scard{position:relative;top:auto;min-height:0;padding:26px 22px}
-  .scard h3{font-size:21px}
+  .stack-end{display:none}
+  .method-intro{height:auto}
+  .scard{position:relative;top:auto;padding:18px 16px;gap:4px 14px}
+  .scard .ico{width:46px;height:46px}
+  .scard h3{font-size:17px}
+  .scard p{font-size:14px}
+  .scard .badge{font-size:9px;padding:5px 8px}
   section{padding:72px 0}
   .hero{padding:48px 0 72px}
   .hero .wrap,.split,.sol-grid,.offer .wrap,.about-grid,.sim{grid-template-columns:1fr;gap:44px}
@@ -443,7 +447,7 @@ footer a:hover{color:#fff}
         <li><span class="ic"><svg><use href="#i-wa"/></svg></span><div><b>Atendimento humano</b>Antes, durante e depois da contemplação.</div></li>
         <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><b>Produtos Porto</b>Solidez, regulação e transparência.</div></li>
       </ul>
-      <a class="btn btn-blue" data-wa="Olá, quero conversar com um consultor Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg>Quero minha consultoria gratuita<svg class="arr"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-blue" data-wa="Olá, quero conversar com um consultor Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg>Falar com um consultor<svg class="arr"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -554,35 +558,36 @@ footer a:hover{color:#fff}
     </div>
     <div class="stack" id="stack">
         <article class="scard" style="--i:0">
-          <div class="row"><span class="ico"><svg><use href="#i-search"/></svg></span></div>
+          <span class="ico"><svg><use href="#i-search"/></svg></span>
           <h3>Análise</h3>
           <p>Entendemos seu objetivo, prazo e orçamento. Sem pressa.</p>
         </article>
         <article class="scard" style="--i:1">
-          <div class="row"><span class="ico"><svg><use href="#i-map"/></svg></span></div>
+          <span class="ico"><svg><use href="#i-map"/></svg></span>
           <h3>Pesquisa</h3>
           <p>Mapeamos os grupos com prazos e parcelas para o seu plano.</p>
         </article>
         <article class="scard hl" style="--i:2">
-          <div class="row"><span class="ico"><svg><use href="#i-award"/></svg></span><span class="badge">Diferencial Montoro</span></div>
+          <span class="ico"><svg><use href="#i-award"/></svg></span><span class="badge">Diferencial Montoro</span>
           <h3>Escolha do produto</h3>
           <p>Recomendamos o que serve a você, não à comissão.</p>
         </article>
         <article class="scard" style="--i:3">
-          <div class="row"><span class="ico"><svg><use href="#i-calendar"/></svg></span></div>
+          <span class="ico"><svg><use href="#i-calendar"/></svg></span>
           <h3>Contribuição mensal</h3>
           <p>Assinatura digital e parcelas previsíveis, sem juros.</p>
         </article>
         <article class="scard hl" style="--i:4">
-          <div class="row"><span class="ico"><svg><use href="#i-dice"/></svg></span><span class="badge">Diferencial Montoro</span></div>
+          <span class="ico"><svg><use href="#i-dice"/></svg></span><span class="badge">Diferencial Montoro</span>
           <h3>Lances & sorteios</h3>
           <p>Acompanhamos mês a mês, com estratégia de lance.</p>
         </article>
         <article class="scard" style="--i:5">
-          <div class="row"><span class="ico"><svg><use href="#i-key"/></svg></span></div>
+          <span class="ico"><svg><use href="#i-key"/></svg></span>
           <h3>Realização</h3>
           <p>Contemplado, você compra à vista e negocia melhor.</p>
         </article>
+        <div class="stack-end" aria-hidden="true"></div>
     </div>
   </div>
 </section>
