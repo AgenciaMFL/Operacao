@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montoro Consórcios — Consórcio sem juros, sem entrada e sem taxa de adesão</title>
+<meta name="description" content="Planejamento que vira conquista. Consórcio de imóvel, automóvel e empresarial com consultoria sem custo, método claro e a segurança da Porto Bank.">
+<meta name="theme-color" content="#041F38">
+<link rel="icon" href="assets/img/logo-montoro.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-ink:#041F38; --navy-deep:#062A4C; --navy:#0B3A63;
+  --blue:#397DBA; --blue-dark:#2B6499; --blue-soft:#6FA3D3;
+  --cream:#F4F6F9; --cream-warm:#EAF0F6; --sand:#D5E2EF; --white:#fff;
+  --ink:#231F20; --text:#3B4652; --muted:#66737F;
+  --wa:#25D366; --wa-dark:#1DA851;
+  --radius:20px; --shadow:0 20px 50px -20px rgba(4,31,56,.35);
+  --wrap:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
+h1,h2,h3{color:var(--ink);line-height:1.12;letter-spacing:-.02em;font-weight:700}
+h2{font-size:clamp(28px,4vw,44px)}
+h3{font-size:20px}
+.accent{color:var(--blue)}
+.eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.lead{font-size:clamp(16px,1.6vw,18px);color:var(--muted);max-width:640px}
+.center{text-align:center}.center .lead{margin:16px auto 0}
+section{padding:96px 0}
+.dark{background:var(--navy-ink);color:#C7D3DF}
+.dark h1,.dark h2,.dark h3{color:var(--white)}
+.dark .lead{color:#A9B8C6}
+.dark .eyebrow{color:var(--blue-soft)}
+.soft{background:var(--cream)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 30px;border-radius:999px;font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:0;font-family:inherit;text-align:center}
+.btn:hover{transform:translateY(-2px)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 14px 30px -10px rgba(37,211,102,.6)}
+.btn-wa:hover{background:var(--wa-dark)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 14px 30px -12px rgba(57,125,186,.7)}
+.btn-blue:hover{background:var(--blue-dark)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.3);color:#fff}
+.btn-ghost:hover{border-color:#fff}
+.btn-lg{padding:22px 38px;font-size:16px}
+.btn svg{width:20px;height:20px;flex-shrink:0}
+.cta-note{font-size:13px;color:var(--muted);margin-top:14px}
+.dark .cta-note{color:#8FA2B5}
+
+/* Top bar + header */
+.topbar{background:var(--blue);color:#fff;font-size:14px;text-align:center;padding:10px 20px;font-weight:500}
+.topbar a{text-decoration:underline;font-weight:700}
+header{position:sticky;top:0;z-index:50;background:rgba(4,31,56,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+header img{height:38px;width:auto}
+header .btn{padding:12px 22px;font-size:13px}
+
+/* Hero */
+.hero{position:relative;padding:80px 0 96px;background:radial-gradient(1200px 600px at 85% -10%,rgba(57,125,186,.35),transparent 60%),var(--navy-ink);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(111,163,211,.35);border-radius:999px;padding:8px 18px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-soft);font-weight:600;margin-bottom:26px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 4px rgba(37,211,102,.2)}
+.hero h1{font-size:clamp(40px,6.4vw,76px);color:#fff;margin-bottom:22px}
+.hero .lead{color:#B9C7D4;font-size:clamp(17px,1.8vw,19px);margin-bottom:28px}
+.checks{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:34px}
+.checks li{display:flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:15px}
+.checks svg{width:20px;height:20px;color:var(--wa)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+.trust{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:34px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#8FA2B5}
+.trust b{color:#fff;font-weight:700}
+.hero-media{position:relative}
+.hero-media .main{border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);aspect-ratio:4/4.4}
+.hero-media .main img{width:100%;height:100%;object-fit:cover}
+.float-card{position:absolute;background:#fff;border-radius:18px;padding:16px 20px;box-shadow:var(--shadow);color:var(--ink)}
+.float-card small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.float-card strong{font-size:22px;color:var(--navy)}
+.fc-1{left:-28px;bottom:48px}
+.fc-2{right:-18px;top:36px;background:var(--blue);color:#fff}
+.fc-2 small{color:#DCE8F4}.fc-2 strong{color:#fff}
+
+/* Stats */
+.stats{background:var(--navy-deep);padding:44px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat{text-align:center;color:#A9B8C6;font-size:14px}
+.stat strong{display:block;font-size:clamp(30px,3.6vw,42px);color:#fff;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+
+/* Problem / comparison */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.pain-list{list-style:none;margin-top:28px;display:grid;gap:14px}
+.pain-list li{display:flex;gap:14px;align-items:flex-start;background:var(--cream);border-radius:14px;padding:16px 18px;font-weight:500;color:var(--ink)}
+.pain-list .x{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#FBE4E4;color:#C0392B;display:grid;place-items:center;font-weight:800;font-size:14px}
+.compare{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff;border:1px solid var(--sand)}
+.compare table{width:100%;border-collapse:collapse;font-size:15px}
+.compare th,.compare td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--cream-warm);vertical-align:top}
+.compare thead th{background:var(--navy-ink);color:#fff;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.compare thead th.win{background:var(--blue)}
+.compare td:first-child{font-weight:700;color:var(--ink);width:30%}
+.compare td.win{background:#F1F7FD;color:var(--navy);font-weight:600}
+.compare tr:last-child td{border-bottom:0}
+
+/* Solution */
+.sol-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.sol-img{border-radius:28px;overflow:hidden;aspect-ratio:1/1;box-shadow:var(--shadow)}
+.sol-img img{width:100%;height:100%;object-fit:cover}
+.bullets{list-style:none;display:grid;gap:18px;margin:30px 0 36px}
+.bullets li{display:flex;gap:16px;align-items:flex-start}
+.bullets .ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;background:rgba(57,125,186,.12);color:var(--blue);display:grid;place-items:center}
+.bullets .ic svg{width:22px;height:22px}
+.bullets b{color:var(--ink);display:block}
+.dark .bullets b{color:#fff}
+
+/* Products */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
+.prod{background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;border:1px solid var(--sand)}
+.prod.featured{outline:3px solid var(--blue);position:relative}
+.prod .tag{position:absolute;top:16px;left:16px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;z-index:1}
+.prod-img{aspect-ratio:16/10;overflow:hidden}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod:hover .prod-img img{transform:scale(1.05)}
+.prod-body{padding:26px 26px 28px;display:flex;flex-direction:column;flex:1}
+.prod-body .eyebrow{margin-bottom:8px;font-size:11px}
+.prod-body h3{font-size:24px;margin-bottom:10px}
+.prod-body p{font-size:15px;color:var(--muted);margin-bottom:20px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.specs div{background:var(--cream);border-radius:12px;padding:10px 8px;text-align:center}
+.specs small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.specs b{font-size:13px;color:var(--navy);line-height:1.3;display:block;margin-top:2px}
+.mods{list-style:none;display:grid;gap:8px;margin-bottom:24px;font-size:14px}
+.mods li{display:flex;gap:10px;align-items:flex-start}
+.mods li::before{content:"";flex-shrink:0;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--wa) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.mods b{color:var(--ink)}
+.prod .btn{margin-top:auto;width:100%}
+
+/* Offer */
+.offer{position:relative;padding:110px 0;background:var(--navy-ink);overflow:hidden}
+.offer::before{content:"";position:absolute;inset:0;background:url(assets/img/campanha-bg.webp) center/cover;opacity:.35}
+.offer::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy-ink) 25%,rgba(4,31,56,.55))}
+.offer .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.offer-box{background:#fff;border-radius:28px;padding:40px 36px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);text-align:center}
+.offer-box .eyebrow{margin-bottom:6px}
+.big-off{font-size:clamp(70px,10vw,112px);font-weight:800;color:var(--navy);line-height:1;letter-spacing:-.04em}
+.big-off span{font-size:.45em;vertical-align:top;margin-left:4px}
+.big-off em{font-style:normal;color:var(--blue);font-size:.38em;display:block;letter-spacing:.06em;margin-top:6px}
+.offer-box p{color:var(--muted);margin:14px 0 22px}
+.offer-list{list-style:none;text-align:left;display:grid;gap:10px;margin-bottom:26px}
+.offer-list li{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;background:var(--cream);border-radius:12px;font-size:14px}
+.offer-list li span{color:var(--muted);font-weight:600}
+.offer-list li b{color:var(--navy)}
+.offer-box .btn{width:100%}
+.disclaimer{font-size:12px;color:var(--muted);margin-top:12px}
+
+/* Advantages */
+.adv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.adv{background:#fff;border-radius:20px;padding:28px 24px;border:1px solid var(--sand);transition:transform .25s,box-shadow .25s}
+.adv:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.adv .n{font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.1em}
+.adv h3{font-size:18px;margin:10px 0 8px}
+.adv p{font-size:14px;color:var(--muted)}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;counter-reset:s}
+.step{position:relative;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:30px 26px}
+.step.hl{background:linear-gradient(160deg,rgba(57,125,186,.28),rgba(57,125,186,.06));border-color:rgba(111,163,211,.45)}
+.step .num{font-size:44px;font-weight:800;color:var(--blue-soft);opacity:.55;line-height:1}
+.step .badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:999px;padding:5px 10px;margin:14px 0 0}
+.step h3{margin:14px 0 8px;font-size:20px}
+.step p{font-size:14.5px;color:#A9B8C6}
+
+/* Authority */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-img{position:relative}
+.about-img img{border-radius:28px;box-shadow:var(--shadow);width:100%;aspect-ratio:4/3.2;object-fit:cover}
+.about-img .quote-badge{position:absolute;right:-16px;bottom:-24px;max-width:280px;background:var(--navy-ink);color:#fff;border-radius:18px;padding:20px 22px;font-size:14px;box-shadow:var(--shadow)}
+.about-img .quote-badge b{color:var(--blue-soft)}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.values div{border-left:3px solid var(--blue);padding:4px 0 4px 14px}
+.values b{display:block;color:var(--ink);font-size:16px}
+.values span{font-size:14px;color:var(--muted)}
+.manifesto{margin-top:26px;font-size:17px;color:var(--ink);font-weight:600;line-height:1.5}
+
+.timeline{margin-top:72px;display:grid;grid-template-columns:repeat(7,1fr);gap:0;position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--sand)}
+.tl{position:relative;padding:34px 12px 0 0}
+.tl::before{content:"";position:absolute;top:2px;left:0;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--blue)}
+.tl:last-child::before{background:var(--blue)}
+.tl b{display:block;font-size:20px;color:var(--navy);font-weight:800}
+.tl strong{display:block;font-size:14px;color:var(--ink);margin:4px 0}
+.tl p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* Leaders + testimonials */
+.leaders{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+.leader{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:30px 26px;display:flex;flex-direction:column}
+.leader blockquote{font-size:16px;color:#E4ECF3;line-height:1.6;flex:1;margin-bottom:24px}
+.leader blockquote::before{content:"“";display:block;font-size:56px;line-height:.6;color:var(--blue);margin-bottom:10px;font-weight:800}
+.person{display:flex;align-items:center;gap:14px}
+.person img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(111,163,211,.5)}
+.person b{display:block;color:#fff;font-size:15px}
+.person span{font-size:12.5px;color:#8FA2B5;line-height:1.4;display:block}
+
+.testis{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.testi{background:#fff;border-radius:24px;padding:34px 30px;box-shadow:var(--shadow);border:1px solid var(--sand)}
+.stars{color:#F5B301;font-size:18px;letter-spacing:3px;margin-bottom:14px}
+.testi blockquote{font-size:17px;color:var(--ink);line-height:1.6;margin-bottom:22px}
+.testi .who{display:flex;align-items:center;gap:14px}
+.avatar{width:50px;height:50px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700}
+.testi .who b{display:block;color:var(--ink)}
+.testi .who span{font-size:13px;color:var(--blue);font-weight:600}
+
+/* Simulator form */
+.sim{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.form{background:#fff;border-radius:28px;padding:36px 32px;box-shadow:0 40px 80px -30px rgba(0,0,0,.55)}
+.form h3{font-size:22px;margin-bottom:6px}
+.form > p{font-size:14px;color:var(--muted);margin-bottom:22px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.field input,.field select{width:100%;font:inherit;font-size:15px;padding:14px 16px;border:1.5px solid var(--sand);border-radius:12px;background:var(--cream);color:var(--ink);outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--blue);background:#fff}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative}
+.chips input{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.chips label{margin:0;text-align:center;padding:12px 6px;border:1.5px solid var(--sand);border-radius:12px;cursor:pointer;font-size:14px;background:var(--cream);transition:all .2s}
+.chips input:checked+label{border-color:var(--blue);background:#EAF3FC;color:var(--navy)}
+.chips input:focus-visible+label{outline:2px solid var(--blue);outline-offset:2px}
+.form .btn{width:100%;margin-top:6px}
+.form .safe{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+
+/* FAQ */
+.faq{max-width:860px;margin:48px auto 0;display:grid;gap:12px}
+.faq details{background:#fff;border:1px solid var(--sand);border-radius:16px;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:20px 56px 20px 24px;font-weight:600;color:var(--ink);position:relative;font-size:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:var(--cream);color:var(--blue);display:grid;place-items:center;font-size:20px;font-weight:600;transition:transform .2s}
+.faq details[open] summary::after{content:"−";background:var(--blue);color:#fff}
+.faq details p{padding:0 24px 22px;color:var(--muted);font-size:15px}
+
+/* Final CTA */
+.final{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-ink) 100%);text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(57,125,186,.35),transparent 65%);left:50%;top:-300px;transform:translateX(-50%)}
+.final .wrap{position:relative}
+.final h2{font-size:clamp(34px,5vw,58px);margin-bottom:18px}
+.final .lead{margin:0 auto 34px}
+.final-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.guarantees{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 30px;margin-top:40px;font-size:14px;color:#C7D3DF}
+.guarantees span{display:flex;align-items:center;gap:8px}
+.guarantees svg{width:18px;height:18px;color:var(--wa)}
+
+/* Footer */
+footer{background:#02172A;color:#8FA2B5;font-size:14px;padding:64px 0 120px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer img{height:40px;width:auto;margin-bottom:16px}
+footer h4{color:#fff;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+footer ul{list-style:none;display:grid;gap:8px}
+footer a:hover{color:#fff}
+.legal{border-top:1px solid rgba(255,255,255,.08);margin-top:44px;padding-top:24px;font-size:12px;line-height:1.7}
+.bacen{display:inline-flex;align-items:center;gap:8px;margin-top:14px;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:6px 14px;font-size:12px;color:#C7D3DF}
+
+/* Floating WhatsApp + mobile bar */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:60;width:62px;height:62px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(37,211,102,.7);animation:pulse 2.4s infinite}
+.wa-float svg{width:32px;height:32px;color:#fff}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.mbar{display:none}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.wa-float{animation:none}html{scroll-behavior:auto}}
+
+/* Responsive */
+@media (max-width:1024px){
+  .adv-grid{grid-template-columns:repeat(2,1fr)}
+  .products{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .timeline{grid-template-columns:1fr;gap:22px}
+  .timeline::before{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .tl{padding:0 0 0 34px}
+}
+@media (max-width:900px){
+  section{padding:72px 0}
+  .hero{padding:48px 0 72px}
+  .hero .wrap,.split,.sol-grid,.offer .wrap,.about-grid,.sim{grid-template-columns:1fr;gap:44px}
+  .hero-media{max-width:520px}
+  .fc-1{left:12px;bottom:16px}.fc-2{right:12px;top:16px}
+  .stats .wrap{grid-template-columns:repeat(2,1fr);gap:28px 16px}
+  .steps,.leaders{grid-template-columns:1fr}
+  .testis{grid-template-columns:1fr}
+  .about-img .quote-badge{right:12px;bottom:-20px}
+  .foot{grid-template-columns:1fr}
+  .sol-img{max-width:520px}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .topbar{font-size:13px}
+  header .wrap{height:64px}
+  header img{height:30px}
+  header .btn span{display:none}
+  header .btn{padding:11px 14px}
+  .hero-ctas .btn,.final-ctas .btn{width:100%}
+  .adv-grid{grid-template-columns:1fr}
+  .specs{grid-template-columns:1fr 1fr 1fr}
+  .values{grid-template-columns:1fr}
+  .compare th,.compare td{padding:12px 10px;font-size:13.5px}
+  .offer-box,.form{padding:30px 20px}
+  .wa-float{display:none}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(4,31,56,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.1)}
+  .mbar .btn{width:100%;padding:16px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.43 9.44-9.43a9.4 9.4 0 0 1 9.43 9.44c0 5.2-4.24 9.43-9.45 9.43m8.03-17.46A11.27 11.27 0 0 0 12.04.72C5.79.72.7 5.8.7 12.06c0 2 .52 3.95 1.52 5.67L.6 23.6l6-1.57a11.3 11.3 0 0 0 5.43 1.38h.01c6.25 0 11.34-5.09 11.34-11.34 0-3.03-1.18-5.88-3.32-8.02"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6zM14 3v6h6M8 13h8M8 17h5"/></symbol>
+</svg>
+
+<div class="topbar">Campanha Porto Bank: <strong>até 50% OFF</strong> nas parcelas até a contemplação no consórcio de imóvel. <a href="#oferta">Ver condições</a></div>
+
+<header>
+  <div class="wrap">
+    <a href="#topo" aria-label="Montoro Consórcios"><img src="assets/img/logo-montoro.png" alt="Montoro Consórcios" width="733" height="178"></a>
+    <a class="btn btn-wa" data-wa="Olá, vim do site e quero falar com um consultor Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg><span>Fale no WhatsApp</span></a>
+  </div>
+</header>
+
+<main id="topo">
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="pill"><i></i>Imóvel · Automóvel · Empresarial</div>
+      <h1>Planejamento que vira <span class="accent">conquista.</span></h1>
+      <p class="lead">Na Montoro Consórcios você encontra experiência, credibilidade, método claro e a segurança da Porto, nossa principal parceira. Você paga pelo bem, não pelos juros.</p>
+      <ul class="checks">
+        <li><svg><use href="#i-check"/></svg>Sem juros</li>
+        <li><svg><use href="#i-check"/></svg>Sem entrada</li>
+        <li><svg><use href="#i-check"/></svg>Sem taxa de adesão</li>
+        <li><svg><use href="#i-check"/></svg>FGTS aceito</li>
+      </ul>
+      <div class="hero-ctas">
+        <a class="btn btn-wa btn-lg" data-wa="Olá, quero fazer uma simulação" href="#"><svg><use href="#i-wa"/></svg>Simular no WhatsApp</a>
+        <a class="btn btn-ghost btn-lg" href="#produtos">Conhecer produtos</a>
+      </div>
+      <div class="trust">
+        <span><b>Regulado</b> pelo Banco Central</span>
+        <span><b>Parceria</b> Porto Bank</span>
+        <span><b>Consultoria</b> sem custo</span>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="main"><img src="assets/img/produto-imovel.webp" alt="Casal recebendo as chaves do novo apartamento" width="900" height="672" fetchpriority="high"></div>
+      <div class="float-card fc-1"><small>Parcela que vira</small><strong>patrimônio</strong></div>
+      <div class="float-card fc-2"><small>Carta na mão</small><strong>compra à vista</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROVA RÁPIDA -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><strong>+150 anos</strong>de experiência somada no setor</div>
+    <div class="stat"><strong>1998</strong>a 1ª cota da Porto Consórcio</div>
+    <div class="stat"><strong>1.854</strong>corretores credenciados e capacitados</div>
+    <div class="stat"><strong>até 200</strong>meses sem juros</div>
+  </div>
+</div>
+
+<!-- 3. PROBLEMA -->
+<section>
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">Custo total</span>
+      <h2>Você paga pelo bem, <span class="accent">não pelos juros.</span></h2>
+      <p class="lead" style="margin-top:16px">No financiamento, você recebe o bem logo, mas paga juros. Quanto a sua família realmente paga em aluguel e juros até o fim da vida? É a matemática que ninguém faz com você.</p>
+      <ul class="pain-list">
+        <li><span class="x">✕</span>Juros bancários que encarecem o bem ao longo dos anos</li>
+        <li><span class="x">✕</span>A obrigação de juntar uma entrada alta antes de começar</li>
+        <li><span class="x">✕</span>Aluguel que sai todo mês e não vira patrimônio</li>
+        <li><span class="x">✕</span>Capital de giro da empresa travado em compras de bens</li>
+      </ul>
+    </div>
+    <div class="compare reveal">
+      <table>
+        <thead><tr><th></th><th class="win">Consórcio</th><th>Financiamento</th></tr></thead>
+        <tbody>
+          <tr><td>Juros</td><td class="win">Sem juros</td><td>Juros bancários</td></tr>
+          <tr><td>Entrada</td><td class="win">Não obrigatória</td><td>Exigida</td></tr>
+          <tr><td>Custo</td><td class="win">Taxa de administração diluída nas parcelas</td><td>Juros sobre o valor financiado</td></tr>
+          <tr><td>Poder de compra</td><td class="win">Carta de crédito = pagamento à vista</td><td>Preço de quem financia</td></tr>
+          <tr><td>FGTS</td><td class="win">Lance, complemento ou amortização</td><td>Conforme regras do banco</td></tr>
+          <tr><td>Para quem</td><td class="win">Quem pode se planejar e quer gastar menos</td><td>Quem precisa do bem imediatamente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SOLUÇÃO -->
+<section class="soft">
+  <div class="wrap sol-grid">
+    <div class="sol-img reveal"><img src="assets/img/chave.webp" alt="Entrega das chaves de um imóvel" width="1100" height="821" loading="lazy"></div>
+    <div class="reveal">
+      <span class="eyebrow">Por que a Montoro Consórcios</span>
+      <h2>O jeito certo de <span class="accent">comprar consórcio.</span></h2>
+      <p class="lead" style="margin-top:16px">Consórcio é planejamento, e planejamento merece consultoria de verdade. Nós explicamos o que ninguém explica, acompanhamos até a contemplação e cuidamos do que vem depois.</p>
+      <ul class="bullets">
+        <li><span class="ic"><svg><use href="#i-user"/></svg></span><div><b>Consultoria sem custo</b>Analisamos seu perfil e montamos o plano certo.</div></li>
+        <li><span class="ic"><svg><use href="#i-chart"/></svg></span><div><b>Método próprio</b>Diagnóstico, simulação e recomendação com clareza.</div></li>
+        <li><span class="ic"><svg><use href="#i-wa"/></svg></span><div><b>Atendimento humano</b>Antes, durante e depois da contemplação.</div></li>
+        <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><b>Produtos Porto</b>Solidez, regulação e transparência.</div></li>
+      </ul>
+      <a class="btn btn-blue" data-wa="Olá, quero conversar com um consultor Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg>Quero minha consultoria gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PRODUTOS / OFERTA -->
+<section id="produtos">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Produtos</span>
+      <h2>Três opções para <span class="accent">planejar o que importa.</span></h2>
+      <p class="lead">Cartas de crédito com parcelas flexíveis, sem juros e com poder de negociação para pagamento à vista após contemplação.</p>
+    </div>
+    <div class="products">
+      <article class="prod featured reveal">
+        <span class="tag">Até 50% OFF</span>
+        <div class="prod-img"><img src="assets/img/hero-imovel.webp" alt="Sala de estar de apartamento" width="1100" height="821" loading="lazy"></div>
+        <div class="prod-body">
+          <span class="eyebrow">Produto 01 · Imóvel</span>
+          <h3>O lar como meta.</h3>
+          <p>Do primeiro apê à casa de sempre: casa, apartamento, imóvel comercial, terreno, reforma ou construção.</p>
+          <div class="specs">
+            <div><small>Adesão</small><b>Sem taxa</b></div>
+            <div><small>Parcelas</small><b>Até 200x sem juros</b></div>
+            <div><small>Crédito</small><b>A partir de R$ 70 mil</b></div>
+          </div>
+          <ul class="mods">
+            <li><span><b>Casa ou apartamento</b> sem entrada, em qualquer lugar do Brasil</span></li>
+            <li><span><b>Sala comercial</b> de forma planejada, sólida e sem juros</span></li>
+            <li><span><b>Construção e reforma</b> do seu imóvel</span></li>
+            <li><span><b>Investimento:</b> faça seu dinheiro trabalhar por você</span></li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Quero simular consórcio imóvel" href="#"><svg><use href="#i-wa"/></svg>Simular imóvel</a>
+        </div>
+      </article>
+      <article class="prod reveal">
+        <div class="prod-img"><img src="assets/img/produto-auto.webp" alt="Entrega da chave de um carro na concessionária" width="900" height="672" loading="lazy"></div>
+        <div class="prod-body">
+          <span class="eyebrow">Produto 02 · Automóvel</span>
+          <h3>Mobilidade com planejamento.</h3>
+          <p>Do primeiro carro à frota da empresa. Na contemplação, sua carta vira dinheiro à vista e poder de negociação real.</p>
+          <div class="specs">
+            <div><small>Adesão</small><b>Sem taxa</b></div>
+            <div><small>Parcelas</small><b>Até 90x sem juros</b></div>
+            <div><small>Crédito</small><b>A partir de R$ 25 mil</b></div>
+          </div>
+          <ul class="mods">
+            <li><span><b>Carro</b> novo ou seminovo, incluindo elétricos e híbridos</span></li>
+            <li><span><b>Moto</b> com parcelas acessíveis e sem entrada</span></li>
+            <li><span><b>Utilitário</b> para impulsionar o seu negócio</span></li>
+            <li><span><b>Frota</b> sem imobilizar seu capital de giro</span></li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Quero simular consórcio automóvel" href="#"><svg><use href="#i-wa"/></svg>Simular automóvel</a>
+        </div>
+      </article>
+      <article class="prod reveal">
+        <div class="prod-img"><img src="assets/img/produto-empresa.webp" alt="Sala de reunião de escritório" width="900" height="600" loading="lazy"></div>
+        <div class="prod-body">
+          <span class="eyebrow">Produto 03 · Empresarial</span>
+          <h3>Crescimento com estratégia.</h3>
+          <p>Sede, equipamentos, expansão, sem travar o caixa. Fuja dos juros exorbitantes das linhas de crédito tradicionais.</p>
+          <div class="specs">
+            <div><small>Prazo</small><b>Até 200 meses</b></div>
+            <div><small>Crédito</small><b>Múltiplas cotas</b></div>
+            <div><small>Parcelas</small><b>Sem juros e sem entrada</b></div>
+          </div>
+          <ul class="mods">
+            <li><span><b>Construção</b> com planejamento financeiro e sem juros</span></li>
+            <li><span><b>Reforma</b> para expandir as operações</span></li>
+            <li><span><b>Equipamentos</b> sempre atualizados</span></li>
+            <li><span><b>Investimento</b> empresarial de longo prazo</span></li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Quero simular consórcio empresarial" href="#"><svg><use href="#i-wa"/></svg>Simular empresarial</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 6. OFERTA ESPECIAL -->
+<section class="offer dark" id="oferta">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Campanha Porto Bank</span>
+      <h2>Agora ficou mais fácil <span class="accent" style="color:var(--blue-soft)">conquistar seu imóvel.</span></h2>
+      <p class="lead" style="margin-top:16px">Comece pagando menos: desconto aplicado nas parcelas até a contemplação, sem taxa de adesão e sem juros. Fale com um consultor e veja se o seu plano se encaixa na campanha.</p>
+      <ul class="bullets">
+        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Parcela reduzida até a contemplação</b>A diferença é compensada nas parcelas seguintes, depois que você recebe o crédito.</div></li>
+        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Use até 100% do FGTS</b>Para lance, complemento da carta, abater parcelas ou quitar o saldo devedor.</div></li>
+      </ul>
+    </div>
+    <div class="offer-box reveal">
+      <span class="eyebrow">Consórcio de imóvel</span>
+      <small style="display:block;font-weight:700;color:var(--navy);font-size:18px;margin-top:6px">até</small>
+      <div class="big-off">50<span>%</span><em>OFF nas parcelas</em></div>
+      <p>até 50% de desconto aplicado nas parcelas até a contemplação.</p>
+      <ul class="offer-list">
+        <li><span>Adesão</span><b>Sem taxa de adesão</b></li>
+        <li><span>Parcelas</span><b>Sem juros e prazo flexível</b></li>
+        <li><span>Crédito</span><b>A partir de R$ 70 mil</b></li>
+      </ul>
+      <a class="btn btn-wa btn-lg" data-wa="Quero saber mais sobre a campanha até 50% OFF no consórcio" href="#"><svg><use href="#i-wa"/></svg>Quero aproveitar</a>
+      <p class="disclaimer">*Consulte condições. Sujeito a alterações.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. VANTAGENS -->
+<section class="soft">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Vantagens</span>
+      <h2>Por que o consórcio <span class="accent">faz sentido.</span></h2>
+      <p class="lead">Oito vantagens que diferenciam o consórcio do financiamento.</p>
+    </div>
+    <div class="adv-grid">
+      <div class="adv reveal"><span class="n">01</span><h3>Sem juros e sem entrada</h3><p>A carta vira poder de compra à vista na contemplação, sem o peso dos juros bancários nem a obrigação de uma entrada.</p></div>
+      <div class="adv reveal"><span class="n">02</span><h3>Parcelas flexíveis</h3><p>Você escolhe o valor da carta e o prazo que cabe no seu fluxo mensal, sem amarrar caixa em compromisso rígido.</p></div>
+      <div class="adv reveal"><span class="n">03</span><h3>Lance embutido</h3><p>Pode usar parte da própria carta como lance para antecipar a contemplação, sem desembolsar valor extra.</p></div>
+      <div class="adv reveal"><span class="n">04</span><h3>Planejamento financeiro</h3><p>A melhor ferramenta para quem planeja com tempo: define a meta, contribui mensalmente, contempla com método.</p></div>
+      <div class="adv reveal"><span class="n">05</span><h3>Segurança jurídica</h3><p>Modalidade regulamentada pelo Banco Central. O recurso do grupo fica em conta separada e fiscalizada.</p></div>
+      <div class="adv reveal"><span class="n">06</span><h3>Sem burocracia</h3><p>Adesão 100% digital. Sem análise de crédito complexa, sem montanha de documentos, sem fiador.</p></div>
+      <div class="adv reveal"><span class="n">07</span><h3>Reajuste anual</h3><p>A carta acompanha a inflação, e seu poder de compra fica preservado ao longo de todo o grupo.</p></div>
+      <div class="adv reveal"><span class="n">08</span><h3>FGTS aceito</h3><p>No consórcio de imóvel, use o saldo do FGTS para dar lance ou amortizar, conforme regras da Caixa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. MÉTODO -->
+<section class="dark">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Seis passos do <span class="accent" style="color:var(--blue-soft)">nosso método.</span></h2>
+      <p class="lead">Do simples interesse em conhecer o consórcio até a conquista dos seus sonhos.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">01</div><h3>Análise</h3><p>Entendemos seu objetivo, prazo, capacidade financeira e momento de vida. Sem venda, sem pressa: apenas escuta de verdade.</p></div>
+      <div class="step reveal"><div class="num">02</div><h3>Pesquisa</h3><p>Mapeamos as melhores opções de grupos disponíveis, com prazos, parcelas e janelas de contemplação que combinam com seu plano.</p></div>
+      <div class="step hl reveal"><div class="num">03</div><span class="badge">Diferencial Montoro</span><h3>Escolha do produto</h3><p>Recomendamos o que serve ao seu objetivo, não à comissão. Você decide com método, não na pressa.</p></div>
+      <div class="step reveal"><div class="num">04</div><h3>Contribuição mensal</h3><p>Assinatura 100% digital com suporte Montoro + administração Porto. Parcelas previsíveis, sem juros, com regras explicadas linha por linha.</p></div>
+      <div class="step hl reveal"><div class="num">05</div><span class="badge">Diferencial Montoro</span><h3>Lances &amp; sorteios</h3><p>Acompanhamos sua jornada mês a mês: estratégia de lance, oportunidades, orientação técnica. É onde a maioria das corretoras desaparece, e onde nós aparecemos.</p></div>
+      <div class="step reveal"><div class="num">06</div><h3>Realização</h3><p>Contemplação, uso da carta, negociação na concessionária ou imobiliária, e a conquista vira realidade. A história continua mesmo depois.</p></div>
+    </div>
+    <div class="center" style="margin-top:48px">
+      <a class="btn btn-wa btn-lg" data-wa="Olá, quero dar o primeiro passo com a Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg>Começar pela análise gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- 9. AUTORIDADE -->
+<section>
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="assets/img/historia-1998.webp" alt="Aperto de mãos na primeira venda de cota da Porto Consórcio" width="800" height="597" loading="lazy">
+        <div class="quote-badge">Em 1998, a primeira cota da Porto Consórcio: <b>quem vendeu foi Régis, quem comprou foi Montoro.</b></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Quem somos</span>
+        <h2>Um nome construído sobre <span class="accent">mais de 150 anos</span> somados de experiência.</h2>
+        <p class="lead" style="margin-top:16px">Nascemos reunindo mais de um século de experiência de quem fez parte da história do consórcio no Brasil. Somos especialistas em buscar o produto mais adequado às necessidades dos nossos clientes.</p>
+        <div class="values">
+          <div><b>Experiência</b><span>Equipe pioneira</span></div>
+          <div><b>Credibilidade</b><span>Referência no setor</span></div>
+          <div><b>Método claro</b><span>Sem letras miúdas</span></div>
+          <div><b>Segurança</b><span>Parceria Porto Bank</span></div>
+        </div>
+        <p class="manifesto">Planejamento ao invés de pressa, clareza ao invés de letras miúdas e relacionamento ao invés de uma simples venda rápida.</p>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl"><b>1983</b><strong>Montoro e a Porto Seguro</strong><p>José Roberto Montoro ingressa na Porto Seguro a convite de Jayme Garfinkel.</p></div>
+      <div class="tl"><b>1990</b><strong>Régis e o consórcio</strong><p>Régis Padron ingressa na Sanmel Consórcios.</p></div>
+      <div class="tl"><b>1994</b><strong>Os caminhos se cruzam</strong><p>Na Porto Unidas, Régis conhece Montoro.</p></div>
+      <div class="tl"><b>1998</b><strong>A primeira cota vendida</strong><p>Nasce a Porto Consórcio, com a 1ª cota de imóveis.</p></div>
+      <div class="tl"><b>2002</b><strong>A expansão</strong><p>1.854 corretores credenciados no Sul e Sudeste.</p></div>
+      <div class="tl"><b>2025</b><strong>Um time se forma</strong><p>Montoro, Régis, Adriana e Montoro Filho.</p></div>
+      <div class="tl"><b>2026</b><strong>Uma nova marca</strong><p>Nasce a Montoro Consórcios.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. PROVA SOCIAL -->
+<section class="dark">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Credibilidade</span>
+      <h2>Lideranças da <span class="accent" style="color:var(--blue-soft)">Porto Seguro.</span></h2>
+      <p class="lead">O que pensam as lideranças do nosso principal parceiro sobre quem idealizou esse projeto.</p>
+    </div>
+    <div class="leaders">
+      <div class="leader reveal">
+        <blockquote>O Montoro é a expressão do otimismo e da dedicação aos objetivos que traça.</blockquote>
+        <div class="person"><img src="assets/img/jayme-garfinkel.webp" alt="Jayme Garfinkel" width="240" height="240" loading="lazy"><div><b>Jayme Garfinkel</b><span>Investidor e acionista controlador do Grupo Porto Seguro</span></div></div>
+      </div>
+      <div class="leader reveal">
+        <blockquote>Montoro é uma referência inspiradora no setor de Seguros. Generoso em compartilhar seu vasto conhecimento, contribuindo de forma significativa no desenvolvimento da indústria e de seus profissionais.</blockquote>
+        <div class="person"><img src="assets/img/paulo-kakinoff.webp" alt="Paulo Kakinoff" width="240" height="240" loading="lazy"><div><b>Paulo Kakinoff</b><span>Presidente do Grupo Porto Seguro</span></div></div>
+      </div>
+      <div class="leader reveal">
+        <blockquote>Montoro é meu amigo, foi meu colega de trabalho e também um exemplo. Solícito, sério e estratégico, um executivo de valor.</blockquote>
+        <div class="person"><img src="assets/img/bruno-garfinkel.webp" alt="Bruno Garfinkel" width="240" height="240" loading="lazy"><div><b>Bruno Garfinkel</b><span>Presidente do Conselho de Administração da Porto Seguro</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Depoimentos</span>
+      <h2>Histórias de <span class="accent">quem conquistou.</span></h2>
+      <p class="lead">Clientes reais que confiaram na Montoro Consórcios os caminhos para conquistarem seus objetivos.</p>
+    </div>
+    <div class="testis">
+      <div class="testi reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <blockquote>“O que mais me marcou foi o nível de conhecimento e a honestidade no que se refere às chances de contemplação. Tive todo auxílio necessário para compor a melhor estratégia dentro do que eu planejava.”</blockquote>
+        <div class="who"><span class="avatar">TL</span><div><b>Thiago Henrique Lucato</b><span>Consórcio Imóvel e Automóvel</span></div></div>
+      </div>
+      <div class="testi reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <blockquote>“Eu entendia muito pouco sobre consórcio. Saí da primeira conversa sabendo exatamente o que eu iria pagar, por quanto tempo e qual é a realidade no que diz respeito a lances e chances de contemplação.”</blockquote>
+        <div class="who"><span class="avatar">IS</span><div><b>Ivan Luiz da Silva</b><span>Consórcio Imóvel</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. SIMULAÇÃO (captura) -->
+<section class="dark" id="simular">
+  <div class="wrap sim">
+    <div class="reveal">
+      <span class="eyebrow">Simulação gratuita</span>
+      <h2>Saia da primeira conversa sabendo <span class="accent" style="color:var(--blue-soft)">exatamente quanto vai pagar.</span></h2>
+      <p class="lead" style="margin-top:16px">Conte o que você quer conquistar. Um consultor Montoro analisa seu perfil e responde no WhatsApp com o crédito, o prazo, a parcela ideal e a estratégia de lances.</p>
+      <ul class="bullets">
+        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Sem compromisso</b>A consultoria não tem custo.</div></li>
+        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Sem letras miúdas</b>Regras explicadas linha por linha.</div></li>
+        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Comparamos antes de você assinar</b>Várias opções de grupos, uma análise só.</div></li>
+      </ul>
+    </div>
+    <form class="form reveal" id="sim-form" novalidate>
+      <h3>Simule seu consórcio</h3>
+      <p>Leva menos de 1 minuto.</p>
+      <div class="field">
+        <label for="f-nome">Seu nome</label>
+        <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Como podemos te chamar?" required>
+      </div>
+      <div class="field">
+        <label>O que você quer conquistar?</label>
+        <div class="chips">
+          <input type="radio" name="produto" id="p-imovel" value="Imóvel" checked><label for="p-imovel">Imóvel</label>
+          <input type="radio" name="produto" id="p-auto" value="Automóvel"><label for="p-auto">Automóvel</label>
+          <input type="radio" name="produto" id="p-emp" value="Empresarial"><label for="p-emp">Empresa</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-valor">Valor de crédito desejado</label>
+        <select id="f-valor" name="valor">
+          <option>Até R$ 100 mil</option>
+          <option>R$ 100 mil a R$ 300 mil</option>
+          <option>R$ 300 mil a R$ 600 mil</option>
+          <option>Acima de R$ 600 mil</option>
+          <option>Ainda não sei</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-quando">Quando pretende conquistar?</label>
+        <select id="f-quando" name="quando">
+          <option>O quanto antes</option>
+          <option>Em até 2 anos</option>
+          <option>Em 2 a 5 anos</option>
+          <option>Estou planejando com calma</option>
+        </select>
+      </div>
+      <button class="btn btn-wa btn-lg" type="submit"><svg><use href="#i-wa"/></svg>Receber minha simulação</button>
+      <p class="safe">Você será direcionado ao WhatsApp da Montoro Consórcios.</p>
+    </form>
+  </div>
+</section>
+
+<!-- 12. FAQ / OBJEÇÕES -->
+<section>
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Perguntas frequentes</span>
+      <h2>Tire suas dúvidas antes de dar <span class="accent">o próximo passo.</span></h2>
+    </div>
+    <div class="faq">
+      <details><summary>O que é consórcio e como funciona?</summary><p>É uma compra planejada em grupo. Todos pagam parcelas mensais e formam um fundo comum. Todo mês, participantes são contemplados por sorteio ou lance e recebem a carta de crédito para comprar o bem. Até o fim do grupo, todos são contemplados.</p></details>
+      <details><summary>Consórcio tem juros?</summary><p>Não. A parcela é formada pelo fundo comum, que vira o seu crédito, pela taxa de administração e, quando previstos em contrato, pelo fundo de reserva e seguro. Sem juros, o custo total costuma ser menor que o de um financiamento.</p></details>
+      <details><summary>O consórcio é seguro? Quem fiscaliza?</summary><p>Sim. O consórcio é regulamentado pela Lei 11.795/2008 e fiscalizado pelo Banco Central, que autoriza cada administradora. O Consórcio Porto Bank, com que a Montoro Consórcios trabalha, é autorizado pelo Banco Central e associado à ABAC, entidade que representa o setor.</p></details>
+      <details><summary>Como acontece a contemplação?</summary><p>Por sorteio ou por lance, nas assembleias mensais do grupo. No Porto Bank, o sorteio usa o resultado da Loteria Federal. No lance, você antecipa parcelas para tentar receber o crédito antes. Não há data garantida, mas todos são contemplados até o fim do grupo.</p></details>
+      <details><summary>Preciso dar entrada para começar?</summary><p>Não. Você começa pagando apenas as parcelas mensais do plano escolhido, sem precisar juntar um valor alto antes. Se quiser tentar antecipar a contemplação, pode ofertar lances quando for conveniente, mas isso é opcional.</p></details>
+      <details><summary>Qual a diferença entre consórcio e financiamento?</summary><p>No financiamento, você recebe o bem logo, mas paga juros. No consórcio não há juros nem entrada obrigatória: você paga uma taxa de administração diluída nas parcelas e compra quando é contemplado. É indicado para quem pode se planejar e quer gastar menos.</p></details>
+      <details><summary>Posso usar meu FGTS no consórcio de imóvel?</summary><p>Sim. No Consórcio Porto Bank, você pode usar até 100% do saldo do FGTS para ofertar lance, complementar a carta de crédito, abater parcelas ou quitar o saldo devedor. Vale para imóvel residencial e segue as regras do FGTS, definidas pela Caixa.</p></details>
+      <details><summary>O que é lance embutido?</summary><p>É usar uma parte da própria carta de crédito para pagar o lance, sem tirar todo o valor do bolso. Se você for contemplado, recebe o crédito já descontado dessa parte. O percentual permitido varia conforme o grupo.</p></details>
+      <details><summary>Posso pagar uma parcela menor antes da contemplação?</summary><p>Sim. O Consórcio Porto Bank tem planos com parcela reduzida até a contemplação. A diferença é compensada nas parcelas seguintes, depois que você recebe o crédito. É uma forma de começar com um valor que cabe melhor no orçamento.</p></details>
+      <details><summary>A carta de crédito vale como pagamento à vista?</summary><p>Sim. Para o vendedor, a carta de crédito funciona como pagamento à vista, o que dá a você mais força para negociar preço e condições.</p></details>
+      <details><summary>Existe consórcio de carro com data marcada para a contemplação?</summary><p>Sim. No Consórcio Data Certa do Porto Bank, você escolhe em quanto tempo quer ser contemplado e planeja a compra do carro com data marcada, sem entrada e com a economia do consórcio. Fale com a Montoro Consórcios para conhecer os prazos disponíveis.</p></details>
+      <details><summary>Dá para quitar meu financiamento com o consórcio?</summary><p>Sim. Com a carta contemplada do Porto Bank, você pode quitar o saldo devedor de um financiamento imobiliário em seu nome, mesmo que seja de outro banco. Assim, você troca parcelas com juros por um plano sem juros.</p></details>
+      <details><summary>E se eu precisar desistir do consórcio?</summary><p>Você pode desistir. Os valores pagos ao fundo comum são devolvidos quando sua cota cancelada for sorteada ou no encerramento do grupo, com os descontos previstos em contrato. Outra saída é transferir a cota para outra pessoa, o que a Lei do Consórcio permite.</p></details>
+      <details><summary>Como contratar meu consórcio?</summary><p>Faça uma simulação com a Montoro Consórcios. Nossos consultores ajudam você a definir o valor do crédito, o prazo e a parcela ideais e a pensar na estratégia de lances. A contratação do Consórcio Porto Bank é simples e pode ser feita online.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 13. CTA FINAL -->
+<section class="final dark">
+  <div class="wrap">
+    <span class="eyebrow">Toda história começa com um primeiro passo</span>
+    <h2>Pronto para dar <span class="accent" style="color:var(--blue-soft)">o próximo passo?</span></h2>
+    <p class="lead">O próximo passo desta história pode ser o seu. Converse com um de nossos consultores. Sem compromisso e sem letras miúdas.</p>
+    <div class="final-ctas">
+      <a class="btn btn-wa btn-lg" data-wa="Olá, quero conversar com um consultor Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg>Fale no WhatsApp</a>
+      <a class="btn btn-ghost btn-lg" data-wa="Olá, quero agendar uma reunião com a Montoro Consórcios" href="#">Agendar reunião</a>
+    </div>
+    <div class="guarantees">
+      <span><svg><use href="#i-shield"/></svg>Regulado pelo Banco Central</span>
+      <span><svg><use href="#i-check"/></svg>Consultoria sem custo</span>
+      <span><svg><use href="#i-check"/></svg>Produtos Porto Bank</span>
+      <span><svg><use href="#i-doc"/></svg>Sem letras miúdas</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="assets/img/logo-montoro.png" alt="Montoro Consórcios" width="733" height="178" loading="lazy">
+        <p>Planejamento que vira conquista. Na Montoro Consórcios você encontra experiência, credibilidade, método claro e a segurança da Porto, nossa principal parceira.</p>
+        <span class="bacen"><svg width="14" height="14"><use href="#i-shield"/></svg>Regulado pelo BACEN</span>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a data-wa="Olá, vim do site" href="#">(13) 98231-8000 · WhatsApp</a></li>
+          <li><a href="tel:+551320100208">(13) 2010-0208</a></li>
+          <li><a href="mailto:atendimento@montoroconsorcios.com.br">atendimento@montoroconsorcios.com.br</a></li>
+          <li>Praça dos Expedicionários, 19 · 9º andar · Santos, SP</li>
+          <li><a href="https://www.instagram.com/montoroconsorcios/" target="_blank" rel="noopener">@montoroconsorcios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Links úteis</h4>
+        <ul>
+          <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11795.htm" target="_blank" rel="noopener">Lei do Sistema de Consórcios</a></li>
+          <li><a href="https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=285" target="_blank" rel="noopener">Resolução BCB nº 285, de 19/1/2023</a></li>
+          <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm" target="_blank" rel="noopener">Código de Defesa do Consumidor</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      A Montoro Consórcios (InCompany Corretora de Seguros Ltda.) está inscrita no CNPJ sob o n. 22.581.073/0001-57 com sede na Praça dos Expedicionários, 19 - 9° andar - Santos, SP - CEP 11065-500.<br>
+      © 2026 Montoro Consórcios · Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa="Olá, vim do site" href="#" aria-label="Fale no WhatsApp"><svg><use href="#i-wa"/></svg></a>
+<div class="mbar"><a class="btn btn-wa" data-wa="Olá, quero fazer uma simulação" href="#"><svg><use href="#i-wa"/></svg>Simular no WhatsApp</a></div>
+
+<script>
+(function(){
+  var WA = '5513982318000';
+  function waLink(msg){ return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg); }
+
+  document.querySelectorAll('[data-wa]').forEach(function(a){
+    a.href = waLink(a.getAttribute('data-wa'));
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  document.getElementById('sim-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = e.target, nome = f.nome.value.trim();
+    if (!nome) { f.nome.focus(); f.nome.style.borderColor = '#C0392B'; return; }
+    var msg = 'Olá, quero fazer uma simulação!\n' +
+      'Nome: ' + nome + '\n' +
+      'Consórcio: ' + f.produto.value + '\n' +
+      'Crédito desejado: ' + f.valor.value + '\n' +
+      'Prazo para conquistar: ' + f.quando.value;
+    window.open(waLink(msg), '_blank', 'noopener');
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
