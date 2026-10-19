@@ -231,3 +231,17 @@ Alterações são feitas no Lovable (que sincroniza com o GitHub → Cloudflare 
 - Ao diagnosticar “página quebrada”: peça/olhe primeiro o **Console e a aba Network (F12)** — quase sempre é 404 por caminho/maiúscula ou MIME por link relativo.
 - Após qualquer deploy, lembrar o usuário de testar com **Ctrl+Shift+R** (cache de CDN/navegador).
 - Respostas curtas, em português, com passo a passo quando envolver painel da Cloudflare (o usuário costuma enviar prints).
+
+
+---
+
+## 13. Site da LP como principal em meeky.com.br (atualização)
+
+- Novo código do Worker: `worker/meeky-router-worker.js` (vai no Worker `meeky-lp-proxy`, rota `meeky.com.br/*`).
+  O código antigo (só `/lp`) continua em `worker/lp-proxy-worker.js` para voltar atrás.
+- Regras: `/` e páginas do site-lp → `meeky-site`; `/lp/...` → 301 para a raiz; páginas antigas da loja com
+  equivalente (`/sobre`, `/faq`, `/headphone-anc-meeky-f5-pro`, `/blog/<slug>`…) → 301 para a página nova;
+  `/checkout` (antigo, links dos e-mails), `/admin`, `/r/`, `/vip`, `/termos`, `/privacidade`, arquivos do app
+  etc. → loja (`meeky-focus-control.pages.dev`); qualquer coisa que não exista no site novo → loja.
+- Checkout do site: `Checkout.html` (cópia do checkout da loja, mesmo backend) — fonte em `lp-checkout-src/`.
+- Aviso de venda ao GHL: `lp-checkout-src/src/saleWebhook.ts` (Inbound Webhook, 1x por pagamento aprovado).
