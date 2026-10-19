@@ -28,8 +28,31 @@ patch('CheckoutPage.tsx','CheckoutPage.tsx',[
   ('<Link to="/privacidade" className="text-accent underline" target="_blank">Política de Privacidade</Link>','<a href="https://meeky.com.br/privacidade" className="text-accent underline" target="_blank" rel="noopener">Política de Privacidade</a>'),
   ('navigate(`/checkout/sucesso?','navigate(`/Checkout-sucesso?'),
   ('navigate(`/checkout/pendente?','navigate(`/Checkout-pendente?'),
+  ('import { getCheckoutProduct } from "@/lib/products";','import { getCheckoutProduct } from "@/lib/products";\nimport { saveBuyer, sendSale } from "./saleWebhook";'),
+  ('''                    console.log("[Checkout] Payment result:", data);
+''','''                    console.log("[Checkout] Payment result:", data);
+
+                    // Guarda os dados do comprador para avisar o GHL quando a venda for aprovada
+                    if (data?.payment_id) {
+                      const utmNow = getStoredUtm() as Record<string, string | undefined> | null;
+                      saveBuyer({
+                        name: form.name, email: form.email, phone: form.phone,
+                        product: PRODUCT.name, product_key: String(PRODUCT.key ?? ""), sku: PRODUCT.sku,
+                        quantity, unit_price: unitPrice, shipping: activeShipping, total,
+                        coupon: appliedCoupon?.code || null, payment_method: selectedPaymentMethod || null,
+                        city: form.city, state: form.state,
+                        utm_source: utmNow?.utm_source ?? null, utm_medium: utmNow?.utm_medium ?? null, utm_campaign: utmNow?.utm_campaign ?? null,
+                      });
+                      if (data?.status === "approved") void sendSale(String(data.payment_id), data.order_id ? String(data.order_id) : null);
+                    }
+'''),
 ])
 patch('CheckoutSuccessPage.tsx','CheckoutSuccessPage.tsx',[
+  ('''  const status = searchParams.get("status") || searchParams.get("collection_status");
+''','''  const status = searchParams.get("status") || searchParams.get("collection_status");
+  // Venda aprovada: avisa o GHL (uma vez por pagamento)
+  useEffect(() => { if (status === "approved") void sendSale(paymentId); }, [paymentId, status]);
+'''),
   ('''              <Link
                 to="/"
                 className="inline-flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
@@ -45,11 +68,15 @@ patch('CheckoutSuccessPage.tsx','CheckoutSuccessPage.tsx',[
 patch('CheckoutPendingPage.tsx','CheckoutPendingPage.tsx',[
   ('navigate(`/checkout/sucesso?','navigate(`/Checkout-sucesso?'),
   ('<a href="/contato" className="underline font-semibold">','<a href={lpHref("Contato")} className="underline font-semibold">'),
+  ('''        if (data?.payment_status === "approved") {
+          clearInterval(interval);''','''        if (data?.payment_status === "approved") {
+          clearInterval(interval);
+          void sendSale(paymentId, orderId);'''),
 ])
 # lpHref import nas páginas de sucesso/pendente
 for f in ['CheckoutSuccessPage.tsx','CheckoutPendingPage.tsx']:
     s=open(D+f).read(); i=s.index('\n',s.index('import '))
-    s=s[:i+1]+'import { lpHref } from "./lpLinks";\n'+s[i+1:]
+    s=s[:i+1]+'import { lpHref } from "./lpLinks";\nimport { sendSale } from "./saleWebhook";\n'+s[i+1:]
     s=s.replace('from "@/components/layout/Footer"','from "./LpFooter"')
     assert 'import Layout from "@/components/layout/Layout";' in s
     s=s.replace('import Layout from "@/components/layout/Layout";','import Layout from "./LpLayout";')

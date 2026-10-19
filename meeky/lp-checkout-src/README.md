@@ -18,3 +18,11 @@ pasta `ck/` (JS/CSS) e pasta `fonts/`.
 
 ⚠️ O preço exibido vem de `src/lib/products.ts` da loja no momento do build. O valor cobrado é sempre o do
 servidor da loja. Se a loja mudar preço, regenere esta cópia.
+
+## Aviso de venda para o GHL
+`src/saleWebhook.ts` envia um POST (JSON) para o Inbound Webhook do GHL quando o pagamento é aprovado
+(cartão aprovado na hora, ou Pix aprovado enquanto a pessoa está na página do QR code). Envia uma vez por
+pagamento. Campos: event, payment_id, order_id, name, first_name, email, phone (+55…), product, product_key,
+sku, quantity, unit_price, shipping, total, coupon, payment_method, city, state, utm_*, source, purchased_at.
+Limite: se a pessoa fechar a página antes do Pix ser aprovado, o aviso não sai pelo navegador — para cobrir
+100% é preciso disparar também pelo servidor da loja (mercadopago-webhook, no Lovable).
