@@ -66,16 +66,12 @@ section{padding:96px 0}
 .hero{position:relative;padding:80px 0 96px;background:radial-gradient(1200px 600px at 85% -10%,rgba(57,125,186,.35),transparent 60%),var(--navy-ink);overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .hero-logo{height:58px;width:auto;margin-bottom:36px}
-.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(111,163,211,.35);border-radius:999px;padding:8px 18px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-soft);font-weight:600;margin-bottom:26px}
-.pill i{width:8px;height:8px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 4px rgba(37,211,102,.2)}
 .hero h1{font-size:clamp(40px,6.4vw,76px);color:#fff;margin-bottom:22px}
 .hero .lead{color:#B9C7D4;font-size:clamp(17px,1.8vw,19px);margin-bottom:28px}
 .checks{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:34px}
 .checks li{display:flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:15px}
 .checks svg{width:20px;height:20px;color:var(--wa)}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
-.trust{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:34px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#8FA2B5}
-.trust b{color:#fff;font-weight:700}
 .hero-media{position:relative}
 .hero-media .main{border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);aspect-ratio:4/4.4}
 .hero-media .main img{width:100%;height:100%;object-fit:cover}
@@ -110,12 +106,10 @@ section{padding:96px 0}
 .sol-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
 .sol-img{border-radius:28px;overflow:hidden;aspect-ratio:1/1;box-shadow:var(--shadow)}
 .sol-img img{width:100%;height:100%;object-fit:cover}
-.bullets{list-style:none;display:grid;gap:18px;margin:30px 0 36px}
-.bullets li{display:flex;gap:16px;align-items:flex-start}
-.bullets .ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;background:rgba(57,125,186,.12);color:var(--blue);display:grid;place-items:center}
-.bullets .ic svg{width:22px;height:22px}
-.bullets b{color:var(--ink);display:block}
-.dark .bullets b{color:#fff}
+.bullets{list-style:none;display:grid;gap:14px;margin:30px 0 36px}
+.bullets li{display:flex;align-items:center;gap:14px;font-size:17px;font-weight:600;color:var(--ink)}
+.bullets svg{flex-shrink:0;width:30px;height:30px;padding:6px;border-radius:50%;background:var(--blue);color:#fff}
+.dark .bullets li{color:#fff}
 
 /* Products */
 .products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
@@ -130,11 +124,14 @@ section{padding:96px 0}
 .kicker svg{width:18px;height:18px}
 .prod-body h3{font-size:23px}
 .prod-body p{font-size:15px;color:var(--muted);line-height:1.5}
-.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.specs div{background:var(--cream);border-radius:12px;padding:10px 6px;text-align:center}
-.specs small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.specs b{font-size:13px;color:var(--navy);line-height:1.3;display:block;margin-top:2px}
-.prod .btn{margin-top:auto;width:100%}
+.specs{margin-top:auto}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--sand);border-radius:16px;background:linear-gradient(180deg,#fff,var(--cream));overflow:hidden}
+.specs div{padding:14px 8px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.specs div+div{border-left:1px solid var(--sand)}
+.specs svg{width:20px;height:20px;color:var(--blue)}
+.specs small{white-space:nowrap;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1}
+.specs b{font-size:14px;color:var(--navy);line-height:1.25;font-weight:700}
+.prod .btn{width:100%;white-space:nowrap;font-size:14px;letter-spacing:.04em;padding:18px 16px;gap:10px}
 
 /* Offer */
 .offer{position:relative;padding:110px 0;background:var(--navy-ink);overflow:hidden}
@@ -164,18 +161,18 @@ section{padding:96px 0}
 .adv p{font-size:14px;color:var(--muted);line-height:1.45}
 
 /* Method: sticky intro left, stacking cards right */
-.method-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:start}
+.method-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
 .method-intro{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;gap:18px}
 .method-intro .btn{align-self:flex-start;margin-top:8px}
-.stack{padding-block:max(80px,calc(50vh - 400px)) 0;display:flex;flex-direction:column;gap:14px}
-.scard{position:sticky;top:calc(max(80px,50vh - 400px) + var(--i) * 14px);background:linear-gradient(160deg,#123F69 0%,#0A2D4F 100%);border:1px solid rgba(111,163,211,.28);border-radius:20px;padding:20px 22px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px 18px;box-shadow:0 -14px 34px -16px rgba(0,0,0,.65);transform-origin:center top;will-change:transform}
+.stack{padding-block:max(40px,calc(50vh - 440px)) 0;display:flex;flex-direction:column;gap:clamp(10px,1.6vh,16px)}
+.scard{position:sticky;top:calc(max(40px,50vh - 440px) + var(--i) * 14px);background:linear-gradient(160deg,#123F69 0%,#0A2D4F 100%);border:1px solid rgba(111,163,211,.28);border-radius:22px;padding:clamp(16px,2.6vh,28px) 30px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px 22px;box-shadow:0 -14px 34px -16px rgba(0,0,0,.65);transform-origin:center top;will-change:transform}
 .stack-end{height:55vh}
 .scard.hl{background:linear-gradient(160deg,#2B6499 0%,#123F69 100%);border-color:rgba(111,163,211,.55)}
-.scard .ico{grid-row:span 2;width:54px;height:54px;border-radius:15px;background:rgba(111,163,211,.16);color:var(--blue-soft)}
-.scard .ico svg{width:28px;height:28px}
+.scard .ico{grid-row:span 2;width:clamp(50px,7vh,64px);height:clamp(50px,7vh,64px);border-radius:18px;background:rgba(111,163,211,.16);color:var(--blue-soft)}
+.scard .ico svg{width:30px;height:30px}
 .scard .badge{grid-column:3;grid-row:1;align-self:start;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--blue);color:#fff;border-radius:999px;padding:6px 11px}
-.scard h3{font-size:20px;grid-column:2;align-self:end}
-.scard p{font-size:15px;color:#C7D3DF;line-height:1.45;grid-column:2/4;align-self:start}
+.scard h3{font-size:clamp(19px,2.6vh,23px);grid-column:2;align-self:end}
+.scard p{font-size:clamp(14.5px,1.9vh,16.5px);color:#C7D3DF;line-height:1.45;grid-column:2/4;align-self:start}
 
 /* Authority */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
@@ -313,7 +310,6 @@ footer a:hover{color:#fff}
   .wrap{padding:0 16px}
   .topbar{font-size:13px}
   .hero-logo{height:44px;margin-bottom:28px}
-  .pill{letter-spacing:.12em;font-size:11px;padding:8px 14px}
   .btn{letter-spacing:.03em;gap:10px;padding:17px 20px}
   .btn-lg{padding:19px 22px;font-size:15px}
   .dock-txt,.dock-logo{display:none}
@@ -367,22 +363,15 @@ footer a:hover{color:#fff}
   <div class="wrap">
     <div>
       <img class="hero-logo" src="assets/img/logo-montoro.svg" alt="Montoro Consórcios" width="375" height="88">
-      <div class="pill"><i></i>Imóvel · Automóvel · Empresarial</div>
       <h1>Planejamento que vira <span class="accent">conquista.</span></h1>
       <p class="lead">Na Montoro Consórcios você encontra experiência, credibilidade, método claro e a segurança da Porto, nossa principal parceira. Você paga pelo bem, não pelos juros.</p>
       <ul class="checks">
         <li><svg><use href="#i-check"/></svg>Sem juros</li>
         <li><svg><use href="#i-check"/></svg>Sem entrada</li>
         <li><svg><use href="#i-check"/></svg>Sem taxa de adesão</li>
-        <li><svg><use href="#i-check"/></svg>FGTS aceito</li>
       </ul>
       <div class="hero-ctas">
         <a class="btn btn-wa btn-lg" data-wa="Olá, quero fazer uma simulação" href="#"><svg><use href="#i-wa"/></svg>Simular no WhatsApp<svg class="arr"><use href="#i-arrow"/></svg></a>
-      </div>
-      <div class="trust">
-        <span><b>Regulado</b> pelo Banco Central</span>
-        <span><b>Parceria</b> Porto Bank</span>
-        <span><b>Consultoria</b> sem custo</span>
       </div>
     </div>
     <div class="hero-media">
@@ -442,10 +431,10 @@ footer a:hover{color:#fff}
       <h2>O jeito certo de <span class="accent">comprar consórcio.</span></h2>
       <p class="lead" style="margin-top:16px">Consórcio é planejamento, e planejamento merece consultoria de verdade. Nós explicamos o que ninguém explica, acompanhamos até a contemplação e cuidamos do que vem depois.</p>
       <ul class="bullets">
-        <li><span class="ic"><svg><use href="#i-user"/></svg></span><div><b>Consultoria sem custo</b>Analisamos seu perfil e montamos o plano certo.</div></li>
-        <li><span class="ic"><svg><use href="#i-chart"/></svg></span><div><b>Método próprio</b>Diagnóstico, simulação e recomendação com clareza.</div></li>
-        <li><span class="ic"><svg><use href="#i-wa"/></svg></span><div><b>Atendimento humano</b>Antes, durante e depois da contemplação.</div></li>
-        <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><b>Produtos Porto</b>Solidez, regulação e transparência.</div></li>
+        <li><svg><use href="#i-check"/></svg>Consultoria sem custo</li>
+        <li><svg><use href="#i-check"/></svg>Método próprio</li>
+        <li><svg><use href="#i-check"/></svg>Atendimento humano</li>
+        <li><svg><use href="#i-check"/></svg>Produtos Porto</li>
       </ul>
       <a class="btn btn-blue" data-wa="Olá, quero conversar com um consultor Montoro Consórcios" href="#"><svg><use href="#i-wa"/></svg>Falar com um consultor<svg class="arr"><use href="#i-arrow"/></svg></a>
     </div>
@@ -468,7 +457,7 @@ footer a:hover{color:#fff}
           <span class="kicker"><svg><use href="#i-home"/></svg>Imóvel</span>
           <h3>O lar como meta.</h3>
           <p>Casa, apê, sala comercial, terreno, construção ou reforma.</p>
-          <div class="specs"><div><small>Adesão</small><b>Sem taxa</b></div><div><small>Parcelas</small><b>Até 200x sem juros</b></div><div><small>Crédito</small><b>A partir de R$ 70 mil</b></div></div>
+          <div class="specs"><div><svg><use href="#i-doc"/></svg><small>Adesão</small><b>Sem taxa</b></div><div><svg><use href="#i-percent"/></svg><small>Parcelas</small><b>Até 200x</b></div><div><svg><use href="#i-wallet"/></svg><small>Mínimo</small><b>R$ 70 mil</b></div></div>
           <a class="btn btn-wa" data-wa="Quero simular consórcio imóvel" href="#"><svg><use href="#i-wa"/></svg>Simular imóvel<svg class="arr"><use href="#i-arrow"/></svg></a>
         </div>
       </article>
@@ -479,7 +468,7 @@ footer a:hover{color:#fff}
           <span class="kicker"><svg><use href="#i-car"/></svg>Automóvel</span>
           <h3>Mobilidade com planejamento.</h3>
           <p>Carro novo ou seminovo, moto, utilitário ou frota. Na contemplação, compra à vista.</p>
-          <div class="specs"><div><small>Adesão</small><b>Sem taxa</b></div><div><small>Parcelas</small><b>Até 90x sem juros</b></div><div><small>Crédito</small><b>A partir de R$ 25 mil</b></div></div>
+          <div class="specs"><div><svg><use href="#i-doc"/></svg><small>Adesão</small><b>Sem taxa</b></div><div><svg><use href="#i-percent"/></svg><small>Parcelas</small><b>Até 90x</b></div><div><svg><use href="#i-wallet"/></svg><small>Mínimo</small><b>R$ 25 mil</b></div></div>
           <a class="btn btn-wa" data-wa="Quero simular consórcio automóvel" href="#"><svg><use href="#i-wa"/></svg>Simular automóvel<svg class="arr"><use href="#i-arrow"/></svg></a>
         </div>
       </article>
@@ -490,7 +479,7 @@ footer a:hover{color:#fff}
           <span class="kicker"><svg><use href="#i-building"/></svg>Empresarial</span>
           <h3>Crescimento com estratégia.</h3>
           <p>Sede, equipamentos e frota sem travar o capital de giro.</p>
-          <div class="specs"><div><small>Prazo</small><b>Até 200 meses</b></div><div><small>Crédito</small><b>Múltiplas cotas</b></div><div><small>Parcelas</small><b>Sem juros</b></div></div>
+          <div class="specs"><div><svg><use href="#i-calendar"/></svg><small>Prazo</small><b>200 meses</b></div><div><svg><use href="#i-wallet"/></svg><small>Crédito</small><b>Multicotas</b></div><div><svg><use href="#i-percent"/></svg><small>Parcelas</small><b>Sem juros</b></div></div>
           <a class="btn btn-wa" data-wa="Quero simular consórcio empresarial" href="#"><svg><use href="#i-wa"/></svg>Simular empresarial<svg class="arr"><use href="#i-arrow"/></svg></a>
         </div>
       </article>
@@ -506,8 +495,8 @@ footer a:hover{color:#fff}
       <h2>Agora ficou mais fácil <span class="accent" style="color:var(--blue-soft)">conquistar seu imóvel.</span></h2>
       <p class="lead" style="margin-top:16px">Comece pagando menos: desconto aplicado nas parcelas até a contemplação, sem taxa de adesão e sem juros. Fale com um consultor e veja se o seu plano se encaixa na campanha.</p>
       <ul class="bullets">
-        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Parcela reduzida até a contemplação</b>A diferença é compensada nas parcelas seguintes, depois que você recebe o crédito.</div></li>
-        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Use até 100% do FGTS</b>Para lance, complemento da carta, abater parcelas ou quitar o saldo devedor.</div></li>
+        <li><svg><use href="#i-check"/></svg>Parcela reduzida até a contemplação</li>
+        <li><svg><use href="#i-check"/></svg>Use até 100% do FGTS</li>
       </ul>
     </div>
     <div class="offer-box reveal">
@@ -681,9 +670,9 @@ footer a:hover{color:#fff}
       <h2>Saia da primeira conversa sabendo <span class="accent" style="color:var(--blue-soft)">exatamente quanto vai pagar.</span></h2>
       <p class="lead" style="margin-top:16px">Conte o que você quer conquistar. Um consultor Montoro analisa seu perfil e responde no WhatsApp com o crédito, o prazo, a parcela ideal e a estratégia de lances.</p>
       <ul class="bullets">
-        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Sem compromisso</b>A consultoria não tem custo.</div></li>
-        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Sem letras miúdas</b>Regras explicadas linha por linha.</div></li>
-        <li><span class="ic" style="background:rgba(111,163,211,.15);color:var(--blue-soft)"><svg><use href="#i-check"/></svg></span><div><b>Comparamos antes de você assinar</b>Várias opções de grupos, uma análise só.</div></li>
+        <li><svg><use href="#i-check"/></svg>Sem compromisso</li>
+        <li><svg><use href="#i-check"/></svg>Sem letras miúdas</li>
+        <li><svg><use href="#i-check"/></svg>Comparamos antes de você assinar</li>
       </ul>
     </div>
     <form class="form reveal" id="sim-form" novalidate>
