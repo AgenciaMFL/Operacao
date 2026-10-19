@@ -61,7 +61,7 @@ section{padding:96px 0}
 .topbar a{text-decoration:underline;font-weight:700}
 
 /* Hero (Figma S1): centered copy over the family + house composition */
-.hero{position:relative;overflow:hidden;padding:0;background:linear-gradient(180deg,#00233D 0%,#013257 100%);height:900px;font-family:'Poppins','Montserrat',sans-serif}
+.hero{position:relative;overflow:hidden;padding:0;background:#00233D url(assets/img/hero-bg-desktop.webp) center bottom/auto 100% no-repeat;height:900px;font-family:'Poppins','Montserrat',sans-serif}
 .hero-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:74px}
 .hero-logo{display:block;width:166px;height:39px}
 .hero h1{margin-top:14px;max-width:730px;font-family:inherit;font-weight:700;font-size:54px;line-height:1.01;letter-spacing:-.6px;color:#FBFAF6;text-shadow:0 1.54px 20px rgba(0,0,0,.4);text-wrap:balance}
@@ -73,12 +73,6 @@ section{padding:96px 0}
 .hero-btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(53,159,255,.85)}
 .hero-btn:hover img{transform:rotate(45deg)}
 .hero-btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.hero-art{position:absolute;z-index:1;top:345px;left:50%;width:1129px;aspect-ratio:1129/1154;transform:translateX(calc(-50% + 10.5px));pointer-events:none}
-.hero-art img{position:absolute;max-width:none}
-.hero-art .marca{left:3.28%;top:14.21%;width:96.72%;height:85.79%;mix-blend-mode:screen}
-.hero-art .casa{left:4.43%;top:0;width:89.28%;height:58.23%;object-fit:cover}
-.hero-art .familia-box{position:absolute;left:0;top:3.12%;width:95.31%;height:56.41%;overflow:hidden}
-.hero-art .familia-box img{left:-2.79%;top:-.01%;width:108.46%;height:100.03%}
 
 /* Stats */
 .stats{background:var(--navy-deep);padding:44px 0}
@@ -294,7 +288,7 @@ footer a:hover{color:#fff}
   .scard .badge{font-size:9px;padding:5px 8px}
   section{padding:72px 0}
   .hero{height:auto;min-height:0;padding:0}
-  .hero-art{position:relative;top:auto;left:50%;width:min(1129px,118vw);margin-top:-24px;margin-bottom:calc(min(1129px,118vw) * -.482)}
+  .hero{background:#00233D url(assets/img/hero-bg-mobile.webp) center bottom/190% auto no-repeat;padding-bottom:56vw}
   .split,.sol-grid,.offer .wrap,.about-grid,.sim{grid-template-columns:1fr;gap:44px}
   .stats .wrap{grid-template-columns:repeat(2,1fr);gap:28px 16px}
   .leaders{grid-template-columns:1fr}
@@ -366,11 +360,6 @@ footer a:hover{color:#fff}
     <h1>Compre seu imóvel ou carro <span class="accent">sem pagar juros.</span></h1>
     <p class="hero-lead">Na Montoro Consórcios você encontra experiência, credibilidade, método claro e <b>a segurança de uma administradora sólida e regulada.</b></p>
     <a class="hero-btn" data-wa="Olá, quero fazer uma simulação" href="#">Simular no WhatsApp<img src="assets/img/icon-seta-circulo.svg" alt="" width="25" height="25"></a>
-  </div>
-  <div class="hero-art" aria-hidden="true">
-    <img class="marca" src="assets/img/hero-marca.svg" alt="" width="1092" height="990">
-    <img class="casa" src="assets/img/hero-casa.webp" alt="" width="1536" height="1024" fetchpriority="high">
-    <div class="familia-box"><img src="assets/img/hero-familia.webp" alt="" width="2200" height="1228" fetchpriority="high"></div>
   </div>
 </section>
 
