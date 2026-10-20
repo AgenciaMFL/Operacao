@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "only-sounds-elementor": {
+      "type": "http",
+      "url": "https://onlysounds.com.br/wp-json/elementor/mcp/",
+      "headers": {
+        "Authorization": "${ONLYSOUNDS_WP_AUTH}"
+      }
+    }
+  }
+}
