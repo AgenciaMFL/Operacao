@@ -40,7 +40,12 @@ function wp_remote_request($u, $a) {
   if (!empty($GLOBALS['SEM_SCOPE'])) return ['code'=>401,'body'=>'{"message":"The token is not authorized for this scope."}'];
   return ['code'=>201,'body'=>'{}'];
 }
-function wp_remote_get($u, $a) { return wp_remote_request($u, ['method'=>'GET'] + $a); }
+$LEADS = [];
+function wp_remote_get($u, $a) {
+  global $LEADS;
+  if (preg_match('~/api/Lead/(\d+)$~', $u, $m)) { $GLOBALS['LEAD_GETS'][] = (int) $m[1]; return isset($LEADS[$m[1]]) ? ['code'=>200,'body'=>json_encode($LEADS[$m[1]])] : ['code'=>404,'body'=>'']; }
+  return wp_remote_request($u, ['method'=>'GET'] + $a);
+}
 
 require $argv[1]; require $argv[2];
 function ok($n, $c) { echo ($c ? 'PASSOU ' : 'FALHOU ') . $n . "\n"; if (!$c) $GLOBALS['falhou'] = true; }
@@ -73,4 +78,27 @@ sbelt_falta_diario();
 $posts = array_values(array_filter($CHAMADAS_GHL, fn($c) => $c[0] === 'POST'));
 ok('automático marca os que faltam e pula quem já tem a tag', count($posts) >= 2 && !array_filter($posts, fn($p) => str_contains($p[1], '/contacts/CB/')));
 ok('automático guarda o relatório', isset($O['sbelt_falta_ultimo']['quando']));
+
+// Imperatriz: a falta está no LEAD ("Avaliação faltou"), a avaliação continua "Agendado"
+$AVALIACOES = [
+  ['leadId'=>14660,'nome'=>'Eliene Freire Da Silva Santos','telefone'=>'(99) 99173-7864','dataHoraInicio'=>'2026-10-17T09:00:00','status'=>'Agendado'],
+  ['leadId'=>14632,'nome'=>'Analicy De Sousa Brito','telefone'=>'(99) 98464-6893','dataHoraInicio'=>'2026-10-17T10:00:00','status'=>'Agendado'],
+  ['leadId'=>14700,'nome'=>'Compareceu Certinho','telefone'=>'(99) 91111-2222','dataHoraInicio'=>'2026-10-17T11:00:00','status'=>'Agendado'],
+  ['leadId'=>14800,'nome'=>'Ainda Vai Vir','telefone'=>'(99) 93333-4444','dataHoraInicio'=>'2099-01-01T09:00:00','status'=>'Agendado'],
+];
+$LEADS = ['14660'=>['id'=>14660,'status'=>'Avaliação faltou'], '14632'=>['Id'=>14632,'Status'=>'Avaliação faltou'], '14700'=>['id'=>14700,'status'=>'Compareceu'], '14800'=>['id'=>14800,'status'=>'Agendado']];
+$CONTATOS = ['+5599991737864'=>['id'=>'IE','tags'=>[]]];
+$GLOBALS['LEAD_GETS'] = []; $T = [];
+$b = sbelt_falta_buscar(9, '2026-10-01', '2026-10-20');
+$nomes = array_column($b['lista'], 'nome');
+ok('Imperatriz: falta lida do status do LEAD ("Avaliação faltou")', in_array('Eliene Freire Da Silva Santos', $nomes) && in_array('Analicy De Sousa Brito', $nomes));
+ok('quem compareceu não entra', !in_array('Compareceu Certinho', $nomes));
+ok('avaliação futura não consulta o lead', !in_array(14800, $GLOBALS['LEAD_GETS']));
+ok('status dos leads aparecem na tela', ($b['status_leads']['Avaliação faltou'] ?? 0) === 2);
+
+$O['sbelt_falta_tag'] = 'Falta'; $CHAMADAS_GHL = [];
+$m = sbelt_falta_marcar(9, ['+5599991737864', '+5599984646893'], '2026-10-01', '2026-10-20');
+$posts = array_values(array_filter($CHAMADAS_GHL, fn($c) => $c[0] === 'POST'));
+ok('tag configurável: usa "Falta" no contato existente', json_decode($posts[0][2], true) === ['tags' => ['Falta']] && str_contains($posts[0][1], '/contacts/IE/tags'));
+ok('cria contato na sub-conta da Imperatriz com a tag "Falta"', json_decode($posts[1][2], true)['locationId'] === 'qj2BSucIGAVOYtqGSRAL' && json_decode($posts[1][2], true)['tags'] === ['Falta']);
 exit(empty($falhou) ? 0 : 1);

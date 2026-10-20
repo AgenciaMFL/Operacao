@@ -218,9 +218,12 @@ Testes: `testes/teste-conferencia.php`.
 
 ### 5.4 Tela "Faltas Spa" (Ferramentas → Faltas Spa)
 
-Leva para o GHL quem **faltou na avaliação** segundo a Spa, com a tag **"Faltaram"**.
-- Busca as avaliações da unidade no período (padrão: últimos 30 dias) e filtra status com "falt" ou
-  "não compareceu" (a tela mostra todos os status que a Spa usou, para conferir). Uma linha por pessoa.
+Leva para o GHL quem **faltou na avaliação** segundo a Spa, com uma tag (nome configurável na tela;
+padrão "Faltaram").
+- Busca as avaliações da unidade no período (padrão: últimos 30 dias). Falta = status com "falt" ou
+  "não compareceu" **na avaliação ou no lead**: a unidade marca no lead ("Avaliação faltou" — visto na
+  Imperatriz em 20/10), então para avaliações que já passaram a tela consulta `GET /api/Lead/{id}`
+  (cache 1 h, máx. 500 por busca). A tela mostra os status da avaliação e dos leads. Uma linha por pessoa.
 - Situação no GHL (busca pelo telefone): **sem a tag**, **não existe** (será criado) ou **já tem a tag**.
 - "Colocar a tag": contato existente → `POST /contacts/{id}/tags` (só acrescenta, não apaga nada);
   não existe → cria o contato na sub-conta da unidade com nome, telefone e a tag.

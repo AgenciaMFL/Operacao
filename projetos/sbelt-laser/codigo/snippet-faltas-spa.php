@@ -1,10 +1,11 @@
 <?php
 /**
- * FALTAS SPA -> GHL (tag "Faltaram")
+ * FALTAS SPA -> GHL (tag de falta, nome configurável na tela)
  * Tela no painel: Ferramentas > Faltas Spa (só administradores).
  *
  * 1. "Buscar": lista as avaliações da Spa da unidade no período escolhido e
- *    mostra quem está com status de falta, e se já tem a tag no GHL.
+ *    mostra quem faltou - pelo status da avaliação ou, se ele não disser,
+ *    pelo status do lead (ex.: "Avaliação faltou") - e se já tem a tag no GHL.
  * 2. "Colocar a tag": para os marcados, acha o contato no GHL da unidade
  *    pelo telefone (ou cria, se não existir) e adiciona a tag "Faltaram".
  *    Nada é apagado nem sobrescrito no contato - só a tag é acrescentada.
@@ -16,7 +17,11 @@
  * No Code Snippets: "Run snippet everywhere" (o automático roda fora do painel).
  */
 
-const SBELT_FALTA_TAG = 'Faltaram';
+/** Nome da tag colocada no GHL (configurável na tela; padrão "Faltaram"). */
+function sbelt_falta_tag() {
+    $tag = trim((string) get_option('sbelt_falta_tag', ''));
+    return $tag !== '' ? $tag : 'Faltaram';
+}
 
 add_action('admin_menu', function () {
     add_management_page('Faltas Spa', 'Faltas Spa', 'manage_options', 'sbelt-faltas', 'sbelt_falta_pagina');
@@ -95,6 +100,49 @@ function sbelt_falta_avaliacoes($franquiaId, $de, $ate) {
     return ['lista' => $json['data']];
 }
 
+/**
+ * Status do lead na Spa (GET /api/Lead/{id}), com cache de 1 hora.
+ * Procura o campo de status pelo nome (status/Status/...), em texto.
+ */
+function sbelt_falta_status_lead($leadId) {
+    $leadId = (int) $leadId;
+    if ($leadId <= 0) return '';
+    $chave = 'sbelt_falta_ld_' . $leadId;
+    $cache = get_transient($chave);
+    if ($cache !== false) return (string) $cache;
+
+    $resposta = null;
+    for ($tentativa = 1; $tentativa <= 2; $tentativa++) {
+        $token = spa_get_token($tentativa > 1);
+        if (!$token) return '';
+        $resposta = wp_remote_get(SPA_URL_EMPRESA . '/api/Lead/' . $leadId, [
+            'headers' => ['Authorization' => 'Bearer ' . $token],
+            'timeout' => 15,
+        ]);
+        if (is_wp_error($resposta) || !in_array(wp_remote_retrieve_response_code($resposta), [401, 403], true)) {
+            break;
+        }
+    }
+    if (is_wp_error($resposta) || wp_remote_retrieve_response_code($resposta) >= 400) return '';
+
+    $lead = json_decode(wp_remote_retrieve_body($resposta), true);
+    $status = '';
+    if (is_array($lead)) {
+        foreach (['status', 'Status', 'statusLead', 'StatusLead', 'statusDescricao', 'StatusDescricao'] as $campo) {
+            if (isset($lead[$campo]) && is_string($lead[$campo]) && $lead[$campo] !== '') {
+                $status = $lead[$campo];
+                break;
+            }
+            if (isset($lead[$campo]) && is_array($lead[$campo])) {
+                $status = (string) ($lead[$campo]['descricao'] ?? $lead[$campo]['Descricao'] ?? $lead[$campo]['nome'] ?? $lead[$campo]['Nome'] ?? '');
+                if ($status !== '') break;
+            }
+        }
+    }
+    set_transient($chave, $status, HOUR_IN_SECONDS);
+    return $status;
+}
+
 /** Contato do GHL pelo telefone (ou null). */
 function sbelt_falta_achar_contato($telefoneGhl, $unidade) {
     $r = sbelt_falta_ghl('GET', add_query_arg([
@@ -122,12 +170,28 @@ function sbelt_falta_buscar($franquiaId, $de, $ate, $consultarGhl = true) {
         return $spa;
     }
 
-    $status = [];
-    $porPessoa = [];
+    $status      = [];
+    $statusLeads = [];
+    $porPessoa   = [];
+    $consultas   = 0;
+    $agora       = wp_date('Y-m-d\TH:i:s');
     foreach ($spa['lista'] as $avaliacao) {
         $st = (string) ($avaliacao['status'] ?? '');
         $status[$st] = ($status[$st] ?? 0) + 1;
-        if (!sbelt_falta_eh_falta($st)) continue;
+
+        $faltou = sbelt_falta_eh_falta($st);
+        // a unidade costuma marcar a falta no LEAD ("Avaliação faltou");
+        // só vale olhar avaliações que já aconteceram
+        if (!$faltou && !empty($avaliacao['leadId']) && (string) ($avaliacao['dataHoraInicio'] ?? '') < $agora && $consultas < 500) {
+            $consultas++;
+            $stLead = sbelt_falta_status_lead($avaliacao['leadId']);
+            $statusLeads[$stLead ?: '(não lido)'] = ($statusLeads[$stLead ?: '(não lido)'] ?? 0) + 1;
+            if (sbelt_falta_eh_falta($stLead)) {
+                $faltou = true;
+                $avaliacao['status'] = $stLead . ' (lead)';
+            }
+        }
+        if (!$faltou) continue;
         $telefone = sbelt_falta_telefone_ghl($avaliacao['telefone'] ?? '');
         if ($telefone === '') continue;
         if (!isset($porPessoa[$telefone]) || ($avaliacao['dataHoraInicio'] ?? '') > ($porPessoa[$telefone]['dataHoraInicio'] ?? '')) {
@@ -153,7 +217,7 @@ function sbelt_falta_buscar($franquiaId, $de, $ate, $consultarGhl = true) {
             } else {
                 $linha['contact_id'] = $contato['id'] ?? null;
                 $tags = array_map('strtolower', (array) ($contato['tags'] ?? []));
-                $linha['situacao'] = in_array(strtolower(SBELT_FALTA_TAG), $tags, true) ? 'com_tag' : 'sem_tag';
+                $linha['situacao'] = in_array(strtolower(sbelt_falta_tag()), $tags, true) ? 'com_tag' : 'sem_tag';
             }
         }
         $lista[] = $linha;
@@ -164,7 +228,14 @@ function sbelt_falta_buscar($franquiaId, $de, $ate, $consultarGhl = true) {
         return [$ordem[$a['situacao']], $a['data']] <=> [$ordem[$b['situacao']], $b['data']];
     });
 
-    return ['unidade' => $unidade['nome'], 'status_na_spa' => $status, 'total_avaliacoes' => count($spa['lista']), 'lista' => $lista];
+    return [
+        'unidade'          => $unidade['nome'],
+        'status_na_spa'    => $status,
+        'status_leads'     => $statusLeads,
+        'leads_limitados'  => $consultas >= 500,
+        'total_avaliacoes' => count($spa['lista']),
+        'lista'            => $lista,
+    ];
 }
 
 /** Adiciona a tag (ou cria o contato com a tag) para os telefones informados. */
@@ -191,7 +262,7 @@ function sbelt_falta_marcar($franquiaId, $telefones, $de, $ate) {
         $linha   = $faltas[$telefone];
         $contato = sbelt_falta_achar_contato($telefone, $unidade);
         if ($contato) {
-            $r = sbelt_falta_ghl('POST', 'https://services.leadconnectorhq.com/contacts/' . rawurlencode($contato['id']) . '/tags', $unidade, ['tags' => [SBELT_FALTA_TAG]]);
+            $r = sbelt_falta_ghl('POST', 'https://services.leadconnectorhq.com/contacts/' . rawurlencode($contato['id']) . '/tags', $unidade, ['tags' => [sbelt_falta_tag()]]);
             $acao = 'tag adicionada';
         } else {
             $partes = explode(' ', trim((string) $linha['nome']), 2);
@@ -200,7 +271,7 @@ function sbelt_falta_marcar($franquiaId, $telefones, $de, $ate) {
                 'firstName'  => $partes[0] ?? '',
                 'lastName'   => $partes[1] ?? '',
                 'phone'      => $telefone,
-                'tags'       => [SBELT_FALTA_TAG],
+                'tags'       => [sbelt_falta_tag()],
                 'source'     => 'Spa Solutions - falta na avaliação',
             ]);
             $acao = 'contato criado com a tag';
@@ -277,6 +348,10 @@ function sbelt_falta_pagina() {
             $telefones = array_map('sanitize_text_field', (array) wp_unslash($_POST['tel'] ?? []));
             $marcacao  = $telefones ? sbelt_falta_marcar($franquiaId, $telefones, $de, $ate) : ['erro' => 'nenhuma pessoa marcada'];
         }
+        if (isset($_POST['tag'])) {
+            $tag = sanitize_text_field(wp_unslash($_POST['tag']));
+            if ($tag !== '') update_option('sbelt_falta_tag', $tag, false);
+        }
         if (isset($_POST['salvar_auto'])) {
             update_option('sbelt_falta_auto', !empty($_POST['auto']), false);
             $aviso = !empty($_POST['auto']) ? 'Marcação automática diária LIGADA.' : 'Marcação automática desligada.';
@@ -295,7 +370,7 @@ function sbelt_falta_pagina() {
     $ultimo = get_option('sbelt_falta_ultimo');
     ?>
     <div class="wrap">
-        <h1>Faltas da Spa → tag "<?php echo esc_html(SBELT_FALTA_TAG); ?>" no GHL</h1>
+        <h1>Faltas da Spa → tag "<?php echo esc_html(sbelt_falta_tag()); ?>" no GHL</h1>
         <?php if ($aviso) : ?><div class="notice notice-info"><p><?php echo esc_html($aviso); ?></p></div><?php endif; ?>
 
         <form method="post">
@@ -310,6 +385,7 @@ function sbelt_falta_pagina() {
                 </label>
                 <label>De: <input type="date" name="de" value="<?php echo esc_attr($de); ?>"></label>
                 <label>Até: <input type="date" name="ate" value="<?php echo esc_attr($ate); ?>"></label>
+                <label>Tag: <input type="text" name="tag" value="<?php echo esc_attr(sbelt_falta_tag()); ?>" style="width:120px"></label>
                 <button type="submit" name="buscar" class="button button-primary">Buscar</button>
             </p>
 
@@ -356,6 +432,14 @@ function sbelt_falta_pagina() {
                     <?php endforeach; ?>
                     — contam como falta os que têm "falt" ou "não compareceu" no nome.
                 </p>
+                <?php if (!empty($busca['status_leads'])) : ?>
+                    <p style="color:#646970">Status dos leads (avaliações que já passaram):
+                        <?php foreach ($busca['status_leads'] as $status => $qtd) : ?>
+                            <code><?php echo esc_html($status); ?></code> (<?php echo (int) $qtd; ?>)
+                        <?php endforeach; ?>
+                        <?php if ($busca['leads_limitados']) : ?><strong>— período grande: só os 500 primeiros leads foram conferidos, diminua o período.</strong><?php endif; ?>
+                    </p>
+                <?php endif; ?>
                 <p>
                     <button type="button" class="button" onclick="document.querySelectorAll('.sbelt-falta-pendente').forEach(function(c){c.checked=true})">Marcar todos sem a tag</button>
                     <button type="button" class="button" onclick="document.querySelectorAll('.sbelt-falta').forEach(function(c){c.checked=false})">Desmarcar todos</button>
@@ -379,7 +463,7 @@ function sbelt_falta_pagina() {
                     <?php endforeach; ?>
                     </tbody>
                 </table>
-                <p><button type="submit" name="marcar" class="button button-primary">Colocar a tag "<?php echo esc_html(SBELT_FALTA_TAG); ?>" nos marcados</button></p>
+                <p><button type="submit" name="marcar" class="button button-primary">Colocar a tag "<?php echo esc_html(sbelt_falta_tag()); ?>" nos marcados</button></p>
             <?php endif; ?>
         </form>
 
