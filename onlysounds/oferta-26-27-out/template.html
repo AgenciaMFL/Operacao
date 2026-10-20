@@ -151,6 +151,25 @@ a { color: inherit; }
 .who-text .btn { margin-top: 18px; white-space: nowrap; }
 @media (max-width: 420px) { .who-text .btn { font-size: 16px; padding: 0 22px; } }
 
+/* ===== Depoimentos ===== */
+.depo .center { gap: 16px; }
+.depo-videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 56px; }
+.dvid { display: grid; gap: 14px; }
+.dvid-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: radial-gradient(600px 300px at 30% 20%, rgba(47,122,255,.35), transparent 70%), linear-gradient(160deg, #0f1a3a, #0a0b0f); display: grid; place-items: center; box-shadow: 0 30px 60px -36px rgba(10,20,60,.6); }
+.dvid-frame .play { position: static; transform: none; width: 76px; }
+.dvid-frame .ph { position: absolute; left: 18px; top: 16px; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.dvid-meta { display: flex; align-items: center; gap: 12px; }
+.dvid-meta .av { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-tint); border: 2px dashed #b9cdf5; flex: none; }
+.dvid-meta strong { display: block; font-family: var(--display); font-size: 16px; }
+.dvid-meta span { color: var(--muted); font-size: 14px; }
+.prints { columns: 3 280px; column-gap: 20px; margin-top: 56px; }
+.print { break-inside: avoid; margin: 0 0 20px; border-radius: 20px; background: var(--mist); border: 2px dashed #cdd5e3; padding: 18px; display: grid; gap: 10px; }
+.print .bubble { height: 14px; border-radius: 8px; background: #dfe5ef; }
+.print .bubble.me { justify-self: end; background: #cfe0ff; }
+.print .cap { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.print .cap svg { width: 16px; height: 16px; color: var(--blue); }
+@media (max-width: 760px) { .depo-videos { grid-template-columns: minmax(0, 1fr); } }
+
 /* ===== Ponte (scroll) ===== */
 .scrolly { position: relative; background: var(--ink); }
 .scrolly-pin { position: relative; overflow: hidden; display: grid; place-items: center; padding-block: clamp(96px, 12vw, 160px); }
@@ -426,6 +445,38 @@ footer a:hover { color: #fff; }
       </ul>
       <a class="btn" href="#oferta">Quero evoluir artisticamente <svg><use href="#arrow"/></svg></a>
     </div>
+  </div>
+</section>
+
+<!-- Depoimentos (vídeos e prints são espaços reservados: trocar pelos depoimentos reais) -->
+<section class="band depo">
+  <div class="wrap">
+    <div class="center">
+      <p class="kicker">Depoimentos</p>
+      <h2 class="h2">Quem já está na OnlySounds</h2>
+      <p class="lead" style="text-align:center">Veja o que músicos da comunidade contam sobre a experiência.</p>
+    </div>
+    <div class="depo-videos">
+      <div class="dvid">
+        <!-- No Elementor: widget Vídeo com o depoimento 1 -->
+        <div class="dvid-frame"><span class="ph">Vídeo 1 · substituir</span><span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L7.5 3.64A1 1 0 0 0 6 4.5Z"/></svg></span></div>
+        <div class="dvid-meta"><span class="av" aria-hidden="true"></span><div><strong>Nome do aluno</strong><span>Instrumento · cidade</span></div></div>
+      </div>
+      <div class="dvid">
+        <!-- No Elementor: widget Vídeo com o depoimento 2 -->
+        <div class="dvid-frame"><span class="ph">Vídeo 2 · substituir</span><span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L7.5 3.64A1 1 0 0 0 6 4.5Z"/></svg></span></div>
+        <div class="dvid-meta"><span class="av" aria-hidden="true"></span><div><strong>Nome do aluno</strong><span>Instrumento · cidade</span></div></div>
+      </div>
+    </div>
+    <div class="prints">
+      <figure class="print"><span class="bubble" style="width:90%"></span><span class="bubble" style="width:70%"></span><span class="bubble me" style="width:55%"></span><span class="bubble" style="width:80%"></span><figcaption class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Print de depoimento · substituir</figcaption></figure>
+      <figure class="print"><span class="bubble" style="width:75%"></span><span class="bubble me" style="width:60%"></span><span class="bubble" style="width:85%"></span><span class="bubble" style="width:50%"></span><span class="bubble me" style="width:70%"></span><figcaption class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Print de depoimento · substituir</figcaption></figure>
+      <figure class="print"><span class="bubble" style="width:95%"></span><span class="bubble" style="width:60%"></span><figcaption class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Print de depoimento · substituir</figcaption></figure>
+      <figure class="print"><span class="bubble" style="width:80%"></span><span class="bubble me" style="width:65%"></span><span class="bubble" style="width:70%"></span><span class="bubble" style="width:90%"></span><figcaption class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Print de depoimento · substituir</figcaption></figure>
+      <figure class="print"><span class="bubble" style="width:70%"></span><span class="bubble" style="width:85%"></span><span class="bubble me" style="width:50%"></span><figcaption class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Print de depoimento · substituir</figcaption></figure>
+      <figure class="print"><span class="bubble" style="width:85%"></span><span class="bubble me" style="width:75%"></span><span class="bubble" style="width:60%"></span><span class="bubble" style="width:75%"></span><span class="bubble me" style="width:45%"></span><span class="bubble" style="width:80%"></span><figcaption class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>Print de depoimento · substituir</figcaption></figure>
+    </div>
+    <div class="cta-c" style="margin-top:40px"><a class="btn" href="#oferta">Quero fazer parte <svg><use href="#arrow"/></svg></a></div>
   </div>
 </section>
 
