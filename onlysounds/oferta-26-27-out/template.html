@@ -152,7 +152,7 @@ a { color: inherit; }
 @media (max-width: 420px) { .who-text .btn { font-size: 16px; padding: 0 22px; } }
 
 /* ===== Ponte (scroll) ===== */
-.scrolly { position: relative; background: var(--ink); }
+.scrolly { position: relative; background: #996666; }
 .scrolly-pin { position: relative; overflow: hidden; display: grid; place-items: center; padding-block: clamp(96px, 12vw, 160px); }
 .scrolly-inner { display: grid; justify-items: center; gap: 36px; will-change: transform, opacity; }
 .scrolly-lines { position: relative; display: grid; gap: .18em; text-align: center; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
@@ -161,7 +161,7 @@ a { color: inherit; }
 .scrolly-dots { display: none; gap: 8px; }
 .scrolly-dots i { width: 28px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.18); overflow: hidden; position: relative; }
 .scrolly-dots i b { position: absolute; inset: 0; background: var(--blue); transform-origin: left; transform: scaleX(0); }
-.scrolly-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: none; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6b7385; }
+.scrolly-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: none; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); }
 html.js-scrolly .scrolly { height: 420vh; }
 html.js-scrolly .scrolly-pin { position: sticky; top: 0; height: 100vh; height: 100svh; padding-block: 0; }
 html.js-scrolly .scrolly-lines p { grid-area: 1 / 1; align-self: center; opacity: 0; }
