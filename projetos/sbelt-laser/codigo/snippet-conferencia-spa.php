@@ -80,11 +80,23 @@ function sbelt_conf_ghl_get($url, $unidade) {
     ];
 }
 
+/**
+ * Limite de tempo por página: a hospedagem derruba páginas longas (erro 503).
+ * Depois de 15 s para de consultar contatos novos no GHL; o resto fica para
+ * o próximo clique em Buscar (ou a próxima hora, no automático).
+ */
+function sbelt_conf_tempo_esgotado() {
+    static $inicio = null;
+    if ($inicio === null) $inicio = microtime(true);
+    return (microtime(true) - $inicio) > 15;
+}
+
 /** Contato do GHL com cache de 7 dias (evita centenas de chamadas a cada busca). */
-function sbelt_conf_contato($contactId, $unidade) {
+function sbelt_conf_contato($contactId, $unidade, $respeitarTempo = false) {
     $chave = 'sbelt_ct_' . md5($unidade['ghl_location_id'] . $contactId);
     $cache = get_transient($chave);
     if (is_array($cache)) return $cache;
+    if ($respeitarTempo && sbelt_conf_tempo_esgotado()) return false;
 
     $r = sbelt_conf_ghl_get('https://services.leadconnectorhq.com/contacts/' . rawurlencode($contactId), $unidade);
     $c = $r['body']['contact'] ?? null;
@@ -198,6 +210,8 @@ function sbelt_conf_cruzar($franquiaId) {
     $ignorados = sbelt_conf_ignorados();
     $vistos    = [];
     $lista     = [];
+    $semTempo  = 0;
+    sbelt_conf_tempo_esgotado(); // começa a contar o tempo
     foreach ($ghl['body']['events'] ?? [] as $evento) {
         $contactId = $evento['contactId'] ?? '';
         if ($contactId === '' || ($evento['appointmentStatus'] ?? '') === 'cancelled' || isset($vistos[$contactId])) {
@@ -205,7 +219,12 @@ function sbelt_conf_cruzar($franquiaId) {
         }
         $vistos[$contactId] = true;
 
-        $contato = sbelt_conf_contato($contactId, $unidade) ?: ['nome' => $evento['title'] ?? '', 'telefone' => '', 'email' => ''];
+        $contato = sbelt_conf_contato($contactId, $unidade, true);
+        if ($contato === false) {
+            $semTempo++; // contato ainda não carregado: fica pro próximo clique
+            continue;
+        }
+        $contato = $contato ?: ['nome' => $evento['title'] ?? '', 'telefone' => '', 'email' => ''];
         try {
             $data = sbelt_conf_data($evento['startTime'] ?? '');
             $dataTexto = $data->format('d/m/Y H:i');
@@ -271,6 +290,7 @@ function sbelt_conf_cruzar($franquiaId) {
         'total_spa' => count($spa['lista']),
         'totais'    => $totais,
         'lista'     => $lista,
+        'faltam_carregar' => $semTempo,
     ];
 }
 
@@ -287,6 +307,10 @@ function sbelt_conf_enviar($contactIds, $franquiaId, $simular) {
     $resultados = [];
     foreach ($contactIds as $contactId) {
         $contactId = sanitize_text_field($contactId);
+        if (sbelt_conf_tempo_esgotado()) {
+            $resultados[$contactId] = ['erro' => 'AINDA NÃO ENVIADO: tempo da página esgotado - envie de novo'];
+            continue;
+        }
         $contato = sbelt_conf_contato($contactId, $unidade);
         if (!$contato) {
             $resultados[$contactId] = ['erro' => 'contato não encontrado nessa unidade'];
@@ -394,7 +418,7 @@ function sbelt_conf_verificar() {
                 $auto['visto'][$id] = $agora;
                 continue;
             }
-            if ($agora - $auto['visto'][$id] < HOUR_IN_SECONDS || $envios >= 20) {
+            if ($agora - $auto['visto'][$id] < HOUR_IN_SECONDS || $envios >= 5 || sbelt_conf_tempo_esgotado()) {
                 continue;
             }
 
@@ -470,10 +494,10 @@ function sbelt_conf_pagina() {
 
         if (isset($_POST['processar'])) {
             $simular    = !empty($_POST['simular']);
-            $lote       = array_slice($marcados, 0, 10);
+            $lote       = array_slice($marcados, 0, 5);
             $resultados = sbelt_conf_enviar($lote, $franquiaId, $simular);
-            if (count($marcados) > 10) {
-                $aviso = 'Enviados os 10 primeiros marcados. Clique em Buscar e processe o restante.';
+            if (count($marcados) > 5) {
+                $aviso = 'Enviados os 5 primeiros marcados (limite para não derrubar o site). Clique em Buscar e envie o restante.';
             }
         }
 
@@ -541,6 +565,9 @@ function sbelt_conf_pagina() {
                         <span style="color:<?php echo esc_attr($r[1]); ?>"><strong><?php echo (int) $cruzamento['totais'][$chave]; ?></strong> <?php echo esc_html(strtolower($r[0])); ?></span> ·
                     <?php endforeach; ?>
                 </p>
+                <?php if (!empty($cruzamento['faltam_carregar'])) : ?>
+                    <div class="notice notice-warning"><p><strong>Busca parcial:</strong> ainda faltam <?php echo (int) $cruzamento['faltam_carregar']; ?> contato(s) do GHL para carregar (a busca para em 15 s para não derrubar o site). <strong>Clique em Buscar de novo</strong> até este aviso sumir — os já carregados ficam guardados por 7 dias.</p></div>
+                <?php endif; ?>
                 <p>
                     <button type="button" class="button" onclick="document.querySelectorAll('.sbelt-nao-tem').forEach(function(c){c.checked=true})">Marcar todos "NÃO TEM AINDA"</button>
                     <button type="button" class="button" onclick="document.querySelectorAll('.sbelt-marcar').forEach(function(c){c.checked=false})">Desmarcar todos</button>
@@ -572,7 +599,7 @@ function sbelt_conf_pagina() {
                 </p>
                 <p>
                     <label><input type="checkbox" name="simular" value="1" checked> Só simular (não envia nada pra Spa)</label>
-                    <button type="submit" name="processar" class="button button-primary">Enviar pra Spa (até 10 por vez)</button>
+                    <button type="submit" name="processar" class="button button-primary">Enviar pra Spa (até 5 por vez)</button>
                 </p>
                 <p style="color:#646970">Envie só quem está como <strong>NÃO TEM AINDA</strong>. Quem aparece "pelo nome" provavelmente já foi cadastrado à mão: confira na Spa e marque como resolvido.</p>
             <?php endif; ?>

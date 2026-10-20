@@ -330,6 +330,11 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 
 ## 11. Descobertas (não repetir os erros)
 
+- **Hospedagem (HostGator) derruba página longa com ERRO 503.** Em 20/10 a busca do "Faltas Spa"
+  consultando centenas de leads seguidos derrubou o site por alguns minutos. Regra: nenhuma tela ou
+  rotina pode passar de ~15 s fazendo chamadas externas — trabalhar em partes (as duas telas param em
+  15 s, mostram o parcial e continuam no próximo clique; envios limitados a 5 por clique/rodada).
+
 - Custom Data presente no webhook = PHP ignora os dados padrão do GHL. Todos os campos obrigatórios
   precisam estar no Custom Data.
 - Fuso do schedule do usuário no GHL pode vir como Los_Angeles: conferir sempre (desloca 4 h).

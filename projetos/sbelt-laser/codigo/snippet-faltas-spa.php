@@ -101,7 +101,20 @@ function sbelt_falta_avaliacoes($franquiaId, $de, $ate) {
 }
 
 /**
- * Status do lead na Spa (GET /api/Lead/{id}), com cache de 1 hora.
+ * Limite de tempo por página: a hospedagem (HostGator) derruba páginas que
+ * passam muito tempo trabalhando (erro 503). Depois de 15 s a busca para de
+ * consultar a Spa e mostra o que já tem - é só clicar em Buscar de novo
+ * (o que já foi consultado fica em cache e não é consultado outra vez).
+ */
+function sbelt_falta_tempo_esgotado() {
+    static $inicio = null;
+    if ($inicio === null) $inicio = microtime(true);
+    return (microtime(true) - $inicio) > 15;
+}
+
+/**
+ * Status do lead na Spa (GET /api/Lead/{id}), com cache de 6 horas.
+ * Devolve null quando não consultou por falta de tempo.
  * Procura o campo de status pelo nome (status/Status/...), em texto.
  */
 function sbelt_falta_status_lead($leadId) {
@@ -110,6 +123,7 @@ function sbelt_falta_status_lead($leadId) {
     $chave = 'sbelt_falta_ld_' . $leadId;
     $cache = get_transient($chave);
     if ($cache !== false) return (string) $cache;
+    if (sbelt_falta_tempo_esgotado()) return null;
 
     $resposta = null;
     for ($tentativa = 1; $tentativa <= 2; $tentativa++) {
@@ -139,7 +153,7 @@ function sbelt_falta_status_lead($leadId) {
             }
         }
     }
-    set_transient($chave, $status, HOUR_IN_SECONDS);
+    set_transient($chave, $status, 6 * HOUR_IN_SECONDS);
     return $status;
 }
 
@@ -182,9 +196,12 @@ function sbelt_falta_buscar($franquiaId, $de, $ate, $consultarGhl = true) {
         $faltou = sbelt_falta_eh_falta($st);
         // a unidade costuma marcar a falta no LEAD ("Avaliação faltou");
         // só vale olhar avaliações que já aconteceram
-        if (!$faltou && !empty($avaliacao['leadId']) && (string) ($avaliacao['dataHoraInicio'] ?? '') < $agora && $consultas < 500) {
-            $consultas++;
+        if (!$faltou && !empty($avaliacao['leadId']) && (string) ($avaliacao['dataHoraInicio'] ?? '') < $agora) {
             $stLead = sbelt_falta_status_lead($avaliacao['leadId']);
+            if ($stLead === null) {
+                $consultas++; // ficou pra próxima busca
+                continue;
+            }
             $statusLeads[$stLead ?: '(não lido)'] = ($statusLeads[$stLead ?: '(não lido)'] ?? 0) + 1;
             if (sbelt_falta_eh_falta($stLead)) {
                 $faltou = true;
@@ -210,7 +227,7 @@ function sbelt_falta_buscar($franquiaId, $de, $ate, $consultarGhl = true) {
             'contact_id'   => null,
             'situacao'     => 'nao_consultado',
         ];
-        if ($consultarGhl) {
+        if ($consultarGhl && !sbelt_falta_tempo_esgotado()) {
             $contato = sbelt_falta_achar_contato($telefone, $unidade);
             if (!$contato) {
                 $linha['situacao'] = 'sem_contato';
@@ -232,7 +249,7 @@ function sbelt_falta_buscar($franquiaId, $de, $ate, $consultarGhl = true) {
         'unidade'          => $unidade['nome'],
         'status_na_spa'    => $status,
         'status_leads'     => $statusLeads,
-        'leads_limitados'  => $consultas >= 500,
+        'leads_pendentes'  => $consultas,
         'total_avaliacoes' => count($spa['lista']),
         'lista'            => $lista,
     ];
@@ -260,6 +277,10 @@ function sbelt_falta_marcar($franquiaId, $telefones, $de, $ate) {
             continue;
         }
         $linha   = $faltas[$telefone];
+        if (sbelt_falta_tempo_esgotado()) {
+            $resultado[] = ['nome' => $linha['nome'], 'telefone' => $linha['telefone'], 'data' => $linha['data'], 'acao' => 'AINDA NÃO: tempo da página esgotado - marque de novo e clique outra vez'];
+            continue;
+        }
         $contato = sbelt_falta_achar_contato($telefone, $unidade);
         if ($contato) {
             $r = sbelt_falta_ghl('POST', 'https://services.leadconnectorhq.com/contacts/' . rawurlencode($contato['id']) . '/tags', $unidade, ['tags' => [sbelt_falta_tag()]]);
@@ -356,7 +377,7 @@ function sbelt_falta_pagina() {
             update_option('sbelt_falta_auto', !empty($_POST['auto']), false);
             $aviso = !empty($_POST['auto']) ? 'Marcação automática diária LIGADA.' : 'Marcação automática desligada.';
         }
-        if (isset($_POST['buscar']) || isset($_POST['marcar'])) {
+        if (isset($_POST['buscar'])) {
             $busca = sbelt_falta_buscar($franquiaId, $de, $ate);
         }
     }
@@ -365,7 +386,7 @@ function sbelt_falta_pagina() {
         'sem_tag'        => ['FALTOU - sem a tag no GHL', '#b32d2e'],
         'sem_contato'    => ['FALTOU - não existe no GHL (será criado)', '#996800'],
         'com_tag'        => ['JÁ TEM A TAG', '#00a32a'],
-        'nao_consultado' => ['—', '#646970'],
+        'nao_consultado' => ['FALTOU - GHL não conferido (clique em Buscar de novo)', '#646970'],
     ];
     $ultimo = get_option('sbelt_falta_ultimo');
     ?>
@@ -437,8 +458,10 @@ function sbelt_falta_pagina() {
                         <?php foreach ($busca['status_leads'] as $status => $qtd) : ?>
                             <code><?php echo esc_html($status); ?></code> (<?php echo (int) $qtd; ?>)
                         <?php endforeach; ?>
-                        <?php if ($busca['leads_limitados']) : ?><strong>— período grande: só os 500 primeiros leads foram conferidos, diminua o período.</strong><?php endif; ?>
                     </p>
+                <?php endif; ?>
+                <?php if (!empty($busca['leads_pendentes'])) : ?>
+                    <div class="notice notice-warning"><p><strong>Busca parcial:</strong> ainda faltam <?php echo (int) $busca['leads_pendentes']; ?> lead(s) para conferir na Spa (a busca para em 15 s para não derrubar o site). <strong>Clique em Buscar de novo</strong> até este aviso sumir — o que já foi conferido não é consultado outra vez.</p></div>
                 <?php endif; ?>
                 <p>
                     <button type="button" class="button" onclick="document.querySelectorAll('.sbelt-falta-pendente').forEach(function(c){c.checked=true})">Marcar todos sem a tag</button>
