@@ -181,7 +181,7 @@ Base: `http://sbeltapi.spasolutions.com.br` (http, não https). Login `Sbelt`.
 | Snippet | Arquivo de referência | Status |
 |---|---|---|
 | Integração principal (um único snippet para todas as unidades) | `codigo/integracao-spa-solutions.php` (sem credenciais) | produção |
-| Reprocessar Spa (temporário, só admin) | `codigo/snippet-reprocessar-spa.php` | instalado em 14/10 para recuperar agendamentos; **desativar depois** |
+| Conferência Spa (só admin + verificação automática) | `codigo/snippet-conferencia-spa.php` | entregue em 20/10; substitui o "Reprocessar Spa (temporário)" — **a confirmar** instalação. Precisa "Run snippet everywhere" |
 | GTM só na landing da Pátio | `codigo/snippet-gtm-landing-patio.php` | entregue; **a confirmar** se instalado |
 
 Regras: ao recolar o snippet principal, **desativar o antigo antes** (duas cópias = erro fatal
@@ -198,16 +198,22 @@ Regras: ao recolar o snippet principal, **desativar o antigo antes** (duas cópi
 | `/agendamento-info?telefone=` | GET | sem uso |
 | `/debug?chave=...` | GET | temporária — último lead, último resultado da Spa, última consulta de calendário |
 
-### 5.3 Tela "Reprocessar Spa" (Ferramentas → Reprocessar Spa)
+### 5.3 Tela "Conferência Spa" (Ferramentas → Conferência Spa)
 
-Recupera agendamentos que estão no calendário do GHL mas não chegaram na Spa.
-1. Escolher a unidade → **"1. Buscar pendentes"**: lista os agendamentos do calendário GHL (−30/+90 dias,
-   ignora cancelados), lista as avaliações da Spa no mesmo período e compara pelos **últimos 8 dígitos
-   do telefone**. Mostra "Sim" / "NÃO - pendente" e o que a Spa devolveu.
-2. **"2. Processar"** com "Só simular" marcado → confere nomes e `datahorainicio`.
-3. Desmarcar "Só simular" → **"2. Processar"**: envia no máximo 10 por clique pelo mesmo caminho do
-   webhook de agendamento (lead + avaliação no dia/hora escolhido no GHL). Os que sobram ficam na caixa.
-4. Resultado `status 200` = foi; `502` com `{"status":400}` = a Spa recusou o horário.
+Cruza o calendário do GHL da unidade (−30/+90 dias, sem cancelados) com as avaliações da Spa e classifica:
+
+| Situação | Critério | O que fazer |
+|---|---|---|
+| **JÁ NA SPA** | últimos 8 dígitos do telefone batem | nada |
+| **JÁ NA SPA (pelo nome)** | telefone diferente, nome bate (inteiro ou primeiro + último, sem acento) | conferir na Spa; normalmente cadastrado à mão → marcar como resolvido |
+| **IGNORADO** | marcado na tela como "resolvido à mão" | nada (pode desfazer) |
+| **NÃO TEM AINDA** | nenhum dos anteriores | enviar pela tela (simular antes; até 10 por vez) |
+
+**Verificação automática** (liga na própria tela, com e-mail de aviso): de hora em hora, para todas as
+unidades, olha só agendamentos **novos** (quem já estava pendente ao ligar fica de fora), espera 1 hora pelo
+webhook normal e, se a pessoa continuar "NÃO TEM AINDA" e o horário for futuro, envia pela mesma rota do
+webhook. Cada pessoa é tentada uma vez; enviados e recusas (com o motivo da Spa) vão por e-mail.
+Testes: `testes/teste-conferencia.php`.
 
 ### 5.4 Páginas (Elementor, bloco HTML)
 
@@ -269,7 +275,7 @@ Recupera agendamentos que estão no calendário do GHL mas não chegaram na Spa.
 1. Ajustar a **agenda de avaliação da Pátio no painel da Spa** para aceitar o que o GHL oferece
    (21–24 e 26/10, 09–21h, 4 por horário) — agendamentos fora disso são recusados com 400
    (caso Kauane, 14/10). Alternativa: reduzir o GHL ao que a Spa aceita.
-2. Terminar o reprocessamento dos pendentes da Pátio e **desativar o snippet "Reprocessar Spa"**.
+2. Instalar a "Conferência Spa", desativar o "Reprocessar Spa (temporário)", tratar os 31 pendentes e **ligar a verificação automática** com o e-mail da equipe.
 3. **Completar o Custom Data do workflow "Lead Cadastrado - Pátio Alcântara"** (confirmado incompleto em 20/10) e reprocessar os leads perdidos.
 4. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
 5. **Colar a versão 5 do PHP no WordPress** (seção 7) e conferir `ultimas_falhas` no `/debug` depois.
@@ -338,3 +344,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   "Lead Cadastrado - Pátio" só com `franquiaId` (último lead às 13:45). Escrita de volta no GHL da Pátio
   responde 401 (token sem `contacts.write`), como esperado. Agendamento da Nathália falhou às 10:17 e passou
   na nova tentativa do GHL às 10:27 (token da Spa vencido no cache). Criada a **versão 5 do PHP** (seção 7).
+  v5 colada ~14:50; às 15:02 primeiro lead da Pátio aceito pela Spa pelo workflow de lead (lead 14955), 0 falhas.
+  Conferência: 71 pendentes → 31 depois do cadastro manual (telefones digitados diferentes / só lead) →
+  criada a tela "Conferência Spa" (match por nome, "resolvido à mão" e verificação automática por hora).
