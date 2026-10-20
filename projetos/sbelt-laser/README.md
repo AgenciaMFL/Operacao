@@ -84,9 +84,11 @@ Sem `franquiaId` o `/sucesso/` mostra erro de propósito.
 
 ### 3.3 Workflows — Custom Data obrigatório
 
-**Quando o webhook tem Custom Data, o PHP lê SÓ o Custom Data** (ignora os dados padrão do GHL).
-Faltou um campo obrigatório → o PHP responde 400 e nada chega na Spa. Foi exatamente o que
-quebrou a Pátio Alcântara até 14/10 (os workflows tinham só `franquiaId`).
+**Versão 5 do PHP (20/10):** o PHP lê o Custom Data **e** os dados padrão que o GHL sempre manda
+(nome, telefone, e-mail, contact_id, horário do agendamento e Location ID). Campo que faltar no Custom
+Data é preenchido pelos dados padrão, e a unidade é descoberta pelo Location ID se o `franquiaId` faltar.
+**Até a v4** o PHP lia só o Custom Data, e Custom Data incompleto = 400 (foi o que quebrou a Pátio
+até 14/10 no agendamento e até 20/10 no lead). Mesmo assim, manter o Custom Data completo abaixo.
 
 **"Lead Cadastrado - Sbelt <unidade>"** → Webhook POST `https://sbeltlaser.com.br/wp-json/leads/v1/ghl-lead`
 
@@ -233,21 +235,31 @@ Recupera agendamentos que estão no calendário do GHL mas não chegaram na Spa.
 
 ---
 
-## 7. Problemas conhecidos no PHP (ainda não corrigidos)
+## 7. Problemas no PHP
 
-1. **Token da Spa em cache por 38 min, mas vale 30.** Entre o min 30 e 38, `spa_agendar` e
-   `spa_buscar_horarios` falham (não têm retry). Correção: `38 * MINUTE_IN_SECONDS` → `25 * MINUTE_IN_SECONDS`.
-2. **Mensagem de erro da Spa se perde** (`"body": null`): a Spa responde texto puro e o PHP só lê JSON.
-   Correção sugerida em 14/10 (na `spa_agendar`): `'body' => json_decode($corpo, true) ?? $corpo`. **A confirmar** se aplicada.
+**Corrigidos na versão 5** (`codigo/integracao-spa-solutions.php`, testes em `testes/teste-integracao.php`;
+**a confirmar** se já foi colada no WordPress):
+- Token da Spa em cache por 25 min (vale 30) e retry com token novo também no agendamento e na busca de
+  horários (antes: falha entre o min 30 e 38 — caso Nathália, 20/10, que só passou na nova tentativa do GHL).
+- Custom Data incompleto não derruba mais o webhook (usa os dados padrão do GHL; unidade pelo Location ID).
+- Data/hora normalizada para `Y-m-d H:i:s` (Brasília), aceitando qualquer formato do GHL.
+- Mensagem de erro da Spa preservada (antes virava `null`); id do lead lido também do header `Location`.
+- Recusa de horário pela Spa (400) responde **422** (o GHL não fica repetindo à toa); erro de rede/servidor
+  continua **502** (o GHL tenta de novo sozinho).
+- `franquiaId` desconhecido é recusado (antes ia FranquiaId 0).
+- Bloqueio de duplicado grava o telefone sem 55 e consulta com e sem 55.
+- `/debug` passa a mostrar `ultimas_falhas` (as 50 últimas, com rota, unidade, contact_id e motivo).
+
+**Ainda em aberto:**
+1. (corrigido na v5)
+2. (corrigido na v5)
 3. **Dedup de lead por telefone não separa unidade** (`spa_lead_<telefone>`): mesmo telefone em outra
    unidade atualiza o lead antigo em vez de criar um na unidade nova.
 4. **`franquiaId` não é validado** contra `SBELT_UNIDADES` (ausente → FranquiaId 0).
 5. **Webhooks sem autenticação** (`/ghl-lead`, `/ghl-agendamento` aceitam POST de qualquer um).
 6. **`/debug` expõe dados pessoais** (headers, corpo e calendário inteiro) — remover.
 7. **`update_option` de debug a cada `/obrigado/`** com a resposta inteira da API (opções autoload).
-8. **Telefone do bloqueio de duplicado**: `/sucesso/` consulta sem o 55; o webhook marca com o formato do
-   GHL (provavelmente com 55). Se não baterem, o bloqueio nunca dispara. **A confirmar** com
-   `/ja-agendou` de um telefone que já agendou (com e sem 55).
+8. (corrigido na v5 — telefone do bloqueio de duplicado)
 9. Comentários dizem "2 salas"; são 4. `GHL_WEBHOOK_URL` e `/agendamento-info` sem uso.
 
 ---
@@ -260,7 +272,7 @@ Recupera agendamentos que estão no calendário do GHL mas não chegaram na Spa.
 2. Terminar o reprocessamento dos pendentes da Pátio e **desativar o snippet "Reprocessar Spa"**.
 3. **Completar o Custom Data do workflow "Lead Cadastrado - Pátio Alcântara"** (confirmado incompleto em 20/10) e reprocessar os leads perdidos.
 4. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
-5. Aplicar as correções 1 e 2 da seção 7 (token 25 min; mensagem da Spa).
+5. **Colar a versão 5 do PHP no WordPress** (seção 7) e conferir `ultimas_falhas` no `/debug` depois.
 6. Pátio: `contacts.write` no token + `contact_id` nos workflows (escrita de volta e tags).
 7. Remover a rota `/debug`; rotacionar a senha da API da Spa; limpar leads de teste no GHL **e** na Spa.
 8. Confirmar com o TI: `franquiaId 10`; endpoint para listar sessões de depilação (seção 9).
@@ -324,4 +336,5 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   Proposto o plano de automação da abertura de unidades (`PLANO-AUTOMACAO.md`).
 - **20/10/2026** — Leads do formulário da Pátio não chegam na Spa: `/debug` confirma Custom Data do
   "Lead Cadastrado - Pátio" só com `franquiaId` (último lead às 13:45). Escrita de volta no GHL da Pátio
-  responde 401 (token sem `contacts.write`), como esperado.
+  responde 401 (token sem `contacts.write`), como esperado. Agendamento da Nathália falhou às 10:17 e passou
+  na nova tentativa do GHL às 10:27 (token da Spa vencido no cache). Criada a **versão 5 do PHP** (seção 7).

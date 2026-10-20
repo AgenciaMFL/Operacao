@@ -150,7 +150,7 @@ function spa_get_token($forcar_novo = false) {
     }
 
     if ($token) {
-        set_transient('spa_solutions_token', $token, 38 * MINUTE_IN_SECONDS); // token expira em 40min, cache um pouco menor por margem de segurança
+        set_transient('spa_solutions_token', $token, 25 * MINUTE_IN_SECONDS); // token vale 30 min (manual da Spa) - cache menor por margem de segurança
     }
 
     return $token;
@@ -161,6 +161,88 @@ function spa_get_token($forcar_novo = false) {
  */
 function spa_normalizar_telefone($telefone) {
     return preg_replace('/\D/', '', (string) $telefone);
+}
+
+/**
+ * Corpo da resposta da Spa: JSON quando for JSON, senão o texto puro.
+ * A Spa devolve várias mensagens de erro como texto simples (ex: "Horário
+ * Indisponível para agendamento!") - antes isso virava null e a causa se perdia.
+ */
+function spa_decodificar_corpo($resposta) {
+    $bruto = wp_remote_retrieve_body($resposta);
+    $json  = json_decode($bruto, true);
+    return $json !== null ? $json : $bruto;
+}
+
+/**
+ * Id do lead criado: vem no corpo (id/Id) ou só no header Location
+ * (".../api/Lead/123"), conforme o manual da Spa.
+ */
+function spa_extrair_lead_id($resultado) {
+    $corpo = $resultado['body'] ?? null;
+    if (is_array($corpo)) {
+        $id = $corpo['id'] ?? $corpo['Id'] ?? null;
+        if ($id) return (int) $id;
+    } elseif (is_numeric($corpo)) {
+        return (int) $corpo;
+    }
+    if (!empty($resultado['location']) && preg_match('~/(\d+)/?$~', (string) $resultado['location'], $m)) {
+        return (int) $m[1];
+    }
+    return null;
+}
+
+/**
+ * Data/hora no formato que a Spa exige ("Y-m-d H:i:s", horário de Brasília),
+ * aceitando qualquer formato que o GHL mandar (ISO com fuso, sem fuso, epoch ms).
+ */
+function spa_normalizar_data_hora($valor) {
+    $valor = trim((string) $valor);
+    if ($valor === '') return '';
+    try {
+        $fuso = new DateTimeZone('America/Sao_Paulo');
+        $data = is_numeric($valor)
+            ? new DateTime('@' . intdiv((int) $valor, strlen($valor) > 10 ? 1000 : 1))
+            : new DateTime($valor, $fuso);
+        $data->setTimezone($fuso);
+        return $data->format('Y-m-d H:i:s');
+    } catch (Exception $e) {
+        return $valor; // formato desconhecido: manda como veio
+    }
+}
+
+/**
+ * Guarda as últimas 50 falhas (rota, unidade, contato, motivo) pra consultar
+ * em /debug - sem precisar esperar o próximo erro pra entender o anterior.
+ */
+function spa_registrar_falha($rota, $info) {
+    $falhas = get_option('spa_ultimas_falhas', []);
+    if (!is_array($falhas)) $falhas = [];
+    array_unshift($falhas, array_merge(['quando' => current_time('mysql'), 'rota' => $rota], $info));
+    update_option('spa_ultimas_falhas', array_slice($falhas, 0, 50), false);
+}
+
+/**
+ * Descobre a unidade do webhook: pelo franquiaId (Custom Data) e, se faltar
+ * ou não existir no mapa, pelo Location ID da sub-conta do GHL que mandou.
+ */
+function spa_resolver_franquia_da_requisicao($dados) {
+    $recebido = $dados['franquiaid'] ?? null;
+    if (SPA_MODO_TESTE) {
+        return spa_resolver_franquia_id($recebido);
+    }
+    if ($recebido !== null && spa_get_unidade($recebido)) {
+        return (int) $recebido;
+    }
+    $locationId = $dados['_location_id'] ?? '';
+    if ($locationId) {
+        foreach (SBELT_UNIDADES as $id => $unidade) {
+            if ($unidade['ghl_location_id'] === $locationId) {
+                return (int) $id;
+            }
+        }
+    }
+    return null;
 }
 
 /**
@@ -200,14 +282,29 @@ function spa_buscar_leadid_por_telefone($telefone) {
  * "liberado" de novo (pode ajustar esse prazo se o negócio precisar de mais
  * ou menos tempo).
  */
+function spa_telefone_sem_pais($telefone) {
+    $digitos = spa_normalizar_telefone($telefone);
+    if (strlen($digitos) > 11 && strpos($digitos, '55') === 0) {
+        $digitos = substr($digitos, 2);
+    }
+    return $digitos;
+}
+
 function spa_marcar_ja_agendou($telefone, $franquiaId) {
-    $chave = 'spa_ja_agendou_' . (int) $franquiaId . '_' . spa_normalizar_telefone($telefone);
+    // sempre sem o 55 - é assim que a página /sucesso/ consulta
+    $chave = 'spa_ja_agendou_' . (int) $franquiaId . '_' . spa_telefone_sem_pais($telefone);
     set_transient($chave, true, 90 * DAY_IN_SECONDS);
 }
 
 function spa_verificar_ja_agendou($telefone, $franquiaId) {
-    $chave = 'spa_ja_agendou_' . (int) $franquiaId . '_' . spa_normalizar_telefone($telefone);
-    return (bool) get_transient($chave);
+    $semPais = spa_telefone_sem_pais($telefone);
+    // também confere com 55 na frente: marcações antigas foram gravadas assim
+    foreach ([$semPais, '55' . $semPais] as $variacao) {
+        if (get_transient('spa_ja_agendou_' . (int) $franquiaId . '_' . $variacao)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
@@ -241,8 +338,9 @@ function spa_cadastrar_lead($dados, $tentativa = 1) {
     }
 
     return [
-        'status' => $status,
-        'body'   => json_decode(wp_remote_retrieve_body($resposta), true),
+        'status'   => $status,
+        'body'     => spa_decodificar_corpo($resposta),
+        'location' => wp_remote_retrieve_header($resposta, 'location'),
     ];
 }
 
@@ -281,15 +379,15 @@ function spa_atualizar_lead($leadId, $dados, $tentativa = 1) {
 
     return [
         'status' => $status,
-        'body'   => json_decode(wp_remote_retrieve_body($resposta), true),
+        'body'   => spa_decodificar_corpo($resposta),
     ];
 }
 
 /**
  * Busca horários disponíveis na Spa Solutions.
  */
-function spa_buscar_horarios($franquiaId, $dataInicial, $dataFinal) {
-    $token = spa_get_token();
+function spa_buscar_horarios($franquiaId, $dataInicial, $dataFinal, $tentativa = 1) {
+    $token = spa_get_token($tentativa > 1);
     if (!$token) return ['erro' => 'Não foi possível autenticar na Spa Solutions'];
 
     $resposta = wp_remote_post(SPA_URL_EMPRESA . '/api/sessaoavaliacao/BuscarHorarioDisponiveis', [
@@ -307,17 +405,21 @@ function spa_buscar_horarios($franquiaId, $dataInicial, $dataFinal) {
 
     if (is_wp_error($resposta)) return ['erro' => $resposta->get_error_message()];
 
+    if (in_array(wp_remote_retrieve_response_code($resposta), [401, 403]) && $tentativa === 1) {
+        return spa_buscar_horarios($franquiaId, $dataInicial, $dataFinal, 2);
+    }
+
     return [
         'status' => wp_remote_retrieve_response_code($resposta),
-        'body'   => json_decode(wp_remote_retrieve_body($resposta), true),
+        'body'   => spa_decodificar_corpo($resposta),
     ];
 }
 
 /**
  * Agenda a avaliação na Spa Solutions.
  */
-function spa_agendar($leadId, $franquiaId, $dataHoraInicio, $dataHoraFim, $observacao = '') {
-    $token = spa_get_token();
+function spa_agendar($leadId, $franquiaId, $dataHoraInicio, $dataHoraFim, $observacao = '', $tentativa = 1) {
+    $token = spa_get_token($tentativa > 1);
     if (!$token) return ['erro' => 'Não foi possível autenticar na Spa Solutions'];
 
     $resposta = wp_remote_post(SPA_URL_EMPRESA . '/api/sessaoavaliacao/SalvarSessaoAvaliacao', [
@@ -337,9 +439,15 @@ function spa_agendar($leadId, $franquiaId, $dataHoraInicio, $dataHoraFim, $obser
 
     if (is_wp_error($resposta)) return ['erro' => $resposta->get_error_message()];
 
+    // token expirado/inválido -> tenta renovar uma vez (antes não tinha retry
+    // aqui, e o agendamento falhava sempre que o token em cache vencia)
+    if (in_array(wp_remote_retrieve_response_code($resposta), [401, 403]) && $tentativa === 1) {
+        return spa_agendar($leadId, $franquiaId, $dataHoraInicio, $dataHoraFim, $observacao, 2);
+    }
+
     return [
         'status' => wp_remote_retrieve_response_code($resposta),
-        'body'   => json_decode(wp_remote_retrieve_body($resposta), true),
+        'body'   => spa_decodificar_corpo($resposta),
     ];
 }
 
@@ -619,6 +727,7 @@ add_action('rest_api_init', function () {
                 'ultimo_resultado_spa'   => get_option('spa_debug_resultado_lead', 'Nenhuma tentativa registrada ainda'),
                 'ultima_consulta_calendario' => get_option('spa_debug_ultima_consulta', 'Nenhuma consulta registrada ainda'),
                 'ultima_atualizacao_contato' => get_option('spa_debug_ultima_atualizacao_contato', 'Nenhuma atualização registrada ainda'),
+                'ultimas_falhas'         => get_option('spa_ultimas_falhas', []),
             ], 200);
         },
         'permission_callback' => '__return_true',
@@ -681,14 +790,36 @@ function spa_ler_dados_requisicao($request) {
  * Essa função extrai o customData (se existir) e normaliza tudo pra minúsculo.
  */
 function spa_normalizar_campos_lead($dados) {
-    // Se existir "customData", é ali que estão os campos que configuramos no webhook
-    $origem = (isset($dados['customData']) && is_array($dados['customData']))
-        ? $dados['customData']
-        : $dados;
-
+    // 1. dados padrão que o GHL sempre manda (raiz do JSON) - servem de
+    //    reserva quando algum campo não foi configurado no Custom Data
     $normalizado = [];
-    foreach ($origem as $chave => $valor) {
-        $normalizado[strtolower($chave)] = $valor;
+    foreach ($dados as $chave => $valor) {
+        if (!is_array($valor)) {
+            $normalizado[strtolower($chave)] = $valor;
+        }
+    }
+    $reservas = [
+        'nome'     => $dados['full_name'] ?? $dados['first_name'] ?? '',
+        'telefone' => $dados['phone'] ?? '',
+        'email'    => $dados['email'] ?? '',
+        'contact_id' => $dados['contact_id'] ?? '',
+        'datahorainicio' => $dados['calendar']['startTime'] ?? '',
+        'datahorafim'    => $dados['calendar']['endTime'] ?? '',
+    ];
+    foreach ($reservas as $chave => $valor) {
+        if ($valor !== '' && empty($normalizado[$chave])) {
+            $normalizado[$chave] = $valor;
+        }
+    }
+    $normalizado['_location_id'] = $dados['location']['id'] ?? '';
+
+    // 2. Custom Data configurado no webhook tem prioridade (quando preenchido)
+    if (isset($dados['customData']) && is_array($dados['customData'])) {
+        foreach ($dados['customData'] as $chave => $valor) {
+            if ($valor !== '' && $valor !== null) {
+                $normalizado[strtolower($chave)] = $valor;
+            }
+        }
     }
 
     return $normalizado;
@@ -712,10 +843,15 @@ function leads_v1_ghl_lead_callback($request) {
     $telefone   = sanitize_text_field($dados['telefone'] ?? '');
     $email      = sanitize_email($dados['email'] ?? '');
     $midia      = sanitize_text_field($dados['midia'] ?? '');
-    $franquiaId = spa_resolver_franquia_id($dados['franquiaid'] ?? null);
+    $franquiaId = spa_resolver_franquia_da_requisicao($dados);
 
     if (empty($nome) || empty($telefone)) {
+        spa_registrar_falha('ghl-lead', ['franquiaId' => $franquiaId, 'contact_id' => $dados['contact_id'] ?? '', 'erro' => 'nome ou telefone vazio']);
         return new WP_REST_Response(['erro' => 'Nome e telefone são obrigatórios'], 400);
+    }
+    if (!$franquiaId) {
+        spa_registrar_falha('ghl-lead', ['contact_id' => $dados['contact_id'] ?? '', 'erro' => 'unidade não identificada', 'recebido' => $dados['franquiaid'] ?? null]);
+        return new WP_REST_Response(['erro' => 'Unidade não identificada (franquiaId ausente ou desconhecido)'], 400);
     }
 
     $origem = spa_normalizar_midia($midia);
@@ -739,11 +875,12 @@ function leads_v1_ghl_lead_callback($request) {
         $leadId    = $leadIdExistente;
     } else {
         $resultado = spa_cadastrar_lead($payload);
-        $leadId    = $resultado['body']['id'] ?? $resultado['body']['Id'] ?? null;
+        $leadId    = spa_extrair_lead_id($resultado);
     }
 
     if (isset($resultado['erro']) || ($resultado['status'] ?? 0) >= 400) {
         error_log('Spa Solutions - falha ao cadastrar/atualizar lead: ' . json_encode($resultado));
+        spa_registrar_falha('ghl-lead', ['franquiaId' => $franquiaId, 'contact_id' => $dados['contact_id'] ?? '', 'erro' => $resultado]);
 
         // guarda também o resultado da tentativa (sucesso ou erro) pra dar
         // pra ver pelo navegador, sem precisar de acesso ao servidor
@@ -880,12 +1017,18 @@ function leads_v1_ghl_agendamento_callback($request) {
     $nome           = sanitize_text_field($dados['nome'] ?? '');
     $telefone       = sanitize_text_field($dados['telefone'] ?? '');
     $email          = sanitize_email($dados['email'] ?? '');
-    $franquiaId     = spa_resolver_franquia_id($dados['franquiaid'] ?? null);
-    $dataHoraInicio = sanitize_text_field($dados['datahorainicio'] ?? '');
-    $dataHoraFim    = sanitize_text_field($dados['datahorafim'] ?? '');
+    $franquiaId     = spa_resolver_franquia_da_requisicao($dados);
+    $dataHoraInicio = spa_normalizar_data_hora(sanitize_text_field($dados['datahorainicio'] ?? ''));
+    $dataHoraFim    = spa_normalizar_data_hora(sanitize_text_field($dados['datahorafim'] ?? ''));
+    $contactIdFalha = $dados['contact_id'] ?? '';
 
     if (empty($telefone) || empty($dataHoraInicio)) {
+        spa_registrar_falha('ghl-agendamento', ['franquiaId' => $franquiaId, 'contact_id' => $contactIdFalha, 'erro' => 'telefone ou data vazio']);
         return new WP_REST_Response(['erro' => 'telefone e dataHoraInicio são obrigatórios'], 400);
+    }
+    if (!$franquiaId) {
+        spa_registrar_falha('ghl-agendamento', ['contact_id' => $contactIdFalha, 'erro' => 'unidade não identificada', 'recebido' => $dados['franquiaid'] ?? null]);
+        return new WP_REST_Response(['erro' => 'Unidade não identificada (franquiaId ausente ou desconhecido)'], 400);
     }
 
     // salva já, antes de qualquer chamada externa - é o que a página de
@@ -918,10 +1061,11 @@ function leads_v1_ghl_agendamento_callback($request) {
             'Observacao' => 'Lead cadastrado no fallback do agendamento (telefone não encontrado no cache)',
             'FranquiaId' => $franquiaId,
         ]);
-        $leadId = $resultadoCadastro['body']['id'] ?? $resultadoCadastro['body']['Id'] ?? null;
+        $leadId = spa_extrair_lead_id($resultadoCadastro);
 
         if (!$leadId) {
-            return new WP_REST_Response(['erro' => 'Não foi possível localizar nem cadastrar o lead pra agendar'], 502);
+            spa_registrar_falha('ghl-agendamento', ['franquiaId' => $franquiaId, 'contact_id' => $contactIdFalha, 'erro' => 'cadastro de emergência do lead falhou', 'detalhe' => $resultadoCadastro]);
+            return new WP_REST_Response(['erro' => 'Não foi possível localizar nem cadastrar o lead pra agendar', 'detalhe' => $resultadoCadastro], 502);
         }
         spa_salvar_mapeamento_lead($telefone, $leadId);
     }
@@ -930,7 +1074,12 @@ function leads_v1_ghl_agendamento_callback($request) {
 
     if (isset($resultado['erro']) || ($resultado['status'] ?? 0) >= 400) {
         error_log('Spa Solutions - falha ao agendar: ' . json_encode($resultado));
-        return new WP_REST_Response(['erro' => 'Falha ao agendar na Spa Solutions', 'detalhe' => $resultado], 502);
+        spa_registrar_falha('ghl-agendamento', ['franquiaId' => $franquiaId, 'contact_id' => $contactIdFalha, 'dataHoraInicio' => $dataHoraInicio, 'erro' => $resultado]);
+        // 400 da Spa = regra da agenda (dia fechado, fora do horário, horário
+        // ocupado): tentar de novo não resolve, então devolve 422 e o GHL não
+        // fica repetindo. Erro de rede/servidor (5xx etc.) = 502, o GHL tenta de novo.
+        $codigo = (($resultado['status'] ?? 0) === 400) ? 422 : 502;
+        return new WP_REST_Response(['erro' => 'Falha ao agendar na Spa Solutions', 'detalhe' => $resultado], $codigo);
     }
 
     // escreve de volta no contato do GHL, agora com o status atualizado
