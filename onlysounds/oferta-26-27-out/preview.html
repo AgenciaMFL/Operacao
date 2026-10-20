@@ -162,7 +162,7 @@ a { color: inherit; }
 .scrolly-dots i { width: 28px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.18); overflow: hidden; position: relative; }
 .scrolly-dots i b { position: absolute; inset: 0; background: var(--blue); transform-origin: left; transform: scaleX(0); }
 .scrolly-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: none; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6b7385; }
-html.js-scrolly .scrolly { height: 280vh; }
+html.js-scrolly .scrolly { height: 420vh; }
 html.js-scrolly .scrolly-pin { position: sticky; top: 0; height: 100vh; height: 100svh; padding-block: 0; }
 html.js-scrolly .scrolly-lines p { grid-area: 1 / 1; align-self: center; opacity: 0; }
 html.js-scrolly .scrolly-lines p:first-child { opacity: 1; }
@@ -610,7 +610,7 @@ footer a:hover { color: #fff; }
     var seg = function (p, a, b) { return clamp((p - a) / (b - a)); };
     var ease = function (x) { return x * x * (3 - 2 * x); };
     // [entra, sai] de cada frase, em fração do trecho de leitura
-    var T = [[null, [.18, .32]], [[.18, .32], [.46, .60]], [[.46, .60], null]];
+    var T = [[null, [.26, .40]], [[.26, .40], [.60, .74]], [[.60, .74], null]];
     function frame() {
       ticking = false;
       var vh = window.innerHeight, r = sc.getBoundingClientRect();
