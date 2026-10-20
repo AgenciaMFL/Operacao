@@ -182,6 +182,7 @@ Base: `http://sbeltapi.spasolutions.com.br` (http, não https). Login `Sbelt`.
 |---|---|---|
 | Integração principal (um único snippet para todas as unidades) | `codigo/integracao-spa-solutions.php` (sem credenciais) | produção |
 | Conferência Spa (só admin + verificação automática) | `codigo/snippet-conferencia-spa.php` | entregue em 20/10; substitui o "Reprocessar Spa (temporário)" — **a confirmar** instalação. Precisa "Run snippet everywhere" |
+| Faltas Spa → tag "Faltaram" no GHL (só admin + diário) | `codigo/snippet-faltas-spa.php` | entregue em 20/10 — **a confirmar** instalação. Precisa "Run snippet everywhere" e `contacts.write` no token |
 | GTM só na landing da Pátio | `codigo/snippet-gtm-landing-patio.php` | entregue; **a confirmar** se instalado |
 
 Regras: ao recolar o snippet principal, **desativar o antigo antes** (duas cópias = erro fatal
@@ -215,7 +216,18 @@ webhook normal e, se a pessoa continuar "NÃO TEM AINDA" e o horário for futuro
 webhook. Cada pessoa é tentada uma vez; enviados e recusas (com o motivo da Spa) vão por e-mail.
 Testes: `testes/teste-conferencia.php`.
 
-### 5.4 Páginas (Elementor, bloco HTML)
+### 5.4 Tela "Faltas Spa" (Ferramentas → Faltas Spa)
+
+Leva para o GHL quem **faltou na avaliação** segundo a Spa, com a tag **"Faltaram"**.
+- Busca as avaliações da unidade no período (padrão: últimos 30 dias) e filtra status com "falt" ou
+  "não compareceu" (a tela mostra todos os status que a Spa usou, para conferir). Uma linha por pessoa.
+- Situação no GHL (busca pelo telefone): **sem a tag**, **não existe** (será criado) ou **já tem a tag**.
+- "Colocar a tag": contato existente → `POST /contacts/{id}/tags` (só acrescenta, não apaga nada);
+  não existe → cria o contato na sub-conta da unidade com nome, telefone e a tag.
+- Automático opcional: 1x por dia, todas as unidades, faltas dos últimos 7 dias.
+- Exige **`contacts.write`** no token da unidade (a Pátio ainda não tem — ver §3.4). Testes: `testes/teste-faltas.php`.
+
+### 5.5 Páginas (Elementor, bloco HTML)
 
 | Página | Arquivo | O que faz |
 |---|---|---|
@@ -279,7 +291,7 @@ Testes: `testes/teste-conferencia.php`.
 3. **Completar o Custom Data do workflow "Lead Cadastrado - Pátio Alcântara"** (confirmado incompleto em 20/10) e reprocessar os leads perdidos.
 4. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
 5. **Colar a versão 5 do PHP no WordPress** (seção 7) e conferir `ultimas_falhas` no `/debug` depois.
-6. Pátio: `contacts.write` no token + `contact_id` nos workflows (escrita de volta e tags).
+6. Pátio: **`contacts.write` no token** (necessário para a tela "Faltas Spa" e para a escrita de volta no contato).
 7. Remover a rota `/debug`; rotacionar a senha da API da Spa; limpar leads de teste no GHL **e** na Spa.
 8. Confirmar com o TI: `franquiaId 10`; endpoint para listar sessões de depilação (seção 9).
 9. Arquivar o calendário antigo (Personal) da Imperatriz; apagar a data 2027 da Sala 3.
@@ -347,3 +359,4 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   v5 colada ~14:50; às 15:02 primeiro lead da Pátio aceito pela Spa pelo workflow de lead (lead 14955), 0 falhas.
   Conferência: 71 pendentes → 31 depois do cadastro manual (telefones digitados diferentes / só lead) →
   criada a tela "Conferência Spa" (match por nome, "resolvido à mão" e verificação automática por hora).
+  Criada a tela "Faltas Spa": quem tem falta na avaliação na Spa recebe a tag "Faltaram" no GHL da unidade.
