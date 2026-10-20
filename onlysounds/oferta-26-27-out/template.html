@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap">
 <style>
-/* Layout: página branca e editorial, tipografia grande e centrada; o preto aparece só em blocos de palco (banner, acervo, bio, ponte). Oferta reproduz a tabela O que é / Preço / Bônus. Visual único, não muda com o tema. */
+/* Layout: hero azul-escuro com vídeo central; depois página branca e editorial, tipografia grande e centrada; o preto aparece em blocos de palco (acervo, bio). Oferta reproduz a tabela O que é / Preço / Bônus. Visual único, não muda com o tema. */
 :root {
   color-scheme: light;
   --paper: #ffffff;
@@ -61,31 +61,41 @@ a { color: inherit; }
 .micro strong { color: var(--text); }
 
 /* ===== Barra de contagem ===== */
-.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--blue-deep); color: #fff; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--blue); color: #fff; }
 .bar .wrap { display: flex; align-items: center; justify-content: center; gap: 10px 22px; min-height: 52px; flex-wrap: wrap; padding-block: 6px; font-family: var(--display); font-size: 14px; font-weight: 600; }
 .bar b { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 16px; letter-spacing: .02em; }
 .bar .btn { margin-left: 4px; }
 
-/* ===== Hero ===== */
-.hero { padding-block: clamp(48px, 7vw, 96px) 0; }
-.hero .center { gap: 26px; }
-.hero-logo { width: 190px; filter: brightness(0); }
-.hero h1 { font-size: clamp(40px, 6.6vw, 84px); font-weight: 800; max-width: 16ch; }
-.hero h1 em { font-style: normal; color: var(--blue); }
-.hero .lead { text-align: center; }
-.hero-cta { display: grid; justify-items: center; gap: 12px; }
+/* ===== Hero (azul escuro + vídeo) ===== */
+.hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(900px 520px at 50% 62%, rgba(47,122,255,.38), transparent 70%), radial-gradient(600px 400px at 0% 0%, rgba(15,76,185,.55), transparent 70%), linear-gradient(180deg, #04102e 0%, #071d4f 55%, #0a2766 100%); padding-block: clamp(48px, 6vw, 88px) clamp(56px, 7vw, 96px); }
+.hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(180deg, #000 0%, transparent 70%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%); pointer-events: none; }
+.hero .wrap { position: relative; }
+.hero .center { gap: 22px; }
+.hero-logo { width: 180px; }
+.hero h1 { font-size: clamp(36px, 5.6vw, 72px); font-weight: 800; max-width: 17ch; }
+.hero h1 em { font-style: normal; color: #7fb0ff; }
+.hero .lead { text-align: center; color: #c6d4f2; }
+.hero .kicker { color: #9cc0ff; }
 
-.banner { position: relative; margin-top: clamp(48px, 6vw, 72px); border-radius: 28px; overflow: hidden; background: #000; aspect-ratio: 2.4 / 1; min-height: 360px; }
-.banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
-.banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.25) 45%, rgba(0,0,0,0) 65%), linear-gradient(0deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 50%); }
-.banner-box { position: absolute; right: clamp(20px, 4vw, 48px); bottom: clamp(20px, 4vw, 48px); z-index: 1; display: grid; gap: 14px; color: #fff; }
-.banner-box { justify-items: end; }
-.banner .timer div { background: rgba(0,0,0,.6); border-color: rgba(255,255,255,.22); }
-.banner-box .t-head { color: #fff; }
-.banner-box .t-head { font-family: var(--display); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--on-ink-soft); }
-.banner-ticks { position: absolute; right: clamp(20px, 4vw, 48px); top: clamp(20px, 4vw, 48px); z-index: 1; display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-.banner-ticks span { display: inline-flex; gap: 10px; align-items: center; padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #fff; font-family: var(--display); font-weight: 600; font-size: 14px; }
-.banner-ticks svg { width: 16px; height: 16px; color: #8fb6ff; }
+.video { position: relative; display: block; width: 100%; max-width: 920px; margin: clamp(36px, 5vw, 56px) auto 0; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 40px 100px -30px rgba(0,0,0,.8), 0 0 120px -20px rgba(47,122,255,.55); text-decoration: none; }
+.video img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,16,46,.55), rgba(4,16,46,0) 45%); }
+.video:hover img { transform: scale(1.03); }
+.play { position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(72px, 9vw, 96px); aspect-ratio: 1; border-radius: 50%; background: var(--blue); display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(47,122,255,.25); transition: transform .2s ease, box-shadow .2s ease; }
+.video:hover .play { transform: translate(-50%, -50%) scale(1.06); box-shadow: 0 0 0 16px rgba(47,122,255,.2); }
+.play svg { width: 34%; height: 34%; margin-left: 6%; color: #fff; }
+.video-tag { position: absolute; z-index: 1; left: 18px; bottom: 16px; font-family: var(--display); font-weight: 700; font-size: 13px; letter-spacing: .06em; color: #fff; display: flex; gap: 8px; align-items: center; }
+.video-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--rose); }
+
+.hero-foot { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: auto auto; justify-content: center; align-items: center; gap: 24px 48px; }
+.hero-cta { display: grid; justify-items: start; gap: 10px; }
+.hero-cta .micro { color: #a9bbe0; }
+.hero-cta .micro strong { color: #fff; }
+.hero-timer { display: grid; gap: 10px; padding-left: 48px; border-left: 1px solid rgba(255,255,255,.16); }
+.hero-timer .t-head { font-family: var(--display); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #9cc0ff; }
+.hero-ticks { display: flex; gap: 10px 28px; flex-wrap: wrap; justify-content: center; margin-top: 36px; color: #c6d4f2; font-size: 15px; }
+.hero-ticks span { display: inline-flex; gap: 8px; align-items: center; }
+.hero-ticks svg { width: 18px; height: 18px; color: #7fb0ff; }
 
 /* Contador */
 .timer { display: flex; gap: 10px; font-family: var(--display); font-variant-numeric: tabular-nums; }
@@ -223,20 +233,20 @@ footer a:hover { color: #fff; }
   .deal-col { border-left: 0; border-top: 1px solid var(--line); }
   .deal-col:first-child { border-top: 0; }
   .bio-img { aspect-ratio: 16 / 10; }
-  .banner { aspect-ratio: auto; min-height: 520px; }
-  .banner::after { background: linear-gradient(0deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.4) 55%, rgba(0,0,0,0) 80%); }
-  .banner-ticks { position: absolute; top: 20px; right: auto; left: 20px; bottom: auto; }
 }
 @media (max-width: 760px) {
   .bar .lg, .bar .btn { display: none; }
-  .banner-ticks { display: none; }
-  .banner { min-height: 420px; }
+  .hero-foot { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .hero-cta { justify-items: center; }
+  .hero-timer { padding-left: 0; border-left: 0; justify-items: center; width: 100%; }
+  .hero-timer .timer { width: 100%; }
+  .video { border-radius: 16px; }
+  .hero-ticks { flex-direction: column; align-items: center; gap: 8px; }
   .pillars { grid-template-columns: minmax(0, 1fr); border-top: 0; }
   .pillar { border-left: 0; border-top: 1px solid var(--line); padding: 28px 0; }
   .includes { grid-template-columns: minmax(0, 1fr); }
   .stage { aspect-ratio: 4 / 3; }
   .timer div { min-width: 0; flex: 1; }
-  .banner-box { left: 20px; right: 20px; }
   .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; align-items: center; justify-content: space-between; gap: 12px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(10,20,50,.08); }
   .mbar-t { display: grid; font-family: var(--display); line-height: 1.2; }
   .mbar-t small { font-size: 11px; color: var(--muted); font-weight: 600; }
@@ -272,15 +282,20 @@ footer a:hover { color: #fff; }
     <img class="hero-logo" src="{{img:group_8}}" alt="OnlySounds">
     <h1>Direção artística para músicos que têm talento, mas <em>ainda não sabem jogar.</em></h1>
     <p class="lead">Uma escola única de refinamento artístico onde músicos desenvolvem visão, critério e identidade para tomar decisões conscientes no mundo REAL da música.</p>
-    <div class="hero-cta">
-      <a class="btn" href="https://pay.kiwify.com.br/201xbLn" target="_blank" rel="noopener">Entre na OnlySounds <svg><use href="#arrow"/></svg></a>
-      <p class="micro">Assinatura anual em até <strong>12x de R$ 163,20</strong></p>
-    </div>
   </div>
   <div class="wrap">
-    <div class="banner">
-      <img src="{{img:palco-1024x682}}" alt="Rodrigo Suricato no palco diante de uma multidão">
-      <div class="banner-box">
+    <!-- No Elementor: widget Vídeo (YouTube https://youtu.be/jGBQBmZxrrg) -->
+    <a class="video" href="https://youtu.be/jGBQBmZxrrg" target="_blank" rel="noopener" aria-label="Assistir ao vídeo da OnlySounds">
+      <img src="{{img:yt}}" alt="Rodrigo Suricato em um teatro vazio">
+      <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L7.5 3.64A1 1 0 0 0 6 4.5Z"/></svg></span>
+      <span class="video-tag">Assista antes de entrar</span>
+    </a>
+    <div class="hero-foot">
+      <div class="hero-cta">
+        <a class="btn" href="https://pay.kiwify.com.br/201xbLn" target="_blank" rel="noopener">Entre na OnlySounds <svg><use href="#arrow"/></svg></a>
+        <p class="micro">Assinatura anual em até <strong>12x de R$ 163,20</strong></p>
+      </div>
+      <div class="hero-timer">
         <p class="t-head" data-cd-head>Carrinho abre em</p>
         <div class="timer" data-cd-timer>
           <div><b data-h>--</b><small>horas</small></div>
@@ -288,11 +303,11 @@ footer a:hover { color: #fff; }
           <div><b data-s>--</b><small>seg</small></div>
         </div>
       </div>
-      <div class="banner-ticks">
-        <span><svg><use href="#check"/></svg>12 meses de acesso</span>
-        <span><svg><use href="#check"/></svg>Encontros ao vivo</span>
-        <span><svg><use href="#check"/></svg>Comunidade VIP</span>
-      </div>
+    </div>
+    <div class="hero-ticks">
+      <span><svg><use href="#check"/></svg>12 meses de acesso</span>
+      <span><svg><use href="#check"/></svg>Encontros ao vivo com Suricato</span>
+      <span><svg><use href="#check"/></svg>Comunidade VIP no WhatsApp</span>
     </div>
   </div>
 </header>
@@ -311,6 +326,7 @@ footer a:hover { color: #fff; }
         <a class="btn" href="#oferta">Vem pra OnlySounds <svg><use href="#arrow"/></svg></a>
       </div>
     </div>
+    <img class="stage" src="{{img:palco-1024x682}}" alt="Rodrigo Suricato no palco diante de uma multidão">
   </div>
 </section>
 
