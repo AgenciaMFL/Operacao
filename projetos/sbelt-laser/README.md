@@ -112,8 +112,9 @@ quebrou a Pátio Alcântara até 14/10 (os workflows tinham só `franquiaId`).
 | `datahorainicio` | Appointment.Start Date Time | sim |
 | `datahorafim` | Appointment.End Date Time | não (PHP calcula +15 min) |
 
-Configuração da Pátio confirmada por print em 14/10 (agendamento). **A confirmar**: Custom Data
-completo no "Lead Cadastrado - Pátio Alcântara".
+Configuração da Pátio confirmada por print em 14/10 (agendamento). **Em 20/10 o `/debug` mostrou que o
+"Lead Cadastrado - Pátio Alcântara" ainda manda só `franquiaId`** → todo lead da Pátio é recusado (400)
+antes de ir para a Spa; só chega quem agenda (via cadastro de emergência do webhook de agendamento).
 
 Workflows precisam estar **Published** — em Draft nada dispara, nem com "Run test".
 
@@ -257,7 +258,7 @@ Recupera agendamentos que estão no calendário do GHL mas não chegaram na Spa.
    (21–24 e 26/10, 09–21h, 4 por horário) — agendamentos fora disso são recusados com 400
    (caso Kauane, 14/10). Alternativa: reduzir o GHL ao que a Spa aceita.
 2. Terminar o reprocessamento dos pendentes da Pátio e **desativar o snippet "Reprocessar Spa"**.
-3. Confirmar Custom Data completo do workflow "Lead Cadastrado - Pátio Alcântara".
+3. **Completar o Custom Data do workflow "Lead Cadastrado - Pátio Alcântara"** (confirmado incompleto em 20/10) e reprocessar os leads perdidos.
 4. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
 5. Aplicar as correções 1 e 2 da seção 7 (token 25 min; mensagem da Spa).
 6. Pátio: `contacts.write` no token + `contact_id` nos workflows (escrita de volta e tags).
@@ -321,3 +322,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   `franquiaId` (PHP respondia 400). Corrigido o "Agendamento Confirmado - Pátio" (primeiro sucesso: Cintia Santos).
   Recusas 400 da Spa por regra de agenda (Kauane). Criada a tela "Reprocessar Spa" para reenviar os pendentes.
   Proposto o plano de automação da abertura de unidades (`PLANO-AUTOMACAO.md`).
+- **20/10/2026** — Leads do formulário da Pátio não chegam na Spa: `/debug` confirma Custom Data do
+  "Lead Cadastrado - Pátio" só com `franquiaId` (último lead às 13:45). Escrita de volta no GHL da Pátio
+  responde 401 (token sem `contacts.write`), como esperado.
