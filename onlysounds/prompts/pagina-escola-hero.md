@@ -28,17 +28,18 @@ Crie uma página nova no WordPress do site onlysounds.com.br usando o MCP `only-
 ### 3.2 Hero
 - Altura ~880px no desktop (ajustar ao conteúdo no mobile), conteúdo centralizado.
 - **Fundo, em camadas:**
-  1. **Vídeo de fundo em loop**, mudo, sem controles. Arquivos já comprimidos (subir na Biblioteca de Mídia):
-     - `onlysounds/hero-bg/hero-bg-720.webm` (90 KB)
-     - `onlysounds/hero-bg/hero-bg-720.mp4` (311 KB)
-     - Poster/fallback: `onlysounds/hero-bg/hero-bg-poster.jpg`
-     Use um widget HTML com `<video autoplay muted loop playsinline preload="metadata" poster="...">` com as duas `<source>` (WebM primeiro, MP4 depois), `object-fit: cover`, absoluto cobrindo o contêiner. **No mobile (≤ 767px) não carregue o vídeo**: mostre só o poster (ex.: só inserir o `<video>` via JS quando `matchMedia('(min-width: 768px)')` for verdadeiro).
+  1. **Vídeo de fundo em loop**, mudo, sem controles. O vídeo **já está na Biblioteca de Mídia do WordPress** com o nome **`hero-bg-720-1.webm`** (WebM, 1280x720, 30 s, ~90 KB). Busque esse arquivo na biblioteca de mídia pelo MCP (ex.: pesquisar por "hero-bg-720"), pegue a **URL pública** dele e use como fundo da hero:
+     - Widget **HTML** posicionado absoluto cobrindo todo o contêiner da hero (atrás do conteúdo, `z-index` abaixo), com `<video autoplay muted loop playsinline preload="metadata">` e `<source src="URL_DO_hero-bg-720-1.webm" type="video/webm">`, `object-fit: cover; width: 100%; height: 100%`.
+     - Se a biblioteca também tiver `hero-bg-720.mp4`, adicione como segunda `<source>` (type `video/mp4`) para Safari antigo. Se não tiver, siga só com o WebM.
+     - Fallback: fundo do contêiner `#04102E` (azul-escuro) e, se existir na biblioteca, a imagem `hero-bg-poster.jpg` como `poster` do vídeo.
+     - **No mobile (≤ 767px) não carregue o vídeo**: insira o `<video>` via JS só quando `matchMedia('(min-width: 768px)')` for verdadeiro; no mobile fica só o fundo de fallback.
+     - Se não encontrar o arquivo na biblioteca, pare e me avise em vez de usar outro vídeo.
   2. Overlay preto a 10% sobre o vídeo.
   3. Foto do Rodrigo Suricato (exportar do Figma, layer `Foto_RodrigoSuricato`, node `3326:1163`) cobrindo o hero com **opacidade 17%**. Exportar em WebP, máx. ~200 KB.
   4. Brilhos azuis desfocados (os elipses do Figma): 2 círculos `#075AEE` de ~244px com blur ~300px atrás do vídeo central, e 2 elipses `#0084FF` de ~209x103px com blur ~300px nas laterais do botão. Fazer com CSS (`filter: blur()` ou `radial-gradient`), não com imagem.
 - **Conteúdo (centralizado):**
   1. Logo OnlySounds (exportar do Figma, `Group 8`, node `3324:1098`, em SVG) — ~200px de largura no desktop, ~160px no mobile.
-  2. Título H1: **"OnlySounds é direção artística para músicos que tem talento, mas ainda não sabem jogar."** — Plus Jakarta Sans, 36px desktop / 28px mobile, line-height 110%, branco, com o trecho **"ainda não sabem jogar."** em azul (cor do Figma). Largura máx. ~600px.
+  2. Título H1: **"OnlySounds é direção artística para músicos que têm talento, mas ainda não sabem jogar."** — Plus Jakarta Sans, 36px desktop / 28px mobile, line-height 110%, branco, com o trecho **"ainda não sabem jogar."** em azul (cor do Figma). Largura máx. ~600px.
   3. Subtítulo: **"Uma escola única de refinamento artístico onde músicos desenvolvem visão, critério e identidade para tomar decisões conscientes no mundo REAL da música."** — 18px / line-height 26px desktop, 16px mobile, branco, com **"tomar decisões conscientes no mundo REAL da música."** em negrito (conferir os pesos no Figma). Largura máx. ~540px.
   4. **Vídeo principal** em moldura de vidro: retângulo externo `rgba(5,15,34,.37)` com backdrop blur ~15px, raio 24px, borda em degradê `#0067FF → #003E99`; dentro, o player com raio 24px. Desktop ~628x357px; no mobile 100% da largura, proporção 16:9.
      - Vídeo: YouTube `https://youtu.be/jGBQBmZxrrg`.
@@ -49,7 +50,7 @@ Crie uma página nova no WordPress do site onlysounds.com.br usando o MCP `only-
 - Plus Jakarta Sans (Bold, ExtraBold) e Poppins (Regular, SemiBold). Se já estiverem no Kit do Elementor, use as globais; senão carregue via Google Fonts com `display=swap`.
 
 ## 5. Desempenho (obrigatório)
-- Nada de vídeo de fundo do YouTube/Vimeo; só o MP4/WebM próprio acima.
+- Nada de vídeo de fundo do YouTube/Vimeo; só o `hero-bg-720-1.webm` da biblioteca de mídia.
 - Imagens em WebP, com `loading="lazy"` em tudo que não for o hero.
 - JS do temporizador e do vídeo inline, sem jQuery nem bibliotecas.
 - Depois de montar, rode um teste rápido (PageSpeed ou Lighthouse no mobile) e me diga o LCP e o peso total da página.
