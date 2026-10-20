@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap">
 <style>
-/* Layout: hero azul-escuro com vídeo central; depois página branca e editorial, tipografia grande e centrada; o preto aparece em blocos de palco (acervo, bio). Oferta reproduz a tabela O que é / Preço / Bônus. Visual único, não muda com o tema. */
+/* Layout: hero azul-escuro com vídeo central; depois página branca e editorial, tipografia grande e centrada; o preto aparece em blocos de palco (acervo, ponte com scroll). Oferta reproduz a tabela O que é / Preço / Bônus. Visual único, não muda com o tema. */
 :root {
   color-scheme: light;
   --paper: #ffffff;
@@ -137,27 +137,31 @@ a { color: inherit; }
 .cta-c { display: flex; justify-content: center; margin-top: 64px; }
 
 /* ===== Para quem ===== */
-.who-list { list-style: none; padding: 0; margin-top: 48px; display: grid; width: 100%; text-align: left; }
-.who-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 18px; align-items: start; padding: 20px 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-weight: 600; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.4; }
-.who-list li:first-child { border-top: 1px solid var(--line); }
-.who-list svg { width: 28px; height: 28px; color: var(--blue); }
+.who-grid { list-style: none; padding: 0; margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; text-align: left; }
+.who-grid li { display: grid; gap: 18px; align-content: start; padding: 26px 24px 28px; border-radius: 20px; background: var(--paper); border: 1px solid var(--line); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.who-grid li:hover { transform: translateY(-4px); border-color: rgba(47,122,255,.45); box-shadow: 0 20px 40px -24px rgba(15,60,160,.35); }
+.who-ic { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-tint); color: var(--blue); display: grid; place-items: center; transition: background .2s ease, color .2s ease; }
+.who-grid li:hover .who-ic { background: var(--blue); color: #fff; }
+.who-ic svg { width: 26px; height: 26px; }
+.who-grid p { font-family: var(--display); font-weight: 700; font-size: 18px; line-height: 1.35; letter-spacing: -0.01em; }
 
-/* ===== Bio ===== */
-.bio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
-.bio-img { filter: brightness(1.35) contrast(1.05); border-radius: 24px; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 72% center; }
-.bio-text { display: grid; gap: 22px; }
-.bio-text p { color: var(--on-ink-soft); }
-.creds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--ink-line); border: 1px solid var(--ink-line); border-radius: 16px; overflow: hidden; margin-top: 8px; }
-.creds div { background: var(--ink); padding: 18px 20px; display: grid; gap: 2px; }
-.creds strong { font-family: var(--display); font-size: 18px; }
-.creds span { font-size: 13px; color: var(--on-ink-muted); line-height: 1.4; }
-
-/* ===== Ponte ===== */
-.bridge { background: var(--paper); padding-block: clamp(80px, 11vw, 150px); }
-.bridge .center { gap: 6px; }
-.bridge p { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 4.6vw, 58px); letter-spacing: -0.03em; line-height: 1.12; color: #c7cbd4; }
-.bridge p:nth-child(2) { color: #8b91a0; }
-.bridge p:nth-child(3) { color: var(--text); }
+/* ===== Ponte (scroll) ===== */
+.scrolly { position: relative; background: var(--ink); }
+.scrolly-pin { position: relative; overflow: hidden; display: grid; place-items: center; padding-block: clamp(96px, 12vw, 160px); }
+.scrolly-fill { position: absolute; inset: 0; background: var(--blue); opacity: 0; pointer-events: none; }
+.scrolly-fill.to-offer { background: var(--mist); }
+.scrolly-lines { position: relative; display: grid; gap: .18em; text-align: center; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.scrolly-lines p { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 4.6vw, 64px); letter-spacing: -0.035em; line-height: 1.08; text-wrap: balance; will-change: transform, opacity; }
+.scrolly-lines p:nth-child(1) { color: #5b6273; }
+.scrolly-lines p:nth-child(2) { color: #9aa1b2; }
+.scrolly-lines p:nth-child(3) { color: #fff; transition: color .5s ease; }
+.scrolly-lines p:nth-child(3).hot { color: var(--blue); }
+.scrolly-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: none; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #5b6273; }
+html.js-scrolly .scrolly { height: 360vh; }
+html.js-scrolly .scrolly-pin { position: sticky; top: 0; height: 100vh; height: 100svh; padding-block: 0; }
+html.js-scrolly .scrolly-lines p { opacity: 0; }
+html.js-scrolly .scrolly-lines p:first-child { opacity: 1; }
+html.js-scrolly .scrolly-hint { display: block; }
 
 /* ===== Oferta ===== */
 .offer { background: var(--mist); }
@@ -201,20 +205,28 @@ a { color: inherit; }
 .pay svg { height: 24px; width: auto; flex: none; }
 
 /* ===== FAQ ===== */
-.faq { margin-top: 48px; width: 100%; text-align: left; }
-.faq details { border-bottom: 1px solid var(--line); }
-.faq details:first-child { border-top: 1px solid var(--line); }
-.faq summary { cursor: pointer; list-style: none; padding: 24px 0; font-family: var(--display); font-weight: 700; font-size: clamp(17px, 1.6vw, 20px); display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.faq-wrap { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.5fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.faq-side { position: sticky; top: 100px; display: grid; gap: 20px; justify-items: start; }
+.faq-side .lead { font-size: 17px; }
+.wa { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; width: 100%; padding: 20px; border-radius: 20px; background: var(--ink); color: #fff; text-decoration: none; margin-top: 8px; transition: transform .15s ease; }
+.wa:hover { transform: translateY(-2px); }
+.wa .wa-ic { width: 52px; height: 52px; border-radius: 50%; background: #1fae55; display: grid; place-items: center; }
+.wa .wa-ic svg { width: 28px; height: 28px; color: #fff; }
+.wa strong { font-family: var(--display); display: block; font-size: 16px; }
+.wa span { color: var(--on-ink-muted); font-size: 14px; }
+.wa > svg { width: 20px; height: 20px; color: #8fe0ad; }
+.faq { display: grid; gap: 12px; }
+.faq details { border-radius: 18px; background: var(--mist); border: 1px solid transparent; transition: background .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.faq details[open] { background: var(--paper); border-color: rgba(47,122,255,.4); box-shadow: 0 24px 50px -30px rgba(15,60,160,.35); }
+.faq summary { cursor: pointer; list-style: none; padding: 20px 22px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; font-family: var(--display); font-weight: 700; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.3; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: ""; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--blue-tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f7aff' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center / 15px no-repeat; transition: transform .2s ease; }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq .ans { padding: 0 0 26px; color: var(--soft); display: grid; gap: 12px; font-size: 16px; }
+.faq .q-ic { width: 42px; height: 42px; border-radius: 12px; background: var(--paper); color: var(--blue); display: grid; place-items: center; transition: background .2s ease, color .2s ease; }
+.faq details[open] .q-ic { background: var(--blue); color: #fff; }
+.faq .q-ic svg { width: 21px; height: 21px; }
+.faq summary::after { content: ""; width: 30px; height: 30px; border-radius: 50%; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f7aff' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center / 14px no-repeat; transition: transform .25s ease; }
+.faq details[open] summary::after { transform: rotate(45deg); background-color: var(--blue-tint); }
+.faq .ans { padding: 0 22px 24px 80px; color: var(--soft); display: grid; gap: 12px; font-size: 16px; }
 .faq .ans ul { padding-left: 18px; display: grid; gap: 4px; }
-.wa { margin-top: 36px; display: inline-flex; gap: 14px; align-items: center; padding: 14px 22px 14px 16px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; transition: border-color .15s ease; text-align: left; }
-.wa:hover { border-color: #1fae55; }
-.wa svg { width: 34px; height: 34px; color: #1fae55; flex: none; }
-.wa strong { font-family: var(--display); display: block; font-size: 15px; }
-.wa span { color: var(--muted); font-size: 13px; }
 
 footer { background: var(--ink); color: var(--on-ink-muted); }
 footer .wrap { padding-block: 36px; display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; font-size: 14px; }
@@ -226,13 +238,13 @@ footer a:hover { color: #fff; }
 .mbar { display: none; }
 
 @media (max-width: 960px) {
-  .career, .bio, .deal-foot { grid-template-columns: minmax(0, 1fr); }
-  .career .h2 { position: static; }
+  .career, .faq-wrap, .deal-foot { grid-template-columns: minmax(0, 1fr); }
+  .career .h2, .faq-side { position: static; }
+  .who-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .includes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .deal-table { grid-template-columns: minmax(0, 1fr); }
   .deal-col { border-left: 0; border-top: 1px solid var(--line); }
   .deal-col:first-child { border-top: 0; }
-  .bio-img { aspect-ratio: 16 / 10; }
 }
 @media (max-width: 760px) {
   .bar .lg, .bar .btn { display: none; }
@@ -244,7 +256,11 @@ footer a:hover { color: #fff; }
   .hero-ticks { flex-direction: column; align-items: center; gap: 8px; }
   .pillars { grid-template-columns: minmax(0, 1fr); border-top: 0; }
   .pillar { border-left: 0; border-top: 1px solid var(--line); padding: 28px 0; }
-  .includes { grid-template-columns: minmax(0, 1fr); }
+  .includes, .who-grid { grid-template-columns: minmax(0, 1fr); }
+  .faq .ans { padding-left: 22px; }
+  .who-grid li { grid-template-columns: auto minmax(0, 1fr); align-items: center; padding: 18px; gap: 16px; }
+  .who-ic { width: 46px; height: 46px; }
+  .who-grid p { font-size: 16px; }
   .stage { aspect-ratio: 4 / 3; }
   .timer div { min-width: 0; flex: 1; }
   .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; align-items: center; justify-content: space-between; gap: 12px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(10,20,50,.08); }
@@ -378,49 +394,35 @@ footer a:hover { color: #fff; }
 
 <!-- Para quem é -->
 <section class="band mist">
-  <div class="wrap narrow center">
+  <div class="wrap center">
     <p class="kicker">Para quem</p>
     <h2 class="h2" style="margin-top:16px">Para quem é este treinamento?</h2>
-    <ul class="who-list">
-      <li><svg><use href="#check"/></svg>Quem acredita que pode desenvolver identidade artística memorável</li>
-      <li><svg><use href="#check"/></svg>Quem se sente sozinho e sem clareza na jornada</li>
-      <li><svg><use href="#check"/></svg>Quem não é percebido como um artista</li>
-      <li><svg><use href="#check"/></svg>Quem tem talento mas ninguém diz onde está errando</li>
-      <li><svg><use href="#check"/></svg>Quem cansou de guru de internet e quer ouvir quem tem uma carreira real na música</li>
-      <li><svg><use href="#check"/></svg>Quem quer acessar o que não é dito em público por artistas reconhecidos</li>
-      <li><svg><use href="#check"/></svg>Quem quer planejar e entender onde investir</li>
-      <li><svg><use href="#check"/></svg>Quem quer entender o que é viver de música, cifras e oportunidades</li>
-      <li><svg><use href="#check"/></svg>Quem quer absorver repertório e cultura artística</li>
+    <ul class="who-grid">
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.5 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></span><p>Quem acredita que pode desenvolver identidade artística memorável</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span><p>Quem se sente sozinho e sem clareza na jornada</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><p>Quem não é percebido como um artista</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><p>Quem tem talento mas ninguém diz onde está errando</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg></span><p>Quem cansou de guru de internet e quer ouvir quem tem uma carreira real na música</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2"/></svg></span><p>Quem quer acessar o que não é dito em público por artistas reconhecidos</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/><path d="M15 8h5v5"/></svg></span><p>Quem quer planejar e entender onde investir</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15.4 9.3a6 6 0 1 1-6.1 6.1"/></svg></span><p>Quem quer entender o que é viver de música, cifras e oportunidades</p></li>
+      <li><span class="who-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg></span><p>Quem quer absorver repertório e cultura artística</p></li>
     </ul>
-    <div class="cta-c" style="margin-top:48px"><a class="btn" href="#oferta">Quero evoluir artisticamente <svg><use href="#arrow"/></svg></a></div>
+    <div class="cta-c" style="margin-top:56px"><a class="btn" href="#oferta">Quero evoluir artisticamente <svg><use href="#arrow"/></svg></a></div>
   </div>
 </section>
 
-<!-- Bio -->
-<section class="band ink">
-  <div class="wrap bio">
-    <img class="bio-img" src="{{img:mobile}}" alt="Rodrigo Suricato">
-    <div class="bio-text">
-      <p class="kicker">Quem conduz</p>
-      <h2 class="h2">Rodrigo Suricato</h2>
-      <p>Rodrigo Suricato é artista, músico, compositor e comunicador. Construiu sua trajetória sem atalhos: começou nos bares, tornou-se sideman requisitado, venceu o Gibson Contest como melhor guitarrista brasileiro, criou o projeto autoral Suricato, com destaque no Superstar, Rock in Rio e Lollapalooza, conquistou um Grammy Latino, foi novamente indicado no disco seguinte e, desde 2017, é vocalista e guitarrista do Barão Vermelho.</p>
-      <p>Hoje, também é uma das principais vozes sobre criação, processo e carreira na música. Na OnlySounds, compartilha uma visão prática, de quem viveu diferentes fases, escolhas e reinvenções dentro da indústria.</p>
-      <div class="creds">
-        <div><strong>Grammy Latino</strong><span>Vencedor e indicado novamente</span></div>
-        <div><strong>Barão Vermelho</strong><span>Vocalista e guitarrista desde 2017</span></div>
-        <div><strong>Rock in Rio</strong><span>E Lollapalooza com o Suricato</span></div>
-        <div><strong>Gibson Contest</strong><span>Melhor guitarrista brasileiro</span></div>
-      </div>
+<!-- Ponte: frases aparecem com o scroll; a última dá zoom e entra na oferta -->
+<section class="scrolly" id="scrolly">
+  <div class="scrolly-pin">
+    <div class="scrolly-fill" aria-hidden="true"></div>
+    <div class="scrolly-fill to-offer" aria-hidden="true"></div>
+    <div class="scrolly-lines">
+      <p>Quanto custa errar por anos?</p>
+      <p>Quanto custa não sair do lugar?</p>
+      <p>Quanto custa soar igual a todo mundo?</p>
     </div>
-  </div>
-</section>
-
-<!-- Ponte -->
-<section class="bridge">
-  <div class="wrap center">
-    <p>Quanto custa errar por anos?</p>
-    <p>Quanto custa não sair do lugar?</p>
-    <p>Quanto custa soar igual a todo mundo?</p>
+    <span class="scrolly-hint" aria-hidden="true">Role para baixo</span>
   </div>
 </section>
 
@@ -490,12 +492,19 @@ footer a:hover { color: #fff; }
 
 <!-- FAQ -->
 <section class="band">
-  <div class="wrap narrow center">
-    <p class="kicker">Dúvidas</p>
-    <h2 class="h2" style="margin-top:16px">Perguntas frequentes</h2>
+  <div class="wrap faq-wrap">
+    <div class="faq-side">
+      <p class="kicker">Dúvidas</p>
+      <h2 class="h2">Perguntas frequentes</h2>
+      <a class="wa" href="https://wa.me/5521981600820?text=Ol%C3%A1%2C%20vim%20da%20p%C3%A1gina%20da%20OnlySounds%20e%20gostaria%20de%20saber%20mais%20sobre" target="_blank" rel="noopener">
+        <span class="wa-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg></span>
+        <div><strong>Atendimento por WhatsApp</strong><span>Clique aqui para enviar</span></div>
+        <svg><use href="#arrow"/></svg>
+      </a>
+    </div>
     <div class="faq">
       <details open>
-        <summary>O que é OnlySounds?</summary>
+        <summary><span class="q-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></span>O que é OnlySounds?</summary>
         <div class="ans">
           <p>A OnlySounds é uma escola de refinamento e desenvolvimento artístico, criada por Rodrigo Suricato.</p>
           <p>O nome nasceu de uma brincadeira interna com a plataforma “OnlyFans”, mas aqui a exposição é outra: abrir os bastidores, revelar processos, decisões e aprendizados que artistas reconhecidos jamais compartilharam tão diretamente. É pra quem gosta ou vive de som, de arte e de criação.</p>
@@ -512,7 +521,7 @@ footer a:hover { color: #fff; }
         </div>
       </details>
       <details>
-        <summary>Como é a metodologia do Triplo I?</summary>
+        <summary><span class="q-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 15c2.5 0 2.5-6 5-6s2.5 6 5 6 2.5-6 5-6 2.5 6 5 6"/></svg></span>Como é a metodologia do Triplo I?</summary>
         <div class="ans">
           <p>O Triplo I é a metodologia oficial da OnlySounds. Ela organiza a formação artística em três pilares que precisam ser abastecidos:</p>
           <ul>
@@ -523,7 +532,7 @@ footer a:hover { color: #fff; }
         </div>
       </details>
       <details>
-        <summary>Qual o diferencial da OnlySounds?</summary>
+        <summary><span class="q-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span>Qual o diferencial da OnlySounds?</summary>
         <div class="ans">
           <p>Não é comum um artista de carreira organizar e compartilhar seu processo de forma aberta, honesta e útil para outros artistas.</p>
           <p>A OnlySounds não ensina só técnica. Ela ensina consciência artística. Enquanto a maioria das plataformas fala de “como fazer dar certo”, a OnlySounds fala de “como escolher quem você quer ser”.</p>
@@ -531,18 +540,14 @@ footer a:hover { color: #fff; }
         </div>
       </details>
       <details>
-        <summary>Quais as formas de pagamento?</summary>
+        <summary><span class="q-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></svg></span>Quais as formas de pagamento?</summary>
         <div class="ans"><p>Cartão de crédito em até 12x de R$ 163,20, boleto ou Pix Automático. À vista, o valor é R$ 1.578,00. O pagamento é processado pela Kiwify.</p></div>
       </details>
       <details>
-        <summary>Como funciona o bônus dos 20 primeiros?</summary>
+        <summary><span class="q-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-1.5-3-5-4-5-1.5S10 8 12 8Zm0 0c1.5-3 5-4 5-1.5S14 8 12 8Z"/></svg></span>Como funciona o bônus dos 20 primeiros?</summary>
         <div class="ans"><p>As 20 primeiras pessoas que garantirem a vaga recebem um feedback individual e concorrem ao sorteio de 2 mentorias coletivas.</p></div>
       </details>
     </div>
-    <a class="wa" href="https://wa.me/5521981600820?text=Ol%C3%A1%2C%20vim%20da%20p%C3%A1gina%20da%20OnlySounds%20e%20gostaria%20de%20saber%20mais%20sobre" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
-      <div><strong>Atendimento por WhatsApp</strong><span>Clique aqui para enviar</span></div>
-    </a>
   </div>
 </section>
 
@@ -588,5 +593,41 @@ footer a:hover { color: #fff; }
   function step(dir) { rail.scrollBy({ left: dir * (rail.clientWidth * 0.8), behavior: "smooth" }); }
   document.getElementById("railPrev").addEventListener("click", function () { step(-1); });
   document.getElementById("railNext").addEventListener("click", function () { step(1); });
+
+  // Ponte com scroll: frases aparecem uma a uma; a última dá zoom e se funde com a oferta.
+  var sc = document.getElementById("scrolly");
+  if (sc && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js-scrolly");
+    var ps = sc.querySelectorAll(".scrolly-lines p"), fills = sc.querySelectorAll(".scrolly-fill"), pin = sc.querySelector(".scrolly-pin"), hint = sc.querySelector(".scrolly-hint"), off = 0, ticking = false;
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var seg = function (p, a, b) { return clamp((p - a) / (b - a)); };
+    var ease = function (x) { return x * x * (3 - 2 * x); };
+    function measure() {
+      ps[2].style.transform = "none";
+      var r = ps[2].getBoundingClientRect(), pr = pin.getBoundingClientRect();
+      off = (pr.top + pr.height / 2) - (r.top + r.height / 2);
+    }
+    function frame() {
+      ticking = false;
+      var r = sc.getBoundingClientRect();
+      var p = clamp(-r.top / (r.height - window.innerHeight));
+      var a = [seg(p, 0, .12), seg(p, .15, .29), seg(p, .32, .46)];
+      var out = seg(p, .54, .66), center = ease(seg(p, .54, .68)), z = seg(p, .64, .92), fade = seg(p, .84, .92);
+      for (var i = 0; i < 2; i++) {
+        ps[i].style.opacity = a[i] * (1 - out);
+        ps[i].style.transform = "translateY(" + ((1 - ease(a[i])) * 40 - out * 30) + "px)";
+      }
+      ps[2].style.opacity = a[2] * (1 - fade);
+      ps[2].style.transform = "translateY(" + ((1 - ease(a[2])) * 40 + off * center) + "px) scale(" + (1 + Math.pow(z, 2.4) * 11) + ")";
+      ps[2].classList.toggle("hot", z > 0.02);
+      fills[0].style.opacity = seg(p, .76, .88);
+      fills[1].style.opacity = seg(p, .88, .99);
+      hint.style.opacity = 1 - seg(p, .02, .1);
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+    measure(); frame();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { measure(); frame(); });
+  }
 })();
 </script>
