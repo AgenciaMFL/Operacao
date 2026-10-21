@@ -35,6 +35,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400&display=swap">
 <style>
   @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
   @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -56,23 +57,19 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   </div>
 
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <section style="padding-top:74px;background:#fff">
+  <!-- Hero (Figma 3402:35) -->
+  <section style="padding-top:74px;background:linear-gradient(90deg,#DEDAE4 0%,#E9E6EE 25%,#F3EFF5 50%,#EBEAF1 75%,#E2E0EA 100%)">
     <div style="width:100%;overflow:hidden;line-height:0">
-      <img src="assets/hero-depois-w.jpg" alt="Meeky F5 ANC Pro" style="width:100%;height:auto;display:block">
+      <img src="assets/hero-home-v2.webp" alt="Meeky F5 ANC Pro e Meeky Motion 1" style="width:100%;height:auto;display:block">
     </div>
-    <div>
-      <div style="margin-top:clamp(-148px,-7.8vw,-72px);padding-bottom:clamp(32px,3vw,56px)">
-        <div style="max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:48px;flex-wrap:wrap">
-          <div style="flex:1 1 380px;max-width:640px">
-            <h1 style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-size:clamp(32px,3.7vw,60px);font-weight:700;letter-spacing:-.035em;line-height:1.05;text-wrap:balance">Menos ruído. <span style="color:#C9994F">Mais você.</span></h1>
-            <p style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:20px 0 0;max-width:680px;font-size:clamp(15px,1.15vw,18px);line-height:1.55;color:#5A5A5A;text-wrap:pretty">Headphones com cancelamento ativo de ruído, criados para silenciar distrações, elevar sua rotina e <strong style="color:#0A0A0A;font-weight:600;white-space:nowrap">devolver o controle da sua atenção.</strong></p>
-          </div>
-          <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;flex:0 0 auto;margin-bottom:12px">
-            <a href="Checkout.html?produto=f5&amp;qty=1" style="display:inline-flex;align-items:center;gap:26px;padding:12px 12px 12px 38px;border-radius:999px;background:rgba(141,141,141,.11);text-decoration:none;transition:transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="transform:translateY(-3px)">
-              <span style="font-size:20px;font-weight:400;letter-spacing:-.01em;color:#3C3C3C;white-space:nowrap">F5 ANC PRO - R$ 297</span>
-              <span style="display:inline-flex;align-items:center;justify-content:center;padding:18px 38px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s" style-hover="color:#0A0A0A;background-position:0 0">Comprar agora</span>
-            </a>
-          </div>
+    <div style="margin-top:clamp(-170px,-10.5vw,-80px);padding-bottom:clamp(40px,4vw,72px);position:relative">
+      <div style="max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:48px;flex-wrap:wrap">
+        <div style="flex:1 1 380px;max-width:640px">
+          <h1 style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:500;font-size:clamp(40px,4vw,68px);letter-spacing:-.03em;line-height:1.12;color:#09010F">O mundo no <span style="color:#9E69C1">seu volume</span></h1>
+          <p style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:16px 0 0;max-width:560px;font-family:'Poppins','SF Pro Display',-apple-system,sans-serif;font-size:clamp(15px,1.2vw,22px);letter-spacing:.02em;line-height:1.4;color:#8F8A94;text-wrap:pretty">Headphones com cancelamento ativo de ruído, criados para silenciar distrações, elevar sua rotina e devolver o controle da sua atenção.</p>
+        </div>
+        <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;flex:0 0 auto;margin-bottom:8px">
+          <a href="#produtos" style="display:inline-flex;align-items:center;justify-content:center;height:clamp(56px,3.6vw,69px);padding:0 clamp(34px,2.6vw,48px);border-radius:999px;background:#9E69C1;color:#fff;text-decoration:none;white-space:nowrap;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:600;font-size:clamp(18px,1.4vw,23px);letter-spacing:.01em;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Conhecer produtos agora</a>
         </div>
       </div>
     </div>
@@ -80,12 +77,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   </sc-if>
 
   <sc-if value="{{ isMobile }}">
-  <section style="padding-top:74px;background:#fff">
-    <div style="overflow:hidden"><img src="assets/hero-mobile-v3.webp" alt="Meeky F5 ANC Pro" style="width:178%;max-width:none;margin-left:-39%;height:auto;display:block"></div>
-    <div style="position:relative;margin-top:-38%;padding:0 20px 34px;text-align:center">
-      <h1 style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-size:46px;font-weight:700;letter-spacing:-.035em;line-height:1.06">Menos ruído.<br><span style="color:#C9994F">Mais você.</span></h1>
-      <p style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:18px auto 0;max-width:360px;font-size:17px;line-height:1.5;color:#5A5A5A;text-wrap:pretty">Headphones com cancelamento ativo de ruído, criados para silenciar distrações, elevar sua rotina e <strong style="color:#0A0A0A;font-weight:600">devolver o controle da sua atenção.</strong></p>
-      <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;margin-top:26px"><a href="Checkout.html?produto=f5&amp;qty=1" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
+  <section style="padding-top:74px;background:#EEEFF4">
+    <div style="overflow:hidden;line-height:0"><img src="assets/hero-home-mobile-v2.webp" alt="Meeky F5 ANC Pro e Meeky Motion 1" style="width:100%;height:auto;display:block"></div>
+    <div style="position:relative;margin-top:-18%;padding:0 20px 40px;text-align:center">
+      <h1 style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:500;font-size:46px;letter-spacing:-.03em;line-height:1.08;color:#09010F">O mundo no <span style="color:#9E69C1">seu volume</span></h1>
+      <p style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:14px auto 0;max-width:360px;font-family:'Poppins','SF Pro Display',-apple-system,sans-serif;font-size:15.5px;letter-spacing:.01em;line-height:1.45;color:#8F8A94;text-wrap:pretty">Headphones com cancelamento ativo de ruído, criados para silenciar distrações, elevar sua rotina e devolver o controle da sua atenção.</p>
+      <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;margin-top:24px"><a href="#produtos" style="display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 34px;border-radius:999px;background:#9E69C1;color:#fff;text-decoration:none;white-space:nowrap;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:600;font-size:19px;letter-spacing:.01em;transition:background-color .35s" style-hover="background-color:#8A55AD">Conhecer produtos agora</a></div>
     </div>
   </section>
   </sc-if>
@@ -200,7 +197,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   </section>
   </sc-if>
 
-  <section style="background:#fff;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
+  <section id="produtos" style="background:#fff;scroll-margin-top:74px;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
     <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }}">
       <div data-reveal="" style="text-align:{{ headAlign }}">
         <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>O ecossistema Meeky</div>
@@ -215,7 +212,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
           <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8.5% 7.5%;display:flex;flex-direction:column;gap:.7em">
             <h3 style="margin:0;font-size:clamp(26px,11cqw,50px);font-weight:700;letter-spacing:-.02em;line-height:1.05;text-transform:uppercase;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Meeky F5 ANC Pro</h3>
             <p style="margin:0;color:rgba(249,248,246,.8);font-size:clamp(12px,4.3cqw,31px);letter-spacing:.02em;text-transform:uppercase;line-height:1.2">70h · ANC 20dB · Anatel</p>
-            <div style="margin-top:.5em"><a href="Checkout.html?produto=f5&amp;qty=1" style="display:inline-flex;align-items:center;justify-content:center;padding:1.05em 2.1em;border-radius:999px;font-size:clamp(12px,2.6cqw,15px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
+            <div style="margin-top:.5em"><a href="Produto.html" style="display:inline-flex;align-items:center;justify-content:center;padding:1.05em 2.1em;border-radius:999px;font-size:clamp(12px,2.6cqw,15px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
           </div>
         </div>
 
@@ -234,7 +231,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
             <div style="position:absolute;inset:0;padding:0 8.5% 8%;display:flex;flex-direction:column;justify-content:flex-end;gap:.55em">
               <h4 style="margin:0;font-size:clamp(26px,11cqw,50px);font-weight:700;letter-spacing:-.028em;line-height:1.12;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Motion 1</h4>
               <p style="margin:0;color:rgba(249,248,246,.82);font-size:clamp(11.5px,3.7cqw,26px);line-height:1.35">Bone Conduction · Open-Ear Sport — Reservas Abertas, Chegada Prevista Julho 2026.</p>
-              <div style="margin-top:.35em"><a href="Checkout.html?produto=motion1&amp;qty=1" style="align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:999px;overflow:hidden;font-size:clamp(10.5px,2.1cqw,15px);font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#C08A3E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-2px)"><span style="display:block;padding:1.05em 2.1em">Comprar agora</span></a></div>
+              <div style="margin-top:.35em"><a href="Motion1.html" style="align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:999px;overflow:hidden;font-size:clamp(10.5px,2.1cqw,15px);font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#C08A3E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-2px)"><span style="display:block;padding:1.05em 2.1em">Comprar agora</span></a></div>
             </div>
           </div>
 
@@ -259,7 +256,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
           <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8% 8%;display:flex;flex-direction:column;gap:.5em">
             <h3 style="margin:0;font-size:clamp(24px,7.6cqw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Meeky F5 ANC Pro</h3>
             <p style="margin:0;color:rgba(249,248,246,.84);font-size:clamp(13px,3.8cqw,20px);line-height:1.35">70h · ANC 20dB · Anatel</p>
-            <div style="margin-top:.4em"><a href="Checkout.html?produto=f5&amp;qty=1" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
+            <div style="margin-top:.4em"><a href="Produto.html" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
           </div>
         </div>
         <div data-reveal=".1" style="container-type:inline-size;position:relative;aspect-ratio:1162/1056;border-radius:34px;overflow:hidden;background:#000;color:#F9F8F6">
@@ -276,7 +273,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
           <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8% 8%;display:flex;flex-direction:column;gap:.5em">
             <h3 style="margin:0;font-size:clamp(24px,7.6cqw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;color:#FFFFFF">Motion 1</h3>
             <p style="margin:0;color:rgba(249,248,246,.84);font-size:clamp(13px,3.8cqw,20px);line-height:1.35">Bone Conduction · Open-Ear Sport — Reservas Abertas, Chegada Prevista Julho 2026.</p>
-            <div style="margin-top:.4em"><a href="Checkout.html?produto=motion1&amp;qty=1" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
+            <div style="margin-top:.4em"><a href="Motion1.html" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
           </div>
         </div>
         <div data-reveal=".2" style="container-type:inline-size;position:relative;aspect-ratio:1162/1056;border-radius:34px;overflow:hidden;background:#000;color:#F9F8F6">
@@ -324,7 +321,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
       <div style="font-size:12.5px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(249,248,246,.85)">Meeky</div>
       <h2 style="margin:30px 0 0;font-size:clamp(28px,3.1vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.16;text-wrap:balance">O mundo vai continuar tentando te distrair. A diferença é que <span style="color:#C9994F">agora você tem controle.</span></h2>
       <div style="margin-top:38px">
-        <a href="Checkout.html?produto=f5&amp;qty=1" style="display:inline-flex;align-items:center;gap:26px;padding:12px 12px 12px 38px;border-radius:999px;background:rgba(255,255,255,.11);text-decoration:none;transition:transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="transform:translateY(-3px)"><span style="font-size:20px;font-weight:400;letter-spacing:-.01em;color:#F9F8F6;white-space:nowrap">F5 ANC PRO - R$ 297</span><span style="display:inline-flex;align-items:center;justify-content:center;padding:18px 38px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s" style-hover="color:#0A0A0A;background-position:0 0">Ativar meu foco agora</span></a>
+        <a href="#produtos" style="display:inline-flex;align-items:center;justify-content:center;padding:20px 44px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Conhecer os produtos</a>
       </div>
     </div>
   </section>
@@ -335,7 +332,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div style="position:relative;max-width:420px" data-reveal="">
       <div style="font-size:11px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(249,248,246,.85)">Meeky</div>
       <h2 style="margin:20px 0 0;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.14;text-wrap:balance">O mundo vai continuar tentando te distrair. A diferença é que <span style="color:#C9994F">agora você tem controle.</span></h2>
-      <div style="margin-top:26px"><a href="Checkout.html?produto=f5&amp;qty=1" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Comprar agora</a></div>
+      <div style="margin-top:26px"><a href="#produtos" style="display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-decoration:none;white-space:nowrap;background-color:#DEA85E;background-image:linear-gradient(100deg,#FFFFFF 0 50%,rgba(255,255,255,0) 50%);background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-position .5s cubic-bezier(.3,.7,.4,1),color .4s,transform .45s cubic-bezier(.16,.84,.44,1)" style-hover="color:#0A0A0A;background-position:0 0;transform:translateY(-3px)">Conhecer os produtos</a></div>
     </div>
   </section>
   </sc-if>
