@@ -435,7 +435,9 @@ class Component extends DCLogic {
         const el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
-        lenis.scrollTo(el, { offset: -90 });
+        // se alguma imagem acima carregar durante a rolagem, a seção muda de lugar: corrige no final
+        const fix = (n) => { const t = el.getBoundingClientRect().top; if (n > 0 && Math.abs(t - 90) > 12) lenis.scrollTo(el, { offset: -90, onComplete: () => fix(n - 1) }); };
+        lenis.scrollTo(el, { offset: -90, onComplete: () => fix(3) });
       });
     };
     if (window.Lenis) return start();
