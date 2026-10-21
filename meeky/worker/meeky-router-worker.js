@@ -46,6 +46,9 @@ const BLOG_SLUGS = new Set([
   'meeky-f5-anc-pro-vs-redmi-buds-6-active-comparativo-2026', 'meeky-motion-1-especificacoes-preco-lancamento',
   'melhor-headphone-anc-ate-300-reais-brasil-2026', 'multiponto-bluetooth-conectar-notebook-e-celular',
   'o-que-e-cancelamento-de-ruido-ativo-anc', 'quanto-dura-bateria-headphone-anc-na-pratica',
+  'black-friday-2026-como-escolher-fone-sem-cair-em-armadilha', 'presente-de-natal-2026-fone-bluetooth-guia',
+  'corrida-de-rua-fim-de-ano-fone-conducao-ossea-seguranca', 'conducao-ossea-ou-anc-qual-fone-escolher',
+  'bluetooth-6-0-o-que-muda-fone',
 ]);
 const BLOG_ALIASES = {
   'melhor-headphone-anc-ate-300-reais': 'melhor-headphone-anc-ate-300-reais-brasil-2026',
@@ -126,6 +129,11 @@ export default {
       if (blog) {
         const slug = BLOG_ALIASES[blog[1]] || blog[1];
         if (BLOG_SLUGS.has(slug)) return redirect(url, '/Blog-' + slug);
+        // artigo novo: se já existe no site novo, vai para lá; senão continua na loja
+        if (/^[a-z0-9-]+$/.test(slug)) {
+          const head = await fetch(SITE + '/Blog-' + slug + '.html', { method: 'HEAD' });
+          if (head.ok) return redirect(url, '/Blog-' + slug);
+        }
       }
       // 3. páginas que são da loja
       if (STORE_PREFIXES.some((p) => path === p || path.startsWith(p.endsWith('/') ? p : p + '/') || (p.includes('.') && path === p))) {
