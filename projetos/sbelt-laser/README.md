@@ -60,9 +60,9 @@ e na URL do `/sucesso/`. O PHP não fixa unidade nenhuma no envio para a Spa.
 | Vagas por horário | 4 (uma por sala) | 4 via Booking rules → **Maximum bookings per slot = 4** |
 | Duração / intervalo | 15 / 15 min | 15 / 15 min |
 | Fuso | America/Sao_Paulo | America/Sao_Paulo (**estava Los_Angeles**, corrigido em 05/10) |
-| Dias | Weekly hours seg–sex 08:00–17:00 em cada sala | Weekly hours **todos desligados**; só Date-specific hours |
-| Datas especiais | **12/10/2026 Unavailable** nas 4 salas (feriado) | **21, 22, 23, 24 e 26/10/2026, 09:00–21:00** (25 fechado) |
-| Date range | 8 dias rolantes (hoje = dia 1) | vazio (sem limite; quem limita são as datas específicas) |
+| Dias | Weekly hours seg–sex 08:00–17:00 em cada sala | Weekly hours **seg–sex 09:00–21:00** (sáb e dom fechados) — desde 21/10, num "Custom schedule" do Paulo |
+| Datas especiais | **12/10/2026 Unavailable** nas 4 salas (feriado) | nenhuma (as datas da inauguração 21–24 e 26/10 foram removidas em 21/10; os agendamentos continuam) |
+| Date range | 8 dias rolantes (hoje = dia 1) | **10 dias rolantes**, "Count available days only" **desligado** (aumentado em 21/10 porque 21–26/10 estavam lotados) |
 | Redirect da confirmação | `/obrigado/?first_name={{contact.first_name}}&contact_id={{contact.id}}` | o mesmo + `&franquiaId=10` (**a confirmar** se foi salvo) |
 
 Observações:
@@ -72,6 +72,10 @@ Observações:
   30/09–05/10/2026). Orientado a apagar — **a confirmar**.
 - Pátio usa 1 usuário com 4 vagas por horário: **a confirmar** com 2 agendamentos no mesmo horário
   que o GHL não trava pela agenda do Paulo.
+- **Date range abre dias por tempo, não por lotação**: a cada dia que passa entra um dia novo no fim
+  da janela. Dias lotados continuam contando. Com "Count available days only" ligado, dia lotado também
+  conta como "disponível" (visto em 21/10: a janela de 4 dias ficou só com dias cheios e o widget pulou
+  para janeiro/2027). O GHL não tem "lotou → libera mais 1" nativo.
 - Para fechar/abrir um dia: Date-specific hours → "+ Add date specific hours" → escolher a data →
   lixeira no intervalo (= Unavailable) ou definir o horário → Submit. No Round Robin, **em cada sala**.
 
@@ -368,3 +372,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   Conferência: 71 pendentes → 31 depois do cadastro manual (telefones digitados diferentes / só lead) →
   criada a tela "Conferência Spa" (match por nome, "resolvido à mão" e verificação automática por hora).
   Criada a tela "Faltas Spa": quem tem falta na avaliação na Spa recebe a tag "Faltaram" no GHL da unidade.
+- **21/10/2026** — Pátio passou para janela rolante como a Imperatriz: seg–sex 09–21h, Date range 10 dias.
+  Inauguração (21–24 e 26/10) lotada com ~960 agendamentos (192 por dia). Imperatriz: faltas marcadas com a
+  tag "faltaram" no GHL pela tela "Faltas Spa".
