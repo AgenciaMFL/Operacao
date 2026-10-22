@@ -29,8 +29,6 @@ patch('CheckoutPage.tsx','CheckoutPage.tsx',[
   ('navigate(`/checkout/sucesso?','navigate(`/Checkout-sucesso?'),
   ('navigate(`/checkout/pendente?','navigate(`/Checkout-pendente?'),
   ('import { getCheckoutProduct } from "@/lib/products";','import { getCheckoutProduct } from "@/lib/products";\nimport { saveBuyer, sendSale } from "./saleWebhook";'),
-  # Motion 1 em até 12x no cartão (F5 continua em até 6x)
-  ('                  maxInstallments: 6,','                  maxInstallments: PRODUCT.key === "motion1" ? 12 : 6,'),
   ('''                    console.log("[Checkout] Payment result:", data);
 ''','''                    console.log("[Checkout] Payment result:", data);
 

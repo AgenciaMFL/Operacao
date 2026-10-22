@@ -12,6 +12,10 @@ const LpFooter = () => (
           <img src="assets/logo-meeky.svg" alt="Meeky" width={104} height={24} className="w-[104px] h-auto invert mb-[22px]" />
           <p className="text-[rgba(249,248,246,.5)] max-w-[280px] text-[15px] leading-relaxed m-0">Tecnologia brasileira de áudio para foco, produtividade e performance.</p>
           <p className="text-[rgba(249,248,246,.32)] max-w-[280px] text-[13px] leading-relaxed mt-[18px]">Barganha Mix Ltda · CNPJ 43.341.597/0001-40</p>
+          <a href="https://www.instagram.com/meeky.br/" target="_blank" rel="noopener" aria-label="Instagram da Meeky" className="mt-[22px] inline-flex items-center gap-2.5 py-2.5 pl-3 pr-[18px] rounded-full border border-white/15 text-[#F9F8F6] text-sm font-medium hover:bg-[#9E69C1] hover:border-[#9E69C1] transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+            @meeky.br
+          </a>
         </div>
         <div>
           <h4 className={head}>Navegação</h4>
