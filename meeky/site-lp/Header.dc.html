@@ -25,12 +25,12 @@
       <nav style="display:flex;align-items:center;gap:34px;flex-wrap:wrap;justify-content:center">
         <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
           <div style="position:relative;display:flex;align-items:center" onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}">
-            <a href="{{ it.href }}" style="font-size:14px;font-weight:500;letter-spacing:.005em;text-decoration:none;padding:3px 0;color:{{ it.color }};background-image:linear-gradient(#C4863B,#C4863B);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1.5px;transition:background-size .4s cubic-bezier(.16,.84,.44,1),color .3s" style-hover="background-size:100% 1.5px;color:#C4863B">{{ it.label }}</a>
+            <a href="{{ it.href }}" onClick="{{ it.onClick }}" style="font-size:14px;font-weight:500;letter-spacing:.005em;text-decoration:none;padding:3px 0;color:{{ it.color }};background-image:linear-gradient(#C4863B,#C4863B);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1.5px;transition:background-size .4s cubic-bezier(.16,.84,.44,1),color .3s" style-hover="background-size:100% 1.5px;color:#C4863B">{{ it.label }}</a>
             <sc-if value="{{ it.open }}">
               <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:16px;min-width:240px;z-index:20">
                 <div style="display:flex;flex-direction:column;padding:8px;border-radius:18px;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 26px 46px -28px rgba(10,10,10,.55);animation:menu-in .22s cubic-bezier(.16,.84,.44,1) both">
                   <sc-for list="{{ it.children }}" as="c" hint-placeholder-count="2">
-                    <a href="{{ c.href }}" style="display:block;padding:13px 15px;border-radius:12px;font-size:14px;font-weight:500;letter-spacing:-.005em;color:#1A1A1A;text-decoration:none;white-space:nowrap;transition:background-color .25s,color .25s" style-hover="background-color:rgba(196,134,59,.1);color:#C4863B">{{ c.label }}</a>
+                    <a href="{{ c.href }}" style="display:flex;align-items:center;gap:12px;padding:10px 15px 10px 10px;border-radius:12px;font-size:14px;font-weight:500;letter-spacing:-.005em;color:#1A1A1A;text-decoration:none;white-space:nowrap;transition:background-color .25s,color .25s" style-hover="background-color:rgba(196,134,59,.1);color:#C4863B"><img src="{{ c.icon }}" alt="" width="36" height="36" style="width:36px;height:36px;flex:0 0 auto;display:block;border-radius:999px" />{{ c.label }}</a>
                   </sc-for>
                 </div>
               </div>
@@ -54,11 +54,11 @@
       <nav style="display:flex;flex-direction:column">
         <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
           <div style="display:flex;flex-direction:column">
-            <a href="{{ it.href }}" onClick="{{ close }}" style="display:block;padding:14px 2px;font-size:17px;font-weight:500;letter-spacing:-.01em;text-decoration:none;color:{{ it.color }};border-bottom:1px solid rgba(0,0,0,.06)">{{ it.label }}</a>
-            <sc-if value="{{ it.hasChildren }}">
+            <a href="{{ it.href }}" onClick="{{ it.onMobileClick }}" style="display:flex;align-items:center;justify-content:space-between;padding:14px 2px;font-size:17px;font-weight:500;letter-spacing:-.01em;text-decoration:none;color:{{ it.color }};border-bottom:1px solid rgba(0,0,0,.06)">{{ it.label }}<sc-if value="{{ it.hasChildren }}"><span style="display:inline-block;font-size:18px;line-height:1;color:#8F8A94;transition:transform .3s;transform:{{ it.arrow }}">▾</span></sc-if></a>
+            <sc-if value="{{ it.mobileOpen }}">
               <div style="display:flex;flex-direction:column;padding-left:16px">
                 <sc-for list="{{ it.children }}" as="c" hint-placeholder-count="2">
-                  <a href="{{ c.href }}" onClick="{{ close }}" style="display:block;padding:12px 2px;font-size:15px;font-weight:400;letter-spacing:-.005em;text-decoration:none;color:#5A5A5A;border-bottom:1px solid rgba(0,0,0,.06)">{{ c.label }}</a>
+                  <a href="{{ c.href }}" onClick="{{ close }}" style="display:flex;align-items:center;gap:12px;padding:10px 2px;font-size:15px;font-weight:400;letter-spacing:-.005em;text-decoration:none;color:#5A5A5A;border-bottom:1px solid rgba(0,0,0,.06)"><img src="{{ c.icon }}" alt="" width="34" height="34" style="width:34px;height:34px;flex:0 0 auto;display:block;border-radius:999px" />{{ c.label }}</a>
                 </sc-for>
               </div>
             </sc-if>
@@ -83,7 +83,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:74},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;produto&quot;,&quot;sobre&quot;,&quot;duvidas&quot;,&quot;contato&quot;,&quot;blog&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { isMobile: false, open: false, openMenu: null };
+  state = { isMobile: false, open: false, openMenu: null, mobileSub: null };
   componentDidMount() {
     const check = () => {
       const w = document.documentElement.clientWidth || window.innerWidth || 0;
@@ -106,8 +106,8 @@ class Component extends DCLogic {
     const active = String(this.props.active || 'home').toLowerCase();
     const children = {
       produto: [
-        { label: 'Meeky F5 ANC Pro', href: 'Produto.html' },
-        { label: 'Motion 1', href: 'Motion1.html' }
+        { label: 'Meeky F5 ANC Pro', href: 'Produto.html', icon: 'assets/menu-icon-f5.webp' },
+        { label: 'Motion 1', href: 'Motion1.html', icon: 'assets/menu-icon-motion1.webp' }
       ]
     };
     const items = [
@@ -124,7 +124,12 @@ class Component extends DCLogic {
       hasChildren: !!children[i.id],
       open: !!children[i.id] && this.state.openMenu === i.id,
       onEnter: children[i.id] ? () => this.setState({ openMenu: i.id }) : null,
-      onLeave: children[i.id] ? () => this.setState({ openMenu: null }) : null
+      onLeave: children[i.id] ? () => this.setState({ openMenu: null }) : null,
+      // "Produto" não navega: o clique só abre a lista de produtos (fecha ao tirar o mouse)
+      onClick: children[i.id] ? (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ openMenu: i.id }); } : null,
+      onMobileClick: children[i.id] ? (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState(s => ({ mobileSub: s.mobileSub === i.id ? null : i.id })); } : () => this.setState({ open: false }),
+      mobileOpen: !!children[i.id] && this.state.mobileSub === i.id,
+      arrow: this.state.mobileSub === i.id ? 'rotate(180deg)' : 'none'
     }));
     const m = this.state.isMobile, open = m && this.state.open;
     return {
@@ -136,7 +141,7 @@ class Component extends DCLogic {
       bar1: open ? 'translateY(6.6px) rotate(45deg)' : 'none',
       bar3: open ? 'translateY(-6.6px) rotate(-45deg)' : 'none',
       barMid: open ? 0 : 1,
-      toggle: () => this.setState(s => ({ open: !s.open })),
+      toggle: () => this.setState(s => ({ open: !s.open, mobileSub: null })),
       close: () => this.setState({ open: false })
     };
   }
