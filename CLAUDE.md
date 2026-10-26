@@ -9,6 +9,11 @@
 
 ## Regras
 
+- **Resumo da Sbelt Laser:** quando pedirem para resumir o sistema da Sbelt (integração, webhooks, calendários,
+  telas, etc.), resumir **só o sistema e o que foi feito nele**, a partir de `projetos/sbelt-laser/README.md`.
+  Não incluir assuntos de outros clientes ou projetos (ex.: designs do Figma, outros sites) nem detalhes de
+  ferramentas/conexões do Claude.
+
 - Nunca versionar credenciais (senha da Spa, tokens `pit-` do GHL, chaves de debug).
   Na cópia de referência do PHP elas ficam como `COLE_AQUI_*`.
 - Ao mudar algo de um projeto, atualizar o README dele (seções de configuração, pendências e histórico).
