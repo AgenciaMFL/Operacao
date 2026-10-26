@@ -1,6 +1,6 @@
 # Sbelt Laser — Integração GHL + WordPress + Spa Solutions
 
-Documento principal do projeto (versão 5, atualizada em 14/10/2026). Substitui o
+Documento principal do projeto (atualizado em 26/10/2026). Substitui o
 `resumo-projeto-sbelt-laser-v4.md` do pacote zip. Onde algo não foi confirmado,
 está marcado como **a confirmar**.
 
@@ -118,9 +118,9 @@ até 14/10 no agendamento e até 20/10 no lead). Mesmo assim, manter o Custom Da
 | `datahorainicio` | Appointment.Start Date Time | sim |
 | `datahorafim` | Appointment.End Date Time | não (PHP calcula +15 min) |
 
-Configuração da Pátio confirmada por print em 14/10 (agendamento). **Em 20/10 o `/debug` mostrou que o
-"Lead Cadastrado - Pátio Alcântara" ainda manda só `franquiaId`** → todo lead da Pátio é recusado (400)
-antes de ir para a Spa; só chega quem agenda (via cadastro de emergência do webhook de agendamento).
+Configuração da Pátio confirmada por print em 14/10 (agendamento). O "Lead Cadastrado - Pátio Alcântara"
+manda só `franquiaId` (visto em 20/10); até a v5 isso fazia todo lead da Pátio ser recusado. Com a v5 os
+leads passam (confirmado às 15:02 de 20/10), mas o ideal é completar o Custom Data.
 
 Workflows precisam estar **Published** — em Draft nada dispara, nem com "Run test".
 
@@ -212,7 +212,7 @@ Cruza o calendário do GHL da unidade (−30/+90 dias, sem cancelados) com as av
 | **JÁ NA SPA** | últimos 8 dígitos do telefone batem | nada |
 | **JÁ NA SPA (pelo nome)** | telefone diferente, nome bate (inteiro ou primeiro + último, sem acento) | conferir na Spa; normalmente cadastrado à mão → marcar como resolvido |
 | **IGNORADO** | marcado na tela como "resolvido à mão" | nada (pode desfazer) |
-| **NÃO TEM AINDA** | nenhum dos anteriores | enviar pela tela (simular antes; até 10 por vez) |
+| **NÃO TEM AINDA** | nenhum dos anteriores | enviar pela tela (simular antes; até 5 por vez) |
 
 **Verificação automática** (liga na própria tela, com e-mail de aviso): de hora em hora, para todas as
 unidades, olha só agendamentos **novos** (quem já estava pendente ao ligar fica de fora), espera 1 hora pelo
@@ -227,7 +227,7 @@ padrão "Faltaram").
 - Busca as avaliações da unidade no período (padrão: últimos 30 dias). Falta = status com "falt" ou
   "não compareceu" **na avaliação ou no lead**: a unidade marca no lead ("Avaliação faltou" — visto na
   Imperatriz em 20/10), então para avaliações que já passaram a tela consulta `GET /api/Lead/{id}`
-  (cache 1 h, máx. 500 por busca). A tela mostra os status da avaliação e dos leads. Uma linha por pessoa.
+  (cache 6 h; cada clique trabalha até 15 s e continua no próximo). A tela mostra os status da avaliação e dos leads. Uma linha por pessoa.
 - Situação no GHL (busca pelo telefone): **sem a tag**, **não existe** (será criado) ou **já tem a tag**.
 - "Colocar a tag": contato existente → `POST /contacts/{id}/tags` (só acrescenta, não apaga nada);
   não existe → cria o contato na sub-conta da unidade com nome, telefone e a tag.
@@ -263,7 +263,7 @@ padrão "Faltaram").
 ## 7. Problemas no PHP
 
 **Corrigidos na versão 5** (`codigo/integracao-spa-solutions.php`, testes em `testes/teste-integracao.php`;
-**a confirmar** se já foi colada no WordPress):
+**no ar desde 20/10, ~14:50**):
 - Token da Spa em cache por 25 min (vale 30) e retry com token novo também no agendamento e na busca de
   horários (antes: falha entre o min 30 e 38 — caso Nathália, 20/10, que só passou na nova tentativa do GHL).
 - Custom Data incompleto não derruba mais o webhook (usa os dados padrão do GHL; unidade pelo Location ID).
@@ -345,8 +345,8 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   rotina pode passar de ~15 s fazendo chamadas externas — trabalhar em partes (as duas telas param em
   15 s, mostram o parcial e continuam no próximo clique; envios limitados a 5 por clique/rodada).
 
-- Custom Data presente no webhook = PHP ignora os dados padrão do GHL. Todos os campos obrigatórios
-  precisam estar no Custom Data.
+- Até a v4, Custom Data presente no webhook = PHP ignorava os dados padrão do GHL (campo faltando = 400).
+  A v5 completa com os dados padrão, mas manter o Custom Data completo continua sendo o certo.
 - Fuso do schedule do usuário no GHL pode vir como Los_Angeles: conferir sempre (desloca 4 h).
 - Date-specific hours **somam** às Weekly hours: para abrir só datas específicas, desligar as semanais.
 - `{{appointment.only_start_time}}` não resolve no redirect da confirmação; só `{{contact.*}}`.
