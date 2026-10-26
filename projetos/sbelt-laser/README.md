@@ -291,18 +291,24 @@ padrão "Faltaram").
 
 ## 8. Pendências
 
-1. Ajustar a **agenda de avaliação da Pátio no painel da Spa** para aceitar o que o GHL oferece
-   (21–24 e 26/10, 09–21h, 4 por horário) — agendamentos fora disso são recusados com 400
-   (caso Kauane, 14/10). Alternativa: reduzir o GHL ao que a Spa aceita.
-2. Instalar a "Conferência Spa", desativar o "Reprocessar Spa (temporário)", tratar os 31 pendentes e **ligar a verificação automática** com o e-mail da equipe.
-3. **Completar o Custom Data do workflow "Lead Cadastrado - Pátio Alcântara"** (confirmado incompleto em 20/10) e reprocessar os leads perdidos.
-4. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
-5. **Colar a versão 5 do PHP no WordPress** (seção 7) e conferir `ultimas_falhas` no `/debug` depois.
-6. Pátio: **`contacts.write` no token** (necessário para a tela "Faltas Spa" e para a escrita de volta no contato).
-7. Remover a rota `/debug`; rotacionar a senha da API da Spa; limpar leads de teste no GHL **e** na Spa.
-8. Confirmar com o TI: `franquiaId 10`; endpoint para listar sessões de depilação (seção 9).
-9. Arquivar o calendário antigo (Personal) da Imperatriz; apagar a data 2027 da Sala 3.
-10. Testar o bloqueio de duplicado com telefone real (seção 7, item 8).
+1. Deixar a **agenda de avaliação da Pátio no painel da Spa** igual à do GHL (seg–sex 09–21h, 4 por horário)
+   — o que o GHL oferecer e a Spa não aceitar é recusado (400), como nos casos Kauane e Glauce.
+2. Instalar a "Conferência Spa" (desativando o "Reprocessar Spa"), tratar os pendentes que restam e
+   **ligar a verificação automática** com o e-mail da equipe.
+3. Configurar os acionadores nos dois GTM (seção 6) e confirmar de quem é o `GTM-WGCH58VW`.
+4. Pátio: **`contacts.write` no token** (tela "Faltas Spa" e escrita de volta no contato).
+5. Remover a rota `/debug`; rotacionar a senha da API da Spa; limpar leads de teste no GHL **e** na Spa.
+6. Confirmar com o TI: `franquiaId 10`; endpoint para listar sessões de depilação (seção 9).
+7. Arquivar o calendário antigo (Personal) da Imperatriz; apagar a data 2027 da Sala 3.
+8. Testar o bloqueio de duplicado com telefone real.
+9. Trocar a mensagem de WhatsApp de confirmação de sessão da Imperatriz **no painel da Spa** (texto entregue
+   em 21/10; aguardando achar a tela/variáveis).
+10. Investigar Pátio → WhatsApp da Imperatriz: site conferido em 21/10 (LP, formulário, `/sucesso/`,
+    `/obrigado/` sem WhatsApp e apontando para a Pátio); suspeitos: mensagens/workflows do GHL da Pátio
+    copiados da Imperatriz, número conectado no GHL da Pátio, WhatsApp cadastrado na unidade Pátio na Spa.
+
+Feito: PHP v5 no ar desde 20/10 (~14:50), com 0 falhas no `/debug` e o lead da Pátio aceito pela Spa às
+15:02; Custom Data incompleto deixou de quebrar o envio.
 
 ---
 
