@@ -306,6 +306,10 @@ padrão "Faltaram").
 10. Investigar Pátio → WhatsApp da Imperatriz: site conferido em 21/10 (LP, formulário, `/sucesso/`,
     `/obrigado/` sem WhatsApp e apontando para a Pátio); suspeitos: mensagens/workflows do GHL da Pátio
     copiados da Imperatriz, número conectado no GHL da Pátio, WhatsApp cadastrado na unidade Pátio na Spa.
+11. Imperatriz: tag `whatsapp` aplicada só nos contatos que já existiam (28/10). Para os novos, criar no GHL
+    um workflow "Conversa no WhatsApp" (gatilho: mensagem recebida no canal WhatsApp) com filtro "source
+    não é Formulario Imperatriz" e ação "Adicionar tag whatsapp". Escopo `conversations.readonly` liberado no
+    token só para este levantamento (pode ser retirado).
 
 Feito: PHP v5 no ar desde 20/10 (~14:50), com 0 falhas no `/debug` e o lead da Pátio aceito pela Spa às
 15:02; Custom Data incompleto deixou de quebrar o envio.
@@ -381,3 +385,7 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **21/10/2026** — Pátio passou para janela rolante como a Imperatriz: seg–sex 09–21h, Date range 10 dias.
   Inauguração (21–24 e 26/10) lotada com ~960 agendamentos (192 por dia). Imperatriz: faltas marcadas com a
   tag "faltaram" no GHL pela tela "Faltas Spa".
+- **28/10/2026** — Imperatriz: tag `whatsapp` em quem chegou pelo WhatsApp — 294 contatos com conversa no
+  WhatsApp e source diferente de "Formulario Imperatriz" (230 sem source, 61 "Avaliação Comercial - Sbelt
+  Imperatriz2", 3 "Spa Solutions - falta na avaliação"); os 294 conferidos um a um. Quem veio do formulário
+  (1.339) também recebe WhatsApp automático, por isso ter conversa no WhatsApp não basta para a tag.
