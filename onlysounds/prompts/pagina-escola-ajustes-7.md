@@ -133,10 +133,5 @@ Como usar:
 
 ---
 
-## 3. Data do texto da oferta
-- No topo da seção de bônus/oferta está "**Somente 30 e 31 de outubro**". Confirme comigo se está certo antes de mudar (o contador vai até 31/10 às 23:59). **Não altere** se eu não confirmar.
-
----
-
 ## Entrega
 Prints do mobile (375px): hero logo ao abrir (sem tocar), Triplo I com as setas (antes e depois de clicar na seta), bônus com as setas (antes e depois); e do desktop (1440px) mostrando que essas seções continuam iguais.
