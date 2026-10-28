@@ -1,4 +1,4 @@
-Faça **só estes 3 ajustes** na página **Escola** (`/escola`) do site onlysounds.com.br usando o MCP `only-sounds-elementor`. Não mexa em mais nada. Confira cada um numa **aba anônima** no celular (375px) e no desktop (1440px).
+Faça **só estes ajustes** na página **Escola** (`/escola`) do site onlysounds.com.br usando o MCP `only-sounds-elementor`. Não mexa em mais nada. Confira cada um numa **aba anônima** no celular (375px) e no desktop (1440px).
 
 ---
 
