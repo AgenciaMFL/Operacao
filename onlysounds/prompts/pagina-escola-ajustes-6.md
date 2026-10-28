@@ -16,9 +16,9 @@ Atue como designer de UI/UX: a página deve ficar **mais curta de rolar**, sem p
 - **Desktop:** siga o Figma https://www.figma.com/design/C23ByCz4hyo8cvyeKY4CPx/Agencia-MFL?node-id=3650-665&m=dev (node `3650:665`).
 - **Contador:**
   - Conta **de agora até 31/10/2026 às 23:59:59 (horário de Brasília)**, com o texto **"Oferta termina em"** e dias, horas, minutos e segundos. Depois disso mostra "Oferta encerrada".
-  - **Desktop:** ao abrir a página ele não aparece por cima da hero; **assim que a pessoa rola para baixo**, ele **desliza para o canto inferior direito** como um card flutuante **em destaque**: **preto**, com borda e brilho vermelhos pulsando e botão vermelho "Garantir minha vaga".
+  - **Desktop:** ao abrir a página ele não aparece por cima da hero; **assim que a pessoa rola para baixo**, ele **desliza para o canto inferior direito** como um card flutuante **em destaque**: **preto**, com borda e brilho **azuis** pulsando e botão azul "Garantir minha vaga" (**nada de vermelho**).
   - **Mobile:** fica **fixo na parte inferior** da tela, **preto**, sempre visível e em destaque, seguindo o Figma https://www.figma.com/design/C23ByCz4hyo8cvyeKY4CPx/Agencia-MFL?node-id=3650-1013&m=dev (node `3650:1013`).
-- **Remova a barra/contador antigo inteiro** (o widget HTML com `class="os-bar"` e qualquer espaçador dele) e coloque este widget HTML no lugar (o cronômetro é **preto**: mantenha o fundo preto mesmo que o Figma mostre outra cor; ajuste só fontes e tamanhos se precisar, **sem mudar a lógica**):
+- **Remova a barra/contador antigo inteiro** (o widget HTML com `class="os-bar"` e qualquer espaçador dele) e coloque este widget HTML no lugar (o cronômetro é **preto com detalhes azuis `#2F7AFF`, sem vermelho**: mantenha essas cores mesmo que o Figma mostre outra; ajuste só fontes e tamanhos se precisar, **sem mudar a lógica**):
 
 ```html
 <div class="os-timer" id="os-timer" role="region" aria-label="Contagem regressiva da oferta">
@@ -37,19 +37,19 @@ Atue como designer de UI/UX: a página deve ficar **mais curta de rolar**, sem p
 <style>
   .os-timer{position:fixed;z-index:9999;color:#fff;font-family:"Plus Jakarta Sans",sans-serif;
     background:linear-gradient(160deg,#16181f 0%,#07080b 100%);
-    border:1px solid rgba(237,56,56,.55);box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 0 0 rgba(237,56,56,.45);
+    border:1px solid rgba(47,122,255,.55);box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 0 0 rgba(47,122,255,.45);
     transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .35s ease}
   .os-timer__head{display:flex;align-items:center;gap:8px}
   .os-timer__head strong{font-size:14px;font-weight:800;letter-spacing:.02em}
-  .os-timer__dot{width:9px;height:9px;border-radius:50%;background:#ED3838;flex:none;animation:os-t-pulse 1.6s infinite}
-  @keyframes os-t-pulse{0%{box-shadow:0 0 0 0 rgba(237,56,56,.7)}70%{box-shadow:0 0 0 9px rgba(237,56,56,0)}100%{box-shadow:0 0 0 0 rgba(237,56,56,0)}}
+  .os-timer__dot{width:9px;height:9px;border-radius:50%;background:#2F7AFF;flex:none;animation:os-t-pulse 1.6s infinite}
+  @keyframes os-t-pulse{0%{box-shadow:0 0 0 0 rgba(47,122,255,.7)}70%{box-shadow:0 0 0 9px rgba(47,122,255,0)}100%{box-shadow:0 0 0 0 rgba(47,122,255,0)}}
   .os-timer__clock{display:flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums}
   .os-timer__clock div{display:grid;justify-items:center;min-width:52px;padding:7px 6px 5px;border-radius:10px;background:#1e2129;border:1px solid rgba(255,255,255,.1)}
   .os-timer__clock b{font-size:24px;font-weight:800;line-height:1}
   .os-timer__clock span{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a3a7b3;margin-top:3px}
-  .os-timer__clock i{font-style:normal;font-weight:800;color:#ED3838}
-  .os-timer__cta{display:flex;align-items:center;justify-content:center;height:42px;border-radius:999px;background:#ED3838;color:#fff;font-weight:800;font-size:14px;text-decoration:none;transition:transform .2s ease,background .2s ease}
-  .os-timer__cta:hover{transform:translateY(-2px);background:#ff4b4b}
+  .os-timer__clock i{font-style:normal;font-weight:800;color:#2F7AFF}
+  .os-timer__cta{display:flex;align-items:center;justify-content:center;height:42px;border-radius:999px;background:#2F7AFF;color:#fff;font-weight:800;font-size:14px;text-decoration:none;transition:transform .2s ease,background .2s ease}
+  .os-timer__cta:hover{transform:translateY(-2px);background:#4a8cff}
   .os-timer.is-ended{background:#2A2D35;box-shadow:none}
   /* DESKTOP: card flutuante no canto inferior direito; aparece ao rolar */
   @media (min-width:768px){
@@ -58,7 +58,7 @@ Atue como designer de UI/UX: a página deve ficar **mais curta de rolar**, sem p
     .os-timer.is-visible{transform:none;opacity:1;pointer-events:auto}
     .os-timer__clock{justify-content:space-between}
   }
-  @keyframes os-t-glow{0%,100%{box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 0 0 rgba(237,56,56,.45)}50%{box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 0 8px rgba(237,56,56,0)}}
+  @keyframes os-t-glow{0%,100%{box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 0 0 rgba(47,122,255,.45)}50%{box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 0 8px rgba(47,122,255,0)}}
   /* MOBILE: barra fixa embaixo, sempre visível, em destaque */
   @media (max-width:767px){
     .os-timer{left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));border-radius:18px 18px 0 0;
