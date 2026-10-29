@@ -2,7 +2,7 @@
 /**
  * Plugin Name: OnlySounds – Vagas restantes
  * Description: Contador de vagas ligado ao checkout da Kiwify. Cada compra aprovada diminui uma vaga; reembolso ou chargeback devolve a vaga. Shortcodes: [os_vagas] (caixa com barra) e [os_vagas estilo="bonus"] (selo para o card de bônus).
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Agência MFL
  * Requires PHP: 7.4
  */
@@ -74,6 +74,27 @@ add_action('rest_api_init', function () {
     ));
 });
 
+/* Trava para dois avisos ao mesmo tempo não se atropelarem (MySQL GET_LOCK). */
+function os_vagas_lock() {
+    global $wpdb;
+    if (!isset($wpdb)) { return true; }
+    return (bool) $wpdb->get_var($wpdb->prepare('SELECT GET_LOCK(%s, %d)', $wpdb->prefix . 'os_vagas', 10));
+}
+function os_vagas_unlock() {
+    global $wpdb;
+    if (!isset($wpdb)) { return; }
+    $wpdb->query($wpdb->prepare('SELECT RELEASE_LOCK(%s)', $wpdb->prefix . 'os_vagas'));
+}
+/* Lê o estado direto do banco (ignora cache), para usar dentro da trava. */
+function os_vagas_state_fresh() {
+    if (function_exists('wp_cache_delete')) {
+        wp_cache_delete(OS_VAGAS_STATE, 'options');
+        wp_cache_delete('notoptions', 'options');
+        wp_cache_delete('alloptions', 'options');
+    }
+    return os_vagas_state();
+}
+
 function os_vagas_webhook(WP_REST_Request $req) {
     $s = os_vagas_settings();
 
@@ -113,7 +134,11 @@ function os_vagas_webhook(WP_REST_Request $req) {
     $approved = in_array($event, array('order_approved'), true) || in_array($status, array('paid', 'approved'), true);
     $returned = in_array($event, array('order_refunded', 'chargeback'), true) || in_array($status, array('refunded', 'chargedback'), true);
 
-    $st = os_vagas_state();
+    if (!os_vagas_lock()) {
+        // Não conseguiu a trava: responde erro para a Kiwify tentar de novo.
+        return new WP_REST_Response(array('ok' => false, 'error' => 'ocupado, tente novamente'), 503);
+    }
+    $st = os_vagas_state_fresh();
     $orders = $st['orders'];
     $prev = $orders[$order_id] ?? '';
     $action = 'ignorado';
@@ -128,12 +153,16 @@ function os_vagas_webhook(WP_REST_Request $req) {
         $action = 'devolvida';
     }
 
+    if (count($orders) > 5000) {
+        $orders = array_slice($orders, -5000, null, true);
+    }
     $st['orders'] = $orders;
     array_unshift($st['log'], array(
         't' => current_time('mysql'), 'order' => $order_id, 'event' => $event ?: $status, 'acao' => $action,
     ));
     $st['log'] = array_slice($st['log'], 0, 50);
     update_option(OS_VAGAS_STATE, $st, false);
+    os_vagas_unlock();
 
     return new WP_REST_Response(array('ok' => true, 'acao' => $action, 'restantes' => os_vagas_remaining()), 200);
 }
@@ -271,6 +300,13 @@ function os_vagas_admin() {
         $s['refund_returns'] = !empty($_POST['refund_returns']) ? 1 : 0;
         update_option(OS_VAGAS_OPT, $s);
 
+        if (!empty($_POST['new_secret'])) {
+            $s['secret'] = wp_generate_password(32, false, false);
+            update_option(OS_VAGAS_OPT, $s);
+            $msg_extra = ' Chave nova gerada: copie a URL do webhook de novo e atualize na Kiwify.';
+        }
+        os_vagas_lock();
+        $st = os_vagas_state_fresh();
         if (isset($_POST['sold']) && $_POST['sold'] !== '') {
             $st['sold'] = max(0, (int) $_POST['sold']);
         }
@@ -278,7 +314,8 @@ function os_vagas_admin() {
             $st = array('sold' => 0, 'orders' => array(), 'log' => array());
         }
         update_option(OS_VAGAS_STATE, $st, false);
-        $msg = 'Salvo.';
+        os_vagas_unlock();
+        $msg = 'Salvo.' . ($msg_extra ?? '');
     }
 
     $webhook = add_query_arg('key', rawurlencode($s['secret']), rest_url('onlysounds/v1/kiwify'));
@@ -286,6 +323,7 @@ function os_vagas_admin() {
 <div class="wrap">
   <h1>Vagas OnlySounds</h1>
   <?php if ($msg) : ?><div class="notice notice-success"><p><?php echo esc_html($msg); ?></p></div><?php endif; ?>
+  <?php if ($s['kiwify_token'] === '') : ?><div class="notice notice-warning"><p><strong>Atenção:</strong> preencha o <em>Token do webhook da Kiwify</em> abaixo. Sem ele, qualquer pessoa que descubra a URL do webhook consegue registrar vendas falsas.</p></div><?php endif; ?>
   <p><strong>Restam agora:</strong> <?php echo (int) os_vagas_remaining(); ?> de <?php echo (int) $s['total']; ?> (vendidas: <?php echo (int) $st['sold']; ?>)</p>
   <p><strong>URL do webhook para colar na Kiwify</strong> (eventos: Compra aprovada, Reembolso, Chargeback):</p>
   <p><input type="text" readonly class="large-text code" value="<?php echo esc_attr($webhook); ?>" onclick="this.select()"></p>
@@ -295,8 +333,9 @@ function os_vagas_admin() {
       <tr><th><label for="total">Total de vagas</label></th><td><input id="total" name="total" type="number" min="0" value="<?php echo (int) $s['total']; ?>"></td></tr>
       <tr><th><label for="sold">Vendidas (ajuste manual)</label></th><td><input id="sold" name="sold" type="number" min="0" placeholder="<?php echo (int) $st['sold']; ?>"> <p class="description">Deixe vazio para não mexer. Use para acertar o número se já houve vendas antes de ligar o webhook.</p></td></tr>
       <tr><th><label for="product_id">ID do produto na Kiwify</label></th><td><input id="product_id" name="product_id" type="text" class="regular-text" value="<?php echo esc_attr($s['product_id']); ?>"> <p class="description">Opcional. Se preenchido, só vendas deste produto contam.</p></td></tr>
-      <tr><th><label for="kiwify_token">Token do webhook da Kiwify</label></th><td><input id="kiwify_token" name="kiwify_token" type="text" class="regular-text" value="<?php echo esc_attr($s['kiwify_token']); ?>"> <p class="description">Opcional. Se preenchido, confere a assinatura de cada aviso da Kiwify.</p></td></tr>
+      <tr><th><label for="kiwify_token">Token do webhook da Kiwify</label></th><td><input id="kiwify_token" name="kiwify_token" type="text" class="regular-text" value="<?php echo esc_attr($s['kiwify_token']); ?>"> <p class="description">Recomendado. Copie da tela do webhook na Kiwify. Com ele, o plugin só aceita avisos assinados pela Kiwify.</p></td></tr>
       <tr><th>Reembolso devolve a vaga</th><td><label><input name="refund_returns" type="checkbox" value="1" <?php checked(!empty($s['refund_returns'])); ?>> Sim</label></td></tr>
+      <tr><th>Gerar chave nova</th><td><label><input name="new_secret" type="checkbox" value="1"> Gerar uma URL de webhook nova (use se a URL atual vazou; depois cole a nova na Kiwify)</label></td></tr>
       <tr><th>Zerar contador</th><td><label><input name="reset" type="checkbox" value="1"> Zerar vendidas e o histórico</label></td></tr>
     </table>
     <?php submit_button('Salvar'); ?>
