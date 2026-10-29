@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: OnlySounds – Vagas restantes
- * Description: Contador de vagas ligado ao checkout da Kiwify. Cada compra aprovada diminui uma vaga; reembolso ou chargeback devolve a vaga. Use o shortcode [os_vagas] na página.
- * Version: 1.0.0
+ * Description: Contador de vagas ligado ao checkout da Kiwify. Cada compra aprovada diminui uma vaga; reembolso ou chargeback devolve a vaga. Shortcodes: [os_vagas] (caixa com barra) e [os_vagas estilo="bonus"] (selo para o card de bônus).
+ * Version: 1.1.0
  * Author: Agência MFL
  * Requires PHP: 7.4
  */
@@ -141,6 +141,10 @@ function os_vagas_webhook(WP_REST_Request $req) {
 /* ---------- Shortcode [os_vagas] ---------- */
 
 add_shortcode('os_vagas', function ($atts) {
+    $atts = shortcode_atts(array('estilo' => 'caixa'), $atts, 'os_vagas');
+    if ($atts['estilo'] === 'bonus') {
+        return os_vagas_bonus_html();
+    }
     $s = os_vagas_settings();
     $total = (int) $s['total'];
     $rest = os_vagas_remaining();
@@ -173,19 +177,59 @@ add_shortcode('os_vagas', function ($atts) {
   @media (max-width:767px){.os-vagas__txt{font-size:15px}}
   @media (prefers-reduced-motion:reduce){.os-vagas__dot{animation:none}}
 </style>
+<?php echo os_vagas_poll_js(); ?>
+<?php
+    return ob_get_clean();
+});
+
+/* Selo para o card de bônus: [os_vagas estilo="bonus"] */
+function os_vagas_bonus_html() {
+    $s = os_vagas_settings();
+    $total = (int) $s['total'];
+    $rest = os_vagas_remaining();
+    $pct = $total > 0 ? round(($rest / $total) * 100) : 0;
+    $api = esc_url(rest_url('onlysounds/v1/vagas'));
+    ob_start(); ?>
+<div class="os-vbonus<?php echo $rest === 0 ? ' is-out' : ''; ?>" data-api="<?php echo $api; ?>" data-total="<?php echo $total; ?>" data-rest="<?php echo $rest; ?>">
+  <span class="os-vbonus__pill" aria-live="polite">
+    <span data-on<?php echo $rest === 0 ? ' hidden' : ''; ?>>Restam <b data-n><?php echo $rest; ?></b> de <?php echo $total; ?> vagas</span>
+    <span data-off<?php echo $rest === 0 ? '' : ' hidden'; ?>>Bônus esgotado</span>
+  </span>
+  <span class="os-vbonus__bar" role="progressbar" aria-label="Vagas com bônus restantes" aria-valuemin="0" aria-valuemax="<?php echo $total; ?>" aria-valuenow="<?php echo $rest; ?>"><i style="width:<?php echo $pct; ?>%"></i></span>
+</div>
+<style>
+  .os-vbonus{display:grid;justify-items:center;gap:8px;font-family:"Plus Jakarta Sans",sans-serif}
+  .os-vbonus__pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:#FD4C74;color:#fff;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 0 0 rgba(253,76,116,.6);animation:os-vb-pulse 2s infinite}
+  .os-vbonus__pill b{font-weight:800;font-size:14px}
+  .os-vbonus__bar{width:160px;max-width:100%;height:5px;border-radius:99px;background:rgba(255,255,255,.25);overflow:hidden}
+  .os-vbonus__bar i{display:block;height:100%;border-radius:99px;background:#fff;transition:width .6s ease}
+  .os-vbonus.is-out .os-vbonus__pill{background:rgba(255,255,255,.2);animation:none}
+  @keyframes os-vb-pulse{0%{box-shadow:0 0 0 0 rgba(253,76,116,.55)}70%{box-shadow:0 0 0 9px rgba(253,76,116,0)}100%{box-shadow:0 0 0 0 rgba(253,76,116,0)}}
+  @media (prefers-reduced-motion:reduce){.os-vbonus__pill{animation:none}}
+</style>
+<?php
+    echo os_vagas_poll_js();
+    return ob_get_clean();
+}
+
+/* JS que busca o número atualizado (serve para os dois estilos; roda uma vez por página) */
+function os_vagas_poll_js() {
+    static $done = false;
+    if ($done) { return ''; }
+    $done = true;
+    ob_start(); ?>
 <script>
-(function(){
-  var els = document.querySelectorAll(".os-vagas");
+(function(){ function osVagasInit(){
+  var els = document.querySelectorAll(".os-vagas,.os-vbonus");
   if (!els.length) return;
   function paint(el, rest){
     var total = parseInt(el.getAttribute("data-total"), 10) || 0;
     rest = Math.max(0, rest);
     el.querySelectorAll("[data-n]").forEach(function(n){ n.textContent = rest; });
-    var bar = el.querySelector(".os-vagas__bar");
-    bar.setAttribute("aria-valuenow", rest);
-    bar.firstElementChild.style.width = (total ? Math.round(rest / total * 100) : 0) + "%";
-    el.querySelector("[data-on]").hidden = rest === 0;
-    el.querySelector("[data-off]").hidden = rest !== 0;
+    var bar = el.querySelector("[role=progressbar]");
+    if (bar) { bar.setAttribute("aria-valuenow", rest); bar.firstElementChild.style.width = (total ? Math.round(rest / total * 100) : 0) + "%"; }
+    var on = el.querySelector("[data-on]"), off = el.querySelector("[data-off]");
+    if (on) on.hidden = rest === 0; if (off) off.hidden = rest !== 0;
     el.classList.toggle("is-out", rest === 0);
   }
   function load(){
@@ -198,11 +242,13 @@ add_shortcode('os_vagas', function ($atts) {
   els.forEach(function(el){ paint(el, parseInt(el.getAttribute("data-rest"), 10) || 0); });
   load();
   setInterval(function(){ if (!document.hidden) load(); }, 30000);
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", osVagasInit); else osVagasInit();
 })();
 </script>
 <?php
     return ob_get_clean();
-});
+}
 
 /* ---------- Página de configuração (Configurações > Vagas OnlySounds) ---------- */
 
