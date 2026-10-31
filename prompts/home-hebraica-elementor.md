@@ -10,7 +10,12 @@ Implemente a HOME da Hebraica School no WordPress/Elementor a partir do Figma.
 ## Como ler o Figma (economia de crédito)
 1. Rode get_metadata no frame 3855:318 para pegar os node IDs de cada seção.
 2. Rode get_design_context SEÇÃO POR SEÇÃO (nunca o frame inteiro de uma vez).
-3. Exporte cada imagem uma única vez para assets/home/ (webp, máx. 1920px de largura).
+3. IMAGENS: baixe todas as imagens direto do Figma (links acima), pelo MCP do Figma
+   (download_assets ou as URLs de asset retornadas pelo get_design_context).
+   Salve em assets/home/ com nomes descritivos (hero-familia.webp, nossa-escola.webp...),
+   converta para webp (máx. 1920px de largura) e use ESSAS imagens no Elementor
+   (subir para a Biblioteca de Mídia). Não use imagens de banco/placeholder.
+   Baixe cada imagem uma única vez.
 4. Não refaça leituras já feitas; não tire screenshots repetidas.
 
 ## Design tokens (cadastrar como Cores Globais do Elementor)
