@@ -46,6 +46,18 @@ Objetivo: títulos com linhas de tamanho parecido, sem palavra sozinha na últim
 - Landing pages usam o modelo **Elementor Canvas** (sem cabeçalho e rodapé do tema), a não ser que o usuário peça outro.
 - Credenciais do WordPress vêm das variáveis de ambiente `WP_URL`, `WP_USER` e `WP_APP_PASSWORD`. Nunca escreva senhas em arquivos do repositório.
 
+## Performance (PageSpeed mobile)
+
+Metas: Speed Index < 3,4 s, LCP < 2,5 s, CLS < 0,1. Meça no PageSpeed Insights (aba mobile) antes e depois de cada mudança.
+
+1. **Sem animação na primeira dobra.** Nada de "Animação de entrada" do Elementor, efeitos de movimento ou animação infinita (anéis pulsando, brilho em botão) nos elementos visíveis ao abrir a página. Animações contínuas fazem o Speed Index disparar, porque a tela nunca fica "pronta". Abaixo da dobra, só animações curtas (≤ 0,6 s) e que rodam uma vez.
+2. **Vídeo com fachada.** Vídeo do YouTube/Vimeo nunca carrega o player na abertura: use imagem de capa e só carregue o player no clique (widget de vídeo do Elementor com "Sobreposição de imagem" + "Carregamento lento" ligados).
+3. **Imagem principal leve.** Imagem do topo em WebP, até ~150 KB, largura máxima 1600 px no desktop e uma versão menor para mobile. Ela não pode ter lazy load. Demais imagens com lazy load e com largura/altura definidas.
+4. **Fontes.** No máximo 2 famílias e 3 pesos. Em Elementor → Configurações → Desempenho, carregamento de fontes do Google em **Swap**. Ícones: prefira SVG a Font Awesome inteiro.
+5. **Recursos do Elementor ligados** (Elementor → Configurações → Recursos/Desempenho): saída de DOM otimizada, carregamento de assets melhorado, carregamento de CSS melhorado, lazy load de imagens de fundo, ícones de fonte inline.
+6. **Cache e minificação.** O site precisa de plugin de cache (LiteSpeed Cache se a hospedagem for LiteSpeed; senão WP Rocket ou similar) com minificação de CSS/JS e JS adiado. Depois de ativar, confira se formulários, vídeo e botões continuam funcionando.
+7. **Sem pulo de layout.** Reserve espaço para vídeo (proporção 16:9), imagens (largura/altura) e qualquer elemento que carregue depois, para manter o CLS baixo.
+
 ## Ao terminar
 
 Mande um resumo com: o que foi feito, o que foi verificado (incluindo a revisão em 375px), o que deu errado e o que falta o usuário fazer.
