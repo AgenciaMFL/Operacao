@@ -391,3 +391,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   (1.339) também recebe WhatsApp automático, por isso ter conversa no WhatsApp não basta para a tag.
 - **03/11/2026** — Imperatriz: tag `whatsapp` em mais 89 contatos novos desde 28/10 (88 sem source, 1 "Avaliação
   Comercial - Sbelt Imperatriz2"), mesmo critério; total com a tag: 383. Workflow automático ainda pendente (§8 item 11).
+- **03/11/2026** — Pátio: escopos `conversations.readonly`, `conversations/message.readonly` e `contacts.write`
+  liberados no token; tag `whatsapp` em 46 contatos (conversa no WhatsApp e source diferente de "Formulario Patio
+  Alcantara": 41 sem source, 5 "Avaliação Comercial - Sbelt Pátio Alcântara"), conferidos um a um.
