@@ -39,6 +39,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 <style>
   @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
   @keyframes meeky-float{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-14px,0) rotate(-2deg)}}
+  @keyframes meeky-float-p{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-18px,0)}}
   @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
@@ -71,7 +72,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .uso img { position:absolute; width:30.93px; height:30.93px; }
 
   .flt { animation:meeky-float 5.5s ease-in-out infinite; will-change:transform; box-shadow:0 22px 40px -22px rgba(54,19,75,.45); }
-  @media (prefers-reduced-motion:reduce){ .flt { animation:none; } }
+  .flt-p { animation:meeky-float-p 6s ease-in-out infinite; will-change:transform; }
+  @media (prefers-reduced-motion:reduce){ .flt, .flt-p { animation:none; } }
   .grad-txt { -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
   .gal-track { display:flex; width:max-content; animation:meeky-marquee 60s linear infinite; }
   .gal-track img { flex:0 0 auto; }
@@ -145,7 +147,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div class="hv" style="height:814px;zoom:{{ k }}">
       <img class="ab" src="assets/home-v2/motion-circles.svg" alt="" width="553" height="553" style="left:37px;top:105px;width:553px;height:553px">
       <p class="ab pop" style="left:-12px;top:709.16px;margin:0;font-weight:700;font-size:142.703px;letter-spacing:-4.2811px;line-height:1;color:rgba(112,79,132,.51);white-space:nowrap">MOTION 1</p>
-      <img class="ab" src="assets/home-v2/motion-product.webp" alt="Meeky Motion 1" width="606" height="606" loading="lazy" style="left:11px;top:68px;width:606px;height:606px" data-reveal="">
+      <img class="ab flt-p" src="assets/home-v2/motion-product.webp" alt="Meeky Motion 1" width="606" height="606" loading="lazy" style="left:11px;top:68px;width:606px;height:606px">
       <div class="ab" style="left:722px;top:120px;width:529px" data-reveal=".1">
         <h2 class="h55 hub" style="width:407px;height:102px">Sua música.<br><span class="roxo">O entorno também.</span></h2>
         <p class="pop" style="margin:22px 0 0;width:494px;height:70px;font-size:22px;letter-spacing:-.44px;line-height:1.15;color:#645C6C">A condução óssea transmite o som por vibração e mantém o <span style="font-weight:600">canal do ouvido livre para acompanhar o ambiente.</span></p>
@@ -160,7 +162,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div class="hv" style="height:792px;zoom:{{ k }}">
       <img class="ab" src="assets/home-v2/f5-circle.svg" alt="" width="852" height="852" style="left:514.49px;top:-42.36px;width:851.841px;height:851.841px">
       <p class="ab pop" style="left:527px;top:659.49px;margin:0;font-weight:700;font-size:171.948px;letter-spacing:-13.7558px;line-height:1;color:#704F84;white-space:nowrap">F5 ANC PRO</p>
-      <div class="ab" style="left:607px;top:85.89px;width:615.042px;height:588.91px;display:flex;align-items:center;justify-content:center" data-reveal="">
+      <div class="ab flt-p" style="left:607px;top:85.89px;width:615.042px;height:588.91px;display:flex;align-items:center;justify-content:center;animation-delay:-2.5s">
         <img src="assets/home-v2/f5-product.webp" alt="Meeky F5 ANC Pro" width="523" height="488" loading="lazy" style="width:522.652px;height:488.399px;flex:none;transform:rotate(12.35deg)">
       </div>
       <div class="ab" style="left:75px;top:120px;width:517px" data-reveal=".1">
@@ -272,7 +274,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div class="m-sec">
       <div style="position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:1" data-reveal="">
         <img src="assets/home-v2/motion-circles.svg" alt="" width="553" height="553" style="position:absolute;left:4.29%;top:6.1%;width:91.25%;height:91.25%">
-        <img src="assets/home-v2/motion-product.webp" alt="Meeky Motion 1" width="606" height="606" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%">
+        <img class="flt-p" src="assets/home-v2/motion-product.webp" alt="Meeky Motion 1" width="606" height="606" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%">
       </div>
       <h2 class="m-h hub" style="margin-top:20px">Sua música.<br><span class="roxo">O entorno também.</span></h2>
       <p class="m-p" style="color:#645C6C;font-size:16.5px">A condução óssea transmite o som por vibração e mantém o <span style="font-weight:600">canal do ouvido livre para acompanhar o ambiente.</span></p>
@@ -290,7 +292,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div class="m-sec">
       <div style="position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:1" data-reveal="">
         <img src="assets/home-v2/f5-circle.svg" alt="" width="852" height="852" style="position:absolute;left:-20%;top:-20%;width:140%;height:140%">
-        <img src="assets/home-v2/f5-product.webp" alt="Meeky F5 ANC Pro" width="523" height="488" loading="lazy" style="position:absolute;left:8%;top:9%;width:84%;height:auto;transform:rotate(12.35deg)">
+        <div class="flt-p" style="position:absolute;inset:0;animation-delay:-2.5s"><img src="assets/home-v2/f5-product.webp" alt="Meeky F5 ANC Pro" width="523" height="488" loading="lazy" style="position:absolute;left:8%;top:9%;width:84%;height:auto;transform:rotate(12.35deg)"></div>
       </div>
       <h2 class="m-h hub" style="margin-top:20px;color:#FFFDF9">Para quando você quer<br><span style="color:#CF87FF">amenizar o ruído.</span></h2>
       <p class="m-p" style="color:#D4C3E6;font-size:16.5px">O cancelamento ativo reduz ruídos constantes do ambiente. Você escolhe <b style="font-weight:700">quando ouvir menos do que está em volta.</b></p>
@@ -477,6 +479,8 @@ class Component extends DCLogic {
   componentDidUpdate() { this.setupReveal(); }
   setupCursor() {
     if (document.getElementById('om-cursor-ring')) return;
+    // só em computador com mouse: no celular (toque) o círculo ficava preso na tela
+    if (!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
     const ring = document.createElement('div');
     ring.id = 'om-cursor-ring';
     ring.style.cssText = 'position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(158,105,193,.85);border-radius:50%;pointer-events:none;z-index:9998;transform:translate3d(-200px,-200px,0);transition:width .25s ease,height .25s ease,margin .25s ease,background-color .25s ease,border-color .25s ease';
