@@ -35,328 +35,346 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;600;700&display=swap">
 <style>
   @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
   @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  @keyframes move-up-alternate{0%{transform:translateY(0)}50%{transform:translateY(80%)}51%{transform:translateY(-80%)}to{transform:translateY(0)}}
 
-  body { margin:0; background:#fff; color:#0A0A0A; font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  a { color:#C4863B; text-decoration:none; }
-  a:hover { color:#8A5C1E; }
-  img, video { max-width:100%; display:block; }
+  body { margin:0; background:#FFFDF9; color:#09010F; font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  img { max-width:none; display:block; }
+
+  /* Home nova (Figma 2563:171) — medidas em px do Figma; no computador o conteúdo (1322px) é reduzido por "zoom" em telas menores */
+  .hv { position:relative; width:1322px; margin:0 auto; }
+  .ab { position:absolute; }
+  .hub { font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; }
+  .pop { font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; }
+  .sf { font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; }
+  .h55 { margin:0; font-weight:500; font-size:55px; letter-spacing:-1.65px; line-height:1; color:#09010F; }
+  .roxo { color:#9E69C1; }
+  .cover { width:100%; height:100%; object-fit:cover; }
+
+  .btn-g { display:inline-flex; align-items:center; justify-content:center; gap:7.6px; box-sizing:border-box; border-radius:999px; background:linear-gradient(90deg,#9E69C1 0%,#C574FB 50%,#9E69C1 100%); background-size:200% 100%; background-position:0 0; box-shadow:0 2px 0 #470E6D; color:#fff; font-weight:600; font-size:18px; letter-spacing:-.72px; text-transform:uppercase; white-space:nowrap; cursor:pointer; transition:background-position .6s cubic-bezier(.16,.84,.44,1), transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s; }
+  .btn-g:hover { color:#fff; background-position:100% 0; transform:translateY(-2px); box-shadow:0 4px 0 #470E6D, 0 16px 30px -16px rgba(94,45,128,.65); }
+  .btn-g.solid { background:#9E69C1; }
+  .btn-g.solid:hover { background:#8A55AD; }
+  .btn-o { display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; border-radius:999px; border:1px solid #CAB3D9; background:rgba(255,255,255,.18); color:#6E6271; font-weight:600; font-size:16px; letter-spacing:-.64px; text-transform:uppercase; white-space:nowrap; transition:background-color .3s, border-color .3s, color .3s; }
+  .btn-o.white { background:#fff; }
+  .btn-o:hover { background:#fff; border-color:#9E69C1; color:#9E69C1; }
+  .ic-m { display:block; flex:0 0 auto; width:23.62px; height:19.18px; background:#fff; -webkit-mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; transform:rotate(-9.54deg); }
+  .ic-f { display:block; flex:0 0 auto; width:19px; height:21px; background:#fff; -webkit-mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; }
+
+  .uso { position:absolute; left:0; box-sizing:border-box; height:73px; border-radius:14px; }
+  .uso .t { position:absolute; transform:translateY(-50%); margin:0; font-family:'Poppins',sans-serif; font-weight:600; color:#40004E; line-height:.71; white-space:nowrap; }
+  .uso .d { position:absolute; transform:translateY(-50%); margin:0; font-family:'Poppins',sans-serif; color:#765C7C; line-height:1.2; }
+  .uso img { position:absolute; width:30.93px; height:30.93px; }
+
+  .grad-txt { -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+  .gal-track { display:flex; width:max-content; animation:meeky-marquee 60s linear infinite; }
+  .gal-track img { flex:0 0 auto; }
+  .mq-track { display:flex; width:max-content; animation:meeky-marquee 30s linear infinite; }
+  .mq-g { display:flex; align-items:center; gap:38.712px; padding-right:14px; flex:0 0 auto; }
+  .mq-g span { font-family:'SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:27.336px; letter-spacing:-.5467px; line-height:1.48; color:#FAE4FF; white-space:nowrap; }
+
+  /* celular */
+  .m-sec { padding:0 20px; }
+  .m-h { margin:0; font-weight:500; font-size:38px; letter-spacing:-1.1px; line-height:1; color:#09010F; }
+  .m-p { margin:14px 0 0; font-family:'Poppins',sans-serif; font-size:15.5px; line-height:1.32; color:#8F8A94; }
+  .m-btns { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .m-btns .btn-g, .m-btns .btn-o { height:46px; padding:0 20px; font-size:16px; }
+  .m-uso { display:flex; align-items:center; gap:12px; box-sizing:border-box; padding:12px 14px; border-radius:14px; }
+  .m-uso img { width:28px; height:28px; flex:0 0 auto; }
+  .m-uso b { font-family:'Poppins',sans-serif; font-weight:600; font-size:16px; color:#40004E; flex:0 0 auto; min-width:100px; white-space:nowrap; letter-spacing:-.3px; }
+  .m-uso span { font-family:'Poppins',sans-serif; font-size:13px; line-height:1.25; color:#765C7C; }
 </style>
-<script type="module" src="./meeky-3d.js?v=4"></script>
+
 <script src="./image-slot.js"></script>
 <script src="./meeky-form-modal.js?v=20261017a"></script>
 </helmet>
-<div style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#0A0A0A">
+<div style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F;padding-top:{{ topPad }}">
 
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
-    <dc-import name="Header" active="home" hint-size="100%,74px"></dc-import>
+    <dc-import name="HeaderV2" active="home" hint-size="100%,94px"></dc-import>
   </div>
 
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+
   <!-- Hero (Figma 3402:35) -->
-  <section style="padding-top:74px;background:linear-gradient(90deg,#DEDAE4 0%,#E9E6EE 25%,#F3EFF5 50%,#EBEAF1 75%,#E2E0EA 100%)">
-    <div style="width:100%;overflow:hidden;line-height:0">
-      <img src="assets/hero-home-v3.webp" alt="Meeky F5 ANC Pro e Meeky Motion 1" style="width:100%;height:auto;display:block">
+  <section style="position:relative;height:{{ heroH }};background:#EFE9EA url('assets/hero-home-v3.webp') center top/{{ heroBg }} no-repeat;overflow:hidden">
+    <div class="hv" style="height:829px;zoom:{{ k }}">
+      <div class="ab" style="left:0;top:615px;width:706px;display:flex;flex-direction:column;gap:10px">
+        <h1 class="hub" style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;height:58px;display:flex;align-items:center;font-weight:500;font-size:54.708px;letter-spacing:-1.6412px;line-height:.94;color:#09010F;white-space:nowrap">Quanto do mundo você&nbsp;<span class="roxo">quer ouvir agora?</span></h1>
+        <p class="pop" style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:0;width:667px;font-size:20.323px;letter-spacing:-.32px;line-height:1.2;color:#8F8A94">A Meeky faz fones para quem decide quanto do mundo quer ouvir. Existe o momento de amenizar o ruído e o de se <span style="font-weight:600">conectar com o seu entorno.&nbsp; Quem controla isso é você.</span></p>
+      </div>
+      <div class="ab" style="left:1018px;top:655.56px;animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both">
+        <a href="#modelos" class="btn-g hub" style="width:299px;height:63.873px;font-size:21.269px;letter-spacing:-1.0634px;box-shadow:0 1.851px 0 #470E6D">Conhecer os modelos</a>
+      </div>
     </div>
-    <div style="margin-top:clamp(-170px,-10.5vw,-80px);padding-bottom:clamp(40px,4vw,72px);position:relative">
-      <div style="max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:48px;flex-wrap:wrap">
-        <div style="flex:1 1 380px;max-width:640px">
-          <h1 style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:500;font-size:clamp(40px,4vw,68px);letter-spacing:-.03em;line-height:1.12;color:#09010F">Quanto do mundo<br>você quer <span style="color:#9E69C1;white-space:nowrap">ouvir agora?</span></h1>
-          <p style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:16px 0 0;max-width:560px;font-family:'Poppins','SF Pro Display',-apple-system,sans-serif;font-size:clamp(15px,1.2vw,22px);letter-spacing:.02em;line-height:1.4;color:#8F8A94;text-wrap:pretty">A Meeky faz fones para quem decide quanto do mundo quer ouvir. Existe o momento de amenizar o ruído e o de se conectar com o seu entorno. Quem controla isso é você.</p>
-        </div>
-        <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;flex:0 0 auto;margin-bottom:8px">
-          <a href="#produtos" style="display:inline-flex;align-items:center;justify-content:center;height:clamp(56px,3.6vw,69px);padding:0 clamp(34px,2.6vw,48px);border-radius:999px;background:#9E69C1;color:#fff;text-decoration:none;white-space:nowrap;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:600;font-size:clamp(18px,1.4vw,23px);letter-spacing:.01em;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Conhecer produtos agora</a>
+  </section>
+
+  <!-- Faixa TechTudo (Figma 2630:206) -->
+  <section style="background:#731D87;overflow:hidden"><div style="zoom:{{ mqZoom }};height:82px;display:flex;align-items:center;padding-left:12px"><div class="mq-track"><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div></div></div></section>
+
+  <!-- Tem hora de… (Figma 3440:768) -->
+  <section style="background:#FFFDF9;overflow:hidden">
+    <div class="hv" style="height:1738px;zoom:{{ k }}">
+      <img class="ab" src="assets/home-v2/eq-bars.svg" alt="" width="1634" height="439" style="left:-159.94px;top:1299px;width:1634.41px;height:439px">
+      <img class="ab" src="assets/home-v2/motion-card.webp" alt="Mulher usando o Meeky Motion 1" width="640" height="427" loading="lazy" style="left:35px;top:129px;width:640px;height:427px;border-radius:10px" data-reveal="">
+      <div class="ab" style="left:765px;top:182px;width:447px;display:flex;flex-direction:column;gap:23px" data-reveal=".1">
+        <h2 class="h55 hub" style="width:363px">Tem hora de ouvir o<br>que <span class="roxo">está em volta</span></h2>
+        <p class="pop" style="margin:0;width:434px;font-size:18px;line-height:1.29;color:#8F8A94">O Motion 1 transmite o som por vibração óssea e mantém o canal do ouvido livre. Você escuta sua música e <b style="font-weight:700">continua acompanhando<br>o entorno.</b></p>
+      </div>
+      <div class="ab" style="left:765px;top:423px;display:flex;gap:6px"><a href="Motion1.html" class="btn-g hub" style="width:215px;height:45px;">Comprar o motion 1<span class="ic-m"></span></a><a href="Motion1.html" class="btn-o hub" style="width:199px;height:45px;">Ver detalhes</a></div>
+
+      <img class="ab" src="assets/home-v2/f5-card.webp" alt="Mulher usando o Meeky F5 ANC Pro" width="640" height="422" loading="lazy" style="left:657px;top:656px;width:640px;height:422px;border-radius:10px" data-reveal="">
+      <div class="ab" style="left:125px;top:709px;width:447px;display:flex;flex-direction:column;gap:23px" data-reveal=".1">
+        <h2 class="h55 hub" style="width:399px">Tem hora de<br><span class="roxo">amenizar o ruído</span></h2>
+        <p class="pop" style="margin:0;width:435px;font-size:18px;line-height:1.29;color:#8F8A94">O motor do ônibus. O ar-condicionado do escritório. O barulho constante que acompanha o seu dia. Quando você prefere ouvir menos do ambiente, o F5 ANC Pro usa cancelamento <b style="font-weight:700">ativo para reduzir esses ruídos.</b></p>
+      </div>
+      <div class="ab" style="left:125px;top:975px;display:flex;align-items:center;gap:9px"><a href="Produto.html" class="btn-g hub" style="width:215px;height:49px;">Comprar o F5 ANC Pro<span class="ic-f"></span></a><a href="Produto.html" class="btn-o hub" style="width:199px;height:45px;">Ver detalhes</a></div>
+
+      <img class="ab" src="assets/home-v2/smile-woman.webp" alt="Mulher sorrindo com o Meeky F5 ANC Pro" width="738" height="738" loading="lazy" style="left:301px;top:1043px;width:738px;height:738px">
+    </div>
+  </section>
+
+  <!-- Motion 1 (Figma 3522:683) -->
+  <section style="background:#F9F0FF;overflow:hidden">
+    <div class="hv" style="height:814px;zoom:{{ k }}">
+      <img class="ab" src="assets/home-v2/motion-circles.svg" alt="" width="553" height="553" style="left:37px;top:105px;width:553px;height:553px">
+      <p class="ab pop" style="left:-12px;top:709.16px;margin:0;font-weight:700;font-size:142.703px;letter-spacing:-4.2811px;line-height:1;color:rgba(112,79,132,.51);white-space:nowrap">MOTION 1</p>
+      <img class="ab" src="assets/home-v2/motion-product.webp" alt="Meeky Motion 1" width="606" height="606" loading="lazy" style="left:11px;top:68px;width:606px;height:606px" data-reveal="">
+      <div class="ab" style="left:722px;top:120px;width:529px" data-reveal=".1">
+        <h2 class="h55 hub" style="width:407px;height:102px">Sua música.<br><span class="roxo">O entorno também.</span></h2>
+        <p class="pop" style="margin:22px 0 0;width:494px;height:70px;font-size:22px;letter-spacing:-.44px;line-height:1.15;color:#645C6C">A condução óssea transmite o som por vibração e mantém o <span style="font-weight:600">canal do ouvido livre para acompanhar o ambiente.</span></p>
+        <div style="position:relative;margin-top:40px;height:249px"><div class="uso" style="top:0px;width:529px;background:#FDF3FF;border:1px solid #9679BF"><img src="assets/home-v2/check-motion.svg" alt="" width="31" height="31" style="left:14.66px;top:18.28px"><p class="t" style="left:58px;top:33.5px;font-size:18px;letter-spacing:-0.36px">Na Caminhada</p><p class="d" style="left:208px;top:36.75px;width:285px;font-size:16px;letter-spacing:-0.32px">Para ouvir sua música e continuar acompanhando os sons do entorno.</p></div><div class="uso" style="top:88px;width:529px;background:#FDF3FF;border:1px solid #9679BF"><img src="assets/home-v2/check-motion.svg" alt="" width="31" height="31" style="left:16.03px;top:17.53px"><p class="t" style="left:56.5px;top:34.5px;font-size:18px;letter-spacing:-0.36px">Na Corrida</p><p class="d" style="left:207.81px;top:35.5px;width:295px;font-size:16px;letter-spacing:-0.32px">Para quando manter o canal do ouvido livre faz parte da sua escolha.</p></div><div class="uso" style="top:176px;width:529px;background:#FDF3FF;border:1px solid #9679BF"><img src="assets/home-v2/check-motion.svg" alt="" width="31" height="31" style="left:17.03px;top:20.03px"><p class="t" style="left:56.25px;top:34.5px;font-size:18px;letter-spacing:-0.36px">No Trajeto</p><p class="d" style="left:208px;top:35.5px;width:273px;font-size:16px;letter-spacing:-0.32px">Para escutar seu áudio sem cobrir o canal do ouvido.</p></div></div>
+        <div style="margin-top:40px;display:flex;align-items:flex-start;gap:7px"><a href="Motion1.html" class="btn-g hub" style="width:224px;height:49px;">Comprar o motion 1<span class="ic-m"></span></a><a href="Motion1.html" class="btn-o hub white" style="width:199px;height:45px;margin-top:2px">Ver detalhes</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F5 ANC Pro (Figma 3471:243) -->
+  <section style="background:#36134B;overflow:hidden">
+    <div class="hv" style="height:792px;zoom:{{ k }}">
+      <img class="ab" src="assets/home-v2/f5-circle.svg" alt="" width="852" height="852" style="left:514.49px;top:-42.36px;width:851.841px;height:851.841px">
+      <p class="ab pop" style="left:527px;top:659.49px;margin:0;font-weight:700;font-size:171.948px;letter-spacing:-13.7558px;line-height:1;color:#704F84;white-space:nowrap">F5 ANC PRO</p>
+      <div class="ab" style="left:607px;top:85.89px;width:615.042px;height:588.91px;display:flex;align-items:center;justify-content:center" data-reveal="">
+        <img src="assets/home-v2/f5-product.webp" alt="Meeky F5 ANC Pro" width="523" height="488" loading="lazy" style="width:522.652px;height:488.399px;flex:none;transform:rotate(12.35deg)">
+      </div>
+      <div class="ab" style="left:75px;top:120px;width:517px" data-reveal=".1">
+        <h2 class="h55 hub" style="width:407px;height:102px;color:#FFFDF9">Para quando você quer<br><span style="color:#CF87FF">amenizar o ruído.</span></h2>
+        <p class="pop" style="margin:22px 0 0;width:494px;height:59px;font-size:22px;letter-spacing:-.44px;line-height:1.15;color:#D4C3E6">O cancelamento ativo reduz ruídos constantes do ambiente. Você escolhe <b style="font-weight:700">quando ouvir menos do que está em volta.</b></p>
+        <div style="position:relative;margin-top:40px;height:249px"><div class="uso" style="top:0px;width:517px;background:#F9E2FF;border:1px solid rgba(249,223,255,.18)"><img src="assets/home-v2/check-f5.svg" alt="" width="31" height="31" style="left:13.78px;top:19.53px"><p class="t" style="left:53px;top:37px;font-size:20px;letter-spacing:-0.40px">No Trabalho</p><p class="d" style="left:193px;top:35px;width:290px;font-size:14px;letter-spacing:-0.28px">Menos distrações. Mais concentração para o que realmente importa.</p></div><div class="uso" style="top:88px;width:517px;background:#F9E2FF;border:1px solid rgba(249,223,255,.18)"><img src="assets/home-v2/check-f5.svg" alt="" width="31" height="31" style="left:18.28px;top:19.03px"><p class="t" style="left:57.5px;top:36.5px;font-size:20px;letter-spacing:-0.40px">No Estudo</p><p class="d" style="left:192px;top:36px;width:310px;font-size:14px;letter-spacing:-0.28px">Mais imersão nas aulas e nos conteúdos, com menos interferência dos ruídos ao redor.</p></div><div class="uso" style="top:176px;width:517px;background:#F9E2FF;border:1px solid rgba(249,223,255,.18)"><img src="assets/home-v2/check-f5.svg" alt="" width="31" height="31" style="left:18.53px;top:19.53px"><p class="t" style="left:69.5px;top:36.5px;font-size:20px;letter-spacing:-0.40px">No Trajeto</p><p class="d" style="left:193px;top:35.5px;width:285px;font-size:14px;letter-spacing:-0.28px">Para reduzir ruídos contínuos, como o motor do ônibus.</p></div></div>
+        <div style="margin-top:40px;display:flex;align-items:flex-start;gap:7px"><a href="Produto.html" class="btn-g hub" style="width:224px;height:49px;">Comprar o F5 ANC Pro<span class="ic-f"></span></a><a href="Produto.html" class="btn-o hub white" style="width:199px;height:45px;margin-top:2px">Ver detalhes</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferentes momentos + Primeiro, seu momento (Figma 3530:789, 3531:803, 3621:2, 3624:36, 3537:2388, 3531:840) -->
+  <section id="modelos" style="position:relative;background:#FFFDF9;overflow:hidden;scroll-margin-top:94px">
+    <div class="hv" style="height:1759px;zoom:{{ k }}">
+      <h2 class="ab h55 hub" style="left:86px;top:112px;width:451px;height:103px" data-reveal="">Diferentes momentos.<br><span class="roxo">Uma escolha de cada vez.</span></h2>
+      <img class="ab" src="assets/home-v2/arrow-down-left.svg" alt="" width="44" height="44" style="left:1197px;top:171px;width:44px;height:44px;transform:rotate(180deg)">
+      <div class="ab" data-reveal="" style="left:75px;top:262px;width:519px;height:635px;border-radius:15px;background:#C4C4C4;overflow:hidden">
+        <img class="ab" src="assets/home-v2/card-motion.webp" alt="Meeky Motion 1" width="527" height="659" loading="lazy" style="left:-4px;top:-57px;width:527px;height:659px;object-fit:cover">
+        <div class="ab" style="left:0;top:380px;width:519px;height:297px;background:linear-gradient(180deg,rgba(35,2,43,0),#23022B)"></div>
+        <div class="ab" style="left:0;top:380px;width:519px;height:297px;background:linear-gradient(180deg,rgba(35,2,43,0),#23022B)"></div>
+        <div class="ab" style="left:0;top:380px;width:519px;height:297px;background:linear-gradient(180deg,rgba(35,2,43,0),#23022B)"></div>
+        <p class="ab sf grad-txt" style="left:40px;top:468px;width:300px;height:50.293px;margin:0;display:flex;align-items:center;font-weight:700;font-size:63.663px;letter-spacing:-1.2733px;line-height:1.48;background-image:linear-gradient(90deg,#FFFFFF 0%,#F0B1FF 100%);white-space:nowrap">Motion 1</p>
+        <div class="ab" style="left:40px;top:541.45px"><a href="Motion1.html" class="btn-g hub" style="width:216px;height:47.25px;font-size:17.357px;gap:7.3px;letter-spacing:-.6943px;box-shadow:0 1.929px 0 #470E6D">Comprar o motion 1<span class="ic-m"></span></a></div>
+      </div>
+      <div class="ab" style="left:613px;top:262px;width:646px;height:308px;border-radius:15px;overflow:hidden;background:#23022B">
+        <img class="ab" src="assets/home-v2/card-f5.webp" alt="Meeky F5 ANC Pro" width="1066" height="457" loading="lazy" style="left:-36.19%;top:-18.34%;width:165.01%;height:148.43%">
+        <div class="ab" style="left:-10px;top:0;width:372px;height:308px;background:linear-gradient(90deg,#23022B,rgba(35,2,43,0))"></div>
+        <p class="ab sf grad-txt" style="left:32px;top:101px;width:288px;height:39.344px;margin:0;display:flex;align-items:center;font-weight:700;font-size:50.096px;letter-spacing:-1.0019px;line-height:1.48;text-transform:uppercase;background-image:linear-gradient(90deg,#FFFFFF 0%,#F0B1FF 100%);white-space:pre"> F5 ANC Pro</p>
+        <div class="ab" style="left:32px;top:169.12px"><a href="Produto.html" class="btn-g hub" style="width:216px;height:47.25px;gap:7.3px;box-shadow:0 1.929px 0 #470E6D">Comprar o F5 ANC Pro<span class="ic-f"></span></a></div>
+      </div>
+      <div class="ab" style="left:613px;top:589px;width:313px;height:308px;border-radius:13.709px;background:#0A040F;overflow:hidden">
+        <img class="ab" src="assets/home-v2/warr-f5-bg.webp" alt="Meeky F5 ANC Pro com garantia de 12 meses" width="769" height="330" loading="lazy" style="left:-237px;top:42px;width:769px;height:330px;object-fit:cover">
+        <div class="ab" style="left:90.18px;top:18px;width:133.071px;height:23.763px;box-sizing:border-box;border-radius:593px;border:.594px solid rgba(255,255,255,.6);background:linear-gradient(90deg,#FFFFFF,#E9C8FF);display:flex;align-items:center;justify-content:center"><span class="sf" style="font-weight:700;font-size:16.27px;letter-spacing:-.3254px;line-height:.95;color:#000;text-transform:uppercase">F5 ANC Pro</span></div>
+        <p class="ab sf grad-txt" style="left:75.37px;top:49.07px;width:169.994px;height:37.472px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:32.967px;letter-spacing:-.6593px;line-height:.95;background-image:linear-gradient(180deg,#F9DDFF 0%,#FFFFFF 50%,#F9DDFF 100%);white-space:nowrap">Garantia de</p>
+        <p class="ab hub grad-txt" style="left:-45px;top:79.23px;width:403.427px;height:61.234px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:64.964px;letter-spacing:-3.2482px;line-height:.95;background-image:linear-gradient(180deg,#F9DDFF 0%,#FFFFFF 50%,#F9DDFF 100%);white-space:nowrap">12 meses</p>
+      </div>
+      <div class="ab" style="left:946px;top:589px;width:313px;height:308px;border-radius:13.709px;background:#0A040F;overflow:hidden">
+        <img class="ab" src="assets/home-v2/warr-motion-bg.webp" alt="Meeky Motion 1 com garantia de 24 meses" width="313" height="348" loading="lazy" style="left:0;top:0;width:312.87px;height:347.86px">
+        <img class="ab" src="assets/home-v2/warr-motion-ellipse.svg" alt="" width="467" height="467" style="left:26.91px;top:-131.09px;width:467.2px;height:467.2px">
+        <div class="ab" style="left:90.18px;top:18px;width:133.071px;height:23.763px;box-sizing:border-box;border-radius:593px;border:.594px solid rgba(255,255,255,.6);background:linear-gradient(102deg,#FFFFFF 48.146%,#F9DDFF 96.961%);display:flex;align-items:center;justify-content:center"><span class="sf" style="font-weight:700;font-size:16.27px;letter-spacing:-.3254px;line-height:.95;color:#0C0B0B;text-transform:uppercase">Motion 1</span></div>
+        <p class="ab sf" style="left:75.37px;top:49.07px;width:169.994px;height:37.472px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:32.967px;letter-spacing:-.6593px;line-height:.95;color:#FFFDF9;white-space:nowrap">Garantia de</p>
+        <p class="ab hub" style="left:-45px;top:79px;width:403.427px;height:61.234px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:64.964px;letter-spacing:-3.2482px;line-height:.95;color:#fff;white-space:pre">24  meses</p>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:0;zoom:{{ k }}">
+      <div style="position:absolute;left:0;right:0;top:1159px;height:391px;overflow:hidden"><div class="gal-track"><img src="assets/home-v2/gal/g1-9.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g4-65.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g5-66.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g6-64.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g8-62.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g7-63.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g1-9.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g4-65.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g5-66.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g6-64.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g8-62.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"><img src="assets/home-v2/gal/g7-63.webp" alt="" width="295" height="391" loading="lazy" style="width:295px;height:391px;margin-right:27px;border-radius:30px"></div></div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:0;zoom:{{ k }}">
+      <div class="hv">
+        <div class="ab" style="left:32px;top:1075px;width:1258px;height:548px;border-radius:21px;overflow:hidden;background:linear-gradient(180deg,#1C0721,#30003B)" data-reveal="">
+          <p class="ab hub" style="left:75px;top:90px;width:454px;height:353px;margin:0;display:flex;align-items:center;font-weight:500;font-size:91.903px;letter-spacing:-2.7571px;line-height:1;color:#EDDFF8"><span><b style="font-weight:700;color:#FFFDF9">Primeiro,<br>seu momento.</b><br>Depois,<br>a tecnologia.</span></p>
+          <div class="ab" style="left:590px;top:-34px;width:706px;height:617px;background:#D9D9D9"></div>
+          <img class="ab" src="assets/home-v2/momento-woman.webp" alt="Mulher treinando com o Meeky F5 ANC Pro" width="780" height="974" loading="lazy" style="left:590px;top:-212px;width:780px;height:974px;object-fit:cover">
         </div>
       </div>
     </div>
   </section>
+
+  <!-- O mundo no seu volume (Figma 3542:22) -->
+  <section style="background:#F9F0FF;overflow:hidden">
+    <div class="hv" style="height:581px;zoom:{{ k }}">
+      <p class="ab hub" style="left:321.96px;top:137px;width:678.077px;height:215px;margin:0;font-weight:700;font-size:119.046px;line-height:.82;color:#441463;text-align:center">O mundo no<br>seu volume</p>
+      <div class="ab" style="left:169px;top:-310px;width:984px;height:1038px;overflow:hidden;pointer-events:none"><img src="assets/home-v2/cta-headphone.webp" alt="" width="984" height="1476" loading="lazy" style="width:100%;height:142.26%"></div>
+      <div class="ab" style="left:511px;top:366px"><a href="#modelos" class="btn-g hub" style="width:299px;height:63.873px;font-size:21.269px;letter-spacing:-1.0634px;box-shadow:0 1.851px 0 #470E6D">Conhecer os modelos</a></div>
+      <div class="ab" style="left:40px;top:83px;width:179px;height:177px;border-radius:19px;overflow:hidden"><img class="ab" src="assets/home-v2/cta-thumb-boxer.webp" alt="" width="179" height="225" loading="lazy" style="left:0;top:-.15%;width:100%;height:126.98%"></div>
+      <div class="ab" style="left:1120px;top:381px;width:175px;height:161px;border-radius:22px;overflow:hidden"><img class="ab" src="assets/home-v2/cta-thumb-f5.webp" alt="" width="230" height="290" loading="lazy" style="left:-15.74%;top:-69.06%;width:131.48%;height:180.24%"></div>
+      <div class="ab" style="left:1040px;top:66px;width:159px;height:142px;border-radius:16px;overflow:hidden"><img class="ab" src="assets/home-v2/cta-thumb-motion.webp" alt="" width="251" height="334" loading="lazy" style="left:-28.74%;top:-37.1%;width:158.02%;height:235.37%"></div>
+    </div>
+  </section>
+
   </sc-if>
 
   <sc-if value="{{ isMobile }}">
-  <section style="padding-top:74px;background:#EEEFF4">
-    <div style="overflow:hidden;line-height:0"><img src="assets/hero-home-mobile-v5.webp" alt="Meeky F5 ANC Pro e Meeky Motion 1" style="width:205%;max-width:none;margin-left:-55%;height:auto;display:block"></div>
+
+  <!-- Hero celular -->
+  <section style="background:#EEEFF4">
+    <div style="overflow:hidden;line-height:0"><img src="assets/hero-home-mobile-v5.webp" alt="Meeky F5 ANC Pro e Meeky Motion 1" width="801" height="399" style="width:205%;max-width:none;margin-left:-55%;height:auto;display:block"></div>
     <div style="position:relative;margin-top:-40%;padding:0 20px 40px;text-align:center">
-      <h1 style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:500;font-size:46px;letter-spacing:-.03em;line-height:1.08;color:#09010F">Quanto do mundo<br>você quer <span style="color:#9E69C1;white-space:nowrap">ouvir agora?</span></h1>
-      <p style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:14px auto 0;max-width:360px;font-family:'Poppins','SF Pro Display',-apple-system,sans-serif;font-size:15.5px;letter-spacing:.01em;line-height:1.45;color:#8F8A94;text-wrap:pretty">A Meeky faz fones para quem decide quanto do mundo quer ouvir. Existe o momento de amenizar o ruído e o de se conectar com o seu entorno. Quem controla isso é você.</p>
-      <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;margin-top:24px"><a href="#produtos" style="display:inline-flex;align-items:center;justify-content:center;height:56px;padding:0 34px;border-radius:999px;background:#9E69C1;color:#fff;text-decoration:none;white-space:nowrap;font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;font-weight:600;font-size:19px;letter-spacing:.01em;transition:background-color .35s" style-hover="background-color:#8A55AD">Conhecer produtos agora</a></div>
+      <h1 class="hub" style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both;margin:0;font-weight:500;font-size:42px;letter-spacing:-1.26px;line-height:1;color:#09010F">Quanto do mundo você <span class="roxo">quer ouvir agora?</span></h1>
+      <p class="pop" style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .38s both;margin:14px auto 0;max-width:360px;font-size:15.5px;letter-spacing:-.25px;line-height:1.3;color:#8F8A94">A Meeky faz fones para quem decide quanto do mundo quer ouvir. Existe o momento de amenizar o ruído e o de se <span style="font-weight:600">conectar com o seu entorno. Quem controla isso é você.</span></p>
+      <div style="animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .6s both;margin-top:24px"><a href="#modelos" class="btn-g hub" style="height:56px;padding:0 34px;font-size:19px;letter-spacing:-.9px">Conhecer os modelos</a></div>
     </div>
   </section>
+
+  <section style="background:#731D87;overflow:hidden"><div style="zoom:.58;height:82px;display:flex;align-items:center;padding-left:12px"><div class="mq-track"><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div></div></div></section>
+
+  <section style="background:#FFFDF9;overflow:hidden;padding-top:48px">
+    <div class="m-sec">
+      <img src="assets/home-v2/motion-card.webp" alt="Mulher usando o Meeky Motion 1" width="640" height="427" loading="lazy" style="width:100%;height:auto;border-radius:10px" data-reveal="">
+      <div style="margin-top:28px" data-reveal="">
+        <h2 class="m-h hub">Tem hora de ouvir o<br>que <span class="roxo">está em volta</span></h2>
+        <p class="m-p">O Motion 1 transmite o som por vibração óssea e mantém o canal do ouvido livre. Você escuta sua música e <b style="font-weight:700">continua acompanhando o entorno.</b></p>
+        <div class="m-btns"><a href="Motion1.html" class="btn-g hub">Comprar o motion 1<span class="ic-m"></span></a><a href="Motion1.html" class="btn-o hub">Ver detalhes</a></div>
+      </div>
+      <div style="margin-top:56px" data-reveal="">
+        <h2 class="m-h hub">Tem hora de<br><span class="roxo">amenizar o ruído</span></h2>
+        <p class="m-p">O motor do ônibus. O ar-condicionado do escritório. O barulho constante que acompanha o seu dia. Quando você prefere ouvir menos do ambiente, o F5 ANC Pro usa cancelamento <b style="font-weight:700">ativo para reduzir esses ruídos.</b></p>
+        <div class="m-btns"><a href="Produto.html" class="btn-g hub">Comprar o F5 ANC Pro<span class="ic-f"></span></a><a href="Produto.html" class="btn-o hub">Ver detalhes</a></div>
+      </div>
+      <img src="assets/home-v2/f5-card.webp" alt="Mulher usando o Meeky F5 ANC Pro" width="640" height="422" loading="lazy" style="margin-top:28px;width:100%;height:auto;border-radius:10px" data-reveal="">
+    </div>
+    <div style="position:relative;margin-top:36px;height:92vw;max-height:440px">
+      <img src="assets/home-v2/eq-bars.svg" alt="" width="1634" height="439" style="position:absolute;left:-20%;bottom:0;width:140%;height:auto">
+      <img src="assets/home-v2/smile-woman.webp" alt="Mulher sorrindo com o Meeky F5 ANC Pro" width="738" height="738" loading="lazy" style="position:absolute;left:50%;bottom:-6%;width:92vw;max-width:470px;height:auto;transform:translateX(-50%)">
+    </div>
+  </section>
+
+  <section style="background:#F9F0FF;overflow:hidden;padding-top:40px">
+    <div class="m-sec">
+      <div style="position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:1" data-reveal="">
+        <img src="assets/home-v2/motion-circles.svg" alt="" width="553" height="553" style="position:absolute;left:4.29%;top:6.1%;width:91.25%;height:91.25%">
+        <img src="assets/home-v2/motion-product.webp" alt="Meeky Motion 1" width="606" height="606" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%">
+      </div>
+      <h2 class="m-h hub" style="margin-top:20px">Sua música.<br><span class="roxo">O entorno também.</span></h2>
+      <p class="m-p" style="color:#645C6C;font-size:16.5px">A condução óssea transmite o som por vibração e mantém o <span style="font-weight:600">canal do ouvido livre para acompanhar o ambiente.</span></p>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:10px">
+        <div class="m-uso" style="background:#FDF3FF;border:1px solid #9679BF"><img src="assets/home-v2/check-motion.svg" alt="" width="28" height="28"><b>Na Caminhada</b><span>Para ouvir sua música e continuar acompanhando os sons do entorno.</span></div>
+        <div class="m-uso" style="background:#FDF3FF;border:1px solid #9679BF"><img src="assets/home-v2/check-motion.svg" alt="" width="28" height="28"><b>Na Corrida</b><span>Para quando manter o canal do ouvido livre faz parte da sua escolha.</span></div>
+        <div class="m-uso" style="background:#FDF3FF;border:1px solid #9679BF"><img src="assets/home-v2/check-motion.svg" alt="" width="28" height="28"><b>No Trajeto</b><span>Para escutar seu áudio sem cobrir o canal do ouvido.</span></div>
+      </div>
+      <div class="m-btns"><a href="Motion1.html" class="btn-g hub">Comprar o motion 1<span class="ic-m"></span></a><a href="Motion1.html" class="btn-o hub white">Ver detalhes</a></div>
+    </div>
+    <div style="height:14vw;overflow:hidden;margin-top:26px"><p class="pop" style="margin:0 0 0 14px;font-weight:700;font-size:19vw;letter-spacing:-.03em;line-height:1;color:rgba(112,79,132,.51);white-space:nowrap">MOTION 1</p></div>
+  </section>
+
+  <section style="background:#36134B;overflow:hidden;padding-top:44px">
+    <div class="m-sec">
+      <div style="position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:1" data-reveal="">
+        <img src="assets/home-v2/f5-circle.svg" alt="" width="852" height="852" style="position:absolute;left:-20%;top:-20%;width:140%;height:140%">
+        <img src="assets/home-v2/f5-product.webp" alt="Meeky F5 ANC Pro" width="523" height="488" loading="lazy" style="position:absolute;left:8%;top:9%;width:84%;height:auto;transform:rotate(12.35deg)">
+      </div>
+      <h2 class="m-h hub" style="margin-top:20px;color:#FFFDF9">Para quando você quer<br><span style="color:#CF87FF">amenizar o ruído.</span></h2>
+      <p class="m-p" style="color:#D4C3E6;font-size:16.5px">O cancelamento ativo reduz ruídos constantes do ambiente. Você escolhe <b style="font-weight:700">quando ouvir menos do que está em volta.</b></p>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:10px">
+        <div class="m-uso" style="background:#F9E2FF;border:1px solid rgba(249,223,255,.18)"><img src="assets/home-v2/check-f5.svg" alt="" width="28" height="28"><b>No Trabalho</b><span>Menos distrações. Mais concentração para o que realmente importa.</span></div>
+        <div class="m-uso" style="background:#F9E2FF;border:1px solid rgba(249,223,255,.18)"><img src="assets/home-v2/check-f5.svg" alt="" width="28" height="28"><b>No Estudo</b><span>Mais imersão nas aulas e nos conteúdos, com menos interferência dos ruídos ao redor.</span></div>
+        <div class="m-uso" style="background:#F9E2FF;border:1px solid rgba(249,223,255,.18)"><img src="assets/home-v2/check-f5.svg" alt="" width="28" height="28"><b>No Trajeto</b><span>Para reduzir ruídos contínuos, como o motor do ônibus.</span></div>
+      </div>
+      <div class="m-btns"><a href="Produto.html" class="btn-g hub">Comprar o F5 ANC Pro<span class="ic-f"></span></a><a href="Produto.html" class="btn-o hub white">Ver detalhes</a></div>
+    </div>
+    <div style="height:12.4vw;overflow:hidden;margin-top:26px"><p class="pop" style="margin:0 0 0 10px;font-weight:700;font-size:17vw;letter-spacing:-.08em;line-height:1;color:#704F84;white-space:nowrap">F5 ANC PRO</p></div>
+  </section>
+
+  <section id="modelos" style="background:#FFFDF9;overflow:hidden;padding:52px 0 56px;scroll-margin-top:74px">
+    <div class="m-sec">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px" data-reveal="">
+        <h2 class="m-h hub" style="font-size:36px">Diferentes momentos.<br><span class="roxo">Uma escolha de cada vez.</span></h2>
+        <img src="assets/home-v2/arrow-down-left.svg" alt="" width="44" height="44" style="width:32px;height:32px;flex:0 0 auto;margin-bottom:4px;transform:rotate(180deg)">
+      </div>
+      <div style="margin-top:26px;width:519px;height:635px;position:relative;zoom:{{ kmCard }}"><div class="ab" style="left:0px;top:0px;width:519px;height:635px;border-radius:15px;background:#C4C4C4;overflow:hidden">
+        <img class="ab" src="assets/home-v2/card-motion.webp" alt="Meeky Motion 1" width="527" height="659" loading="lazy" style="left:-4px;top:-57px;width:527px;height:659px;object-fit:cover">
+        <div class="ab" style="left:0;top:380px;width:519px;height:297px;background:linear-gradient(180deg,rgba(35,2,43,0),#23022B)"></div>
+        <div class="ab" style="left:0;top:380px;width:519px;height:297px;background:linear-gradient(180deg,rgba(35,2,43,0),#23022B)"></div>
+        <div class="ab" style="left:0;top:380px;width:519px;height:297px;background:linear-gradient(180deg,rgba(35,2,43,0),#23022B)"></div>
+        <p class="ab sf grad-txt" style="left:40px;top:468px;width:300px;height:50.293px;margin:0;display:flex;align-items:center;font-weight:700;font-size:63.663px;letter-spacing:-1.2733px;line-height:1.48;background-image:linear-gradient(90deg,#FFFFFF 0%,#F0B1FF 100%);white-space:nowrap">Motion 1</p>
+        <div class="ab" style="left:40px;top:541.45px"><a href="Motion1.html" class="btn-g hub" style="width:216px;height:47.25px;font-size:17.357px;gap:7.3px;letter-spacing:-.6943px;box-shadow:0 1.929px 0 #470E6D">Comprar o motion 1<span class="ic-m"></span></a></div>
+      </div></div>
+      <div style="margin-top:14px;width:646px;height:635px;position:relative;zoom:{{ kmGrid }}"><div class="ab" style="left:0px;top:0px;width:646px;height:308px;border-radius:15px;overflow:hidden;background:#23022B">
+        <img class="ab" src="assets/home-v2/card-f5.webp" alt="Meeky F5 ANC Pro" width="1066" height="457" loading="lazy" style="left:-36.19%;top:-18.34%;width:165.01%;height:148.43%">
+        <div class="ab" style="left:-10px;top:0;width:372px;height:308px;background:linear-gradient(90deg,#23022B,rgba(35,2,43,0))"></div>
+        <p class="ab sf grad-txt" style="left:32px;top:101px;width:288px;height:39.344px;margin:0;display:flex;align-items:center;font-weight:700;font-size:50.096px;letter-spacing:-1.0019px;line-height:1.48;text-transform:uppercase;background-image:linear-gradient(90deg,#FFFFFF 0%,#F0B1FF 100%);white-space:pre"> F5 ANC Pro</p>
+        <div class="ab" style="left:32px;top:169.12px"><a href="Produto.html" class="btn-g hub" style="width:216px;height:47.25px;gap:7.3px;box-shadow:0 1.929px 0 #470E6D">Comprar o F5 ANC Pro<span class="ic-f"></span></a></div>
+      </div><div class="ab" style="left:0;top:327px;width:313px;height:308px;border-radius:13.709px;background:#0A040F;overflow:hidden">
+        <img class="ab" src="assets/home-v2/warr-f5-bg.webp" alt="Meeky F5 ANC Pro com garantia de 12 meses" width="769" height="330" loading="lazy" style="left:-237px;top:42px;width:769px;height:330px;object-fit:cover">
+        <div class="ab" style="left:90.18px;top:18px;width:133.071px;height:23.763px;box-sizing:border-box;border-radius:593px;border:.594px solid rgba(255,255,255,.6);background:linear-gradient(90deg,#FFFFFF,#E9C8FF);display:flex;align-items:center;justify-content:center"><span class="sf" style="font-weight:700;font-size:16.27px;letter-spacing:-.3254px;line-height:.95;color:#000;text-transform:uppercase">F5 ANC Pro</span></div>
+        <p class="ab sf grad-txt" style="left:75.37px;top:49.07px;width:169.994px;height:37.472px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:32.967px;letter-spacing:-.6593px;line-height:.95;background-image:linear-gradient(180deg,#F9DDFF 0%,#FFFFFF 50%,#F9DDFF 100%);white-space:nowrap">Garantia de</p>
+        <p class="ab hub grad-txt" style="left:-45px;top:79.23px;width:403.427px;height:61.234px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:64.964px;letter-spacing:-3.2482px;line-height:.95;background-image:linear-gradient(180deg,#F9DDFF 0%,#FFFFFF 50%,#F9DDFF 100%);white-space:nowrap">12 meses</p>
+      </div><div class="ab" style="left:333px;top:327px;width:313px;height:308px;border-radius:13.709px;background:#0A040F;overflow:hidden">
+        <img class="ab" src="assets/home-v2/warr-motion-bg.webp" alt="Meeky Motion 1 com garantia de 24 meses" width="313" height="348" loading="lazy" style="left:0;top:0;width:312.87px;height:347.86px">
+        <img class="ab" src="assets/home-v2/warr-motion-ellipse.svg" alt="" width="467" height="467" style="left:26.91px;top:-131.09px;width:467.2px;height:467.2px">
+        <div class="ab" style="left:90.18px;top:18px;width:133.071px;height:23.763px;box-sizing:border-box;border-radius:593px;border:.594px solid rgba(255,255,255,.6);background:linear-gradient(102deg,#FFFFFF 48.146%,#F9DDFF 96.961%);display:flex;align-items:center;justify-content:center"><span class="sf" style="font-weight:700;font-size:16.27px;letter-spacing:-.3254px;line-height:.95;color:#0C0B0B;text-transform:uppercase">Motion 1</span></div>
+        <p class="ab sf" style="left:75.37px;top:49.07px;width:169.994px;height:37.472px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:32.967px;letter-spacing:-.6593px;line-height:.95;color:#FFFDF9;white-space:nowrap">Garantia de</p>
+        <p class="ab hub" style="left:-45px;top:79px;width:403.427px;height:61.234px;margin:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:64.964px;letter-spacing:-3.2482px;line-height:.95;color:#fff;white-space:pre">24  meses</p>
+      </div></div>
+    </div>
+    <div class="m-sec" style="margin-top:44px">
+      <div style="border-radius:21px;overflow:hidden;background:linear-gradient(180deg,#1C0721,#30003B)" data-reveal="">
+        <p class="hub" style="margin:0;padding:34px 26px 30px;font-weight:500;font-size:48px;letter-spacing:-1.44px;line-height:1;color:#EDDFF8"><b style="font-weight:700;color:#FFFDF9">Primeiro,<br>seu momento.</b><br>Depois,<br>a tecnologia.</p>
+        <div style="height:105vw;max-height:520px;overflow:hidden"><img src="assets/home-v2/momento-woman.webp" alt="Mulher treinando com o Meeky F5 ANC Pro" width="780" height="974" loading="lazy" class="cover" style="object-position:50% 30%"></div>
+      </div>
+    </div>
+    <div style="margin-top:20px;overflow:hidden"><div class="gal-track"><img src="assets/home-v2/gal/g1-9.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g4-65.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g5-66.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g6-64.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g8-62.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g7-63.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g1-9.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g2-8.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g4-65.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g5-66.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g6-64.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g8-62.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"><img src="assets/home-v2/gal/g7-63.webp" alt="" width="160" height="212" loading="lazy" style="width:160px;height:212px;margin-right:12px;border-radius:18px"></div></div>
+  </section>
+
+  <section style="position:relative;background:#F9F0FF;overflow:hidden;height:390px">
+    <img src="assets/home-v2/cta-headphone.webp" alt="" width="984" height="1476" loading="lazy" style="position:absolute;left:50%;top:-56px;width:430px;height:auto;transform:translateX(-50%);pointer-events:none">
+    <div style="position:relative;padding-top:132px;text-align:center">
+      <p class="hub" style="margin:0;font-weight:700;font-size:54px;line-height:.82;color:#441463">O mundo no<br>seu volume</p>
+      <a href="#modelos" class="btn-g hub" style="margin-top:28px;height:54px;padding:0 30px;font-size:18px;letter-spacing:-.9px;box-shadow:0 1.851px 0 #470E6D">Conhecer os modelos</a>
+    </div>
+    <div style="position:absolute;left:14px;top:30px;width:84px;height:84px;border-radius:14px;overflow:hidden"><img src="assets/home-v2/cta-thumb-boxer.webp" alt="" width="84" height="105" loading="lazy" style="width:100%;height:126.98%"></div>
+    <div style="position:absolute;right:16px;top:22px;width:76px;height:68px;border-radius:12px;overflow:hidden"><img src="assets/home-v2/cta-thumb-motion.webp" alt="" width="120" height="160" loading="lazy" style="position:absolute;left:-28.74%;top:-37.1%;width:158.02%;height:235.37%"></div>
+    <div style="position:absolute;right:14px;bottom:26px;width:84px;height:77px;border-radius:14px;overflow:hidden"><img src="assets/home-v2/cta-thumb-f5.webp" alt="" width="110" height="139" loading="lazy" style="position:absolute;left:-15.74%;top:-69.06%;width:131.48%;height:180.24%"></div>
+  </section>
+
   </sc-if>
 
-  <section style="background:#0C0C0C;padding:19px 0;overflow:hidden">
-    <div style="display:flex;width:max-content;animation:meeky-marquee 34s linear infinite">
-      <div style="display:flex;align-items:center;gap:38px;flex:0 0 auto;padding-right:38px"><img src="assets/techtudo.svg" alt="TechTudo" style="height:16px;width:auto;flex:0 0 auto;display:block"><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">Top 7 ANC 2026</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">70h Bateria ANC</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">★ 5,0 · +500 avaliações</span><img src="assets/techtudo.svg" alt="TechTudo" style="height:16px;width:auto;flex:0 0 auto;display:block"><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">Top 7 ANC 2026</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">70h Bateria ANC</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">★ 5,0 · +500 avaliações</span><img src="assets/techtudo.svg" alt="TechTudo" style="height:16px;width:auto;flex:0 0 auto;display:block"><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">Top 7 ANC 2026</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">70h Bateria ANC</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">★ 5,0 · +500 avaliações</span></div>
-      <div style="display:flex;align-items:center;gap:38px;flex:0 0 auto;padding-right:38px"><img src="assets/techtudo.svg" alt="TechTudo" style="height:16px;width:auto;flex:0 0 auto;display:block"><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">Top 7 ANC 2026</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">70h Bateria ANC</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">★ 5,0 · +500 avaliações</span><img src="assets/techtudo.svg" alt="TechTudo" style="height:16px;width:auto;flex:0 0 auto;display:block"><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">Top 7 ANC 2026</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">70h Bateria ANC</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">★ 5,0 · +500 avaliações</span><img src="assets/techtudo.svg" alt="TechTudo" style="height:16px;width:auto;flex:0 0 auto;display:block"><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">Top 7 ANC 2026</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">70h Bateria ANC</span><span style="font-size:16px;font-weight:500;letter-spacing:-.005em;color:rgba(249,248,246,.9);white-space:nowrap">★ 5,0 · +500 avaliações</span></div>
-    </div>
-  </section>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(430px,100%),1fr));align-items:stretch">
-    <div style="position:relative;overflow:hidden;min-height:{{ photoH }}">
-      <img src="assets/foco-mao-w.jpg" alt="Meeky F5 ANC Pro em uso na rua" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%">
-    </div>
-    <div style="display:flex;flex-direction:column;justify-content:center;padding:{{ splitPad }}" data-reveal="">
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>O problema</div>
-      <h2 style="margin:22px 0 0;font-size:{{ splitH2 }};font-weight:700;letter-spacing:-.032em;line-height:1.06;text-wrap:balance">O problema não é falta de tempo.</h2>
-      <p style="margin:22px 0 0;font-size:{{ splitP }};line-height:1.55;max-width:540px;color:#5A5A5A;text-wrap:pretty">Notificações. Barulho. Interrupções. Você tenta focar — mas o ambiente não ajuda. No final do dia, a sensação é a mesma: você poderia ter feito mais.</p>
-      <p style="margin:20px 0 0;font-size:{{ splitLead }};line-height:1.5;max-width:540px;color:#0A0A0A;font-weight:600">Foco virou vantagem competitiva.</p>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(430px,100%),1fr));align-items:stretch">
-    <div style="display:flex;flex-direction:column;justify-content:center;padding:{{ splitPad }};order:{{ ordText }}" data-reveal="">
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>A solução</div>
-      <h2 style="margin:22px 0 0;font-size:{{ splitH2 }};font-weight:700;letter-spacing:-.032em;line-height:1.06;text-wrap:balance">A Meeky resolve isso.</h2>
-      <p style="margin:22px 0 0;font-size:{{ splitP }};line-height:1.55;max-width:540px;color:#5A5A5A;text-wrap:pretty">Criamos um headphone para eliminar distrações e devolver o controle para você. Mais foco. Mais clareza. Mais resultado.</p>
-      <div style="margin-top:34px">
-        <a href="Produto.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:18px 38px;border-radius:999px;font-size:19px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Ver especificações</a>
-      </div>
-    </div>
-    <div style="position:relative;overflow:hidden;min-height:{{ photoH }};order:{{ ordPhoto }}">
-      <img src="assets/solucao-uso-w.jpg" alt="Meeky F5 ANC Pro sendo usado" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%">
-    </div>
-  </div>
-
-  
-  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <section style="position:relative;background:#050505 url('assets/bg-3d-wave.webp') 68% center/cover no-repeat;color:#F9F8F6;padding:130px 0;overflow:hidden">
-    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,4,4,.94) 0 34%,rgba(4,4,4,.66) 58%,rgba(4,4,4,.3) 100%);pointer-events:none"></div>
-    <div style="position:relative;max-width:1320px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:56px;align-items:center" data-reveal="">
-      <div>
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#E2AD68"><span style="width:26px;height:1px;background:#E2AD68;display:inline-block"></span>Meeky F5 ANC Pro</div>
-      <h2 style="margin:20px 0 0;font-size:clamp(36px,3.7vw,54px);font-weight:700;letter-spacing:-.032em;line-height:1.05;max-width:620px">Tecnologia para cada momento.</h2>
-      <div style="margin-top:44px;display:flex;flex-direction:column;gap:14px">
-        <div data-reveal="0" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px 36px;align-items:center;padding:26px 30px;border-radius:26px;background:rgba(6,6,6,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(226,173,104,.22)">
-          <div style="display:flex;align-items:center;gap:15px">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex:0 0 auto"><circle cx="11" cy="11" r="10.25" stroke="#E2AD68" stroke-opacity=".5" stroke-width="1.5"></circle><path d="M6.6 11.3l3 3 5.8-6.2" stroke="#E2AD68" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            <h3 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.018em;line-height:1.1">Foco</h3>
-          </div>
-          <p style="margin:0;color:rgba(249,248,246,.86);font-size:17px;line-height:1.5;text-wrap:pretty">Para trabalho, estudo e concentração profunda.</p>
-        </div>
-        <div data-reveal=".1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px 36px;align-items:center;padding:26px 30px;border-radius:26px;background:rgba(6,6,6,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(226,173,104,.22)">
-          <div style="display:flex;align-items:center;gap:15px">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex:0 0 auto"><circle cx="11" cy="11" r="10.25" stroke="#E2AD68" stroke-opacity=".5" stroke-width="1.5"></circle><path d="M6.6 11.3l3 3 5.8-6.2" stroke="#E2AD68" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            <h3 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.018em;line-height:1.1">Movimento</h3>
-          </div>
-          <p style="margin:0;color:rgba(249,248,246,.86);font-size:17px;line-height:1.5;text-wrap:pretty">Para treino, rotina ativa e performance diária.</p>
-        </div>
-        <div data-reveal=".2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px 36px;align-items:center;padding:26px 30px;border-radius:26px;background:rgba(6,6,6,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(226,173,104,.22)">
-          <div style="display:flex;align-items:center;gap:15px">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex:0 0 auto"><circle cx="11" cy="11" r="10.25" stroke="#E2AD68" stroke-opacity=".5" stroke-width="1.5"></circle><path d="M6.6 11.3l3 3 5.8-6.2" stroke="#E2AD68" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            <h3 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.018em;line-height:1.1">Rotina</h3>
-          </div>
-          <p style="margin:0;color:rgba(249,248,246,.86);font-size:17px;line-height:1.5;text-wrap:pretty">Para viagens, deslocamentos e momentos em que o mundo faz barulho demais.</p>
-        </div>
-      </div>
-      </div>
-      <div style="position:relative;min-height:520px;display:flex;align-items:center;justify-content:center">
-        <div style="position:absolute;width:88%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(226,173,104,.22),rgba(226,173,104,.05) 55%,rgba(226,173,104,0) 72%)"></div>
-        <x-import component-from-global-scope="meeky-3d" src="assets/fone-meeky-v5.glb" hint="arraste para girar" accent="#E2AD68" hint-color="#FFFFFF" style="width:100%;height:560px;position:relative" hint-size="100%,560px"></x-import>
-      </div>
-    </div>
-  </section>
-  </sc-if>
-
-  <sc-if value="{{ isMobile }}">
-  <section style="position:relative;background:#050505 url('assets/bg-3d-wave.webp') 68% center/cover no-repeat;color:#F9F8F6;padding:60px 20px;overflow:hidden">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,4,4,.92),rgba(4,4,4,.72));pointer-events:none"></div>
-    <div style="position:relative;text-align:center" data-reveal="">
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#E2AD68"><span style="width:22px;height:1px;background:#E2AD68;display:inline-block"></span>Meeky F5 ANC Pro</div>
-      <h2 style="margin:16px 0 0;font-size:34px;font-weight:700;letter-spacing:-.032em;line-height:1.08">Tecnologia para<br>cada momento.</h2>
-      <div style="margin-top:14px;position:relative;display:flex;align-items:center;justify-content:center">
-        <div style="position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(226,173,104,.22),rgba(226,173,104,.05) 55%,rgba(226,173,104,0) 72%)"></div>
-        <x-import component-from-global-scope="meeky-3d" src="assets/fone-meeky-v5.glb" hint="arraste para girar" accent="#E2AD68" hint-color="#FFFFFF" style="width:100%;height:320px;position:relative" hint-size="100%,320px"></x-import>
-      </div>
-      <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;text-align:left">
-        <div data-reveal="0" style="padding:20px 22px;border-radius:22px;background:rgba(6,6,6,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(226,173,104,.22)">
-          <div style="display:flex;align-items:center;gap:12px">
-            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style="flex:0 0 auto"><circle cx="11" cy="11" r="10.25" stroke="#E2AD68" stroke-opacity=".5" stroke-width="1.5"></circle><path d="M6.6 11.3l3 3 5.8-6.2" stroke="#E2AD68" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            <h3 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-.018em;line-height:1.1">Foco</h3>
-          </div>
-          <p style="margin:8px 0 0;color:rgba(249,248,246,.86);font-size:15px;line-height:1.45;text-wrap:pretty">Para trabalho, estudo e concentração profunda.</p>
-        </div>
-        <div data-reveal=".1" style="padding:20px 22px;border-radius:22px;background:rgba(6,6,6,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(226,173,104,.22)">
-          <div style="display:flex;align-items:center;gap:12px">
-            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style="flex:0 0 auto"><circle cx="11" cy="11" r="10.25" stroke="#E2AD68" stroke-opacity=".5" stroke-width="1.5"></circle><path d="M6.6 11.3l3 3 5.8-6.2" stroke="#E2AD68" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            <h3 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-.018em;line-height:1.1">Movimento</h3>
-          </div>
-          <p style="margin:8px 0 0;color:rgba(249,248,246,.86);font-size:15px;line-height:1.45;text-wrap:pretty">Para treino, rotina ativa e performance diária.</p>
-        </div>
-        <div data-reveal=".15" style="padding:20px 22px;border-radius:22px;background:rgba(6,6,6,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(226,173,104,.22)">
-          <div style="display:flex;align-items:center;gap:12px">
-            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style="flex:0 0 auto"><circle cx="11" cy="11" r="10.25" stroke="#E2AD68" stroke-opacity=".5" stroke-width="1.5"></circle><path d="M6.6 11.3l3 3 5.8-6.2" stroke="#E2AD68" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            <h3 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-.018em;line-height:1.1">Rotina</h3>
-          </div>
-          <p style="margin:8px 0 0;color:rgba(249,248,246,.86);font-size:15px;line-height:1.45;text-wrap:pretty">Para viagens, deslocamentos e momentos em que o mundo faz barulho demais.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  </sc-if>
-
-  <section id="produtos" style="background:#fff;scroll-margin-top:74px;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
-    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }}">
-      <div data-reveal="" style="text-align:{{ headAlign }}">
-        <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>O ecossistema Meeky</div>
-        <h2 style="margin:20px 0 0;font-size:{{ splitH2 }};font-weight:700;letter-spacing:-.032em;line-height:1.05;text-wrap:balance">Um produto. Um futuro em construção.</h2>
-      </div>
-
-      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-      <div style="margin-top:48px;display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
-
-        <div data-reveal="0" style="flex:1 1 340px;min-width:0;align-self:stretch;container-type:inline-size;position:relative;aspect-ratio:1183/1652;border-radius:49px;overflow:hidden;background:#000;color:#F9F8F6">
-          <img src="assets/bento-f5.webp" alt="Meeky F5 ANC Pro" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8.5% 7.5%;display:flex;flex-direction:column;gap:.7em">
-            <h3 style="margin:0;font-size:clamp(26px,11cqw,50px);font-weight:700;letter-spacing:-.02em;line-height:1.05;text-transform:uppercase;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Meeky F5 ANC Pro</h3>
-            <p style="margin:0;color:rgba(249,248,246,.8);font-size:clamp(12px,4.3cqw,31px);letter-spacing:.02em;text-transform:uppercase;line-height:1.2">70h · ANC 20dB · Anatel</p>
-            <div style="margin-top:.5em"><a href="Produto.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:1.05em 2.1em;border-radius:999px;font-size:clamp(15px,3cqw,19px);font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Ver detalhes</a></div>
-          </div>
-        </div>
-
-        <div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:16px">
-
-          <div data-reveal=".1" style="container-type:inline-size;position:relative;aspect-ratio:1170/830;border-radius:49px;overflow:hidden;background:#000;color:#F9F8F6">
-            <img src="assets/bento-empresas.webp" alt="Uso profissional do Meeky F5 ANC Pro" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-            <div style="position:absolute;inset:0;padding:0 8.5%;display:flex;flex-direction:column;justify-content:center;gap:.55em">
-              <h4 style="margin:0;font-size:clamp(26px,11cqw,50px);font-weight:700;letter-spacing:-.028em;line-height:1.12;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Para equipes<br>e empresas</h4>
-              <p style="margin:0;color:rgba(249,248,246,.82);font-size:clamp(12px,4.2cqw,29px);line-height:1.35">A partir de 20 unidades ·<br>nota fiscal · suporte direto</p>
-            </div>
-          </div>
-
-          <div data-reveal=".2" style="container-type:inline-size;position:relative;aspect-ratio:1160/830;border-radius:49px;overflow:hidden;background:#000;color:#F9F8F6">
-            <img src="assets/bento-motion.webp" alt="Meeky Motion 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-            <div style="position:absolute;inset:0;padding:0 8.5% 8%;display:flex;flex-direction:column;justify-content:flex-end;gap:.55em">
-              <h4 style="margin:0;font-size:clamp(26px,11cqw,50px);font-weight:700;letter-spacing:-.028em;line-height:1.12;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Motion 1</h4>
-              <p style="margin:0;color:rgba(249,248,246,.82);font-size:clamp(11.5px,3.7cqw,26px);line-height:1.35">Bone Conduction · Open-Ear Sport.</p>
-              <div style="margin-top:.35em"><a href="Motion1.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:999px;overflow:hidden;font-size:clamp(15px,3cqw,19px);font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)"><span style="display:block;padding:1.05em 2.1em">Ver detalhes</span></a></div>
-            </div>
-          </div>
-
-        </div>
-
-        <div data-reveal=".3" style="flex:1 1 100%;container-type:inline-size;position:relative;aspect-ratio:2456/830;border-radius:49px;overflow:hidden;background:#000;color:#F9F8F6">
-          <img src="assets/bento-garantia.webp" alt="12 meses de garantia · Anatel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;inset:0;padding:0 4.5%;display:flex;flex-direction:column;justify-content:center;gap:.65em">
-            <h4 style="margin:0;font-size:clamp(26px,6cqw,50px);font-weight:700;letter-spacing:-.028em;line-height:1.08;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">12 meses de garantia</h4>
-            <p style="margin:0;color:rgba(249,248,246,.82);font-size:clamp(13px,2.1cqw,30px);line-height:1.4">Certificado Anatel · Nota fiscal em todo pedido.</p>
-          </div>
-        </div>
-
-      </div>
-      </sc-if>
-
-      <sc-if value="{{ isMobile }}">
-      <div style="margin-top:34px;display:flex;flex-direction:column;gap:14px">
-        <div data-reveal="0" style="container-type:inline-size;position:relative;aspect-ratio:1162/1056;border-radius:34px;overflow:hidden;background:#000;color:#F9F8F6">
-          <img src="assets/bento-m-f5.webp" alt="Meeky F5 ANC Pro" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 40%,rgba(0,0,0,0) 66%);pointer-events:none"></div>
-          <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8% 8%;display:flex;flex-direction:column;gap:.5em">
-            <h3 style="margin:0;font-size:clamp(24px,7.6cqw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Meeky F5 ANC Pro</h3>
-            <p style="margin:0;color:rgba(249,248,246,.84);font-size:clamp(13px,3.8cqw,20px);line-height:1.35">70h · ANC 20dB · Anatel</p>
-            <div style="margin-top:.4em"><a href="Produto.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Ver detalhes</a></div>
-          </div>
-        </div>
-        <div data-reveal=".1" style="container-type:inline-size;position:relative;aspect-ratio:1162/1056;border-radius:34px;overflow:hidden;background:#000;color:#F9F8F6">
-          <img src="assets/bento-m-empresas.webp" alt="Uso profissional do Meeky F5 ANC Pro" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 40%,rgba(0,0,0,0) 66%);pointer-events:none"></div>
-          <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8% 8%;display:flex;flex-direction:column;gap:.5em">
-            <h3 style="margin:0;font-size:clamp(24px,7.6cqw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Para equipes e empresas</h3>
-            <p style="margin:0;color:rgba(249,248,246,.84);font-size:clamp(13px,3.8cqw,20px);line-height:1.35">A partir de 20 unidades · nota fiscal · suporte direto</p>
-          </div>
-        </div>
-        <div data-reveal=".15" style="container-type:inline-size;position:relative;aspect-ratio:1162/1056;border-radius:34px;overflow:hidden;background:#000;color:#F9F8F6">
-          <img src="assets/bento-m-motion.webp" alt="Meeky Motion 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.62) 34%,rgba(0,0,0,.12) 62%,rgba(0,0,0,0) 78%);pointer-events:none"></div>
-          <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8% 8%;display:flex;flex-direction:column;gap:.5em">
-            <h3 style="margin:0;font-size:clamp(24px,7.6cqw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;color:#FFFFFF">Motion 1</h3>
-            <p style="margin:0;color:rgba(249,248,246,.84);font-size:clamp(13px,3.8cqw,20px);line-height:1.35">Bone Conduction · Open-Ear Sport.</p>
-            <div style="margin-top:.4em"><a href="Motion1.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Ver detalhes</a></div>
-          </div>
-        </div>
-        <div data-reveal=".2" style="container-type:inline-size;position:relative;aspect-ratio:1162/1056;border-radius:34px;overflow:hidden;background:#000;color:#F9F8F6">
-          <img src="assets/bento-m-garantia.webp" alt="12 meses de garantia · Anatel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 40%,rgba(0,0,0,0) 66%);pointer-events:none"></div>
-          <div style="position:absolute;left:0;right:0;bottom:0;padding:0 8% 8%;display:flex;flex-direction:column;gap:.5em">
-            <h3 style="margin:0;font-size:clamp(24px,7.6cqw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;background:linear-gradient(90deg,#FFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">12 meses de garantia</h3>
-            <p style="margin:0;color:rgba(249,248,246,.84);font-size:clamp(13px,3.8cqw,20px);line-height:1.35">Certificado Anatel · Nota fiscal em todo pedido.</p>
-          </div>
-        </div>
-      </div>
-      </sc-if>
-    </div>
-  </section>
-
-  <!-- Compra em volume (Figma 3206:2) -->
-  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <section id="volume" style="position:relative;scroll-margin-top:74px;background:#222 url('assets/volume-bg-v2.webp') 62% center/cover no-repeat;color:#F9F8F6;height:clamp(480px,27vw,690px);overflow:hidden">
-    <div style="position:absolute;top:0;bottom:0;left:0;width:44%;background:linear-gradient(to right,#111 0%,rgba(17,17,17,0) 100%);pointer-events:none"></div>
-    <div style="position:relative;height:100%;max-width:1320px;margin:0 auto;padding:0 40px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
-      <div data-reveal="" style="max-width:536px">
-        <h2 style="margin:0;font-size:clamp(36px,3.5vw,52px);font-weight:700;letter-spacing:-.02em;line-height:1.13;color:#fff">Quer comprar em <span style="background:linear-gradient(90deg,#FFFFFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">grandes quantidades?</span></h2>
-        <p style="margin:22px 0 0;max-width:451px;font-size:clamp(18px,1.45vw,26px);letter-spacing:-.02em;line-height:1.1;color:#E0E0E0">Temos condições especiais para compras em volume. Fale com nossa equipe e <strong style="font-weight:700">solicite uma cotação.</strong></p>
-        <div style="margin-top:34px"><a href="#volume" data-meeky-form="volume" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:18px 34px;border-radius:999px;font-size:19px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Solicitar cotação em volume</a></div>
-        <p style="margin:16px 0 0;font-size:13px;letter-spacing:.02em;color:rgba(224,224,224,.62)">A partir de 20 unidades · nota fiscal · atendimento direto</p>
-      </div>
-    </div>
-  </section>
-  </sc-if>
-
-  <sc-if value="{{ isMobile }}">
-  <section id="volume" style="position:relative;scroll-margin-top:74px;background:linear-gradient(to bottom,#1B1A1F 0,#1B1A1F calc(100% - 94vw),rgba(27,26,31,0) calc(100% - 66vw)),url('assets/volume-bg-mobile-v2.webp') center bottom/100% auto no-repeat,#1B1A1F;color:#F9F8F6;padding:56px 20px 62vw;text-align:center;overflow:hidden">
-    <div data-reveal="" style="position:relative;max-width:420px;margin:0 auto">
-      <h2 style="margin:0;font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.13;color:#fff;text-wrap:balance">Quer comprar em <span style="background:linear-gradient(90deg,#FFFFFF 0%,#E2AD68 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">grandes quantidades?</span></h2>
-      <p style="margin:16px 0 0;font-size:17px;letter-spacing:-.01em;line-height:1.3;color:#E0E0E0">Temos condições especiais para compras em volume. Fale com nossa equipe e <strong style="font-weight:700">solicite uma cotação.</strong></p>
-      <div style="margin-top:24px"><a href="#volume" data-meeky-form="volume" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:17px 30px;border-radius:999px;font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Solicitar cotação em volume</a></div>
-      <p style="margin:14px 0 0;font-size:12.5px;color:rgba(224,224,224,.62)">A partir de 20 unidades · nota fiscal · atendimento direto</p>
-    </div>
-  </section>
-  </sc-if>
-
-  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <section style="position:relative;background:#050505 url('assets/bg-final.webp') center center/cover no-repeat;color:#F9F8F6;padding:40px 24px;height:690px;box-sizing:border-box;display:grid;place-items:center;text-align:center;overflow:hidden">
-    <div style="position:relative;max-width:760px;margin:0 auto" data-reveal="">
-      <div style="font-size:12.5px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(249,248,246,.85)">Meeky</div>
-      <h2 style="margin:30px 0 0;font-size:clamp(28px,3.1vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.16;text-wrap:balance">O mundo vai continuar tentando te distrair. A diferença é que <span style="color:#C9994F">agora você tem controle.</span></h2>
-      <div style="margin-top:38px">
-        <a href="#produtos" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:20px 44px;border-radius:999px;font-size:19px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Conhecer os produtos</a>
-      </div>
-    </div>
-  </section>
-  </sc-if>
-
-  <sc-if value="{{ isMobile }}">
-  <section style="position:relative;background:#050505 url('assets/bg-final-mobile.webp') center center/cover no-repeat;color:#F9F8F6;padding:60px 20px;min-height:400px;box-sizing:border-box;display:grid;place-items:center;text-align:center;overflow:hidden">
-    <div style="position:relative;max-width:420px" data-reveal="">
-      <div style="font-size:11px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(249,248,246,.85)">Meeky</div>
-      <h2 style="margin:20px 0 0;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.14;text-wrap:balance">O mundo vai continuar tentando te distrair. A diferença é que <span style="color:#C9994F">agora você tem controle.</span></h2>
-      <div style="margin-top:26px"><a href="#produtos" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:17px 34px;border-radius:999px;font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Conhecer os produtos</a></div>
-    </div>
-  </section>
-  </sc-if>
-
-  <dc-import name="Footer" hint-size="100%,420px"></dc-import>
+  <dc-import name="FooterV2" hint-size="100%,592px"></dc-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { isMobile: false };
+  state = { isMobile: false, w: 1440 };
   renderVals() {
-    const m = this.state.isMobile;
+    const m = this.state.isMobile, w = this.state.w;
+    // conteúdo do Figma tem 1322px; em telas menores tudo é reduzido na mesma proporção
+    const k = Math.min(1, (w - 48) / 1322);
+    const cw = Math.max(280, w - 40);
     return {
       isMobile: m, isDesktop: !m,
-      secPadY: m ? '60px' : '140px',
-      secPadX: m ? '20px' : '40px',
-      splitPad: m ? '44px 20px' : 'clamp(56px,7vw,96px) clamp(28px,6vw,90px)',
-      photoH: m ? '300px' : '480px',
-      headAlign: m ? 'center' : 'left',
-      splitH2: m ? '34px' : 'clamp(34px,3.5vw,52px)',
-      splitP: m ? '16px' : '20px',
-      splitLead: m ? '18px' : '21px',
-      ordText: m ? 2 : 1,
-      ordPhoto: m ? 1 : 2
+      k: k.toFixed(4),
+      mqZoom: k.toFixed(4),
+      heroH: Math.round(829 * k) + 'px',
+      heroBg: Math.round(2560 * k) + 'px ' + Math.round(829 * k) + 'px',
+      topPad: m ? '74px' : '94px',
+      kmCard: (cw / 519).toFixed(4),
+      kmGrid: (cw / 646).toFixed(4)
     };
   }
   componentDidMount() { this.setupViewport(); this.setupReveal(); this.setupCursor(); this.kickVideos(); this.setupSmoothScroll(); this.scrollToHash(); }
@@ -364,11 +382,17 @@ class Component extends DCLogic {
     // menu links like Home.html#volume: wait for the section to render, then scroll to it
     const id = (location.hash || '').slice(1);
     if (!id) return;
+    // a Home nova não tem mais a seção de compra em volume: links antigos (Home.html#volume) abrem o formulário
+    if (id === 'volume') {
+      const open = () => window.__meekyFormModal ? window.__meekyFormModal.open('volume') : setTimeout(open, 200);
+      setTimeout(open, 400);
+      return;
+    }
     let tries = 0;
     const go = () => {
       const el = document.getElementById(id);
       if (!el) { if (++tries < 40) setTimeout(go, 100); return; }
-      const y = el.getBoundingClientRect().top + window.pageYOffset - 74;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - (this.state.isMobile ? 74 : 94);
       if (window.__meekyLenis) window.__meekyLenis.scrollTo(y, { immediate: true, force: true });
       else window.scrollTo(0, y);
     };
@@ -381,7 +405,7 @@ class Component extends DCLogic {
       const w = document.documentElement.clientWidth || window.innerWidth || 0;
       if (!w) return;
       const m = w <= 860;
-      if (m !== this.state.isMobile) this.setState({ isMobile: m });
+      if (m !== this.state.isMobile || w !== this.state.w) this.setState({ isMobile: m, w });
     };
     this._onMq = check;
     window.addEventListener('resize', check);
@@ -436,8 +460,9 @@ class Component extends DCLogic {
         if (!el) return;
         e.preventDefault();
         // se alguma imagem acima carregar durante a rolagem, a seção muda de lugar: corrige no final
-        const fix = (n) => { const t = el.getBoundingClientRect().top; if (n > 0 && Math.abs(t - 90) > 12) lenis.scrollTo(el, { offset: -90, onComplete: () => fix(n - 1) }); };
-        lenis.scrollTo(el, { offset: -90, onComplete: () => fix(3) });
+        const off = this.state.isMobile ? 74 : 94;
+        const fix = (n) => { const t = el.getBoundingClientRect().top; if (n > 0 && Math.abs(t - off) > 12) lenis.scrollTo(el, { offset: -off, onComplete: () => fix(n - 1) }); };
+        lenis.scrollTo(el, { offset: -off, onComplete: () => fix(3) });
       });
     };
     if (window.Lenis) return start();
@@ -451,10 +476,10 @@ class Component extends DCLogic {
     if (document.getElementById('om-cursor-ring')) return;
     const ring = document.createElement('div');
     ring.id = 'om-cursor-ring';
-    ring.style.cssText = 'position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(201,148,80,.85);border-radius:50%;pointer-events:none;z-index:9998;transform:translate3d(-200px,-200px,0);transition:width .25s ease,height .25s ease,margin .25s ease,background-color .25s ease,border-color .25s ease';
+    ring.style.cssText = 'position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(158,105,193,.85);border-radius:50%;pointer-events:none;z-index:9998;transform:translate3d(-200px,-200px,0);transition:width .25s ease,height .25s ease,margin .25s ease,background-color .25s ease,border-color .25s ease';
     const dot = document.createElement('div');
     dot.id = 'om-cursor-dot';
-    dot.style.cssText = 'position:fixed;top:0;left:0;width:6px;height:6px;margin:-3px 0 0 -3px;background:#C99450;border-radius:50%;pointer-events:none;z-index:9999;transform:translate3d(-200px,-200px,0)';
+    dot.style.cssText = 'position:fixed;top:0;left:0;width:6px;height:6px;margin:-3px 0 0 -3px;background:#9E69C1;border-radius:50%;pointer-events:none;z-index:9999;transform:translate3d(-200px,-200px,0)';
     document.body.appendChild(ring);
     document.body.appendChild(dot);
     let mx = -200, my = -200, rx = -200, ry = -200;
@@ -466,8 +491,8 @@ class Component extends DCLogic {
       ring.style.width = big ? '58px' : '34px';
       ring.style.height = big ? '58px' : '34px';
       ring.style.margin = big ? '-29px 0 0 -29px' : '-17px 0 0 -17px';
-      ring.style.backgroundColor = big ? 'rgba(201,148,80,.14)' : 'transparent';
-      ring.style.borderColor = big ? 'rgba(201,148,80,1)' : 'rgba(201,148,80,.85)';
+      ring.style.backgroundColor = big ? 'rgba(158,105,193,.14)' : 'transparent';
+      ring.style.borderColor = big ? 'rgba(158,105,193,1)' : 'rgba(158,105,193,.85)';
     };
     const loop = () => {
       rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
@@ -528,6 +553,7 @@ class Component extends DCLogic {
     }
   }
 }
+
 </script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWMG33GN"

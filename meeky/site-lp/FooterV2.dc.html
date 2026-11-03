@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js?v=20261015e"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+<script src="./meeky-form-modal.js?v=20261017a"></script>
+</helmet>
+<!-- Rodapé novo da Home (Figma 3542:34) -->
+<footer style="background:#FFFDF9;overflow:hidden;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#847F88">
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="position:relative;width:1322px;height:592px;margin:0 auto;zoom:{{ k }}">
+      <img src="assets/home-v2/footer-logo.svg" alt="Meeky" width="145" height="25" style="position:absolute;left:7px;top:69.93px;width:144.732px;height:25.392px;display:block" />
+      <p style="position:absolute;left:7px;top:110.83px;width:239.122px;margin:0;font-size:15.732px;line-height:1.14">Tecnologia brasileira de áudio para foco, produtividade e performance.</p>
+      <p style="position:absolute;left:7px;top:175.85px;width:149.976px;margin:0;font-size:11.903px;line-height:1.14">Barganha Mix Ltda · CNPJ 43.341.597/0001-40</p>
+      <div style="position:absolute;left:868px;top:75.17px;width:136.341px;display:flex;flex-direction:column;gap:8.39px;font-size:15.732px;line-height:1.14">
+        <span style="font-weight:700">Navegação</span>
+        <a href="Produto.html" style="color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">Produto</a>
+        <a href="Sobre.html" style="color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">Sobre</a>
+        <a href="Blog.html" style="color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">Blog</a>
+        <a href="#volume" data-meeky-form="volume" style="color:#847F88;text-decoration:none;white-space:nowrap;transition:color .25s" style-hover="color:#9E69C1">Comprar Volume</a>
+      </div>
+      <div style="position:absolute;left:1018px;top:75.17px;width:136.341px;display:flex;flex-direction:column;gap:8.39px;font-size:15.732px;line-height:1.14">
+        <span style="font-weight:700">Suporte</span>
+        <a href="Duvidas.html" style="color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">Dúvidas</a>
+      </div>
+      <div style="position:absolute;left:1116px;top:75.17px;display:flex;flex-direction:column;gap:8.39px;font-size:15.732px;line-height:1.14">
+        <a href="https://www.instagram.com/meeky.br/" target="_blank" rel="noopener" style="font-weight:700;color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">Redes sociais</a>
+        <a href="mailto:contato@meeky.com.br" style="color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">contato@meeky.com.br</a>
+        <a href="tel:+5512991074311" style="color:#847F88;text-decoration:none;transition:color .25s" style-hover="color:#9E69C1">(12) 99107-4311</a>
+      </div>
+      <div style="position:absolute;left:0;top:254.5px;width:1322px;height:3px;background:rgba(0,0,0,.09)"></div>
+      <p style="position:absolute;left:0;right:0;top:293px;margin:0;text-align:center;font-size:15.732px;line-height:1.14">Todos os Direitos reservados</p>
+      <img src="assets/home-v2/footer-meeky-big.svg" alt="" width="1275" height="220" style="position:absolute;left:23px;top:372px;width:1275px;height:220px;display:block" />
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}">
+    <div style="padding:44px 20px 0">
+      <img src="assets/home-v2/footer-logo.svg" alt="Meeky" width="145" height="25" style="width:124px;height:auto;display:block" />
+      <p style="margin:14px 0 0;max-width:260px;font-size:14.5px;line-height:1.3">Tecnologia brasileira de áudio para foco, produtividade e performance.</p>
+      <p style="margin:10px 0 0;font-size:11.5px;line-height:1.3">Barganha Mix Ltda · CNPJ 43.341.597/0001-40</p>
+      <div style="margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:26px 18px;font-size:14.5px;line-height:1.2">
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-weight:700">Navegação</span>
+          <a href="Produto.html" style="color:#847F88;text-decoration:none">Produto</a>
+          <a href="Sobre.html" style="color:#847F88;text-decoration:none">Sobre</a>
+          <a href="Blog.html" style="color:#847F88;text-decoration:none">Blog</a>
+          <a href="#volume" data-meeky-form="volume" style="color:#847F88;text-decoration:none">Comprar Volume</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span style="font-weight:700">Suporte</span>
+          <a href="Duvidas.html" style="color:#847F88;text-decoration:none">Dúvidas</a>
+        </div>
+        <div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:9px">
+          <a href="https://www.instagram.com/meeky.br/" target="_blank" rel="noopener" style="font-weight:700;color:#847F88;text-decoration:none">Redes sociais</a>
+          <a href="mailto:contato@meeky.com.br" style="color:#847F88;text-decoration:none">contato@meeky.com.br</a>
+          <a href="tel:+5512991074311" style="color:#847F88;text-decoration:none">(12) 99107-4311</a>
+        </div>
+      </div>
+      <div style="margin-top:30px;height:2px;background:rgba(0,0,0,.09)"></div>
+      <p style="margin:18px 0 0;text-align:center;font-size:13px">Todos os Direitos reservados</p>
+      <img src="assets/home-v2/footer-meeky-big.svg" alt="" width="1275" height="220" style="margin-top:26px;width:100%;height:auto;display:block" />
+    </div>
+  </sc-if>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:592}}">
+class Component extends DCLogic {
+  state = { w: 1440 };
+  componentDidMount() {
+    const check = () => {
+      const w = document.documentElement.clientWidth || window.innerWidth || 0;
+      if (w && w !== this.state.w) this.setState({ w });
+    };
+    this._check = check;
+    window.addEventListener('resize', check);
+    requestAnimationFrame(check);
+    setTimeout(check, 300);
+    check();
+  }
+  componentWillUnmount() { if (this._check) window.removeEventListener('resize', this._check); }
+  renderVals() {
+    const w = this.state.w, m = w <= 860;
+    return { isMobile: m, isDesktop: !m, k: Math.min(1, (w - 48) / 1322).toFixed(4) };
+  }
+}
+</script>
+</body>
+</html>

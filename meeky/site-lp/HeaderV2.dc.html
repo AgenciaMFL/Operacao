@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js?v=20261015e"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+<style>
+  @keyframes menu-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+</style>
+<script src="./meeky-form-modal.js?v=20261017a"></script>
+</helmet>
+<!-- Menu novo da Home (Figma 2563:185) -->
+<div style="position:relative;background:#FDF6FF;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif">
+  <div style="position:relative;max-width:1370px;box-sizing:border-box;margin:0 auto;padding:0 {{ padX }};height:{{ barH }};display:flex;align-items:center;justify-content:space-between">
+    <a href="Home.html" aria-label="Meeky" style="display:flex;align-items:center;flex:0 0 auto;text-decoration:none">
+      <img src="assets/home-v2/logo-menu.svg" alt="Meeky" width="139" height="24" style="width:{{ logoW }};height:auto;display:block" />
+    </a>
+
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="position:absolute;left:50%;top:28px;transform:translateX(-50%);display:flex;align-items:center;gap:13px">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+          <div style="position:relative;display:flex;align-items:center" onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}">
+            <a href="{{ it.href }}" onClick="{{ it.onClick }}" style="display:flex;align-items:center;justify-content:center;height:34px;width:{{ it.w }};border-radius:130px;background:{{ it.bg }};font-size:18px;font-weight:400;letter-spacing:-.36px;color:{{ it.color }};text-decoration:none;white-space:nowrap;transition:background-color .3s,color .3s" style-hover="background-color:rgba(232,210,255,.34);color:#8B6A93">{{ it.label }}</a>
+            <sc-if value="{{ it.open }}">
+              <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:14px;min-width:250px;z-index:20">
+                <div style="display:flex;flex-direction:column;padding:8px;border-radius:18px;background:#fff;border:1px solid rgba(158,105,193,.18);box-shadow:0 26px 46px -28px rgba(54,19,75,.55);animation:menu-in .22s cubic-bezier(.16,.84,.44,1) both">
+                  <sc-for list="{{ it.children }}" as="c" hint-placeholder-count="2">
+                    <a href="{{ c.href }}" style="display:flex;align-items:center;gap:12px;padding:10px 15px 10px 10px;border-radius:12px;font-size:15px;font-weight:500;letter-spacing:-.005em;color:#36134B;text-decoration:none;white-space:nowrap;transition:background-color .25s,color .25s" style-hover="background-color:rgba(232,210,255,.45);color:#8B6A93"><img src="{{ c.icon }}" alt="" width="36" height="36" style="width:36px;height:36px;flex:0 0 auto;display:block;border-radius:999px" />{{ c.label }}</a>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </nav>
+    </sc-if>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="https://www.instagram.com/meeky.br/" target="_blank" rel="noopener" aria-label="Instagram da Meeky" style="position:relative;display:block;width:39px;height:39px;flex:0 0 auto;transition:transform .3s" style-hover="transform:scale(1.08)">
+        <img src="assets/home-v2/insta-circle.svg" alt="" width="39" height="39" style="position:absolute;inset:0;width:39px;height:39px;display:block" />
+        <img src="assets/home-v2/insta-icon.svg" alt="" width="21" height="21" style="position:absolute;left:9px;top:9px;width:21px;height:21px;display:block" />
+      </a>
+      <sc-if value="{{ isMobile }}">
+        <button type="button" aria-label="Menu" onClick="{{ toggle }}" style="flex:0 0 auto;width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;border:1px solid rgba(91,76,94,.2);border-radius:14px;background:rgba(255,255,255,.6);cursor:pointer">
+          <span style="display:block;width:19px;height:1.6px;background:#36134B;border-radius:2px;transition:transform .3s cubic-bezier(.16,.84,.44,1);transform:{{ bar1 }}"></span>
+          <span style="display:block;width:19px;height:1.6px;background:#36134B;border-radius:2px;transition:opacity .2s;opacity:{{ barMid }}"></span>
+          <span style="display:block;width:19px;height:1.6px;background:#36134B;border-radius:2px;transition:transform .3s cubic-bezier(.16,.84,.44,1);transform:{{ bar3 }}"></span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{ open }}">
+    <div style="position:absolute;top:{{ barH }};left:0;right:0;background:rgba(253,246,255,.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(158,105,193,.15);box-shadow:0 24px 40px -28px rgba(54,19,75,.45);padding:10px 20px 22px;animation:menu-in .28s cubic-bezier(.16,.84,.44,1) both">
+      <nav style="display:flex;flex-direction:column">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column">
+            <a href="{{ it.href }}" onClick="{{ it.onMobileClick }}" style="display:flex;align-items:center;justify-content:space-between;padding:14px 2px;font-size:17px;font-weight:500;letter-spacing:-.01em;text-decoration:none;color:{{ it.mColor }};border-bottom:1px solid rgba(91,76,94,.1)">{{ it.label }}<sc-if value="{{ it.hasChildren }}"><span style="display:inline-block;font-size:18px;line-height:1;color:#8B6A93;transition:transform .3s;transform:{{ it.arrow }}">▾</span></sc-if></a>
+            <sc-if value="{{ it.mobileOpen }}">
+              <div style="display:flex;flex-direction:column;padding-left:16px">
+                <sc-for list="{{ it.children }}" as="c" hint-placeholder-count="2">
+                  <a href="{{ c.href }}" onClick="{{ close }}" style="display:flex;align-items:center;gap:12px;padding:10px 2px;font-size:15px;font-weight:400;text-decoration:none;color:#5B4C5E;border-bottom:1px solid rgba(91,76,94,.1)"><img src="{{ c.icon }}" alt="" width="34" height="34" style="width:34px;height:34px;flex:0 0 auto;display:block;border-radius:999px" />{{ c.label }}</a>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </nav>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:94},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;produto&quot;,&quot;sobre&quot;,&quot;duvidas&quot;,&quot;contato&quot;,&quot;blog&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { isMobile: false, open: false, openMenu: null, mobileSub: null };
+  componentDidMount() {
+    const check = () => {
+      const w = document.documentElement.clientWidth || window.innerWidth || 0;
+      if (!w) return;
+      const m = w <= 860;
+      if (m !== this.state.isMobile) this.setState({ isMobile: m, open: false });
+    };
+    this._check = check;
+    window.addEventListener('resize', check);
+    if (window.ResizeObserver) { this._ro = new ResizeObserver(check); this._ro.observe(document.documentElement); }
+    requestAnimationFrame(check);
+    setTimeout(check, 300);
+    check();
+  }
+  componentWillUnmount() {
+    if (this._check) window.removeEventListener('resize', this._check);
+    if (this._ro) this._ro.disconnect();
+  }
+  renderVals() {
+    const active = String(this.props.active || 'home').toLowerCase();
+    const children = {
+      produto: [
+        { label: 'Meeky F5 ANC Pro', href: 'Produto.html', icon: 'assets/menu-icon-f5.webp' },
+        { label: 'Motion 1', href: 'Motion1.html', icon: 'assets/menu-icon-motion1.webp' }
+      ]
+    };
+    // larguras de cada item como no Figma
+    const items = [
+      { id: 'home', label: 'Home', href: 'Home.html', w: '103px' },
+      { id: 'produto', label: 'Produto', href: 'Produto.html', w: '86px' },
+      { id: 'sobre', label: 'Sobre', href: 'Sobre.html', w: '76px' },
+      { id: 'duvidas', label: 'Dúvidas', href: 'Duvidas.html', w: '86px' },
+      { id: 'blog', label: 'Blog', href: 'Blog.html', w: '64px' },
+      { id: 'contato', label: 'Contato', href: 'Contato.html', w: '94px' }
+    ].map(i => Object.assign({}, i, {
+      color: i.id === active ? '#8B6A93' : '#5B4C5E',
+      mColor: i.id === active ? '#9E69C1' : '#2A1530',
+      bg: i.id === active ? 'rgba(232,210,255,.34)' : 'transparent',
+      children: children[i.id] || [],
+      hasChildren: !!children[i.id],
+      open: !!children[i.id] && this.state.openMenu === i.id,
+      onEnter: children[i.id] ? () => this.setState({ openMenu: i.id }) : null,
+      onLeave: children[i.id] ? () => this.setState({ openMenu: null }) : null,
+      // "Produto" não navega: o clique só abre a lista de produtos
+      onClick: children[i.id] ? (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ openMenu: i.id }); } : null,
+      onMobileClick: children[i.id] ? (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState(s => ({ mobileSub: s.mobileSub === i.id ? null : i.id })); } : () => this.setState({ open: false }),
+      mobileOpen: !!children[i.id] && this.state.mobileSub === i.id,
+      arrow: this.state.mobileSub === i.id ? 'rotate(180deg)' : 'none'
+    }));
+    const m = this.state.isMobile, open = m && this.state.open;
+    return {
+      items,
+      isMobile: m,
+      isDesktop: !m,
+      open,
+      padX: m ? '20px' : '24px',
+      barH: m ? '74px' : '94px',
+      logoW: m ? '112px' : '139px',
+      bar1: open ? 'translateY(6.6px) rotate(45deg)' : 'none',
+      bar3: open ? 'translateY(-6.6px) rotate(-45deg)' : 'none',
+      barMid: open ? 0 : 1,
+      toggle: () => this.setState(s => ({ open: !s.open, mobileSub: null })),
+      close: () => this.setState({ open: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
