@@ -389,3 +389,5 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   WhatsApp e source diferente de "Formulario Imperatriz" (230 sem source, 61 "Avaliação Comercial - Sbelt
   Imperatriz2", 3 "Spa Solutions - falta na avaliação"); os 294 conferidos um a um. Quem veio do formulário
   (1.339) também recebe WhatsApp automático, por isso ter conversa no WhatsApp não basta para a tag.
+- **03/11/2026** — Imperatriz: tag `whatsapp` em mais 89 contatos novos desde 28/10 (88 sem source, 1 "Avaliação
+  Comercial - Sbelt Imperatriz2"), mesmo critério; total com a tag: 383. Workflow automático ainda pendente (§8 item 11).
