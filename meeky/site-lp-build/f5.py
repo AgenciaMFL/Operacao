@@ -255,9 +255,11 @@ M = f'''
     <div style="margin-top:26px;padding-left:20px">{depo_track(290, 230, 14, 15.5)}</div>
   </section>
 
-  <section style="position:relative;background:#F9F0FF;overflow:hidden;padding:44px 20px 48px">
+  <section style="position:relative;background:#F9F0FF;overflow:hidden;padding:0 20px 48px">
     <img src="{P}cta-eq.svg" alt="" width="1634" height="439" style="position:absolute;left:-40%;top:-6px;width:200%;height:auto;transform:scaleY(-1);pointer-events:none">
-    <div style="position:relative">
+    <!-- fone flutuando em cima, igual à página do Motion 1 -->
+    <div class="flt-p" style="position:relative;margin:10px auto 0;width:68vw;max-width:320px;aspect-ratio:313/300"><img src="{P}hero-headphone.webp" alt="" width="266" height="249" loading="lazy" style="position:absolute;left:7.5%;top:8.5%;width:85%;height:auto;transform:rotate(12.35deg)"></div>
+    <div style="position:relative;margin-top:2vw">
       <h2 class="hub" style="margin:0;font-weight:700;font-size:56px;letter-spacing:-1.7px;line-height:.94;color:#441463">F5 ANC Pro</h2>
       <p class="pop" style="margin:14px 0 0;font-size:16px;line-height:1.35;color:#4C3F5C">Menos distrações. Mais espaço para o que importa. Leve o seu próximo play para outro nível.</p>
       {m_price()}
