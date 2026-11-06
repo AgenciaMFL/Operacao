@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Blog | Meeky Audio</title>
 <meta name="description" content="Guias, comparativos e reviews sobre headphones com cancelamento de ruído, foco e produtividade.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,21 +126,22 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
     <dc-import name="HeaderV2" active="blog" hint-size="100%,94px"></dc-import>
   </div>
   <section class="b-hero">
-    <img class="eq" src="assets/blog-v2/eq.svg" alt="" width="1634" height="439">
+    <img loading="lazy" class="eq" src="assets/blog-v2/eq.svg" alt="" width="1634" height="439">
     <div class="b-eyebrow">Blog Meeky</div>
     <h1>Conhecimento para<br>ouvir o seu mundo.</h1>
     <p>Guias, comparativos e ideias para escolher seu fone e aproveitar cada momento.</p>
-    <label class="b-search"><img src="assets/blog-v2/search.svg" alt="" width="21" height="21"><input id="b-q" type="search" placeholder="O que você quer descobrir?" aria-label="Buscar no blog""></label>
+    <label class="b-search" id="b-s1"><img loading="lazy" src="assets/blog-v2/search.svg" alt="" width="21" height="21"><input id="b-q" class="b-qi" type="search" placeholder="O que você quer descobrir?" aria-label="Buscar no blog" autocomplete="off"><button type="button" class="b-clear" aria-label="Limpar busca">×</button></label>
   </section>
+  <div class="b-float" id="b-float"><label class="b-search"><img loading="lazy" src="assets/blog-v2/search.svg" alt="" width="21" height="21"><input class="b-qi" type="search" placeholder="Buscar no blog" aria-label="Buscar no blog" autocomplete="off"><button type="button" class="b-clear" aria-label="Limpar busca">×</button></label></div>
   <section class="b-list">
-    <div class="b-list-h"><h2>Sua próxima leitura começa aqui.</h2><span>GUIAS E COMPARATIVOS · 37 ARTIGOS</span></div>
+    <div class="b-list-h"><h2>Sua próxima leitura começa aqui.</h2><span id="b-count" data-all="GUIAS E COMPARATIVOS · 37 ARTIGOS">GUIAS E COMPARATIVOS · 37 ARTIGOS</span></div>
     <div class="b-grid">
       <a class="b-card" data-q="black friday 2026: como escolher fone sem cair em armadilha checklist prático para comprar fone na black friday 2026: anc real vs anc de marketing, codec, bateria medida, garantia, nota fiscal, anatel e loja com cnpj. guias" href="Blog-black-friday-2026-como-escolher-fone-sem-cair-em-armadilha.html"><img src="assets/blog/cover-black-friday-2026.webp" alt="Black Friday 2026: como escolher fone sem cair em armadilha" loading="lazy"><div><small>Guias · 19 Out 2026</small><h2>Black Friday 2026: como escolher fone sem cair em armadilha</h2><p>Checklist prático para comprar fone na Black Friday 2026: ANC real vs ANC de marketing, codec, bateria medida, garantia, nota fiscal, Anatel e loja com CNPJ.</p><span>Ler artigo →</span></div></a>
       <a class="b-card" data-q="presente de natal 2026: guia de fone bluetooth por perfil guia de presente de natal 2026: como escolher o fone bluetooth certo para quem trabalha em casa, estuda, corre, pedala ou treina. sem promessas de prazo. guias" href="Blog-presente-de-natal-2026-fone-bluetooth-guia.html"><img src="assets/blog/cover-presente-natal-2026.webp" alt="Presente de Natal 2026: guia de fone Bluetooth por perfil" loading="lazy"><div><small>Guias · 19 Out 2026</small><h2>Presente de Natal 2026: guia de fone Bluetooth por perfil</h2><p>Guia de presente de Natal 2026: como escolher o fone Bluetooth certo para quem trabalha em casa, estuda, corre, pedala ou treina. Sem promessas de prazo.</p><span>Ler artigo →</span></div></a>
@@ -190,7 +200,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }
@@ -201,8 +211,41 @@ class Component extends DCLogic {
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <script>
-// busca do blog: filtra os cards pelo título, resumo e categoria
-document.addEventListener('input',function(e){if(!e.target||e.target.id!=='b-q')return;var q=e.target.value.trim().toLowerCase(),n=0;document.querySelectorAll('.b-list .b-card').forEach(function(c){var ok=!q||(c.getAttribute('data-q')||'').indexOf(q)>-1;c.style.display=ok?'':'none';if(ok)n++});var em=document.getElementById('b-empty'),en=document.getElementById('b-end');if(em)em.style.display=n?'none':'block';if(en)en.style.display=n?'block':'none'});
+// Busca do blog: filtra os cards pelo título, resumo e categoria (sem diferenciar acentos).
+// A barra do banner e a barra fixa (aparece ao rolar) usam o mesmo texto.
+(function(){
+  function norm(t){ return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function apply(v, from){
+    document.querySelectorAll('.b-qi').forEach(function(i){ if(i!==from) i.value=v; i.closest('.b-search').classList.toggle('has', !!v); });
+    var words=norm(v).split(/\s+/).filter(Boolean), n=0;
+    document.querySelectorAll('.b-list .b-card').forEach(function(c){
+      var t=norm(c.getAttribute('data-q')), ok=words.every(function(w){ return t.indexOf(w)>-1; });
+      c.style.display=ok?'':'none'; if(ok) n++;
+    });
+    var em=document.getElementById('b-empty'), en=document.getElementById('b-end'), ct=document.getElementById('b-count');
+    if(em) em.style.display=n?'none':'block'; if(en) en.style.display=n?'block':'none';
+    if(ct) ct.textContent=v ? (n+(n===1?' ARTIGO ENCONTRADO':' ARTIGOS ENCONTRADOS')) : ct.getAttribute('data-all');
+  }
+  function toList(){
+    var l=document.querySelector('.b-list'); if(!l) return;
+    var off=(window.innerWidth<=860?74:94)+80, y=l.getBoundingClientRect().top+window.pageYOffset-off;
+    if(window.__meekyLenis) window.__meekyLenis.scrollTo(y); else window.scrollTo({top:y,behavior:'smooth'});
+  }
+  document.addEventListener('input',function(e){
+    if(!e.target.classList || !e.target.classList.contains('b-qi')) return;
+    apply(e.target.value, e.target);
+    if(e.target.closest('#b-float')) { var l=document.querySelector('.b-list'); if(l && l.getBoundingClientRect().bottom<200) toList(); }
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Enter' && e.target.classList && e.target.classList.contains('b-qi')){ e.preventDefault(); e.target.blur(); toList(); } });
+  document.addEventListener('click',function(e){ var b=e.target.closest && e.target.closest('.b-clear'); if(!b) return; e.preventDefault(); apply('', null); var i=b.parentNode.querySelector('.b-qi'); if(i) i.focus(); });
+  // mostra a barra fixa quando a busca do banner sai da tela
+  function tick(){
+    var s1=document.getElementById('b-s1'), f=document.getElementById('b-float'); if(!s1||!f) return;
+    var top=window.innerWidth<=860?74:94;
+    f.classList.toggle('on', s1.getBoundingClientRect().bottom < top+8);
+  }
+  window.addEventListener('scroll',tick,{passive:true}); window.addEventListener('resize',tick); setInterval(tick,250);
+})();
 </script>
 </body>
 </html>

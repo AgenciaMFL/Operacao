@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Multiponto Bluetooth na Prática: Como Conectar Notebook e Celular ao Mesmo Tempo | Meeky Audio</title>
 <meta name="description" content="Guia técnico do multipoint no Bluetooth 5.4 do Meeky F5: passo a passo para parear em dois dispositivos e casos de uso reais no dia a dia.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">13 Jul 2026 · 7 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-jbl-vs-meeky.webp" alt="Multiponto Bluetooth na Prática: Como Conectar Notebook e Celular ao Mesmo Tempo"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-jbl-vs-meeky.webp" alt="Multiponto Bluetooth na Prática: Como Conectar Notebook e Celular ao Mesmo Tempo"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>Multipoint é a função que mantém o mesmo headphone Bluetooth conectado em dois dispositivos ao mesmo tempo — normalmente notebook e celular. Você fica em reunião no notebook, o celular toca, o áudio troca sozinho. Fim das rotinas de "desemparelhar-emparelhar" a cada vez que alterna de dispositivo. No <a href="Produto.html">Meeky F5 ANC Pro</a>, essa função vem habilitada de fábrica pelo Bluetooth 5.4.</p><p>Este guia explica o conceito, o passo a passo de configuração e os cenários reais onde multipoint economiza tempo de verdade.</p><h2>O que é multipoint e por que não é a mesma coisa que multipairing?</h2><p><strong>Multipairing</strong> é a memória: o fone lembra de vários dispositivos que já pareou, mas conecta em um por vez. Praticamente todo fone Bluetooth moderno faz multipairing. <strong>Multipoint</strong> é diferente — o fone fica <em>ativo em dois dispositivos simultaneamente</em>. Se o dispositivo A está reproduzindo música e chega uma chamada no dispositivo B, o fone pausa a música e passa a chamada, tudo sem intervenção manual. É essa a função que muda a rotina.</p><h2>Bluetooth 5.4 é obrigatório para multipoint?</h2><p>Não. Multipoint já existia no Bluetooth 5.0. O que o <a href="Blog-bluetooth-54-53-50-diferenca-headphone.html">Bluetooth 5.4</a> traz é execução melhor: menos consumo de bateria mantendo duas conexões vivas, menos microcortes na troca de fonte e maior estabilidade quando os dois dispositivos disputam prioridade. Por isso o multipoint em 5.4 é sensivelmente mais fluido que em versões anteriores.</p><h2>Como parear o Meeky F5 ANC Pro em notebook e celular ao mesmo tempo?</h2><p>Passo a passo prático para o primeiro pareamento em dois dispositivos:</p><ol><li>Com o fone desligado, segure o botão liga/desliga por cerca de 5 segundos até o LED piscar em azul/vermelho — modo pareamento.</li><li>No notebook, abra <em>Bluetooth</em>, procure "Meeky F5 ANC Pro" e conecte.</li><li>Desative rapidamente o Bluetooth do notebook (ou coloque o fone em modo pareamento de novo segurando o botão).</li><li>Agora no celular, procure "Meeky F5 ANC Pro" no Bluetooth e conecte.</li><li>Reative o Bluetooth do notebook. Em poucos segundos, o fone se conecta aos dois simultaneamente.</li></ol><p>A partir da próxima vez que ligar o fone, ele reconecta automaticamente nos dois últimos dispositivos usados. O áudio segue o dispositivo que estiver ativo — se ambos tocam ao mesmo tempo, o primeiro que iniciou o stream costuma ter prioridade.</p><h2>Quais são os casos de uso reais no dia a dia?</h2><p>Três cenários que aparecem toda semana em quem trabalha remoto:</p><ul><li><strong>Reunião no notebook + ligação no celular:</strong> você está em call e o celular toca. O fone pausa a reunião, toca o telefone. Ao encerrar, volta para a call. Sem retirar o fone.</li><li><strong>Música pessoal + reunião de trabalho:</strong> você ouve Spotify no celular durante um intervalo. O Google Meet começa no notebook. O áudio migra sozinho para a reunião.</li><li><strong>Notificações do WhatsApp Web:</strong> notebook conectado para trabalho, celular parado no bolso. Uma mensagem de voz chega — você ouve pelo fone sem tocar em nada.</li></ul><h2>Multipoint funciona misturando sistemas operacionais?</h2><p>Sim. Windows + iPhone, macOS + Android, iPad + notebook Linux — qualquer combinação. O multipoint é gerenciado pelo próprio fone, não pelo sistema operacional. O que importa é os dois dispositivos suportarem Bluetooth clássico (todos os laptops e celulares modernos suportam). Se você quer aproveitar a função com áudio de alta qualidade em cima, veja como escolher entre <a href="Blog-ldac-vs-aac-vs-sbc-diferenca-headphone-bluetooth.html">LDAC, AAC e SBC</a> conforme o dispositivo que está ativo.</p><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><p>Veja também: <a href="Blog-headphone-home-office-anc.html">headphone com ANC para home office</a> e <a href="Blog-headphone-anc-70-horas-bateria-por-que-importa.html">por que 70h de bateria faz diferença</a>.</p><h2>Perguntas frequentes</h2><div>O que é multipoint Bluetooth?+<p>Multipoint é a função que permite ao fone Bluetooth ficar conectado em dois dispositivos ao mesmo tempo — por exemplo, o notebook do trabalho e o celular pessoal. Se uma chamada entra no celular enquanto você está em reunião no notebook, o fone alterna a fonte automaticamente sem precisar reparear. É diferente de multipairing (memória de vários dispositivos), que só guarda pareamentos, mas conecta em um por vez.</p>Preciso de Bluetooth 5.4 para usar multipoint?+<p>Não obrigatoriamente. Multipoint existe desde versões anteriores do Bluetooth (5.0 já suporta). O que o Bluetooth 5.4 traz é maior estabilidade de conexão simultânea, menor consumo de energia e menos travamento quando os dois dispositivos disputam a atenção do fone. O F5 ANC Pro usa Bluetooth 5.4 justamente para o multipoint trabalhar sem microcortes.</p>Como ativar multipoint no Meeky F5 ANC Pro passo a passo?+<p>Primeiro pareamento: 1) ligue o fone segurando o botão até entrar em modo pareamento (LED piscando); 2) conecte no primeiro dispositivo (ex: notebook) via Bluetooth; 3) desligue o Bluetooth do notebook por um instante ou coloque o fone novamente em modo pareamento; 4) conecte no segundo dispositivo (ex: celular); 5) reative o Bluetooth do primeiro. A partir daí, o fone conecta nos dois automaticamente ao ligar. O áudio segue o dispositivo ativo.</p>Quais casos de uso reais valem multipoint no dia a dia?+<p>Os mais comuns: (1) você está em call no notebook e recebe uma ligação no celular — o fone troca a fonte sozinho; (2) você está ouvindo música pelo celular e começa um Google Meet no notebook — o áudio vai automaticamente para a reunião; (3) você usa o notebook para trabalho e o celular para notificações do WhatsApp Web ou Spotify em standby. Ganha-se dezenas de reparearamentos por semana.</p>Multipoint funciona entre Android e iPhone ao mesmo tempo?+<p>Sim. O multipoint do fone é agnóstico de sistema operacional — o que ele controla é a conexão Bluetooth simultânea, não a plataforma. Você pode ter um iPhone pessoal e um MacBook, um Android e um Windows, um iPad e um celular Android. Desde que os dois dispositivos suportem Bluetooth clássico (praticamente todos suportam), o fone alterna entre eles normalmente.</p></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

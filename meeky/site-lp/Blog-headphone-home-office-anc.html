@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Headphone para home office com ANC: o que ninguém te conta antes de comprar | Meeky Audio</title>
 <meta name="description" content="Descubra por que o headphone certo para home office vai além do preço. ANC, microfone, bateria e conforto — o que realmente importa para quem trabalha em casa.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <p>ANC, microfone, bateria e conforto — o que realmente importa para quem trabalha em casa.</p>
     <div class="b-meta">15 Abr 2026 · 7 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-home-office-anc.webp" alt="Headphone para home office com ANC: o que ninguém te conta antes de comprar"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-home-office-anc.webp" alt="Headphone para home office com ANC: o que ninguém te conta antes de comprar"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>O melhor headphone para home office com ANC é o que reduz ruído constante, tem microfone honesto para reuniões, conforto para 4-6 horas e conexão estável. Em 2026, o microfone é o critério mais ignorado — e o que mais faz diferença no dia a dia.</p><p>Trabalhar em casa parece libertador — até você perceber que a rua, os vizinhos, a família e o cachorro do andar de cima fazem mais barulho do que qualquer escritório corporativo.</p><p>Quem trabalha em home office sabe: a batalha pelo foco é real. E o headphone certo pode ser a diferença entre um dia produtivo e um dia perdido em distrações.</p><p>Mas não é qualquer headphone que resolve. Há pontos específicos que a maioria dos guias não menciona — e que fazem toda a diferença na prática. Vamos a eles.</p><h2>Por que o headphone gamer não é o ideal para home office</h2><p>Headphones gamer são ótimos para games. Mas para reuniões de trabalho e longas horas de foco, eles apresentam problemas práticos: são pesados, têm microfone boom que incomoda em reuniões de vídeo, e geralmente não têm ANC.</p><p>Para home office, o que você precisa é diferente: conforto para 6-8 horas de uso, microfone integrado limpo para chamadas, cancelamento de ruído ativo e bateria longa.</p><h2>ANC: o recurso mais subestimado para quem trabalha em casa</h2><p>Imagina estar numa reunião importante com o cliente e, de repente, a moto do vizinho revvando lá fora. Ou tentar focar numa tarefa complexa com televisão ao fundo.</p><p>O cancelamento de ruído ativo resolve isso. Com o ANC ligado, ruídos constantes como trânsito, ar-condicionado e conversas ao fundo são reduzidos drasticamente. Você cria um bolsão de silêncio sob demanda — sem precisar mudar de ambiente. Entenda melhor <a href="Blog-o-que-e-cancelamento-de-ruido-ativo-anc.html">como o cancelamento de ruído ativo funciona</a>.</p><p>No <a href="Produto.html"><strong>Meeky F5 ANC Pro</strong></a>, o cancelamento chega a <strong>20±3dB</strong>. Na prática, é suficiente para tornar praticamente inaudível o barulho de rua em apartamentos e casas urbanas.</p><h2>Microfone integrado: o que avaliar para reuniões</h2><p>Para chamadas e videoconferências, o microfone do headphone é tão importante quanto o cancelamento de ruído. Um microfone ruim coloca você em desvantagem em reuniões — sua voz soa abafada, com eco ou com ruído de fundo.</p><p>Avalie: qualidade de captação de voz, redução de eco e clareza em ambientes com algum ruído. O <strong>Meeky F5 ANC Pro</strong> tem microfone integrado testado para chamadas claras mesmo em home office com barulho de fundo.</p><h2>Bateria: o problema que aparece nas piores horas</h2><p>Nada pior do que o headphone morrer no meio de uma reunião importante. E com o ANC ligado, a bateria descarrega mais rápido.</p><p>A maioria dos headphones ANC dura entre 20 e 35 horas com cancelamento ativo. O <strong>Meeky F5 ANC Pro</strong> tem <strong>70 horas de autonomia</strong> — o suficiente para mais de duas semanas de uso diário sem recarregar. Veja por que <a href="Blog-headphone-70-horas-bateria.html">70 horas de bateria no headphone</a> faz tanta diferença. É uma das maiores autonomias da categoria custo-benefício no Brasil.</p><figure><img src="assets/blog/lifestyle-work-closeup.webp" alt="Profissional usando o headphone Meeky F5 ANC Pro durante trabalho remoto em home office" loading="lazy"><figcaption>Foco total no home office com o Meeky F5 ANC Pro</figcaption></figure><h2>Conforto: o fator que todo mundo esquece de pesquisar</h2><p>Um headphone que aperta depois de 2 horas é inaceitável para quem trabalha 8 horas por dia. Procure por: almofadas macias com espuma de memória ou espuma densa, arco ajustável com boa distribuição de peso e formato over-ear (que cobre toda a orelha).</p><p>Clientes que testaram o <strong>Meeky F5 ANC Pro</strong> relatam usar por várias horas seguidas sem desconforto — algo confirmado nas avaliações na Amazon.</p><h2>Home office em 2026: o setup que realmente funciona</h2><p>O headphone ideal para home office em 2026 combina: ANC eficiente para isolamento, microfone limpo para chamadas, bateria longa para o dia todo, conforto para uso prolongado e preço acessível.</p><p>O <strong>Meeky F5 ANC Pro</strong> foi desenvolvido pensando exatamente nisso. Com cancelamento de 20dB, 70 horas de bateria, microfone integrado e certificação Anatel, ele resolve o principal problema de quem trabalha em casa: o barulho que mata o foco.</p><div class="b-cta"><a href="Produto.html">Conheça o Meeky F5 ANC Pro </a></div><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><p>Veja também: <a href="Blog-headphone-anc-para-programador-desenvolvedor.html">headphone ANC para programador</a> e <a href="Blog-quanto-dura-bateria-headphone-anc-na-pratica.html">quanto dura a bateria na prática</a>.</p><div><h2>Perguntas frequentes</h2><div><h3>Qual o melhor headphone ANC para home office?</h3><p>O ideal é um headphone over-ear com ANC ativo, microfone integrado, bateria de longa duração e conforto para uso prolongado. O Meeky F5 ANC Pro atende todos esses critérios com 70 horas de bateria e cancelamento de até 20dB.</p></div><div><h3>Headphone com ANC melhora a produtividade no home office?</h3><p>Sim. Estudos mostram que reduzir ruídos externos aumenta o foco e diminui erros em tarefas cognitivas. O ANC elimina sons constantes como ar-condicionado, trânsito e conversas ao fundo, criando um ambiente mais propício à concentração.</p></div><div><h3>Headphone ANC funciona bem em chamadas e reuniões?</h3><p>Sim, desde que o modelo tenha microfone com cancelamento de ruído (ENC). O Meeky F5 ANC Pro possui microfone integrado que filtra ruídos ambiente durante chamadas, garantindo voz clara para quem está do outro lado.</p></div></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

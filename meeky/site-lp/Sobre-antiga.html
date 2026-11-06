@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<!-- Meta Pixel Code -->
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
 
+<meta name="robots" content="noindex">
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400&display=swap">
 <style>
   @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes move-up-alternate{0%{transform:translateY(0)}50%{transform:translateY(80%)}51%{transform:translateY(-80%)}to{transform:translateY(0)}}
@@ -45,7 +46,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   a:hover { color:#8A5C1E; }
   img, video { max-width:100%; display:block; }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div ref="{{ rootRef }}" style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#0A0A0A">
 
@@ -90,7 +91,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 
   <div style="background:#fff;display:grid;grid-template-columns:{{ splitCols }};align-items:center;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}" data-reveal="">
     <div style="display:flex;align-items:center;justify-content:center;padding-left:{{ secPadX }};padding-right:{{ secPadX }}">
-      <img src="assets/meeky-logo-3d.webp" alt="Logo MEEKY em 3D" style="width:{{ logoW }};height:auto">
+      <img loading="lazy" src="assets/meeky-logo-3d.webp" alt="Logo MEEKY em 3D" style="width:{{ logoW }};height:auto">
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;padding:{{ splitPad }};text-align:{{ splitAlign }}">
       <h2 style="margin:0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.06;text-wrap:balance">Do problema real ao produto.</h2>
@@ -276,7 +277,7 @@ class Component extends DCLogic {
     };
     if (window.Lenis) return start();
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

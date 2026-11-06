@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Meeky F5 ANC Pro vs QCY H3: comparativo honesto com dados reais | Meeky Audio</title>
 <meta name="description" content="Meeky F5 e QCY H3 custam quase o mesmo em abril de 2026. Mas qual entrega mais no dia a dia? Comparamos bateria, ANC, microfone e garantia com dados reais.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">20 Abr 2026 · 8 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-f5-vs-qcy.webp" alt="Meeky F5 ANC Pro vs QCY H3: comparativo honesto com dados reais"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-f5-vs-qcy.webp" alt="Meeky F5 ANC Pro vs QCY H3: comparativo honesto com dados reais"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>Meeky F5 e QCY H3 custam praticamente o mesmo em abril de 2026 — R$297 vs R$298,90. A diferença real está no microfone, na bateria com ANC ativo e no frete. Para home office com reuniões frequentes, o microfone é o critério decisivo.</p><p>Você pesquisou "headphone ANC até R$ 300" e apareceram dois nomes: QCY H3 e Meeky F5 ANC Pro. Preço quase idêntico — R$ 298,90 vs R$ 297. Qual escolher? Fizemos a comparação com dados reais de abril de 2026, sem achismo.</p><h2>Ficha técnica — dados verificados em abril de 2026</h2><div><table><thead><tr><th>Especificação</th><th>Meeky F5 ANC Pro</th><th>QCY H3</th></tr></thead><tbody><tr><td>ANC</td><td>até 20dB</td><td>até 43dB</td></tr><tr><td>Bateria sem ANC</td><td>70h</td><td>60h</td></tr><tr><td>Bateria com ANC</td><td>40h</td><td>35h</td></tr><tr><td>Bluetooth</td><td>5.4</td><td>5.4</td></tr><tr><td>Drivers</td><td>40mm</td><td>40mm titânio</td></tr><tr><td>Preço</td><td>R$ 297</td><td>R$ 298,90</td></tr><tr><td>Garantia</td><td>12 meses</td><td>12 meses (loja oficial)</td></tr><tr><td>Frete</td><td>Grátis</td><td>cobrado à parte</td></tr></tbody></table></div><h2>Bateria com ANC ativo — onde a diferença aparece na prática</h2><p>No papel, 40h vs 35h parece pouco. Na prática, para quem usa 5 horas por dia — home office, academia e deslocamento — o Meeky F5 dura 8 dias sem recarregar. O QCY H3 dura 7 dias. A diferença é pequena em números, mas real em rotina: você recarrega o Meeky na sexta, o QCY na quinta. Entenda <a href="Blog-headphone-anc-70-horas-bateria-por-que-importa.html">por que 70 horas de bateria muda tudo</a>.</p><h2>ANC — QCY tem vantagem técnica, mas com ressalva</h2><p>O QCY H3 entrega ANC de até 43dB contra 20dB do Meeky F5. Para ambientes extremos como obras ou aeroportos, o QCY leva vantagem técnica. Para home office, estudos e academia — os três casos de uso mais comuns — o ANC de 20dB do Meeky F5 é mais que suficiente para eliminar distrações do cotidiano.</p><h2>Microfone — ponto crítico para home office</h2><p>Reviews no Mobizoo e Oficina da Net apontam o microfone do QCY H3 como o principal ponto fraco: "ruim", "só serve para quebrar um galho numa ligação". Para quem usa o fone em reuniões e chamadas frequentes, esse é um fator decisivo. O Meeky F5 ANC Pro tem microfone ENC com filtro de ruído ambiente para chamadas mais claras.</p><h2>Frete — detalhe que faz diferença</h2><p>O site qcybrasil.com cobra frete para pedidos. Quem compra o H3 por R$ 298,90 paga o frete à parte. O Meeky F5 tem frete grátis para todo o Brasil — sem surpresas na hora de fechar a compra.</p><h2>Qual escolher?</h2><p>Escolha o <strong>QCY H3</strong> se o ANC máximo possível é sua prioridade absoluta e você não faz muitas chamadas.</p><p>Escolha o <a href="Produto.html"><strong>Meeky F5 ANC Pro</strong></a> se quer 40h de bateria com ANC ativo, microfone para reuniões, frete grátis e compra nacional com garantia real de 12 meses — tudo pelo mesmo preço. Confira nosso guia do <a href="Blog-melhor-headphone-anc-ate-300-reais-brasil-2026.html">melhor headphone ANC até R$300 em abril de 2026</a>.</p><a href="Produto.html">Garanta o Meeky F5 ANC Pro por R$ 297 </a><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><hr><h2>Perguntas frequentes</h2><div><h3>O QCY H3 é melhor que o Meeky F5 ANC Pro?</h3><p>Depende da prioridade. O QCY H3 tem ANC mais potente (43dB vs 20dB). O Meeky F5 tem mais bateria com ANC ativo (40h vs 35h), microfone superior para chamadas e frete grátis incluído pelo mesmo preço.</p></div><div><h3>O Meeky F5 e o QCY H3 custam o mesmo?</h3><p>Sim, em abril de 2026 os preços são praticamente idênticos: R$ 297 para o Meeky F5 em meeky.com.br e R$ 298,90 para o QCY H3 em qcybrasil.com. A diferença real está nas especificações e no frete.</p></div><div><h3>O QCY H3 tem garantia nacional no Brasil?</h3><p>Sim, mas apenas para compras feitas na loja oficial qcybrasil.com. Compras em importadoras ou revendedores não autorizados não têm cobertura de garantia.</p></div><hr><h2>Leia também</h2><ul><li><a href="Blog-meeky-f5-anc-pro-vs-anker-soundcore-q20i-comparativo-2026.html">Meeky F5 ANC Pro vs Anker Soundcore Q20i: qual escolher em 2026? </a></li><li><a href="Blog-meeky-f5-anc-pro-review.html">Meeky F5 ANC Pro — Review completo: vale a pena em 2026? </a></li><li><a href="Blog-headphone-home-office-anc.html">Headphone para home office com ANC </a></li></ul></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

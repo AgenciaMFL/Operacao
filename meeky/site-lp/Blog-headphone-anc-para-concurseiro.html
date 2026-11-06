@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Headphone ANC para Concurseiro: Vale a Pena em 2026? | Meeky Audio</title>
 <meta name="description" content="Como o cancelamento de ruído ajuda quem estuda para concurso em casa, biblioteca ou café — e o que considerar antes de comprar.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">22 Jun 2026 · 7 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-anc-estudar.webp" alt="Headphone ANC para Concurseiro: Vale a Pena em 2026?"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-anc-estudar.webp" alt="Headphone ANC para Concurseiro: Vale a Pena em 2026?"></div>
   <article class="b-wrap">
     <div class="b-prose"><h2>Resposta direta</h2><p>Para quem prepara concurso, ANC vale muito a pena — mas não pelos motivos óbvios. Mais do que "silenciar barulho", o ANC <strong>reduz a carga cognitiva de ignorar interferências</strong>, e isso muda diretamente a qualidade do estudo: você cansa menos, mantém o foco por mais tempo e tem sessões mais produtivas no mesmo número de horas.</p><h2>A realidade de estudar para concurso no Brasil</h2><p>Concurseiro estuda <strong>onde dá</strong>. Em casa com família trabalhando, com cachorro latindo, obra do vizinho, tv ligada. Em biblioteca pública com gente conversando e celular tocando. Em café com música alta e máquina de espresso. Cada um desses ambientes drena foco silenciosamente — o cérebro <em>parece</em> ignorar o barulho, mas está gastando energia para fazê-lo. Ao fim de 4 horas, você está mais cansado do que estaria em silêncio.</p><h2>Como o ANC ajuda na prática</h2><ul><li><strong>Menos esforço para ignorar barulho</strong> — o cérebro processa menos ruído, sobra mais para o conteúdo.</li><li><strong>Sessões mais longas com qualidade</strong> — você não desiste depois de 1h por fadiga auditiva.</li><li><strong>Ambiente controlado em qualquer lugar</strong> — biblioteca lotada vira sala silenciosa.</li><li><strong>Sinal visual de "não me interrompa"</strong> — em casa, fone na cabeça ajuda a definir limite com a família.</li></ul><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><h2>O que considerar ao comprar</h2><ul><li><strong>Conforto acima de tudo:</strong> você vai usar 4–8h por dia. Peso baixo, almofadas memory foam e pressão equilibrada importam mais que ANC.</li><li><strong>Bateria longa:</strong> evita ansiedade de "vai descarregar no meio do estudo". Modelos com 60h+ permitem estudar a semana inteira em uma carga.</li><li><strong>ANC eficaz para baixas frequências:</strong> o que mais incomoda em casa (geladeira, ar condicionado, motor de carro lá fora) é grave — onde ANC funciona melhor.</li><li><strong>Microfone decente:</strong> útil para participar de aulas ao vivo, mentorias e simulados em grupo.</li><li><strong>Preço honesto:</strong> concurseiro normalmente está economizando. Pagar R$1.500 em fone premium não compensa quando alternativas de R$300 entregam 90% do resultado.</li></ul><h2>Meeky F5 ANC Pro para concurseiro</h2><p>O <a href="Produto.html">Meeky F5 ANC Pro</a> reúne o conjunto adequado para essa rotina: ANC de até 20dB, 70h de bateria (cobre semanas inteiras de estudo), conforto para sessões longas, microfone para aulas ao vivo e preço de R$297 com nota fiscal e garantia de 12 meses. É o tipo de compra que você faz uma vez e usa por toda a preparação.</p><h2>Rotina sugerida com ANC</h2><ul><li>Blocos de 90 minutos com fone, 10–15 minutos de pausa sem fone (descanso auditivo).</li><li>Use silêncio puro com ANC, ou ruído branco/marrom em volume baixo — evite música com letra durante leitura.</li><li>Mantenha o volume em ~50% — ANC permite ouvir confortável sem precisar elevar.</li><li>Carregue uma vez por semana, antes do final de semana.</li></ul><h2>Conclusão</h2><p>Para concurseiro, ANC não é luxo — é ferramenta de produtividade. A diferença entre estudar com e sem aparece em cansaço, foco mantido e quantidade de conteúdo absorvido por hora. E não precisa ser caro: até R$300 já existem opções honestas e duradouras no Brasil.</p><p>Veja também: <a href="Blog-headphone-anc-para-estudar.html">headphone ANC para estudar</a>, <a href="Blog-headphone-anc-para-autista-hipersensibilidade-sensorial.html">ANC para hipersensibilidade sensorial</a> e <a href="Blog-quanto-dura-bateria-headphone-anc-na-pratica.html">bateria na prática</a>.</p><h2>Perguntas frequentes</h2><div>ANC realmente ajuda a estudar para concurso?+<p>Sim, principalmente para quem estuda em casa com família, em biblioteca pública ou em café. O ANC reduz a carga cognitiva de ignorar barulho — seu cérebro deixa de gastar energia 'filtrando' sons e direciona mais foco para o conteúdo.</p>É melhor estudar com música, ruído branco ou silêncio?+<p>Depende da pessoa. Estudos mostram que a maioria absorve melhor em silêncio total ou com ruído branco/marrom; música com letra costuma atrapalhar em leitura e escrita. ANC permite que você escolha — silêncio sem barulho externo, ou ruído controlado por você.</p>Quanto tempo posso usar o fone seguido sem desconforto?+<p>Depende do peso, das almofadas e da pressão do arco. Modelos leves (~250g) com almofadas memory foam permitem sessões de 3–4h confortáveis. Recomendamos pausas de 10 minutos a cada 90 minutos para descanso auditivo, conforme orientações gerais de saúde auditiva.</p>O Meeky F5 ANC Pro serve para concurseiro?+<p>Sim — é uma opção pensada para essa rotina. ANC de até 20dB para atenuar barulho de casa e biblioteca, bateria de 70h (estuda por semanas sem se preocupar com tomada), conforto para sessões longas e preço acessível (R$297) para quem está economizando durante a preparação.</p>Fone in-ear ou over-ear para estudar?+<p>Over-ear é geralmente mais confortável para sessões longas (não pressiona o canal auditivo) e tem ANC mais eficaz. In-ear é mais portátil. Para concurseiro, que tipicamente estuda 4–8h por dia, over-ear costuma ser a melhor escolha.</p></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

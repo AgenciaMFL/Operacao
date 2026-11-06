@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<!-- Meta Pixel Code -->
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
 
+<meta name="robots" content="noindex">
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400&display=swap">
 <style>
   @keyframes spec-sheen{0%{background-position:200% 0}to{background-position:-200% 0}}
   @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -45,7 +46,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   a:hover { color:#8A5C1E; }
   img, video { max-width:100%; display:block; }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div ref="{{ rootRef }}" style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#0A0A0A">
 
@@ -56,7 +57,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   <section style="position:relative;padding:74px 0 0;background:#E8EBEE;color:#0A0A0A;overflow:hidden">
     <sc-if value="{{ heroOverlay }}" hint-placeholder-val="{{ true }}">
     <div style="position:relative;height:832px">
-    <img src="assets/motion-hero.webp" alt="MEEKY Motion 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% center">
+    <img loading="lazy" src="assets/motion-hero.webp" alt="MEEKY Motion 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% center">
     <div style="position:absolute;inset:0;background:{{ heroWash }};pointer-events:none"></div>
     <div style="position:absolute;inset:0;max-width:1320px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center">
       <div style="max-width:620px">
@@ -79,7 +80,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 
     <sc-if value="{{ isTabletStack }}">
     <div style="position:relative;padding:20px 20px 60px;text-align:center">
-      <img src="assets/motion-hero.webp" alt="MEEKY Motion 1" style="width:calc(100% + 40px);max-width:none;margin-left:-20px;height:340px;object-fit:cover;object-position:62% center">
+      <img loading="lazy" src="assets/motion-hero.webp" alt="MEEKY Motion 1" style="width:calc(100% + 40px);max-width:none;margin-left:-20px;height:340px;object-fit:cover;object-position:62% center">
       <h1 style="margin:28px 0 0;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.08;color:#0A0A0A;text-wrap:balance">MEEKY Motion 1</h1>
       <p style="margin:18px auto 0;max-width:360px;font-size:16px;line-height:1.58;color:#4A4E52;text-wrap:pretty">Feito para quem corre, pedala, caminha e treina — sem abrir mão de escutar o mundo ao redor. Com tecnologia de condução óssea real, o som chega até você por vibração, mantendo seus ouvidos livres e sua atenção onde ela precisa estar.</p>
       <div style="margin:24px auto 0;width:min(340px,100%);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 24px;border-radius:26px;background:radial-gradient(130% 120% at 0% 0%,rgba(226,173,104,.2),rgba(255,255,255,.03) 55%),rgba(10,10,10,.86);border:1px solid rgba(255,255,255,.1);color:#F9F8F6">
@@ -95,7 +96,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 
     <sc-if value="{{ isMobile }}">
     <div style="background-color:#CED8E2;overflow:hidden">
-      <img src="assets/motion-hero-mobile-v2.webp" alt="MEEKY Motion 1" style="width:154%;max-width:none;margin-left:-27%;display:block">
+      <img loading="lazy" src="assets/motion-hero-mobile-v2.webp" alt="MEEKY Motion 1" style="width:154%;max-width:none;margin-left:-27%;display:block">
       <div style="position:relative;margin-top:-44%;padding:0 20px 48px;text-align:center">
       <h1 style="margin:0;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.08;color:#0A0A0A;text-wrap:balance">MEEKY Motion 1</h1>
       <p style="margin:16px auto 0;max-width:360px;font-size:16px;line-height:1.58;color:#3D4145;text-wrap:pretty">Feito para quem corre, pedala, caminha e treina — sem abrir mão de escutar o mundo ao redor. Com tecnologia de condução óssea real, o som chega até você por vibração, mantendo seus ouvidos livres e sua atenção onde ela precisa estar.</p>
@@ -124,7 +125,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div role="img" aria-label="Motion 1 na academia" style="min-height:{{ diffPhotoH }};height:100%;background-image:url('assets/motion-academia.webp');background-size:cover;background-position:42% 26%;background-repeat:no-repeat"></div>
     </sc-if>
     <sc-if value="{{ isMobile }}">
-    <img src="assets/motion-academia.webp" alt="Motion 1 na academia" style="width:100%;height:{{ diffPhotoH }};object-fit:cover;object-position:42% 26%">
+    <img loading="lazy" src="assets/motion-academia.webp" alt="Motion 1 na academia" style="width:100%;height:{{ diffPhotoH }};object-fit:cover;object-position:42% 26%">
     </sc-if>
     <div style="padding-top:{{ secPadY }};padding-bottom:{{ secPadY }};padding-left:{{ fichaPadR }};padding-right:{{ fichaPadL }}" data-reveal="">
         <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>Diferença</div>
@@ -190,7 +191,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div role="img" aria-label="Motion 1 em uso ao ar livre" style="min-height:{{ connPhotoH }};height:100%;background-image:url('assets/motion-lifestyle.webp');background-size:cover;background-position:45% 32%;background-repeat:no-repeat"></div>
     </sc-if>
     <sc-if value="{{ isMobile }}">
-    <img src="assets/motion-lifestyle.webp" alt="Motion 1 em uso ao ar livre" style="width:100%;height:{{ connPhotoH }};object-fit:cover;object-position:45% 32%">
+    <img loading="lazy" src="assets/motion-lifestyle.webp" alt="Motion 1 em uso ao ar livre" style="width:100%;height:{{ connPhotoH }};object-fit:cover;object-position:45% 32%">
     </sc-if>
   </section>
 
@@ -251,7 +252,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div role="img" aria-label="Motion 1 com LED em treino noturno" style="position:relative;min-height:{{ fichaBandH }};height:100%;background-image:url('assets/motion-noturno.webp');background-size:cover;background-position:52% 30%;background-repeat:no-repeat"></div>
     </sc-if>
     <sc-if value="{{ fichaStack }}">
-    <img src="assets/motion-noturno.webp" alt="Motion 1 com LED em treino noturno" style="width:100%;height:{{ fichaBandH }};object-fit:cover;object-position:52% 48%">
+    <img loading="lazy" src="assets/motion-noturno.webp" alt="Motion 1 com LED em treino noturno" style="width:100%;height:{{ fichaBandH }};object-fit:cover;object-position:52% 48%">
     </sc-if>
   </section>
 
@@ -436,7 +437,7 @@ class Component extends DCLogic {
     };
     if (window.Lenis) return start();
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

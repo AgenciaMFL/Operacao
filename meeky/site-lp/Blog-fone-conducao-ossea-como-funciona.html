@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Fone de condução óssea: como funciona e vale a pena? | Meeky Audio</title>
 <meta name="description" content="Entenda como funciona o fone de condução óssea, vantagens, limites e para quem vale a pena. Guia completo com tabela comparativa e checklist de compra.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">06 Out 2026 · 6 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/og-motion1.jpg" alt="Fone de condução óssea: como funciona e vale a pena?"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/og-motion1.jpg" alt="Fone de condução óssea: como funciona e vale a pena?"></div>
   <article class="b-wrap">
     <div class="b-prose"><h2>O que é um fone de condução óssea?</h2><p>É um fone que não entra nem veda a orelha. Ele apoia transdutores na região das têmporas, na frente do ouvido. Por isso é chamado de open-ear (ouvido aberto).</p><h2>Como funciona?</h2><ol><li>O fone converte o áudio em vibrações.</li><li>As vibrações atravessam o osso da face até a cóclea (ouvido interno).</li><li>O cérebro interpreta como som, enquanto o canal auditivo continua livre para captar o ambiente.</li></ol><h2>Condução óssea é o mesmo que open-ear?</h2><p>Nem todo fone aberto usa condução óssea. Alguns open-ear usam alto-falantes direcionais perto do ouvido. A condução óssea transmite pelo osso. Na prática, o uso é parecido: ouvido livre e consciência do entorno. Confira na ficha técnica de cada produto qual tecnologia é usada.</p><h2>Condução óssea vs earbud vs headphone com ANC</h2><div><table><thead><tr><th>Critério</th><th>Condução óssea</th><th>Earbud (intra-auricular)</th><th>Headphone com ANC</th></tr></thead><tbody><tr><td>Ouve o ambiente</td><td>Sim, totalmente</td><td>Limitado</td><td>Não (isola)</td></tr><tr><td>Isolamento de ruído</td><td>Nenhum</td><td>Passivo</td><td>Ativo (ANC)</td></tr><tr><td>Graves</td><td>Mais leves</td><td>Bons</td><td>Fortes</td></tr><tr><td>Conforto em treino longo</td><td>Alto</td><td>Médio</td><td>Baixo (calor)</td></tr><tr><td>Uso ideal</td><td>Esporte, rua, ciclismo</td><td>Dia a dia</td><td>Foco, transporte, escritório</td></tr></tbody></table></div><h2>Quais as vantagens?</h2><ul><li>Ouvido livre: você escuta trânsito, voz e alertas;</li><li>sem pressão no canal auditivo, bom para uso prolongado;</li><li>leve e estável para esporte;</li><li>não acumula suor dentro da orelha.</li></ul><h2>Quais os limites?</h2><ul><li>Não cancela nem isola ruído externo;</li><li>graves menos intensos que fones fechados;</li><li>em volume alto pode haver vazamento de som para quem está perto;</li><li>ouvir o ambiente ajuda na atenção, mas não é garantia de segurança: respeite sempre as regras de trânsito.</li></ul><h2>Para quem faz sentido?</h2><p>Corredores, ciclistas, quem treina, quem trabalha em locais onde precisa ouvir chamados, e quem não tolera fone dentro do ouvido.</p><h2>Checklist de compra</h2><ul><li><strong>Peso:</strong> abaixo de ~35 g reduz cansaço.</li><li><strong>Resistência:</strong> procure certificação IP (suor/respingo).</li><li><strong>Bateria:</strong> veja horas em uso real e a condição do teste (volume).</li><li><strong>Bluetooth e microfone:</strong> versão e qualidade em chamadas.</li><li><strong>Anatel:</strong> produto homologado.</li><li><strong>Garantia e suporte no Brasil.</strong></li></ul><h2>Exemplo: Meeky Motion 1</h2><div><table><tbody><tr><td>Tipo</td><td>condução óssea, open-ear</td></tr><tr><td>Peso</td><td>30 g</td></tr><tr><td>Bluetooth</td><td>6.0</td></tr><tr><td>Resistência</td><td>IPX5</td></tr><tr><td>Bateria</td><td>até 14 h (LED desligado)* · 9 h (LED ligado) · ~200 h em espera · 2 h de carga</td></tr><tr><td>Carga</td><td>~2 h</td></tr><tr><td>Homologação</td><td>Anatel</td></tr><tr><td>Garantia</td><td>2 anos</td></tr></tbody></table></div><p>*Medido com 60% de volume, segundo especificação do fabricante.</p><p><strong>Transparência:</strong> ainda não publicamos teste próprio do Motion 1. Os dados acima são da ficha técnica do produto.</p><h2>Perguntas frequentes (FAQ)</h2><div><h3>Fone de condução óssea machuca ou prejudica a audição?</h3><p>O som chega pelo osso, sem pressionar o canal auditivo. Como qualquer fone, volume alto por muito tempo pode prejudicar a audição. Use em volume moderado.</p></div><div><h3>Dá para ouvir música bem com condução óssea?</h3><p>Sim, para uso diário e esporte. Os graves são mais leves que em fones fechados.</p></div><div><h3>Funciona para quem tem perda auditiva?</h3><p>Depende do tipo de perda. Consulte um profissional de saúde auditiva.</p></div><div><h3>Condução óssea cancela ruído?</h3><p>Não. Ela deixa o ambiente audível. Para cancelar ruído, o caminho é um headphone com ANC.</p></div><div><h3>É bom para corrida e ciclismo?</h3><p>É um dos usos mais comuns, por manter o ouvido livre. Mantenha atenção ao trânsito.</p></div><div><h3>Posso usar com óculos e capacete?</h3><p>Em geral sim, por não ocupar o ouvido. Teste o encaixe com seu modelo.</p></div><p>Veja também: <a href="Motion1.html">Meeky Motion 1</a>, <a href="Blog-meeky-motion-1-especificacoes-preco-lancamento.html">Meeky Motion 1: especificações, preço e lançamento</a> e, para quem prefere isolamento, <a href="Produto.html">Meeky F5 ANC Pro</a>.</p></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

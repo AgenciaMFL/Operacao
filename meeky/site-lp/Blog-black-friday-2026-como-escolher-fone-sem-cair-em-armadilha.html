@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Black Friday 2026: como escolher fone sem cair em armadilha | Meeky Audio</title>
 <meta name="description" content="Checklist prático para comprar fone na Black Friday 2026: ANC real vs ANC de marketing, codec, bateria medida, garantia, nota fiscal, Anatel e loja com CNPJ.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">19 Out 2026 · 6 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-black-friday-2026.webp" alt="Black Friday 2026: como escolher fone sem cair em armadilha"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-black-friday-2026.webp" alt="Black Friday 2026: como escolher fone sem cair em armadilha"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>A Black Friday concentra boas oportunidades e também muitas fichas técnicas confusas. Em fones Bluetooth, os termos técnicos viraram argumento de venda, e nem sempre significam o que parecem. Este checklist ajuda a separar o que é especificação verificável do que é só marketing, para você comprar uma vez e não se arrepender depois.</p><p>Usamos o <a href="Produto.html">Meeky F5 ANC Pro</a> como exemplo de como cada item deveria estar documentado. Não é para dizer que ele é a única escolha, e sim mostrar o que exigir de qualquer marca.</p><h2>1. ANC real vs "ANC" de marketing</h2><p>Cancelamento de ruído ativo (ANC) usa microfones para captar o som do ambiente e gera uma onda inversa que reduz ruídos constantes, como motor de ônibus, ar-condicionado e zumbido de escritório. É diferente de duas coisas que costumam aparecer com nomes parecidos:</p><ul><li><strong>ENC/CVC:</strong> redução de ruído aplicada ao microfone em chamadas. Ajuda quem está do outro lado da linha, não o que você ouve.</li><li><strong>Isolamento passivo:</strong> é a vedação física da almofada ou ponteira. Todo fone fechado isola um pouco, sem nenhuma eletrônica.</li></ul><p>Sinais de ANC real: valor de redução informado em dB, menção a microfones dedicados ao cancelamento e um botão ou modo para ligar e desligar. Se o anúncio diz apenas "cancelamento de ruído" sem nenhum desses detalhes, pergunte ao vendedor antes de comprar. Para entender melhor a diferença, veja <a href="Blog-anc-ativo-vs-cancelamento-passivo-diferenca.html">ANC ativo vs cancelamento passivo</a>.</p><h2>2. Codec: o que importa de verdade</h2><p>Codec é a forma como o áudio é comprimido entre o celular e o fone. Os mais comuns são SBC (universal) e AAC (muito usado em iPhone e bem suportado em Android). Outros codecs existem, mas só funcionam se o celular e o fone suportarem o mesmo padrão. Uma sigla bonita na caixa não ajuda se o seu aparelho não conversa com ela.</p><p>Na prática, para streaming no dia a dia, a implementação do fabricante, o ajuste do som e o encaixe costumam pesar mais que o codec. Detalhamos isso em <a href="Blog-ldac-vs-aac-vs-sbc-diferenca-headphone-bluetooth.html">diferença entre codecs Bluetooth</a>.</p><h2>3. Bateria medida, não só anunciada</h2><p>"Até 80 horas" sem contexto não diz muito. A autonomia muda com volume, ANC ligado ou desligado e uso de chamadas. Uma ficha honesta informa pelo menos a bateria com e sem ANC. Desconfie de números muito acima do que outros fones do mesmo tamanho entregam sem nenhuma explicação.</p><p>Outro ponto que poucos olham: tempo de recarga e se existe carga rápida. Em uma rotina corrida, dez minutos de tomada podem valer mais que dez horas extras no papel.</p><h2>4. Garantia no Brasil</h2><p>Garantia contra defeito de fabricação precisa ser acionável aqui. Pergunte: quem atende, por qual canal, em quanto tempo e quem paga o envio. Produto importado por conta própria ou vendido por terceiro sem representante no país pode deixar você sem suporte quando mais precisar.</p><h2>5. Nota fiscal e Anatel</h2><p>Todo fone Bluetooth vendido legalmente no Brasil precisa de homologação da Anatel. O número pode ser consultado no site da agência. A nota fiscal, por sua vez, é o que garante seus direitos de consumidor, incluindo garantia legal e arrependimento em compras online. Sem esses dois itens, o desconto sai caro.</p><h2>6. Loja com CNPJ e suporte</h2><p>Antes de pagar, confira se a loja exibe razão social, CNPJ, endereço, política de troca e um canal de contato que responde. Em datas de alto volume, sites falsos copiam lojas conhecidas. Desconfie de domínios estranhos, pagamento apenas por Pix para pessoa física e preços muito abaixo do mercado.</p><h2>Checklist resumido</h2><div><table><thead><tr><th>Item</th><th>O que conferir</th></tr></thead><tbody><tr><td>ANC</td><td>Redução em dB informada e modo liga/desliga</td></tr><tr><td>Codec</td><td>Suporte do fone e do seu celular</td></tr><tr><td>Bateria</td><td>Autonomia com e sem ANC e condição de medição</td></tr><tr><td>Garantia</td><td>Prazo e canal de atendimento no Brasil</td></tr><tr><td>Documentação</td><td>Nota fiscal e homologação Anatel</td></tr><tr><td>Loja</td><td>CNPJ, endereço, política de troca e suporte</td></tr></tbody></table></div><h2>Exemplo de checklist cumprido: Meeky F5 ANC Pro</h2><p>Usando as informações publicadas na página do produto:</p><div><table><tbody><tr><td>ANC</td><td>Cancelamento de ruído ativo híbrido, até 20±3 dB</td></tr><tr><td>Bluetooth</td><td>5.4 Multiponto (2 dispositivos)</td></tr><tr><td>Codecs</td><td>AAC e SBC</td></tr><tr><td>Bateria</td><td>Até 70 h sem ANC / até 40 h com ANC</td></tr><tr><td>Certificação</td><td>Anatel e SIG Bluetooth</td></tr><tr><td>Garantia</td><td>12 meses, suporte via WhatsApp</td></tr><tr><td>Empresa</td><td>Barganha Mix Ltda, CNPJ ativo, nota fiscal</td></tr><tr><td>Preço atual</td><td>R$ 297 com frete grátis</td></tr></tbody></table></div><p>O preço exibido acima é o vigente no site quando este texto foi publicado. Na Black Friday ou em qualquer outra data, vale sempre o valor mostrado no checkout no momento da compra. Se você quer um fone para treino ao ar livre em vez de foco em ambientes barulhentos, veja também o <a href="Motion1.html">Meeky Motion 1</a> e o comparativo <a href="Blog-conducao-ossea-ou-anc-qual-fone-escolher.html">condução óssea ou ANC</a>.</p><h2>Erros comuns na Black Friday</h2><ul><li>Comparar só o percentual de desconto, sem checar o histórico de preço.</li><li>Comprar pela sigla da caixa sem saber se o celular suporta o recurso.</li><li>Ignorar o prazo de entrega informado no checkout quando o fone é presente com data marcada.</li><li>Pular a leitura da política de troca.</li></ul><h2>Perguntas frequentes (FAQ)</h2><div><h3>Como saber se o ANC de um fone é real?</h3><p>Procure a especificação de quanto o cancelamento reduz (em dB), a menção a microfones dedicados ao ANC e um modo para ligar e desligar o recurso. Desconfie de anúncios que chamam de ANC apenas a redução de ruído em chamadas (ENC/CVC) ou o isolamento passivo das almofadas.</p></div><div><h3>Bateria anunciada é a bateria real?</h3><p>Depende da condição de medição. Volume, ANC ligado ou desligado e codec mudam muito a autonomia. Prefira fabricantes que informam a autonomia com e sem ANC e a condição em que mediram.</p></div><div><h3>Por que a homologação da Anatel importa?</h3><p>Equipamentos de radiofrequência vendidos no Brasil, como fones Bluetooth, precisam de homologação da Anatel. O selo indica que o produto passou pelo processo exigido no país. Você pode consultar o número no site da agência.</p></div><div><h3>Vale a pena comprar fone sem nota fiscal?</h3><p>Não é recomendado. Sem nota fiscal, acionar a garantia e o direito de arrependimento fica bem mais difícil. Exija nota fiscal emitida por empresa com CNPJ ativo.</p></div><div><h3>Codec faz tanta diferença assim?</h3><p>Para a maioria das pessoas ouvindo streaming no celular, AAC e SBC bem implementados atendem bem. Mais importante que a sigla é saber se o seu celular suporta o codec anunciado; sem suporte dos dois lados, o recurso não é usado.</p></div><div><h3>O Meeky F5 ANC Pro terá desconto na Black Friday?</h3><p>Este guia não anuncia promoções. O preço vigente é sempre o exibido na página do produto e no checkout no momento da compra.</p></div><div><p>Leia também: <a href="Blog-o-que-e-cancelamento-de-ruido-ativo-anc.html">O que é cancelamento de ruído ativo (ANC)</a>, <a href="Blog-quanto-dura-bateria-headphone-anc-na-pratica.html">Quanto dura a bateria de um headphone ANC na prática</a> e <a href="Blog-presente-de-natal-2026-fone-bluetooth-guia.html">Guia de presente de Natal 2026</a>.</p><div><a href="Produto.html">Ver o Meeky F5 ANC Pro</a></div></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

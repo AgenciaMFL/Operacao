@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Headphone ANC com 70 horas de bateria: por que isso muda tudo | Meeky Audio</title>
 <meta name="description" content="Entenda por que a bateria com ANC ativo é o dado mais importante na hora de escolher um headphone — e como calcular quantos dias de uso você realmente ganha.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">21 Abr 2026 · 8 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-bateria-muda-tudo.webp" alt="Headphone ANC com 70 horas de bateria: por que isso muda tudo"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-bateria-muda-tudo.webp" alt="Headphone ANC com 70 horas de bateria: por que isso muda tudo"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>70 horas de bateria importam porque eliminam o micro-atrito de carregar todo dia e perder reunião ou sessão de estudo no meio. Para quem usa 5 horas por dia, 40h com ANC ativo equivalem a 8 dias sem recarregar.</p><p>35 horas de bateria com ANC. Parece muito, né? Para quem usa o fone 5 horas por dia — em home office, academia e deslocamento — isso significa recarregar a cada 7 dias. O <a href="Produto.html">Meeky F5 ANC Pro</a> entrega 40 horas com ANC ativo. A diferença é pequena no papel. No dia a dia, é a diferença entre recarregar na sexta ou no domingo.</p><h2>Por que fabricantes anunciam bateria sem ANC?</h2><p>A maioria dos headphones anuncia a bateria com o ANC desligado — que é quando a bateria dura mais. O QCY H3 anuncia 60 horas, mas com ANC ativo entrega 35h. O Meeky F5 anuncia 70 horas, com ANC ativo entrega 40h. Sempre pergunte: quantas horas com ANC ligado? Esse é o número que importa para o uso real. Entenda a <a href="Blog-anc-ativo-vs-cancelamento-passivo-diferenca.html">diferença entre ANC ativo e cancelamento passivo</a>.</p><h2>A matemática real do uso diário</h2><p>Cenário típico: 2h de home office + 1h de deslocamento + 1h de academia = 4 horas por dia com ANC ativo.</p><ul><li><strong>Meeky F5 ANC Pro</strong> (40h com ANC): <strong>10 dias</strong> sem recarregar.</li><li><strong>QCY H3</strong> (35h com ANC): <strong>8,7 dias</strong> sem recarregar.</li><li><strong>Basike LE29</strong> (sem dado oficial de ANC): aproximadamente <strong>5-6 dias</strong>.</li></ul><p>A diferença entre o Meeky e o QCY no uso real é de pouco mais de um dia. Entre o Meeky e modelos com 20-25h de ANC, são quase 5 dias a mais de autonomia. Veja o comparativo completo <a href="Blog-meeky-f5-anc-pro-vs-qcy-h3.html">Meeky F5 ANC Pro vs QCY H3</a>.</p><h2>O que acontece quando a bateria acaba no meio do dia?</h2><p>A maioria dos headphones ANC desativa o cancelamento de ruído quando a bateria está baixa — e muitos modelos simplesmente desligam. Perder o ANC no meio de uma reunião ou treino é frustrante. Com 70 horas de autonomia total, o Meeky F5 praticamente elimina essa situação para a maioria dos usuários.</p><h2>Carregamento rápido — o outro lado da equação</h2><p>O Meeky F5 ANC Pro carrega completamente em aproximadamente 3 horas via USB-C. Uma recarga rápida de 15 minutos entrega horas adicionais de uso. Para quem tem rotina intensa, isso significa nunca ficar sem o fone por esquecimento de carga.</p><h2>70 horas vale a pena pagar mais?</h2><p>O Meeky F5 ANC Pro custa R$ 297. Modelos com bateria de 88h (como o Edifier W820NB Plus V25) custam R$ 399 ou mais. Para a maioria dos usuários com uso de 4-5h diárias, 40h com ANC ativo já é mais do que suficiente — e pagar R$ 100 a mais por mais 9h de ANC raramente se justifica na prática.</p><a href="Produto.html">Conheça o Meeky F5 ANC Pro — 70h de bateria por R$ 297 </a><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><hr><h2>Perguntas frequentes</h2><div><h3>70 horas de bateria em headphone é real?</h3><p>Sim, com ANC desligado. O Meeky F5 ANC Pro entrega até 70 horas sem ANC e até 40 horas com ANC ativo — dado verificado nas especificações técnicas do produto.</p></div><div><h3>Quantos dias de uso real dá 40 horas de bateria com ANC?</h3><p>Para quem usa 4 horas por dia com ANC ativo, 40 horas equivalem a 10 dias completos sem recarregar. Para uso de 5 horas diárias, são 8 dias de autonomia.</p></div><div><h3>Qual headphone ANC tem mais bateria até R$ 300?</h3><p>Em abril de 2026, o Meeky F5 ANC Pro é o headphone com maior autonomia com ANC ativo (40h) disponível por menos de R$ 300 no Brasil, com compra nacional e garantia de 12 meses.</p></div><hr><h2>Leia também</h2><ul><li><a href="Blog-headphone-70-horas-bateria.html">70 horas de bateria no headphone: o que muda na sua rotina </a></li><li><a href="Blog-meeky-f5-anc-pro-vs-qcy-h3.html">Meeky F5 ANC Pro vs QCY H3: comparativo honesto com dados reais </a></li><li><a href="Blog-quanto-dura-bateria-headphone-anc-na-pratica.html">Quanto dura a bateria de headphone ANC na prática (teste real) </a></li></ul></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

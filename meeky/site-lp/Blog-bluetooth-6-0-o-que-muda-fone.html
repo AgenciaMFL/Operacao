@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Bluetooth 6.0 em fone: o que muda de verdade | Meeky Audio</title>
 <meta name="description" content="O que o Bluetooth 6.0 muda para quem usa fone: conexão, estabilidade, consumo e alcance, e por que tudo depende também do celular.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">19 Out 2026 · 6 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-bluetooth-6.webp" alt="Bluetooth 6.0 em fone: o que muda de verdade"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-bluetooth-6.webp" alt="Bluetooth 6.0 em fone: o que muda de verdade"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>Toda nova versão do Bluetooth vira argumento de venda: "6.0" na caixa parece automaticamente melhor que "5.3". Em parte é, mas os ganhos reais costumam ser menores e mais específicos do que o marketing sugere. Este guia explica o que muda, o que não muda e por que o seu celular é metade da equação.</p><h2>O que é a versão do Bluetooth</h2><p>Bluetooth é um padrão mantido por um grupo da indústria, o Bluetooth SIG. Cada versão adiciona recursos ou melhora os existentes. Um fone e um celular de versões diferentes continuam se conectando, porque o padrão é retrocompatível. O que acontece é que a conexão usa apenas os recursos que os dois têm em comum.</p><p>Na prática: um fone com Bluetooth 6.0 conectado a um celular com Bluetooth 5.0 vai funcionar como uma conexão 5.0. Já explicamos a evolução das versões anteriores em <a href="Blog-bluetooth-54-53-50-diferenca-headphone.html">diferença entre Bluetooth 5.4, 5.3 e 5.0</a>.</p><h2>O que o Bluetooth 6.0 traz</h2><p>Entre as novidades da especificação 6.0 estão recursos voltados a medição de distância mais precisa entre dispositivos (Channel Sounding) e ajustes que melhoram a eficiência na troca de dados e na descoberta de aparelhos. Muitos desses recursos têm mais impacto em localização, rastreadores e dispositivos de casa conectada do que em ouvir música.</p><p>Para quem usa fone, os efeitos que podem aparecer são: conexão mais estável, pareamento mais fluido e algum ganho de eficiência. Mas eles dependem de o fabricante do fone e do celular implementarem os recursos.</p><h2>O que muda (e o que não muda) para quem usa fone</h2><div><table><thead><tr><th>Aspecto</th><th>O que esperar</th><th>Depende de</th></tr></thead><tbody><tr><td>Estabilidade da conexão</td><td>Pode melhorar</td><td>Celular, antenas, ambiente</td></tr><tr><td>Alcance</td><td>Sem garantia de aumento</td><td>Potência do rádio, obstáculos, celular</td></tr><tr><td>Consumo de energia</td><td>Ganhos modestos</td><td>Volume, bateria, recursos ligados</td></tr><tr><td>Qualidade do som</td><td>Não muda diretamente</td><td>Codec, ajuste e tipo de fone</td></tr><tr><td>Latência</td><td>Pode variar pouco</td><td>Codec, aplicativo, celular</td></tr></tbody></table></div><h2>Alcance: o número da caixa e a vida real</h2><p>Alcance de Bluetooth costuma ser medido em ambiente aberto, sem obstáculos. Paredes, o próprio corpo, bolsos, mochilas e interferência de outros aparelhos reduzem a distância útil. Por isso, um fone com alcance de "até 10 m" pode cortar a poucos metros se o celular estiver no bolso traseiro e você girar o tronco. Isso acontece em qualquer versão.</p><p>Durante o treino, deixar o celular em uma pochete ou braçadeira do mesmo lado do fone e próximo ao corpo ajuda a manter a conexão estável.</p><h2>Consumo: a bateria depende de mais coisas</h2><p>As melhorias de eficiência existem, mas são pequenas perto de outros fatores. Volume é o que mais pesa: subir de 60% para 90% pode reduzir bastante a autonomia. Recursos como LED, ANC (em fones que têm) e chamadas também consomem energia. No <a href="Motion1.html">Meeky Motion 1</a>, a autonomia é de até 14 h com LED desligado e até 9 h com LED ligado, medida a 60% de volume, com bateria de 220 mAh.</p><h2>Qualidade de som: não confunda versão com codec</h2><p>A versão do Bluetooth não define a qualidade do áudio. Quem faz isso é o codec (SBC, AAC e outros), junto com o ajuste do fabricante e o tipo de fone. Um fone de condução óssea, por exemplo, tem graves mais leves por natureza, em qualquer versão de Bluetooth. Veja <a href="Blog-ldac-vs-aac-vs-sbc-diferenca-headphone-bluetooth.html">diferença entre codecs Bluetooth</a>.</p><h2>Preciso trocar de celular para aproveitar?</h2><p>Não. O fone funciona com celulares de versões anteriores. Você só aproveita recursos específicos do 6.0 se o seu aparelho também tiver suporte. Para a maioria das pessoas, o que define a experiência é: encaixe, bateria, conforto e estabilidade de conexão no uso real.</p><h2>Como avaliar um fone além da versão</h2><ul><li>Bateria com condição de medição informada (volume, LED, ANC).</li><li>Alcance declarado e onde você costuma levar o celular.</li><li>Homologação Anatel e garantia no Brasil.</li><li>Tipo de fone adequado ao uso: condução óssea para treino ao ar livre, ANC para ambientes barulhentos. Veja <a href="Blog-conducao-ossea-ou-anc-qual-fone-escolher.html">condução óssea ou ANC</a>.</li></ul><h2>Exemplo: Meeky Motion 1</h2><div><table><tbody><tr><td>Tecnologia</td><td>Condução óssea open-ear</td></tr><tr><td>Peso</td><td>30 g</td></tr><tr><td>Bluetooth</td><td>6.0</td></tr><tr><td>Resistência</td><td>IPX5: suor e respingos; não é para natação</td></tr><tr><td>Bateria</td><td>Até 14 h com LED desligado / 9 h com LED ligado</td></tr><tr><td>Condição de medição</td><td>60% de volume; a autonomia varia conforme o uso</td></tr><tr><td>Em espera</td><td>~200 h</td></tr><tr><td>Carga</td><td>~2 h</td></tr><tr><td>LED integrado</td><td>4 modos</td></tr><tr><td>Controles</td><td>Botões físicos</td></tr><tr><td>Chamadas</td><td>Microfone integrado</td></tr><tr><td>Homologação</td><td>Anatel; não é dispositivo médico</td></tr><tr><td>Garantia</td><td>2 anos</td></tr><tr><td>Preço</td><td>R$ 749,90 em até 6x de R$ 124,98 sem juros</td></tr><tr><td>Envio</td><td>Frete grátis · disponível para envio com seguro e rastreio</td></tr></tbody></table></div><p><strong>Transparência:</strong> ainda não publicamos teste próprio; os dados são da ficha técnica. O Motion 1 não tem cancelamento de ruído ativo nem LDAC.</p><p>Alcance informado: até 10 m, em ambiente sem obstáculos. Bateria de 220 mAh.</p><h2>Perguntas frequentes (FAQ)</h2><div><h3>Fone com Bluetooth 6.0 funciona em celular com Bluetooth 5.x?</h3><p>Sim. O Bluetooth é retrocompatível. O fone conecta normalmente, mas a conexão usa os recursos que os dois aparelhos têm em comum, ou seja, os da versão mais antiga.</p></div><div><h3>Bluetooth 6.0 melhora a qualidade do som?</h3><p>Não diretamente. A qualidade do som depende principalmente do codec, do ajuste do fabricante e do tipo de fone. A versão do Bluetooth influencia mais a conexão do que o timbre.</p></div><div><h3>Bluetooth 6.0 aumenta o alcance?</h3><p>Não de forma garantida. O alcance depende da potência do rádio, das antenas, de obstáculos e do celular. O Meeky Motion 1 informa alcance de até 10 m em ambiente sem obstáculos.</p></div><div><h3>Bluetooth 6.0 gasta menos bateria?</h3><p>As versões recentes trazem melhorias de eficiência, mas a autonomia real depende muito mais do volume, do tamanho da bateria e dos recursos ligados. No Motion 1, o LED ligado reduz a autonomia de até 14 h para até 9 h, a 60% de volume.</p></div><div><h3>Como saber a versão do Bluetooth do meu celular?</h3><p>Consulte a ficha técnica do modelo no site do fabricante. Alguns aplicativos também mostram essa informação nas configurações avançadas.</p></div><div><h3>O Motion 1 tem LDAC ou ANC?</h3><p>Não. O Meeky Motion 1 é um fone de condução óssea open-ear com Bluetooth 6.0, sem LDAC e sem cancelamento de ruído ativo.</p></div><div><p>Respeite as regras de trânsito, mantenha atenção ao entorno e consulte um profissional de saúde auditiva em caso de dúvida. Ouvir o ambiente não garante segurança.</p><p>Leia também: <a href="Blog-fone-conducao-ossea-como-funciona.html">Fone de condução óssea: como funciona e vale a pena?</a> e <a href="Blog-meeky-motion-1-especificacoes-preco-lancamento.html">Meeky Motion 1: especificações, preço e lançamento</a>.</p><a href="Motion1.html">Ver o Meeky Motion 1</a></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

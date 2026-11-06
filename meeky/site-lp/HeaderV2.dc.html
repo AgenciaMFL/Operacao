@@ -8,11 +8,10 @@
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
 <style>
   @keyframes menu-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <!-- Menu novo da Home (Figma 2563:185) -->
 <div style="position:relative;background:#FDF6FF;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif">
@@ -22,7 +21,7 @@
     </a>
 
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-      <nav style="position:absolute;left:50%;top:28px;transform:translateX(-50%);display:flex;align-items:center;gap:13px">
+      <nav style="position:absolute;left:50%;top:28px;transform:translateX(-50%);display:flex;align-items:center;gap:13px;zoom:{{ navZoom }}">
         <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
           <div style="position:relative;display:flex;align-items:center" onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}">
             <a href="{{ it.href }}" onClick="{{ it.onClick }}" style="display:flex;align-items:center;justify-content:center;height:34px;width:{{ it.w }};border-radius:130px;background:{{ it.bg }};font-size:18px;font-weight:400;letter-spacing:-.36px;color:{{ it.color }};text-decoration:none;white-space:nowrap;transition:background-color .3s,color .3s" style-hover="background-color:rgba(232,210,255,.34);color:#8B6A93">{{ it.label }}</a>
@@ -84,6 +83,7 @@ class Component extends DCLogic {
       if (!w) return;
       const m = w <= 860;
       if (m !== this.state.isMobile) this.setState({ isMobile: m, open: false });
+      if (w !== this.state.w) this.setState({ w });
     };
     this._check = check;
     window.addEventListener('resize', check);
@@ -111,7 +111,8 @@ class Component extends DCLogic {
       { id: 'sobre', label: 'Sobre', href: 'Sobre.html', w: '76px' },
       { id: 'duvidas', label: 'Dúvidas', href: 'Duvidas.html', w: '86px' },
       { id: 'blog', label: 'Blog', href: 'Blog.html', w: '64px' },
-      { id: 'contato', label: 'Contato', href: 'Contato.html', w: '94px' }
+      { id: 'contato', label: 'Contato', href: 'Contato.html', w: '94px' },
+      { id: 'volume', label: 'Compra em volume', href: '#volume', w: '164px' }
     ].map(i => Object.assign({}, i, {
       color: i.id === active ? '#8B6A93' : '#5B4C5E',
       mColor: i.id === active ? '#9E69C1' : '#2A1530',
@@ -133,6 +134,7 @@ class Component extends DCLogic {
       isMobile: m,
       isDesktop: !m,
       open,
+      navZoom: Math.min(1, Math.max(.72, ((this.state.w || 1440) - 380) / 780)).toFixed(3),
       padX: m ? '20px' : '24px',
       barH: m ? '74px' : '94px',
       logoW: m ? '112px' : '139px',

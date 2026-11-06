@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>JBL Tune 770NC ou Meeky F5 ANC Pro: R$ 202 de diferença — o que você realmente ganha? | Meeky Audio</title>
 <meta name="description" content="JBL 770NC custa R$ 499. Meeky F5 custa R$ 297. Ambos têm 70h de bateria. Comparamos os dois com dados reais e uma reclamação pública sobre o ANC do JBL.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">14 Abr 2026 · 9 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-jbl-vs-meeky.webp" alt="JBL Tune 770NC ou Meeky F5 ANC Pro: R$ 202 de diferença — o que você realmente ganha?"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-jbl-vs-meeky.webp" alt="JBL Tune 770NC ou Meeky F5 ANC Pro: R$ 202 de diferença — o que você realmente ganha?"></div>
   <article class="b-wrap">
     <div class="b-prose"><blockquote>Ficha técnica e preços consultados em abril de 2026. Valores podem variar conforme loja, promoção e disponibilidade. Este comparativo foi elaborado pela Meeky com base em informações públicas disponíveis nas páginas oficiais e marketplaces consultados na data indicada. Nenhum fabricante concorrente financiou ou influenciou as avaliações.</blockquote><h2>Resposta direta</h2><p>Pagar mais pelo JBL Tune 770NC faz sentido se você valoriza o app com equalizador avançado, o modo TalkThru e o nome da marca. Em bateria, os dois são equivalentes. Para home office com reuniões frequentes, o microfone e o suporte pós-venda são os critérios decisivos. Nos preços consultados em abril de 2026, a diferença entre os modelos era de aproximadamente R$202 — valores podem variar.</p><h2>Ficha técnica comparativa</h2><p>Preços consultados em abril de 2026. Valores podem variar conforme loja, promoção e disponibilidade.</p><div><table><thead><tr><th>Especificação</th><th>JBL Tune 770NC</th><th>Meeky F5 ANC Pro</th></tr></thead><tbody><tr><td>ANC</td><td>Adaptativo com Smart Ambient</td><td>Até 20dB</td></tr><tr><td>Bateria (sem ANC)</td><td>70h</td><td>70h</td></tr><tr><td>Bateria (com ANC)</td><td>44h*</td><td>70h</td></tr><tr><td>Bluetooth</td><td>5.3</td><td>5.4</td></tr><tr><td>LDAC</td><td>Não</td><td>Sim</td></tr><tr><td>Drivers</td><td>40mm</td><td>40mm</td></tr><tr><td>Preço (abr/2026)</td><td>~R$499–503</td><td>R$297</td></tr><tr><td>Garantia</td><td>12 meses</td><td>12 meses</td></tr><tr><td>Frete</td><td>Variável</td><td>Grátis</td></tr><tr><td>App dedicado</td><td>Sim (JBL Headphones)</td><td>Não</td></tr><tr><td>Dobra para viagem</td><td>Sim</td><td>Não</td></tr></tbody></table></div><p>*Conforme comunicação oficial da JBL para o Tune 770NC com ANC ativo.</p><h2>Bateria — empate técnico</h2><p>Ambos têm 70 horas de bateria sem ANC. Com ANC ativo, o JBL 770NC entrega 44h conforme informação oficial da marca. Para a maioria dos usuários, essa diferença prática é pouco perceptível no uso cotidiano.</p><h2>ANC — o que dizem os testes e reviews</h2><p>O JBL Tune 770NC tem ANC adaptativo com Smart Ambient — tecnologia que ajusta o nível de cancelamento automaticamente. Em reviews técnicos públicos, o ANC é descrito como funcional para uso cotidiano, com desempenho que pode variar conforme ambiente, expectativa e tipo de ruído. Para quem busca isolamento premium em ambientes com ruído intenso, vale comparar expectativas antes da compra.</p><p>O Meeky F5 ANC Pro declara até 20dB de redução. Nos nossos testes em condições reais (home office, metrô, academia), o ANC cumpriu bem para ruídos contínuos como ar-condicionado e motor.</p><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><h2>Diferenças a favor do JBL Tune 770NC</h2><ul><li>Branding consolidado no Brasil</li><li>App JBL Headphones com equalizador avançado e modos personalizados</li><li>Modo TalkThru para ouvir vozes sem tirar o fone</li><li>Presença em lojas físicas (Fast Shop, Americanas)</li><li>Headphone dobrável para transporte</li></ul><h2>Diferenças a favor do Meeky F5 ANC Pro</h2><ul><li>LDAC — codec de alta resolução (JBL não tem)</li><li>Bluetooth 5.4 — versão mais recente que o Bluetooth 5.3 do JBL</li><li>Preço menor nos valores consultados</li><li>Frete grátis para todo o Brasil</li><li>Garantia de 12 meses com suporte direto em português</li></ul><h2>Para quem vale cada um</h2><div><h3>Escolha o JBL Tune 770NC se:</h3><ul><li>Você valoriza o nome JBL e a presença em lojas físicas</li><li>Quer app com equalizador avançado e modo TalkThru</li><li>Viaja com frequência e precisa de um headphone dobrável</li><li>Tem orçamento para ir além de R$300</li></ul></div><div><h3>Escolha o Meeky F5 ANC Pro se:</h3><ul><li>Quer LDAC + 70h de bateria + ANC funcional por R$297</li><li>Usa Android e prioriza qualidade de áudio de alta resolução</li><li>Precisa de frete grátis e suporte em português sem burocracia</li><li>Prefere investir a diferença de preço em outro lugar</li></ul></div><div><p>Leia também:</p><ul><li><a href="Blog-meeky-f5-anc-pro-vs-anker-soundcore-q20i-comparativo-2026.html">Meeky F5 ANC Pro vs Anker Soundcore Q20i: qual escolher em 2026?</a></li><li><a href="Blog-meeky-f5-anc-pro-vs-qcy-h3-vs-jbl-770nc-comparativo-2026.html">Meeky F5 vs QCY H3 vs JBL 770NC: comparativo completo (2026)</a></li><li><a href="Blog-melhor-headphone-anc-ate-300-reais-brasil-2026.html">Melhor headphone ANC até R$300 no Brasil (2026): guia definitivo</a></li></ul></div><h2>Perguntas frequentes</h2><div>O JBL Tune 770NC é melhor que o Meeky F5 ANC Pro?+<p>Depende do critério. O JBL tem app mais completo, modo TalkThru, branding reconhecido e é dobrável. O Meeky F5 tem LDAC, Bluetooth 5.4, preço menor e frete grátis. Em bateria total, os dois são equivalentes. A melhor escolha depende do que você prioriza.</p>O ANC do JBL Tune 770NC é bom?+<p>É funcional para uso cotidiano, com ANC adaptativo Smart Ambient conforme comunicação oficial da JBL. A percepção de desempenho pode variar conforme ambiente, expectativa e tipo de ruído. Para ambientes moderadamente barulhentos como home office e academia, cumpre o papel.</p>Vale a pena pagar mais pelo JBL em relação ao Meeky F5?+<p>Para quem valoriza app com equalizador, TalkThru e marca consolidada, pode valer. Para quem prioriza LDAC, Bluetooth 5.4, frete grátis e suporte local pelo menor preço, o Meeky F5 é a escolha mais econômica com garantia equivalente.</p></div><p><strong>Comprar o Meeky F5 ANC Pro:</strong> <a href="Produto.html">meeky.com.br/headphone-anc-meeky-f5-pro</a> — R$297, frete grátis, nota fiscal, LDAC, garantia 12 meses.</p></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

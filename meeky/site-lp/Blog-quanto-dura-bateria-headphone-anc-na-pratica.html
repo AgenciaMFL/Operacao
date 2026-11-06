@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Quanto Dura a Bateria de Headphone ANC na Prática? (Teste Real) | Meeky Audio</title>
 <meta name="description" content="Bateria anunciada vs real: fatores que afetam, como calcular para seu uso e comparativo 70h Meeky vs 40h QCY vs 44h JBL em dias reais.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">22 Jun 2026 · 8 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-bateria-muda-tudo.webp" alt="Quanto Dura a Bateria de Headphone ANC na Prática? (Teste Real)"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-bateria-muda-tudo.webp" alt="Quanto Dura a Bateria de Headphone ANC na Prática? (Teste Real)"></div>
   <article class="b-wrap">
     <div class="b-prose"><h2>Resposta direta (com honestidade)</h2><p>A bateria anunciada por fabricantes é o <strong>melhor cenário</strong>, medido em condições otimizadas. No uso real, com volume confortável, ANC sempre ligado e codec mais pesado, a duração cai 15–30% do número da caixa. O importante não é o número absoluto — é <strong>quantos dias de uso isso vira para a sua rotina</strong>.</p><h2>Por que o número da caixa nunca bate</h2><p>Fabricantes seguem condições padrão para divulgar duração (volume médio-baixo, codec SBC, ANC frequentemente desligado, sem multiponto). Você usa em condições reais. A diferença típica:</p><ul><li><strong>Volume 80% vs 50%:</strong> consome ~30% mais.</li><li><strong>LDAC vs SBC:</strong> consome ~15–20% mais.</li><li><strong>ANC ligado vs desligado:</strong> consome ~25–40% mais.</li><li><strong>Multiponto ativo:</strong> consome ~10% mais.</li></ul><h2>Comparativo: anunciado vs real (jun/2026)</h2><p>Valores reais medidos em uso típico: volume ~60%, ANC ligado, codec padrão do aparelho conectado.</p><div><table><thead><tr><th>Modelo</th><th>Anunciado (ANC on)</th><th>Real (uso típico)</th><th>Dias (6h/dia)</th></tr></thead><tbody><tr><td>Meeky F5 ANC Pro</td><td><strong>70h</strong></td><td>~50–60h</td><td><strong>~9–10 dias</strong></td></tr><tr><td>JBL Tune 770NC</td><td>44h</td><td>~35–40h</td><td>~6–7 dias</td></tr><tr><td>Soundcore Q20i</td><td>40h</td><td>~30–35h</td><td>~5–6 dias</td></tr><tr><td>QCY H3</td><td>~40h</td><td>~32h</td><td>~5–6 dias</td></tr></tbody></table></div><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><h2>Como calcular para o seu uso</h2><p>Pegue a especificação do fabricante (ANC on), aplique fator de uso real e divida pelas suas horas/dia:</p><div>dias_reais = (horas_anunciadas × 0,80) ÷ horas_por_dia</div><p>O fator 0,80 é conservador (assume volume médio-alto e ANC sempre ligado). Para uso mais leve, use 0,90.</p><p>Exemplos com Meeky F5 (70h anunciadas, fator 0,80 → 56h reais):</p><ul><li>2h/dia de uso casual → ~28 dias entre cargas</li><li>4h/dia (estudo + entretenimento) → ~14 dias</li><li>6h/dia (home office) → ~9 dias</li><li>8h/dia (uso intenso) → ~7 dias</li></ul><h2>Por que a folga de bateria importa</h2><p>Não é só "menos vezes na tomada". É <strong>menos ansiedade</strong>. Você esquece do fone na bolsa, viaja sem o carregador, usa o dia inteiro sem se preocupar com porcentagem. Quem tem 70h reais raramente pensa em bateria. Quem tem 30h, pensa toda noite.</p><p>O <a href="Produto.html">Meeky F5 ANC Pro</a> foi projetado em torno desse argumento. Para a maioria dos usuários (4–6h/dia), uma carga cobre uma a duas semanas inteiras de uso. Não é marketing — é projeto.</p><h2>Conclusão</h2><p>Bateria anunciada é uma referência, não uma promessa. Use o fator 0,80 e divida pelas suas horas reais. Para quem usa fone como ferramenta diária (trabalho, estudo, treino), a bateria é, junto com conforto, o fator que mais aparece no uso prolongado.</p><p>Veja também: <a href="Blog-headphone-anc-70-horas-bateria-por-que-importa.html">por que 70h de bateria importa</a>, <a href="Blog-headphone-70-horas-bateria.html">70h de bateria na rotina</a> e <a href="Blog-headphone-anc-funciona-em-aviao.html">ANC em avião</a>.</p><h2>Perguntas frequentes</h2><div>Por que a bateria real é sempre menor que a anunciada?+<p>Fabricantes medem em condições otimizadas: volume médio-baixo (~50%), codec eficiente (SBC), ANC frequentemente desligado e sem multiponto ativo. No uso cotidiano, volume mais alto, LDAC, ANC ligado e conexões secundárias reduzem o número anunciado em 15–30%.</p>ANC ligado consome muito mais bateria?+<p>Sim. ANC ativo consome cerca de 25–40% mais energia que o modo passivo, porque os microfones ANC ficam captando ruído continuamente e o DSP processa o antissinal em tempo real. Por isso fabricantes divulgam dois números (ex.: 60h sem ANC / 40h com ANC).</p>Qual o número honesto de bateria do Meeky F5 ANC Pro?+<p>70h é a especificação oficial com ANC ligado em condições padrão de teste. Em uso real com volume confortável (~60%) e ANC sempre ligado, ficamos entre 50–60h em jun/2026. Ainda é o maior número da faixa até R$300 — Soundcore Q20i fica em 40h com ANC e QCY H3 em ~40h.</p>Quantos dias dura uma carga no uso típico?+<p>Depende do seu uso. Para 6h/dia de trabalho com ANC ligado: Meeky F5 ~9–10 dias, Soundcore Q20i ~6–7 dias, QCY H3 ~6–7 dias, JBL 770NC ~7 dias. Para uso ocasional (2h/dia), todos passam de duas semanas.</p>Carga rápida vale mais que bateria longa?+<p>São complementares. Carga rápida é ótima para 'emergência' (5 min = horas extras). Bateria longa elimina a necessidade de carregar com frequência. Para quem viaja ou trabalha fora de casa, bateria longa traz mais tranquilidade. Para quem está sempre perto de uma tomada, carga rápida basta.</p></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

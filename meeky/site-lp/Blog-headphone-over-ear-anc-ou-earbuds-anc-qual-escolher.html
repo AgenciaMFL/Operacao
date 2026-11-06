@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Headphone Over-Ear ANC ou Earbuds ANC: Qual Escolher para Trabalho e Estudo | Meeky Audio</title>
 <meta name="description" content="Comparativo de formato (não de marca) para decidir entre concha over-ear e in-ear: isolamento, conforto em uso prolongado, bateria e cancelamento reais.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">13 Jul 2026 · 8 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-anc-ativo-vs-passivo.webp" alt="Headphone Over-Ear ANC ou Earbuds ANC: Qual Escolher para Trabalho e Estudo"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-anc-ativo-vs-passivo.webp" alt="Headphone Over-Ear ANC ou Earbuds ANC: Qual Escolher para Trabalho e Estudo"></div>
   <article class="b-wrap">
     <div class="b-prose"><p>Para uso prolongado em trabalho e estudo, o <strong>headphone over-ear com ANC ativo</strong> ganha da maioria dos earbuds ANC por três motivos objetivos: isolamento passivo maior (a concha já bloqueia som antes de a eletrônica entrar), bateria muito superior (dezenas de horas por carga contra 5–8 horas de earbud) e conforto ao longo de várias horas seguidas. O <strong>earbud in-ear com ANC</strong> vence quando o critério é mobilidade, discrição e uso rápido — não jornada longa.</p><p>Este guia compara os dois formatos ponto a ponto para você decidir com base em como usa fone de verdade, sem depender de marca específica.</p><h2>Qual formato bloqueia mais ruído no total?</h2><p>Todo cancelamento de ruído tem duas camadas: o passivo (isolamento físico) e o ativo (o ANC eletrônico). Over-ear já parte na frente na camada passiva: as almofadas grandes cobrem toda a orelha e bloqueiam parte considerável de médios e agudos antes de o ANC ligar. O earbud in-ear depende inteiramente do ajuste da ponta de silicone dentro do canal auditivo — se a vedação falha, tanto o isolamento quanto o ANC ativo caem junto. Se quiser entender melhor essa distinção, veja o guia sobre <a href="Blog-anc-ativo-vs-cancelamento-passivo-diferenca.html">ANC ativo vs cancelamento passivo</a>.</p><h2>Qual é mais confortável para expediente longo?</h2><p>Conforto depende de anatomia, mas há um padrão claro: em jornadas de 6 a 10 horas, over-ear com almofadas de memory foam distribui o peso na cabeça e não pressiona o canal auditivo. A maior parte de quem passa oito horas em call ou em foco relata menos fadiga. O earbud in-ear é leve e some no ouvido, mas a pressão contínua da ponta cansa depois de algumas horas em boa parte dos usuários — e reposicionar o bud interrompe a concentração. Para uso profissional prolongado, over-ear é a aposta mais segura.</p><h2>Qual dura mais bateria em uma semana de trabalho?</h2><p>Aqui a diferença é física: over-ear tem espaço para bateria maior. O <a href="Produto.html">Meeky F5 ANC Pro</a>, por exemplo, entrega 40 horas com ANC ativo e 70 horas sem ANC em uma única carga — dá para trabalhar uma semana inteira sem carregar. Earbuds ANC, mesmo os bons, ficam entre 5 e 8 horas de uso contínuo por carga, exigindo pausas no case ao longo do dia. Para quem não quer se preocupar com carregar toda hora, over-ear resolve. Entenda melhor <a href="Blog-headphone-anc-70-horas-bateria-por-que-importa.html">por que a bateria com ANC importa</a>.</p><h2>Earbud tem alguma vantagem real sobre over-ear?</h2><p>Sim, e não são poucas. Earbud é discreto (cabe no bolso), leve (não esquenta a cabeça), livre da haste de arco (não atrapalha para deitar ou usar boné), e melhor para atividade física de impacto leve, deslocamento e uso rápido. Para caminhada, transporte público e chamadas curtas em movimento, earbud ganha. O erro é usar earbud como fone principal de expediente prolongado — não é para isso que ele foi feito.</p><h2>Como decidir com base no seu uso principal?</h2><p>Uma regra prática: se mais de 60% do seu uso é sentado, com fone por mais de 2 horas seguidas (home office, estudo, biblioteca, viagem longa), escolha <strong>over-ear com ANC ativo</strong>. Se mais de 60% é em movimento, com sessões curtas e trocas frequentes (rua, transporte, academia leve, chamadas rápidas), escolha <strong>earbud in-ear com ANC</strong>. Sempre que possível, priorize também isolamento passivo real, ANC ativo verificado (não só "redução de ruído para chamada") e autonomia condizente com sua rotina.</p><p>Se está comparando um over-ear com ANC ativo contra um earbud sem ANC no áudio, o comparativo <a href="Blog-meeky-f5-anc-pro-vs-redmi-buds-6-active-comparativo-2026.html">Meeky F5 ANC Pro vs Redmi Buds 6 Active</a> mostra essa disputa de formato na prática.</p><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><p>Veja também: <a href="Blog-o-que-e-cancelamento-de-ruido-ativo-anc.html">o que é ANC ativo</a> e <a href="Blog-headphone-home-office-anc.html">headphone com ANC para home office</a>.</p><h2>Perguntas frequentes</h2><div>Over-ear com ANC cancela mais ruído do que earbud com ANC?+<p>Em geral sim, e o motivo é físico antes de ser eletrônico. O headphone over-ear já soma um isolamento passivo grande pelas almofadas grandes sobre a orelha, e o ANC ativo entra em cima disso. O earbud in-ear depende do ajuste da ponta de silicone no canal auditivo — se a vedação escapa, o ANC também escapa. Em ambiente controlado (avião, escritório) o over-ear tende a entregar cancelamento mais consistente.</p>Qual formato é mais confortável para 8 horas de uso?+<p>Depende da anatomia. Over-ear com almofadas de memory foam distribui o peso e não pressiona o canal auditivo, o que costuma ganhar em jornadas longas — mas esquenta em locais quentes. Earbud in-ear é leve e discreto, porém a pressão da ponta no canal cansa depois de algumas horas em muita gente. Para trabalho e estudo prolongado, over-ear é a escolha mais segura para conforto.</p>Earbud com ANC dura menos bateria?+<p>Sim, por design. Earbuds trabalham com baterias minúsculas dentro do bud e dependem do case para recarregar ao longo do dia — a autonomia por carga costuma ficar entre 5 e 8 horas com ANC ligado. Um over-ear tem espaço para bateria maior: o Meeky F5 ANC Pro, por exemplo, entrega 40 horas com ANC ativo em uma única carga. Para uma semana inteira de trabalho, over-ear resolve sem parar para carregar.</p>Earbud com ANC serve para chamadas de trabalho?+<p>Serve bem, especialmente pela discrição e mobilidade — mas o microfone tende a captar mais ruído de vento e ambiente porque fica pendurado longe da boca. Over-ear com múltiplos microfones costuma entregar áudio de chamada mais estável em ambientes barulhentos. Se a maior parte das suas chamadas é em home office silencioso, os dois funcionam.</p>Vale a pena ter os dois formatos?+<p>Para muita gente, sim. Over-ear para expediente longo, foco em casa, biblioteca e viagens; earbud in-ear para caminhada, academia leve e uso rápido no transporte público. Cada um resolve um cenário. Se você só pode ter um agora e o uso principal é trabalho e estudo, priorize over-ear com ANC ativo real.</p></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Headphone com ANC Funciona em Avião? A Resposta Definitiva | Meeky Audio</title>
 <meta name="description" content="Por que avião é o cenário ideal para ANC, como o cancelamento processa o ruído contínuo do motor e o que esperar durante o voo.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">22 Jun 2026 · 7 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-anc-vale-a-pena.webp" alt="Headphone com ANC Funciona em Avião? A Resposta Definitiva"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-anc-vale-a-pena.webp" alt="Headphone com ANC Funciona em Avião? A Resposta Definitiva"></div>
   <article class="b-wrap">
     <div class="b-prose"><h2>Resposta direta</h2><p>Sim — e o avião é, na verdade, <strong>o cenário onde o ANC mais brilha</strong>. O ruído contínuo e previsível do motor é exatamente o tipo de som que a tecnologia de cancelamento ativo é melhor projetada para atenuar. A diferença entre voar com ANC e sem é dramática: a viagem fica menos cansativa, você ouve música em volume confortável e dorme melhor.</p><h2>Por que avião é o cenário ideal para ANC</h2><p>ANC funciona melhor com <strong>ruídos contínuos e previsíveis</strong> (baixas frequências, estáveis no tempo) — exatamente o perfil do motor de avião, do ar condicionado da cabine e do fluxo de ar pelas paredes. Em um voo comercial, esses três sons somam ~80–90 dB de ruído contínuo. Um ANC de qualidade reduz isso em ~20 dB perceptivos, levando a cabine para um patamar comparável a um escritório tranquilo.</p><p>Em compensação, o ANC <strong>não cancela bem vozes humanas, choro de bebê, anúncios pelo alto-falante ou movimentos súbitos</strong>. Isso é técnico, não falha do produto: esses sons são imprevisíveis e ricos em frequências médias/altas, fora da zona ideal do ANC.</p><h2>O que você ganha na prática</h2><ul><li><strong>Música em volume mais baixo</strong> — sem competir com o motor, você ouve confortável a ~50% do volume.</li><li><strong>Menos fadiga auditiva</strong> — o cérebro deixa de processar ruído contínuo, e você desembarca menos exausto.</li><li><strong>Sono mais fácil</strong> — o silêncio relativo ajuda a relaxar, especialmente em voos noturnos.</li><li><strong>Conversas mais leves</strong> — você consegue ouvir o vizinho de poltrona sem precisar gritar.</li></ul><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><h2>O que esperar (e o que não esperar)</h2><p>Esperar: <strong>silêncio relativo</strong>, fadiga reduzida e música/filme em qualidade superior à dos fones do avião. Não esperar: silêncio total (nenhum ANC do mundo cancela 100%), cancelamento de bebês chorando ou de anúncios da tripulação (na verdade, isso é bom — você não quer perder anúncios de segurança).</p><h2>Por que o Meeky F5 ANC Pro funciona bem para voos</h2><p>O <a href="Produto.html">Meeky F5 ANC Pro</a> tem três características práticas que importam em viagens:</p><ul><li><strong>ANC até 20dB</strong> — atenuação consistente do ruído contínuo do motor.</li><li><strong>70h de bateria</strong> — você esquece o carregador e ainda sobra para a viagem inteira (ida + volta + uso entre voos).</li><li><strong>Certificação Anatel</strong> — compatível com a regulamentação brasileira, sem risco em fiscalizações.</li><li><strong>Peso baixo e almofadas macias</strong> — confortável para usar por horas seguidas em poltrona apertada.</li></ul><h2>Dicas práticas de uso em voo</h2><ul><li>Coloque o fone <strong>antes</strong> da decolagem — o ANC ajuda também com a variação de pressão.</li><li>Carregue na véspera. Mesmo com 70h, evite começar a viagem na reserva.</li><li>Para entretenimento de bordo, leve um adaptador Bluetooth de avião (AirFly tipo) ou use o celular.</li><li>Em pouso e decolagem, mantenha ANC ligado mas baixe o volume da música para ouvir avisos.</li></ul><h2>Conclusão</h2><p>ANC em avião não é luxo — é a diferença entre desembarcar cansado ou descansado. Para voos acima de 2h, a tecnologia paga o investimento já na primeira viagem.</p><p>Veja também: <a href="Blog-anc-prejudica-qualidade-do-som-headphone.html">ANC prejudica a qualidade do som?</a>, <a href="Blog-quanto-dura-bateria-headphone-anc-na-pratica.html">quanto dura a bateria na prática</a> e <a href="Blog-o-que-e-cancelamento-de-ruido-ativo-anc.html">o que é ANC</a>.</p><h2>Perguntas frequentes</h2><div>Posso usar headphone Bluetooth durante o voo?+<p>Sim. Desde 2013 (FAA) e 2014 (ANAC), o uso de Bluetooth é permitido em modo avião durante todas as fases do voo na maioria das companhias. Confirme com a tripulação na decolagem e pouso.</p>Quanto o ANC reduz o ruído do motor do avião?+<p>Em um avião comercial típico (~85 dB de cabine), um ANC de qualidade reduz a sensação para algo equivalente a ~65 dB — comparável a um café tranquilo. A redução é mais eficaz em frequências graves (motor, ar condicionado), menos em vozes e anúncios.</p>O ANC do Meeky F5 ANC Pro funciona bem em avião?+<p>Sim. O Meeky F5 ANC Pro tem até 20dB de redução ativa, certificação Anatel e bateria de 70h com ANC ligado — suficiente para múltiplos voos longos sem recarregar. Em testes em voos domésticos e internacionais (jun/2026), atenua bem o ruído contínuo do motor, principal incômodo da viagem.</p>Adaptador para tomada do avião funciona com headphone Bluetooth?+<p>Não diretamente — os jacks de entretenimento de bordo são analógicos (P2 duplo). Para usar Bluetooth, você precisa de um transmissor Bluetooth de avião (vendido por marcas como Twelve South AirFly). Vale o investimento se você voa com frequência em rotas longas.</p>O ANC ajuda a dormir no avião?+<p>Muito. Reduz o estresse auditivo contínuo (que mesmo inconscientemente cansa o cérebro), facilitando relaxamento. Para dormir confortavelmente, considere também o peso e a pressão do fone — modelos leves e com almofadas macias são mais adequados para uso prolongado deitado.</p></div></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

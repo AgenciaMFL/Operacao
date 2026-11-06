@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Meta Pixel Code -->
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<link rel="preload" as="image" href="assets/sobre-v2/hero-woman.webp" fetchpriority="high">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
 
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;600;700&display=swap">
 <style>
   @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
   @keyframes meeky-float{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-14px,0) rotate(-2deg)}}
@@ -60,9 +62,14 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .btn-g:hover { color:#fff; background-position:100% 0; transform:translateY(-2px); box-shadow:0 4px 0 #470E6D, 0 16px 30px -16px rgba(94,45,128,.65); }
   .btn-g.solid { background:#9E69C1; }
   .btn-g.solid:hover { background:#8A55AD; }
-  .btn-o { display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; border-radius:999px; border:1px solid #CAB3D9; background:rgba(255,255,255,.18); color:#6E6271; font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; transition:background-color .3s, border-color .3s, color .3s; }
+  .btn-o { display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; border-radius:999px; border:1px solid #CAB3D9; background:rgba(255,255,255,.18); color:#6E6271; font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; position:relative; overflow:hidden; isolation:isolate; transition:color .35s, border-color .35s, transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s; }
+  /* Ver detalhes: o roxo enche o botão da esquerda para a direita ao passar o mouse */
+  .btn-o::before { content:''; position:absolute; inset:0; z-index:-1; border-radius:inherit; background:linear-gradient(90deg,#9E69C1,#C574FB); transform:scaleX(0); transform-origin:left center; transition:transform .45s cubic-bezier(.16,.84,.44,1); }
+  .btn-o::after { content:'→'; display:inline-block; width:0; margin-left:0; opacity:0; transform:translateX(-6px); transition:width .35s, margin .35s, opacity .35s, transform .35s; }
   .btn-o.white { background:#fff; }
-  .btn-o:hover { background:#fff; border-color:#9E69C1; color:#9E69C1; }
+  .btn-o:hover { color:#fff; border-color:#9E69C1; transform:translateY(-2px); box-shadow:0 14px 26px -14px rgba(94,45,128,.6); }
+  .btn-o:hover::before { transform:scaleX(1); }
+  .btn-o:hover::after { width:1em; margin-left:8px; opacity:1; transform:none; }
   .ic-m { display:block; flex:0 0 auto; width:23.62px; height:19.18px; background:#fff; -webkit-mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; transform:rotate(-9.54deg); }
   .ic-f { display:block; flex:0 0 auto; width:19px; height:21px; background:#fff; -webkit-mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; }
 
@@ -95,7 +102,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 
 
 <script>window.__pageVals = (k, m, w) => ({ kmCard2: (Math.max(280, w - 40) / 534.53).toFixed(4) });</script>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F;padding-top:{{ topPad }}">
 
@@ -108,8 +115,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   <!-- Hero Sobre (Figma 4157:195) -->
   <section style="position:relative;overflow:hidden;background:linear-gradient(214.4deg,#4A3169 8.95%,#B987F8 88.12%)">
     <div class="hv" style="height:838px;zoom:{{ k }}">
-      <img class="ab" src="assets/sobre-v2/hero-eq.svg" alt="" width="1634" height="439" style="left:-168px;top:-154px;width:1634.41px;height:439px;mix-blend-mode:plus-lighter">
-      <img class="ab" src="assets/sobre-v2/hero-woman.webp" alt="Mulher sorrindo ouvindo música com o Meeky F5 ANC Pro" width="1036" height="1107" style="left:446px;top:-175px;width:1035.4px;height:1107px">
+      <img loading="lazy" class="ab" src="assets/sobre-v2/hero-eq.svg" alt="" width="1634" height="439" style="left:-168px;top:-154px;width:1634.41px;height:439px;mix-blend-mode:plus-lighter">
+      <img fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" class="ab" src="assets/sobre-v2/hero-woman.webp" alt="Mulher sorrindo ouvindo música com o Meeky F5 ANC Pro" width="1036" height="1107" style="left:446px;top:-175px;width:1035.4px;height:1107px">
       <h1 class="ab hub grad-txt" style="left:0;top:295px;width:578px;height:123.49px;margin:0;display:flex;align-items:center;font-weight:700;font-size:67.836px;letter-spacing:-2.0351px;line-height:.94;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%);animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both">Tecnologia brasileira<br>para foco e performance.</h1>
       <p class="ab pop" style="left:0;top:444px;width:535px;height:99.5px;margin:0;display:flex;align-items:center;font-size:24.884px;letter-spacing:-.4977px;line-height:1.27;color:#fff;animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .3s both">Foco para produzir. Liberdade para se mover. Do F5 ANC Pro ao Motion 1, a Meeky cria novas formas de ouvir o seu mundo.</p>
     </div>
@@ -138,13 +145,13 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
         <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">O QUE NOS MOVE</p>
         <h2 class="hub" style="margin:26px 0 0;text-align:center;font-weight:700;font-size:44px;line-height:48.4px;color:#09010F">Tecnologia a serviço da sua rotina.</h2>
         <div style="margin-top:26px;display:flex;gap:24px"><div style="box-sizing:border-box;width:424.66px;height:190px;padding:24px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-ear.svg" alt="" width="12" height="20" style="width:11.72px;height:19.52px"></span>
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/sobre-v2/ic-ear.svg" alt="" width="12" height="20" style="width:11.72px;height:19.52px"></span>
           <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Foco para produzir</p>
           <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Menos distrações para trabalhar, estudar e aproveitar sua música.</p></div><div style="box-sizing:border-box;width:424.66px;height:190px;padding:24px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-mic.svg" alt="" width="17" height="23" style="width:17.3px;height:22.72px"></span>
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/sobre-v2/ic-mic.svg" alt="" width="17" height="23" style="width:17.3px;height:22.72px"></span>
           <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Liberdade para se mover</p>
           <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Áudio que acompanha o treino e diferentes momentos do dia.</p></div><div style="box-sizing:border-box;width:424.66px;height:190px;padding:24px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-headset.svg" alt="" width="24" height="20" style="width:23.8px;height:19.84px"></span>
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/sobre-v2/ic-headset.svg" alt="" width="24" height="20" style="width:23.8px;height:19.84px"></span>
           <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Proximidade para cuidar</p>
           <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Suporte nacional e uma relação que continua depois da compra.</p></div></div>
       </div>
@@ -185,14 +192,14 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
             <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Filipe Cardoso</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADOR</p></div>
           </div>
           <p class="pop" style="margin:0;height:75px;font-size:16px;line-height:25px;color:#594F66">Engenheiro e empreendedor no mercado de tecnologia e marketplaces. Lidera produto, fornecedores e estratégia comercial, do conceito à experiência de quem usa.</p>
-          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Produto, tecnologia e estratégia</p></div>
+          <div style="display:flex;align-items:center;gap:8px"><img loading="lazy" src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Produto, tecnologia e estratégia</p></div>
         </div><div style="box-sizing:border-box;width:649px;height:280px;padding:28px;border-radius:24px;background:#F2EDFA;display:flex;flex-direction:column;gap:18px">
           <div style="display:flex;align-items:center;gap:20px">
             <div style="flex:0 0 auto;width:64px;height:64px;border-radius:20px;background:#fff;display:flex;align-items:center;justify-content:center"><span class="hub" style="font-weight:700;font-size:25px;line-height:30px;color:#7D47B8">FM</span></div>
             <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Fernanda Micchi</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADORA</p></div>
           </div>
           <p class="pop" style="margin:0;height:75px;font-size:16px;line-height:25px;color:#594F66">Especialista em RH, saúde emocional e desenvolvimento humano. Conecta tecnologia com foco, presença e bem-estar.</p>
-          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Pessoas, foco e bem-estar</p></div>
+          <div style="display:flex;align-items:center;gap:8px"><img loading="lazy" src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Pessoas, foco e bem-estar</p></div>
         </div></div>
       </div>
     </div>
@@ -219,8 +226,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div style="position:relative;height:118vw;max-height:600px;overflow:hidden">
       <div style="position:absolute;left:0;right:0;bottom:0;height:68%;background:linear-gradient(180deg,rgba(85,57,119,0),#553977)"></div>
       <div style="position:absolute;left:0;right:0;bottom:0;height:68%;background:linear-gradient(180deg,rgba(85,57,119,0),#553977)"></div>
-      <img src="assets/sobre-v2/m-eq.svg" alt="" width="946" height="254" style="position:absolute;left:-17%;bottom:-2%;width:124%;height:auto;transform:scaleY(-1) rotate(180deg);mix-blend-mode:plus-lighter">
-      <img src="assets/sobre-v2/hero-woman.webp" alt="Mulher sorrindo ouvindo música com o Meeky F5 ANC Pro" width="480" height="513" style="position:absolute;left:50%;bottom:0;width:126vw;max-width:640px;height:auto;transform:translateX(-50%)">
+      <img loading="lazy" src="assets/sobre-v2/m-eq.svg" alt="" width="946" height="254" style="position:absolute;left:-17%;bottom:-2%;width:124%;height:auto;transform:scaleY(-1) rotate(180deg);mix-blend-mode:plus-lighter">
+      <img fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" src="assets/sobre-v2/hero-woman.webp" alt="Mulher sorrindo ouvindo música com o Meeky F5 ANC Pro" width="480" height="513" style="position:absolute;left:50%;bottom:0;width:126vw;max-width:640px;height:auto;transform:translateX(-50%)">
     </div>
     <div style="position:relative;background:#553977;padding:4px 20px 44px;text-align:center">
       <h1 class="hub grad-txt" style="margin:0;font-weight:700;font-size:44px;letter-spacing:-1.3px;line-height:.98;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%)">Tecnologia brasileira para foco e performance.</h1>
@@ -243,13 +250,13 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:11.5px;color:#7D47B8">O QUE NOS MOVE</p>
     <h2 class="m-h hub" style="margin-top:12px;text-align:center;font-weight:700;font-size:36px">Tecnologia a serviço da sua rotina.</h2>
     <div style="margin-top:22px;display:flex;flex-direction:column;gap:12px"><div style="box-sizing:border-box;padding:20px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-ear.svg" alt="" width="12" height="20" style="width:11.72px;height:19.52px"></span>
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/sobre-v2/ic-ear.svg" alt="" width="12" height="20" style="width:11.72px;height:19.52px"></span>
           <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Foco para produzir</p>
           <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Menos distrações para trabalhar, estudar e aproveitar sua música.</p></div><div style="box-sizing:border-box;padding:20px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-mic.svg" alt="" width="17" height="23" style="width:17.3px;height:22.72px"></span>
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/sobre-v2/ic-mic.svg" alt="" width="17" height="23" style="width:17.3px;height:22.72px"></span>
           <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Liberdade para se mover</p>
           <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Áudio que acompanha o treino e diferentes momentos do dia.</p></div><div style="box-sizing:border-box;padding:20px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-headset.svg" alt="" width="24" height="20" style="width:23.8px;height:19.84px"></span>
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/sobre-v2/ic-headset.svg" alt="" width="24" height="20" style="width:23.8px;height:19.84px"></span>
           <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Proximidade para cuidar</p>
           <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Suporte nacional e uma relação que continua depois da compra.</p></div></div>
   </section>
@@ -280,14 +287,14 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
             <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Filipe Cardoso</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADOR</p></div>
           </div>
           <p class="pop" style="margin:0;font-size:16px;line-height:25px;color:#594F66">Engenheiro e empreendedor no mercado de tecnologia e marketplaces. Lidera produto, fornecedores e estratégia comercial, do conceito à experiência de quem usa.</p>
-          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Produto, tecnologia e estratégia</p></div>
+          <div style="display:flex;align-items:center;gap:8px"><img loading="lazy" src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Produto, tecnologia e estratégia</p></div>
         </div><div style="box-sizing:border-box;padding:22px;border-radius:24px;background:#F2EDFA;display:flex;flex-direction:column;gap:18px">
           <div style="display:flex;align-items:center;gap:20px">
             <div style="flex:0 0 auto;width:64px;height:64px;border-radius:20px;background:#fff;display:flex;align-items:center;justify-content:center"><span class="hub" style="font-weight:700;font-size:25px;line-height:30px;color:#7D47B8">FM</span></div>
             <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Fernanda Micchi</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADORA</p></div>
           </div>
           <p class="pop" style="margin:0;font-size:16px;line-height:25px;color:#594F66">Especialista em RH, saúde emocional e desenvolvimento humano. Conecta tecnologia com foco, presença e bem-estar.</p>
-          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Pessoas, foco e bem-estar</p></div>
+          <div style="display:flex;align-items:center;gap:8px"><img loading="lazy" src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Pessoas, foco e bem-estar</p></div>
         </div></div>
   </section>
 
@@ -418,7 +425,7 @@ class Component extends DCLogic {
     };
     if (window.Lenis) return start();
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

@@ -391,6 +391,8 @@
     var href = el.getAttribute('data-href') || el.getAttribute('href') || '';
     if (CHECKOUT_RE.test(href)) return 'checkout';
     if (/\/pre-cadastro|#comprar/i.test(href)) return 'checkout';
+    // "Compra em volume" do menu: abre o formulário de volume na própria página
+    if (/(^|\/|Home\.html)#volume$/i.test(href)) return 'volume';
     return null;
   }
 
@@ -423,8 +425,7 @@
     show(key);
   }, true);
 
-  // Pré-carrega os formulários escondidos assim que a página termina de carregar,
-  // para o popup abrir já pronto
+  // Pré-carrega os formulários escondidos para o popup abrir já pronto
   function preload() {
     var hasVolume = document.querySelector('[data-meeky-form="volume"]');
     var links = [].slice.call(document.querySelectorAll('a[href],a[data-href]')).filter(function (a) { return CHECKOUT_RE.test(a.getAttribute('data-href') || a.getAttribute('href') || ''); });
@@ -435,9 +436,20 @@
     if (hasVolume) build('volume');
     if ((!links.length || !hasVolume) && (preload.tries = (preload.tries || 0) + 1) < 20) setTimeout(preload, 500);
   }
+  // Os formulários do GHL são pesados (trazem a verificação anti-robô da Cloudflare).
+  // Por isso só são pré-carregados quando a pessoa começa a usar a página (toque, rolagem, mouse),
+  // ou 8 s depois de abrir. Se clicar em comprar antes disso, o formulário abre na hora do clique.
   function schedulePreload() {
-    var run = function () { (window.requestIdleCallback || function (cb) { setTimeout(cb, 300); })(preload); };
-    if (document.readyState === 'complete') run(); else window.addEventListener('load', run);
+    var started = false;
+    var run = function () {
+      if (started) return; started = true;
+      (window.requestIdleCallback || function (cb) { setTimeout(cb, 300); })(preload);
+    };
+    ['pointerdown', 'touchstart', 'wheel', 'keydown', 'mousemove'].forEach(function (e) {
+      window.addEventListener(e, function () { setTimeout(run, 1200); }, { once: true, passive: true });
+    });
+    var later = function () { setTimeout(run, 8000); };
+    if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
   }
   if (document.body) schedulePreload(); else document.addEventListener('DOMContentLoaded', schedulePreload);
 

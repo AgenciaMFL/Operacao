@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Meta Pixel Code -->
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<link rel="preload" as="image" href="assets/f5-v2/hero-headphone.webp" fetchpriority="high">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
 
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;600;700&display=swap">
 <style>
   @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
   @keyframes meeky-float{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-14px,0) rotate(-2deg)}}
@@ -60,9 +62,14 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .btn-g:hover { color:#fff; background-position:100% 0; transform:translateY(-2px); box-shadow:0 4px 0 #470E6D, 0 16px 30px -16px rgba(94,45,128,.65); }
   .btn-g.solid { background:#9E69C1; }
   .btn-g.solid:hover { background:#8A55AD; }
-  .btn-o { display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; border-radius:999px; border:1px solid #CAB3D9; background:rgba(255,255,255,.18); color:#6E6271; font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; transition:background-color .3s, border-color .3s, color .3s; }
+  .btn-o { display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; border-radius:999px; border:1px solid #CAB3D9; background:rgba(255,255,255,.18); color:#6E6271; font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; position:relative; overflow:hidden; isolation:isolate; transition:color .35s, border-color .35s, transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s; }
+  /* Ver detalhes: o roxo enche o botão da esquerda para a direita ao passar o mouse */
+  .btn-o::before { content:''; position:absolute; inset:0; z-index:-1; border-radius:inherit; background:linear-gradient(90deg,#9E69C1,#C574FB); transform:scaleX(0); transform-origin:left center; transition:transform .45s cubic-bezier(.16,.84,.44,1); }
+  .btn-o::after { content:'→'; display:inline-block; width:0; margin-left:0; opacity:0; transform:translateX(-6px); transition:width .35s, margin .35s, opacity .35s, transform .35s; }
   .btn-o.white { background:#fff; }
-  .btn-o:hover { background:#fff; border-color:#9E69C1; color:#9E69C1; }
+  .btn-o:hover { color:#fff; border-color:#9E69C1; transform:translateY(-2px); box-shadow:0 14px 26px -14px rgba(94,45,128,.6); }
+  .btn-o:hover::before { transform:scaleX(1); }
+  .btn-o:hover::after { width:1em; margin-left:8px; opacity:1; transform:none; }
   .ic-m { display:block; flex:0 0 auto; width:23.62px; height:19.18px; background:#fff; -webkit-mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; transform:rotate(-9.54deg); }
   .ic-f { display:block; flex:0 0 auto; width:19px; height:21px; background:#fff; -webkit-mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; }
 
@@ -100,7 +107,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .bnf .ic { flex:0 0 auto; width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; }
 </style>
 
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F;padding-top:{{ topPad }}">
 
@@ -115,7 +122,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <div class="hv" style="height:838px;zoom:{{ k }}">
       <p class="ab pop" style="left:527px;top:-3.00px;margin:0;transform:translateY(-50%);font-weight:700;font-size:152.395px;letter-spacing:-12.1916px;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="ab pop" style="left:527px;top:149.00px;margin:0;transform:translateY(-50%);font-weight:700;font-size:152.395px;letter-spacing:-12.1916px;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="ab pop" style="left:527px;top:301.85px;margin:0;transform:translateY(-50%);font-weight:700;font-size:152.395px;letter-spacing:-12.1916px;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="ab pop" style="left:527px;top:437.93px;margin:0;transform:translateY(-50%);font-weight:700;font-size:152.395px;letter-spacing:-12.1916px;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="ab pop" style="left:527px;top:590.78px;margin:0;transform:translateY(-50%);font-weight:700;font-size:152.395px;letter-spacing:-12.1916px;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="ab pop" style="left:527px;top:732.00px;margin:0;transform:translateY(-50%);font-weight:700;font-size:152.395px;letter-spacing:-12.1916px;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p>
       <div class="ab flt-p" style="left:541.23px;top:0;width:826.267px;height:791.162px;display:flex;align-items:center;justify-content:center">
-        <img src="assets/f5-v2/hero-headphone.webp" alt="Headphone Meeky F5 ANC Pro" width="702" height="656" style="width:702.148px;height:656.132px;flex:none;transform:rotate(12.35deg)">
+        <img fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" src="assets/f5-v2/hero-headphone.webp" alt="Headphone Meeky F5 ANC Pro" width="702" height="656" style="width:702.148px;height:656.132px;flex:none;transform:rotate(12.35deg)">
       </div>
       <h1 class="ab hub grad-txt" style="left:0;top:161px;width:max-content;height:84px;margin:0;display:flex;align-items:center;font-weight:700;font-size:79.102px;letter-spacing:-2.3731px;line-height:.94;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%);animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both">F5 ANC Pro</h1>
       <p class="ab pop" style="left:0;top:260px;width:465px;height:110px;margin:0;display:flex;align-items:center;font-size:22px;letter-spacing:-.44px;line-height:1.27;color:#fff;animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .3s both"><span>Cancelamento de ruído ativo até 20dB, 70 horas de bateria e Bluetooth 5.4 multiponto, o headphone <b style="font-weight:600">que some do seu pescoço e aparece só quando você precisa dele.</b></span></p>
@@ -127,7 +134,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <section style="background:#731D87;overflow:hidden"><div style="zoom:{{ mqZoom }};height:82px;display:flex;align-items:center;padding-left:12px"><div class="mq-track"><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div></div></div></section>
+  <section style="background:#731D87;overflow:hidden"><div style="zoom:{{ mqZoom }};height:82px;display:flex;align-items:center;padding-left:12px"><div class="mq-track"><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div></div></div></section>
 
   <!-- Detalhes técnicos (Figma 4092:764) -->
   <section style="background:#FFFDF9;overflow:hidden">
@@ -160,11 +167,11 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
           <p class="pop" style="margin:18px 0 0;font-size:17px;line-height:28.05px;color:#D1C4E0">Acabamento discreto, conexão com fio e recarga rápida.<br>Tudo para o seu som acompanhar o dia.</p>
           <div style="margin-top:30px;display:flex;gap:16px">
             <div style="width:365px;height:119px;box-sizing:border-box;padding:18px 18px 0 22px;border-radius:18px;background:#342144">
-              <div style="display:flex;align-items:center;gap:12px;height:30px"><span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center"><img src="assets/f5-v2/ic-layers.svg" alt="" width="20" height="20" style="width:19.6px;height:19.6px"></span><p class="hub" style="margin:0;font-weight:700;font-size:21px;line-height:26.25px;color:#fff">Acabamento matte</p></div>
+              <div style="display:flex;align-items:center;gap:12px;height:30px"><span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/f5-v2/ic-layers.svg" alt="" width="20" height="20" style="width:19.6px;height:19.6px"></span><p class="hub" style="margin:0;font-weight:700;font-size:21px;line-height:26.25px;color:#fff">Acabamento matte</p></div>
               <p class="pop" style="margin:9px 0 0;font-size:15px;line-height:1.29;color:#D1C4E0">Visual discreto para qualquer<br>momento da sua rotina.</p>
             </div>
             <div style="width:365px;height:119px;box-sizing:border-box;padding:18px 18px 0 22px;border-radius:18px;background:#342144">
-              <div style="display:flex;align-items:center;gap:12px;height:30px"><span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center"><img src="assets/f5-v2/ic-plug.svg" alt="" width="12" height="20" style="width:11.6px;height:19.6px"></span><p class="hub" style="margin:0;font-weight:700;font-size:21px;line-height:26.25px;color:#fff">Continue pelo P2</p></div>
+              <div style="display:flex;align-items:center;gap:12px;height:30px"><span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center"><img loading="lazy" src="assets/f5-v2/ic-plug.svg" alt="" width="12" height="20" style="width:11.6px;height:19.6px"></span><p class="hub" style="margin:0;font-weight:700;font-size:21px;line-height:26.25px;color:#fff">Continue pelo P2</p></div>
               <p class="pop" style="margin:9px 0 0;font-size:15px;line-height:1.29;color:#D1C4E0">Mesmo sem bateria, conecte<br>o cabo e siga ouvindo.</p>
             </div>
           </div>
@@ -190,21 +197,21 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
       <img class="ab" src="assets/f5-v2/boxer.webp" alt="Mulher treinando com o Meeky F5 ANC Pro" width="500" height="620" loading="lazy" style="left:0;top:311px;width:500px;height:620px;border-radius:28px;object-fit:cover" data-reveal="">
       <div class="ab" style="left:558px;top:349.5px;width:764px;display:flex;flex-direction:column;gap:18px" data-reveal=".1">
         <div class="bnf" style="height:169px;background:#FFFFFF;border:1px solid #FAE4FF">
-          <div class="ic" style="background:#F2EDFA"><img src="assets/f5-v2/ic-wave.svg" alt="" width="24" height="28" style="width:20.00px;height:23.40px"></div>
+          <div class="ic" style="background:#F2EDFA"><img loading="lazy" src="assets/f5-v2/ic-wave.svg" alt="" width="24" height="28" style="width:20.00px;height:23.40px"></div>
           <div style="width:642px;display:flex;flex-direction:column;gap:8px">
             <p class="hub" style="margin:0;font-weight:700;font-size:29px;line-height:34.8px;color:#09010F">Foco no que importa.</p>
             <p class="pop" style="margin:0;width:600px;font-size:16px;line-height:23px;color:#6E6678">Reduza as distrações ao redor com ANC de até 20 dB e dê mais espaço ao trabalho, aos estudos e às suas ideias.</p>
             <p class="pop" style="margin:0;font-weight:600;font-size:10px;line-height:15px;color:#7D47B8">ANC HÍBRIDO · ATÉ 20 dB</p>
           </div>
         </div><div class="bnf" style="height:169px;background:#F2EDFA;border:1px solid transparent">
-          <div class="ic" style="background:#E9DAFF"><img src="assets/f5-v2/ic-bolt.svg" alt="" width="20" height="29" style="width:16.60px;height:24.54px"></div>
+          <div class="ic" style="background:#E9DAFF"><img loading="lazy" src="assets/f5-v2/ic-bolt.svg" alt="" width="20" height="29" style="width:16.60px;height:24.54px"></div>
           <div style="width:642px;display:flex;flex-direction:column;gap:8px">
             <p class="hub" style="margin:0;font-weight:700;font-size:29px;line-height:34.8px;color:#09010F">Mais ritmo para o treino.</p>
             <p class="pop" style="margin:0;width:600px;font-size:16px;line-height:23px;color:#6E6678">Resistência IPX4 contra suor e respingos para acompanhar o movimento. Sua playlist segue com você.</p>
             <p class="pop" style="margin:0;font-weight:600;font-size:10px;line-height:15px;color:#7D47B8">RESISTÊNCIA IPX4</p>
           </div>
         </div><div class="bnf" style="height:169px;background:#FEFBFF;border:1px solid #FAE4FF">
-          <div class="ic" style="background:#F2EDFA"><img src="assets/f5-v2/ic-headset.svg" alt="" width="26" height="28" style="width:22.27px;height:23.40px"></div>
+          <div class="ic" style="background:#F2EDFA"><img loading="lazy" src="assets/f5-v2/ic-headset.svg" alt="" width="26" height="28" style="width:22.27px;height:23.40px"></div>
           <div style="width:642px;display:flex;flex-direction:column;gap:8px">
             <p class="hub" style="margin:0;font-weight:700;font-size:29px;line-height:34.8px;color:#09010F">Conforto para ficar mais.</p>
             <p class="pop" style="margin:0;width:600px;font-size:16px;line-height:23px;color:#6E6678">Almofadas over-ear e ajuste leve para ouvir sua música, participar de reuniões ou relaxar no fim do dia.</p>
@@ -280,7 +287,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
       <div class="ab" style="left:484px;top:-474px;width:1016.088px;height:1131.08px;display:flex;align-items:center;justify-content:center;pointer-events:none">
         <div style="flex:none;width:690px;height:926.678px;overflow:hidden;transform:rotate(24.91deg)"><img src="assets/home-v2/cta-headphone.webp" alt="" width="690" height="1035" loading="lazy" style="width:100%;height:111.76%"></div>
       </div>
-      <img class="ab" src="assets/f5-v2/cta-eq.svg" alt="" width="1634" height="439" style="left:448px;top:-57px;width:1634.41px;height:439px;transform:scaleY(-1)">
+      <img loading="lazy" class="ab" src="assets/f5-v2/cta-eq.svg" alt="" width="1634" height="439" style="left:448px;top:-57px;width:1634.41px;height:439px;transform:scaleY(-1)">
       <h2 class="ab hub" style="left:7px;top:84px;width:469px;height:84px;margin:0;display:flex;align-items:center;font-weight:700;font-size:79.102px;letter-spacing:-2.3731px;line-height:.94;color:#441463">F5 ANC Pro</h2>
       <p class="ab pop" style="left:7px;top:182px;width:670px;margin:0;font-size:18px;line-height:1.32;color:#4C3F5C">Menos distrações. Mais espaço para o que importa.<br>Leve o seu próximo play para outro nível.</p>
       <div class="ab" style="left:0;top:261px;width:434px;height:148px;border-radius:10px;background:linear-gradient(108.8deg,rgba(255,253,249,0.78) .8%,rgba(255,251,242,0.78) 102.9%)"></div>
@@ -297,24 +304,24 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 
   <!-- Hero F5 celular (Figma 4172:1035) -->
   <section style="position:relative;overflow:hidden;background:#553977">
-    <div style="position:relative;height:128vw;max-height:620px;overflow:hidden;background:linear-gradient(231.77deg,#4A3169 8.95%,#B987F8 88.12%)">
+    <div style="position:relative;height:84vw;max-height:430px;overflow:hidden;background:linear-gradient(231.77deg,#4A3169 8.95%,#B987F8 88.12%)">
       <p class="pop" style="position:absolute;left:50%;top:-5.8vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:11.4vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:30.7vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:48vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:67.2vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:86.4vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:103.6vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p><p class="pop" style="position:absolute;left:50%;top:123.4vw;margin:0;transform:translate(-50%,-50%);font-weight:700;font-size:19.2vw;letter-spacing:-1.5vw;line-height:1;color:#D5B8F7;opacity:.09;mix-blend-mode:overlay;white-space:nowrap">F5 ANC PRO</p>
       <div style="position:absolute;left:0;right:0;bottom:0;height:61%;background:linear-gradient(180deg,rgba(85,57,119,0),#553977)"></div>
       <div style="position:absolute;left:0;right:0;bottom:0;height:61%;background:linear-gradient(180deg,rgba(85,57,119,0),#553977)"></div>
-      <div class="flt-p" style="position:absolute;left:50%;top:4vw;width:82vw;max-width:420px;margin-left:-41vw;aspect-ratio:313/300"><img src="assets/f5-v2/hero-headphone.webp" alt="Headphone Meeky F5 ANC Pro" width="266" height="249" style="position:absolute;left:7.5%;top:8.5%;width:85%;height:auto;transform:rotate(12.35deg)"></div>
+      <div class="flt-p" style="position:absolute;left:50%;top:1vw;width:66vw;max-width:340px;margin-left:-33vw;aspect-ratio:313/300"><img fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" fetchpriority="high" src="assets/f5-v2/hero-headphone.webp" alt="Headphone Meeky F5 ANC Pro" width="266" height="249" style="position:absolute;left:7.5%;top:8.5%;width:85%;height:auto;transform:rotate(12.35deg)"></div>
     </div>
-    <div style="position:relative;margin-top:-34vw;padding:0 20px 44px;display:flex;flex-direction:column;align-items:center;text-align:center">
-      <h1 class="hub grad-txt" style="margin:0;font-weight:700;font-size:56px;letter-spacing:-1.7px;line-height:.94;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%)">F5 ANC Pro</h1>
-      <p class="pop" style="margin:14px 0 0;max-width:380px;font-size:16px;letter-spacing:-.3px;line-height:1.35;color:#fff">Cancelamento de ruído ativo até 20dB, 70 horas de bateria e Bluetooth 5.4 multiponto, o headphone <b style="font-weight:600">que some do seu pescoço e aparece só quando você precisa dele.</b></p>
-      <div style="margin-top:20px;width:100%;max-width:380px;box-sizing:border-box;padding:14px 14px 16px;border-radius:10px;background:linear-gradient(108.8deg,rgba(255,253,249,.85),rgba(255,251,242,.85));text-align:center">
-        <p class="pop" style="margin:0;display:flex;align-items:baseline;justify-content:center;gap:8px;color:#31023C;font-weight:700;white-space:nowrap"><span style="font-size:32px;letter-spacing:-.6px">6x</span><span style="font-size:52px;letter-spacing:-3.6px;line-height:1.1">R$ 49,50</span></p>
-        <p class="pop" style="margin:2px 0 0;font-size:14px;letter-spacing:-.4px;color:#31023C">ou à vista de <b style="font-weight:700">R$ 297</b> sem juros · frete grátis</p>
+    <div style="position:relative;margin-top:-14vw;padding:0 20px 36px;display:flex;flex-direction:column;align-items:center;text-align:center">
+      <h1 class="hub grad-txt" style="margin:0;font-weight:700;font-size:46px;letter-spacing:-1.4px;line-height:.94;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%)">F5 ANC Pro</h1>
+      <p class="pop" style="margin:10px 0 0;max-width:380px;font-size:14.5px;letter-spacing:-.25px;line-height:1.32;color:#fff">Cancelamento de ruído ativo até 20dB, 70 horas de bateria e Bluetooth 5.4 multiponto, o headphone <b style="font-weight:600">que some do seu pescoço e aparece só quando você precisa dele.</b></p>
+      <div style="margin-top:14px;width:100%;max-width:380px;box-sizing:border-box;padding:9px 12px 11px;border-radius:10px;background:linear-gradient(108.8deg,rgba(255,253,249,.85),rgba(255,251,242,.85));text-align:center">
+        <p class="pop" style="margin:0;display:flex;align-items:baseline;justify-content:center;gap:7px;color:#31023C;font-weight:700;white-space:nowrap"><span style="font-size:26px;letter-spacing:-.5px">6x</span><span style="font-size:42px;letter-spacing:-2.6px;line-height:1.1">R$ 49,50</span></p>
+        <p class="pop" style="margin:1px 0 0;font-size:12.5px;letter-spacing:-.35px;color:#31023C">ou à vista de <b style="font-weight:700">R$ 297</b> sem juros · frete grátis</p>
       </div>
-      <a href="Checkout.html?produto=f5&amp;qty=1" class="btn-g" style="margin-top:22px;width:100%;max-width:380px;height:54px;font-size:15px;box-shadow:0 2.23px 0 #470E6D">Comprar agora</a>
+      <a href="Checkout.html?produto=f5&amp;qty=1" class="btn-g" style="margin-top:14px;width:100%;max-width:380px;height:50px;font-size:15px;box-shadow:0 2.23px 0 #470E6D">Comprar agora</a>
     </div>
   </section>
 
-  <section style="background:#731D87;overflow:hidden"><div style="zoom:.58;height:82px;display:flex;align-items:center;padding-left:12px"><div class="mq-track"><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div></div></div></section>
+  <section style="background:#731D87;overflow:hidden"><div style="zoom:.58;height:82px;display:flex;align-items:center;padding-left:12px"><div class="mq-track"><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div><div class="mq-g"><img loading="lazy" src="assets/home-v2/techtudo.svg" alt="TechTudo" width="136" height="24" style="width:136.265px;height:23.992px"><span>Top 7 ANC 2026</span><span>70h Bateria ANC</span></div></div></div></section>
 
   <section style="background:#FFFDF9;padding:44px 20px 52px">
     <div style="height:110vw;max-height:520px;border-radius:28px;background:#F2EDFA;overflow:hidden" data-reveal=""><img src="assets/f5-v2/detalhes-woman.webp" alt="Mulher usando o Meeky F5 ANC Pro" width="672" height="840" loading="lazy" class="cover" style="object-position:30% 20%"></div>
@@ -332,8 +339,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
         <h2 class="hub" style="margin:12px 0 0;font-weight:700;font-size:38px;line-height:1.05;color:#fff">Pensado nos detalhes.<br>Pronto para sua rotina.</h2>
         <p class="pop" style="margin:12px 0 0;font-size:15px;line-height:1.55;color:#D1C4E0">Acabamento discreto, conexão com fio e recarga rápida. Tudo para o seu som acompanhar o dia.</p>
         <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
-          <div style="padding:16px 18px;border-radius:18px;background:#342144"><div style="display:flex;align-items:center;gap:10px"><img src="assets/f5-v2/ic-layers.svg" alt="" width="20" height="20"><p class="hub" style="margin:0;font-weight:700;font-size:20px;color:#fff">Acabamento matte</p></div><p class="pop" style="margin:6px 0 0;font-size:14px;line-height:1.35;color:#D1C4E0">Visual discreto para qualquer momento da sua rotina.</p></div>
-          <div style="padding:16px 18px;border-radius:18px;background:#342144"><div style="display:flex;align-items:center;gap:10px"><img src="assets/f5-v2/ic-plug.svg" alt="" width="12" height="20"><p class="hub" style="margin:0;font-weight:700;font-size:20px;color:#fff">Continue pelo P2</p></div><p class="pop" style="margin:6px 0 0;font-size:14px;line-height:1.35;color:#D1C4E0">Mesmo sem bateria, conecte o cabo e siga ouvindo.</p></div>
+          <div style="padding:16px 18px;border-radius:18px;background:#342144"><div style="display:flex;align-items:center;gap:10px"><img loading="lazy" src="assets/f5-v2/ic-layers.svg" alt="" width="20" height="20"><p class="hub" style="margin:0;font-weight:700;font-size:20px;color:#fff">Acabamento matte</p></div><p class="pop" style="margin:6px 0 0;font-size:14px;line-height:1.35;color:#D1C4E0">Visual discreto para qualquer momento da sua rotina.</p></div>
+          <div style="padding:16px 18px;border-radius:18px;background:#342144"><div style="display:flex;align-items:center;gap:10px"><img loading="lazy" src="assets/f5-v2/ic-plug.svg" alt="" width="12" height="20"><p class="hub" style="margin:0;font-weight:700;font-size:20px;color:#fff">Continue pelo P2</p></div><p class="pop" style="margin:6px 0 0;font-size:14px;line-height:1.35;color:#D1C4E0">Mesmo sem bateria, conecte o cabo e siga ouvindo.</p></div>
           <div style="position:relative;height:140px;border-radius:18px;background:#E8D9FA;overflow:hidden">
             <p class="pop" style="position:absolute;left:18px;top:14px;margin:0;font-weight:600;font-size:12px;color:#241333">RECARGA RÁPIDA USB-C</p>
             <p class="hub" style="position:absolute;left:18px;top:38px;margin:0;font-weight:700;font-size:48px;line-height:1.08;color:#241333">10 min</p>
@@ -353,7 +360,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     <p class="m-p" style="color:#6E6678">Mais concentração no trabalho, energia no treino e conforto nos seus momentos de pausa.</p>
     <img src="assets/f5-v2/boxer.webp" alt="Mulher treinando com o Meeky F5 ANC Pro" width="500" height="620" loading="lazy" style="margin-top:22px;width:100%;height:105vw;max-height:520px;border-radius:24px;object-fit:cover;object-position:50% 30%" data-reveal="">
     <div style="margin-top:14px;display:flex;flex-direction:column;gap:12px">
-      <div class="bnf" style="padding:18px;gap:14px;background:#FFFFFF;border:1px solid #FAE4FF"><div class="ic" style="width:42px;height:42px;background:#F2EDFA"><img src="assets/f5-v2/ic-wave.svg" alt="" width="24" height="28" style="width:17.65px;height:20.65px"></div><div><p class="hub" style="margin:0;font-weight:700;font-size:24px;line-height:1.15;color:#09010F">Foco no que importa.</p><p class="pop" style="margin:6px 0 0;font-size:14.5px;line-height:1.4;color:#6E6678">Reduza as distrações ao redor com ANC de até 20 dB e dê mais espaço ao trabalho, aos estudos e às suas ideias.</p><p class="pop" style="margin:8px 0 0;font-weight:600;font-size:10px;color:#7D47B8">ANC HÍBRIDO · ATÉ 20 dB</p></div></div><div class="bnf" style="padding:18px;gap:14px;background:#F2EDFA;border:1px solid transparent"><div class="ic" style="width:42px;height:42px;background:#E9DAFF"><img src="assets/f5-v2/ic-bolt.svg" alt="" width="20" height="29" style="width:14.65px;height:21.65px"></div><div><p class="hub" style="margin:0;font-weight:700;font-size:24px;line-height:1.15;color:#09010F">Mais ritmo para o treino.</p><p class="pop" style="margin:6px 0 0;font-size:14.5px;line-height:1.4;color:#6E6678">Resistência IPX4 contra suor e respingos para acompanhar o movimento. Sua playlist segue com você.</p><p class="pop" style="margin:8px 0 0;font-weight:600;font-size:10px;color:#7D47B8">RESISTÊNCIA IPX4</p></div></div><div class="bnf" style="padding:18px;gap:14px;background:#FEFBFF;border:1px solid #FAE4FF"><div class="ic" style="width:42px;height:42px;background:#F2EDFA"><img src="assets/f5-v2/ic-headset.svg" alt="" width="26" height="28" style="width:19.65px;height:20.65px"></div><div><p class="hub" style="margin:0;font-weight:700;font-size:24px;line-height:1.15;color:#09010F">Conforto para ficar mais.</p><p class="pop" style="margin:6px 0 0;font-size:14.5px;line-height:1.4;color:#6E6678">Almofadas over-ear e ajuste leve para ouvir sua música, participar de reuniões ou relaxar no fim do dia.</p><p class="pop" style="margin:8px 0 0;font-weight:600;font-size:10px;color:#7D47B8">ALMOFADAS OVER-EAR</p></div></div>
+      <div class="bnf" style="padding:18px;gap:14px;background:#FFFFFF;border:1px solid #FAE4FF"><div class="ic" style="width:42px;height:42px;background:#F2EDFA"><img loading="lazy" src="assets/f5-v2/ic-wave.svg" alt="" width="24" height="28" style="width:17.65px;height:20.65px"></div><div><p class="hub" style="margin:0;font-weight:700;font-size:24px;line-height:1.15;color:#09010F">Foco no que importa.</p><p class="pop" style="margin:6px 0 0;font-size:14.5px;line-height:1.4;color:#6E6678">Reduza as distrações ao redor com ANC de até 20 dB e dê mais espaço ao trabalho, aos estudos e às suas ideias.</p><p class="pop" style="margin:8px 0 0;font-weight:600;font-size:10px;color:#7D47B8">ANC HÍBRIDO · ATÉ 20 dB</p></div></div><div class="bnf" style="padding:18px;gap:14px;background:#F2EDFA;border:1px solid transparent"><div class="ic" style="width:42px;height:42px;background:#E9DAFF"><img loading="lazy" src="assets/f5-v2/ic-bolt.svg" alt="" width="20" height="29" style="width:14.65px;height:21.65px"></div><div><p class="hub" style="margin:0;font-weight:700;font-size:24px;line-height:1.15;color:#09010F">Mais ritmo para o treino.</p><p class="pop" style="margin:6px 0 0;font-size:14.5px;line-height:1.4;color:#6E6678">Resistência IPX4 contra suor e respingos para acompanhar o movimento. Sua playlist segue com você.</p><p class="pop" style="margin:8px 0 0;font-weight:600;font-size:10px;color:#7D47B8">RESISTÊNCIA IPX4</p></div></div><div class="bnf" style="padding:18px;gap:14px;background:#FEFBFF;border:1px solid #FAE4FF"><div class="ic" style="width:42px;height:42px;background:#F2EDFA"><img loading="lazy" src="assets/f5-v2/ic-headset.svg" alt="" width="26" height="28" style="width:19.65px;height:20.65px"></div><div><p class="hub" style="margin:0;font-weight:700;font-size:24px;line-height:1.15;color:#09010F">Conforto para ficar mais.</p><p class="pop" style="margin:6px 0 0;font-size:14.5px;line-height:1.4;color:#6E6678">Almofadas over-ear e ajuste leve para ouvir sua música, participar de reuniões ou relaxar no fim do dia.</p><p class="pop" style="margin:8px 0 0;font-weight:600;font-size:10px;color:#7D47B8">ALMOFADAS OVER-EAR</p></div></div>
     </div>
   </section>
 
@@ -414,7 +421,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   </section>
 
   <section style="position:relative;background:#F9F0FF;overflow:hidden;padding:44px 20px 48px">
-    <img src="assets/f5-v2/cta-eq.svg" alt="" width="1634" height="439" style="position:absolute;left:-40%;top:-6px;width:200%;height:auto;transform:scaleY(-1);pointer-events:none">
+    <img loading="lazy" src="assets/f5-v2/cta-eq.svg" alt="" width="1634" height="439" style="position:absolute;left:-40%;top:-6px;width:200%;height:auto;transform:scaleY(-1);pointer-events:none">
     <div style="position:relative">
       <h2 class="hub" style="margin:0;font-weight:700;font-size:56px;letter-spacing:-1.7px;line-height:.94;color:#441463">F5 ANC Pro</h2>
       <p class="pop" style="margin:14px 0 0;font-size:16px;line-height:1.35;color:#4C3F5C">Menos distrações. Mais espaço para o que importa. Leve o seu próximo play para outro nível.</p>
@@ -542,7 +549,7 @@ class Component extends DCLogic {
     };
     if (window.Lenis) return start();
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }

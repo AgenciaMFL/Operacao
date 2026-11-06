@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KWMG33GN');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Desempenho: conexões antecipadas, fontes sem bloquear a tela e React servido pelo próprio site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display"></noscript>
+<script>window.__resources = { "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js" };</script>
+<link rel="preload" href="./vendor/react.production.min.js" as="script">
+<link rel="preload" href="./vendor/react-dom.production.min.js" as="script">
+<!-- /Desempenho -->
+<!-- Google Tag Manager + Meta Pixel (carregamento adiado para não travar a abertura da página) -->
+<script>
+(function(w,d){
+  w.dataLayer=w.dataLayer||[]; w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  if(!w.fbq){var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}
+  fbq('init','1661170241699314'); fbq('track','PageView');
+  var done=false;
+  function add(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function go(){ if(done) return; done=true;
+    add('https://www.googletagmanager.com/gtm.js?id=GTM-KWMG33GN');
+    add('https://connect.facebook.net/en_US/fbevents.js'); }
+  ['pointerdown','touchstart','keydown','wheel','mousemove'].forEach(function(e){ w.addEventListener(e,go,{once:true,passive:true}); });
+  w.addEventListener('load',function(){ setTimeout(go,3500); });
+})(window,document);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1" /></noscript>
+<!-- End Google Tag Manager + Meta Pixel -->
+
 <title>Meeky F5 ANC Pro vs QCY H3 vs JBL 770NC: Comparativo Real (2026) | Meeky Audio</title>
 <meta name="description" content="Comparativo honesto entre Meeky F5 ANC Pro, QCY H3 e JBL Tune 770NC em testes reais de 2026: ANC, bateria, LDAC, conectividade, garantia e custo-benefício.">
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1661170241699314');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 <script src="./support.js?v=20261015e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
   body { margin:0; background:#FFFDF9; color:#09010F; font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:#7D47B8; text-decoration:none; }
@@ -56,6 +57,12 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-search img { width:20.5px; height:20.5px; flex:0 0 auto; }
   .b-search input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; font:inherit; font-size:15px; color:#09010F; }
   .b-search input::placeholder { color:#6E6678; }
+  .b-float { position:fixed; left:0; right:0; top:94px; z-index:150; display:flex; justify-content:center; padding:12px 20px; pointer-events:none; opacity:0; transform:translateY(-14px); transition:opacity .3s, transform .35s cubic-bezier(.16,.84,.44,1); }
+  .b-float.on { opacity:1; transform:none; pointer-events:auto; }
+  .b-float .b-search { margin:0; width:100%; max-width:620px; height:56px; box-shadow:0 18px 40px -18px rgba(54,19,75,.45), 0 0 0 1px rgba(158,105,193,.25); }
+  .b-clear { flex:0 0 auto; width:30px; height:30px; border:0; border-radius:999px; background:#F2EDFA; color:#7D47B8; font-size:18px; line-height:1; cursor:pointer; display:none; }
+  .b-search.has .b-clear { display:block; }
+  .b-search input::-webkit-search-cancel-button { -webkit-appearance:none; display:none; }
   .b-cover { max-width:1000px; margin:-40px auto 0; padding:0 20px; position:relative; }
   .b-cover img { width:100%; aspect-ratio:1200/630; object-fit:cover; border-radius:28px; box-shadow:0 30px 60px -30px rgba(54,19,75,.45); }
   .b-wrap { max-width:760px; margin:0 auto; padding:56px 20px 40px; }
@@ -102,6 +109,8 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
   .b-more h2.b-mt { max-width:1322px; margin:0 auto; padding:72px 24px 0; font-family:'Hubot Sans','SF Pro Display',sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; font-size:clamp(32px,3vw,44px); font-weight:700; color:#09010F; }
   @media (max-width:1100px) { .b-grid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:860px) {
+    .b-float { top:74px; padding:10px 14px; }
+    .b-float .b-search { height:50px; }
     .b-hero { padding:120px 20px 64px; }
     .b-search { height:56px; }
     .b-cover { margin-top:-28px; }
@@ -117,7 +126,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     .b-more h2.b-mt { padding:48px 20px 0; }
   }
 </style>
-<script src="./meeky-form-modal.js?v=20261017a"></script>
+<script src="./meeky-form-modal.js?v=20261106a"></script>
 </helmet>
 <div style="font-family:'Poppins','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F">
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
@@ -129,7 +138,7 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
     
     <div class="b-meta">02 Jun 2026 · 10 min de leitura</div>
   </section>
-  <div class="b-cover"><img src="assets/blog/cover-f5-vs-qcy.webp" alt="Meeky F5 ANC Pro vs QCY H3 vs JBL 770NC: Comparativo Real (2026)"></div>
+  <div class="b-cover"><img loading="lazy" src="assets/blog/cover-f5-vs-qcy.webp" alt="Meeky F5 ANC Pro vs QCY H3 vs JBL 770NC: Comparativo Real (2026)"></div>
   <article class="b-wrap">
     <div class="b-prose"><blockquote>Os testes descritos neste artigo foram realizados pela equipe Meeky em condições reais de uso, não em laboratório certificado. Os valores são aproximações baseadas em uso cotidiano. Informações sobre homologação de produtos de terceiros foram verificadas no portal da Anatel em junho de 2026 — a situação pode variar conforme versão, lote, importador e vendedor. Nenhum fabricante concorrente teve acesso ou influência sobre o conteúdo deste comparativo.</blockquote><h2>Resposta direta</h2><p>Considerando preço, bateria, LDAC, Anatel e suporte local, o <strong>Meeky F5 ANC Pro</strong> (R$297) apresenta o pacote mais equilibrado para quem busca um headphone até R$300. O <strong>QCY H3</strong> (~R$299) vence no ANC puro. O <strong>JBL 770NC</strong> (~R$450) entrega ANC adaptativo, app dedicado e marca consolidada — mas a um preço significativamente mais alto e sem LDAC. Nos preços consultados em junho de 2026, o JBL custava cerca de 51% a mais que o Meeky — valores podem variar conforme loja, promoção e disponibilidade.</p><h2>Por que esse comparativo existe</h2><p>Toda semana chegam mensagens de clientes com a mesma dúvida: "Meeky ou QCY H3?" e "Vale esticar para o JBL?". Decidi escrever uma comparação honesta — incluindo onde o Meeky perde — para que você tome a decisão certa para o seu caso, não para o nosso faturamento.</p><p>Testei os três modelos em condições reais de uso entre março e maio de 2026: home office em Jacareí (SP), linha 7-Rubi da CPTM (São Paulo) e uma academia em São José dos Campos.</p><h2>Cancelamento de Ruído Ativo: quem cancela mais?</h2><p><strong>Home office (ar-condicionado ligado):</strong></p><ul><li>QCY H3: melhor desempenho nos testes — ar-condicionado ficou praticamente inaudível</li><li>JBL 770NC: desempenho similar ao QCY, levemente superior em frequências médias</li><li>Meeky F5: reduziu significativamente, mas fundo de ruído continuou presente</li></ul><p><strong>Transporte público (linha CPTM):</strong></p><ul><li>JBL 770NC: melhor desempenho nos testes — ruído de motor bem controlado</li><li>QCY H3: muito bom — reduziu bem a percepção do ruído de motor</li><li>Meeky F5: reduziu o ruído de motor; vozes próximas continuaram audíveis</li></ul><p><strong>Academia (música ambiente + equipamentos):</strong></p><ul><li>Os três modelos tiveram desempenho similar — ANC é menos eficaz em ruídos variados</li><li>O isolamento passivo das almofadas foi o fator mais relevante nesse ambiente</li></ul><p><strong>Veredicto de ANC:</strong> QCY H3 e JBL 770NC tiveram melhor desempenho de ANC nos testes. O Meeky F5 ficou em terceiro nessa categoria específica. Isso está refletido nas especificações declaradas pelos fabricantes. Se o ANC for o único critério, o QCY H3 entrega mais pelo menor preço.</p><h2>Bateria: onde o Meeky se destaca</h2><div><table><thead><tr><th>Modelo</th><th>Declarada</th><th>Estimativa real (ANC on, 60%)</th><th>Dias (6h/dia)</th></tr></thead><tbody><tr><td>Meeky F5 ANC Pro</td><td>70h</td><td>~67h</td><td>~11 dias</td></tr><tr><td>JBL 770NC</td><td>44h (ANC on)*</td><td>~40h</td><td>~6-7 dias</td></tr><tr><td>QCY H3</td><td>40h</td><td>~37h</td><td>~6 dias</td></tr></tbody></table></div><p>*Conforme comunicação oficial da JBL para o Tune 770NC com ANC ativo.</p><p>A diferença de bateria entre o Meeky (~67h) e o QCY (~37h) representa cerca de 30 horas a mais — quase 5 dias de uso sem recarregar. Para uso de 8 horas por dia, o Meeky recarrega aproximadamente uma vez por semana. <strong>Veredicto de bateria: Meeky F5 se destaca.</strong></p><div class="b-cta"><h3>Pronto para eliminar as distrações?</h3><p>Meeky F5 ANC Pro — 70h de bateria, ANC ativo, frete grátis para todo o Brasil.</p><a href="Produto.html">Comprar por R$ 297</a><p>Garantia de 12 meses · Compra 100% nacional · Entrega rastreada</p></div><h2>Qualidade de áudio: LDAC como diferencial</h2><div><table><thead><tr><th>Modelo</th><th>LDAC</th><th>AAC</th><th>SBC</th></tr></thead><tbody><tr><td>Meeky F5 ANC Pro</td><td><strong>Sim</strong></td><td>Sim</td><td>Sim</td></tr><tr><td>QCY H3</td><td>Não</td><td>Sim</td><td>Sim</td></tr><tr><td>JBL 770NC</td><td>Não</td><td>Sim</td><td>Sim</td></tr></tbody></table></div><p>LDAC é o codec de alta resolução desenvolvido pela Sony, compatível com a maioria dos Androids modernos. Ele transmite mais dados que o AAC, o que pode resultar em qualidade de áudio perceptivelmente superior em dispositivos compatíveis.</p><p>O Meeky F5 é o único dos três com LDAC. O JBL 770NC — consideravelmente mais caro — não tem o codec.</p><p><strong>Importante:</strong> LDAC não funciona com iPhone. Em dispositivos Apple, o codec utilizado é o AAC, que todos os três suportam.</p><h2>Conectividade Bluetooth</h2><ul><li><strong>Meeky F5:</strong> Bluetooth 5.4 — versão mais recente dos três</li><li><strong>JBL 770NC:</strong> Bluetooth 5.3</li><li><strong>QCY H3:</strong> Bluetooth 5.3</li></ul><p>A vantagem do Bluetooth 5.4 é mais técnica do que perceptível no uso cotidiano. A estabilidade real depende do dispositivo, ambiente e implementação do chip. Nenhum dos três apresentou dropout nos testes em ambientes urbanos normais.</p><h2>Regularização e garantia</h2><h3>Certificação Anatel</h3><div><table><thead><tr><th>Modelo</th><th>Situação Anatel</th><th>Observação</th></tr></thead><tbody><tr><td>Meeky F5 ANC Pro</td><td>✅ Homologado</td><td>Produto regularizado para comercialização no Brasil</td></tr><tr><td>JBL 770NC</td><td>✅ Homologado</td><td>Produto regularizado para comercialização no Brasil</td></tr><tr><td>QCY H3</td><td>⚠️ Verificar</td><td>Não localizamos registro para a versão analisada em jun/2026*</td></tr></tbody></table></div><p>*Em junho de 2026, não localizamos registro de homologação do QCY H3 no portal da Anatel para a versão analisada. A situação pode variar conforme versão, lote, importador e vendedor. Recomendamos consultar anatel.gov.br/produto antes da compra.</p><h3>Garantia</h3><ul><li><strong>Meeky F5 ANC Pro:</strong> 12 meses com suporte em português via WhatsApp e e-mail, direto com a marca.</li><li><strong>JBL 770NC:</strong> 12 meses com suporte via estrutura oficial JBL Brasil.</li><li><strong>QCY H3:</strong> Depende do vendedor no marketplace — consulte a política de cada loja antes de comprar.</li></ul><h2>Qualidade sonora</h2><p><strong>Meeky F5 ANC Pro:</strong> Som equilibrado, com leve ênfase em médios. Vozes claras — bom para podcasts e videoconferências. Com LDAC ativo em Android, a experiência de áudio sobe de nível.</p><p><strong>QCY H3:</strong> Som com mais graves — preferido por quem ouve música eletrônica e pop. Sem LDAC.</p><p><strong>JBL 770NC:</strong> Assinatura sonora JBL com bass ligeiramente elevado e médios limpos. App JBL Headphones com equalizador. Sem LDAC.</p><h2>Conforto em uso prolongado</h2><p>Testamos os três em blocos de 4 horas contínuas:</p><p><strong>Meeky F5 ANC Pro (268g):</strong> Almofadas de espuma com boa vedação. Leve pressão na parte superior da cabeça após 3 horas. Ajuste deslizante funciona bem para cabeças de tamanho médio.</p><p><strong>QCY H3 (248g):</strong> O mais leve dos três. Almofadas macias, boa vedação. Confortável por longos períodos.</p><p><strong>JBL 770NC (232g):</strong> O mais leve, com melhor distribuição de peso. O único que dobra para transporte — vantagem real para viagens.</p><h2>Para quem cada modelo é ideal</h2><p><strong>Escolha o Meeky F5 ANC Pro se:</strong> você quer LDAC + Anatel + bateria de 70h em um único produto até R$300; trabalha em home office e precisa de bateria que dure a semana toda; faz videochamadas longas e prioriza clareza de voz; usa Android e quer qualidade de áudio de alta resolução; precisa de nota fiscal, Anatel e garantia de 12 meses com suporte em português.</p><p><strong>Escolha o QCY H3 se:</strong> ANC mais potente é sua prioridade principal; você verificou a situação regulatória e está ciente das condições de garantia do vendedor; não usa o headphone profissionalmente de forma intensiva; prefere economizar e aceita os trade-offs.</p><p><strong>Escolha o JBL 770NC se:</strong> você pode esticar o orçamento para ~R$450; viaja com frequência (o único que dobra para mochila); valoriza app com equalizador e TalkThru; quer marca consolidada com estrutura de suporte nacional.</p><h2>Tabela de decisão rápida</h2><p>Preços consultados em junho de 2026. Valores podem variar conforme loja, promoção e disponibilidade.</p><div><table><thead><tr><th>Critério</th><th>Meeky F5</th><th>QCY H3</th><th>JBL 770NC</th></tr></thead><tbody><tr><td>Melhor ANC nos testes</td><td>❌</td><td>✅</td><td>✅✅</td></tr><tr><td>Maior bateria</td><td>✅✅</td><td>❌</td><td>✅</td></tr><tr><td>LDAC</td><td>✅✅</td><td>❌</td><td>❌</td></tr><tr><td>Menor preço</td><td>❌</td><td>✅✅</td><td>❌</td></tr><tr><td>Anatel confirmado</td><td>✅</td><td>⚠️ Verificar</td><td>✅</td></tr><tr><td>Garantia BR</td><td>✅</td><td>Depende</td><td>✅</td></tr><tr><td>Suporte PT</td><td>✅</td><td>❌</td><td>Sim</td></tr><tr><td>Bluetooth mais recente</td><td>✅✅</td><td>✅</td><td>✅</td></tr><tr><td>Dobra para viagem</td><td>❌</td><td>❌</td><td>✅</td></tr><tr><td>App dedicado</td><td>❌</td><td>❌</td><td>✅</td></tr><tr><td>Nota fiscal</td><td>✅</td><td>Depende</td><td>✅</td></tr></tbody></table></div><h2>Conclusão</h2><p>Considerando o conjunto de preço, bateria, LDAC, Anatel e suporte local, o <strong>Meeky F5 ANC Pro</strong> é uma das escolhas mais equilibradas para quem busca um headphone até R$300 no Brasil em 2026. O comparativo foi feito de forma honesta — o Meeky perde em ANC para o QCY H3 e o JBL, e isso está claro ao longo do texto.</p><p><strong>QCY H3</strong> é a escolha para quem prioriza ANC e preço, com atenção às condições de garantia e regularização.</p><p><strong>JBL 770NC</strong> é uma opção sólida para quem pode ir além de R$300 e valoriza app dedicado e marca consolidada. Veja também o <a href="Blog-jbl-770nc-ou-meeky-f5-vale-a-pena-pagar-mais.html">comparativo direto JBL 770NC vs Meeky F5</a>, o <a href="Blog-meeky-f5-anc-pro-vs-anker-soundcore-q20i-comparativo-2026.html">comparativo Meeky F5 vs Anker Soundcore Q20i</a>, o <a href="Blog-ldac-vs-aac-vs-sbc-diferenca-headphone-bluetooth.html">comparativo de codecs LDAC vs AAC vs SBC</a>, o guia de <a href="Blog-bluetooth-54-53-50-diferenca-headphone.html">Bluetooth 5.4 vs 5.3 vs 5.0</a> e o <a href="Blog-melhor-headphone-anc-ate-300-reais-brasil-2026.html">guia do melhor headphone ANC até R$300</a>.</p><p><strong>Comprar o Meeky F5 ANC Pro:</strong> <a href="Produto.html">meeky.com.br/headphone-anc-meeky-f5-pro</a> — frete grátis, nota fiscal, garantia 12 meses, LDAC, entrega para todo o Brasil.</p><h2>Perguntas frequentes</h2><div>O QCY H3 tem versão com Anatel?+<p>Em junho de 2026, não localizamos registro de homologação do QCY H3 no portal da Anatel para a versão analisada. A situação pode variar conforme versão, lote e importador. Recomendamos verificar em anatel.gov.br/produto antes da compra.</p>O Meeky Motion 1 é uma versão do F5 com ANC mais potente?+<p>Não. O Meeky Motion 1 é outro tipo de produto: um fone de condução óssea open-ear, sem cancelamento de ruído e sem LDAC. Ele deixa o ouvido livre para você ouvir o ambiente durante corrida, ciclismo e treino. Para isolamento de ruído, o modelo indicado continua sendo o Meeky F5 ANC Pro.</p>O LDAC do Meeky funciona com iPhone?+<p>Não. O iOS não suporta LDAC. Em iPhones, o codec utilizado é o AAC, que o Meeky também suporta. O LDAC funciona com a maioria dos Androids modernos e dispositivos Sony.</p>O JBL 770NC vale mais que o Meeky?+<p>Depende do perfil. Para quem precisa de ANC mais agressivo, app com equalizador e um headphone que dobre para viagens, o JBL pode justificar o preço adicional. Para quem prioriza LDAC, bateria de 70h e custo-benefício, o Meeky F5 entrega mais por menos.</p>Os três funcionam com iPhone?+<p>Sim. Os três conectam via Bluetooth com iPhone normalmente. O LDAC (disponível apenas no Meeky) não funcionará com iOS, mas AAC e SBC funcionam em todos.</p>Qual tem o melhor microfone para videochamadas?+<p>O Meeky F5 tem microfone com supressão de ruído otimizado para chamadas. Em testes de videochamada em home office, a clareza de voz foi boa nos três modelos.</p></div><p>Este comparativo foi elaborado pela Meeky com base em informações públicas disponíveis nas páginas oficiais e marketplaces consultados na data indicada. Preços e disponibilidade podem variar. Os testes foram realizados em condições reais de uso, não em laboratório certificado. Nenhum fabricante concorrente financiou ou influenciou as avaliações.</p></div>
     <a class="b-back" href="Blog.html">← Voltar ao blog</a>
@@ -158,7 +167,7 @@ class Component extends DCLogic {
       requestAnimationFrame(raf);
     };
     const s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.20/dist/lenis.min.js';
+    s.src = './vendor/lenis.min.js';
     s.onload = start;
     document.head.appendChild(s);
   }
