@@ -35,206 +35,334 @@ src="https://www.facebook.com/tr?id=1661170241699314&ev=PageView&noscript=1"
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@75..125,400..700&family=Poppins:wght@400;600;700&display=swap">
 <style>
+  @keyframes hero-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  @keyframes meeky-float{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-14px,0) rotate(-2deg)}}
+  @keyframes meeky-float-p{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-18px,0)}}
   @keyframes meeky-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  @keyframes move-up-alternate{0%{transform:translateY(0)}50%{transform:translateY(80%)}51%{transform:translateY(-80%)}to{transform:translateY(0)}}
-  body { margin:0; background:#fff; color:#0A0A0A; font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  a { color:#C4863B; text-decoration:none; }
-  a:hover { color:#8A5C1E; }
-  img, video { max-width:100%; display:block; }
+
+  body { margin:0; background:#FFFDF9; color:#09010F; font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  img { max-width:none; display:block; }
+
+  /* Home nova (Figma 2563:171) — medidas em px do Figma; no computador o conteúdo (1322px) é reduzido por "zoom" em telas menores */
+  .hv { position:relative; width:1322px; margin:0 auto; }
+  .ab { position:absolute; }
+  .hub { font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif; font-stretch:75%; font-variation-settings:"wdth" 75; }
+  .pop { font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; }
+  .sf { font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; }
+  .h55 { margin:0; font-weight:500; font-size:55px; letter-spacing:-1.65px; line-height:1; color:#09010F; }
+  .roxo { color:#9E69C1; }
+  .cover { width:100%; height:100%; object-fit:cover; }
+
+  .btn-g { display:inline-flex; align-items:center; justify-content:center; gap:7.6px; box-sizing:border-box; border-radius:999px; background:linear-gradient(90deg,#9E69C1 0%,#C574FB 50%,#9E69C1 100%); background-size:200% 100%; background-position:0 0; box-shadow:0 2px 0 #470E6D; color:#fff; font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; cursor:pointer; transition:background-position .6s cubic-bezier(.16,.84,.44,1), transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s; }
+  .btn-g:hover { color:#fff; background-position:100% 0; transform:translateY(-2px); box-shadow:0 4px 0 #470E6D, 0 16px 30px -16px rgba(94,45,128,.65); }
+  .btn-g.solid { background:#9E69C1; }
+  .btn-g.solid:hover { background:#8A55AD; }
+  .btn-o { display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; border-radius:999px; border:1px solid #CAB3D9; background:rgba(255,255,255,.18); color:#6E6271; font-family:'Poppins','SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; transition:background-color .3s, border-color .3s, color .3s; }
+  .btn-o.white { background:#fff; }
+  .btn-o:hover { background:#fff; border-color:#9E69C1; color:#9E69C1; }
+  .ic-m { display:block; flex:0 0 auto; width:23.62px; height:19.18px; background:#fff; -webkit-mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-motion.png) center/100% 100% no-repeat; transform:rotate(-9.54deg); }
+  .ic-f { display:block; flex:0 0 auto; width:19px; height:21px; background:#fff; -webkit-mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; mask:url(assets/home-v2/icon-f5.png) center/100% 100% no-repeat; }
+
+  .uso { position:absolute; left:0; box-sizing:border-box; height:73px; border-radius:14px; }
+  .uso .t { position:absolute; transform:translateY(-50%); margin:0; font-family:'Poppins',sans-serif; font-weight:600; color:#40004E; line-height:.71; white-space:nowrap; }
+  .uso .d { position:absolute; transform:translateY(-50%); margin:0; font-family:'Poppins',sans-serif; color:#765C7C; line-height:1.2; }
+  .uso img { position:absolute; width:30.93px; height:30.93px; }
+
+  .flt { animation:meeky-float 5.5s ease-in-out infinite; will-change:transform; box-shadow:0 22px 40px -22px rgba(54,19,75,.45); }
+  .flt-p { animation:meeky-float-p 6s ease-in-out infinite; will-change:transform; }
+  @media (prefers-reduced-motion:reduce){ .flt, .flt-p { animation:none; } }
+  .grad-txt { -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+  .gal-track { display:flex; width:max-content; animation:meeky-marquee 60s linear infinite; }
+  .gal-track img { flex:0 0 auto; }
+  .mq-track { display:flex; width:max-content; animation:meeky-marquee 75s linear infinite; }
+  .mq-g { display:flex; align-items:center; gap:38.712px; padding-right:14px; flex:0 0 auto; }
+  .mq-g span { font-family:'SF Pro Display',-apple-system,sans-serif; font-weight:600; font-size:27.336px; letter-spacing:-.5467px; line-height:1.48; color:#FAE4FF; white-space:nowrap; }
+
+  /* celular */
+  .m-sec { padding:0 20px; }
+  .m-h { margin:0; font-weight:500; font-size:38px; letter-spacing:-1.1px; line-height:1; color:#09010F; }
+  .m-p { margin:14px 0 0; font-family:'Poppins',sans-serif; font-size:15.5px; line-height:1.32; color:#8F8A94; }
+  .m-btns { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .m-btns .btn-g, .m-btns .btn-o { height:46px; padding:0 15px; font-size:12.5px; letter-spacing:.01em; }
+  .m-uso { display:flex; align-items:center; gap:12px; box-sizing:border-box; padding:12px 14px; border-radius:14px; }
+  .m-uso img { width:28px; height:28px; flex:0 0 auto; }
+  .m-uso b { font-family:'Poppins',sans-serif; font-weight:600; font-size:16px; color:#40004E; flex:0 0 auto; min-width:100px; white-space:nowrap; letter-spacing:-.3px; }
+  .m-uso span { font-family:'Poppins',sans-serif; font-size:13px; line-height:1.25; color:#765C7C; }
 </style>
+
+
+<script>window.__pageVals = (k, m, w) => ({ kmCard2: (Math.max(280, w - 40) / 534.53).toFixed(4) });</script>
 <script src="./meeky-form-modal.js?v=20261017a"></script>
 </helmet>
-<div ref="{{ rootRef }}" style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#fff;color:#0A0A0A">
+<div style="font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#FFFDF9;color:#09010F;padding-top:{{ topPad }}">
 
   <div style="position:fixed;top:0;left:0;right:0;z-index:200">
-    <dc-import name="Header" active="sobre" hint-size="100%,74px"></dc-import>
+    <dc-import name="HeaderV2" active="sobre" hint-size="100%,94px"></dc-import>
   </div>
 
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <section style="padding-top:74px;background:#EFE7DC">
-    <div style="position:relative;background-image:url('assets/sobre-hero.webp');background-size:cover;background-position:center center;background-repeat:no-repeat;min-height:min(46vw,660px);display:flex;align-items:center">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(243,238,230,.97) 0 30%,rgba(243,238,230,.82) 44%,rgba(243,238,230,0) 62%);pointer-events:none"></div>
-      <div style="position:relative;max-width:1320px;margin:0 auto;width:100%;box-sizing:border-box;padding-left:{{ heroPadL }};padding-right:{{ secPadX }}">
-        <div style="max-width:560px">
-          <h1 style="margin:0;font-size:{{ h1Size }};font-weight:700;letter-spacing:-.035em;line-height:1.06;text-wrap:balance;color:#0A0A0A">Tecnologia brasileira para foco e performance.</h1>
-          <p style="margin:22px 0 0;max-width:480px;font-size:{{ leadP }};line-height:1.55;color:#3D3A35;text-wrap:pretty">Dois fones, dois modos de escutar: o silêncio de quem precisa se concentrar e a atenção de quem treina em movimento.</p>
-          <p style="margin:20px 0 0;max-width:480px;font-size:13.5px;line-height:1.5;color:#6E675E">Operada por Barganha Mix Ltda · CNPJ 43.341.597/0001-40 · Certificação Anatel · Garantia 12 meses no Brasil</p>
-        </div>
+
+  <!-- Hero Sobre (Figma 4157:195) -->
+  <section style="position:relative;overflow:hidden;background:linear-gradient(214.4deg,#4A3169 8.95%,#B987F8 88.12%)">
+    <div class="hv" style="height:838px;zoom:{{ k }}">
+      <img class="ab" src="assets/sobre-v2/hero-eq.svg" alt="" width="1634" height="439" style="left:-168px;top:-154px;width:1634.41px;height:439px;mix-blend-mode:plus-lighter">
+      <img class="ab" src="assets/sobre-v2/hero-woman.webp" alt="Mulher sorrindo ouvindo música com o Meeky F5 ANC Pro" width="1036" height="1107" style="left:446px;top:-175px;width:1035.4px;height:1107px">
+      <h1 class="ab hub grad-txt" style="left:0;top:295px;width:578px;height:123.49px;margin:0;display:flex;align-items:center;font-weight:700;font-size:67.836px;letter-spacing:-2.0351px;line-height:.94;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%);animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .15s both">Tecnologia brasileira<br>para foco e performance.</h1>
+      <p class="ab pop" style="left:0;top:444px;width:535px;height:99.5px;margin:0;display:flex;align-items:center;font-size:24.884px;letter-spacing:-.4977px;line-height:1.27;color:#fff;animation:hero-in 1s cubic-bezier(.16,.84,.44,1) .3s both">Foco para produzir. Liberdade para se mover. Do F5 ANC Pro ao Motion 1, a Meeky cria novas formas de ouvir o seu mundo.</p>
+    </div>
+  </section>
+
+  <!-- Nossa origem (Figma 4167:73) -->
+  <section style="background:#FFFDF9;overflow:hidden">
+    <div class="hv" style="height:618px;zoom:{{ k }}">
+      <div class="ab" style="left:316px;top:80px;width:690px;height:408px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center" data-reveal="">
+        <p class="pop" style="margin:0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">A NOSSA HISTÓRIA</p>
+        <h2 class="hub" style="margin:0;font-weight:700;font-size:56px;line-height:60.48px;color:#09010F">Do problema real<br>ao seu dia a dia.</h2>
+        <p class="pop" style="margin:0;width:659px;font-size:18px;line-height:30.6px;color:#6E6678">A Meeky nasceu de uma dificuldade que Filipe conhecia de perto: manter o foco e o equilíbrio em uma rotina cheia de ruído e distrações.</p>
+        <p class="pop" style="margin:0;width:670px;font-size:18px;line-height:28.9px;color:#6E6678">O contato com fábricas e tendências de áudio na China se encontrou com uma necessidade do público brasileiro. Dessa conexão nasceu uma marca que aproxima tecnologia, presença e bem-estar.</p>
+      </div>
+      <div class="ab flt" style="left:69px;top:66px;width:208.88px;height:207.29px;display:flex;align-items:center;justify-content:center;box-shadow:none"><div style="flex:none;width:179px;height:177px;border-radius:19px;overflow:hidden;transform:rotate(10.75deg);box-shadow:0 22px 40px -22px rgba(54,19,75,.45)"><img src="assets/sobre-v2/t-boxer.webp" alt="" width="179" height="225" loading="lazy" style="display:block;width:100%;height:126.98%;margin-top:-.27px"></div></div>
+      <div class="ab flt" style="left:1028px;top:61px;width:195.14px;height:184.24px;display:flex;align-items:center;justify-content:center;animation-delay:-1.3s;box-shadow:none"><div style="position:relative;flex:none;width:159px;height:142px;border-radius:16px;overflow:hidden;transform:rotate(-18.03deg);box-shadow:0 22px 40px -22px rgba(54,19,75,.45)"><img class="ab" src="assets/sobre-v2/t-motion.webp" alt="" width="251" height="334" loading="lazy" style="left:-28.74%;top:-37.1%;width:158.02%;height:235.37%"></div></div>
+      <img class="ab flt" src="assets/sobre-v2/t-9.webp" alt="" width="175" height="161" loading="lazy" style="left:77px;top:414px;width:175px;height:161px;animation-delay:-3.1s;box-shadow:none;filter:drop-shadow(0 22px 20px rgba(54,19,75,.25))">
+      <div class="ab flt" style="left:1093px;top:421px;width:175px;height:161px;border-radius:22px;overflow:hidden;animation-delay:-2.4s"><img class="ab" src="assets/sobre-v2/t-f5.webp" alt="" width="230" height="290" loading="lazy" style="left:-15.74%;top:-69.06%;width:131.48%;height:180.24%"></div>
+    </div>
+  </section>
+
+  <!-- O que nos move (Figma 4167:83) -->
+  <section style="background:#FFFDF9;overflow:hidden">
+    <div class="hv" style="height:371px;zoom:{{ k }}">
+      <div class="ab" style="left:0;top:35px;width:1322px" data-reveal="">
+        <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">O QUE NOS MOVE</p>
+        <h2 class="hub" style="margin:26px 0 0;text-align:center;font-weight:700;font-size:44px;line-height:48.4px;color:#09010F">Tecnologia a serviço da sua rotina.</h2>
+        <div style="margin-top:26px;display:flex;gap:24px"><div style="box-sizing:border-box;width:424.66px;height:190px;padding:24px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-ear.svg" alt="" width="12" height="20" style="width:11.72px;height:19.52px"></span>
+          <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Foco para produzir</p>
+          <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Menos distrações para trabalhar, estudar e aproveitar sua música.</p></div><div style="box-sizing:border-box;width:424.66px;height:190px;padding:24px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-mic.svg" alt="" width="17" height="23" style="width:17.3px;height:22.72px"></span>
+          <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Liberdade para se mover</p>
+          <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Áudio que acompanha o treino e diferentes momentos do dia.</p></div><div style="box-sizing:border-box;width:424.66px;height:190px;padding:24px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-headset.svg" alt="" width="24" height="20" style="width:23.8px;height:19.84px"></span>
+          <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Proximidade para cuidar</p>
+          <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Suporte nacional e uma relação que continua depois da compra.</p></div></div>
       </div>
     </div>
   </section>
+
+  <!-- Dois jeitos de escutar (Figma 4167:107) -->
+  <section style="background:#FFFDF9;overflow:hidden">
+    <div class="hv" style="height:812px;zoom:{{ k }}">
+      <div class="ab" style="left:0;top:65px;width:1322px;text-align:center" data-reveal="">
+        <p class="pop" style="margin:0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">ENCONTRE O SEU JEITO DE OUVIR</p>
+        <h2 class="hub" style="margin:17px 0 0;font-weight:700;font-size:56px;line-height:60.48px;color:#09010F">Dois fones. A mesma ideia de liberdade.</h2>
+      </div>
+      <div class="ab" style="left:116.59px;top:206px;display:flex;gap:19.77px" data-reveal=".1"><div style="position:relative;width:534.53px;height:523px;border-radius:23px;background:#F2EDFA;overflow:hidden">
+          <div class="ab" style="left:-228.97px;top:-9.88px;width:763.75px;height:600.42px;border-radius:16.8px;overflow:hidden"><img class="ab" src="assets/sobre-v2/card-f5.webp" alt="Meeky F5 ANC Pro" width="1195" height="625" loading="lazy" style="left:-34.31%;top:-4.05%;width:156.43%;height:104.02%"></div>
+          <div class="ab" style="left:2.41px;top:328px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div>
+          <div class="ab" style="left:2.41px;top:328px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div>
+          <p class="ab sf" style="left:0;right:0;top:372px;margin:0;text-align:center;font-weight:700;font-size:50.096px;letter-spacing:-1.0019px;line-height:50px;color:#fff;text-transform:uppercase">F5 ANC Pro</p>
+          <div class="ab" style="left:159.27px;top:439.45px"><a href="Checkout.html?produto=f5&amp;qty=1" class="btn-g" style="width:216px;height:47.25px;font-size:13px;gap:7.3px;box-shadow:0 1.929px 0 #470E6D">Comprar o F5 ANC Pro<span class="ic-f"></span></a></div>
+        </div><div style="position:relative;width:534.53px;height:523px;border-radius:23px;background:#F2EDFA;overflow:hidden">
+          <div class="ab" style="left:-12.35px;top:-40.36px;width:546.89px;height:591.36px;overflow:hidden"><img class="ab" src="assets/sobre-v2/card-motion.webp" alt="Meeky Motion 1" width="576" height="591" loading="lazy" style="left:.03%;top:0;width:105.34%;height:99.95%"></div>
+          <div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div><div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div><div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div><div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div>
+          <p class="ab sf" style="left:0;right:0;top:372px;margin:0;text-align:center;font-weight:700;font-size:63.663px;letter-spacing:-1.2733px;line-height:50px;color:#fff">Motion 1</p>
+          <div class="ab" style="left:159.27px;top:439.45px"><a href="Checkout.html?produto=motion1&amp;qty=1" class="btn-g" style="width:216px;height:47.25px;font-size:13px;gap:7.3px;box-shadow:0 1.929px 0 #470E6D">Comprar o motion 1<span class="ic-m"></span></a></div>
+        </div></div>
+    </div>
+  </section>
+
+  <!-- Quem faz a Meeky (Figma 4167:136) -->
+  <section style="background:#FFFDF9;overflow:hidden">
+    <div class="hv" style="height:542px;zoom:{{ k }}">
+      <div class="ab" style="left:0;top:60px;width:1322px" data-reveal="">
+        <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">PESSOAS POR TRÁS DO SOM</p>
+        <h2 class="hub" style="margin:23px 0 0;text-align:center;font-weight:700;font-size:50px;line-height:55px;color:#09010F">Quem está por trás da Meeky.</h2>
+        <div style="margin-top:23px;display:flex;gap:24px"><div style="box-sizing:border-box;width:649px;height:280px;padding:28px;border-radius:24px;background:#F2EDFA;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="flex:0 0 auto;width:64px;height:64px;border-radius:20px;background:#fff;display:flex;align-items:center;justify-content:center"><span class="hub" style="font-weight:700;font-size:25px;line-height:30px;color:#7D47B8">FC</span></div>
+            <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Filipe Cardoso</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADOR</p></div>
+          </div>
+          <p class="pop" style="margin:0;height:75px;font-size:16px;line-height:25px;color:#594F66">Engenheiro e empreendedor no mercado de tecnologia e marketplaces. Lidera produto, fornecedores e estratégia comercial, do conceito à experiência de quem usa.</p>
+          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Produto, tecnologia e estratégia</p></div>
+        </div><div style="box-sizing:border-box;width:649px;height:280px;padding:28px;border-radius:24px;background:#F2EDFA;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="flex:0 0 auto;width:64px;height:64px;border-radius:20px;background:#fff;display:flex;align-items:center;justify-content:center"><span class="hub" style="font-weight:700;font-size:25px;line-height:30px;color:#7D47B8">FM</span></div>
+            <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Fernanda Micchi</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADORA</p></div>
+          </div>
+          <p class="pop" style="margin:0;height:75px;font-size:16px;line-height:25px;color:#594F66">Especialista em RH, saúde emocional e desenvolvimento humano. Conecta tecnologia com foco, presença e bem-estar.</p>
+          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Pessoas, foco e bem-estar</p></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O mundo no seu volume (Figma 4172:1025) -->
+  <section style="background:#F9F0FF;overflow:hidden">
+    <div class="hv" style="height:581px;zoom:{{ k }}">
+      <p class="ab hub" style="left:321.96px;top:137px;width:678.077px;height:215px;margin:0;font-weight:700;font-size:119.046px;line-height:.82;color:#441463;text-align:center">O mundo no<br>seu volume</p>
+      <div class="ab" style="left:169px;top:-310px;width:984px;height:1038px;overflow:hidden;pointer-events:none"><img src="assets/home-v2/cta-headphone.webp" alt="" width="984" height="1476" loading="lazy" style="width:100%;height:142.26%"></div>
+      <div class="ab" style="left:511px;top:366px"><a href="Home.html#modelos" class="btn-g" style="width:299px;height:63.873px;font-size:16px;box-shadow:0 1.851px 0 #470E6D">Conhecer os modelos</a></div>
+      <div class="ab flt" style="left:40px;top:83px;width:179px;height:177px;border-radius:19px;overflow:hidden;animation-delay:-0s"><img class="ab" src="assets/home-v2/cta-thumb-boxer.webp" alt="" width="179" height="225" loading="lazy" style="left:0;top:-.15%;width:100%;height:126.98%"></div>
+      <div class="ab flt" style="left:1120px;top:381px;width:175px;height:161px;border-radius:22px;overflow:hidden;animation-delay:-2.4s"><img class="ab" src="assets/home-v2/cta-thumb-f5.webp" alt="" width="230" height="290" loading="lazy" style="left:-15.74%;top:-69.06%;width:131.48%;height:180.24%"></div>
+      <div class="ab flt" style="left:1040px;top:66px;width:159px;height:142px;border-radius:16px;overflow:hidden;animation-delay:-1.3s"><img class="ab" src="assets/home-v2/cta-thumb-motion.webp" alt="" width="251" height="334" loading="lazy" style="left:-28.74%;top:-37.1%;width:158.02%;height:235.37%"></div>
+    </div>
+  </section>
+
   </sc-if>
 
   <sc-if value="{{ isMobile }}">
-  <section style="padding-top:74px;background:#EFE7DC">
-    <div style="position:relative;background-color:#EFE7DC;background-image:url('assets/sobre-hero-mobile.webp');background-size:cover;background-position:center 22%;background-repeat:no-repeat;min-height:0;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;padding:70% 20px 34px;text-align:center">
-      <div style="position:absolute;left:0;right:0;bottom:0;height:56%;background:linear-gradient(180deg,rgba(244,240,233,0) 0%,rgba(244,240,233,.92) 26%,#F4F0E9 46%,#F4F0E9 100%);pointer-events:none"></div>
-      <div style="position:relative">
-      <h1 style="margin:0;font-size:{{ h1Size }};font-weight:700;letter-spacing:-.035em;line-height:1.08;text-wrap:balance;color:#0A0A0A">Tecnologia brasileira para foco e performance.</h1>
-      <p style="margin:18px auto 0;max-width:380px;font-size:{{ leadP }};line-height:1.55;color:#3D3A35;text-wrap:pretty">Dois fones, dois modos de escutar: o silêncio de quem precisa se concentrar e a atenção de quem treina em movimento.</p>
-      <p style="margin:18px auto 0;max-width:380px;font-size:13px;line-height:1.5;color:#6E675E">Operada por Barganha Mix Ltda · CNPJ 43.341.597/0001-40 · Certificação Anatel · Garantia 12 meses no Brasil</p>
-      </div>
+
+  <!-- Hero Sobre celular (Figma 4172:1196) -->
+  <section style="position:relative;overflow:hidden;background:linear-gradient(240.97deg,#4A3169 8.95%,#B987F8 88.12%)">
+    <div style="position:relative;height:118vw;max-height:600px;overflow:hidden">
+      <div style="position:absolute;left:0;right:0;bottom:0;height:68%;background:linear-gradient(180deg,rgba(85,57,119,0),#553977)"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:68%;background:linear-gradient(180deg,rgba(85,57,119,0),#553977)"></div>
+      <img src="assets/sobre-v2/m-eq.svg" alt="" width="946" height="254" style="position:absolute;left:-17%;bottom:-2%;width:124%;height:auto;transform:scaleY(-1) rotate(180deg);mix-blend-mode:plus-lighter">
+      <img src="assets/sobre-v2/hero-woman.webp" alt="Mulher sorrindo ouvindo música com o Meeky F5 ANC Pro" width="480" height="513" style="position:absolute;left:50%;bottom:0;width:126vw;max-width:640px;height:auto;transform:translateX(-50%)">
+    </div>
+    <div style="position:relative;background:#553977;padding:4px 20px 44px;text-align:center">
+      <h1 class="hub grad-txt" style="margin:0;font-weight:700;font-size:44px;letter-spacing:-1.3px;line-height:.98;background-image:linear-gradient(90deg,#FFFFFF 50%,#F4E2FF 100%)">Tecnologia brasileira para foco e performance.</h1>
+      <p class="pop" style="margin:14px auto 0;max-width:380px;font-size:16px;letter-spacing:-.3px;line-height:1.35;color:#fff">Foco para produzir. Liberdade para se mover. Do F5 ANC Pro ao Motion 1, a Meeky cria novas formas de ouvir o seu mundo.</p>
     </div>
   </section>
+
+  <section style="position:relative;background:#FFFDF9;overflow:hidden;padding:44px 20px 48px;text-align:center">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
+      <div class="flt" style="width:96px;height:95px;border-radius:14px;overflow:hidden;transform:rotate(10.75deg)"><img src="assets/sobre-v2/t-boxer.webp" alt="" width="96" height="122" loading="lazy" style="width:100%;height:126.98%"></div>
+      <div class="flt" style="position:relative;width:96px;height:86px;border-radius:12px;overflow:hidden;animation-delay:-1.3s"><img src="assets/sobre-v2/t-motion.webp" alt="" width="152" height="202" loading="lazy" style="position:absolute;left:-28.74%;top:-37.1%;width:158.02%;height:235.37%"></div>
+    </div>
+    <p class="pop" style="margin:0;font-weight:600;font-size:11.5px;color:#7D47B8">A NOSSA HISTÓRIA</p>
+    <h2 class="m-h hub" style="margin-top:12px;font-weight:700;font-size:40px">Do problema real<br>ao seu dia a dia.</h2>
+    <p class="m-p" style="color:#6E6678;line-height:1.6">A Meeky nasceu de uma dificuldade que Filipe conhecia de perto: manter o foco e o equilíbrio em uma rotina cheia de ruído e distrações.</p>
+    <p class="m-p" style="color:#6E6678;line-height:1.6">O contato com fábricas e tendências de áudio na China se encontrou com uma necessidade do público brasileiro. Dessa conexão nasceu uma marca que aproxima tecnologia, presença e bem-estar.</p>
+  </section>
+
+  <section style="background:#FFFDF9;padding:8px 20px 44px">
+    <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:11.5px;color:#7D47B8">O QUE NOS MOVE</p>
+    <h2 class="m-h hub" style="margin-top:12px;text-align:center;font-weight:700;font-size:36px">Tecnologia a serviço da sua rotina.</h2>
+    <div style="margin-top:22px;display:flex;flex-direction:column;gap:12px"><div style="box-sizing:border-box;padding:20px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-ear.svg" alt="" width="12" height="20" style="width:11.72px;height:19.52px"></span>
+          <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Foco para produzir</p>
+          <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Menos distrações para trabalhar, estudar e aproveitar sua música.</p></div><div style="box-sizing:border-box;padding:20px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-mic.svg" alt="" width="17" height="23" style="width:17.3px;height:22.72px"></span>
+          <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Liberdade para se mover</p>
+          <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Áudio que acompanha o treino e diferentes momentos do dia.</p></div><div style="box-sizing:border-box;padding:20px;border-radius:22px;background:#fff;border:1px solid #EAD8FF;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><img src="assets/sobre-v2/ic-headset.svg" alt="" width="24" height="20" style="width:23.8px;height:19.84px"></span>
+          <p class="hub" style="margin:0;font-weight:700;font-size:25px;line-height:28.75px;color:#09010F">Proximidade para cuidar</p>
+          <p class="pop" style="margin:0;font-size:14px;line-height:22.4px;color:#6E6678">Suporte nacional e uma relação que continua depois da compra.</p></div></div>
+  </section>
+
+  <section style="background:#FFFDF9;padding:8px 20px 44px">
+    <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:11.5px;color:#7D47B8">ENCONTRE O SEU JEITO DE OUVIR</p>
+    <h2 class="m-h hub" style="margin-top:12px;text-align:center;font-weight:700;font-size:38px">Dois fones. A mesma ideia de liberdade.</h2>
+    <div style="margin-top:22px;width:534.53px;display:flex;flex-direction:column;gap:14px;zoom:{{ kmCard2 }}"><div style="position:relative;width:534.53px;height:523px;border-radius:23px;background:#F2EDFA;overflow:hidden">
+          <div class="ab" style="left:-228.97px;top:-9.88px;width:763.75px;height:600.42px;border-radius:16.8px;overflow:hidden"><img class="ab" src="assets/sobre-v2/card-f5.webp" alt="Meeky F5 ANC Pro" width="1195" height="625" loading="lazy" style="left:-34.31%;top:-4.05%;width:156.43%;height:104.02%"></div>
+          <div class="ab" style="left:2.41px;top:328px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div>
+          <div class="ab" style="left:2.41px;top:328px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div>
+          <p class="ab sf" style="left:0;right:0;top:372px;margin:0;text-align:center;font-weight:700;font-size:50.096px;letter-spacing:-1.0019px;line-height:50px;color:#fff;text-transform:uppercase">F5 ANC Pro</p>
+          <div class="ab" style="left:159.27px;top:439.45px"><a href="Checkout.html?produto=f5&amp;qty=1" class="btn-g" style="width:216px;height:47.25px;font-size:13px;gap:7.3px;box-shadow:0 1.929px 0 #470E6D">Comprar o F5 ANC Pro<span class="ic-f"></span></a></div>
+        </div><div style="position:relative;width:534.53px;height:523px;border-radius:23px;background:#F2EDFA;overflow:hidden">
+          <div class="ab" style="left:-12.35px;top:-40.36px;width:546.89px;height:591.36px;overflow:hidden"><img class="ab" src="assets/sobre-v2/card-motion.webp" alt="Meeky Motion 1" width="576" height="591" loading="lazy" style="left:.03%;top:0;width:105.34%;height:99.95%"></div>
+          <div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div><div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div><div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div><div class="ab" style="left:-11.88px;top:338px;width:559px;height:236px;background:linear-gradient(180deg,rgba(24,18,46,0),#18122E)"></div>
+          <p class="ab sf" style="left:0;right:0;top:372px;margin:0;text-align:center;font-weight:700;font-size:63.663px;letter-spacing:-1.2733px;line-height:50px;color:#fff">Motion 1</p>
+          <div class="ab" style="left:159.27px;top:439.45px"><a href="Checkout.html?produto=motion1&amp;qty=1" class="btn-g" style="width:216px;height:47.25px;font-size:13px;gap:7.3px;box-shadow:0 1.929px 0 #470E6D">Comprar o motion 1<span class="ic-m"></span></a></div>
+        </div></div>
+  </section>
+
+  <section style="background:#FFFDF9;padding:8px 20px 48px">
+    <p class="pop" style="margin:0;text-align:center;font-weight:600;font-size:11.5px;color:#7D47B8">PESSOAS POR TRÁS DO SOM</p>
+    <h2 class="m-h hub" style="margin-top:12px;text-align:center;font-weight:700;font-size:38px">Quem está por trás da Meeky.</h2>
+    <div style="margin-top:22px;display:flex;flex-direction:column;gap:14px"><div style="box-sizing:border-box;padding:22px;border-radius:24px;background:#F2EDFA;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="flex:0 0 auto;width:64px;height:64px;border-radius:20px;background:#fff;display:flex;align-items:center;justify-content:center"><span class="hub" style="font-weight:700;font-size:25px;line-height:30px;color:#7D47B8">FC</span></div>
+            <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Filipe Cardoso</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADOR</p></div>
+          </div>
+          <p class="pop" style="margin:0;font-size:16px;line-height:25px;color:#594F66">Engenheiro e empreendedor no mercado de tecnologia e marketplaces. Lidera produto, fornecedores e estratégia comercial, do conceito à experiência de quem usa.</p>
+          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Produto, tecnologia e estratégia</p></div>
+        </div><div style="box-sizing:border-box;padding:22px;border-radius:24px;background:#F2EDFA;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="flex:0 0 auto;width:64px;height:64px;border-radius:20px;background:#fff;display:flex;align-items:center;justify-content:center"><span class="hub" style="font-weight:700;font-size:25px;line-height:30px;color:#7D47B8">FM</span></div>
+            <div><p class="hub" style="margin:0;font-weight:700;font-size:32px;line-height:35.2px;color:#09010F">Fernanda Micchi</p><p class="pop" style="margin:5px 0 0;font-weight:600;font-size:12px;line-height:18px;color:#7D47B8">COFUNDADORA</p></div>
+          </div>
+          <p class="pop" style="margin:0;font-size:16px;line-height:25px;color:#594F66">Especialista em RH, saúde emocional e desenvolvimento humano. Conecta tecnologia com foco, presença e bem-estar.</p>
+          <div style="display:flex;align-items:center;gap:8px"><img src="assets/sobre-v2/dot.svg" alt="" width="6" height="6" style="width:6px;height:6px"><p class="pop" style="margin:0;font-weight:500;font-size:12px;line-height:18px;color:#7D47B8">Pessoas, foco e bem-estar</p></div>
+        </div></div>
+  </section>
+
+  <section style="position:relative;background:#F9F0FF;overflow:hidden;height:390px">
+    <img src="assets/home-v2/cta-headphone.webp" alt="" width="984" height="1476" loading="lazy" style="position:absolute;left:50%;top:-56px;width:430px;height:auto;transform:translateX(-50%);pointer-events:none">
+    <div style="position:relative;padding-top:132px;text-align:center">
+      <p class="hub" style="margin:0;font-weight:700;font-size:54px;line-height:.82;color:#441463">O mundo no<br>seu volume</p>
+      <a href="Home.html#modelos" class="btn-g" style="margin-top:28px;height:54px;padding:0 30px;font-size:14.5px;box-shadow:0 1.851px 0 #470E6D">Conhecer os modelos</a>
+    </div>
+    <div class="flt" style="position:absolute;left:14px;top:30px;width:84px;height:84px;border-radius:14px;overflow:hidden"><img src="assets/home-v2/cta-thumb-boxer.webp" alt="" width="84" height="105" loading="lazy" style="width:100%;height:126.98%"></div>
+    <div class="flt" style="position:absolute;right:16px;top:22px;width:76px;height:68px;border-radius:12px;overflow:hidden;animation-delay:-1.3s"><img src="assets/home-v2/cta-thumb-motion.webp" alt="" width="120" height="160" loading="lazy" style="position:absolute;left:-28.74%;top:-37.1%;width:158.02%;height:235.37%"></div>
+    <div class="flt" style="position:absolute;right:14px;bottom:26px;width:84px;height:77px;border-radius:14px;overflow:hidden;animation-delay:-2.4s"><img src="assets/home-v2/cta-thumb-f5.webp" alt="" width="110" height="139" loading="lazy" style="position:absolute;left:-15.74%;top:-69.06%;width:131.48%;height:180.24%"></div>
+  </section>
+
   </sc-if>
 
-  <section style="background:#FFFFFF;border-top:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);padding:19px 0;overflow:hidden">
-    <div style="display:flex;width:max-content;animation:meeky-marquee 34s linear infinite">
-      <div style="display:flex;align-items:center;gap:38px;flex:0 0 auto;padding-right:38px"><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span></div>
-      <div style="display:flex;align-items:center;gap:38px;flex:0 0 auto;padding-right:38px"><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Tecnologia brasileira</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Certificação Anatel</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Garantia 12 meses</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Suporte nacional</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">+500 avaliações</span><span style="font-size:16px;font-weight:500;color:#1A1A1A;white-space:nowrap">Top 7 TechTudo ANC 2026</span></div>
-    </div>
-  </section>
-
-  <div style="background:#fff;display:grid;grid-template-columns:{{ splitCols }};align-items:center;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}" data-reveal="">
-    <div style="display:flex;align-items:center;justify-content:center;padding-left:{{ secPadX }};padding-right:{{ secPadX }}">
-      <img src="assets/meeky-logo-3d.webp" alt="Logo MEEKY em 3D" style="width:{{ logoW }};height:auto">
-    </div>
-    <div style="display:flex;flex-direction:column;justify-content:center;padding:{{ splitPad }};text-align:{{ splitAlign }}">
-      <h2 style="margin:0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.06;text-wrap:balance">Do problema real ao produto.</h2>
-      <p style="margin:24px 0 0;font-size:{{ bodyP }};line-height:1.65;max-width:520px;color:#5A5A5A;text-wrap:pretty">A Meeky nasceu de uma dor real que o Filipe vivia no dia a dia: a dificuldade de manter foco, produtividade e equilíbrio em meio ao excesso de barulho, distrações e ansiedade.</p>
-      <p style="margin:18px 0 0;font-size:{{ bodyP }};line-height:1.65;max-width:520px;color:#5A5A5A;text-wrap:pretty">Uma viagem à China — contato direto com fábricas, processos de produção e tendências do mercado de áudio — mostrou o potencial do produto. O Brasil mostrou a dor do público. A Meeky nasceu no encontro dessas duas visões.</p>
-    </div>
-  </div>
-
-  <section style="background:#0C0C0C;color:#F9F8F6;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
-    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }};text-align:center" data-reveal="">
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#DEA85E"><span style="width:26px;height:1px;background:#DEA85E;display:inline-block"></span>Desenvolvimento</div>
-      <h2 style="margin:20px auto 0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;max-width:800px;line-height:1.1">Do conceito ao F5 ANC Pro.</h2>
-      <p style="margin:24px auto 0;max-width:720px;font-size:{{ bodyP }};line-height:1.65;color:rgba(249,248,246,.7);text-wrap:pretty">A escolha do produto passou por análise de mercado, contato com fornecedores, avaliação de qualidade de construção, conforto, bateria, Bluetooth, cancelamento ativo de ruído e certificação para venda no Brasil.</p>
-      <div style="margin-top:52px;display:grid;grid-template-columns:{{ statCols }};gap:14px;text-align:left">
-        <sc-for list="{{ devStats }}" as="s" hint-placeholder-count="4">
-          <div style="padding:{{ statPad }};border-radius:26px;background:radial-gradient(130% 120% at 0% 0%,rgba(226,173,104,.16),rgba(255,255,255,.03) 52%,rgba(255,255,255,.02) 100%);border:1px solid rgba(255,255,255,.1);transition:transform .5s cubic-bezier(.16,.84,.44,1),border-color .45s" style-hover="transform:translateY(-6px);border-color:rgba(226,173,104,.5)">
-            <b style="display:block;font-size:{{ statNum }};font-weight:700;letter-spacing:-.03em;color:#DEA85E;margin-bottom:10px">{{ s.n }}</b>
-            <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(249,248,246,.62)">{{ s.k }}</span>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:#fff;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
-    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }};text-align:center" data-reveal="">
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#C4863B"><span style="width:26px;height:1px;background:#C4863B;display:inline-block"></span>Fundadores</div>
-      <h2 style="margin:20px auto 0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.06;max-width:16ch;text-wrap:balance">Quem está por trás da Meeky.</h2>
-      <div style="margin-top:48px;display:grid;grid-template-columns:{{ founderCols }};gap:16px;text-align:left">
-        <sc-for list="{{ founders }}" as="f" hint-placeholder-count="2">
-          <div style="padding:{{ founderPad }};border-radius:26px;border:1px solid #EFE9DF;background:radial-gradient(130% 120% at 0% 0%,rgba(196,134,59,.16),rgba(251,248,243,.9) 52%,rgba(251,248,243,.85) 100%);transition:transform .5s cubic-bezier(.16,.84,.44,1),border-color .45s" style-hover="transform:translateY(-6px);border-color:rgba(196,134,59,.55)">
-            <h3 style="margin:0;font-size:{{ founderName }};font-weight:600;letter-spacing:-.015em">{{ f.name }}</h3>
-            <p style="margin:8px 0 0;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:#C4863B">{{ f.role }}</p>
-            <p style="margin:20px 0 0;font-size:{{ bodyP }};line-height:1.65;color:#5A5A5A;text-wrap:pretty">{{ f.bio }}</p>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:#0C0C0C;color:#F9F8F6;padding-top:{{ secPadY }};padding-bottom:{{ secPadY }}">
-    <div style="max-width:1320px;margin:0 auto;padding-left:{{ secPadX }};padding-right:{{ secPadX }};text-align:center" data-reveal="">
-      <div style="display:inline-flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#DEA85E"><span style="width:26px;height:1px;background:#DEA85E;display:inline-block"></span>Em números</div>
-      <h2 style="margin:20px auto 0;font-size:{{ h2Size }};font-weight:700;letter-spacing:-.03em;line-height:1.1;max-width:800px">O que os clientes já confirmaram.</h2>
-      <div style="margin-top:44px;display:grid;grid-template-columns:{{ statCols }};gap:14px;text-align:left">
-        <sc-for list="{{ numbers }}" as="s" hint-placeholder-count="4">
-          <div style="padding:{{ statPad }};border-radius:26px;background:radial-gradient(130% 120% at 0% 0%,rgba(226,173,104,.16),rgba(255,255,255,.03) 52%,rgba(255,255,255,.02) 100%);border:1px solid rgba(255,255,255,.1);transition:transform .5s cubic-bezier(.16,.84,.44,1),border-color .45s" style-hover="transform:translateY(-6px);border-color:rgba(226,173,104,.5)">
-            <b style="display:block;font-size:{{ statNum }};font-weight:700;letter-spacing:-.03em;color:#DEA85E;margin-bottom:10px">{{ s.n }}</b>
-            <span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(249,248,246,.62)">{{ s.k }}</span>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-  <section style="position:relative;background:#050505 url('assets/bg-final.webp') center center/cover no-repeat;color:#F9F8F6;padding:150px 24px;box-sizing:border-box;display:grid;place-items:center;text-align:center;overflow:hidden">
-    <div style="position:relative;max-width:{{ ctaMax }};margin:0 auto" data-reveal="">
-      <h2 style="margin:0 auto;font-size:{{ ctaH2 }};font-weight:700;letter-spacing:-.03em;line-height:1.16;text-wrap:balance">A Meeky nasceu para devolver às pessoas o controle do próprio ambiente.</h2>
-      <div style="margin-top:38px">
-        <a href="Produto.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:999px;border:none;overflow:hidden;font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;white-space:nowrap;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;box-shadow:0 10px 26px -14px rgba(196,134,59,.9);transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)"><span style="display:block;padding:19px 42px">Conhecer o produto</span></a>
-      </div>
-    </div>
-  </section>
-  </sc-if>
-
-  <sc-if value="{{ isMobile }}">
-  <section style="position:relative;background:#050505 url('assets/bg-final-mobile.webp') center center/cover no-repeat;color:#F9F8F6;padding:80px 20px;box-sizing:border-box;display:grid;place-items:center;text-align:center;overflow:hidden">
-    <div style="position:relative;max-width:{{ ctaMax }}" data-reveal="">
-      <h2 style="margin:0;font-size:{{ ctaH2 }};font-weight:700;letter-spacing:-.03em;line-height:1.14;text-wrap:balance">A Meeky nasceu para devolver às pessoas o controle do próprio ambiente.</h2>
-      <a href="Produto.html" style="font-family:'Hubot Sans','SF Pro Display',-apple-system,sans-serif;font-stretch:75%;margin:30px auto 0;width:min(340px,100%);box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:19px 24px;border-radius:999px;font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:none;color:#fff;text-decoration:none;background-color:#9E69C1;background-image:none;background-size:240% 100%;background-position:100% 0;background-repeat:no-repeat;transition:background-color .35s,transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s" style-hover="background-color:#8A55AD;transform:translateY(-3px);box-shadow:0 18px 34px -18px rgba(94,45,128,.7)">Conhecer o produto</a>
-    </div>
-  </section>
-  </sc-if>
-
-  <dc-import name="Footer" hint-size="100%,420px"></dc-import>
+  <dc-import name="FooterV2" hint-size="100%,592px"></dc-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = (() => { const w = (typeof document !== 'undefined' && document.documentElement.clientWidth) || 1440; return { isMobile: w <= 860, vw: w }; })();
+  state = { isMobile: false, w: 1440 };
   renderVals() {
-    const m = this.state.isMobile;
-    const mid = !m && this.state.vw < 1100;
+    const m = this.state.isMobile, w = this.state.w;
+    // conteúdo do Figma tem 1322px; em telas menores tudo é reduzido na mesma proporção
+    const k = Math.min(1, (w - 48) / 1322);
+    const cw = Math.max(280, w - 40);
     return {
-      rootRef: this._rootRef || (this._rootRef = React.createRef()),
       isMobile: m, isDesktop: !m,
-      secPadY: m ? '60px' : '130px',
-      secPadX: m ? '20px' : '40px',
-      heroPadTop: m ? '38px' : '72px',
-      heroCols: m ? '1fr' : 'minmax(0,.9fr) minmax(0,1.1fr)',
-      heroTextOrder: m ? '2' : '1',
-      heroImgH: m ? '260px' : '560px',
-      heroPadL: m ? '20px' : 'clamp(40px,6vw,90px)',
-      ctaH2: m ? '26px' : 'clamp(26px,2.3vw,34px)',
-      ctaMax: m ? '340px' : '560px',
-      h1Size: m ? '38px' : 'clamp(42px,4.6vw,64px)',
-      h2Size: m ? '34px' : 'clamp(36px,3.9vw,54px)',
-      leadP: m ? '18px' : '21px',
-      bodyP: m ? '17px' : '19px',
-      splitCols: m ? '1fr' : '1fr 1fr',
-      splitPad: m ? '24px 20px 0' : '0 clamp(32px,6vw,90px) 0 0',
-      splitAlign: m ? 'center' : 'left',
-      logoW: m ? '78%' : '82%',
-      statCols: m ? '1fr 1fr' : (mid ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))'),
-      statPad: m ? '28px 22px' : '44px 36px',
-      statNum: m ? '32px' : '46px',
-      founderCols: m ? '1fr' : 'repeat(2,minmax(0,1fr))',
-      founderPad: m ? '32px 26px' : '48px 44px',
-      founderName: m ? '22px' : '24px',
-      devStats: [
-        { n: '20dB', k: 'ANC Ativo' },
-        { n: '70h', k: 'Bateria' },
-        { n: '5.4', k: 'BT Multiponto' },
-        { n: '40mm', k: 'Driver Hi-Fi' }
-      ],
-      numbers: [
-        { n: '5,0/5', k: 'Avaliação média' },
-        { n: '+500', k: 'Avaliações verificadas' },
-        { n: 'Top 7', k: 'TechTudo ANC 2026' },
-        { n: '12m', k: 'Garantia Brasil' }
-      ],
-      founders: [
-        { name: 'Filipe Cardoso', role: 'Cofundador', bio: 'Engenheiro e empreendedor no mercado de tecnologia e marketplaces. Lidera produto, fornecedores e estratégia comercial — do conceito ao headphone que você tem nas mãos.' },
-        { name: 'Fernanda Micchi', role: 'Cofundadora', bio: 'Especialista em RH, saúde emocional e desenvolvimento humano. Conecta tecnologia com foco, presença e bem-estar.' }
-      ]
+      k: k.toFixed(4),
+      mqZoom: k.toFixed(4),
+      heroH: Math.round(829 * k) + 'px',
+      heroBg: Math.round(2560 * k) + 'px ' + Math.round(829 * k) + 'px',
+      topPad: m ? '74px' : '94px',
+      kmCard: (cw / 519).toFixed(4),
+      kmGrid: (cw / 646).toFixed(4),
+      // valores extras de cada página (alturas das seções etc.)
+      ...(window.__pageVals ? window.__pageVals(k, m, w) : {})
     };
   }
-  componentDidMount() { this.setupViewport(); this.setupReveal(); this.setupSmoothScroll(); }
-  componentDidUpdate() { this.setupReveal(); }
+  componentDidMount() { this.setupViewport(); this.setupReveal(); this.setupCursor(); this.kickVideos(); this.setupSmoothScroll(); this.scrollToHash(); }
+  scrollToHash() {
+    // menu links like Home.html#volume: wait for the section to render, then scroll to it
+    const id = (location.hash || '').slice(1);
+    if (!id) return;
+    // a Home nova não tem mais a seção de compra em volume: links antigos (Home.html#volume) abrem o formulário
+    if (id === 'volume') {
+      const open = () => window.__meekyFormModal ? window.__meekyFormModal.open('volume') : setTimeout(open, 200);
+      setTimeout(open, 400);
+      return;
+    }
+    let tries = 0;
+    const go = () => {
+      const el = document.getElementById(id);
+      if (!el) { if (++tries < 40) setTimeout(go, 100); return; }
+      const y = el.getBoundingClientRect().top + window.pageYOffset - (this.state.isMobile ? 74 : 94);
+      if (window.__meekyLenis) window.__meekyLenis.scrollTo(y, { immediate: true, force: true });
+      else window.scrollTo(0, y);
+    };
+    // repete depois que imagens/rolagem suave carregam, para não parar atrás do menu
+    setTimeout(go, 150);
+    setTimeout(() => { tries = 0; go(); }, 1200);
+  }
   setupViewport() {
     const check = () => {
-      const el = this._rootRef && this._rootRef.current;
-      const w = (el && el.getBoundingClientRect().width) || document.documentElement.clientWidth || window.innerWidth || 0;
+      const w = document.documentElement.clientWidth || window.innerWidth || 0;
       if (!w) return;
       const m = w <= 860;
-      if (m !== this.state.isMobile || w !== this.state.vw) this.setState({ isMobile: m, vw: w });
+      if (m !== this.state.isMobile || w !== this.state.w) this.setState({ isMobile: m, w });
     };
     this._onMq = check;
     window.addEventListener('resize', check);
     if (window.ResizeObserver) {
       this._ro = new ResizeObserver(check);
       this._ro.observe(document.documentElement);
-      const el = this._rootRef && this._rootRef.current;
-      if (el) this._ro.observe(el);
     }
     requestAnimationFrame(check);
     setTimeout(check, 300);
@@ -245,6 +373,7 @@ class Component extends DCLogic {
     const start = () => {
       if (!window.Lenis) return;
       const opts = { duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, touchMultiplier: 1.6 };
+      // probe which element actually accepts a scroll write
       const canScroll = el => {
         if (!el || el.scrollHeight <= el.clientHeight + 4) return false;
         const prev = el.scrollTop;
@@ -255,7 +384,7 @@ class Component extends DCLogic {
       };
       const root = document.scrollingElement || document.documentElement;
       if (!canScroll(root)) {
-        let found = null;
+        let found = null, node = document.body;
         const walk = el => {
           if (found || !el) return;
           if (el !== root && canScroll(el)) { found = el; return; }
@@ -271,7 +400,21 @@ class Component extends DCLogic {
       let lastFrame = 0;
       const raf = t => { lastFrame = t; lenis.raf(t); requestAnimationFrame(raf); };
       requestAnimationFrame(raf);
+      // backup ticker for contexts where requestAnimationFrame is throttled
       setInterval(() => { const n = performance.now(); if (n - lastFrame > 100) lenis.raf(n); }, 16);
+      document.addEventListener('click', e => {
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const id = a.getAttribute('href');
+        if (id.length < 2) return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        // se alguma imagem acima carregar durante a rolagem, a seção muda de lugar: corrige no final
+        const off = this.state.isMobile ? 74 : 94;
+        const fix = (n) => { const t = el.getBoundingClientRect().top; if (n > 0 && Math.abs(t - off) > 12) lenis.scrollTo(el, { offset: -off, onComplete: () => fix(n - 1) }); };
+        lenis.scrollTo(el, { offset: -off, onComplete: () => fix(3) });
+      });
     };
     if (window.Lenis) return start();
     const s = document.createElement('script');
@@ -279,13 +422,55 @@ class Component extends DCLogic {
     s.onload = start;
     document.head.appendChild(s);
   }
+  componentDidUpdate() { this.setupReveal(); }
+  setupCursor() {
+    if (document.getElementById('om-cursor-ring')) return;
+    // só em computador com mouse: no celular (toque) o círculo ficava preso na tela
+    if (!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
+    const ring = document.createElement('div');
+    ring.id = 'om-cursor-ring';
+    ring.style.cssText = 'position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(158,105,193,.85);border-radius:50%;pointer-events:none;z-index:9998;transform:translate3d(-200px,-200px,0);transition:width .25s ease,height .25s ease,margin .25s ease,background-color .25s ease,border-color .25s ease';
+    const dot = document.createElement('div');
+    dot.id = 'om-cursor-dot';
+    dot.style.cssText = 'position:fixed;top:0;left:0;width:6px;height:6px;margin:-3px 0 0 -3px;background:#9E69C1;border-radius:50%;pointer-events:none;z-index:9999;transform:translate3d(-200px,-200px,0)';
+    document.body.appendChild(ring);
+    document.body.appendChild(dot);
+    let mx = -200, my = -200, rx = -200, ry = -200;
+    this._cursorMove = e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
+      const t = e.target && e.target.closest ? e.target.closest('a,button,summary,input,textarea') : null;
+      const big = !!t;
+      ring.style.width = big ? '58px' : '34px';
+      ring.style.height = big ? '58px' : '34px';
+      ring.style.margin = big ? '-29px 0 0 -29px' : '-17px 0 0 -17px';
+      ring.style.backgroundColor = big ? 'rgba(158,105,193,.14)' : 'transparent';
+      ring.style.borderColor = big ? 'rgba(158,105,193,1)' : 'rgba(158,105,193,.85)';
+    };
+    const loop = () => {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
+      this._raf = requestAnimationFrame(loop);
+    };
+    document.addEventListener('mousemove', this._cursorMove);
+    loop();
+  }
+  kickVideos() {
+    const go = () => document.querySelectorAll('video').forEach(v => {
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    });
+    go(); setTimeout(go, 600); setTimeout(go, 2000);
+  }
   setupReveal() {
     const nodes = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]:not([data-reveal-ready])'));
     nodes.forEach(el => {
       el.setAttribute('data-reveal-ready', '');
       el.style.opacity = '0';
-      el.style.transform = 'translateY(26px)';
-      el.style.transition = 'opacity .9s cubic-bezier(.16,.84,.44,1), transform .9s cubic-bezier(.16,.84,.44,1)';
+      el.style.transform = 'translateY(18px)';
+      const d = parseFloat(el.getAttribute('data-reveal')) || 0;
+      el.style.transition = 'opacity 1s cubic-bezier(.16,.84,.44,1) ' + d + 's, transform 1s cubic-bezier(.16,.84,.44,1) ' + d + 's';
     });
     if (!this._onScroll) {
       this._onScroll = () => this.tickReveal();
@@ -301,7 +486,7 @@ class Component extends DCLogic {
     if (!list.length) { clearInterval(this._poll); this._poll = null; return; }
     list.forEach(el => {
       const r = el.getBoundingClientRect();
-      if (!h || r.top < h * 0.88) {
+      if (!h || (r.top < h * 0.88 && r.bottom > 0)) {
         el.setAttribute('data-reveal-done', '');
         el.style.opacity = '1';
         el.style.transform = 'none';
@@ -311,6 +496,9 @@ class Component extends DCLogic {
   componentWillUnmount() {
     if (this._onMq) window.removeEventListener('resize', this._onMq);
     if (this._ro) this._ro.disconnect();
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._cursorMove) document.removeEventListener('mousemove', this._cursorMove);
+    ['om-cursor-ring','om-cursor-dot'].forEach(id => { const n = document.getElementById(id); if (n) n.remove(); });
     clearInterval(this._poll);
     if (this._onScroll) {
       window.removeEventListener('scroll', this._onScroll, true);
@@ -318,6 +506,7 @@ class Component extends DCLogic {
     }
   }
 }
+
 </script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWMG33GN"
