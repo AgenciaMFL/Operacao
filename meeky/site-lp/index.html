@@ -379,7 +379,9 @@ class Component extends DCLogic {
       heroBg: Math.round(2560 * k) + 'px ' + Math.round(829 * k) + 'px',
       topPad: m ? '74px' : '94px',
       kmCard: (cw / 519).toFixed(4),
-      kmGrid: (cw / 646).toFixed(4)
+      kmGrid: (cw / 646).toFixed(4),
+      // valores extras de cada página (alturas das seções etc.)
+      ...(window.__pageVals ? window.__pageVals(k, m, w) : {})
     };
   }
   componentDidMount() { this.setupViewport(); this.setupReveal(); this.setupCursor(); this.kickVideos(); this.setupSmoothScroll(); this.scrollToHash(); }
