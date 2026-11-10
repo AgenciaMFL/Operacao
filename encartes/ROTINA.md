@@ -21,7 +21,9 @@ A notificação para o celular é a mensagem final da sessão: deixe-a curta e d
    - Saída com `SEM_MUDANCA`: o site já está com esse encarte. Responda só "Encarte já publicado".
    - Saída com "Página N atualizada": confira a URL publicada (o HTML deve conter os novos
      arquivos `encarte-AAAAMMDD-...`) e termine com
-     "✅ Encarte <nome do cliente> atualizado no site: <url>".
+     "✅ Encarte <nome do cliente> atualizado no site: <url>". O próprio WordPress manda o
+     e-mail de confirmação para os endereços em `notificar` do JSON; se a saída tiver
+     `AVISO_EMAIL`, acrescente "(e-mail de confirmação falhou)" na mensagem final.
    - Qualquer `ERRO`: termine com "⚠️ Encarte <cliente> NÃO foi trocado: <erro resumido> —
      <o que o usuário precisa fazer>". Não tente contornar editando o site por outro caminho.
 5. Não faça commit nem push de nada.

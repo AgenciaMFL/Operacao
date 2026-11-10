@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Encarte Automático
  * Description: Troca as imagens do encarte semanal em páginas Elementor via REST API. Os widgets são identificados pela classe CSS "encarte-1", "encarte-2"... (Avançado > Classes CSS) ou pelo ID do elemento.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Agência MFL
  * Requires PHP: 7.4
  */
@@ -60,9 +60,15 @@ final class Encarte_Automatico {
 						'required' => true,
 						'type'     => 'object',
 					),
-					'dry_run' => array(
+					'dry_run'  => array(
 						'type'    => 'boolean',
 						'default' => false,
+					),
+					// E-mails que recebem a confirmação depois da troca.
+					'notificar' => array(
+						'type'    => 'array',
+						'items'   => array( 'type' => 'string' ),
+						'default' => array(),
 					),
 				),
 			)
@@ -144,19 +150,46 @@ final class Encarte_Automatico {
 			return new WP_Error( 'encarte_slot_inexistente', 'Slots não encontrados na página: ' . implode( ', ', $missing ), array( 'status' => 400 ) );
 		}
 
+		$email_sent = null;
 		if ( ! $dry_run ) {
 			$document = \Elementor\Plugin::$instance->documents->get( $page_id, false );
 			$document->save( array( 'elements' => $elements ) );
 			\Elementor\Plugin::$instance->files_manager->clear_cache();
 			do_action( 'encarte_automatico/trocado', $page_id, $report );
+
+			$recipients = array_filter( array_map( 'sanitize_email', (array) $request['notificar'] ), 'is_email' );
+			if ( $recipients ) {
+				$email_sent = self::send_confirmation( $recipients, $page_id, $report );
+			}
 		}
 
 		return array(
-			'page_id' => $page_id,
-			'dry_run' => $dry_run,
-			'url'     => get_permalink( $page_id ),
-			'trocas'  => $report,
+			'page_id'       => $page_id,
+			'dry_run'       => $dry_run,
+			'url'           => get_permalink( $page_id ),
+			'trocas'        => $report,
+			'email_enviado' => $email_sent,
 		);
+	}
+
+	private static function send_confirmation( array $recipients, $page_id, array $report ) {
+		$site    = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
+		$subject = sprintf( '✅ Encarte %s atualizado (%s)', $site, wp_date( 'd/m/Y' ) );
+		$lines   = array(
+			sprintf( 'O encarte do site %s foi trocado em %s.', $site, wp_date( 'd/m/Y \à\s H:i' ) ),
+			'',
+			'Página: ' . get_permalink( $page_id ),
+			'',
+			'Imagens publicadas:',
+		);
+		foreach ( $report as $troca ) {
+			foreach ( $troca['depois'] as $url ) {
+				$lines[] = '- ' . $url;
+			}
+		}
+		$lines[] = '';
+		$lines[] = 'Mensagem automática do plugin Encarte Automático.';
+		return wp_mail( $recipients, $subject, implode( "\n", $lines ) );
 	}
 
 	/**

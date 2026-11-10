@@ -97,10 +97,10 @@ class WordPress:
         )
         return media_id
 
-    def trocar(self, page_id: int, slots: dict[str, list[int]], dry_run: bool) -> dict:
+    def trocar(self, page_id: int, slots: dict[str, list[int]], notify: list[str]) -> dict:
         resp = self.session.post(
             f"{self.api}/encarte/v1/trocar",
-            json={"page_id": page_id, "slots": slots, "dry_run": dry_run},
+            json={"page_id": page_id, "slots": slots, "notificar": notify},
             timeout=120,
         )
         return self._check(resp)
@@ -211,8 +211,11 @@ def main() -> None:
     args = parser.parse_args()
 
     order: list[str] | None = None
+    notify: list[str] = []
     if args.cliente:
-        order = load_client(args.cliente).get("slots")
+        client = load_client(args.cliente)
+        order = client.get("slots")
+        notify = client.get("notificar", [])
     if args.slots:
         order = [s.strip() for s in args.slots.split(",") if s.strip()]
 
@@ -257,10 +260,14 @@ def main() -> None:
         print(f"Enviada {image.name} -> mídia #{uploaded[image]}")
 
     for page_id, plan in pending.items():
-        result = wp.trocar(page_id, {slot: [uploaded[f] for f in files] for slot, files in plan.items()}, False)
+        result = wp.trocar(page_id, {slot: [uploaded[f] for f in files] for slot, files in plan.items()}, notify)
         print(f"\nPágina {page_id} atualizada: {result['url']}")
         for troca in result["trocas"]:
             print(f"  {troca['slot']}: {', '.join(troca['antes']) or '-'} -> {', '.join(troca['depois'])}")
+        if result.get("email_enviado") is True:
+            print(f"E-mail de confirmação enviado para: {', '.join(notify)}")
+        elif result.get("email_enviado") is False:
+            print("AVISO_EMAIL: o WordPress não conseguiu enviar o e-mail de confirmação.")
 
 
 if __name__ == "__main__":
