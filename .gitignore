@@ -4,3 +4,4 @@
 # Credenciais locais do encarte
 .env
 __pycache__/
+*.zip
