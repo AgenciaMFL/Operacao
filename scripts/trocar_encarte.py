@@ -12,12 +12,19 @@ Configuração por variáveis de ambiente (ou arquivo .env na raiz do repositór
   WP_USER          usuário do WordPress
   WP_APP_PASSWORD  senha de aplicativo (Usuários > Perfil > Senhas de aplicativo)
   WP_PAGE_IDS      ID(s) da(s) página(s), separados por vírgula
+
+Ou por cliente, com --cliente NOME (lê clientes/NOME.json). Nesse caso usuário e senha
+vêm de <PREFIXO>_WP_USER e <PREFIXO>_WP_APP_PASSWORD, com o prefixo definido no JSON.
+
+Se a página já mostra exatamente essas imagens (mesmo conteúdo), nada é enviado.
 """
 
 from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
+import json
 import mimetypes
 import os
 import re
@@ -64,18 +71,19 @@ class WordPress:
             message = resp.text[:300]
         sys.exit(f"ERRO {resp.status_code} em {resp.request.method} {resp.url}: {message}")
 
-    def slots(self, page_id: int) -> list[dict]:
-        resp = self.session.get(f"{self.api}/encarte/v1/slots", params={"page_id": page_id}, timeout=60)
+    def slots(self, page_id: int, ids: list[str] | None = None) -> list[dict]:
+        params = {"page_id": page_id, "ids": ",".join(ids or [])}
+        resp = self.session.get(f"{self.api}/encarte/v1/slots", params=params, timeout=60)
         return self._check(resp)["slots"]
 
-    def upload(self, path: Path, title: str) -> int:
+    def upload(self, path: Path, filename: str, title: str) -> int:
         mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
         resp = self.session.post(
             f"{self.api}/wp/v2/media",
             data=path.read_bytes(),
             headers={
                 "Content-Type": mime,
-                "Content-Disposition": f'attachment; filename="{path.name}"',
+                "Content-Disposition": f'attachment; filename="{filename}"',
             },
             timeout=300,
         )
@@ -111,11 +119,20 @@ def find_images(folder: Path) -> list[Path]:
     )
 
 
-def map_images_to_slots(images: list[Path], slots: list[dict]) -> dict[str, list[Path]]:
+def content_tag(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:10]
+
+
+def map_images_to_slots(images: list[Path], slots: list[dict], order: list[str] | None = None) -> dict[str, list[Path]]:
     """Arquivo cujo nome começa com o nome do slot vai para ele (ex.: encarte-2.jpg,
     encarte-galeria_03.png). Se nenhum arquivo usar esse padrão, distribui pela ordem
-    alfabética: 1º arquivo -> 1º slot da página, e assim por diante."""
+    alfabética: 1º arquivo -> 1º slot (da página, ou de `order` se informado), e assim por diante."""
     names = list(dict.fromkeys(s["slot"] for s in slots))
+    if order:
+        missing = [o for o in order if o not in names]
+        if missing:
+            sys.exit(f"ERRO: elemento(s) não encontrado(s) na página: {', '.join(missing)}")
+        names = order
     multiple = {s["slot"] for s in slots if s["multiple"]}
     by_length = sorted(names, key=len, reverse=True)
 
@@ -151,19 +168,53 @@ def map_images_to_slots(images: list[Path], slots: list[dict]) -> dict[str, list
     return {slot: [image] for slot, image in zip(names, images)}
 
 
+def already_published(plan: dict[str, list[Path]], slots: list[dict]) -> bool:
+    current = {s["slot"]: s["atual"] for s in slots}
+    return all(
+        len(current.get(slot, [])) == len(files)
+        and all(content_tag(f) in url for f, url in zip(files, current[slot]))
+        for slot, files in plan.items()
+    )
+
+
+def load_client(name: str) -> dict:
+    path = REPO_ROOT / "clientes" / f"{name}.json"
+    if not path.is_file():
+        sys.exit(f"ERRO: cliente {name} não configurado ({path} não existe).")
+    config = json.loads(path.read_text(encoding="utf-8"))
+    prefix = config["prefixo_credenciais"]
+    os.environ.setdefault("WP_URL", config["wp_url"])
+    os.environ.setdefault("WP_PAGE_IDS", ",".join(str(p) for p in config["paginas"]))
+    for var in ("WP_USER", "WP_APP_PASSWORD"):
+        if os.environ.get(f"{prefix}_{var}"):
+            os.environ[var] = os.environ[f"{prefix}_{var}"]
+        elif not os.environ.get(var):
+            sys.exit(f"ERRO: variável {prefix}_{var} não configurada no ambiente.")
+    return config
+
+
 def main() -> None:
     load_dotenv(REPO_ROOT / ".env")
 
     parser = argparse.ArgumentParser(description="Troca as imagens do encarte nas páginas Elementor.")
     parser.add_argument("pasta", nargs="?", default=str(REPO_ROOT / "encartes" / "entrada"),
                         help="pasta com as imagens do encarte (padrão: encartes/entrada)")
+    parser.add_argument("--cliente", help="usa a configuração de clientes/CLIENTE.json")
     parser.add_argument("--pagina", action="append", type=int,
                         help="ID da página (pode repetir). Padrão: WP_PAGE_IDS")
+    parser.add_argument("--slots",
+                        help="slots em ordem, separados por vírgula (classe encarte-* ou ID do elemento Elementor)")
     parser.add_argument("--dry-run", action="store_true",
                         help="só mostra o que seria trocado, sem subir nem salvar nada")
     parser.add_argument("--listar-slots", action="store_true",
                         help="lista os slots encontrados em cada página e sai")
     args = parser.parse_args()
+
+    order: list[str] | None = None
+    if args.cliente:
+        order = load_client(args.cliente).get("slots")
+    if args.slots:
+        order = [s.strip() for s in args.slots.split(",") if s.strip()]
 
     wp = WordPress(env("WP_URL"), env("WP_USER"), env("WP_APP_PASSWORD"))
     page_ids = args.pagina or [int(p) for p in env("WP_PAGE_IDS").split(",") if p.strip()]
@@ -171,7 +222,7 @@ def main() -> None:
     if args.listar_slots:
         for page_id in page_ids:
             print(f"Página {page_id}:")
-            for s in wp.slots(page_id):
+            for s in wp.slots(page_id, order):
                 extra = " (várias imagens)" if s["multiple"] else ""
                 print(f"  {s['slot']:<20} {s['type']}{extra}  atual: {', '.join(s['atual']) or '-'}")
         return
@@ -181,23 +232,31 @@ def main() -> None:
         print(f"Nenhuma imagem em {args.pasta}. Nada a fazer.")
         return
 
-    plans = {page_id: map_images_to_slots(images, wp.slots(page_id)) for page_id in page_ids}
+    page_slots = {page_id: wp.slots(page_id, order) for page_id in page_ids}
+    plans = {page_id: map_images_to_slots(images, page_slots[page_id], order) for page_id in page_ids}
 
     for page_id, plan in plans.items():
         print(f"Página {page_id}:")
         for slot, files in plan.items():
             print(f"  {slot:<20} <- {', '.join(f.name for f in files)}")
+
+    pending = {p: plan for p, plan in plans.items() if not already_published(plan, page_slots[p])}
+    if not pending:
+        print("\nSEM_MUDANCA: o site já mostra exatamente estas imagens.")
+        return
     if args.dry_run:
         print("\n--dry-run: nada foi enviado.")
         return
 
-    title = "Encarte " + dt.date.today().strftime("%d/%m/%Y")
+    today = dt.date.today()
+    title = "Encarte " + today.strftime("%d/%m/%Y")
     uploaded: dict[Path, int] = {}
-    for image in dict.fromkeys(f for plan in plans.values() for files in plan.values() for f in files):
-        uploaded[image] = wp.upload(image, title)
+    for image in dict.fromkeys(f for plan in pending.values() for files in plan.values() for f in files):
+        filename = f"encarte-{today:%Y%m%d}-{content_tag(image)}{image.suffix.lower()}"
+        uploaded[image] = wp.upload(image, filename, title)
         print(f"Enviada {image.name} -> mídia #{uploaded[image]}")
 
-    for page_id, plan in plans.items():
+    for page_id, plan in pending.items():
         result = wp.trocar(page_id, {slot: [uploaded[f] for f in files] for slot, files in plan.items()}, False)
         print(f"\nPágina {page_id} atualizada: {result['url']}")
         for troca in result["trocas"]:

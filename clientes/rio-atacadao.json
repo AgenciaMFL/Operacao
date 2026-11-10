@@ -1,0 +1,13 @@
+{
+  "nome": "Rio Atacadão",
+  "wp_url": "https://rioatacadao.com.br",
+  "paginas": [90],
+  "slots": ["985e64a", "010565b"],
+  "prefixo_credenciais": "RIO_ATACADAO",
+  "figma": {
+    "file_key": "C23ByCz4hyo8cvyeKY4CPx",
+    "pagina_node_id": "4215:2",
+    "formato": "jpg",
+    "escala": 2
+  }
+}

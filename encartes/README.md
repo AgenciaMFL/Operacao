@@ -9,6 +9,21 @@ imagens novas ──► encartes/entrada/ ──► GitHub Action ──► sobe
                                                       └─► limpa o cache de CSS do Elementor
 ```
 
+## Modo Figma → site (Rio Atacadão)
+
+Toda terça, de hora em hora (9h–19h), uma rotina do Claude Code abre o Figma
+(página **Rio atacadao**, node `4215:2`), pega os encartes que estiverem lá (de cima para
+baixo), troca as imagens na página `/encarte/` e manda notificação no celular.
+Se o site já estiver com aquele encarte, não faz nada (e não avisa).
+
+Você só precisa: **colar os 2 encartes novos nessa página do Figma**, um embaixo do outro
+(o de cima vai para a primeira imagem do site), apagando os da semana anterior.
+
+Configuração em `clientes/rio-atacadao.json` e passo a passo da rotina em `encartes/ROTINA.md`.
+Credenciais no ambiente do Claude Code: `RIO_ATACADAO_WP_USER` e `RIO_ATACADAO_WP_APP_PASSWORD`.
+O plugin (passo 1 abaixo) precisa estar instalado; não é preciso marcar classes CSS,
+os widgets são identificados pelo ID do Elementor.
+
 ## Configuração (uma vez por site)
 
 ### 1. Instalar o plugin no WordPress

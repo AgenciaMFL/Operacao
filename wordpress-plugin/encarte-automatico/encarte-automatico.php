@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Encarte Automático
- * Description: Troca as imagens do encarte semanal em páginas Elementor via REST API. Marque os widgets com a classe CSS "encarte-1", "encarte-2"... (Avançado > Classes CSS).
- * Version: 1.0.0
+ * Description: Troca as imagens do encarte semanal em páginas Elementor via REST API. Os widgets são identificados pela classe CSS "encarte-1", "encarte-2"... (Avançado > Classes CSS) ou pelo ID do elemento.
+ * Version: 1.1.0
  * Author: Agência MFL
  * Requires PHP: 7.4
  */
@@ -30,6 +30,7 @@ final class Encarte_Automatico {
 		);
 
 		// Lista os slots encontrados na página (na ordem em que aparecem).
+		// Slot = classe CSS "encarte-*" ou o ID do elemento no Elementor (passado em ?ids=a1b2c3d,e4f5a6b).
 		register_rest_route(
 			self::REST_NAMESPACE,
 			'/slots',
@@ -37,7 +38,12 @@ final class Encarte_Automatico {
 				'methods'             => 'GET',
 				'callback'            => array( __CLASS__, 'route_slots' ),
 				'permission_callback' => array( __CLASS__, 'can_edit_page' ),
-				'args'                => $page_arg,
+				'args'                => $page_arg + array(
+					'ids' => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+				),
 			)
 		);
 
@@ -73,11 +79,12 @@ final class Encarte_Automatico {
 			return $elements;
 		}
 
+		$ids   = array_filter( array_map( 'trim', explode( ',', (string) $request['ids'] ) ) );
 		$found = array();
 		self::walk(
 			$elements,
-			function ( array &$element ) use ( &$found ) {
-				foreach ( self::slot_classes( $element ) as $slot ) {
+			function ( array &$element ) use ( &$found, $ids ) {
+				foreach ( self::slot_names( $element, $ids ) as $slot ) {
 					$found[] = array(
 						'slot'     => $slot,
 						'type'     => self::element_type( $element ),
@@ -116,7 +123,7 @@ final class Encarte_Automatico {
 		self::walk(
 			$elements,
 			function ( array &$element ) use ( $slots, &$report ) {
-				foreach ( self::slot_classes( $element ) as $slot ) {
+				foreach ( self::slot_names( $element, array_keys( $slots ) ) as $slot ) {
 					if ( empty( $slots[ $slot ] ) ) {
 						continue;
 					}
@@ -174,6 +181,15 @@ final class Encarte_Automatico {
 				self::walk( $element['elements'], $callback );
 			}
 		}
+	}
+
+	/** Classes "encarte-*" do elemento, mais o ID do elemento se ele foi pedido explicitamente. */
+	private static function slot_names( array $element, array $ids ) {
+		$names = self::slot_classes( $element );
+		if ( isset( $element['id'] ) && in_array( $element['id'], $ids, true ) ) {
+			$names[] = $element['id'];
+		}
+		return $names;
 	}
 
 	private static function slot_classes( array $element ) {
