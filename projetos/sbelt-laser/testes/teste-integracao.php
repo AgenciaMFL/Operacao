@@ -54,7 +54,8 @@ ok('ja-agendou encontra marcação antiga com 55', spa_verificar_ja_agendou('999
 
 // 3. Spa recusa o horário (400 em texto puro) -> 422 com a mensagem
 $T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_5521999990001' => 777]; $O = [];
-$FILA = [['code'=>400,'body'=>'Horário Indisponível para agendamento!','headers'=>[]]];
+$FILA = [['code'=>200,'body'=>'{"id":777,"franquiaId":10}','headers'=>[]], // confere o lead do cache na Spa
+         ['code'=>400,'body'=>'Horário Indisponível para agendamento!','headers'=>[]]];
 $r = leads_v1_ghl_agendamento_callback(new WP_REST_Request(json_encode($base)));
 ok('recusa da Spa vira 422 (GHL não fica repetindo)', $r->get_status() === 422);
 ok('mensagem da Spa preservada', ($r->get_data()['detalhe']['body'] ?? '') === 'Horário Indisponível para agendamento!');
@@ -79,9 +80,48 @@ ok('unidade desconhecida é recusada sem chamar a Spa', $r->get_status() === 400
 // 6. Custom Data completo (como está na Imperatriz) continua igual
 $T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_5599988887777' => 555]; $O = []; $CHAMADAS = [];
 $imp = ['customData'=>['nome'=>'Ana','telefone'=>'+5599988887777','franquiaId'=>'9','datahorainicio'=>'2026-10-22 08:30:00']];
-$FILA = [['code'=>201,'body'=>'{}','headers'=>[]]];
+$FILA = [['code'=>200,'body'=>'{"id":555,"franquiaId":9}','headers'=>[]], ['code'=>201,'body'=>'{}','headers'=>[]]];
 $r = leads_v1_ghl_agendamento_callback(new WP_REST_Request(json_encode($imp)));
-$corpo = json_decode($CHAMADAS[0][1]['body'], true);
+$corpo = json_decode($CHAMADAS[1][1]['body'], true);
 ok('Imperatriz (Custom Data completo) segue funcionando', $r->get_status() === 200 && $corpo['franquiaId'] === 9 && $corpo['dataHoraInicio'] === '2026-10-22 08:30:00' && $corpo['dataHoraFim'] === '2026-10-22 08:45:00');
+
+// 7. v6: telefone já era lead em OUTRA unidade -> cria lead novo na Pátio (antes só atualizava o antigo)
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_5521999990001' => 300]; $O = []; $CHAMADAS = [];
+$lead = $base;
+$FILA = [['code'=>200,'body'=>'{"id":300,"franquiaId":9}','headers'=>[]], // lead 300 é da Imperatriz
+         ['code'=>201,'body'=>'{"id":901}','headers'=>[]],               // cadastro novo na Pátio
+         ['code'=>200,'body'=>'{}','headers'=>[]]];                      // escrita no GHL
+$r = leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+ok('lead de outra unidade: cria novo (901) com POST', $r->get_status() === 200 && ($r->get_data()['leadId'] ?? null) === 901 && str_ends_with($CHAMADAS[1][0], '/api/Lead') && ($CHAMADAS[1][1]['method'] ?? 'POST') === 'POST');
+ok('cache novo gravado por unidade', ($T['spa_lead_10_5521999990001'] ?? null) === 901);
+ok('envio registrado no /debug com a ação', str_starts_with($O['spa_ultimos_envios'][0]['acao'] ?? '', 'criado (lead antigo 300'));
+
+// 8. v6: lead do cache foi apagado na Spa (404) -> cria novo
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_10_5521999990001' => 400]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>404,'body'=>'','headers'=>[]], ['code'=>201,'body'=>'{"id":902}','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+$r = leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+ok('lead apagado na Spa: cria novo (902)', ($r->get_data()['leadId'] ?? null) === 902);
+
+// 9. v6: lead existe na mesma unidade -> atualiza sem voltar o status pra Novo
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_10_5521999990001' => 500]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>200,'body'=>'{"id":500,"franquiaId":10}','headers'=>[]], ['code'=>200,'body'=>'','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+$r = leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+$put = json_decode($CHAMADAS[1][1]['body'], true);
+ok('mesma unidade: atualiza o 500 com PUT', ($r->get_data()['leadId'] ?? null) === 500 && ($CHAMADAS[1][1]['method'] ?? '') === 'PUT');
+ok('atualização não manda Status (não desfaz Agendado)', !isset($put['Status']));
+
+// 10. v6: Spa fora do ar na conferência (500) -> mantém o comportamento antigo (atualiza)
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_10_5521999990001' => 500]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>500,'body'=>'','headers'=>[]], ['code'=>200,'body'=>'','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+$r = leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+ok('Spa sem resposta na conferência: segue atualizando o 500', ($r->get_data()['leadId'] ?? null) === 500);
+
+// 11. v6: agendamento com lead do cache de outra unidade -> cadastra na Pátio antes de agendar
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_5521999990001' => 300]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>200,'body'=>'{"id":300,"franquiaId":9}','headers'=>[]], ['code'=>201,'body'=>'{"id":903}','headers'=>[]],
+         ['code'=>201,'body'=>'{}','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+$r = leads_v1_ghl_agendamento_callback(new WP_REST_Request(json_encode($base)));
+$ag = json_decode($CHAMADAS[2][1]['body'], true);
+ok('agendamento usa o lead novo da Pátio (903)', $r->get_status() === 200 && $ag['leadId'] === 903 && $ag['franquiaId'] === 10);
 
 exit(empty($falhou) ? 0 : 1);

@@ -275,11 +275,21 @@ padrão "Faltaram").
 - Bloqueio de duplicado grava o telefone sem 55 e consulta com e sem 55.
 - `/debug` passa a mostrar `ultimas_falhas` (as 50 últimas, com rota, unidade, contact_id e motivo).
 
+**Versão 6** (10/11/2026, entregue — **a confirmar** se foi colada):
+- Lead do cache é **conferido na Spa** (`GET /api/Lead/{id}`) antes de ser reaproveitado. Se não existe mais ou é
+  de outra unidade, cadastra um lead novo na unidade certa (antes o webhook respondia 200, mas só "atualizava"
+  um lead antigo/apagado/de outra unidade — a pessoa não aparecia na Spa da Pátio). Se a Spa não responder à
+  conferência, segue como antes.
+- Cache telefone → lead **por unidade** (`spa_lead_<franquiaId>_<telefone>`; a chave antiga ainda é lida e conferida).
+- Atualização de lead existente não manda mais `Status: Novo` (não desfaz "Agendado").
+- `/debug` mostra `ultimos_envios` (100 últimos sucessos: rota, unidade, contato, nome, leadId, criado/atualizado).
+- Testes: `testes/teste-integracao.php` (22 casos). `teste-conferencia.php` tem 6 falhas que já existiam na v5
+  (datas de out/2026 no teste ficaram no passado), sem relação com a v6.
+
 **Ainda em aberto:**
 1. (corrigido na v5)
 2. (corrigido na v5)
-3. **Dedup de lead por telefone não separa unidade** (`spa_lead_<telefone>`): mesmo telefone em outra
-   unidade atualiza o lead antigo em vez de criar um na unidade nova.
+3. (corrigido na v6 — dedup por unidade)
 4. **`franquiaId` não é validado** contra `SBELT_UNIDADES` (ausente → FranquiaId 0).
 5. **Webhooks sem autenticação** (`/ghl-lead`, `/ghl-agendamento` aceitam POST de qualquer um).
 6. **`/debug` expõe dados pessoais** (headers, corpo e calendário inteiro) — remover.
@@ -394,3 +404,7 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **03/11/2026** — Pátio: escopos `conversations.readonly`, `conversations/message.readonly` e `contacts.write`
   liberados no token; tag `whatsapp` em 46 contatos (conversa no WhatsApp e source diferente de "Formulario Patio
   Alcantara": 41 sem source, 5 "Avaliação Comercial - Sbelt Pátio Alcântara"), conferidos um a um.
+- **10/11/2026** — Pátio: leads com webhook "Concluído" no GHL que não aparecem na Spa (ex.: Luciane, 5 envios do
+  formulário em 09–10/11). Causa provável no código: cache telefone → lead global e sem conferência — reenvio
+  vira só PUT num lead antigo (outra unidade, apagado ou com data de cadastro antiga, fora do filtro do painel).
+  Criada a **v6 do PHP** (§7).

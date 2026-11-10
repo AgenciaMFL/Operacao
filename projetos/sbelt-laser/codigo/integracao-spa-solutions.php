@@ -4,6 +4,7 @@
  * A versão que roda está no WordPress (Code Snippets). Senha da Spa, tokens
  * pit- do GHL e chave do /debug foram trocados por COLE_AQUI_*.
  * Não colar este arquivo em produção sem preencher esses valores.
+ * v6 (10/11/2026): lead conferido na Spa antes de reaproveitar (cache por unidade) e log de envios no /debug.
  */
 /**
  * Integração WordPress -> GHL (iframe) + Spa Solutions API
@@ -251,18 +252,78 @@ function spa_resolver_franquia_da_requisicao($dados) {
  * diferentes com redirect entre elas - o navegador não guarda mais nada em
  * memória depois do redirect, então usamos o telefone como elo entre as duas.
  */
-function spa_salvar_mapeamento_lead($telefone, $leadId) {
-    $chave = 'spa_lead_' . spa_normalizar_telefone($telefone);
+function spa_salvar_mapeamento_lead($telefone, $leadId, $franquiaId = null) {
+    // v6: chave por unidade - antes era só pelo telefone, e quem já era lead em
+    // outra unidade (ou num lead apagado na Spa) só "atualizava" o lead antigo
+    $chave = $franquiaId
+        ? 'spa_lead_' . (int) $franquiaId . '_' . spa_normalizar_telefone($telefone)
+        : 'spa_lead_' . spa_normalizar_telefone($telefone);
     set_transient($chave, $leadId, 90 * DAY_IN_SECONDS); // janela de deduplicação: 90 dias
 }
 
 /**
- * Recupera o leadId da Spa Solutions a partir do telefone.
+ * Recupera o leadId da Spa Solutions a partir do telefone (na unidade, e
+ * depois na chave antiga, sem unidade - essa sempre é conferida na Spa antes de usar).
  */
-function spa_buscar_leadid_por_telefone($telefone) {
-    $chave = 'spa_lead_' . spa_normalizar_telefone($telefone);
-    $valor = get_transient($chave);
+function spa_buscar_leadid_por_telefone($telefone, $franquiaId = null) {
+    $tel = spa_normalizar_telefone($telefone);
+    if ($franquiaId) {
+        $valor = get_transient('spa_lead_' . (int) $franquiaId . '_' . $tel);
+        if ($valor) return (int) $valor;
+    }
+    $valor = get_transient('spa_lead_' . $tel);
     return $valor ? (int) $valor : null;
+}
+
+/**
+ * Consulta o lead na Spa (GET /api/Lead/{id}).
+ * existe: true = achou, false = não existe (404/400/corpo vazio), null = não deu pra saber (rede/5xx).
+ */
+function spa_consultar_lead($leadId, $tentativa = 1) {
+    $token = spa_get_token($tentativa > 1);
+    if (!$token) return ['existe' => null];
+
+    $resposta = wp_remote_get(SPA_URL_EMPRESA . '/api/Lead/' . (int) $leadId, [
+        'headers' => ['Authorization' => 'Bearer ' . $token],
+        'timeout' => 10,
+    ]);
+    if (is_wp_error($resposta)) return ['existe' => null];
+
+    $status = wp_remote_retrieve_response_code($resposta);
+    if (in_array($status, [401, 403]) && $tentativa === 1) {
+        return spa_consultar_lead($leadId, 2);
+    }
+    if ($status >= 500) return ['existe' => null];
+    if ($status >= 400) return ['existe' => false];
+
+    $lead = json_decode(wp_remote_retrieve_body($resposta), true);
+    if (!is_array($lead) || !$lead) return ['existe' => false];
+
+    $franquia = $lead['franquiaId'] ?? $lead['FranquiaId'] ?? ($lead['franquia']['id'] ?? $lead['Franquia']['Id'] ?? null);
+    return ['existe' => true, 'franquiaId' => $franquia !== null ? (int) $franquia : null];
+}
+
+/**
+ * O lead guardado no cache ainda serve pra essa unidade? Se não existe mais na
+ * Spa ou é de outra unidade, não serve - aí cadastra um novo. Se a Spa não
+ * respondeu, mantém o comportamento antigo (usa o lead).
+ */
+function spa_lead_valido_na_unidade($leadId, $franquiaId) {
+    $lead = spa_consultar_lead($leadId);
+    if ($lead['existe'] === false) return false;
+    if ($lead['existe'] === true && $lead['franquiaId'] !== null && $lead['franquiaId'] !== (int) $franquiaId) return false;
+    return true;
+}
+
+/**
+ * Guarda os últimos 100 envios que deram certo (rota, unidade, contato, lead,
+ * se criou ou atualizou) pra conferir no /debug quando alguém "não aparece".
+ */
+function spa_registrar_envio($rota, $info) {
+    $envios = get_option('spa_ultimos_envios', []);
+    if (!is_array($envios)) $envios = [];
+    array_unshift($envios, array_merge(['quando' => current_time('mysql'), 'rota' => $rota], $info));
+    update_option('spa_ultimos_envios', array_slice($envios, 0, 100), false);
 }
 
 /**
@@ -728,6 +789,7 @@ add_action('rest_api_init', function () {
                 'ultima_consulta_calendario' => get_option('spa_debug_ultima_consulta', 'Nenhuma consulta registrada ainda'),
                 'ultima_atualizacao_contato' => get_option('spa_debug_ultima_atualizacao_contato', 'Nenhuma atualização registrada ainda'),
                 'ultimas_falhas'         => get_option('spa_ultimas_falhas', []),
+                'ultimos_envios'         => get_option('spa_ultimos_envios', []),
             ], 200);
         },
         'permission_callback' => '__return_true',
@@ -868,11 +930,20 @@ function leads_v1_ghl_lead_callback($request) {
 
     // Verifica se já existe um lead pra esse telefone (evita duplicar cadastro
     // caso a mesma pessoa preencha o formulário mais de uma vez)
-    $leadIdExistente = spa_buscar_leadid_por_telefone($telefone);
+    $leadIdExistente = spa_buscar_leadid_por_telefone($telefone, $franquiaId);
+    $acao = 'criado';
+    if ($leadIdExistente && !spa_lead_valido_na_unidade($leadIdExistente, $franquiaId)) {
+        $acao = 'criado (lead antigo ' . $leadIdExistente . ' não existe na Spa ou é de outra unidade)';
+        $leadIdExistente = null;
+    }
 
     if ($leadIdExistente) {
-        $resultado = spa_atualizar_lead($leadIdExistente, $payload);
+        // não volta o status pra "Novo": a pessoa pode já estar Agendada
+        $payloadAtualizacao = $payload;
+        unset($payloadAtualizacao['Status']);
+        $resultado = spa_atualizar_lead($leadIdExistente, $payloadAtualizacao);
         $leadId    = $leadIdExistente;
+        $acao      = 'atualizado';
     } else {
         $resultado = spa_cadastrar_lead($payload);
         $leadId    = spa_extrair_lead_id($resultado);
@@ -900,9 +971,11 @@ function leads_v1_ghl_lead_callback($request) {
         'leadId'           => $leadId,
     ]);
 
+    spa_registrar_envio('ghl-lead', ['franquiaId' => $franquiaId, 'contact_id' => $dados['contact_id'] ?? '', 'nome' => $nome, 'leadId' => $leadId, 'acao' => $acao]);
+
     // guarda a relação telefone -> leadId pra usar depois, no agendamento
     if ($leadId) {
-        spa_salvar_mapeamento_lead($telefone, $leadId);
+        spa_salvar_mapeamento_lead($telefone, $leadId, $franquiaId);
 
         // escreve de volta no contato do GHL, pra aparecer mesmo se a pessoa
         // não chegar a agendar (é aqui que resolve o caso "só preencheu o form")
@@ -1046,7 +1119,10 @@ function leads_v1_ghl_agendamento_callback($request) {
         $dataHoraFim = date('Y-m-d H:i:s', $inicio + 15 * 60);
     }
 
-    $leadId = spa_buscar_leadid_por_telefone($telefone);
+    $leadId = spa_buscar_leadid_por_telefone($telefone, $franquiaId);
+    if ($leadId && !spa_lead_valido_na_unidade($leadId, $franquiaId)) {
+        $leadId = null; // lead do cache sumiu da Spa ou é de outra unidade: cadastra de novo abaixo
+    }
 
     // fallback: se por algum motivo não achamos o leadId (ex: cache expirou,
     // ou o webhook do form falhou), cadastra o lead agora mesmo antes de agendar
@@ -1067,7 +1143,7 @@ function leads_v1_ghl_agendamento_callback($request) {
             spa_registrar_falha('ghl-agendamento', ['franquiaId' => $franquiaId, 'contact_id' => $contactIdFalha, 'erro' => 'cadastro de emergência do lead falhou', 'detalhe' => $resultadoCadastro]);
             return new WP_REST_Response(['erro' => 'Não foi possível localizar nem cadastrar o lead pra agendar', 'detalhe' => $resultadoCadastro], 502);
         }
-        spa_salvar_mapeamento_lead($telefone, $leadId);
+        spa_salvar_mapeamento_lead($telefone, $leadId, $franquiaId);
     }
 
     $resultado = spa_agendar($leadId, $franquiaId, $dataHoraInicio, $dataHoraFim);
@@ -1085,6 +1161,7 @@ function leads_v1_ghl_agendamento_callback($request) {
     // escreve de volta no contato do GHL, agora com o status atualizado
     $contactId = sanitize_text_field($dados['contact_id'] ?? '');
     ghl_atualizar_campos_contato($contactId, $franquiaId, 'Agendamento sincronizado com a Spa Solutions', $leadId);
+    spa_registrar_envio('ghl-agendamento', ['franquiaId' => $franquiaId, 'contact_id' => $contactId, 'nome' => $nome, 'leadId' => $leadId, 'dataHoraInicio' => $dataHoraInicio]);
 
     return new WP_REST_Response([
         'status' => 'ok',
