@@ -430,3 +430,9 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   int x long") — o lead 17339 continua existindo e precisa ser apagado pelo painel. 17243 (Aguida) e 17335 (Geiza)
   são leads vazios criados pelo fallback do site durante a falha da data em português — sobra a limpar.
   Os 25 envios do dia usaram os leads já existentes ("Lead cadastrado via site"), sem criar lead novo.
+- **11/11/2026** — v6.1 e Conferência v3 coladas. A **página da Pátio deixa de ser usada para agendamentos**
+  (decisão do cliente). A correção fica pronta para quando voltar a usar; a confirmação em produção vem pelos
+  agendamentos da Imperatriz (mesmo código, também afetada pela data em português).
+  **Ao reativar a Pátio:** conferir no `/debug` o primeiro agendamento (deve cair em `ultimos_envios`, não em
+  `ultimas_falhas`); manter a verificação automática da Conferência ligada; alinhar a agenda de avaliação da
+  Spa com a do GHL (§8 item 1); limpar os leads vazios 17243/17339 (Aguida) e 17335 (Geiza) pelo painel/TI.
