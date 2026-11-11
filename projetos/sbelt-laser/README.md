@@ -425,3 +425,8 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   Rodada contra os dados reais: +23 fora da Spa (14 de 09–10/11, já passados; 9 de 14 e 16/11 — enviados e
   conferidos). A Aguida (14/11 09:00) foi enviada por um teste local sem o cache do site e ganhou **lead novo
   (17339)** — conferir duplicado na Spa.
+- **11/11/2026** — Aguida: avaliação de 14/11 09:00 refeita no lead original (17242); a do lead 17339 (criado por
+  engano no teste local) foi **cancelada**. `DELETE /api/Lead/{id}/{franquiaId}` da Spa está quebrado (404 "Find
+  int x long") — o lead 17339 continua existindo e precisa ser apagado pelo painel. 17243 (Aguida) e 17335 (Geiza)
+  são leads vazios criados pelo fallback do site durante a falha da data em português — sobra a limpar.
+  Os 25 envios do dia usaram os leads já existentes ("Lead cadastrado via site"), sem criar lead novo.
