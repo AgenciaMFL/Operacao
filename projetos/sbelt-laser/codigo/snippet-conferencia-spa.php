@@ -1,6 +1,6 @@
 <?php
 /**
- * CONFERÊNCIA GHL x SPA SOLUTIONS (v2)
+ * CONFERÊNCIA GHL x SPA SOLUTIONS (v3 - 11/11/2026: janela -2/+45 dias, próximos primeiro, casa pelo dia)
  * Tela no painel: Ferramentas > Conferência Spa (só administradores).
  *
  * 1. "Buscar": cruza os agendamentos do calendário GHL da unidade com as
@@ -177,8 +177,10 @@ function sbelt_conf_cruzar($franquiaId) {
         return ['erro' => 'unidade inválida'];
     }
 
-    $inicio = time() - 30 * DAY_IN_SECONDS;
-    $fim    = time() + 90 * DAY_IN_SECONDS;
+    // v3: janela curta (2 dias atrás até 45 à frente). Com -30/+90 a Pátio tinha 1.600 agendamentos e o
+    // limite de 15 s por clique só carregava os mais antigos - os de hoje e amanhã nunca apareciam.
+    $inicio = time() - 2 * DAY_IN_SECONDS;
+    $fim    = time() + 45 * DAY_IN_SECONDS;
 
     $ghl = sbelt_conf_ghl_get(add_query_arg([
         'locationId' => $unidade['ghl_location_id'],
@@ -198,12 +200,14 @@ function sbelt_conf_cruzar($franquiaId) {
     $porTelefone = [];
     $porNome     = [];
     foreach ($spa['lista'] as $avaliacao) {
+        // v3: casa pelo DIA também - uma avaliação antiga da mesma pessoa não conta como "já na Spa"
+        $dia = substr((string) ($avaliacao['dataHoraInicio'] ?? ''), 0, 10);
         $tel = sbelt_conf_telefone($avaliacao['telefone'] ?? '');
         if ($tel !== '') {
-            $porTelefone[$tel] = $avaliacao;
+            $porTelefone[$tel . '|' . $dia] = $avaliacao;
         }
         foreach (sbelt_conf_chaves_nome($avaliacao['nome'] ?? '') as $chave) {
-            $porNome[$chave] = $avaliacao;
+            $porNome[$chave . '|' . $dia] = $avaliacao;
         }
     }
 
@@ -212,7 +216,18 @@ function sbelt_conf_cruzar($franquiaId) {
     $lista     = [];
     $semTempo  = 0;
     sbelt_conf_tempo_esgotado(); // começa a contar o tempo
-    foreach ($ghl['body']['events'] ?? [] as $evento) {
+    // v3: próximos agendamentos primeiro (hoje, amanhã...), depois os que já passaram
+    $eventos = $ghl['body']['events'] ?? [];
+    $agora   = time();
+    $ts = function ($e) { $t = strtotime((string) ($e['startTime'] ?? '')); return $t ?: 0; };
+    usort($eventos, function ($a, $b) use ($ts, $agora) {
+        $ta = $ts($a); $tb = $ts($b);
+        $fa = $ta >= $agora - 3 * HOUR_IN_SECONDS; $fb = $tb >= $agora - 3 * HOUR_IN_SECONDS;
+        if ($fa !== $fb) return $fa ? -1 : 1;
+        return $fa ? $ta <=> $tb : $tb <=> $ta;
+    });
+
+    foreach ($eventos as $evento) {
         $contactId = $evento['contactId'] ?? '';
         if ($contactId === '' || ($evento['appointmentStatus'] ?? '') === 'cancelled' || isset($vistos[$contactId])) {
             continue;
@@ -234,18 +249,19 @@ function sbelt_conf_cruzar($franquiaId) {
             $inicioTs  = 0;
         }
 
+        $dia = isset($data) && $inicioTs ? $data->format('Y-m-d') : '';
         $tel = sbelt_conf_telefone($contato['telefone']);
         $achadoNome = null;
         foreach (sbelt_conf_chaves_nome($contato['nome']) as $chave) {
-            if (isset($porNome[$chave])) {
-                $achadoNome = $porNome[$chave];
+            if (isset($porNome[$chave . '|' . $dia])) {
+                $achadoNome = $porNome[$chave . '|' . $dia];
                 break;
             }
         }
 
-        if ($tel !== '' && isset($porTelefone[$tel])) {
+        if ($tel !== '' && isset($porTelefone[$tel . '|' . $dia])) {
             $situacao = 'spa_telefone';
-            $naSpa    = $porTelefone[$tel];
+            $naSpa    = $porTelefone[$tel . '|' . $dia];
         } elseif ($achadoNome) {
             $situacao = 'spa_nome';
             $naSpa    = $achadoNome;

@@ -419,3 +419,9 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **11/11/2026** — Pátio: 17 agendamentos de 11–13/11 que estavam no GHL e fora do calendário da Spa (data em
   português) reenviados pela rota `/ghl-agendamento` com a data ISO do GHL; conferido em `ListarAgendamentosAvaliacao`:
   todos os agendamentos de 11, 12 e 13/11 do GHL estão na Spa.
+- **11/11/2026** — Conferência Spa **v3**: com janela −30/+90 dias a Pátio tinha ~1.600 agendamentos e o limite de
+  15 s por clique só carregava os mais antigos (os de hoje/amanhã nunca apareciam); e "já na Spa" casava telefone/nome
+  com **qualquer** avaliação antiga. Agora: janela −2/+45 dias, próximos primeiro, casamento pelo **dia**.
+  Rodada contra os dados reais: +23 fora da Spa (14 de 09–10/11, já passados; 9 de 14 e 16/11 — enviados e
+  conferidos). A Aguida (14/11 09:00) foi enviada por um teste local sem o cache do site e ganhou **lead novo
+  (17339)** — conferir duplicado na Spa.
