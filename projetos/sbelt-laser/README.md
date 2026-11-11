@@ -416,3 +416,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **11/11/2026** — v6 colada (o snippet principal foi apagado sem querer e recriado a partir do zip original;
   credenciais validadas). `/debug` mostrou a causa real: data do agendamento em português vinda do GHL desde 06/11.
   Criada a v6.1 (§7). Conferência Spa instalada.
+- **11/11/2026** — Pátio: 17 agendamentos de 11–13/11 que estavam no GHL e fora do calendário da Spa (data em
+  português) reenviados pela rota `/ghl-agendamento` com a data ISO do GHL; conferido em `ListarAgendamentosAvaliacao`:
+  todos os agendamentos de 11, 12 e 13/11 do GHL estão na Spa.
