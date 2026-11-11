@@ -29,10 +29,12 @@ import mimetypes
 import os
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 import requests
 
+mimetypes.add_type("image/webp", ".webp")
 REPO_ROOT = Path(__file__).resolve().parent.parent
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
@@ -168,6 +170,16 @@ def map_images_to_slots(images: list[Path], slots: list[dict], order: list[str] 
     return {slot: [image] for slot, image in zip(names, images)}
 
 
+def to_webp(image: Path, quality: int, workdir: Path) -> Path:
+    """Converte para WebP (bem mais leve que JPG/PNG, mesma resolução). Requer Pillow."""
+    from PIL import Image
+
+    out = workdir / (image.stem + ".webp")
+    with Image.open(image) as im:
+        im.convert("RGB").save(out, "WEBP", quality=quality, method=6)
+    return out
+
+
 def already_published(plan: dict[str, list[Path]], slots: list[dict]) -> bool:
     current = {s["slot"]: s["atual"] for s in slots}
     return all(
@@ -206,16 +218,20 @@ def main() -> None:
                         help="slots em ordem, separados por vírgula (classe encarte-* ou ID do elemento Elementor)")
     parser.add_argument("--dry-run", action="store_true",
                         help="só mostra o que seria trocado, sem subir nem salvar nada")
+    parser.add_argument("--forcar", action="store_true",
+                        help="publica mesmo que o site já mostre estas imagens")
     parser.add_argument("--listar-slots", action="store_true",
                         help="lista os slots encontrados em cada página e sai")
     args = parser.parse_args()
 
     order: list[str] | None = None
     notify: list[str] = []
+    webp_quality: int | None = None
     if args.cliente:
         client = load_client(args.cliente)
         order = client.get("slots")
         notify = client.get("notificar", [])
+        webp_quality = client.get("webp_qualidade")
     if args.slots:
         order = [s.strip() for s in args.slots.split(",") if s.strip()]
 
@@ -243,7 +259,7 @@ def main() -> None:
         for slot, files in plan.items():
             print(f"  {slot:<20} <- {', '.join(f.name for f in files)}")
 
-    pending = {p: plan for p, plan in plans.items() if not already_published(plan, page_slots[p])}
+    pending = {p: plan for p, plan in plans.items() if args.forcar or not already_published(plan, page_slots[p])}
     if not pending:
         print("\nSEM_MUDANCA: o site já mostra exatamente estas imagens.")
         return
@@ -253,10 +269,13 @@ def main() -> None:
 
     today = dt.date.today()
     title = "Encarte " + today.strftime("%d/%m/%Y")
+    workdir = Path(tempfile.mkdtemp(prefix="encarte-"))
     uploaded: dict[Path, int] = {}
     for image in dict.fromkeys(f for plan in pending.values() for files in plan.values() for f in files):
-        filename = f"encarte-{today:%Y%m%d}-{content_tag(image)}{image.suffix.lower()}"
-        uploaded[image] = wp.upload(image, filename, title)
+        # O nome leva o hash do arquivo original, para reconhecer depois que já foi publicado.
+        to_send = to_webp(image, webp_quality, workdir) if webp_quality else image
+        filename = f"encarte-{today:%Y%m%d}-{content_tag(image)}{to_send.suffix.lower()}"
+        uploaded[image] = wp.upload(to_send, filename, title)
         print(f"Enviada {image.name} -> mídia #{uploaded[image]}")
 
     for page_id, plan in pending.items():
