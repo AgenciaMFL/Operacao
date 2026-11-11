@@ -12,7 +12,7 @@ imagens novas ──► encartes/entrada/ ──► GitHub Action ──► sobe
 ## Modo Figma → site (Rio Atacadão)
 
 Toda terça, de hora em hora (9h–19h), uma rotina do Claude Code abre o Figma
-(página **Rio atacadao**, node `4215:2`), pega os encartes que estiverem lá (de cima para
+(página **Rio atacadao**, node `3080:2`), pega os encartes que estiverem lá (de cima para
 baixo), troca as imagens na página `/encarte/` e manda notificação no celular.
 Se o site já estiver com aquele encarte, não faz nada (e não avisa).
 
