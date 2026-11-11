@@ -4,6 +4,7 @@
  * A versão que roda está no WordPress (Code Snippets). Senha da Spa, tokens
  * pit- do GHL e chave do /debug foram trocados por COLE_AQUI_*.
  * Não colar este arquivo em produção sem preencher esses valores.
+ * v6.1 (11/11/2026): data do GHL em português ("quarta-feira, 11 de novembro de 2026 às 09:15").
  * v6 (10/11/2026): lead conferido na Spa antes de reaproveitar (cache por unidade) e log de envios no /debug.
  */
 /**
@@ -200,6 +201,24 @@ function spa_extrair_lead_id($resultado) {
 function spa_normalizar_data_hora($valor) {
     $valor = trim((string) $valor);
     if ($valor === '') return '';
+
+    // GHL em português (desde ~06/11/2026): "quarta-feira, 11 de novembro de 2026 às 09:15"
+    // (o PHP não entende mês por extenso em português, então monta a data na mão)
+    $meses = ['janeiro' => 1, 'fevereiro' => 2, 'marco' => 3, 'março' => 3, 'abril' => 4, 'maio' => 5, 'junho' => 6,
+              'julho' => 7, 'agosto' => 8, 'setembro' => 9, 'outubro' => 10, 'novembro' => 11, 'dezembro' => 12];
+    if (preg_match('/(\d{1,2})\s+de\s+([[:alpha:]çÇ]+)\s+de\s+(\d{4})\D+?(\d{1,2}):(\d{2})(?:\s*([AaPp])\.?\s*[Mm]\.?)?/u', $valor, $m)) {
+        $mes = $meses[mb_strtolower($m[2], 'UTF-8')] ?? null;
+        if ($mes) {
+            $hora = (int) $m[4];
+            if (!empty($m[6])) {
+                $pm = strtolower($m[6]) === 'p';
+                if ($pm && $hora < 12) $hora += 12;
+                if (!$pm && $hora === 12) $hora = 0;
+            }
+            return sprintf('%04d-%02d-%02d %02d:%02d:00', (int) $m[3], $mes, (int) $m[1], $hora, (int) $m[5]);
+        }
+    }
+
     try {
         $fuso = new DateTimeZone('America/Sao_Paulo');
         $data = is_numeric($valor)

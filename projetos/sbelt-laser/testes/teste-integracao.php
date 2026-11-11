@@ -124,4 +124,17 @@ $r = leads_v1_ghl_agendamento_callback(new WP_REST_Request(json_encode($base)));
 $ag = json_decode($CHAMADAS[2][1]['body'], true);
 ok('agendamento usa o lead novo da Pátio (903)', $r->get_status() === 200 && $ag['leadId'] === 903 && $ag['franquiaId'] === 10);
 
+// 12. v6.1: GHL mandando a data em português (causa das falhas de 06 a 11/11/2026)
+ok('data em português vira Y-m-d H:i:s', spa_normalizar_data_hora('quarta-feira, 11 de novembro de 2026 às 09:15') === '2026-11-11 09:15:00');
+ok('março com cedilha', spa_normalizar_data_hora('sexta-feira, 6 de março de 2026 às 18:45') === '2026-03-06 18:45:00');
+ok('português com AM/PM', spa_normalizar_data_hora('terça-feira, 10 de novembro de 2026 às 1:30 PM') === '2026-11-10 13:30:00');
+ok('ISO continua igual', spa_normalizar_data_hora('2026-10-21T15:00:00-03:00') === '2026-10-21 15:00:00');
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_10_5521999990001' => 500]; $O = []; $CHAMADAS = [];
+$pt = ['customData'=>['franquiaId'=>'10','nome'=>'Maria','telefone'=>'+5521999990001',
+       'dataHoraInicio'=>'quarta-feira, 11 de novembro de 2026 às 09:15','dataHoraFim'=>'quarta-feira, 11 de novembro de 2026 às 09:30']];
+$FILA = [['code'=>200,'body'=>'{"id":500,"franquiaId":10}','headers'=>[]], ['code'=>201,'body'=>'{}','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+$r = leads_v1_ghl_agendamento_callback(new WP_REST_Request(json_encode($pt)));
+$ag = json_decode($CHAMADAS[1][1]['body'], true);
+ok('agendamento com data em português chega certo na Spa', $r->get_status() === 200 && $ag['dataHoraInicio'] === '2026-11-11 09:15:00' && $ag['dataHoraFim'] === '2026-11-11 09:30:00');
+
 exit(empty($falhou) ? 0 : 1);

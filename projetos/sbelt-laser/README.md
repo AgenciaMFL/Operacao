@@ -275,7 +275,12 @@ padrão "Faltaram").
 - Bloqueio de duplicado grava o telefone sem 55 e consulta com e sem 55.
 - `/debug` passa a mostrar `ultimas_falhas` (as 50 últimas, com rota, unidade, contact_id e motivo).
 
-**Versão 6** (10/11/2026, entregue — **a confirmar** se foi colada):
+**Versão 6.1** (11/11/2026, colada a v6 às ~14h; **6.1 a colar**): o GHL passou a mandar `dataHoraInicio/Fim`
+em português ("quarta-feira, 11 de novembro de 2026 às 09:15") — **todas as 50 falhas do /debug de 06 a 11/11**
+(38 Pátio, 12 Imperatriz) eram a Spa recusando essa data (400 → 422, o GHL não repete). `spa_normalizar_data_hora`
+agora entende esse formato (com ou sem AM/PM). Recuperar quem falhou pela Conferência Spa (usa a data ISO da API do GHL).
+
+**Versão 6** (10/11/2026, colada em 11/11):
 - Lead do cache é **conferido na Spa** (`GET /api/Lead/{id}`) antes de ser reaproveitado. Se não existe mais ou é
   de outra unidade, cadastra um lead novo na unidade certa (antes o webhook respondia 200, mas só "atualizava"
   um lead antigo/apagado/de outra unidade — a pessoa não aparecia na Spa da Pátio). Se a Spa não responder à
@@ -408,3 +413,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   formulário em 09–10/11). Causa provável no código: cache telefone → lead global e sem conferência — reenvio
   vira só PUT num lead antigo (outra unidade, apagado ou com data de cadastro antiga, fora do filtro do painel).
   Criada a **v6 do PHP** (§7).
+- **11/11/2026** — v6 colada (o snippet principal foi apagado sem querer e recriado a partir do zip original;
+  credenciais validadas). `/debug` mostrou a causa real: data do agendamento em português vinda do GHL desde 06/11.
+  Criada a v6.1 (§7). Conferência Spa instalada.
