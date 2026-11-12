@@ -1059,9 +1059,31 @@
     if (e.data?.tipo === 'proposta:atualizar') render(e.data.dados);
     else if (e.data?.tipo === 'proposta:capa' && S) { aberta = !e.data.mostrar; render(S); }
     else if (e.data?.tipo === 'proposta:imprimir') { imprimir(); return; }
+    else if (e.data?.tipo === 'proposta:rolar') { destacarSecao(e.data.secao, e.data.aba); return; }
     else return;
     aoRolar();
   });
+
+  // Integração com o editor: rola e destaca a seção do bloco aberto; clicar numa seção abre o bloco dela
+  const SECOES_EDITAVEIS = '#inicio, #solucao, #investimento, #resultados, #aprovar';
+  function destacarSecao(id, aba) {
+    if (aba) document.getElementById(`aba-${aba}`)?.click();
+    const alvo = document.getElementById(id);
+    if (!alvo) return;
+    alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    alvo.classList.remove('destaque-editor');
+    void alvo.offsetWidth;
+    alvo.classList.add('destaque-editor');
+    setTimeout(() => alvo.classList.remove('destaque-editor'), 1800);
+  }
+  if (isPreview && window.parent !== window) {
+    document.documentElement.classList.add('modo-editor');
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, summary, input, dialog')) return;
+      const secao = e.target.closest(SECOES_EDITAVEIS);
+      if (secao) window.parent.postMessage({ tipo: 'editor:abrir-bloco', secao: secao.id }, location.origin);
+    });
+  }
 
   window.addEventListener('scroll', aoRolar, { passive: true });
   window.addEventListener('resize', aoRolar);

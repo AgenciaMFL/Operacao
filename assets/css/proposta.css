@@ -565,6 +565,13 @@ body.rolou .topo { border-bottom-color: var(--linha); }
 .resultados-centro .b-destaque { margin-inline: auto; text-align: center; }
 .resultados-centro .b-destaque::before { margin-inline: auto; }
 
+/* ---------- integração com o editor (só na pré-visualização) ---------- */
+
+.modo-editor :is(#inicio, #solucao, #investimento, #resultados, #aprovar) { cursor: pointer; transition: box-shadow .2s; }
+.modo-editor :is(#inicio, #solucao, #investimento, #resultados, #aprovar):hover { box-shadow: inset 0 0 0 2px rgba(57, 211, 83, .55); }
+.destaque-editor { animation: destaqueEditor 1.8s ease-out; }
+@keyframes destaqueEditor { 0%, 60% { box-shadow: inset 0 0 0 3px #39D353; } 100% { box-shadow: inset 0 0 0 3px rgba(57, 211, 83, 0); } }
+
 /* ---------- seções ---------- */
 
 .secao-banda { padding: clamp(72px, 9vw, 112px) 0; }

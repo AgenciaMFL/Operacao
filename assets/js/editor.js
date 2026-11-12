@@ -19,6 +19,7 @@
   let filtroDepo = '';
   let online = false;      // editor aberto no site com servidor (login + publicar)
   let pendente = false;    // há alterações ainda não publicadas
+  let mostrandoCapa = false;
 
   const hojeIso = () => {
     const d = new Date();
@@ -99,6 +100,7 @@
     ligarAcoesDoPainel();
     preencherCampos();
     atualizarPainel();
+    marcarBlocoAtivo();
   }
 
   /* ---------- imagem de capa do vídeo ---------- */
@@ -166,6 +168,9 @@
     if (c.m === '4' && !String(S.vCombo || '').trim()) falta.push('Valor do Plano 2');
     if (c.mfl && !String(S.vCrm || '').trim()) falta.push('Valor do CRM MFL Sales');
     if (!/^https?:\/\//i.test(String(S.videoUrl || '').trim())) falta.push('Link do vídeo');
+    $('topo-cliente').textContent = String(S.cliente || '').trim() || 'Nova proposta';
+    $('ok-tudo').hidden = falta.length > 0;
+    atualizarBlocos(c);
     const aviso = $('aviso');
     aviso.hidden = !falta.length;
     aviso.replaceChildren();
@@ -214,6 +219,7 @@
   function atualizarStatus(textoFixo) {
     const status = $('status');
     status.replaceChildren();
+    atualizarCartaoPublicacao();
     if (textoFixo) { status.textContent = textoFixo; return; }
     if (!online) { status.textContent = 'Rascunho salvo no navegador'; return; }
     if (!S.idPublicado) { status.textContent = 'Ainda não publicada'; return; }
@@ -248,12 +254,136 @@
       desenharDepoimentos();
       alterado();
     });
-    $('exportar').addEventListener('click', () => {
-      const antigo = document.title;
-      document.title = `Proposta MFL Sales - ${S.cliente || 'Cliente'}`;
-      iframe.contentWindow?.postMessage({ tipo: 'proposta:imprimir' }, location.origin);
-      setTimeout(() => { document.title = antigo; }, 500);
+  }
+
+  /* ---------- navegação do painel (estilo Elementor): abas, grade de blocos e bloco aberto ---------- */
+
+  const lateral = $('lateral');
+  let blocoAtivo = null;
+
+  // Seção da proposta que corresponde a cada bloco (a prévia rola até ela)
+  const SECAO_DO_BLOCO = {
+    cliente: ['inicio'], modelo: ['solucao'], investimento: ['investimento'], publico: ['solucao', 'inbound'],
+    escopo: ['solucao', 'inbound'], crm: ['solucao', 'tecnologia'], condicoes: ['investimento'], video: ['resultados'], responsavel: ['aprovar']
+  };
+  const BLOCO_DA_SECAO = { inicio: 'cliente', solucao: 'modelo', investimento: 'investimento', resultados: 'video', aprovar: 'responsavel' };
+
+  function trocarAbaLateral(aba) {
+    lateral.dataset.aba = aba;
+    document.querySelectorAll('.aba-lateral').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.aba === aba)));
+    document.querySelectorAll('.painel-aba-lateral').forEach((p) => { p.hidden = p.dataset.aba !== aba; });
+  }
+
+  function marcarBlocoAtivo() {
+    document.querySelectorAll('.bloco-editor').forEach((b) => b.classList.toggle('ativo', b.dataset.bloco === blocoAtivo));
+  }
+
+  function abrirBloco(id, { rolarPrevia = true } = {}) {
+    const secao = document.querySelector(`.bloco-editor[data-bloco="${id}"]`);
+    if (!secao || secao.hidden) return;
+    trocarAbaLateral('blocos');
+    blocoAtivo = id;
+    $('bloco-titulo').textContent = secao.dataset.titulo;
+    lateral.dataset.vista = 'bloco';
+    marcarBlocoAtivo();
+    document.querySelector('.lateral-corpo').scrollTop = 0;
+    if (!rolarPrevia) return;
+    if (id === 'capa') { mostrarCapa(true); return; }
+    if (mostrandoCapa) mostrarCapa(false);
+    const [alvo, aba] = SECAO_DO_BLOCO[id] || [];
+    if (alvo) iframe.contentWindow?.postMessage({ tipo: 'proposta:rolar', secao: alvo, aba }, location.origin);
+  }
+
+  function voltarParaGrade() {
+    blocoAtivo = null;
+    lateral.dataset.vista = 'grade';
+    marcarBlocoAtivo();
+    if (mostrandoCapa) mostrarCapa(false);
+  }
+
+  // Selo de cada bloco (completo / falta) e blocos que não se aplicam ao modelo
+  function atualizarBlocos(c) {
+    const vazio = (v) => !String(v ?? '').trim();
+    const falta = {
+      cliente: vazio(S.cliente),
+      investimento: (c.hasIn && vazio(S.vIn)) || ((c.m === '2' || c.m === '3') && vazio(S.vOut)) || (c.m === '4' && vazio(S.vCombo)) || (c.mfl && vazio(S.vCrm)),
+      escopo: c.hasIn && !S.sc.meta && !S.sc.google,
+      video: !/^https?:\/\//i.test(String(S.videoUrl || '').trim())
+    };
+    document.querySelectorAll('.tile').forEach((t) => {
+      const secao = document.querySelector(`.bloco-editor[data-bloco="${t.dataset.bloco}"]`);
+      t.hidden = !secao || secao.hidden;
+      t.dataset.estado = falta[t.dataset.bloco] ? 'falta' : 'ok';
+      t.title = falta[t.dataset.bloco] ? 'Falta preencher' : 'Completo';
     });
+    if (blocoAtivo && document.querySelector(`.bloco-editor[data-bloco="${blocoAtivo}"]`)?.hidden) voltarParaGrade();
+    filtrarBlocos();
+  }
+
+  const normalizarBusca = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+  function filtrarBlocos() {
+    const termo = normalizarBusca($('busca').value).trim();
+    let algum = false;
+    document.querySelectorAll('.categoria').forEach((cat) => {
+      let visiveis = 0;
+      cat.querySelectorAll('.tile').forEach((t) => {
+        const secao = document.querySelector(`.bloco-editor[data-bloco="${t.dataset.bloco}"]`);
+        const aplica = secao && !secao.hidden;
+        const bate = !termo || normalizarBusca(`${t.textContent} ${t.dataset.palavras || ''} ${secao?.textContent || ''}`).includes(termo);
+        t.style.display = aplica && bate ? '' : 'none';
+        if (aplica && bate) visiveis += 1;
+      });
+      cat.hidden = visiveis === 0;
+      if (termo && visiveis) cat.open = true;
+      algum = algum || visiveis > 0;
+    });
+    $('busca-vazia').hidden = algum;
+  }
+
+  document.querySelectorAll('.aba-lateral').forEach((b) => b.addEventListener('click', () => trocarAbaLateral(b.dataset.aba)));
+  document.querySelectorAll('.tile').forEach((t) => t.addEventListener('click', () => abrirBloco(t.dataset.bloco)));
+  $('voltar').addEventListener('click', voltarParaGrade);
+  $('busca').addEventListener('input', filtrarBlocos);
+  $('busca').addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const primeiro = [...document.querySelectorAll('.tile')].find((t) => t.style.display !== 'none' && !t.hidden);
+    if (primeiro) abrirBloco(primeiro.dataset.bloco);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) { fecharMenu(); return; }
+    if (e.key === 'Escape' && lateral.dataset.vista === 'bloco' && !document.querySelector('dialog[open]')) voltarParaGrade();
+  });
+
+  // Menu "⋯"
+  const menu = $('menu');
+  const fecharMenu = () => { menu.hidden = true; $('menu-botao').setAttribute('aria-expanded', 'false'); };
+  $('menu-botao').addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.hidden = !menu.hidden;
+    $('menu-botao').setAttribute('aria-expanded', String(!menu.hidden));
+  });
+  menu.addEventListener('click', fecharMenu);
+  document.addEventListener('click', (e) => { if (!menu.hidden && !menu.contains(e.target)) fecharMenu(); });
+
+  // Cartão "Publicação" da aba Proposta
+  function atualizarCartaoPublicacao() {
+    const temLink = online && S.idPublicado;
+    $('publicacao-link').hidden = !temLink;
+    if (temLink) $('publicacao-url').value = linkDe(S.idPublicado);
+    $('publicacao-texto').textContent = !online ? 'A publicação funciona no site hospedado (editor.php), com login.'
+      : !S.idPublicado ? 'Publique para gerar o link do cliente.'
+        : pendente ? 'Há alterações ainda não publicadas. Publique de novo para atualizar o mesmo link.' : 'Publicada. Este é o link do cliente:';
+  }
+
+  $('exportar').addEventListener('click', () => {
+    const antigo = document.title;
+    document.title = `Proposta MFL Sales - ${S.cliente || 'Cliente'}`;
+    iframe.contentWindow?.postMessage({ tipo: 'proposta:imprimir' }, location.origin);
+    setTimeout(() => { document.title = antigo; }, 500);
+  });
+  {
     let dentroDeQuadro = false;
     try { dentroDeQuadro = window.self !== window.top; } catch (e) { dentroDeQuadro = true; }
     if (dentroDeQuadro) $('nota-pdf').textContent = 'Para exportar o PDF, abra o editor fora da prévia (no site publicado) e clique em Exportar PDF. Aqui a impressão é bloqueada.';
@@ -309,11 +439,18 @@
     } catch (err) { alert(err.message); }
   });
 
-  let mostrandoCapa = false;
-  $('acao-capa').addEventListener('click', (e) => {
-    mostrandoCapa = !mostrandoCapa;
-    e.currentTarget.textContent = mostrandoCapa ? 'Ver proposta' : 'Ver capa';
+  function mostrarCapa(mostrar) {
+    mostrandoCapa = mostrar;
+    $('acao-capa').textContent = mostrandoCapa ? 'Ver proposta' : 'Ver capa';
     iframe.contentWindow?.postMessage({ tipo: 'proposta:capa', mostrar: mostrandoCapa }, location.origin);
+  }
+  $('acao-capa').addEventListener('click', () => mostrarCapa(!mostrandoCapa));
+
+  // Clique numa seção da prévia abre o bloco correspondente no painel
+  window.addEventListener('message', (e) => {
+    if (e.origin !== location.origin || e.data?.tipo !== 'editor:abrir-bloco') return;
+    const bloco = BLOCO_DA_SECAO[e.data.secao];
+    if (bloco) abrirBloco(bloco, { rolarPrevia: false });
   });
 
   $('acao-aba').addEventListener('click', () => {
@@ -356,7 +493,7 @@
     $('usuario').hidden = false;
     $('usuario-nome').textContent = u.nome || u.email;
     $('acao-abrir').hidden = true;
-    $('acao-baixar').classList.remove('primario');
+    $('acao-sair').hidden = false;
     atualizarStatus();
   }
 
@@ -381,6 +518,7 @@
     $('dialogo-publicado').showModal();
   }
 
+  $('publicacao-copiar').addEventListener('click', (e) => copiar($('publicacao-url').value, e.currentTarget));
   $('publicado-copiar').addEventListener('click', (e) => copiar($('publicado-link').value, e.currentTarget));
 
   $('acao-publicar').addEventListener('click', async (e) => {

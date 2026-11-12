@@ -32,7 +32,12 @@ Estrutura de site: **Capa** (layout do Figma) → **Abertura** (layout do Figma 
 
 ## Como o comercial cria uma proposta
 
-1. Abra `editor.html` (o gerador). O painel à esquerda tem os grupos 1 a 9: cliente, modelo, público, escopo, CRM, investimento, condições, vídeo e responsável. A caixa amarela **Falta preencher** mostra o que ainda falta.
+1. Abra o editor (`editor.php` no site, ou `editor.html` local). O painel lateral segue o estilo do Elementor:
+   - **Blocos:** grade de blocos (Essenciais, Conteúdo, Avançado), cada um com selo verde (completo) ou laranja (falta). Clique num bloco para abrir as opções dele e use ← para voltar. A busca acha blocos e campos (ex.: "verba").
+   - **Proposta:** checklist, link de publicação e conta.
+   - **Mapa de calor:** próxima etapa.
+
+   Ao abrir um bloco, a prévia rola até a seção. Clicar numa seção da prévia abre o bloco dela.
 2. Confira com **Ver capa** e **Celular**.
 3. **Exportar PDF** abre a impressão da proposta (Salvar como PDF, A4, margens Nenhuma, gráficos de plano de fundo ligados).
 4. **Baixar .json** e coloque o arquivo em `propostas/`. Envie o link: `https://SEU-DOMINIO/index.html?p=nome-do-arquivo`

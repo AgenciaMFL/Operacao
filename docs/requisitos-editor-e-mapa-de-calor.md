@@ -100,3 +100,8 @@ Ordenação por mais recentes, busca por cliente e filtro por status.
 4. Novo editor estilo Elementor.
 
 (A ordem pode inverter: o editor novo não depende do mapa de calor.)
+
+## Decisões (12/11/2026)
+- Começar pelo **editor novo** (estilo Elementor).
+- Mapa de calor: fazer **tudo**, inclusive relatório, mapa de cliques e rolagem e **gravações das visitas**.
+- **Aviso por e-mail quando o cliente abrir a proposta:** sim, para felipepessoa@agenciamfl.com.br. Via `mail()` do PHP da Hostinger, ou SMTP da conta de e-mail, se o `mail()` cair no spam.
