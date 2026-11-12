@@ -207,16 +207,14 @@
 
         <!-- aba Mapa de calor -->
         <div class="painel-aba-lateral" data-aba="mapa" hidden>
-          <section class="cartao-lateral em-breve">
+          <section class="cartao-lateral">
             <h3>Mapa de calor</h3>
-            <p class="hint">Próxima etapa. Aqui vão aparecer todas as propostas enviadas, com:</p>
-            <ul>
-              <li>se o cliente abriu, quantas vezes e quando</li>
-              <li>tempo de leitura, rolagem e seções vistas</li>
-              <li>mapa de calor de cliques e de rolagem</li>
-              <li>gravações das visitas</li>
-              <li>aviso por e-mail quando o cliente abrir</li>
-            </ul>
+            <p class="hint">Veja quem abriu cada proposta, quanto tempo leu, onde clicou, até onde rolou e as gravações das visitas.</p>
+            <a class="btn btn-link" id="abrir-mapa" href="mapa.php" target="_blank" rel="noopener">Abrir tela do Mapa de calor</a>
+          </section>
+          <section class="cartao-lateral" id="mapa-resumo" hidden>
+            <h3>Últimas aberturas</h3>
+            <div id="mapa-resumo-lista" class="mapa-resumo-lista"></div>
           </section>
         </div>
       </div>

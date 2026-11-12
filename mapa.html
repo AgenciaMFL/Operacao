@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mapa de calor · Propostas MFL Sales</title>
+  <link rel="icon" href="assets/img/mfl-sales-icone.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/rrweb-player.min.css">
+  <link rel="stylesheet" href="assets/css/mapa.css">
+</head>
+<body>
+  <div class="tela">
+    <!-- lista de propostas enviadas -->
+    <aside class="lista">
+      <header class="lista-topo">
+        <img src="assets/img/mfl-sales-icone-branco.svg" alt="" class="lista-logo">
+        <div>
+          <strong>Mapa de calor</strong>
+          <span>Propostas enviadas</span>
+        </div>
+        <a href="editor.php" class="voltar-editor" id="voltar-editor">Editor</a>
+      </header>
+      <label class="busca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" id="busca" placeholder="Buscar cliente…" aria-label="Buscar cliente"></label>
+      <div class="filtros" role="group" aria-label="Filtrar por status">
+        <button type="button" data-filtro="" class="ativo">Todas</button>
+        <button type="button" data-filtro="engajada">Engajadas</button>
+        <button type="button" data-filtro="aberta">Abertas</button>
+        <button type="button" data-filtro="nao-aberta">Não abertas</button>
+      </div>
+      <div class="lista-itens" id="lista"><p class="vazio">Carregando…</p></div>
+    </aside>
+
+    <!-- detalhe da proposta -->
+    <main class="detalhe" id="detalhe">
+      <div class="aviso-demo" id="aviso-demo" hidden>Dados de exemplo: no site hospedado esta tela mostra as visitas reais das propostas publicadas.</div>
+
+      <div class="vazio-detalhe" id="sem-selecao">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+        <h2>Escolha uma proposta</h2>
+        <p>Veja quem abriu, quanto tempo leu, o mapa de calor e as gravações das visitas.</p>
+      </div>
+
+      <div id="conteudo" hidden>
+        <header class="det-topo">
+          <div>
+            <span class="status-chip" id="det-status"></span>
+            <h1 id="det-cliente">Cliente</h1>
+            <p id="det-info"></p>
+          </div>
+          <div class="det-link">
+            <input type="text" id="det-url" readonly aria-label="Link da proposta">
+            <button type="button" id="det-copiar">Copiar</button>
+            <a id="det-abrir" target="_blank" rel="noopener">Abrir</a>
+          </div>
+        </header>
+
+        <section class="kpis" id="kpis"></section>
+
+        <nav class="abas" role="tablist" aria-label="Acompanhamento">
+          <button type="button" role="tab" data-aba="relatorio" aria-selected="true">Relatório</button>
+          <button type="button" role="tab" data-aba="calor" aria-selected="false">Mapa de calor</button>
+          <button type="button" role="tab" data-aba="gravacoes" aria-selected="false">Gravações</button>
+        </nav>
+
+        <!-- Relatório -->
+        <section class="aba-painel" data-aba="relatorio">
+          <div class="grade-relatorio">
+            <article class="cartao">
+              <h3>Atenção por seção</h3>
+              <p class="sub">Quantas visitas passaram por cada parte da proposta e o tempo médio em cada uma.</p>
+              <div id="secoes" class="secoes"></div>
+            </article>
+            <article class="cartao">
+              <h3>Ações do cliente</h3>
+              <p class="sub">O que o cliente clicou durante as visitas.</p>
+              <ul id="acoes" class="acoes"></ul>
+            </article>
+          </div>
+          <article class="cartao">
+            <h3>Visitas</h3>
+            <div class="tabela-rolagem">
+              <table class="tabela">
+                <thead><tr><th>Quando</th><th>Aparelho</th><th>Leitura</th><th>Rolagem</th><th>Mais tempo em</th><th>Origem</th><th></th></tr></thead>
+                <tbody id="visitas"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- Mapa de calor -->
+        <section class="aba-painel" data-aba="calor" hidden>
+          <div class="calor-barra">
+            <div class="segmentado" role="group" aria-label="Tipo de mapa">
+              <button type="button" data-tipo="cliques" class="ativo">Cliques</button>
+              <button type="button" data-tipo="rolagem">Rolagem e atenção</button>
+            </div>
+            <div class="segmentado" role="group" aria-label="Aparelho">
+              <button type="button" data-aparelho="computador" class="ativo">Computador</button>
+              <button type="button" data-aparelho="celular">Celular</button>
+            </div>
+            <div class="legenda" id="legenda"><span>Pouco</span><i></i><span>Muito</span></div>
+            <span class="calor-info" id="calor-info"></span>
+          </div>
+          <div class="palco" id="palco">
+            <div class="palco-caixa" id="palco-caixa">
+              <iframe id="calor-frame" title="Proposta com o mapa de calor"></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gravações -->
+        <section class="aba-painel" data-aba="gravacoes" hidden>
+          <div class="grade-gravacoes">
+            <div class="cartao lista-gravacoes">
+              <h3>Visitas gravadas</h3>
+              <div id="gravacoes-lista"></div>
+            </div>
+            <div class="cartao player-caixa">
+              <div id="player" class="player"><p class="vazio">Escolha uma visita para assistir.</p></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/vendor/rrweb-player.min.js" defer></script>
+  <script src="assets/js/mapa.js" defer></script>
+</body>
+</html>

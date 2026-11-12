@@ -1,0 +1,2 @@
+rrweb 2.2.2 e rrweb-player 2.2.2 (licença MIT, https://github.com/rrweb-io/rrweb).
+Usados para gravar e reproduzir as visitas das propostas (tela de Mapa de calor).

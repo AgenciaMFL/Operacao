@@ -1280,3 +1280,4 @@ a.video-link:hover { text-decoration: underline; }
   .secao-banda { padding: 36px 0; }
   .cartao, .comp-coluna, .plano, .total, .fluxo-etapa, .b-citacao { break-inside: avoid; }
 }
+.rodape-privacidade { margin-top: 4px; font-size: .74rem; opacity: .75; }

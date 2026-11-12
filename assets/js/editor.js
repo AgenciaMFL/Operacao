@@ -341,7 +341,10 @@
     $('busca-vazia').hidden = algum;
   }
 
-  document.querySelectorAll('.aba-lateral').forEach((b) => b.addEventListener('click', () => trocarAbaLateral(b.dataset.aba)));
+  document.querySelectorAll('.aba-lateral').forEach((b) => b.addEventListener('click', () => {
+    trocarAbaLateral(b.dataset.aba);
+    if (b.dataset.aba === 'mapa' && online) carregarResumoMapa();
+  }));
   document.querySelectorAll('.tile').forEach((t) => t.addEventListener('click', () => abrirBloco(t.dataset.bloco)));
   $('voltar').addEventListener('click', voltarParaGrade);
   $('busca').addEventListener('input', filtrarBlocos);
@@ -486,8 +489,25 @@
     return json;
   }
 
+  // Aba "Mapa de calor": resumo das últimas aberturas (a tela completa é o mapa.php)
+  async function carregarResumoMapa() {
+    try {
+      const { propostas } = await api('acompanhamento.php');
+      const abertas = propostas.filter((p) => p.aberturas).slice(0, 5);
+      $('mapa-resumo').hidden = !abertas.length;
+      $('mapa-resumo-lista').replaceChildren(...abertas.map((p) => {
+        const a = Object.assign(document.createElement('a'), { href: `mapa.php?id=${p.id}`, target: '_blank', rel: 'noopener' });
+        const nome = document.createElement('strong');
+        nome.append(Object.assign(document.createElement('span'), { className: `st ${p.status}` }), p.cliente || '(sem nome)');
+        a.append(nome, Object.assign(document.createElement('small'), { textContent: `${p.aberturas} ${p.aberturas === 1 ? 'abertura' : 'aberturas'} · última ${new Date(p.ultimaAbertura * 1000).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}` }));
+        return a;
+      }));
+    } catch (e) { /* sem dados ainda */ }
+  }
+
   function ativarModoOnline(u) {
     online = true;
+    carregarResumoMapa();
     $('acao-publicar').hidden = false;
     $('acao-lista').hidden = false;
     $('usuario').hidden = false;
@@ -618,6 +638,8 @@
       if (sessao.logado) ativarModoOnline(sessao);
       else location.href = 'editor.php';
     } catch (e) {
+      $('abrir-mapa').href = 'mapa.html';
+      $('abrir-mapa').target = '_self';
       // sem servidor (arquivos abertos localmente): só rascunho e .json.
       // No site hospedado isso é um problema: mostra o motivo em vez de esconder o Publicar em silêncio.
       if (window.MFL_SERVIDOR) {

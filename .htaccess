@@ -6,11 +6,12 @@ DirectoryIndex index.html
   RewriteEngine On
   # O editor só abre pelo editor.php, que pede login
   RewriteRule ^editor\.html$ editor.php [L,QSA]
+  RewriteRule ^mapa\.html$ mapa.php [L,QSA]
   # Pastas e arquivos internos não são acessíveis pelo navegador
   RewriteRule ^dados(/|$) - [F,L]
 </IfModule>
 
-<FilesMatch "^(config\.php|config\.exemplo\.php|_base\.php|criar-usuario\.php|README\.md|\.gitignore)$">
+<FilesMatch "^(config\.php|config\.exemplo\.php|_base\.php|_porta\.php|criar-usuario\.php|README\.md|\.gitignore)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>

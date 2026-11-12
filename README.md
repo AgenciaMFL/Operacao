@@ -65,6 +65,17 @@ dados/              → propostas publicadas (criada sozinha, bloqueada para o n
 
 **Fluxo do comercial:** entra no `editor.php` com e-mail e senha, edita a proposta, clica em **Publicar** e recebe o link (`?p=` + código de 10 letras) com botões de copiar e enviar no WhatsApp. Publicar de novo atualiza o mesmo link. **Propostas publicadas** lista tudo o que já foi publicado, com copiar link, abrir, editar e duplicar.
 
+**Mapa de calor (`mapa.php`, com login):**
+- lista de todas as propostas publicadas, com status: não aberta, aberta ou muito engajada;
+- em cada uma:
+  - **Relatório:** aberturas, pessoas, tempo de leitura, rolagem, atenção por seção, ações (Aprovar, WhatsApp, PDF, vídeo, abas) e lista de visitas;
+  - **Mapa de calor:** cliques ou rolagem e atenção, desenhado por cima da própria proposta, no computador ou no celular;
+  - **Gravações:** replay das visitas, com rrweb.
+
+O rastreamento roda só nas propostas publicadas (`assets/js/rastreio.js` → `api/evento.php`) e não conta quem está logado no editor. Os dados ficam em `dados/visitas` e `dados/gravacoes`.
+
+A cada nova abertura sai um e-mail para o endereço configurado em `avisos` no `api/config.php`, no máximo 1 a cada 20 minutos por proposta. O remetente precisa ser uma caixa de e-mail do domínio, criada na Hostinger.
+
 **PDF:** botão Exportar PDF no editor e Salvar em PDF no rodapé da proposta (impressão do navegador, gratuita). Melhor resultado no Chrome do computador.
 
 **Cadastrar alguém ou trocar senha:** gere a linha com `php api/criar-usuario.php email@agenciamfl.com.br "senha"` e cole em `api/config.php` (modelo em `api/config.exemplo.php`).

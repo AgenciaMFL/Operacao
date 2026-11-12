@@ -17,6 +17,8 @@
   const PREVIEW_KEY = 'mfl-proposta-rascunho';
   const params = new URLSearchParams(location.search);
   const isPreview = params.has('preview');
+  const modoMapa = params.has('mapa');   // exibida dentro da tela de Mapa de calor
+  let publicadaPelaApi = false;
   const slug = (params.get('p') || 'padrao').replace(/[^a-z0-9_-]/gi, '');
 
   // Identidade fixa da agência
@@ -928,7 +930,8 @@
           el('a', { href: AGENCIA.site, target: '_blank', rel: 'noopener', text: 'www.agenciamfl.com.br' }),
           el('a', { href: 'https://instagram.com/agenciamfl', target: '_blank', rel: 'noopener', text: AGENCIA.instagram }),
           el('button', { type: 'button', class: 'rodape-pdf', onclick: imprimir, text: 'Salvar em PDF' })),
-        el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${AGENCIA.nome}. Proposta confidencial preparada exclusivamente para ${nomeCliente() || 'o cliente'}.` })));
+        el('p', { class: 'rodape-legal', text: `© ${new Date().getFullYear()} ${AGENCIA.nome}. Proposta confidencial preparada exclusivamente para ${nomeCliente() || 'o cliente'}.` }),
+        el('p', { class: 'rodape-legal rodape-privacidade', text: 'Esta página registra de forma anônima como ela é navegada (tempo de leitura, rolagem e cliques) para melhorarmos o atendimento.' })));
 
     ativarRevelar();
   }
@@ -1028,7 +1031,7 @@
   }
 
   async function carregar() {
-    if (isPreview) {
+    if (isPreview && !modoMapa) {
       try {
         const rascunho = localStorage.getItem(PREVIEW_KEY);
         if (rascunho) return JSON.parse(rascunho);
@@ -1038,7 +1041,11 @@
     if (/^[a-z0-9]{10}$/.test(slug)) {
       try {
         const api = await fetch(`api/proposta.php?id=${slug}`, { cache: 'no-store' });
-        if (api.ok && (api.headers.get('content-type') || '').includes('application/json')) return await api.json();
+        if (api.ok && (api.headers.get('content-type') || '').includes('application/json')) {
+          const dados = await api.json();
+          publicadaPelaApi = true;
+          return dados;
+        }
       } catch (e) { /* sem servidor: tenta o arquivo */ }
     }
     const resp = await fetch(`propostas/${slug}.json`, { cache: 'no-store' });
@@ -1076,7 +1083,7 @@
     alvo.classList.add('destaque-editor');
     setTimeout(() => alvo.classList.remove('destaque-editor'), 1800);
   }
-  if (isPreview && window.parent !== window) {
+  if (isPreview && !modoMapa && window.parent !== window) {
     document.documentElement.classList.add('modo-editor');
     document.addEventListener('click', (e) => {
       if (e.target.closest('a, button, summary, input, dialog')) return;
@@ -1094,7 +1101,18 @@
 
 
   Promise.all([carregar(), carregarCatalogo()])
-    .then(([d]) => { render(d); aoRolar(); })
+    .then(([d]) => {
+      render(d);
+      aoRolar();
+      // acompanhamento de visitas (mapa de calor): só em proposta publicada e fora das prévias
+      if (publicadaPelaApi && !isPreview) {
+        window.MFL_RASTREIO = { id: slug, teste: params.has('rastreio-teste') };
+        const s = document.createElement('script');
+        s.src = 'assets/js/rastreio.js?v=20261112';
+        s.defer = true;
+        document.body.append(s);
+      }
+    })
     .catch((err) => {
       console.error(err);
       mostrarErro(location.protocol === 'file:'
