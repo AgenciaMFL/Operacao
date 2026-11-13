@@ -25,7 +25,7 @@
   const AGENCIA = {
     nome: 'MFL Sales',
     slogan: 'Estratégia · Performance · Resultados',
-    logo: 'assets/img/mfl-sales-logo.png',
+    logo: 'assets/img/mfl-sales-logo.svg',
     site: 'https://www.agenciamfl.com.br',
     instagram: '@agenciamfl'
   };
@@ -689,7 +689,7 @@
       videoCapa = el('video', {
         class: 'capa-video', autoplay: true, muted: true, loop: true, playsinline: true,
         preload: 'auto', poster: poster || null, 'aria-hidden': 'true', 'data-src': src
-      }, el('source', { src, type: 'video/mp4' }), webm && el('source', { src: webm, type: 'video/webm' }));
+      }, webm && el('source', { src: webm, type: 'video/webm' }), el('source', { src, type: 'video/mp4' }));
       videoCapa.muted = true;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) videoCapa.removeAttribute('autoplay');
     }
