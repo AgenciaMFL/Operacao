@@ -176,7 +176,7 @@ function visitasDaProposta(string $id): array {
 // Junta os envios de uma visita num resumo (duração, rolagem, tempo por seção, cliques e ações)
 function resumoVisita(string $id, string $visita, bool $comCliques = false): array {
   $r = ['visita' => $visita, 'visitante' => '', 'dispositivo' => '', 'origem' => '', 'inicio' => null, 'fim' => null,
-    'ativo' => 0, 'rolagem' => 0, 'tempo' => [], 'acoes' => [], 'cliques' => 0, 'gravacao' => false];
+    'ativo' => 0, 'rolagem' => 0, 'tempo' => [], 'acoes' => [], 'eventos' => [], 'cliques' => 0, 'gravacao' => false];
   $pontos = [];
   foreach (lerLinhas(arquivoVisita($id, $visita)) as $l) {
     $em = (int)($l['em'] ?? 0);
@@ -188,7 +188,12 @@ function resumoVisita(string $id, string $visita, bool $comCliques = false): arr
     $r['ativo'] += (int)($l['ativo'] ?? 0);
     $r['rolagem'] = max($r['rolagem'], (float)($l['rolagem'] ?? 0));
     foreach (($l['tempo'] ?? []) as $sec => $ms) $r['tempo'][$sec] = ($r['tempo'][$sec] ?? 0) + (int)$ms;
-    foreach (($l['acoes'] ?? []) as $a) $r['acoes'][] = $a['a'];
+    foreach (($l['acoes'] ?? []) as $a) {
+      $r['acoes'][] = $a['a'];
+      // horário da ação (o navegador manda em ms; se faltar, usa a hora do envio)
+      $t = (int)($a['t'] ?? 0) > 0 ? intdiv((int)$a['t'], 1000) : $em;
+      $r['eventos'][] = ['a' => $a['a'], 't' => abs($t - $em) < 86400 ? $t : $em];
+    }
     foreach (($l['cliques'] ?? []) as $c) {
       $r['cliques']++;
       if ($comCliques) $pontos[] = $c + ['d' => $r['dispositivo']];
