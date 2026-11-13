@@ -988,6 +988,9 @@ a.video-link:hover { text-decoration: underline; }
 .player::backdrop { background: rgba(4, 9, 22, .82); backdrop-filter: blur(4px); }
 .player-moldura { aspect-ratio: 16 / 9; max-width: 100%; background: #000; }
 .player-moldura iframe, .player-moldura video { display: block; width: 100%; height: 100%; border: 0; }
+/* vídeo vertical (Shorts ou arquivo em pé): moldura 9:16 que cabe na altura da tela */
+.player-moldura.vertical { aspect-ratio: 9 / 16; height: min(78vh, 760px); width: auto; max-width: calc(100vw - 32px); margin-inline: auto; }
+.player:has(.player-moldura.vertical) { width: fit-content; max-width: calc(100vw - 32px); }
 .player-legenda { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 18px; font-size: .92rem; color: #A9B8D6; }
 .player-legenda strong { color: #fff; }
 .player-fechar { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(196, 213, 245, .25); background: transparent; color: #fff; font: 700 .82rem var(--fonte); cursor: pointer; }

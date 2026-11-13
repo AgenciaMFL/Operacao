@@ -622,7 +622,8 @@
     const u = String(url || '').trim();
     if (!u) return null;
     const yt = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([\w-]{11})/);
-    if (yt) return { tipo: 'iframe', src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0`, capa: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` };
+    // menos elementos do YouTube: sem vídeos relacionados, sem anotações, sem barra de título
+    if (yt) return { tipo: 'iframe', vertical: /shorts\//.test(u), src: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&fs=1`, capa: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` };
     const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
     if (vm) return { tipo: 'iframe', src: `https://player.vimeo.com/video/${vm[1]}?autoplay=1` };
     if (/^https?:\/\//i.test(u) && !/\.(mp4|webm|mov)(\?|$)/i.test(u)) return { tipo: 'link', src: u };
@@ -642,9 +643,13 @@
     }
     const midia = fonte.tipo === 'iframe'
       ? el('iframe', { src: fonte.src, title: 'Depoimento em vídeo', allow: 'autoplay; fullscreen; picture-in-picture', allowfullscreen: true })
-      : el('video', { src: fonte.src, controls: true, autoplay: true, playsinline: true });
+      : el('video', { src: fonte.src, controls: true, autoplay: true, playsinline: true, controlslist: 'nodownload', disablepictureinpicture: true });
+    const moldura = el('div', { class: `player-moldura${fonte.vertical ? ' vertical' : ''}` }, midia);
+    // arquivo de vídeo: a moldura assume o formato do próprio vídeo (vertical ou horizontal)
+    if (fonte.tipo === 'arquivo') midia.addEventListener('loadedmetadata', () => moldura.classList.toggle('vertical', midia.videoHeight > midia.videoWidth));
+    dialogo.classList.toggle('player-vertical', !!fonte.vertical);
     dialogo.replaceChildren(
-      el('div', { class: 'player-moldura' }, midia),
+      moldura,
       el('div', { class: 'player-legenda' },
         el('span', {}, el('strong', { text: dep.pessoa || dep.cliente || '' }), [dep.cargo, dep.cliente].filter(Boolean).length && dep.pessoa ? ` · ${[dep.cargo, dep.cliente].filter(Boolean).join(', ')}` : ''),
         el('button', { type: 'button', class: 'player-fechar', onclick: () => dialogo.close(), text: 'Fechar ✕' })));
