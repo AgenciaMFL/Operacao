@@ -140,6 +140,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
 .sbbf .live__dot{width:9px;height:9px;border-radius:50%;background:var(--orange-2);animation:sb-blink 1.4s ease-in-out infinite}
 @keyframes sb-blink{50%{opacity:.25}}
 .sbbf .form-slot{position:relative;width:100%}
+.sbbf .form-dica{margin-top:10px;font-size:13px;color:rgba(255,255,255,.75);text-align:center}
 .sbbf .form-slot iframe{display:block;width:100%;min-height:434px;border:none;border-radius:16px}
 
 /* FAQ */
@@ -346,7 +347,6 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
           <!-- Formulário do GHL da Pátio Alcântara (a área escolhida na hero já vem marcada) -->
           <div class="form-slot">
             <iframe
-              src="https://api.leadconnectorhq.com/widget/form/6YYXRBcLpkQnT8VuiqGP"
               style="width:100%;height:434px;border:none;border-radius:16px"
               id="inline-6YYXRBcLpkQnT8VuiqGP"
               data-layout="{'id':'INLINE'}"
@@ -365,6 +365,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
               title="Formulario Patio Alcantara">
             </iframe>
             <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+            <p class="form-dica" id="formDica" hidden>Confira a área no campo "Selecione seu procedimento".</p>
           </div>
         </div>
       </div>
@@ -415,6 +416,16 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
   var iframe = document.getElementById('inline-6YYXRBcLpkQnT8VuiqGP');
   var radios = Array.prototype.slice.call(raiz.querySelectorAll('.picker [data-area]'));
   var areaAtual = null;
+  var formCarregado = false;
+  var dica = document.getElementById('formDica');
+
+  /* O formulário carrega UMA vez, já com a área escolhida. Recarregar depois faz o GHL
+     mostrar "Envio em andamento" (ele guarda o campo marcado como envio incompleto). */
+  function carregarForm() {
+    if (formCarregado || !iframe) return;
+    formCarregado = true;
+    iframe.src = urlDoForm(areaAtual || 'Axila');
+  }
 
   function urlDoForm(area) {
     // repassa as UTMs/parâmetros da página para o formulário (origem do lead)
@@ -434,7 +445,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
     raiz.querySelectorAll('[data-area-text]').forEach(function (el) {
       el.textContent = el.dataset.areaText === 'lower' ? area.toLowerCase() : area;
     });
-    if (iframe) iframe.src = urlDoForm(area);
+    if (formCarregado && dica) dica.hidden = false; // já carregou: a pessoa troca no próprio formulário
     if (avisar) {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'area_escolhida', area: area, franquiaId: 10 });
@@ -452,6 +463,15 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
     });
   });
   setArea('Axila', false);
+
+  // carrega o formulário quando a pessoa clica num botão de agendar ou chega perto da seção
+  raiz.querySelectorAll('a[href="#agendar"]').forEach(function (a) { a.addEventListener('click', carregarForm); });
+  var secaoForm = document.getElementById('agendar');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es, obs) {
+      if (es.some(function (e) { return e.isIntersecting; })) { carregarForm(); obs.disconnect(); }
+    }, { rootMargin: '0px 0px 250px 0px' }).observe(secaoForm);
+  } else { carregarForm(); }
 
   /* ---------- Faixas: repete o texto até cobrir a tela inteira ----------
      (sem isso, em telas largas sobrava um buraco vazio no fim da faixa) */
