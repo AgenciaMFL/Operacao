@@ -248,15 +248,8 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
             <span class="txt">sessões<b>grátis</b></span>
           </div>
 
-          <p class="hero__sub" data-entra style="--atraso:.45s">Diga tchau à lâmina e à cera. Escolha a área e as <b>3&nbsp;primeiras sessões ficam por nossa&nbsp;conta.</b></p>
+          <p class="hero__sub" data-entra style="--atraso:.45s">Diga tchau à lâmina e à cera. Você escolhe a área no formulário e as <b>3&nbsp;primeiras sessões ficam por nossa&nbsp;conta.</b></p>
 
-          <div data-entra style="--atraso:.55s">
-            <span class="picker__label" id="picker-label">Escolha sua área:</span>
-            <div class="picker" role="radiogroup" aria-labelledby="picker-label">
-              <button type="button" role="radio" aria-checked="true" data-area="Axila">Axila</button>
-              <button type="button" role="radio" aria-checked="false" data-area="Buço" tabindex="-1">Buço</button>
-            </div>
-          </div>
 
           <div class="hero__acoes" data-entra style="--atraso:.65s">
             <a class="btn btn--primary" href="#agendar">Quero minhas 3 sessões
@@ -335,8 +328,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
           <div class="booking__copy">
             <h2 class="h2 h2--light">Garanta suas 3 sessões</h2>
             <p class="booking__lead">Preencha seus dados e, em seguida, escolha o dia e o horário da sua avaliação.</p>
-            <p class="chosen">Área escolhida: <b data-area-text>Axila</b></p>
-            <ul class="checks">
+                        <ul class="checks">
               <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>3 sessões de depilação a laser grátis</li>
               <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Buço ou axila, você escolhe</li>
               <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Tecnologia 4D exclusiva Sbelt</li>
@@ -365,7 +357,6 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
               title="Formulario Patio Alcantara">
             </iframe>
             <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-            <p class="form-dica" id="formDica" hidden>Confira a área no campo "Selecione seu procedimento".</p>
           </div>
         </div>
       </div>
@@ -398,7 +389,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
   </footer>
 
   <a class="sticky-cta" href="#agendar">
-    <span><b>3 sessões grátis</b> de <span data-area-text="lower">axila</span></span>
+    <span><b>3 sessões grátis</b> de buço ou axila</span>
     <span class="sticky-cta__btn">Agendar</span>
   </a>
 </div>
@@ -408,69 +399,21 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
   var raiz = document.getElementById('sbbf');
   requestAnimationFrame(function () { raiz.classList.add('carregou'); });
 
-  /* ---------- Área escolhida na hero -> já marcada no formulário ----------
-     O formulário do GHL aceita o valor pelo link: ?indivíduo_lista_suspensa_2b4a=Axila
-     (é a "chave de consulta" do campo "Selecione seu procedimento"). */
-  var CHAVE_CAMPO = 'indivíduo_lista_suspensa_2b4a';
+  /* ---------- Formulário: carrega quando a pessoa chega perto ou clica em agendar ----------
+     (repassa as UTMs da página para o formulário) */
   var FORM_URL = 'https://api.leadconnectorhq.com/widget/form/6YYXRBcLpkQnT8VuiqGP';
   var iframe = document.getElementById('inline-6YYXRBcLpkQnT8VuiqGP');
-  var radios = Array.prototype.slice.call(raiz.querySelectorAll('.picker [data-area]'));
-  var areaAtual = null;
   var formCarregado = false;
-  var dica = document.getElementById('formDica');
-
-  /* O formulário carrega UMA vez, já com a área escolhida. Recarregar depois faz o GHL
-     mostrar "Envio em andamento" (ele guarda o campo marcado como envio incompleto). */
   function carregarForm() {
     if (formCarregado || !iframe) return;
     formCarregado = true;
-    iframe.src = urlDoForm(areaAtual || 'Axila');
+    iframe.src = FORM_URL + (location.search || '');
   }
-
-  function urlDoForm(area) {
-    // repassa as UTMs/parâmetros da página para o formulário (origem do lead)
-    var params = new URLSearchParams(location.search);
-    params.set(CHAVE_CAMPO, area);
-    return FORM_URL + '?' + params.toString();
-  }
-
-  function setArea(area, avisar) {
-    if (area === areaAtual) return;
-    areaAtual = area;
-    radios.forEach(function (b) {
-      var on = b.dataset.area === area;
-      b.setAttribute('aria-checked', String(on));
-      b.tabIndex = on ? 0 : -1;
-    });
-    raiz.querySelectorAll('[data-area-text]').forEach(function (el) {
-      el.textContent = el.dataset.areaText === 'lower' ? area.toLowerCase() : area;
-    });
-    if (formCarregado && dica) dica.hidden = false; // já carregou: a pessoa troca no próprio formulário
-    if (avisar) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'area_escolhida', area: area, franquiaId: 10 });
-    }
-  }
-
-  radios.forEach(function (b, i) {
-    b.addEventListener('click', function () { setArea(b.dataset.area, true); });
-    b.addEventListener('keydown', function (e) {
-      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(e.key) < 0) return;
-      e.preventDefault();
-      var dir = (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 1;
-      var prox = radios[(i + dir + radios.length) % radios.length];
-      setArea(prox.dataset.area, true); prox.focus();
-    });
-  });
-  setArea('Axila', false);
-
-  // carrega o formulário quando a pessoa clica num botão de agendar ou chega perto da seção
   raiz.querySelectorAll('a[href="#agendar"]').forEach(function (a) { a.addEventListener('click', carregarForm); });
-  var secaoForm = document.getElementById('agendar');
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es, obs) {
       if (es.some(function (e) { return e.isIntersecting; })) { carregarForm(); obs.disconnect(); }
-    }, { rootMargin: '0px 0px 250px 0px' }).observe(secaoForm);
+    }, { rootMargin: '0px 0px 600px 0px' }).observe(document.getElementById('agendar'));
   } else { carregarForm(); }
 
   /* ---------- Faixas: repete o texto até cobrir a tela inteira ----------
