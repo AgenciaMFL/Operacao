@@ -439,3 +439,9 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **16/11/2026** — v6.2 (em andamento, **não entregue**): no `/ghl-lead`, se a pessoa já existia na base da Spa
   (lead já conhecido na unidade ou `telefoneJaEhCliente`), remove a tag `SBELT_TAG_LEAD_NOVO` ("lead novo" —
   **confirmar o nome exato** no GHL) do contato; senão mantém. Testes: 31 casos em `teste-integracao.php`.
+- **16/11/2026** — Landing **Black Friday da Pátio** (3 sessões grátis de buço ou axila): hero da Pátio mantida
+  com copy nova; layout novo sem a seção de escolher área; formulário GHL `6YYXRBcLpkQnT8VuiqGP`. A área escolhida
+  na hero vai marcada no formulário pelo link `?indivíduo_lista_suspensa_2b4a=Axila|Buço` (chave de consulta do
+  campo "Selecione seu procedimento", `contact.selecione_seu_procedimento`; testado no widget). Modelo em
+  `codigo/landing-patio-black-friday.html` (imagens como `__HERO__`/`__LOGO__`/`__ICONE__`, embutidas na entrega).
+  Tag de área no GHL: workflow "Form Submitted" com If/Else no campo (a criar no GHL).
