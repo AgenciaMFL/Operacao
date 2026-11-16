@@ -89,11 +89,14 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
 .sbbf .hero__foto{display:block;width:100%;height:auto}
 
 /* Faixas cruzadas */
-.sbbf .ribbons{position:relative;height:120px;overflow:hidden;background:linear-gradient(var(--hero) 50%,var(--cream) 50%)}
-.sbbf .ribbon{position:absolute;left:-5%;width:110%;overflow:hidden;white-space:nowrap;padding:13px 0;font-weight:800;font-size:16px;text-transform:uppercase}
-.sbbf .ribbon--dark{top:38px;background:var(--ink);color:#fff;transform:rotate(2.2deg)}
-.sbbf .ribbon--orange{top:36px;background:var(--orange);color:var(--ink);transform:rotate(-2.6deg);box-shadow:0 10px 24px -8px rgba(0,0,0,.35)}
+.sbbf .ribbons{position:relative;height:132px;overflow:hidden;background:linear-gradient(var(--hero) 50%,var(--cream) 50%)}
+.sbbf .ribbon{position:absolute;left:-10%;width:120%;overflow:hidden;white-space:nowrap;padding:13px 0;font-weight:800;font-size:16px;text-transform:uppercase}
+.sbbf .ribbon--dark{top:64px;background:var(--ink);color:#fff;transform:rotate(2.2deg)}
+.sbbf .ribbon--orange{top:22px;background:var(--orange);color:var(--ink);transform:rotate(-2.6deg);box-shadow:0 10px 24px -8px rgba(0,0,0,.35)}
 .sbbf .ribbon--orange img{filter:brightness(0) saturate(100%)}
+/* em telas largas a faixa é mais comprida: inclina menos para o cruzamento ficar igual */
+@media (min-width:1200px){.sbbf .ribbon--dark{transform:rotate(1.3deg)}.sbbf .ribbon--orange{transform:rotate(-1.5deg)}}
+@media (min-width:1700px){.sbbf .ribbon--dark{transform:rotate(.95deg)}.sbbf .ribbon--orange{transform:rotate(-1.1deg)}}
 
 /* Seções */
 .sbbf .section{padding:96px 0}
@@ -445,6 +448,26 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
     });
   });
   setArea('Axila', false);
+
+  /* ---------- Faixas: repete o texto até cobrir a tela inteira ----------
+     (sem isso, em telas largas sobrava um buraco vazio no fim da faixa) */
+  function encherFaixas() {
+    raiz.querySelectorAll('.marquee').forEach(function (m) {
+      var grupos = m.querySelectorAll('.marquee__group');
+      if (!grupos.length) return;
+      var g = grupos[0];
+      if (!g.dataset.base) g.dataset.base = g.innerHTML;
+      g.innerHTML = g.dataset.base;
+      var largura = Math.max(window.innerWidth, 1200) * 1.25;
+      var n = 0;
+      while (g.scrollWidth < largura && n < 20) { g.insertAdjacentHTML('beforeend', g.dataset.base); n++; }
+      for (var i = 1; i < grupos.length; i++) grupos[i].innerHTML = g.innerHTML;
+      // mesma velocidade em qualquer tamanho de tela (~70 px por segundo)
+      m.style.animationDuration = Math.round(g.scrollWidth / 70) + 's';
+    });
+  }
+  encherFaixas();
+  var tFaixa; window.addEventListener('resize', function () { clearTimeout(tFaixa); tFaixa = setTimeout(encherFaixas, 200); });
 
   /* ---------- Header com sombra ao rolar ---------- */
   var header = raiz.querySelector('.header');
