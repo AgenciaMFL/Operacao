@@ -4,6 +4,7 @@
  * A versão que roda está no WordPress (Code Snippets). Senha da Spa, tokens
  * pit- do GHL e chave do /debug foram trocados por COLE_AQUI_*.
  * Não colar este arquivo em produção sem preencher esses valores.
+ * v6.3 (16/11/2026): tag da área escolhida no formulário ("axila" ou "buço") no contato do GHL.
  * v6.2 (16/11/2026): tira a tag de lead novo no GHL de quem já existia na base da Spa (lead ou cliente).
  * v6.1 (11/11/2026): data do GHL em português ("quarta-feira, 11 de novembro de 2026 às 09:15").
  * v6 (10/11/2026): lead conferido na Spa antes de reaproveitar (cache por unidade) e log de envios no /debug.
@@ -381,6 +382,58 @@ function spa_ja_existia_na_base($acao, $leadId) {
     if (is_wp_error($resposta) || wp_remote_retrieve_response_code($resposta) >= 400) return false;
     $lead = json_decode(wp_remote_retrieve_body($resposta), true);
     return is_array($lead) && !empty($lead['telefoneJaEhCliente']);
+}
+
+// Campo "Selecione seu procedimento" do formulário (Axila / Buço) -> tag no contato do GHL.
+define('SBELT_CAMPO_PROCEDIMENTO_ID', '6g2o3T7C5P9nmSPkcFoK'); // id do campo personalizado no GHL da Pátio
+const SBELT_TAGS_PROCEDIMENTO = ['axila' => 'axila', 'buco' => 'buço'];
+
+/** Tira acento e deixa minúsculo ("Buço" -> "buco"). */
+function sbelt_sem_acento($texto) {
+    $texto = mb_strtolower(trim((string) $texto), 'UTF-8');
+    return strtr($texto, ['ç' => 'c', 'á' => 'a', 'à' => 'a', 'ã' => 'a', 'â' => 'a', 'é' => 'e', 'ê' => 'e', 'í' => 'i', 'ó' => 'o', 'õ' => 'o', 'ô' => 'o', 'ú' => 'u']);
+}
+
+/**
+ * Área escolhida no formulário. Procura no corpo do webhook (qualquer campo com
+ * "procedimento" no nome) e, se não vier, lê o campo personalizado do contato no GHL.
+ */
+function sbelt_area_do_formulario($dados, $contactId, $franquiaId) {
+    foreach ($dados as $chave => $valor) {
+        if (is_string($valor) && strpos(sbelt_sem_acento($chave), 'procedimento') !== false && $valor !== '') {
+            return $valor;
+        }
+    }
+    $unidade = spa_get_unidade($franquiaId);
+    if (empty($contactId) || !$unidade) return '';
+    $resposta = wp_remote_get('https://services.leadconnectorhq.com/contacts/' . rawurlencode($contactId), [
+        'headers' => ['Authorization' => 'Bearer ' . $unidade['ghl_api_token'], 'Version' => '2021-07-28', 'Accept' => 'application/json'],
+        'timeout' => 10,
+    ]);
+    if (is_wp_error($resposta) || wp_remote_retrieve_response_code($resposta) >= 400) return '';
+    $contato = json_decode(wp_remote_retrieve_body($resposta), true)['contact'] ?? [];
+    foreach ($contato['customFields'] ?? [] as $campo) {
+        if (($campo['id'] ?? '') === SBELT_CAMPO_PROCEDIMENTO_ID) {
+            $v = $campo['value'] ?? '';
+            return is_array($v) ? (string) reset($v) : (string) $v;
+        }
+    }
+    return '';
+}
+
+/** Coloca a tag "axila" ou "buço" no contato conforme a área escolhida no formulário. */
+function sbelt_marcar_area($dados, $contactId, $franquiaId) {
+    $area = sbelt_sem_acento(sbelt_area_do_formulario($dados, $contactId, $franquiaId));
+    $tag  = SBELT_TAGS_PROCEDIMENTO[$area] ?? null;
+    if (!$tag) return 'sem área';
+    $unidade = spa_get_unidade($franquiaId);
+    $resposta = wp_remote_post('https://services.leadconnectorhq.com/contacts/' . rawurlencode($contactId) . '/tags', [
+        'headers' => ['Authorization' => 'Bearer ' . $unidade['ghl_api_token'], 'Version' => '2021-07-28', 'Content-Type' => 'application/json', 'Accept' => 'application/json'],
+        'body'    => json_encode(['tags' => [$tag]]),
+        'timeout' => 15,
+    ]);
+    $status = is_wp_error($resposta) ? $resposta->get_error_message() : wp_remote_retrieve_response_code($resposta);
+    return $tag . ' (' . $status . ')';
 }
 
 function spa_registrar_envio($rota, $info) {
@@ -1040,8 +1093,10 @@ function leads_v1_ghl_lead_callback($request) {
     if ($jaExistia) {
         $tagRemovida = ghl_remover_tag(sanitize_text_field($dados['contact_id'] ?? ''), $franquiaId, SBELT_TAG_LEAD_NOVO);
     }
+    // tag da área escolhida no formulário (axila / buço)
+    $tagArea = sbelt_marcar_area($dados, sanitize_text_field($dados['contact_id'] ?? ''), $franquiaId);
     spa_registrar_envio('ghl-lead', ['franquiaId' => $franquiaId, 'contact_id' => $dados['contact_id'] ?? '', 'nome' => $nome, 'leadId' => $leadId, 'acao' => $acao,
-        'ja_existia' => $jaExistia, 'tag_lead_novo' => $jaExistia ? ('removida (' . ($tagRemovida['status'] ?? $tagRemovida['erro'] ?? '?') . ')') : 'mantida']);
+        'tag_area' => $tagArea, 'ja_existia' => $jaExistia, 'tag_lead_novo' => $jaExistia ? ('removida (' . ($tagRemovida['status'] ?? $tagRemovida['erro'] ?? '?') . ')') : 'mantida']);
 
     // guarda a relação telefone -> leadId pra usar depois, no agendamento
     if ($leadId) {

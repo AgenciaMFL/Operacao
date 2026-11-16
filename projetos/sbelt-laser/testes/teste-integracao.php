@@ -157,4 +157,27 @@ $FILA = [['code'=>201,'body'=>'{"id":951}','headers'=>[]], ['code'=>200,'body'=>
 leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
 ok('lead novo de verdade: mantém a tag', count($tagDel()) === 0 && ($O['spa_ultimos_envios'][0]['tag_lead_novo'] ?? '') === 'mantida');
 
+// 14. v6.3: tag da área do formulário
+$tagAdd = fn() => array_values(array_filter($GLOBALS['CHAMADAS'], fn($c) => str_ends_with($c[0], '/tags') && ($c[1]['method'] ?? 'POST') === 'POST' && !isset($c[1]['method'])));
+// a) área no corpo do webhook (campo do formulário)
+$T = ['spa_solutions_token' => str_repeat('t', 40)]; $O = []; $CHAMADAS = [];
+$x = $lead; $x['Selecione seu procedimento'] = 'Buço';
+$FILA = [['code'=>201,'body'=>'{"id":960}','headers'=>[]]];
+leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($x)));
+$a = $tagAdd();
+ok('área no webhook: tag "buço" no contato', count($a) === 1 && json_decode($a[0][1]['body'], true)['tags'] === ['buço'] && str_contains($a[0][0], '/contacts/C1/tags'));
+// b) área só no contato do GHL (campo personalizado)
+$T = ['spa_solutions_token' => str_repeat('t', 40)]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>201,'body'=>'{"id":961}','headers'=>[]], ['code'=>200,'body'=>'{"id":961}','headers'=>[]],
+         ['code'=>200,'body'=>'{"contact":{"customFields":[{"id":"6g2o3T7C5P9nmSPkcFoK","value":"Axila"}]}}','headers'=>[]]];
+leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+$a = $tagAdd();
+ok('área lida do contato: tag "axila"', count($a) === 1 && json_decode($a[0][1]['body'], true)['tags'] === ['axila']);
+ok('tag da área registrada no /debug', str_starts_with($O['spa_ultimos_envios'][0]['tag_area'] ?? '', 'axila'));
+// c) sem área: nenhuma tag
+$T = ['spa_solutions_token' => str_repeat('t', 40)]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>201,'body'=>'{"id":962}','headers'=>[]], ['code'=>200,'body'=>'{"id":962}','headers'=>[]], ['code'=>200,'body'=>'{"contact":{"customFields":[]}}','headers'=>[]]];
+leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+ok('sem área escolhida: não coloca tag', count($tagAdd()) === 0 && ($O['spa_ultimos_envios'][0]['tag_area'] ?? '') === 'sem área');
+
 exit(empty($falhou) ? 0 : 1);

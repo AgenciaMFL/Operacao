@@ -445,3 +445,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   campo "Selecione seu procedimento", `contact.selecione_seu_procedimento`; testado no widget). Modelo em
   `codigo/landing-patio-black-friday.html` (imagens como `__HERO__`/`__LOGO__`/`__ICONE__`, embutidas na entrega).
   Tag de área no GHL: workflow "Form Submitted" com If/Else no campo (a criar no GHL).
+- **16/11/2026** — v6.3: no `/ghl-lead`, tag **`axila`** ou **`buço`** no contato conforme o campo "Selecione seu
+  procedimento" do formulário da Pátio (lido do corpo do webhook ou, se não vier, do campo personalizado
+  `6g2o3T7C5P9nmSPkcFoK` no contato). `/debug` mostra `tag_area`. Inclui a v6.2 (tag "lead novo"). 35 testes.
