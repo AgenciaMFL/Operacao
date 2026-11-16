@@ -448,3 +448,8 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
 - **16/11/2026** — v6.3: no `/ghl-lead`, tag **`axila`** ou **`buço`** no contato conforme o campo "Selecione seu
   procedimento" do formulário da Pátio (lido do corpo do webhook ou, se não vier, do campo personalizado
   `6g2o3T7C5P9nmSPkcFoK` no contato). `/debug` mostra `tag_area`. Inclui a v6.2 (tag "lead novo"). 35 testes.
+- **16/11/2026** — v6.3 colada e confirmada em produção: testes "testeclau"/"testeclau4"/"teste5" com tag `buço (201)`
+  e agendamento na Spa sem erro. Calendário da Pátio passou a usar formulário próprio (não o "Formulario Patio
+  Alcantara"), para não pedir o procedimento de novo nem disparar o webhook de lead duas vezes. Landing Black Friday
+  publicada (`codigo/landing-patio-black-friday.html`), slug `sbelt-patio` — **o snippet do GTM da Pátio usa
+  `is_page('patio-alcantara')` e precisa trocar para `sbelt-patio`**. Leads de teste a apagar no GHL e na Spa.
