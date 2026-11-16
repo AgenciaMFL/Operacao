@@ -65,7 +65,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
   background:radial-gradient(closest-side,rgba(8,126,167,.45),transparent) calc(100% + 330px) -330px/1160px 1160px no-repeat,
              radial-gradient(closest-side,rgba(8,126,167,.45),transparent) -560px calc(100% + 760px)/1560px 1560px no-repeat,var(--hero)}
 .sbbf .hero__grid{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:36px}
-.sbbf .hero__texto{flex:none;width:min(500px,44%);align-self:center;padding:24px 0 56px;position:relative;z-index:2}
+.sbbf .hero__texto{flex:none;width:min(500px,44%);align-self:center;padding:24px 0 100px;position:relative;z-index:2}
 .sbbf .etiqueta{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:7px 16px 7px 8px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.3px;margin-bottom:22px}
 .sbbf .etiqueta__pre{background:var(--orange);color:#fff;font-weight:800;padding:3px 12px 4px;border-radius:999px;font-size:13px}
 .sbbf .etiqueta__pulso{width:8px;height:8px;border-radius:50%;background:var(--orange-2);box-shadow:0 0 0 0 rgba(245,130,32,.7);animation:sb-pulso 1.8s infinite}
@@ -89,7 +89,7 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
 .sbbf .hero__foto{display:block;width:100%;height:auto}
 
 /* Faixas cruzadas */
-.sbbf .ribbons{position:relative;height:132px;overflow:hidden;background:linear-gradient(var(--hero) 50%,var(--cream) 50%)}
+.sbbf .ribbons{position:relative;z-index:3;height:132px;margin-top:-72px;overflow:hidden;background:linear-gradient(transparent 55%,var(--cream) 55%)}
 .sbbf .ribbon{position:absolute;left:-10%;width:120%;overflow:hidden;white-space:nowrap;padding:13px 0;font-weight:800;font-size:16px;text-transform:uppercase}
 .sbbf .ribbon--dark{top:64px;background:var(--ink);color:#fff;transform:rotate(2.2deg)}
 .sbbf .ribbon--orange{top:22px;background:var(--orange);color:var(--ink);transform:rotate(-2.6deg);box-shadow:0 10px 24px -8px rgba(0,0,0,.35)}
@@ -188,6 +188,8 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
   .sbbf .hero__sub{font-size:16px}
   .sbbf .hero__acoes{justify-content:center}
   .sbbf .hero__visual{width:min(100%,460px);margin-top:24px;justify-content:center}
+  .sbbf .hero__texto{padding-bottom:0}
+  .sbbf .ribbons{margin-top:-60px}
   .sbbf .section{padding:72px 0}
   .sbbf .section--tight{padding:24px 0 72px}
   .sbbf .steps{grid-template-columns:1fr}
