@@ -436,3 +436,6 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   **Ao reativar a Pátio:** conferir no `/debug` o primeiro agendamento (deve cair em `ultimos_envios`, não em
   `ultimas_falhas`); manter a verificação automática da Conferência ligada; alinhar a agenda de avaliação da
   Spa com a do GHL (§8 item 1); limpar os leads vazios 17243/17339 (Aguida) e 17335 (Geiza) pelo painel/TI.
+- **16/11/2026** — v6.2 (em andamento, **não entregue**): no `/ghl-lead`, se a pessoa já existia na base da Spa
+  (lead já conhecido na unidade ou `telefoneJaEhCliente`), remove a tag `SBELT_TAG_LEAD_NOVO` ("lead novo" —
+  **confirmar o nome exato** no GHL) do contato; senão mantém. Testes: 31 casos em `teste-integracao.php`.

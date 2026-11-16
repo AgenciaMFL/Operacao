@@ -4,6 +4,7 @@
  * A versão que roda está no WordPress (Code Snippets). Senha da Spa, tokens
  * pit- do GHL e chave do /debug foram trocados por COLE_AQUI_*.
  * Não colar este arquivo em produção sem preencher esses valores.
+ * v6.2 (16/11/2026): tira a tag de lead novo no GHL de quem já existia na base da Spa (lead ou cliente).
  * v6.1 (11/11/2026): data do GHL em português ("quarta-feira, 11 de novembro de 2026 às 09:15").
  * v6 (10/11/2026): lead conferido na Spa antes de reaproveitar (cache por unidade) e log de envios no /debug.
  */
@@ -338,6 +339,50 @@ function spa_lead_valido_na_unidade($leadId, $franquiaId) {
  * Guarda os últimos 100 envios que deram certo (rota, unidade, contato, lead,
  * se criou ou atualizou) pra conferir no /debug quando alguém "não aparece".
  */
+// Tag do GHL que marca "lead novo" - é removida quando a pessoa já existia na base da Spa.
+// Trocar aqui se o nome da tag no GHL for outro (o GHL compara sem diferenciar maiúsculas).
+define('SBELT_TAG_LEAD_NOVO', 'lead novo');
+
+/**
+ * Remove uma tag do contato no GHL da unidade (DELETE /contacts/{id}/tags).
+ * Precisa de contacts.write no token. Se a tag não existir no contato, o GHL só ignora.
+ */
+function ghl_remover_tag($contactId, $franquiaId, $tag) {
+    $unidade = spa_get_unidade($franquiaId);
+    if (empty($contactId) || !$unidade) return ['erro' => 'contato ou unidade ausente'];
+    $resposta = wp_remote_request('https://services.leadconnectorhq.com/contacts/' . rawurlencode($contactId) . '/tags', [
+        'method'  => 'DELETE',
+        'headers' => [
+            'Authorization' => 'Bearer ' . $unidade['ghl_api_token'],
+            'Version'       => '2021-07-28',
+            'Content-Type'  => 'application/json',
+            'Accept'        => 'application/json',
+        ],
+        'body'    => json_encode(['tags' => [$tag]]),
+        'timeout' => 15,
+    ]);
+    if (is_wp_error($resposta)) return ['erro' => $resposta->get_error_message()];
+    return ['status' => wp_remote_retrieve_response_code($resposta)];
+}
+
+/**
+ * A pessoa já existia na base da Spa? Sim quando o site já conhecia um lead dela
+ * nessa unidade (acao "atualizado") ou quando a Spa diz que o telefone já é cliente.
+ */
+function spa_ja_existia_na_base($acao, $leadId) {
+    if ($acao === 'atualizado') return true;
+    if (!$leadId) return false;
+    $token = spa_get_token();
+    if (!$token) return false;
+    $resposta = wp_remote_get(SPA_URL_EMPRESA . '/api/Lead/' . (int) $leadId, [
+        'headers' => ['Authorization' => 'Bearer ' . $token],
+        'timeout' => 10,
+    ]);
+    if (is_wp_error($resposta) || wp_remote_retrieve_response_code($resposta) >= 400) return false;
+    $lead = json_decode(wp_remote_retrieve_body($resposta), true);
+    return is_array($lead) && !empty($lead['telefoneJaEhCliente']);
+}
+
 function spa_registrar_envio($rota, $info) {
     $envios = get_option('spa_ultimos_envios', []);
     if (!is_array($envios)) $envios = [];
@@ -990,7 +1035,13 @@ function leads_v1_ghl_lead_callback($request) {
         'leadId'           => $leadId,
     ]);
 
-    spa_registrar_envio('ghl-lead', ['franquiaId' => $franquiaId, 'contact_id' => $dados['contact_id'] ?? '', 'nome' => $nome, 'leadId' => $leadId, 'acao' => $acao]);
+    // já existia na base da Spa (lead conhecido ou cliente)? então não é lead novo: tira a tag no GHL
+    $jaExistia = spa_ja_existia_na_base($acao, $leadId);
+    if ($jaExistia) {
+        $tagRemovida = ghl_remover_tag(sanitize_text_field($dados['contact_id'] ?? ''), $franquiaId, SBELT_TAG_LEAD_NOVO);
+    }
+    spa_registrar_envio('ghl-lead', ['franquiaId' => $franquiaId, 'contact_id' => $dados['contact_id'] ?? '', 'nome' => $nome, 'leadId' => $leadId, 'acao' => $acao,
+        'ja_existia' => $jaExistia, 'tag_lead_novo' => $jaExistia ? ('removida (' . ($tagRemovida['status'] ?? $tagRemovida['erro'] ?? '?') . ')') : 'mantida']);
 
     // guarda a relação telefone -> leadId pra usar depois, no agendamento
     if ($leadId) {

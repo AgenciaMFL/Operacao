@@ -137,4 +137,24 @@ $r = leads_v1_ghl_agendamento_callback(new WP_REST_Request(json_encode($pt)));
 $ag = json_decode($CHAMADAS[1][1]['body'], true);
 ok('agendamento com data em português chega certo na Spa', $r->get_status() === 200 && $ag['dataHoraInicio'] === '2026-11-11 09:15:00' && $ag['dataHoraFim'] === '2026-11-11 09:30:00');
 
+// 13. v6.2: tag "lead novo"
+$tagDel = fn() => array_values(array_filter($GLOBALS['CHAMADAS'], fn($c) => str_ends_with($c[0], '/tags') && ($c[1]['method'] ?? '') === 'DELETE'));
+// a) já era lead conhecido nessa unidade -> tira a tag
+$T = ['spa_solutions_token' => str_repeat('t', 40), 'spa_lead_10_5521999990001' => 500]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>200,'body'=>'{"id":500,"franquiaId":10}','headers'=>[]], ['code'=>200,'body'=>'','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+$d = $tagDel();
+ok('já existia como lead: remove a tag "lead novo" do contato C1', count($d) === 1 && str_contains($d[0][0], '/contacts/C1/tags') && json_decode($d[0][1]['body'], true)['tags'] === ['lead novo']);
+ok('envio registra ja_existia e tag removida', ($O['spa_ultimos_envios'][0]['ja_existia'] ?? null) === true && str_starts_with($O['spa_ultimos_envios'][0]['tag_lead_novo'] ?? '', 'removida'));
+// b) lead novo, telefone já é cliente na Spa -> tira a tag
+$T = ['spa_solutions_token' => str_repeat('t', 40)]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>201,'body'=>'{"id":950}','headers'=>[]], ['code'=>200,'body'=>'{"id":950,"telefoneJaEhCliente":true}','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+ok('telefone já é cliente: remove a tag', count($tagDel()) === 1);
+// c) lead novo de verdade -> mantém a tag
+$T = ['spa_solutions_token' => str_repeat('t', 40)]; $O = []; $CHAMADAS = [];
+$FILA = [['code'=>201,'body'=>'{"id":951}','headers'=>[]], ['code'=>200,'body'=>'{"id":951,"telefoneJaEhCliente":false}','headers'=>[]], ['code'=>200,'body'=>'{}','headers'=>[]]];
+leads_v1_ghl_lead_callback(new WP_REST_Request(json_encode($lead)));
+ok('lead novo de verdade: mantém a tag', count($tagDel()) === 0 && ($O['spa_ultimos_envios'][0]['tag_lead_novo'] ?? '') === 'mantida');
+
 exit(empty($falhou) ? 0 : 1);
