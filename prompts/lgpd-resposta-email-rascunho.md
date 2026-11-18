@@ -35,16 +35,24 @@ de segurança reconhecidos internacionalmente:
 - autenticação em dois fatores, permissões por usuário e registro de todos os acessos.
 
 **6. Como os dados serão inseridos na plataforma de envio (HighLevel)**
-[Descrever o fluxo, ex.: a Hebraica extrai a lista de associados com filhos na faixa do maternal
-e envia à MFL por [canal seguro – ex.: link com senha/acesso restrito], contendo apenas os dados
-mínimos necessários (ex.: nome do responsável e e-mail/telefone). A MFL importa a lista na
-plataforma, confere a importação e elimina o arquivo original em até [X] dias.]
-Sugerimos também incluir em todo comunicado um link de descadastro (opt-out).
+- A Hebraica extrai do seu sistema apenas os associados com filhos na faixa etária do maternal,
+  contendo somente os dados necessários para o envio: nome do responsável, e-mail e telefone.
+- O arquivo é compartilhado com a MFL por link de acesso restrito (ex.: pasta compartilhada
+  apenas com os administradores da MFL), nunca por e-mail aberto ou anexo.
+- A MFL importa a lista no HighLevel, marcando os contatos com uma etiqueta específica
+  ("Associados – Maternal"), para que sejam usados apenas nessa comunicação.
+- Após a conferência da importação, o arquivo original é excluído em até 7 dias.
+- Todo comunicado enviado inclui link de descadastro. Quem pedir para sair é removido
+  automaticamente da lista e não recebe novos envios.
+- Se algum titular pedir a exclusão dos seus dados, a MFL remove o contato da plataforma
+  mediante solicitação da Hebraica.
 
 **7. Acesso da MFL à base em caso de manutenção**
-[Sim/Não – descrever: ex.: o acesso é restrito a [X] profissionais da MFL, com login individual,
-apenas quando necessário para operar ou dar suporte à ferramenta, sob dever de confidencialidade
-previsto em contrato. Os acessos são registrados pela plataforma.]
+Sim. O acesso à base no HighLevel é restrito a dois administradores da MFL, Fred e Yaan,
+responsáveis pela operação da ferramenta (importação, envios e suporte). Cada um acessa com
+login individual [e autenticação em dois fatores], e a plataforma registra os acessos realizados.
+O acesso é utilizado apenas para operar e manter a ferramenta, conforme as instruções da Hebraica,
+e está sujeito ao dever de confidencialidade previsto em contrato.
 
 Ficamos à disposição para uma conversa, se preferirem.
 
