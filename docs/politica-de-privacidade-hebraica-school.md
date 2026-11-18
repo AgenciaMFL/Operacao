@@ -1,9 +1,9 @@
 # Política de Privacidade – Hebraica School
 
-**Última atualização:** [DD/MM/AAAA]
+**Última atualização:** {{DATA_DE_PUBLICACAO}}
 
 Esta Política explica como os dados pessoais são tratados no site da Hebraica School
-(hebraicaschool.mflsales.com.br [ajustar para o domínio definitivo]), no formulário "Agende uma visita"
+(https://hebraicaschool.org.br), no formulário "Agende uma visita"
 e nos comunicados sobre a Hebraica School. Ela complementa a
 [Política de Privacidade da Hebraica](https://www.ahebraica.org.br/politica-de-privacidade-externa/),
 que continua valendo para todos os demais serviços do clube.
@@ -11,7 +11,7 @@ que continua valendo para todos os demais serviços do clube.
 ## 1. Quem é responsável pelos seus dados
 
 A Hebraica School é a Escola Maternal e Infantil da **Associação Brasileira A Hebraica de São Paulo**
-("Hebraica"), CNPJ [00.000.000/0000-00], com sede na Rua Hungria, 1000 – Pinheiros, São Paulo/SP,
+("Hebraica"), com sede na Rua Hungria, 1000 – Pinheiros, São Paulo/SP,
 CEP 01455-000. A Hebraica é a **controladora** dos dados pessoais tratados conforme esta Política,
 ou seja, é quem decide como e para que eles são usados.
 
@@ -55,8 +55,8 @@ Seus dados podem ser compartilhados apenas com:
   comunicados. Atua como **operadora**, tratando os dados somente conforme as instruções da Hebraica,
   com dever de confidencialidade.
 - **Fornecedores de tecnologia** usados pela MFL: a plataforma de CRM e envio de comunicações
-  HighLevel (onde ficam os dados do formulário e dos comunicados) e a empresa de hospedagem do site
-  [Hostinger – confirmar].
+  HighLevel (onde ficam os dados do formulário e dos comunicados) e o provedor de nuvem onde o site está
+  hospedado (Oracle Cloud Infrastructure).
 - **Autoridades públicas**, quando houver obrigação legal ou ordem judicial.
 
 ## 5. Transferência internacional de dados
@@ -70,7 +70,7 @@ em trânsito e armazenados.
 ## 6. Por quanto tempo guardamos
 
 - **Dados do formulário:** pelo tempo necessário para atender ao seu pedido e acompanhar o interesse
-  da família, por até [24 meses] após o último contato, ou até você pedir a exclusão (salvo
+  da família, por até 24 meses após o último contato, ou até você pedir a exclusão (salvo
   obrigação legal de guarda). Se a criança for matriculada, os dados passam a seguir as regras de
   guarda do contrato educacional.
 - **Comunicados aos associados:** enquanto durar a campanha de divulgação da Hebraica School ou até
