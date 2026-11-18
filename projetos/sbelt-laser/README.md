@@ -453,3 +453,8 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   Alcantara"), para não pedir o procedimento de novo nem disparar o webhook de lead duas vezes. Landing Black Friday
   publicada (`codigo/landing-patio-black-friday.html`), slug `sbelt-patio` — **o snippet do GTM da Pátio usa
   `is_page('patio-alcantara')` e precisa trocar para `sbelt-patio`**. Leads de teste a apagar no GHL e na Spa.
+- **18/11/2026** — Pátio: token com escopo de edição de calendário. A disponibilidade real é o "Custom schedule"
+  `Y69M3xd98Yp3oioK3dSv` (usuário `7Dkf7wa4x7OSNffLbcu0`, ligado ao calendário; seg–sáb 09–21h), lido em
+  `GET /calendars/schedules/search?locationId=&userId=&calendarId=` e alterado por `PUT /calendars/schedules/{id}`
+  com o array `rules` inteiro. Adicionada exceção `{"type":"date","date":"2026-11-20"}` 09:00–14:00 (último
+  horário 13:45). Já havia 1 agendamento às 14:00 de 20/11 (Yasmin), mantido.
