@@ -458,3 +458,8 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   `GET /calendars/schedules/search?locationId=&userId=&calendarId=` e alterado por `PUT /calendars/schedules/{id}`
   com o array `rules` inteiro. Adicionada exceção `{"type":"date","date":"2026-11-20"}` 09:00–14:00 (último
   horário 13:45). Já havia 1 agendamento às 14:00 de 20/11 (Yasmin), mantido.
+- **18/11/2026** — Pátio: Date range 8 → **11 dias** (aberto até 28/11). **Cuidado:** `PUT /calendars/{id}` com só
+  `allowBookingFor` fez o GHL voltar outros campos ao padrão (duração/intervalo 30 min, confirmação "ThankYouMessage"
+  em vez do redirect para `/obrigado/`). Restaurado em ~2 min a partir do backup (`formSubmitRedirectURL` no PUT;
+  na leitura o campo vem como `formSubmitRedirectUrl`), sem agendamentos nesse intervalo. **Sempre mandar no PUT
+  todos os campos do GET** (duração, intervalo, durationOptions, formSubmitType/RedirectURL, vagas, formId).
