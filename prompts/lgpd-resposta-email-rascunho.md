@@ -17,16 +17,25 @@ formulário "Agende uma visita", com o texto sugerido e link para a Política. P
 [Verificar o contrato atual. Se não houver cláusula específica, propor aditivo definindo a MFL como
 OPERADORA e a Hebraica como CONTROLADORA, com: tratamento apenas conforme instruções da Hebraica,
 confidencialidade, medidas de segurança, comunicação de incidentes em até [X] horas, uso de
-suboperadores (ex.: plataforma de CRM/envio) e devolução/eliminação dos dados ao fim do contrato.]
+suboperadores (o HighLevel, plataforma de CRM/envio) e devolução/eliminação dos dados ao fim do contrato.]
 
 **5. Onde ficam armazenados os dados**
-- Formulário do site: os envios vão direto para a plataforma de CRM [LeadConnector/GoHighLevel],
+Tanto os dados do formulário do site quanto os da ferramenta de envio de comunicados ficam na
+mesma plataforma: o HighLevel (GoHighLevel / LeadConnector), CRM utilizado pela MFL.
+- O formulário "Agende uma visita" é do próprio HighLevel; os envios vão direto para a plataforma
   e [não] ficam gravados no servidor do site (hospedagem [Hostinger]). [Confirmar.]
-- Ferramenta de envio de comunicados: [mesma plataforma / outra – nome]. A plataforma armazena
-  os dados em servidores de nuvem [localização – confirmar com o fornecedor; se for fora do Brasil,
-  informar, pois envolve transferência internacional de dados (art. 33 da LGPD)].
+- O HighLevel é uma empresa com sede nos Estados Unidos e hospeda a plataforma no Google Cloud
+  Platform. Segundo a política de privacidade do fornecedor, os dados podem ser transferidos para
+  outros países (incluindo EUA e Índia, onde estão afiliadas e prestadores), o que caracteriza
+  transferência internacional de dados (art. 33 da LGPD).
+- Medidas de segurança informadas pelo fornecedor: criptografia em trânsito (TLS 1.2+) e em
+  repouso (AES-256), avaliação anual SOC 2 Tipo II, testes de invasão periódicos, autenticação em
+  dois fatores, permissões por usuário e registro de acessos (logs de auditoria).
+- Fontes: https://www.gohighlevel.com/privacy-policy e https://www.gohighlevel.com/privacy-and-security
+[Confirmar com o HighLevel a disponibilidade de um Acordo de Processamento de Dados (DPA) e a região
+exata dos servidores.]
 
-**6. Como os dados serão inseridos na plataforma de envio**
+**6. Como os dados serão inseridos na plataforma de envio (HighLevel)**
 [Descrever o fluxo, ex.: a Hebraica extrai a lista de associados com filhos na faixa do maternal
 e envia à MFL por [canal seguro – ex.: link com senha/acesso restrito], contendo apenas os dados
 mínimos necessários (ex.: nome do responsável e e-mail/telefone). A MFL importa a lista na
