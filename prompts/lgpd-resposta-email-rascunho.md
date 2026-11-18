@@ -20,20 +20,19 @@ confidencialidade, medidas de segurança, comunicação de incidentes em até [X
 suboperadores (o HighLevel, plataforma de CRM/envio) e devolução/eliminação dos dados ao fim do contrato.]
 
 **5. Onde ficam armazenados os dados**
-Tanto os dados do formulário do site quanto os da ferramenta de envio de comunicados ficam na
-mesma plataforma: o HighLevel (GoHighLevel / LeadConnector), CRM utilizado pela MFL.
-- O formulário "Agende uma visita" é do próprio HighLevel; os envios vão direto para a plataforma
-  e [não] ficam gravados no servidor do site (hospedagem [Hostinger]). [Confirmar.]
-- O HighLevel é uma empresa com sede nos Estados Unidos e hospeda a plataforma no Google Cloud
-  Platform. Segundo a política de privacidade do fornecedor, os dados podem ser transferidos para
-  outros países (incluindo EUA e Índia, onde estão afiliadas e prestadores), o que caracteriza
-  transferência internacional de dados (art. 33 da LGPD).
-- Medidas de segurança informadas pelo fornecedor: criptografia em trânsito (TLS 1.2+) e em
-  repouso (AES-256), avaliação anual SOC 2 Tipo II, testes de invasão periódicos, autenticação em
-  dois fatores, permissões por usuário e registro de acessos (logs de auditoria).
-- Fontes: https://www.gohighlevel.com/privacy-policy e https://www.gohighlevel.com/privacy-and-security
-[Confirmar com o HighLevel a disponibilidade de um Acordo de Processamento de Dados (DPA) e a região
-exata dos servidores.]
+Os dados coletados pelo formulário do site e os utilizados nos comunicados ficam centralizados em
+uma única plataforma de CRM, o HighLevel, que é a ferramenta da MFL para gestão de contatos e envio
+de comunicações. O formulário do site envia os dados diretamente para essa plataforma, sem
+armazenamento no servidor do site.
+
+A plataforma é hospedada na infraestrutura do Google Cloud, nos Estados Unidos. A transferência
+internacional está amparada pelo art. 33 da LGPD, com [as garantias contratuais do acordo de
+processamento de dados (DPA) do fornecedor, que encaminharemos junto]. O fornecedor adota padrões
+de segurança reconhecidos internacionalmente:
+- certificação SOC 2 Tipo II, com auditoria independente anual;
+- criptografia dos dados em trânsito (TLS 1.2+) e armazenados (AES-256);
+- testes de invasão periódicos;
+- autenticação em dois fatores, permissões por usuário e registro de todos os acessos.
 
 **6. Como os dados serão inseridos na plataforma de envio (HighLevel)**
 [Descrever o fluxo, ex.: a Hebraica extrai a lista de associados com filhos na faixa do maternal
