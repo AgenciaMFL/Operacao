@@ -9,7 +9,8 @@ https://www.ahebraica.org.br/politica-de-privacidade-externa/
 ## 1. Política de Privacidade no site
 - Rodapé (todas as páginas): link "Política de Privacidade" na linha de baixo, ao lado do
   "Todos os direitos reservados", abrindo em nova aba (target="_blank" rel="noopener").
-- Crie a página /politica-de-privacidade/ que REDIRECIONA (301) para a URL oficial acima
+- (SUBSTITUÍDO por prompts/pagina-politica-privacidade.md — a página agora tem conteúdo próprio, sem redirecionamento.)
+- ~~Crie a página /politica-de-privacidade/ que REDIRECIONA (301) para a URL oficial acima~~
   (pelo mini plugin, hook template_redirect), para termos um endereço próprio para usar no
   banner de cookies e no aviso do formulário.
 - Em Configurações → Privacidade do WordPress, defina essa página como página de privacidade.
