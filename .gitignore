@@ -1,2 +1,9 @@
 # Local MCP settings with secrets
 .claude/settings.json
+
+# Ferramenta de cortes
+.env
+.venv/
+secrets/
+work/
+__pycache__/
