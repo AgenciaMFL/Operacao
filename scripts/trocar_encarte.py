@@ -78,6 +78,15 @@ class WordPress:
         resp = self.session.get(f"{self.api}/encarte/v1/slots", params=params, timeout=60)
         return self._check(resp)["slots"]
 
+    def published_urls(self) -> list[str]:
+        """URLs dos encartes já enviados para a Biblioteca de Mídia por este script."""
+        resp = self.session.get(
+            f"{self.api}/wp/v2/media",
+            params={"search": "Encarte", "per_page": 100, "_fields": "source_url"},
+            timeout=60,
+        )
+        return [m["source_url"] for m in self._check(resp)]
+
     def upload(self, path: Path, filename: str, title: str) -> int:
         mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
         resp = self.session.post(
@@ -170,6 +179,20 @@ def map_images_to_slots(images: list[Path], slots: list[dict], order: list[str] 
     return {slot: [image] for slot, image in zip(names, images)}
 
 
+def pdf_to_images(pdf: Path, width: int, workdir: Path) -> list[Path]:
+    """Uma imagem PNG (sem perda) por página do PDF, com `width` px de largura. Requer PyMuPDF."""
+    import pymupdf
+
+    pages = []
+    with pymupdf.open(pdf) as doc:
+        for number, page in enumerate(doc, start=1):
+            zoom = width / page.rect.width
+            out = workdir / f"{number}.png"
+            page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False).save(out)
+            pages.append(out)
+    return pages
+
+
 def to_webp(image: Path, quality: int, workdir: Path) -> Path:
     """Converte para WebP (bem mais leve que JPG/PNG, mesma resolução). Requer Pillow."""
     from PIL import Image
@@ -210,7 +233,9 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Troca as imagens do encarte nas páginas Elementor.")
     parser.add_argument("pasta", nargs="?", default=str(REPO_ROOT / "encartes" / "entrada"),
-                        help="pasta com as imagens do encarte (padrão: encartes/entrada)")
+                        help="pasta com as imagens do encarte, ou o PDF do encarte (uma página por slot)")
+    parser.add_argument("--largura-pdf", type=int, default=2560,
+                        help="largura em px de cada página quando a entrada é PDF (padrão: 2560)")
     parser.add_argument("--cliente", help="usa a configuração de clientes/CLIENTE.json")
     parser.add_argument("--pagina", action="append", type=int,
                         help="ID da página (pode repetir). Padrão: WP_PAGE_IDS")
@@ -246,7 +271,12 @@ def main() -> None:
                 print(f"  {s['slot']:<20} {s['type']}{extra}  atual: {', '.join(s['atual']) or '-'}")
         return
 
-    images = find_images(Path(args.pasta))
+    source = Path(args.pasta)
+    if source.is_file() and source.suffix.lower() == ".pdf":
+        images = pdf_to_images(source, args.largura_pdf, Path(tempfile.mkdtemp(prefix="encarte-pdf-")))
+        print(f"PDF com {len(images)} página(s) convertido para imagem ({args.largura_pdf}px de largura).")
+    else:
+        images = find_images(source)
     if not images:
         print(f"Nenhuma imagem em {args.pasta}. Nada a fazer.")
         return
@@ -263,6 +293,14 @@ def main() -> None:
     if not pending:
         print("\nSEM_MUDANCA: o site já mostra exatamente estas imagens.")
         return
+    if not args.forcar:
+        history = wp.published_urls()
+        old = [f.name for plan in pending.values() for files in plan.values() for f in files
+               if any(content_tag(f) in url for url in history)]
+        if old:
+            print(f"\nENCARTE_ANTIGO: {', '.join(old)} já foi publicado antes e foi substituído. "
+                  "Nada foi alterado (use --forcar para republicar).")
+            return
     if args.dry_run:
         print("\n--dry-run: nada foi enviado.")
         return

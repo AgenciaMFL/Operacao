@@ -9,6 +9,18 @@ imagens novas ──► encartes/entrada/ ──► GitHub Action ──► sobe
                                                       └─► limpa o cache de CSS do Elementor
 ```
 
+## Modo PDF → site (sem Figma)
+
+O PDF do encarte (uma página por imagem do site) pode ir direto para o script:
+
+```bash
+python scripts/trocar_encarte.py "ENC RA 24 A 28-11.pdf" --cliente rio-atacadao
+```
+
+Cada página vira uma imagem de 2560 px sem perda, convertida para WebP na hora de subir.
+Página 1 → 1ª imagem do site, página 2 → 2ª. Se uma imagem já foi publicada antes e
+substituída, o script não volta com ela (proteção contra republicar encarte antigo).
+
 ## Modo Figma → site (Rio Atacadão)
 
 Toda terça, de hora em hora (9h–19h), uma rotina do Claude Code abre o Figma

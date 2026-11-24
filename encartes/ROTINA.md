@@ -19,6 +19,8 @@ A notificação para o celular é a mensagem final da sessão: deixe-a curta e d
 4. Rode `python3 scripts/trocar_encarte.py PASTA --cliente CLIENTE` a partir da raiz do repositório
    (instale `requests` com `pip install -r scripts/requirements.txt` se faltar).
    - Saída com `SEM_MUDANCA`: o site já está com esse encarte. Responda só "Encarte já publicado".
+   - Saída com `ENCARTE_ANTIGO`: o Figma ainda tem um encarte antigo (o site foi atualizado por
+     outro caminho, ex.: PDF). Responda só "Sem encarte novo no Figma", sem notificar.
    - Saída com "Página N atualizada": confira a URL publicada (o HTML deve conter os novos
      arquivos `encarte-AAAAMMDD-...`) e termine com
      "✅ Encarte <nome do cliente> atualizado no site: <url>". O próprio WordPress manda o
