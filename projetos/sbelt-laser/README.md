@@ -463,3 +463,8 @@ com workflow), ou export manual da Spa → import no GHL com tag. Aguardando dec
   em vez do redirect para `/obrigado/`). Restaurado em ~2 min a partir do backup (`formSubmitRedirectURL` no PUT;
   na leitura o campo vem como `formSubmitRedirectUrl`), sem agendamentos nesse intervalo. **Sempre mandar no PUT
   todos os campos do GET** (duração, intervalo, durationOptions, formSubmitType/RedirectURL, vagas, formId).
+- **26/11/2026** — Pátio: CSV de leads com avaliação **"Em Andamento"** na Spa (248, tag `em andamento na spa`) para
+  importar no GHL. "Em Andamento" é **status da avaliação** (`ListarAgendamentosAvaliacao`), não do lead. O `status`
+  do `GET /api/Lead/{id}` é numérico; mapeado na Pátio pela avaliação: 6 = Agendado, 3 = Confirmado, 10 = Faltou;
+  4/5 misturam Realizado/Em Andamento/Comparecido. A API não lista leads por status/unidade — varrer ids expõe leads
+  de outras franquias (não fazer); partir sempre de fontes da unidade (avaliações da franquia, cache do site, GHL).
