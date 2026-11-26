@@ -20,7 +20,8 @@ a{color:#0b5aa6}a:hover{color:#0f2443}
 html{scroll-behavior:smooth}
 section{scroll-margin-top:100px}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:Poppins,Poppins,sans-serif}
+h1,h2,h3{font-family:Poppins,Poppins,sans-serif;text-wrap:balance}
+p{text-wrap:pretty}
 .acc{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:600;letter-spacing:-0.01em}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;font-size:13px;font-weight:600;color:#0f2443;letter-spacing:.06em;text-transform:uppercase}
 .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:#0b5aa6}
@@ -267,7 +268,9 @@ main section:not(.hero){padding-top:88px !important}
 .why-box{border-radius:24px !important}
 .contact-box{border-radius:22px !important}
 #contact .card{padding:22px !important}
-#contact .split > div:first-child .btn-a,#contact .split > div:first-child .btn-ghost{flex:1 1 140px}
+.cbtns{display:grid !important;grid-template-columns:1fr 1fr;gap:10px !important;width:100%;max-width:420px}
+.cbtns .btn-a,.cbtns .btn-ghost{justify-content:center;min-height:52px;padding:0 14px;font-size:15px;border-radius:999px}
+.cbtns .btn-a .arr{display:none}
 .pain-grid .pcard .pimg{height:170px}
 }
 @media (max-width:760px){
@@ -284,6 +287,18 @@ main section:not(.hero){padding-top:88px !important}
 .pcard .pimg{height:150px !important}
 .pain-head-r{display:none !important}
 .car-nav{display:flex !important}
+.hero{min-height:calc(100svh - 16px) !important}
+.hero-in{align-self:center;padding-top:100px !important;padding-bottom:28px !important}
+.hero-in > div{gap:20px !important}
+.hero-in h1{font-size:clamp(32px,9vw,40px) !important}
+.hero-in > div > p{font-size:16px !important;line-height:1.55 !important}
+.hero-chips{gap:5px}
+.hchip{padding:7px 11px;font-size:11.5px}
+.marquee{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y;padding:4px 20px 6px;scroll-padding:0 20px}
+.marquee::-webkit-scrollbar{display:none}
+.mq-track{animation:none !important}
+.mq-track > div[aria-hidden]{display:none !important}
+.mq-tile{scroll-snap-align:start}
 .svc-grid,.pain-grid{overflow-y:hidden !important;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
 .pcard:hover,.pcard{transform:none !important}
 .pcard{box-shadow:0 10px 24px rgba(5,25,55,.22)}
@@ -315,7 +330,6 @@ footer .wrap > div:last-child{flex-direction:column;align-items:center;text-alig
 .gal .wide{grid-column:auto;aspect-ratio:4/3}
 .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
 .split,.faq-grid{gap:40px}
-.mobile-bar{display:flex}
 .faq2{grid-template-columns:minmax(0,1fr);gap:40px}
 .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .pain-grid{grid-template-columns:minmax(0,1fr)}
@@ -677,7 +691,7 @@ footer .wrap > div:last-child{flex-direction:column;align-items:center;text-alig
 <h2 class="h2"><span data-i18n="galTitle.a">Our</span> <em class="acc" style="color: #0b5aa6"><span data-i18n="galTitle.b">Work</span></em></h2>
 </div>
 </div>
-<div class="marquee">
+<div class="marquee" id="galGrid">
 <div class="mq-track">
 <div class="mq-tile"><img src="assets/gallery-1.jpg" alt="Finished pool with travertine deck" data-i18n-alt="[[t.ph.g1]]" loading="lazy"></div>
 <div class="mq-tile"><img src="assets/gallery-2.jpg" alt="Travertine pool deck" data-i18n-alt="[[t.ph.g2]]" loading="lazy"></div>
@@ -695,6 +709,7 @@ footer .wrap > div:last-child{flex-direction:column;align-items:center;text-alig
 </div>
 </div>
 </div>
+<div class="car-nav" style="margin-top: 14px"><button type="button" class="circ o" aria-label="Previous services" data-i18n-aria-label="[[t.prev]]" data-action="galPrev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button><button type="button" class="circ f" aria-label="Next services" data-i18n-aria-label="[[t.next]]" data-action="galNext"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button></div>
 </section>
 
 <!-- WHY JLB -->
@@ -771,7 +786,7 @@ footer .wrap > div:last-child{flex-direction:column;align-items:center;text-alig
 <div style="display: flex; flex-direction: column; gap: 20px">
 <h2 class="h2"><span data-i18n="ctaTitle.a">Get Your</span> <em class="acc" style="color: #0b5aa6"><span data-i18n="ctaTitle.b">Free Estimate</span></em></h2>
 <p style="margin: 0; font-size: 20px; color: #5b6573"><span data-i18n="ctaSub">Fill out the form or call us today.</span></p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
+<div class="cbtns" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
 <a href="tel:+12393626312" data-tel class="btn-a"><span><span data-i18n="call">Call</span></span><span class="arr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a>
 <a href="sms:+12393626312" data-sms class="btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z"></path></svg><span data-i18n="text">Send SMS</span></a>
 </div>
@@ -840,13 +855,6 @@ footer .wrap > div:last-child{flex-direction:column;align-items:center;text-alig
 </div>
 </div>
 </footer>
-
-<!-- MOBILE STICKY CONTACT BAR -->
-<div class="mobile-bar" style="position: sticky; bottom: 0; z-index: 30; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.94); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(0,0,0,0.08)">
-<a href="tel:+12393626312" data-tel class="btn-ghost" style="flex: 1; padding: 0 10px; min-height: 48px"><span data-i18n="call">Call</span></a>
-<a href="sms:+12393626312" data-sms class="btn-ghost" style="flex: 1; padding: 0 10px; min-height: 48px">SMS</a>
-<a href="#contact" class="btn-a sm" style="flex: 1.6"><span><span data-i18n="estimateShort">Estimate</span></span><span class="arr"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a>
-</div>
 
 </div>
 <script>
@@ -1097,14 +1105,14 @@ var JLB_PHONES = {
   // carousels
   function scrollCar(el, dir){
     if (!el) return;
-    var card = el.querySelector('.svc, .pcard');
+    var card = el.querySelector('.svc, .pcard, .mq-tile');
     var step = card ? card.getBoundingClientRect().width + 14 : el.clientWidth * 0.85;
     var max = el.scrollWidth - el.clientWidth, target = el.scrollLeft + dir * step;
     if (dir > 0 && el.scrollLeft >= max - 4) target = 0;
     if (dir < 0 && el.scrollLeft <= 4) target = max;
     el.scrollTo({ left: target, behavior: 'smooth' });
   }
-  var svcGrid = document.getElementById('svcGrid'), painGrid = document.getElementById('painGrid');
+  var svcGrid = document.getElementById('svcGrid'), painGrid = document.getElementById('painGrid'), galGrid = document.getElementById('galGrid');
   // benefits rotator
   var benIdx = 0, benTimer = null;
   var benItems = document.querySelectorAll('.ben-item'), benImgs = document.querySelectorAll('.ben-img');
@@ -1120,7 +1128,8 @@ var JLB_PHONES = {
     toggleLang: function(){ pop.hidden ? openLang() : closeLang(); }, closeLang: closeLang,
     toggleMenu: function(){ setMenu(!mnav.classList.contains('open')); }, closeMenu: function(){ setMenu(false); },
     svcPrev: function(){ scrollCar(svcGrid, -1); }, svcNext: function(){ scrollCar(svcGrid, 1); },
-    painPrev: function(){ scrollCar(painGrid, -1); }, painNext: function(){ scrollCar(painGrid, 1); }
+    painPrev: function(){ scrollCar(painGrid, -1); }, painNext: function(){ scrollCar(painGrid, 1); },
+    galPrev: function(){ scrollCar(galGrid, -1); }, galNext: function(){ scrollCar(galGrid, 1); }
   };
   document.addEventListener('click', function(e){
     var a = e.target.closest('[data-action]');
