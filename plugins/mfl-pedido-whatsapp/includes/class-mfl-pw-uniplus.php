@@ -49,6 +49,44 @@ class MFL_PW_Uniplus {
 		add_filter( 'rest_pre_dispatch', array( __CLASS__, 'filter' ), 5, 3 );
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
 		add_action( 'admin_post_mfl_pw_uniplus_limpar', array( __CLASS__, 'clear_log' ) );
+
+		// Caixinha "Vinculado ao Uniplus" no produto (aba Inventário).
+		add_action( 'woocommerce_product_options_inventory_product_data', array( __CLASS__, 'product_field' ) );
+		add_action( 'woocommerce_admin_process_product_object', array( __CLASS__, 'save_product_field' ) );
+	}
+
+	/**
+	 * Marcar quando o "Código no E-commerce" deste produto no Uniplus for o ID dele no site.
+	 * Só assim o porteiro aceita as atualizações que o Uniplus manda apenas com o ID.
+	 */
+	public static function product_field() {
+		global $product_object;
+		if ( ! $product_object instanceof WC_Product ) {
+			return;
+		}
+		echo '<div class="options_group">';
+		woocommerce_wp_checkbox(
+			array(
+				'id'          => 'mfl_uniplus_vinculo',
+				'label'       => 'Vinculado ao Uniplus',
+				'value'       => $product_object->get_meta( self::META_VINCULO ) ? 'yes' : 'no',
+				'description' => sprintf(
+					'Marque só depois de colocar <strong>%d</strong> no "Código no E-commerce" deste produto no Uniplus (Produtos → OPÇÕES → E-commerce). Aí o estoque do Uniplus passa a atualizar este produto.',
+					(int) $product_object->get_id()
+				),
+			)
+		);
+		echo '</div>';
+	}
+
+	public static function save_product_field( $product ) {
+		// O nonce da tela de produto é conferido pelo WooCommerce antes deste gancho.
+		$marcado = isset( $_POST['mfl_uniplus_vinculo'] ) && 'yes' === $_POST['mfl_uniplus_vinculo']; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( $marcado ) {
+			$product->update_meta_data( self::META_VINCULO, 1 );
+		} else {
+			$product->delete_meta_data( self::META_VINCULO );
+		}
 	}
 
 	/* ------------------------------------------------------------------ */
