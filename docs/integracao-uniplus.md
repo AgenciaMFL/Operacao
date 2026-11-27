@@ -63,6 +63,16 @@ A versão 0.7.1 corrige isso:
 - **Chave "Uniplus":** apareceu nos logs da hospedagem (o Uniplus manda a chave na URL) e no chat. Trocar: revogar a antiga e criar outra com o **mesmo nome "Uniplus"**.
 - **LiteSpeed:** recomendado desligar "Cache REST API" e excluir `/wp-json/` do cache (prompt pronto, ainda não aplicado).
 
+### 27/11/2026, 18:00: conexão restabelecida
+
+- O bloqueio do IP **177.72.162.12** na Hostinger saiu (depois do chamado com o atendente). Às 18:00:55, o Uniplus chegou ao site **sozinho, sem ninguém clicar**. Isso indica que há uma sincronização automática, provavelmente de hora em hora.
+- **Como o Uniplus trabalha:**
+  1. faz `GET /wc/v3/products/{Código no E-commerce}`;
+  2. se receber 404, registra "não existe na loja" e segue para o próximo, sem criar nada;
+  3. se o produto existir, envia o estoque (o porteiro aplica nos produtos com vínculo);
+  4. consulta também `GET /wc/v3/orders`, e o porteiro devolve uma lista vazia.
+- **Falta:** a fila tem 7.766 produtos marcados, e com limite 1 é um produto por passada. **Próximo passo (28/11):** olhar a tela "Alteração em massa dos produtos" no Uniplus (sem aplicar nada) e deixar marcados só os produtos do site. Depois: vincular os 56 produtos (deixar o Código no E-commerce vazio para o Uniplus "criar" e o porteiro ligar pelo SKU, ou colocar o ID e marcar a caixinha), liberar o limite e testar "zerou → some".
+
 ## Pendências
 
 1. Confirmar que a fila rodou: o "Último acesso" da chave Uniplus deve mudar para depois de 16:28. Depois, comparar com o estado de antes, na parte 2 do teste.
