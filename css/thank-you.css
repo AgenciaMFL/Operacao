@@ -31,7 +31,10 @@ body.thank-you-page {
 
 .thank-you__logo {
   display: block;
-  height: 44px;
+  /* Square mark+wordmark asset, teal ink — reads fine as-is on this
+     card's white background (no invert-to-white needed, unlike the
+     hero section's dark teal backdrop). */
+  height: 56px;
   width: auto;
   margin: 0 auto 28px;
 }
@@ -106,4 +109,35 @@ body.thank-you-page {
   .thank-you__title {
     font-size: 26px;
   }
+}
+
+/* Rodapé: essas classes só existiam em css/sections.css, que esta
+   página não carrega (seria um arquivo enorme por causa de uma única
+   seção pequena) — copiadas de lá pra ficar auto-contido. */
+.site-footer {
+  background: var(--color-grey-95);
+  border-top: 1px solid var(--color-ink-10);
+  padding: 40px 0;
+}
+
+.site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer__logo {
+  height: 40px;
+  width: auto;
+  aspect-ratio: 88 / 66;
+}
+
+.site-footer p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16.3px;
+  letter-spacing: 0.33px;
+  color: var(--color-grey-32);
 }
