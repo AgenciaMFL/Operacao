@@ -1,0 +1,109 @@
+/* =========================================================
+   PÁGINA DE OBRIGADO (pós-envio do formulário de lead)
+   Reaproveita tokens.css/base.css (cores, fontes, .btn) para ficar na
+   mesma identidade visual do site principal — só este arquivo é
+   específico da página.
+   ========================================================= */
+body.thank-you-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.thank-you {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(180deg, var(--color-teal) 0%, #052e29 100%);
+}
+
+.thank-you__card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-white);
+  border-radius: 28px;
+  padding: 48px 40px 40px;
+  text-align: center;
+  box-shadow: 0 40px 90px rgba(4, 24, 21, 0.35);
+}
+
+.thank-you__logo {
+  display: block;
+  height: 44px;
+  width: auto;
+  margin: 0 auto 28px;
+}
+
+.thank-you__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  color: var(--color-white);
+}
+
+.thank-you__check svg {
+  width: 34px;
+  height: 34px;
+}
+
+.thank-you__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 2.07px;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 12px;
+}
+
+.thank-you__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: var(--color-ink);
+  margin-bottom: 14px;
+}
+
+.thank-you__text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-grey-25);
+  margin-bottom: 32px;
+}
+
+.thank-you__text + .thank-you__text {
+  margin-top: -20px;
+}
+
+.thank-you .btn {
+  justify-content: center;
+  width: 100%;
+}
+
+.thank-you__footnote {
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--color-grey-32);
+}
+
+@media (max-width: 480px) {
+  .thank-you__card {
+    padding: 36px 24px 32px;
+    border-radius: 22px;
+  }
+  .thank-you__title {
+    font-size: 26px;
+  }
+}
