@@ -53,6 +53,16 @@ A versão 0.7.1 corrige isso:
 - **ID sem SKU** só é aceito se o produto já foi confirmado antes pelo SKU (meta `_mfl_uniplus_vinculo`). Caso contrário, devolve 404. A expectativa é que o Uniplus tente então criar o produto mandando o SKU; aí casamos pelo SKU e devolvemos o ID certo.
 - **Conflito:** se, em menos de 20 minutos, o mesmo produto receber quantidades diferentes pelo ID, o vínculo é desfeito e nada é aplicado.
 
+### Situação em 27/11/2026, 16:30
+
+- **Plugin 0.7.4** instalado. O porteiro tem a caixinha "Vinculado ao Uniplus" no produto, na aba Estoque, e um diagnóstico em WooCommerce → Uniplus.
+- **BLOCO APARAS (2649):** vinculado. No Uniplus, o Código no E-commerce é 2649. No teste simulado com a chave do Uniplus (15:59), recebeu estoque 2791, com o controle de estoque ligado.
+- **Tarefa gigante das 10:54** (limite 10000): travou depois de centenas de chamadas lentas. O IP do Uniplus, **177.72.162.12**, foi para a lista de bloqueio do firewall da Hostinger. A Hostinger liberou o IP e o TI cancelou a tarefa.
+- **16:29:** a tarefa com limite 1 respondeu em 0,3 s com "Produto 438786367 … não existe na loja (ECOM446)". O Uniplus atende **o próximo da fila**, e não o produto em que se clica. Com 7.766 marcados, a fila não chega aos produtos do site.
+- **Regra:** **nunca** usar limite alto enquanto houver milhares de produtos marcados. Manter **limite = 1**.
+- **Chave "Uniplus":** apareceu nos logs da hospedagem (o Uniplus manda a chave na URL) e no chat. Trocar: revogar a antiga e criar outra com o **mesmo nome "Uniplus"**.
+- **LiteSpeed:** recomendado desligar "Cache REST API" e excluir `/wp-json/` do cache (prompt pronto, ainda não aplicado).
+
 ## Pendências
 
 1. Confirmar que a fila rodou: o "Último acesso" da chave Uniplus deve mudar para depois de 16:28. Depois, comparar com o estado de antes, na parte 2 do teste.
