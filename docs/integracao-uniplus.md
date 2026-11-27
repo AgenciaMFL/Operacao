@@ -31,6 +31,20 @@ Só vão para o site os produtos com **"Envia para… = Brinquelandia"** no cada
 - 16:28: sincronização só do SKU 15685 (BLOCO APARAS, ID 2649; estoque 2.791, R$ 3,10), feita por Ações → Sincronizar com e-commerce. Ficou na fila ("agendada").
 - Até o momento, nada mudou no site e nenhum produto foi duplicado.
 
+## Porteiro no plugin (0.7.0, 27/11/2026)
+
+Testes de 26 e 27/11 mostraram o seguinte:
+- O Uniplus guarda os **IDs do site antigo** (ex.: BLOCO APARAS = 22743, que hoje é o 2649).
+- Ele tem **7.766 produtos marcados**, e cria um **rascunho** para cada um que não acha no site (foi o caso do relógio, ID 2740).
+- A fila roda em horários fixos (18:00, 9:00…), um produto por passada quando o limite é 1.
+
+O plugin 0.7.0 resolve isso do lado do site, sem alterar a base do Uniplus:
+- **Produto existente:** casa pelo SKU e aplica só estoque e preço.
+- **Produto que não existe no site:** recusa.
+- **Pedidos:** invisíveis para o Uniplus.
+
+Com isso, dá para voltar o **limite para 0**. O registro fica em WooCommerce → Uniplus.
+
 ## Pendências
 
 1. Confirmar que a fila rodou: o "Último acesso" da chave Uniplus deve mudar para depois de 16:28. Depois, comparar com o estado de antes, na parte 2 do teste.

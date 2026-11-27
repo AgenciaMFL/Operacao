@@ -16,6 +16,14 @@ Plugin do WooCommerce para a Bazar Brinquelândia: o cliente monta o carrinho, f
 - **Filtros "Destaques" e "Em promoção"** na Loja/Categoria/busca: por URL (`?destaques=1`, `?promocao=1`) ou pelo shortcode `[mfl_filtro tipo="destaques"]` / `[mfl_filtro tipo="promocao"]`, que gera um botão liga/desliga (classes `.mfl-filtro`, `.is-active`, `.mfl-filtro__chave`, `.mfl-filtro__rotulo` para estilizar).
 - **Preço no Loop Grid do Elementor:** a faixa de preço (`?min_price`/`?max_price`) e a ordenação por preço e mais vendidos (`?orderby=price` / `price-desc` / `popularity`) também valem para o Loop Grid com "Consulta atual" na Loja/Categoria/busca (o Woo sozinho só aplica na consulta principal).
 - **Menu de categorias automático** `[mfl_menu_categorias titulo="Categorias"]`: lê as categorias do WooCommerce (categoria nova aparece sozinha quando tiver produto), sanfona com "Ver tudo em X" + subcategorias, "Outros…" por último, ordem de Produtos → Categorias. Cor de cada categoria no campo **"Cor no menu"** da edição da categoria. Visual em `assets/css/menu-categorias.css` (variáveis `--mfl-cats-*`).
+- **Porteiro da integração Uniplus:** o que chega pela chave REST **"Uniplus"** é filtrado:
+  - em produto que já está no site (casado pelo **SKU = Código do Uniplus**, mesmo que o Uniplus mande um ID do site antigo), aplica **só estoque e preço**;
+  - estoque 0 deixa o produto fora de estoque, e ele some do site;
+  - produto que não está no site é recusado, sem criar rascunho;
+  - pedidos ficam invisíveis para o Uniplus e não podem ser alterados;
+  - categorias, exclusões e outras escritas são bloqueadas.
+
+  Registro em **WooCommerce → Uniplus**.
 - **Segurança sem plugin extra:** XML-RPC desligado, versão do WordPress escondida, descoberta de usuários bloqueada (`?author=N` e `/wp-json/wp/v2/users` sem login), login bloqueado por 15 min após 6 erros do mesmo IP, mensagem de erro de login genérica, editor de arquivos do painel desligado e cabeçalhos de segurança (nosniff, SAMEORIGIN, Referrer-Policy, Permissions-Policy).
 - Título das abas no formato **"Página | Bazar Brinquelândia"**.
 - **Leveza:** sem scripts de emoji/oEmbed no `<head>` e no máximo 5 revisões por página/produto.
