@@ -47,6 +47,11 @@ class MFL_PW_Uniplus {
 
 	public static function init() {
 		add_filter( 'rest_pre_dispatch', array( __CLASS__, 'filter' ), 5, 3 );
+
+		// Diagnóstico: registra a resposta de TODA chamada REST feita com chave da API (ck_),
+		// inclusive as recusadas na autenticação, para saber quem gera erros como 401/403.
+		add_filter( 'rest_authentication_errors', array( __CLASS__, 'diag_auth' ), 999 );
+		add_filter( 'rest_post_dispatch', array( __CLASS__, 'diag_response' ), 999, 3 );
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
 		add_action( 'admin_post_mfl_pw_uniplus_limpar', array( __CLASS__, 'clear_log' ) );
 
@@ -144,6 +149,61 @@ class MFL_PW_Uniplus {
 		}
 		// phpcs:enable
 		return '';
+	}
+
+	/* ------------------------------------------------------------------ */
+	/* Diagnóstico                                                         */
+	/* ------------------------------------------------------------------ */
+
+	const OPTION_DIAG = 'mfl_pw_uniplus_diag';
+	const MAX_DIAG    = 60;
+
+	private static $auth_note = '';
+
+	private static function api_key_suffix() {
+		$key = self::consumer_key_from_request();
+		return 0 === strpos( $key, 'ck_' ) ? '…' . substr( $key, -7 ) : '';
+	}
+
+	public static function diag_auth( $result ) {
+		if ( '' === self::api_key_suffix() ) {
+			return $result;
+		}
+		if ( is_wp_error( $result ) ) {
+			self::$auth_note = 'autenticação recusada: ' . $result->get_error_code();
+		} elseif ( true === $result ) {
+			self::$auth_note = 'autenticado';
+		}
+		return $result;
+	}
+
+	public static function diag_response( $response, $server, $request ) {
+		$suffix = self::api_key_suffix();
+		if ( '' === $suffix || ! $request instanceof WP_REST_Request ) {
+			return $response;
+		}
+		$status = $response instanceof WP_HTTP_Response ? $response->get_status() : 0;
+		$data   = $response instanceof WP_HTTP_Response ? $response->get_data() : null;
+		$code   = is_array( $data ) && isset( $data['code'] ) ? (string) $data['code'] : '';
+		$msg    = is_array( $data ) && isset( $data['message'] ) ? wp_strip_all_tags( (string) $data['message'] ) : '';
+
+		$diag   = get_option( self::OPTION_DIAG, array() );
+		$diag   = is_array( $diag ) ? $diag : array();
+		$diag[] = array(
+			't'      => time(),
+			'ip'     => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '',
+			'key'    => $suffix,
+			'user'   => get_current_user_id(),
+			'call'   => strtoupper( $request->get_method() ) . ' ' . substr( $request->get_route(), 0, 70 ),
+			'status' => $status,
+			'code'   => substr( $code . ( $msg ? ' — ' . $msg : '' ), 0, 160 ),
+			'auth'   => self::$auth_note,
+		);
+		if ( count( $diag ) > self::MAX_DIAG ) {
+			$diag = array_slice( $diag, -self::MAX_DIAG );
+		}
+		update_option( self::OPTION_DIAG, $diag, false );
+		return $response;
 	}
 
 	/* ------------------------------------------------------------------ */
@@ -495,6 +555,7 @@ class MFL_PW_Uniplus {
 			<?php endif; ?>
 			<?php if ( ! $log ) : ?>
 				<p><em>Nenhuma atualização do Uniplus registrada ainda.</em></p>
+				<?php self::diag_table(); ?>
 			<?php else : ?>
 				<table class="widefat striped">
 					<thead><tr><th>Quando</th><th>Chamada</th><th>SKU</th><th>Produto</th><th>Resultado</th><th>Detalhe</th></tr></thead>
@@ -517,6 +578,7 @@ class MFL_PW_Uniplus {
 					<?php endforeach; ?>
 					</tbody>
 				</table>
+				<?php self::diag_table(); ?>
 				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" style="margin-top:16px">
 					<input type="hidden" name="action" value="mfl_pw_uniplus_limpar">
 					<?php wp_nonce_field( 'mfl_pw_uniplus_limpar' ); ?>
@@ -527,6 +589,32 @@ class MFL_PW_Uniplus {
 		<?php
 	}
 
+	private static function diag_table() {
+		$diag = get_option( self::OPTION_DIAG, array() );
+		$diag = is_array( $diag ) ? array_reverse( $diag ) : array();
+		echo '<h2 style="margin-top:28px">Diagnóstico: respostas a chamadas com chave da API</h2>';
+		echo '<p>Toda chamada à API REST feita com uma chave ck_ (Uniplus ou outra), com o código que o site devolveu. Se um erro aparecer no Uniplus e não aparecer aqui, ele foi gerado antes do WordPress (servidor/proteção da hospedagem).</p>';
+		if ( ! $diag ) {
+			echo '<p><em>Nenhuma chamada com chave registrada ainda.</em></p>';
+			return;
+		}
+		echo '<table class="widefat striped"><thead><tr><th>Quando</th><th>IP</th><th>Chave</th><th>Usuário</th><th>Chamada</th><th>Código</th><th>Motivo</th><th>Autenticação</th></tr></thead><tbody>';
+		foreach ( $diag as $row ) {
+			printf(
+				'<tr><td>%s</td><td>%s</td><td><code>%s</code></td><td>%d</td><td><code>%s</code></td><td><strong>%d</strong></td><td>%s</td><td>%s</td></tr>',
+				esc_html( wp_date( 'd/m/Y H:i:s', $row['t'] ) ),
+				esc_html( $row['ip'] ),
+				esc_html( $row['key'] ),
+				(int) $row['user'],
+				esc_html( $row['call'] ),
+				(int) $row['status'],
+				esc_html( $row['code'] ),
+				esc_html( $row['auth'] )
+			);
+		}
+		echo '</tbody></table>';
+	}
+
 	public static function clear_log() {
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			wp_die( 'Sem permissão.' );
@@ -534,6 +622,7 @@ class MFL_PW_Uniplus {
 		check_admin_referer( 'mfl_pw_uniplus_limpar' );
 		delete_option( self::OPTION_LOG );
 		delete_option( self::OPTION_STATS );
+		delete_option( self::OPTION_DIAG );
 		wp_safe_redirect( admin_url( 'admin.php?page=mfl-pw-uniplus' ) );
 		exit;
 	}
