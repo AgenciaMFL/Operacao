@@ -41,6 +41,8 @@ class MFL_PW_Uniplus {
 	private static $ignored    = 0;
 	private static $unchanged  = 0;
 	private static $unlinked   = 0;
+	private static $reads      = 0;
+	private static $last_read  = '';
 	private static $flush_hooked = false;
 
 	public static function init() {
@@ -136,8 +138,11 @@ class MFL_PW_Uniplus {
 			return self::error( 'mfl_pw_uniplus_pedidos', 'Pedidos do site não são enviados ao Uniplus.', 403 );
 		}
 
-		// Leituras passam (o Uniplus pode consultar produtos e categorias).
+		// Leituras passam (o Uniplus pode consultar produtos e categorias); só contamos.
 		if ( 'GET' === $method ) {
+			self::$reads++;
+			self::$last_read = substr( $route, 0, 80 );
+			self::hook_flush();
 			return $result;
 		}
 
@@ -385,6 +390,10 @@ class MFL_PW_Uniplus {
 				'detail' => substr( (string) $detail, 0, 300 ),
 			);
 		}
+		self::hook_flush();
+	}
+
+	private static function hook_flush() {
 		if ( ! self::$flush_hooked ) {
 			self::$flush_hooked = true;
 			add_action( 'shutdown', array( __CLASS__, 'flush_log' ) );
@@ -403,6 +412,15 @@ class MFL_PW_Uniplus {
 
 		$stats = get_option( self::OPTION_STATS, array() );
 		$stats = is_array( $stats ) ? $stats : array();
+		if ( self::$reads ) {
+			$stats['leituras']       = (int) ( $stats['leituras'] ?? 0 ) + self::$reads;
+			$stats['ultima_leitura'] = time();
+			$stats['rota_leitura']   = self::$last_read;
+			if ( ! self::$buffer && ! self::$ignored && ! self::$unchanged && ! self::$unlinked ) {
+				update_option( self::OPTION_STATS, $stats, false );
+				return;
+			}
+		}
 		$stats['ultima_chamada'] = time();
 		$stats['ignorados']      = (int) ( $stats['ignorados'] ?? 0 ) + self::$ignored;
 		$stats['sem_mudanca']    = (int) ( $stats['sem_mudanca'] ?? 0 ) + self::$unchanged;
@@ -426,6 +444,11 @@ class MFL_PW_Uniplus {
 			<p>O que o Uniplus enviou ao site (últimas <?php echo (int) self::MAX_LOG; ?> chamadas, mais recentes primeiro).
 				Só estoque e preço de produtos que já existem no site (casados pelo SKU) são aplicados; o resto é ignorado.</p>
 			<?php $stats = get_option( self::OPTION_STATS, array() ); ?>
+			<?php if ( ! empty( $stats['ultima_leitura'] ) ) : ?>
+				<p><strong>Última consulta do Uniplus:</strong> <?php echo esc_html( wp_date( 'd/m/Y H:i:s', $stats['ultima_leitura'] ) ); ?>
+					(<code><?php echo esc_html( $stats['rota_leitura'] ?? '' ); ?></code>)
+					&nbsp;·&nbsp; <strong>Consultas:</strong> <?php echo (int) ( $stats['leituras'] ?? 0 ); ?></p>
+			<?php endif; ?>
 			<?php if ( ! empty( $stats['ultima_chamada'] ) ) : ?>
 				<p><strong>Última escrita do Uniplus:</strong> <?php echo esc_html( wp_date( 'd/m/Y H:i:s', $stats['ultima_chamada'] ) ); ?>
 					&nbsp;·&nbsp; <strong>Conferidos sem mudança:</strong> <?php echo (int) ( $stats['sem_mudanca'] ?? 0 ); ?>
