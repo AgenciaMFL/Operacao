@@ -32,11 +32,15 @@ class MFL_PW_Uniplus {
 	const APLICAR_PRECO = true;
 
 	const OPTION_STATS    = 'mfl_pw_uniplus_stats';
+	const META_VINCULO    = '_mfl_uniplus_vinculo';
+	const META_ULTIMO     = '_mfl_uniplus_ultimo';
+	const JANELA_CONFLITO = 20 * MINUTE_IN_SECONDS;
 
 	private static $is_uniplus = null;
 	private static $buffer     = array();
 	private static $ignored    = 0;
 	private static $unchanged  = 0;
+	private static $unlinked   = 0;
 	private static $flush_hooked = false;
 
 	public static function init() {
@@ -210,8 +214,7 @@ class MFL_PW_Uniplus {
 		$product = null;
 		$how     = '';
 
-		// 1) Pelo SKU (o "Código" do Uniplus) — sempre preferido, porque os IDs guardados
-		//    no Uniplus podem ser do site antigo e coincidir com outro produto do site novo.
+		// 1) Pelo SKU (o "Código" do Uniplus): é o único jeito seguro de saber qual é o produto.
 		if ( '' !== $sku ) {
 			$found = wc_get_product_id_by_sku( $sku );
 			if ( $found ) {
@@ -219,12 +222,22 @@ class MFL_PW_Uniplus {
 				$how     = 'pelo SKU';
 			}
 		} elseif ( $url_id ) {
-			// 2) Sem SKU no envio: aceita o ID só se o produto existir e tiver SKU
-			//    (ou seja, foi vinculado a mão no Uniplus com o ID atual).
+			// 2) Sem SKU: o Uniplus guarda IDs do site antigo, que podem ser OUTRO produto no site
+			//    novo. Só aceitamos o ID de produtos já confirmados pelo SKU (vínculo gravado aqui).
+			//    Os demais recebem 404: o Uniplus então tenta criar o produto mandando o SKU, e aí
+			//    casamos pelo SKU e devolvemos o ID certo.
 			$candidate = wc_get_product( $url_id );
-			if ( $candidate && '' !== (string) $candidate->get_sku() ) {
+			if ( $candidate && $candidate->get_meta( self::META_VINCULO ) ) {
 				$product = $candidate;
-				$how     = 'pelo ID';
+				$how     = 'pelo ID vinculado';
+			} else {
+				return array(
+					'response' => self::error( 'mfl_pw_uniplus_nao_vinculado', 'ID não vinculado; envie o SKU.', 404 ),
+					'sku'      => '',
+					'id'       => (int) $url_id,
+					'action'   => 'ignorado (ID não vinculado)',
+					'detail'   => 'ID enviado: ' . $url_id,
+				);
 			}
 		}
 
@@ -238,11 +251,29 @@ class MFL_PW_Uniplus {
 			);
 		}
 
+		// Proteção contra ID repetido: se o mesmo produto recebe, pelo ID, uma quantidade diferente
+		// da que recebeu há pouco, há dois produtos do Uniplus apontando para ele. Desfaz o vínculo
+		// e não aplica nada (o produto só volta a sincronizar pelo SKU).
+		$qty_in = self::qty_from( $data );
+		$last   = $product->get_meta( self::META_ULTIMO );
+		if ( 'pelo ID vinculado' === $how && null !== $qty_in && is_array( $last )
+			&& ( time() - (int) $last['t'] ) < self::JANELA_CONFLITO && (int) $last['q'] !== $qty_in ) {
+			$product->delete_meta_data( self::META_VINCULO );
+			$product->save_meta_data();
+			return array(
+				'response' => self::error( 'mfl_pw_uniplus_conflito', 'Dois produtos do Uniplus apontam para este ID.', 409 ),
+				'sku'      => (string) $product->get_sku(),
+				'id'       => $product->get_id(),
+				'action'   => 'conflito: vínculo desfeito',
+				'detail'   => 'recebeu ' . $qty_in . ' e há pouco ' . (int) $last['q'] . ' (' . $last['via'] . '); nada aplicado',
+			);
+		}
+
 		$changes = array();
 
 		// Estoque: liga o controle e grava a quantidade (≤ 0 → fora de estoque → some do site).
-		if ( isset( $data['stock_quantity'] ) && '' !== $data['stock_quantity'] && null !== $data['stock_quantity'] ) {
-			$qty = (int) round( (float) $data['stock_quantity'] );
+		if ( null !== $qty_in ) {
+			$qty = $qty_in;
 			if ( ! $product->get_manage_stock() ) {
 				$product->set_manage_stock( true );
 				$changes[] = 'controle de estoque ligado';
@@ -267,9 +298,14 @@ class MFL_PW_Uniplus {
 			}
 		}
 
-		if ( $changes ) {
-			$product->save();
+		if ( 'pelo SKU' === $how && ! $product->get_meta( self::META_VINCULO ) ) {
+			$product->update_meta_data( self::META_VINCULO, 1 );
+			$changes[] = 'vínculo gravado';
 		}
+		if ( null !== $qty_in ) {
+			$product->update_meta_data( self::META_ULTIMO, array( 't' => time(), 'q' => $qty_in, 'via' => $how ) );
+		}
+		$product->save();
 
 		$ignored = array_diff( array_keys( $data ), array( 'id', 'sku', 'stock_quantity', 'stock_status', 'manage_stock', 'regular_price' ) );
 
@@ -278,9 +314,16 @@ class MFL_PW_Uniplus {
 			'sku'      => $sku ? $sku : (string) $product->get_sku(),
 			'id'       => $product->get_id(),
 			'action'   => 'atualizado ' . $how,
-			'detail'   => ( $changes ? implode( '; ', $changes ) : 'sem mudança' )
+			'detail'   => ( array_diff( $changes, array( 'vínculo gravado' ) ) ? implode( '; ', $changes ) : 'sem mudança' . ( in_array( 'vínculo gravado', $changes, true ) ? '; vínculo gravado' : '' ) )
 				. ( $ignored ? ' | ignorado: ' . implode( ', ', array_slice( $ignored, 0, 8 ) ) : '' ),
 		);
+	}
+
+	private static function qty_from( array $data ) {
+		if ( isset( $data['stock_quantity'] ) && '' !== $data['stock_quantity'] && null !== $data['stock_quantity'] ) {
+			return (int) round( (float) $data['stock_quantity'] );
+		}
+		return null;
 	}
 
 	/**
@@ -325,7 +368,9 @@ class MFL_PW_Uniplus {
 	 * milhares de itens por passada). Produtos que não estão no site só contam.
 	 */
 	private static function log( $method, $route, $sku, $id, $action, $detail ) {
-		if ( 0 === strpos( $action, 'ignorado' ) ) {
+		if ( 0 === strpos( $action, 'ignorado (ID' ) ) {
+			self::$unlinked++;
+		} elseif ( 0 === strpos( $action, 'ignorado' ) ) {
 			self::$ignored++;
 		} elseif ( 0 === strpos( $detail, 'sem mudança' ) ) {
 			self::$unchanged++;
@@ -361,6 +406,7 @@ class MFL_PW_Uniplus {
 		$stats['ultima_chamada'] = time();
 		$stats['ignorados']      = (int) ( $stats['ignorados'] ?? 0 ) + self::$ignored;
 		$stats['sem_mudanca']    = (int) ( $stats['sem_mudanca'] ?? 0 ) + self::$unchanged;
+		$stats['nao_vinculados'] = (int) ( $stats['nao_vinculados'] ?? 0 ) + self::$unlinked;
 		if ( self::$ignored ) {
 			$stats['ultimo_ignorado'] = time();
 		}
@@ -383,7 +429,8 @@ class MFL_PW_Uniplus {
 			<?php if ( ! empty( $stats['ultima_chamada'] ) ) : ?>
 				<p><strong>Última escrita do Uniplus:</strong> <?php echo esc_html( wp_date( 'd/m/Y H:i:s', $stats['ultima_chamada'] ) ); ?>
 					&nbsp;·&nbsp; <strong>Conferidos sem mudança:</strong> <?php echo (int) ( $stats['sem_mudanca'] ?? 0 ); ?>
-					&nbsp;·&nbsp; <strong>Ignorados (não estão no site):</strong> <?php echo (int) ( $stats['ignorados'] ?? 0 ); ?></p>
+					&nbsp;·&nbsp; <strong>Ignorados (não estão no site):</strong> <?php echo (int) ( $stats['ignorados'] ?? 0 ); ?>
+					&nbsp;·&nbsp; <strong>Recusados por ID antigo/não vinculado:</strong> <?php echo (int) ( $stats['nao_vinculados'] ?? 0 ); ?></p>
 			<?php endif; ?>
 			<?php if ( ! $log ) : ?>
 				<p><em>Nenhuma atualização do Uniplus registrada ainda.</em></p>

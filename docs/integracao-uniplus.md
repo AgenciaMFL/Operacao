@@ -45,6 +45,14 @@ O plugin 0.7.0 resolve isso do lado do site, sem alterar a base do Uniplus:
 
 Com isso, dá para voltar o **limite para 0**. O registro fica em WooCommerce → Uniplus.
 
+### 0.7.1 (27/11/2026): correção depois da primeira passada
+
+Às 11:06, o Uniplus mandou `POST /products/2720` **só com o ID**, sem SKU, e com estoque 0. A versão 0.7.0 aceitou: ligou o controle de estoque do produto 2720 (SKU 438798966) e o deixou fora de estoque. Esse ID era quase certamente do site antigo e correspondia a outro produto.
+
+A versão 0.7.1 corrige isso:
+- **ID sem SKU** só é aceito se o produto já foi confirmado antes pelo SKU (meta `_mfl_uniplus_vinculo`). Caso contrário, devolve 404. A expectativa é que o Uniplus tente então criar o produto mandando o SKU; aí casamos pelo SKU e devolvemos o ID certo.
+- **Conflito:** se, em menos de 20 minutos, o mesmo produto receber quantidades diferentes pelo ID, o vínculo é desfeito e nada é aplicado.
+
 ## Pendências
 
 1. Confirmar que a fila rodou: o "Último acesso" da chave Uniplus deve mudar para depois de 16:28. Depois, comparar com o estado de antes, na parte 2 do teste.
